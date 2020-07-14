@@ -20,8 +20,6 @@ This is the keymap I use on my Kyria keyboard from [splitkb.com](https://splitkb
    * [Special keys](#special-keys)
    * [Acknowledgments](#acknowledgments)
 
-<!-- Added by: username, at: Tue 14 Jul 2020 18:04:44 AEST -->
-
 <!--te-->
 
 # Overview
@@ -48,13 +46,13 @@ Speed, reducing the number of keys, or coding keyboard firmware for fun are not 
 
 * A modified RSTHD as the alpha layout.
 
-* A custom layer switching code, which is like a merger or QMK's LT() and TG() functions. More information is [here](../../keyboard-notes/qmk-layer-tap-toggle).
+* A custom layer switching code, which is like a merger or QMK's LT() and TG() functions. More information is [here](../../../../keyboard-notes/tree/master/qmk-layer-tap-toggle).
 
-* The ability to select the OS in use (currently Mac and Windows supported) from the keyboard, which changes the shortcuts programmed into the keyboard. More information is [here](../../keyboard-notes/qmk-os-shortcuts).
+* The ability to select the OS in use (currently Mac and Windows supported) from the keyboard, which changes the shortcuts programmed into the keyboard. More information is [here](../../../../keyboard-notes/tree/master/qmk-os-shortcuts).
 
-* A custom mouse feature to make mouse keys more controllable. More information is [here](../../keyboard-notes/qmk-custom-mouse).
+* A custom mouse feature to make mouse keys more controllable. More information is [here](../../../../keyboard-notes/tree/master/qmk-custom-mouse).
 
-* A custom editing layer for platform-independent editing. More information is [here](../../keyboard-notes/qmk-custom-edit).
+* A custom editing layer for platform-independent editing. More information is [here](../../../../keyboard-notes/tree/master/qmk-custom-edit).
 
 * Matching use of the encoders on each layer.
 
