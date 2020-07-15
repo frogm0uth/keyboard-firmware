@@ -119,7 +119,7 @@ Left encoder (primary side) is mouse wheel up/down. With Shift pressed, it is wh
 
 Activation: left thumb. Primary keys on right, auxiliary keys on left.
 
-This is an editing layer based on my [Custom Edit](../../keyboard-notes/qmk-custom-edit) code.
+This is an editing layer based on my [Custom Edit](../../../../keyboard-notes/tree/master/qmk-custom-mouse) code.
 
 Left encoder (auxiliary side) is history scrubbing i.e. undo and redo.
 
@@ -129,7 +129,7 @@ Right encoder (primary side) moves the cursor left and right by a character. Wit
 
 Activation: right thumb. Primary keys on left, auxiliary keys on right.
 
-This is a cursor movement layer based on my [Custom Mouse](../../keyboard-notes/qmk-custom-mouse) code.
+This is a cursor movement layer based on my [Custom Mouse](../../../../keyboard-notes/tree/master/qmk-custom-mouse) code.
 
 Left encoder (primary side) moves the mouse cursor right/left by the amount set by the accelerator keys. If **Rept** is held down, it moves down/up. Encoder push is mouse button 1. 
 
