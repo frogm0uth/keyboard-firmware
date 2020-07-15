@@ -119,7 +119,7 @@ Left encoder (primary side) is mouse wheel up/down. With Shift pressed, it is wh
 
 Activation: left thumb. Primary keys on right, auxiliary keys on left.
 
-This is an editing layer based on my [Custom Edit](../../../../keyboard-notes/tree/master/qmk-custom-mouse) code.
+This is an editing layer based on my [Custom Edit](../../../../keyboard-notes/tree/master/qmk-custom-edit) code.
 
 Left encoder (auxiliary side) is history scrubbing i.e. undo and redo.
 
