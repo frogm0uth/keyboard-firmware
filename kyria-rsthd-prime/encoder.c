@@ -64,9 +64,9 @@ void encoder_update_user(uint8_t index, bool clockwise) {
 
   case NUMPAD:
     if (left) {
-      keycode = clockwise ? SC(SC_APP_ZOOM_IN) : SC(SC_APP_ZOOM_OUT);
-    } else {
       keycode = clockwise ? SC(SC_SCR_ZOOM_IN) : SC(SC_SCR_ZOOM_OUT);
+    } else {
+      keycode = clockwise ? SC(SC_APP_ZOOM_IN) : SC(SC_APP_ZOOM_OUT);
     }
     break;
 
