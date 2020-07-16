@@ -118,7 +118,7 @@ void encoder_update_user(uint8_t index, bool clockwise) {
     }
 #ifdef RGBLIGHT_ENABLE
     if (right) {
-      rgblight_encoder(clockwise);
+      rgblight_encoder(clockwise, mods);
     }
 #endif
     break;

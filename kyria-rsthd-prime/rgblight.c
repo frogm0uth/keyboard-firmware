@@ -17,8 +17,7 @@
 
 #include "keymap.h"
 
-void rgblight_encoder(bool clockwise) {
-  uint8_t mods = get_mods();
+void rgblight_encoder(bool clockwise, uint8_t mods) {
   if (mods & MOD_MASK_GUI) {
     if (clockwise) {
       rgblight_increase_val_noeeprom();
