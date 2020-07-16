@@ -115,4 +115,3 @@ void custom_mouse_record(uint16_t keycode, keyrecord_t *record);
 void custom_mouse_encoder(bool clockwise);
 void custom_wheel_encoder(bool clockwise, bool rotate);
 void custom_mouse_status(void);
-//void custom_mouse_move(uint16_t x, uint16_t y);
