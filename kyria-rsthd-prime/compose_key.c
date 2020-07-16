@@ -33,11 +33,16 @@ static uint8_t compose_status = compose_init;
 // Utilities for displaying stuff on the OLED
 //
 
-#ifndef COMPOSE_MAX_SEQUENCE
-#define COMPOSE_MAX_SEQUENCE 12
+#ifndef COMPOSE_MAX_SEQUENCE // the number of sequence chars to display
+#define COMPOSE_MAX_SEQUENCE 8
 #endif
-static char compose_sequence[COMPOSE_MAX_SEQUENCE+1];
+#ifndef COMPOSE_MAX_WIDTH  // the number of next chars to display
+#define COMPOSE_MAX_WIDTH 12
+#endif
+static char compose_sequence[COMPOSE_MAX_SEQUENCE+1] = "";
 static uint8_t compose_sequence_last = 0;
+
+static char compose_nextchars[COMPOSE_MAX_WIDTH+1] = "";
 
 // The character conversion array below is copied from
 // qmk_firmware/quantum/process_keycode/process_terminal.c, as it's usually not
@@ -59,16 +64,36 @@ void reset_sequence_string(void) {
 
 void append_keycode_to_sequence_string(uint16_t keycode, bool shifted) {
   char char_to_add;
-  if (shifted) {
+  if (shifted || S(keycode) == keycode) {
     char_to_add = shifted_keycode_to_ascii_lut[keycode & 0xFF];
   } else {
     char_to_add = keycode_to_ascii_lut[keycode];
   }
   if (compose_sequence_last < COMPOSE_MAX_SEQUENCE) {
-    compose_sequence[compose_sequence_last] = char_to_add;
-    compose_sequence_last++;
+    compose_sequence[compose_sequence_last++] = char_to_add;
     compose_sequence[compose_sequence_last] = '\0';
   }
+}
+
+void clear_next_chars(void) {
+    compose_nextchars[0] = '\0';
+}
+
+void scan_next_chars(struct compose_node* node) {
+  uint8_t last = 0;
+
+  compose_nextchars[last++] = '[';
+  while (node->node_type != compose_terminate && last < COMPOSE_MAX_WIDTH-1) {
+    if (S(node->trigger) == node->trigger) {
+      compose_nextchars[last] = shifted_keycode_to_ascii_lut[node->trigger & 0xFF];
+    } else {
+      compose_nextchars[last] = keycode_to_ascii_lut[node->trigger];
+    }
+    last++;
+    node++;
+  }
+  compose_nextchars[last++] = ']';
+  compose_nextchars[last] = '\0';
 }
 #endif
 
@@ -84,6 +109,7 @@ void process_record_compose(uint16_t keycode, keyrecord_t *record) {
       compose_current = compose_tree_root;
 #ifdef COMPOSE_STATUS_ENABLE
       reset_sequence_string();
+      scan_next_chars(compose_current);
 #endif
     } else {
       compose_status = compose_aborted;
@@ -122,10 +148,16 @@ bool compose_key_intercept(uint16_t keycode, keyrecord_t *record) {
 	
       case compose_continue:  // Move down one level
 	compose_current = compose_current -> continuation;
+#ifdef COMPOSE_STATUS_ENABLE
+	scan_next_chars(compose_current);
+#endif
 	break;
 
       case compose_callback:
 	(*(compose_current->compose_callback))(keycode);
+#ifdef COMPOSE_STATUS_ENABLE
+	clear_next_chars();
+#endif
 	compose_status = compose_success; // Done
 	break;
 
@@ -133,6 +165,9 @@ bool compose_key_intercept(uint16_t keycode, keyrecord_t *record) {
 	clear_mods();
 	tap_code16(compose_current->output_keycode);
 	set_mods(mods);
+#ifdef COMPOSE_STATUS_ENABLE
+	clear_next_chars();
+#endif
 	compose_status = compose_success; // Done
 	break;
       }
@@ -164,6 +199,7 @@ void compose_key_status() {
   oled_write(compose_status_strings[compose_status], false);
   if (compose_status != compose_init && compose_status != compose_aborted) {
     oled_write(compose_sequence, false);
+    oled_write(compose_nextchars, false);
   }
   oled_write_P(PSTR("\n"), false);
 }
