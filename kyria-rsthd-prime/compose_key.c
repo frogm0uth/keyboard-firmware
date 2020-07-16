@@ -39,6 +39,10 @@ static uint8_t compose_status = compose_init;
 #ifndef COMPOSE_MAX_WIDTH  // the number of next chars to display
 #define COMPOSE_MAX_WIDTH 12
 #endif
+#ifndef COMPOSE_STATUS_TIMEOUT // display timeout
+#define COMPOSE_STATUS_TIMEOUT 3000
+#endif
+
 static char compose_sequence[COMPOSE_MAX_SEQUENCE+1] = "";
 static uint8_t compose_sequence_last = 0;
 
@@ -82,7 +86,6 @@ void clear_next_chars(void) {
 void scan_next_chars(struct compose_node* node) {
   uint8_t last = 0;
 
-  compose_nextchars[last++] = '[';
   while (node->node_type != compose_terminate && last < COMPOSE_MAX_WIDTH-1) {
     if (S(node->trigger) == node->trigger) {
       compose_nextchars[last] = shifted_keycode_to_ascii_lut[node->trigger & 0xFF];
@@ -92,9 +95,20 @@ void scan_next_chars(struct compose_node* node) {
     last++;
     node++;
   }
-  compose_nextchars[last++] = ']';
   compose_nextchars[last] = '\0';
 }
+
+// Call from matrix_scan_user()
+//
+static uint16_t compose_status_timer = 0;
+void compose_status_tick(void) {
+  if (compose_status != compose_init && compose_status != compose_active) {
+    if (timer_elapsed(compose_status_timer) > COMPOSE_STATUS_TIMEOUT) {
+      compose_status = compose_init;
+    }
+  }
+}
+
 #endif
 
 static struct compose_node* compose_current = compose_tree_root;
@@ -156,7 +170,7 @@ bool compose_key_intercept(uint16_t keycode, keyrecord_t *record) {
       case compose_callback:
 	(*(compose_current->compose_callback))(keycode);
 #ifdef COMPOSE_STATUS_ENABLE
-	clear_next_chars();
+	compose_status_timer = timer_read();
 #endif
 	compose_status = compose_success; // Done
 	break;
@@ -166,7 +180,7 @@ bool compose_key_intercept(uint16_t keycode, keyrecord_t *record) {
 	tap_code16(compose_current->output_keycode);
 	set_mods(mods);
 #ifdef COMPOSE_STATUS_ENABLE
-	clear_next_chars();
+	compose_status_timer = timer_read();
 #endif
 	compose_status = compose_success; // Done
 	break;
@@ -181,25 +195,28 @@ bool compose_key_intercept(uint16_t keycode, keyrecord_t *record) {
 #ifdef COMPOSE_STATUS_ENABLE
   // Display last keycode even if failure
   append_keycode_to_sequence_string(keycode, mods & MOD_MASK_SHIFT);
+  compose_status_timer = timer_read();
 #endif
-
+  
   return true; // swallow the last code, it's not expected that it will output
 }
 
 #ifdef COMPOSE_STATUS_ENABLE
 static char* compose_status_strings[] = {
-  [compose_init]    = "",
-  [compose_active]  = "COMPOSE:  ",
-  [compose_success] = "COMPLETE: ",
-  [compose_failed]  = "FAILED:   ",
-  [compose_aborted] = "CANCELED",
+  [compose_active]  = "COMPOSE: ",
+  [compose_success] = "SUCCESS: ",
+  [compose_failed]  = "FAILED:  ",
 };
 
 void compose_key_status() {
-  oled_write(compose_status_strings[compose_status], false);
   if (compose_status != compose_init && compose_status != compose_aborted) {
+    oled_write(compose_status_strings[compose_status], false);
     oled_write(compose_sequence, false);
-    oled_write(compose_nextchars, false);
+    if (compose_status == compose_active) {
+      oled_write_P(PSTR("["), false);
+      oled_write(compose_nextchars, false);
+      oled_write_P(PSTR("]"), false);
+    }
   }
   oled_write_P(PSTR("\n"), false);
 }

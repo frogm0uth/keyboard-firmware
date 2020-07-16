@@ -19,7 +19,7 @@
 #include "keymap.h"
 
 // simplify #define for OLED status output
-#if !defined(OLED_DRIVER_ENABLE) && defined(COMPOSE_STATUS_ENABLE)
+#if (!defined(OLED_DRIVER_ENABLE) || !defined(COMPOSE_KEY)) && defined(COMPOSE_STATUS_ENABLE)
   #undef COMPOSE_STATUS_ENABLE
 #endif
 
@@ -59,4 +59,5 @@ void compose_key_reset(void);
 
 #ifdef COMPOSE_STATUS_ENABLE
 void compose_key_status(void);
+void compose_status_tick(void);
 #endif

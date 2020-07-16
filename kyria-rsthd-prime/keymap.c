@@ -594,6 +594,11 @@ void matrix_scan_user(void) {
   custom_edit_tick();
 #endif
   
+  // Compose key status timer
+#ifdef COMPOSE_STATUS_ENABLE
+  compose_status_tick();
+#endif
+  
   // App-switcher timeout
   app_switcher_tick();
 
