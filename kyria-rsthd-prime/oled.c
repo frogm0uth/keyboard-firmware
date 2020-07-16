@@ -44,6 +44,18 @@ static void render_qmk_logo(void) {
   oled_write_P(qmk_logo, false);
 }
 
+
+static char* layer_names[] = {
+  [PRIME]  = "PRIME",
+  [RSTHD]  = "RSTHD",
+  [NUMPAD] = "NumPad",
+  [SYNTAX] = "Syntax",
+  [EDIT]   = "Edit",
+  [CURSOR] = "Cursor",
+  [FUNC]   = "Func",
+  [ADJUST] = "Adjust"
+};
+
 static void render_status(void) {
     // QMK Logo and version information
     render_qmk_logo();
@@ -55,42 +67,16 @@ static void render_status(void) {
     oled_write_P(PSTR("\n"), false);
 #endif
 
-    // Host Keyboard Layer Status
-    oled_write_P(PSTR("Layer: "), false);
-
-    switch (get_highest_layer(layer_state)) {
-        case ALPHA:
-	  switch (get_highest_layer(default_layer_state)) {
-	  case PRIME:
-	    oled_write_P(PSTR("PRIME\n"), false);
-	    break;
-	  case RSTHD:
-	    oled_write_P(PSTR("RSTHD\n"), false);
-	    break;
-	  }
-	  break;
-        case NUMPAD:
-            oled_write_P(PSTR("NumPad\n"), false);
-            break;
-        case SYNTAX:
-            oled_write_P(PSTR("Syntax\n"), false);
-            break;
-        case EDIT:
-            oled_write_P(PSTR("Edit\n"), false);
-            break;
-        case CURSOR:
-            oled_write_P(PSTR("Cursor\n"), false);
-            break;
-        case FUNC:
-            oled_write_P(PSTR("Func\n"), false);
-            break;
-        case ADJUST:
-            oled_write_P(PSTR("Adjust\n"), false);
-            break;
-        default:
-            oled_write_P(PSTR("Undefined\n"), false);
+    // Display layer name
+    uint8_t layer = get_highest_layer(layer_state);
+    if (layer == ALPHA) {
+      layer = get_highest_layer(default_layer_state);
     }
+    oled_write_P(PSTR("Layer: "), false);
+    oled_write(layer_names[layer], false);
+    oled_write_P(PSTR("\n"), false);
 
+    
     // Modifiers
     uint8_t mods = get_mods();
     if (mods & MOD_MASK_SHIFT) {
@@ -130,9 +116,9 @@ static void render_status(void) {
 
     // Host Keyboard LED Status
     uint8_t led_usb_state = host_keyboard_leds();
-    oled_write_P(IS_LED_ON(led_usb_state, USB_LED_NUM_LOCK)    ? PSTR("NUMLCK ") : PSTR("       "), false);
+    //oled_write_P(IS_LED_ON(led_usb_state, USB_LED_NUM_LOCK)    ? PSTR("NUMLCK ") : PSTR("       "), false);
     oled_write_P(IS_LED_ON(led_usb_state, USB_LED_CAPS_LOCK)   ? PSTR("CAPLCK ") : PSTR("       "), false);
-    oled_write_P(IS_LED_ON(led_usb_state, USB_LED_SCROLL_LOCK) ? PSTR("SCRLCK ") : PSTR("       "), false);
+    //oled_write_P(IS_LED_ON(led_usb_state, USB_LED_SCROLL_LOCK) ? PSTR("SCRLCK ") : PSTR("       "), false);
     
     // How fast are you??
 #ifdef WPM_ENABLE
