@@ -27,7 +27,7 @@
 //#define CURSOR_RIGHTHANDED
 
 // uncomment to enable detailed compose key status
-//#define COMPOSE_STATUS_ENABLE
+#define COMPOSE_STATUS_ENABLE
 
 #ifdef OLED_DRIVER_ENABLE
   #define OLED_DISPLAY_128X64
