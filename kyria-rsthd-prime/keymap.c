@@ -24,7 +24,7 @@ void keyboard_post_init_user(void) {
   user_config.raw = eeconfig_read_user();
 
   // Set OS
-#if defined OS_SHORTCUTS && !defined(OS_SHORTCUTS_STATIC)
+#if defined(OS_SHORTCUTS) && !defined(OS_SHORTCUTS_STATIC)
   os_set_raw(user_config.os_selection);
 #endif
   
@@ -74,12 +74,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Layer 1: PRIME
 
   ,-----------------------------------------.                              ,-----------------------------------------.
-  |  Esc |   J  |   C  |   W  |   F  |   K  |                              |   Z  |   M  |   U  | '  " |   Q  |Leader|
+  |  Esc |   J  |   C  |   W  |   D  |   Y  |                              |   Z  |   L  |   U  | '  " |   Q  |Leader|
   |------+------+------+------+------+------|                              |------+------+------+------+------+------|
   |      |   R  |   S  |   T  |   H  |   P  |                              |   V  |   N  |   I  |   O  |   A  |      |
   | Ctrl |      |      |      |      |      |                              |      |      |      |      |      | Ctrl |
   |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
-  |      |      |   Y  |   G  |   D  |   B  |      |      |  |      |      |   X  |   L  | ,  - | .  _ |      |      |
+  |      |      |   B  |   G  |   F  |   K  |      |      |  |      |      |   X  |   M  | ,  - | .  _ |      |      |
   |  Cmd | Shift|      |      |      |      |   E  |  Tab |  | Enter| Space|      |      |      |      | Shift|  Cmd |
   `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
                        |(EncL)|      |      |      | EDIT |  |CURSOR|      |      |      |(EncR)|
@@ -87,9 +87,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                        `----------------------------------'  `----------------------------------'
  */
     [PRIME] = LAYOUT(
-      KC_ESC,  KC_J,   KC_C,   KC_W,   KC_F,   KC_K,                                           KC_Z,    KC_M,    KC_U,    KC_QUOT, KC_Q,   KC_LEAD,
-      KC_LCTL, KC_R,   KC_S,   KC_T,   KC_H,   KC_P,                                           KC_V,    KC_N,    KC_I,    KC_O,    KC_A,   KC_RCTL,
-      KC_LGUI, CU_LSFT,KC_Y,   KC_G,   KC_D,   KC_B, XXXXXXX, XXXXXXX, /* */ XXXXXXX,      XXXXXXX, KC_X,    KC_L,    CU_CMMI, CU_DTUN, CU_RSFT, KC_RGUI,
+      KC_ESC,  KC_J,   KC_C,   KC_W,   KC_D,   KC_Y,                                             KC_Z,    KC_L,    KC_U,    KC_QUOT, KC_Q,   KC_LEAD,
+      KC_LCTL, KC_R,   KC_S,   KC_T,   KC_H,   KC_P,                                             KC_V,    KC_N,    KC_I,    KC_O,    KC_A,   KC_RCTL,
+      KC_LGUI, CU_LSFT,KC_B,   KC_G,   KC_F,   KC_K, XXXXXXX, XXXXXXX, /* */ KC_COMM,   XXXXXXX, KC_X,    KC_M,    CU_CMMI, CU_DTUN, CU_RSFT, KC_RGUI,
                          CU_SLOCK, KC_LALT, CU_NUMPAD, KC_E,  CU_EDIT, /* */ CU_CURSOR, KC_SPACE, CU_SYNTAX, KC_RALT, CU_SLEEP
     ),
 
@@ -97,12 +97,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Layer 2: NUMPAD (R)
 
   ,-----------------------------------------.                              ,-----------------------------------------.
-  |  Esc | FUNC |      |   =  |      | AppP |                              | AppN | 4  $ | 5  % | 6  ^ |      | BASE |
+  |  Esc | FUNC |  ../ |   =  |      | AppP |                              | AppN | 4  $ | 5  % | 6  ^ |      | BASE |
   |------+------+------+------+------+------|                              |------+------+------+------+------+------|
-  |      |   -  |   +  |   0  |   .  |  Up  |                              |AppWin| 1  ! | 2  @ | 3  # | `  ~ |
+  |      |   /  |   *  |   .  |   0  |  Up  |                              |AppWin| 1  ! | 2  @ | 3  # | `  ~ |
   | Ctrl |      |      |      |      |      |                              |      |      |      |      |      | Ctrl |
   |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
-  |      |      |  Tab |   *  |   /  | Left |      |      |  |      |      | Right| 7  & | 8  * | 9  ( |      |      |
+  |      |      |  Tab |   -  |   +  | Left |      |      |  |      |      | Right| 7  & | 8  * | 9  ( |      |      |
   |  Cmd | Shift|      |      |      |      |      |  Tab |  | Enter| Space|      |      |      |      | Shift|  Cmd |
   `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
                        |(EncL)|      |      |      | EDIT |  |CURSOR|      |      |      |(EncR)|
@@ -110,9 +110,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                        `----------------------------------'  `----------------------------------'
  */
     [NUMPAD] = LAYOUT(
-      _______, CU_FUNC, XXXXXXX, KC_EQL,  XXXXXXX, CU_APPP,                                           CU_APPN,  KC_4, KC_5, KC_6, XXXXXXX, CU_BASE,
-      _______, KC_MINS, KC_PLUS, KC_0,    KC_DOT,  KC_UP,                                             CU_WAPP,  KC_1, KC_2, KC_3, KC_GRV,  _______,
-      _______, _______, KC_TAB,  KC_ASTR, KC_SLSH, KC_LEFT, XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, KC_RIGHT, KC_7, KC_8, KC_9, _______, _______,
+      _______, CU_FUNC, CU_DIRU, KC_EQL,  XXXXXXX, CU_APPP,                                           CU_APPN,  KC_4, KC_5, KC_6, XXXXXXX, CU_BASE,
+      _______, KC_SLSH, KC_ASTR, KC_DOT,  KC_0,    KC_UP,                                             CU_WAPP,  KC_1, KC_2, KC_3, KC_GRV,  _______,
+      _______, _______, KC_TAB,  KC_MINS, KC_PLUS,  KC_LEFT, XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, KC_RIGHT, KC_7, KC_8, KC_9, _______, _______,
                                 CU_SCRZ0, _______, _______, XXXXXXX, _______, /* */ _______, _______, _______,  _______,  CU_APPZ0
     ),
 
@@ -378,6 +378,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     
     
     /** 
+     ** Macro/convenience codes
+     **/
+  case CU_DIRU:  // directory up
+    if (record->event.pressed) {
+      tap_code(KC_DOT);
+      tap_code(KC_DOT);
+      tap_code(KC_SLSH);
+    }
+    break;
+    
+    /** 
      ** Custom keycodes for different code on shift
      **/
 
@@ -419,18 +430,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   case CU_COMMA_MINUS:
     custom_shift(KC_COMMA, KC_MINUS, record);
     break;
-    
-#ifdef NOTUSED
-    // Custom double-arrows for window navigation
-  case CU_RL:
-    custom_shift(KC_RIGHT, KC_LEFT, record);
-    break;
-    
-  case CU_UD:
-    custom_shift(KC_UP, KC_DOWN, record);
-    break;
-#endif
 
+    
     // "Hyper" back and forward -
     //   Normal: undo and redo
     //   Cmd:    browser back and forward
@@ -532,7 +533,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     break;
     
     // OS selection
-#if defined OS_SHORTCUTS && !defined(OS_SHORTCUTS_STATIC)
+#if defined(OS_SHORTCUTS) && !defined(OS_SHORTCUTS_STATIC)
   case CU_SELECT_MACOS:
   case CU_SELECT_WINDOWS:
     if (record->event.pressed) {
@@ -546,7 +547,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
 
   // Default processing for OS shortcuts
-#if defined OS_SHORTCUTS && !defined(OS_SHORTCUTS_STATIC)
+#if defined(OS_SHORTCUTS) && !defined(OS_SHORTCUTS_STATIC)
   process_record_shortcut(keycode, record);
 #endif
   

@@ -23,7 +23,7 @@
 #include "layer_tap_toggle.h"
 
 void app_switcher_record(uint16_t keycode, bool pressed);
-void rgblight_encoder(bool clockwise);
+void rgblight_encoder(bool clockwise, uint8_t mods);
 void rgblight_oled_status(void);
 
 // User config structure. Defined here instead of keymap.c in case
@@ -98,6 +98,8 @@ enum custom_keycodes {
 #ifdef LAYER_TAP_TOGGLE
   LAYER_KEYS,
 #endif
+
+  CU_DIRU,   // Directory up
   
   CU_LSFT,   // Shift-caps lock keys
   CU_RSFT,
@@ -126,7 +128,7 @@ enum custom_keycodes {
   CU_RSTHD,     // Change default layer and save to EEPROM
   CU_PRIME,
 
-#if defined OS_SHORTCUTS && !defined(OS_SHORTCUTS_STATIC)
+#if defined(OS_SHORTCUTS) && !defined(OS_SHORTCUTS_STATIC)
   OS_SELECT_KEYCODES,
   OS_SHORTCUT_KEYCODES,
 #endif
@@ -134,7 +136,7 @@ enum custom_keycodes {
 
 
 // Since we are using OS shortcuts, here are some #defines to make them fit better into the keymap
-#if defined OS_SHORTCUTS && !defined(OS_SHORTCUTS_STATIC)
+#if defined(OS_SHORTCUTS) && !defined(OS_SHORTCUTS_STATIC)
 
 #define CU_SLOCK SC_SCREEN_LOCK
 #define CU_SLEEP SC_SYSTEM_SLEEP
