@@ -42,6 +42,13 @@ void keyboard_post_init_user(void) {
 #define CU_HBCK CU_HYPER_BACK
 #define CU_HFWD CU_HYPER_FORWARD
 
+#ifdef COMPOSE_KEY
+  #define CU_DEAD CU_COMPOSE  // Compose key
+#elif defined(LEADER_ENABLE)
+  #define CU_DEAD KC_LEAD     // Leader key
+#else
+  #define CU_DEAD KC_NO       // Nothing
+#endif
 
 /**
  ** Keymap
@@ -64,7 +71,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                        `----------------------------------'  `----------------------------------'
  */
     [RSTHD] = LAYOUT(
-      KC_ESC,  KC_J,    KC_C,   KC_Y,   KC_F,   KC_K,                                           KC_Z,    KC_L,    KC_QUOT, KC_U,    KC_Q,   KC_LEAD,
+      KC_ESC,  KC_J,    KC_C,   KC_Y,   KC_F,   KC_K,                                           KC_Z,    KC_L,    KC_QUOT, KC_U,    KC_Q,   CU_DEAD,
       KC_LCTL, KC_R,    KC_S,   KC_T,   KC_H,   KC_D,                                           KC_M,    KC_N,    KC_A,    KC_I,    KC_O,   KC_RCTL,
       KC_LGUI, CU_LSFT, KC_V,   KC_G,   KC_P,   KC_B, XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, KC_X,    KC_W,    CU_DTUN, CU_CMMI, CU_RSFT, KC_RGUI,
                            CU_SLOCK, KC_LALT, CU_NUMPAD, KC_E, CU_EDIT, /* */ CU_CURSOR, KC_SPACE, CU_SYNTAX, KC_RALT, CU_SLEEP
@@ -87,7 +94,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                        `----------------------------------'  `----------------------------------'
  */
     [PRIME] = LAYOUT(
-      KC_ESC,  KC_J,   KC_C,   KC_W,   KC_D,   KC_Y,                                             KC_Z,    KC_L,    KC_U,    KC_QUOT, KC_Q,   KC_LEAD,
+      KC_ESC,  KC_J,   KC_C,   KC_W,   KC_D,   KC_Y,                                             KC_Z,    KC_L,    KC_U,    KC_QUOT, KC_Q,   CU_DEAD,
       KC_LCTL, KC_R,   KC_S,   KC_T,   KC_H,   KC_P,                                             KC_V,    KC_N,    KC_I,    KC_O,    KC_A,   KC_RCTL,
       KC_LGUI, CU_LSFT,KC_B,   KC_G,   KC_F,   KC_K, XXXXXXX, XXXXXXX, /* */ KC_COMM,   XXXXXXX, KC_X,    KC_M,    CU_CMMI, CU_DTUN, CU_RSFT, KC_RGUI,
                          CU_SLOCK, KC_LALT, CU_NUMPAD, KC_E,  CU_EDIT, /* */ CU_CURSOR, KC_SPACE, CU_SYNTAX, KC_RALT, CU_SLEEP
@@ -327,8 +334,22 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   uint8_t mods = get_mods();
   uint16_t tempcode = KC_NO;
 
+  // First check to see if we intercept for a compose sequence
+#ifdef COMPOSE_KEY
+  if (compose_key_intercept(keycode, record)) {
+    return false;
+  }
+#endif
+  
   switch (keycode) {
 
+    // Toggle compose mode on or off
+#ifdef COMPOSE_KEY
+  case CU_COMPOSE:
+    process_record_compose(keycode, record);
+    break;
+#endif
+    
     // Custom mouse
 #ifdef CUSTOM_MOUSE
     CUSTOM_MOUSE_PROCESS_RECORD(keycode, record);

@@ -26,6 +26,9 @@
 // uncomment to put custom mouse keys on the right hand
 //#define CURSOR_RIGHTHANDED
 
+// uncomment to enable detailed compose key status
+//#define COMPOSE_STATUS_ENABLE
+
 #ifdef OLED_DRIVER_ENABLE
   #define OLED_DISPLAY_128X64
 #endif

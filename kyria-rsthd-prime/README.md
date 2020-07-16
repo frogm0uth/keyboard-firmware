@@ -40,22 +40,17 @@ My desires with this keyboard layout are:
 2. Platform-independence
 3. Comfort
 
-Speed, reducing the number of keys, or coding keyboard firmware for fun are not important goals for me.
+Speed and reducing the number of keys in use are not important goals for me.
 
 ## Main features
 
 * A modified RSTHD as the alpha layout.
-
 * A custom layer switching code, which is like a merger or QMK's LT() and TG() functions. More information is [here](../../../../keyboard-notes/tree/master/qmk-layer-tap-toggle).
-
 * The ability to select the OS in use (currently Mac and Windows supported) from the keyboard, which changes the shortcuts programmed into the keyboard. More information is [here](../../../../keyboard-notes/tree/master/qmk-os-shortcuts).
-
 * A custom mouse feature to make mouse keys more controllable. More information is [here](../../../../keyboard-notes/tree/master/qmk-custom-mouse).
-
 * A custom editing layer for platform-independent editing. More information is [here](../../../../keyboard-notes/tree/master/qmk-custom-edit).
-
+* A *Compose* key. In this keymap, it replaces the Leader key. More information is [here](../../../../keyboard-notes/tree/master/qmk-compose-key).
 * Matching use of the encoders on each layer.
-
 * Informative info on the OLED. (Unfortunately, at the moment only the left OLED can be usefully used.) 
 
 ## Work in Progress/TODO

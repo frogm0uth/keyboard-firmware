@@ -21,6 +21,7 @@
 #include "custom_mouse.h"
 #include "custom_edit.h"
 #include "layer_tap_toggle.h"
+#include "compose_key.h"
 
 void app_switcher_record(uint16_t keycode, bool pressed);
 void rgblight_encoder(bool clockwise, uint8_t mods);
@@ -84,6 +85,11 @@ enum layers {
 enum custom_keycodes {
   CU_IGNORE = SAFE_RANGE,
 
+#ifdef COMPOSE_KEY
+    // Compose key - experimental
+  CU_COMPOSE,
+#endif
+  
   // Custom mouse and wheel movement
 #ifdef CUSTOM_MOUSE
   CUSTOM_MOUSE_KEYS,

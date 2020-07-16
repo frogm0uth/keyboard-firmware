@@ -58,7 +58,9 @@ static char* layer_names[] = {
 
 static void render_status(void) {
     // QMK Logo and version information
+#ifndef COMPOSE_STATUS_ENABLE // not enough room in display
     render_qmk_logo();
+#endif
     //    oled_write_P(PSTR("       Kyria rev1.0\n\n"), false);
 
     // OS status
@@ -113,6 +115,9 @@ static void render_status(void) {
     default:
       oled_write_P(PSTR("\n"), false);
     }
+#ifdef COMPOSE_STATUS_ENABLE
+    compose_key_status();
+#endif
 
     // Host Keyboard LED Status
     uint8_t led_usb_state = host_keyboard_leds();
