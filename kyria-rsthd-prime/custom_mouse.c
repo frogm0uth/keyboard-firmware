@@ -15,7 +15,6 @@
  */
 #include QMK_KEYBOARD_H
 
-#include "custom_mouse.h"
 #include "keymap.h"
 
 /**
@@ -39,15 +38,6 @@ static uint16_t custom_mouse_timer = 0;
 static uint16_t custom_wheel_timer = 0;
 static uint16_t wheel_repeat_term = WHEEL_REPEAT_TERM;
 
-#ifdef TESTING
-void custom_mouse_move(uint16_t x, uint16_t y) {
-  report_mouse_t currentReport = pointing_device_get_report();
-  currentReport.x = x;
-  currentReport.y = y;
-  pointing_device_set_report(currentReport);
-  pointing_device_send();
-}
-#endif
 
 void custom_mouse_action(void) {
   report_mouse_t currentReport = pointing_device_get_report();
@@ -248,19 +238,5 @@ void custom_mouse_status () {
     itoa(delta, delta_s, 10);
     oled_write(delta_s, false);
   }
-#ifdef TESTING
-  if (mousekey_bits & CM_BIT(CM_MS_L)) {
-    oled_write_P(PSTR("L "), false);
-  }
-  if (mousekey_bits & CM_BIT(CM_MS_R)) {
-    oled_write_P(PSTR("R "), false);
-  }
-  if (mousekey_bits & CM_BIT(CM_MS_U)) {
-    oled_write_P(PSTR("U "), false);
-  }
-  if (mousekey_bits & CM_BIT(CM_MS_D)) {
-    oled_write_P(PSTR("D "), false);
-  }
-#endif
 }
 #endif

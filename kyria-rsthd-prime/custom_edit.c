@@ -15,8 +15,6 @@
  */
 #include QMK_KEYBOARD_H
 
-//#include "shortcuts.h"
-//#include "custom_edit.h"
 #include "keymap.h"
 
 
