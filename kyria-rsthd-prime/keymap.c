@@ -150,23 +150,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Layer 4: EDIT (R)
 
   ,-----------------------------------------.                              ,-----------------------------------------.
-  |  Esc |  All |  Cut | Copy | Paste| WinL |                              | WinR | WordL|  Up  | WordR|      | BASE |
+  |  Esc |  All |  Cut | Copy | Paste| WinL |                              | WinR | WordL|  Up  | WordR| PgUp | BASE |
   |------+------+------+------+------+------|                              |------+------+------+------+------+------|
-  |      |      |      |      |      | AppL |                              | AppR | Left | Down | Right| PgUp |      |
-  |      |DelMod| Acc1 | Acc2 |Repeat|      |                              |      |      |      |      |      |      |
+  |      |      |      |      |      | AppL |                              | AppR | Left | Down | Right| PgDn |      |
+  | Ctrl |DelMod| Acc1 | Acc2 |Repeat|      |                              |      |      |      |      |      | Ctrl |
   |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
-  |      |      |      |      |      | TabL |      |      |  |      |      | TabR | HBck | Down | HFwd | PgDn |      |
-  |      | Shift| Ctrl |  Alt |  Cmd |      |      |      |  | Enter| BkSp |      |      |      |      |      |      |
+  |      |      |      |      |      | TabL |      |      |  |      |      | TabR | HBck | Down | HFwd |      |      |
+  |  Cmd | Shift| Ctrl |  Alt |  Cmd |      |      |      |  | Enter| BkSp |      |      |      |      | Shift|  Cmd |
   `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
                        |(EncL)|      |      |      | (**) |  |      |      |  Del |      |(EncR)|
-                       |      |      |      |      |      |  |      |      |      |  Alt |      |
+                       |      |  Alt |      |      |      |  |      |      |      |  Alt |      |
                        `----------------------------------'  `----------------------------------'
  */
   [EDIT] = LAYOUT(
-      _______, CU_ALL,  CU_CUT,  CU_COPY, CU_PAST, CU_WINL,                                           CU_WINR, CE_WD_L, CE_MV_U, CE_WD_R, XXXXXXX, CU_BASE,
-      XXXXXXX, CE_DMOD, CE_ACC1, CE_ACC2, CE_REPT, CU_APPL,                                           CU_APPR, CE_MV_L, CE_MV_D, CE_MV_R, CE_PG_U, XXXXXXX,
-      XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, CU_TABL, XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, CU_TABR, CU_HBCK, CE_MV_D, CU_HFWD, CE_PG_D, XXXXXXX,
-                                 XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, /* */ KC_ENTER, KC_BSPC, KC_DEL, _______, XXXXXXX
+      _______, CU_ALL,  CU_CUT,  CU_COPY, CU_PAST, CU_WINL,                                           CU_WINR, CE_WD_L, CE_MV_U, CE_WD_R, CE_PG_U, CU_BASE,
+      _______, CE_DMOD, CE_ACC1, CE_ACC2, CE_REPT, CU_APPL,                                           CU_APPR, CE_MV_L, CE_MV_D, CE_MV_R, CE_PG_D, _______,
+      _______, _______, KC_LCTL, KC_LALT, KC_LGUI, CU_TABL, XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, CU_TABR, CU_HBCK, CE_MV_D, CU_HFWD, _______, _______,
+                                 XXXXXXX, _______, XXXXXXX, XXXXXXX, _______, /* */ KC_ENTER, KC_BSPC, KC_DEL, _______, _______
     ),
 
 /*
@@ -176,10 +176,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   |  Esc |      |      | MS_U |      | ScrL |                              | ScrR | Paste| Copy |  Cut |  All | BASE |
   |------+------+------+------+------+------|                              |------+------+------+------+------+------|
   |      |      | MS_L | MS_D | MS_R |Expose|                              |FulScr|      |      |      |      |      |
-  |      | Wheel|      |      |      |      |                              |      |Repeat| Acc2 | Acc1 | Slow |      |
+  | Ctrl | Wheel|      |      |      |      |                              |      |Repeat| Acc2 | Acc1 | Slow | Ctrl |
   |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
   |      |      | HBck | MS_D | HFwd |DskTop|      |      |  |      |      |DskTop|      |      |      |      |      | 
-  |      |      |      |      |      |      | Btn_L| Btn_R|  |      | SSScr|      |  Cmd |  Alt | Ctrl | Shift|      |
+  |  Cmd | Shift|      |      |      |      | Btn_L| Btn_R|  |      | SSScr|      |  Cmd |  Alt | Ctrl | Shift|  Cmd |
   `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
                        |(EncL)| Btn_M| SSRgn|      |      |  | (**) |      | SSRgn| SSWin|(EncR)|
                        |      |      |      |      |      |  |      |      |      |      |      |
@@ -188,8 +188,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #ifndef CURSOR_RIGHTHANDED
     [CURSOR] = LAYOUT(
       _______, XXXXXXX, XXXXXXX, CM_MS_U, XXXXXXX, CU_SCRL,                                             CU_SCRR,  CU_PAST, CU_COPY, CU_CUT,  CU_ALL,  CU_BASE,
-      XXXXXXX, CM_WHEE, CM_MS_L, CM_MS_D, CM_MS_R, CU_WALL,                                             CU_FSCR,  CM_REPT, CM_ACC2, CM_ACC1, CM_SLOW, XXXXXXX,
-      XXXXXXX, XXXXXXX, CU_HBCK, CM_MS_D, CU_HFWD, CU_DTOP,  XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX,  CU_DTOP,  KC_RGUI, KC_RALT, KC_RCTL, KC_RSFT, XXXXXXX,
+      _______, CM_WHEE, CM_MS_L, CM_MS_D, CM_MS_R, CU_WALL,                                             CU_FSCR,  CM_REPT, CM_ACC2, CM_ACC1, CM_SLOW, _______,
+      _______, _______, CU_HBCK, CM_MS_D, CU_HFWD, CU_DTOP,  XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX,  CU_DTOP,  KC_RGUI, KC_RALT, KC_RCTL, _______, _______,
                                  CM_BTN1, CM_BTN3, CU_SSRGN, CM_BTN1, CM_BTN2, /* */ _______, CU_SSSCR, CU_SSRGN, CU_SSWIN, XXXXXXX
     ),
 #endif
@@ -197,6 +197,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*
  * Layer 5: CURSOR ALT (L) "Right-handed version"
 
+  ,-----------------------------------------.                              ,-----------------------------------------.
+  |  Esc |  All |  Cut | Copy | Paste| ScrL |                              | ScrR |      | MS_U |      |      | BASE |
+  |------+------+------+------+------+------|                              |------+------+------+------+------+------|
+  |      |      |      |      |      |Expose|                              |FulScr| MS_L | MS_D | MS_R |      |      |
+  | Ctrl | Slow | Acc1 | Acc2 |Repeat|      |                              |      |      |      |      | Wheel| Ctrl |
+  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
+  |      |      |      |      |      |DskTop|      |      |  |      |      |DskTop| HBck | MS_D | HFwd |      |      |
+  |  Cmd | Shift| Ctrl |  Alt |  Cmd |      | Btn_L| Btn_R|  |      | SSScr|      |      |      |      | Shift|  Cmd |
+  `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
+                       |(EncL)| Btn_M| SSRgn|      |      |  | (**) |      | SSRgn| SSWin|(EncR)|
+                       |      |      |      |      |      |  |      |      |      |      |      |
+                       `----------------------------------'  `----------------------------------'
   ,-----------------------------------------.                              ,-----------------------------------------.
   |  Esc |  All |  Cut | Copy | Paste| ScrL |                              | ScrR |      | MS_U |      |      | BASE |
   |------+------+------+------+------+------|                              |------+------+------+------+------+------|
@@ -213,8 +225,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #ifdef CURSOR_RIGHTHANDED
     [CURSOR] = LAYOUT(
       _______, CU_ALL,  CU_CUT,  CU_COPY, CU_PAST, CU_SCRL,                                            CU_SCRR,  XXXXXXX, CM_MS_U, XXXXXXX, XXXXXXX, CU_BASE,
-      XXXXXXX, CM_SLOW, CM_ACC1, CM_ACC2, CM_REPT, CU_WALL,                                            CU_FSCR,  CM_MS_L, CM_MS_D, CM_MS_R, CM_WHEE, XXXXXXX,
-      XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, CU_DTOP, XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX,  CU_DTOP,  CU_HBCK, CM_MS_D, CU_HFWD, XXXXXXX, XXXXXXX,
+      _______, CM_SLOW, CM_ACC1, CM_ACC2, CM_REPT, CU_WALL,                                            CU_FSCR,  CM_MS_L, CM_MS_D, CM_MS_R, CM_WHEE, _______,
+      _______, _______, KC_LCTL, KC_LALT, KC_LGUI, CU_DTOP, XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX,  CU_DTOP,  CU_HBCK, CM_MS_D, CU_HFWD, _______, _______,
                                 CM_BTN1, CM_BTN3, CM_SSRGN, CM_BTN1, CM_BTN2, /* */ _______, CU_SSSCR, CU_SSRGN, CU_SSWIN, XXXXXXX
     ),
 #endif
@@ -226,19 +238,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   |  Esc | (**) |      |      |      |      |                              |      |  F4  |  F5  |  F6  |      | BASE |
   |------+------+------+------+------+------|                              |------+------+------+------+------+------|
   |      |      |      |      |      |      |                              |      |  F1  |  F2  |  F3  |      |      |
-  |      | Shift| Ctrl |  Alt |  Cmd |      |                              |      |      |      |      |      |      |
+  | Ctrl |      |      |      |      |      |                              |      |      |      |      |      | Ctrl |
   |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
   |      |      |      |      |      |      |      |      |  |      |      |      |  F7  |  F8  |  F9  |      |      |
-  |      |      |      |      |      |      |      |      |  |      |  F10 |      |      |      |      |      |      |
+  |  Cmd | Shift| Ctrl |  Alt |  Cmd |      |      |      |  |      |  F10 |      |      |      |      | Shift|  Cmd |
   `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
                        |(EncL)|      |      |      |      |  |      |      | F11  |  F12 |(EncR)|
-                       |      |      | (**) |      |      |  |      |      |      |      |      |
+                       |      |  Alt | (**) |      |      |  |      |      |      |      |      |
                        `----------------------------------'  `----------------------------------'
  */
     [FUNC] = LAYOUT(
       _______, CU_FUNC, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                           XXXXXXX, KC_F4, KC_F5, KC_F6, XXXXXXX, CU_BASE,
-      XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, XXXXXXX,                                           XXXXXXX, KC_F1, KC_F2, KC_F3, XXXXXXX, XXXXXXX,
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, XXXXXXX, KC_F7, KC_F8, KC_F9, XXXXXXX, XXXXXXX,
+      _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                           XXXXXXX, KC_F1, KC_F2, KC_F3, XXXXXXX, _______,
+      _______, _______, KC_LCTL, KC_LALT, KC_LGUI, XXXXXXX, XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, XXXXXXX, KC_F7, KC_F8, KC_F9, _______, _______,
                                  XXXXXXX, XXXXXXX, CU_FUNC, XXXXXXX, XXXXXXX, /* */ XXXXXXX, KC_F10, KC_F11, KC_F12, XXXXXXX
     ),
     
@@ -248,21 +260,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ,-----------------------------------------.                              ,-----------------------------------------.
   |  Esc |      |      | Mute |      |      |                              |      | !WIN | !MAC |      | (**) | BASE |
   |------+------+------+------+------+------|                              |------+------+------+------+------+------|
-  |      |      |      | VolUp| BrtUp|      |                              |      |!RSTHD|!PRIME|      |      |      |
+  |      |      |      | VolUp| BrtUp|      |                              |      |!RSTHD|!BASE |      |      |      |
   | Ctrl |      |      |      |      |      |                              |      |      |      |      |      | Ctrl |
   |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
   |      |      |      | VolDn| BrtDn|      |      |      |  |      |      |      |      |      |      |      |      |
   |  Cmd | Shift|      |      |      |      |      |      |  | !WIPE|      |      |      |      |      | Shift|  Cmd |
   `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
                        |(EncL)|      |      |      |      |  |      |      |      |      |(EncR)|
-                       |      |      |      |      |      |  |      |      | (**) |      |      |
+                       |      |  Alt |      |      |      |  |      |      | (**) |  Alt |      |
                        `----------------------------------'  `----------------------------------'
  */
     [ADJUST] = LAYOUT(
       _______, XXXXXXX, XXXXXXX, KC_MUTE, XXXXXXX, XXXXXXX,                                           XXXXXXX, CU_WIN,   CU_MAC,   XXXXXXX, CU_ADJUST, CU_BASE,
       _______, XXXXXXX, XXXXXXX, KC_VOLU, KC_BRIU, XXXXXXX,                                           XXXXXXX, CU_RSTHD, CU_PRIME, XXXXXXX, XXXXXXX, _______,
       _______, _______, XXXXXXX, KC_VOLD, KC_BRID, XXXXXXX, XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,  XXXXXXX, _______, _______,
-                                 KC_MUTE, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, /* */ CU_WIPE, XXXXXXX, CU_ADJUST, XXXXXXX,  CU_SAVE
+                                 KC_MUTE, _______, XXXXXXX, XXXXXXX, XXXXXXX, /* */ CU_WIPE, XXXXXXX, CU_ADJUST, _______,  CU_SAVE
     ),
 };
 
