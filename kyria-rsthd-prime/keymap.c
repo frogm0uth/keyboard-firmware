@@ -127,12 +127,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Layer 3: SYNTAX (L)
 
   ,-----------------------------------------.                              ,-----------------------------------------.
-  |  Esc |      |   [  |   |  |   ]  |      |                              |      |      |   #  |      |ADJUST| BASE |
+  |  Esc |      |   [  |   |  |   ]  | WinL |                              | WinR |      |   #  |      |ADJUST| BASE |
   |------+------+------+------+------+------|                              |------+------+------+------+------+------|
-  |      |   /  |   {  |   ;  |   }  |      |                              |      |   )  |   :  |   (  |   \  |      |
+  |      |   /  |   {  |   ;  |   }  | AppL |                              | AppR |   )  |   :  |   (  |   \  |      |
   | Ctrl |      |      |      |      |      |                              |      |      |      |      |      | Ctrl |
   |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
-  |      |      |   <  |   ?  |   >  |      |      |      |  |      |      |      |      |   !  |  Tab |      |      |
+  |      |      |   <  |   ?  |   >  | TabL |      |      |  |      |      | TabR |      |   !  |  Tab |      |      |
   |  Cmd | Shift|      |      |      |      | Enter|  Tab |  | Enter| Space|      |      |      |      | Shift|  Cmd |
   `--------------------+------+------+------|      |      |  |      |      |------+------+---------------------------'
                        |(EncL)|      | Space|      | EDIT |  |CURSOR|      |      |      |(EncR)|
@@ -140,10 +140,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                        `----------------------------------'  `----------------------------------'
  */
     [SYNTAX] = LAYOUT(
-      _______, XXXXXXX, KC_LBRC, KC_PIPE, KC_RBRC, KC_NO,                                            KC_NO, XXXXXXX, KC_HASH, XXXXXXX, CU_ADJUST, CU_BASE,
-      _______, KC_SLSH, KC_LCBR, KC_SCLN, KC_RCBR, KC_NO,                                            KC_NO, KC_RPRN, KC_COLN, KC_LPRN, KC_BSLS, _______,
-      _______, _______, KC_LABK, KC_QUES, KC_RABK, KC_NO,  XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, KC_NO, XXXXXXX, KC_EXLM, KC_TAB, _______, _______,
-                              XXXXXXX, _______, KC_SPACE, KC_ENTER, _______, /* */ _______, _______, _______, _______, XXXXXXX
+      _______, XXXXXXX, KC_LBRC, KC_PIPE, KC_RBRC, CU_WINL,                                           CU_WINR, XXXXXXX, KC_HASH, XXXXXXX, CU_ADJUST, CU_BASE,
+      _______, KC_SLSH, KC_LCBR, KC_SCLN, KC_RCBR, CU_APPL,                                           CU_APPR, KC_RPRN, KC_COLN, KC_LPRN, KC_BSLS, _______,
+      _______, _______, KC_LABK, KC_QUES, KC_RABK, CU_TABL, XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, CU_TABR, XXXXXXX, KC_EXLM, KC_TAB, _______, _______,
+                               XXXXXXX, _______, KC_SPACE, KC_ENTER, _______, /* */ _______, _______, _______, _______, XXXXXXX
     ),
 
 /*
