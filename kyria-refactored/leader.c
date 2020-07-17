@@ -25,7 +25,7 @@ void matrix_scan_leader(void){
         leading = false;
         leader_end();
 
-        SEQ_TWO_KEYS(KC_F, KC_P) { // Hello world
+        SEQ_TWO_KEYS(KC_H, KC_W) { // Hello world
             SEND_STRING("Hello, world!");
         }
 	// Add more here

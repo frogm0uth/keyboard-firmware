@@ -6,7 +6,7 @@ This is a refactored version of the [thomasbaart](https://github.com/qmk/qmk_fir
 
 The original keymap.c has been split up into several files. If you are thinking of doing a lot of customization to your keymap, you may find this an easier starting point.
 
-The rules.mk file has been modified that the new source files are compiled and linked only if the corresponding feature is enabled. The main effect of this is that you can remove features in rules.mk by setting them to **no** without getting compile errors. This applies to the following: OLED_DRIVER_ENABLE, ENCODER_ENABLE, LEADER_ENABLE.
+The rules.mk file has been modified so that the new source files are compiled and linked only if the corresponding feature is enabled. The main effect of this is that you can remove features in rules.mk by setting them to **no** without getting compile errors. This applies to the following: OLED_DRIVER_ENABLE, ENCODER_ENABLE, LEADER_ENABLE.
 
 ## Default layers
 
