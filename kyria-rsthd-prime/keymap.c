@@ -178,10 +178,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   |      |      | MS_L | MS_D | MS_R |Expose|                              |FulScr|      |      |      |      |      |
   |      | Wheel|      |      |      |      |                              |      |Repeat| Acc2 | Acc1 | Slow |      |
   |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
-  |      |      | HBck | MS_D | HFwd | SSRgn|      |      |  |      |      |DskTop|      |      |      |      |      | 
-  |      |      |      |      |      |      | Btn_L| Btn_R|  |      |      |      |  Cmd |  Alt | Ctrl | Shift|      |
+  |      |      | HBck | MS_D | HFwd |DskTop|      |      |  |      |      |DskTop|      |      |      |      |      | 
+  |      |      |      |      |      |      | Btn_L| Btn_R|  |      | SSScr|      |  Cmd |  Alt | Ctrl | Shift|      |
   `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
-                       |(EncL)|      | Btn_M|      |      |  | (**) |      | SSWin| SSScr|(EncR)|
+                       |(EncL)| Btn_M| SSRgn|      |      |  | (**) |      | SSRgn| SSWin|(EncR)|
                        |      |      |      |      |      |  |      |      |      |      |      |
                        `----------------------------------'  `----------------------------------'
 */
@@ -189,10 +189,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [CURSOR] = LAYOUT(
       _______, XXXXXXX, XXXXXXX, CM_MS_U, XXXXXXX, CU_SCRL,                                             CU_SCRR,  CU_PAST, CU_COPY, CU_CUT,  CU_ALL,  CU_BASE,
       XXXXXXX, CM_WHEE, CM_MS_L, CM_MS_D, CM_MS_R, CU_WALL,                                             CU_FSCR,  CM_REPT, CM_ACC2, CM_ACC1, CM_SLOW, XXXXXXX,
-      XXXXXXX, XXXXXXX, CU_HBCK, CM_MS_D, CU_HFWD, CU_SSRGN, XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX,  CU_DTOP,  KC_RGUI, KC_RALT, KC_RCTL, KC_RSFT, XXXXXXX,
-                                 CM_BTN1, XXXXXXX, CM_BTN3,  CM_BTN1, CM_BTN2, /* */ _______, XXXXXXX,  CU_SSWIN, CU_SSSCR, XXXXXXX
+      XXXXXXX, XXXXXXX, CU_HBCK, CM_MS_D, CU_HFWD, CU_DTOP,  XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX,  CU_DTOP,  KC_RGUI, KC_RALT, KC_RCTL, KC_RSFT, XXXXXXX,
+                                 CM_BTN1, CM_BTN3, CU_SSRGN, CM_BTN1, CM_BTN2, /* */ _______, CU_SSSCR, CU_SSRGN, CU_SSWIN, XXXXXXX
     ),
 #endif
+
 /*
  * Layer 5: CURSOR ALT (L) "Right-handed version"
 
@@ -202,10 +203,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   |      |      |      |      |      |Expose|                              |FulScr| MS_L | MS_D | MS_R |      |      |
   |      | Slow | Acc1 | Acc2 |Repeat|      |                              |      |      |      |      | Wheel|      |
   |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
-  |      |      |      |      |      | SSRgn|      |      |  |      |      |DskTop| HBck | MS_D | HFwd |      |      |
-  |      | Shift| Ctrl |  Alt |  Cmd |      | Btn_L| Btn_R|  |      |      |      |      |      |      |      |      |
+  |      |      |      |      |      |DskTop|      |      |  |      |      |DskTop| HBck | MS_D | HFwd |      |      |
+  |      | Shift| Ctrl |  Alt |  Cmd |      | Btn_L| Btn_R|  |      | SSScr|      |      |      |      |      |      |
   `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
-                       |(EncL)|      | Btn_M|      |      |  | (**) |      | SSWin| SSScr|(EncR)|
+                       |(EncL)| Btn_M| SSRgn|      |      |  | (**) |      | SSRgn| SSWin|(EncR)|
                        |      |      |      |      |      |  |      |      |      |      |      |
                        `----------------------------------'  `----------------------------------'
 */
@@ -213,10 +214,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [CURSOR] = LAYOUT(
       _______, CU_ALL,  CU_CUT,  CU_COPY, CU_PAST, CU_SCRL,                                            CU_SCRR,  XXXXXXX, CM_MS_U, XXXXXXX, XXXXXXX, CU_BASE,
       XXXXXXX, CM_SLOW, CM_ACC1, CM_ACC2, CM_REPT, CU_WALL,                                            CU_FSCR,  CM_MS_L, CM_MS_D, CM_MS_R, CM_WHEE, XXXXXXX,
-      XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, CU_SSRGN, XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, CU_DTOP,  CU_HBCK, CM_MS_D, CU_HFWD, XXXXXXX, XXXXXXX,
-                                 CM_BTN1, XXXXXXX, CM_BTN3,  CM_BTN1, CM_BTN2, /* */ _______, XXXXXXX, CU_SSWIN, CU_SSSCR, XXXXXXX
+      XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, CU_DTOP, XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX,  CU_DTOP,  CU_HBCK, CM_MS_D, CU_HFWD, XXXXXXX, XXXXXXX,
+                                CM_BTN1, CM_BTN3, CM_SSRGN, CM_BTN1, CM_BTN2, /* */ _______, CU_SSSCR, CU_SSRGN, CU_SSWIN, XXXXXXX
     ),
 #endif
+
 /*
  * Layer 6: FUNC (R)
 
