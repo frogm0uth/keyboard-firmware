@@ -19,8 +19,8 @@
 
 // Defs for OS selection
 enum os {
-  OS_SELECTION_MACOS = 0, // Don't change the order
-  OS_SELECTION_WINDOWS
+    OS_SELECTION_MACOS = 0, // Don't change the order
+    OS_SELECTION_WINDOWS
 };
 #define IS_MACOS      (os_selection==OS_SELECTION_MACOS)
 #define IS_WINDOWS    (os_selection==OS_SELECTION_WINDOWS)
@@ -37,42 +37,42 @@ enum layers {
 };
 
 enum custom_keycodes {
-  KC_CCCV = SAFE_RANGE,
+    KC_CCCV = SAFE_RANGE,
 
-  KC_QWERTY, // Default layer change keys 
-  KC_COLEDHM,
-  KC_WORKMAN,
-  KC_RSTHD,
+    KC_QWERTY, // Default layer change keys 
+    KC_COLEDHM,
+    KC_WORKMAN,
+    KC_RSTHD,
 
-  KC_MAC,    // Keys to change OS for shortcuts
-  KC_WIN
+    KC_MAC,    // Keys to change OS for shortcuts
+    KC_WIN
 };
 
 // Shortcuts
 enum shortcut_codes {
-  // App-switcher
-  SC_AS_START,
-  SC_AS_RIGHT,
-  SC_AS_LEFT,
+    // App-switcher
+    SC_AS_START,
+    SC_AS_RIGHT,
+    SC_AS_LEFT,
 
-  // Copy-paste
-  SC_COPY,
-  SC_PASTE,
-  
-  // Undo-redo
-  SC_UNDO,
-  SC_REDO,
-  
+    // Copy-paste
+    SC_COPY,
+    SC_PASTE,
+
+    // Undo-redo
+    SC_UNDO,
+    SC_REDO,
+
 };
 #define SC(k) (pgm_read_word(&shortcut_codes[k][os_selection]))
 
 
 // User config structure for EEPROM
 typedef union {
-  uint32_t raw;
-  struct {
-    uint8_t     os_selection :2;
-  };
+    uint32_t raw;
+    struct {
+        uint8_t     os_selection :2;
+    };
 } user_config_t;
 
 

@@ -50,32 +50,32 @@ static void render_status(void) {
     render_qmk_logo();
     oled_write_P(PSTR("       Kyria rev1.0\n\n"), false);
 
-        // Host Keyboard OS Status
+    // Host Keyboard OS Status
     oled_write_P(PSTR("OS:    "), false);
     if (IS_MACOS) {
-      oled_write_P(PSTR("macOS\n"), false);
+        oled_write_P(PSTR("macOS\n"), false);
     } else {
-      oled_write_P(PSTR("Windows\n"), false);
+        oled_write_P(PSTR("Windows\n"), false);
     }      
-      // Host Keyboard Layer Status
+    // Host Keyboard Layer Status
     oled_write_P(PSTR("Layer: "), false);
     switch (get_highest_layer(layer_state)) {
         case 0:
-	  switch(get_highest_layer(default_layer_state)) {
-	  case QWERTY:
-            oled_write_P(PSTR("QWERTY\n"), false);
+            switch(get_highest_layer(default_layer_state)) {
+                case QWERTY:
+                    oled_write_P(PSTR("QWERTY\n"), false);
+                    break;
+                case COLEDHM:
+                    oled_write_P(PSTR("Colemak DHm\n"), false);
+                    break;
+                case WORKMAN:
+                    oled_write_P(PSTR("Workman\n"), false);
+                    break;
+                case RSTHD:
+                    oled_write_P(PSTR("RSTHD\n"), false);
+                    break;
+            }
             break;
-	  case COLEDHM:
-            oled_write_P(PSTR("Colemak DHm\n"), false);
-            break;
-	  case WORKMAN:
-            oled_write_P(PSTR("Workman\n"), false);
-            break;
-	  case RSTHD:
-            oled_write_P(PSTR("RSTHD\n"), false);
-            break;
-	  }
-	  break;
         case LOWER:
             oled_write_P(PSTR("Lower\n"), false);
             break;

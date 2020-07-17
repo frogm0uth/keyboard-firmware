@@ -24,8 +24,8 @@ uint8_t os_selection;
 
 // Initialize from EEPROM 
 void keyboard_post_init_user(void) {
-  user_config.raw = eeconfig_read_user();
-  os_selection = user_config.os_selection;
+    user_config.raw = eeconfig_read_user();
+    os_selection = user_config.os_selection;
 }
 
 
@@ -223,9 +223,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 copy_paste_timer = timer_read();
             } else {
                 if (timer_elapsed(copy_paste_timer) > TAPPING_TERM) {  // Hold, copy
-		  tap_code16(SC(SC_COPY));
+                    tap_code16(SC(SC_COPY));
                 } else { // Tap, paste
-		  tap_code16(SC(SC_PASTE));
+                    tap_code16(SC(SC_PASTE));
                 }
             }
             break;
@@ -258,12 +258,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 	    // Change OS selection
     case KC_MAC:
     case KC_WIN:
-      if (record->event.pressed) {
-	os_selection = keycode == KC_MAC ? OS_SELECTION_MACOS : OS_SELECTION_WINDOWS;
-	user_config.os_selection = os_selection;
-	eeconfig_update_user(user_config.raw);
-      }
-      break;
+        if (record->event.pressed) {
+            os_selection = keycode == KC_MAC ? OS_SELECTION_MACOS : OS_SELECTION_WINDOWS;
+            user_config.os_selection = os_selection;
+            eeconfig_update_user(user_config.raw);
+        }
+        break;
 
 
     }

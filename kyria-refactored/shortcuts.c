@@ -20,16 +20,16 @@
 // Array of shortcut codes. First entry on each row is for macOS, second is for Windows.
 //
 const uint16_t PROGMEM shortcut_codes[][2] = {
-  // App-switcher
-  [SC_AS_START] = {KC_LGUI,   KC_LALT},
-  [SC_AS_RIGHT] = {KC_TAB,    KC_TAB},
-  [SC_AS_LEFT]  = {S(KC_TAB), S(KC_TAB)},
+    // App-switcher
+    [SC_AS_START] = {KC_LGUI,   KC_LALT},
+    [SC_AS_RIGHT] = {KC_TAB,    KC_TAB},
+    [SC_AS_LEFT]  = {S(KC_TAB), S(KC_TAB)},
 
-  // Copy-paste
-  [SC_COPY]  = {G(KC_C), C(KC_C)},
-  [SC_PASTE] = {G(KC_V), C(KC_V)},
+    // Copy-paste
+    [SC_COPY]  = {G(KC_C), C(KC_C)},
+    [SC_PASTE] = {G(KC_V), C(KC_V)},
 
-  // Undo-redo
-  [SC_UNDO]  = {G(KC_Z),    C(KC_Z)},
-  [SC_REDO]  = {S(G(KC_Z)), C(KC_Y)}
+    // Undo-redo
+    [SC_UNDO]  = {G(KC_Z),    C(KC_Z)},
+    [SC_REDO]  = {S(G(KC_Z)), C(KC_Y)}
 };
