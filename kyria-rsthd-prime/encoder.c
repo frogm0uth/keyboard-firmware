@@ -25,7 +25,7 @@ void encoder_update_user(uint8_t index, bool clockwise) {
   layer_state_t layer = get_highest_layer(layer_state);
   uint16_t keycode = KC_NO;
   
-  if (left) clockwise = !clockwise;  // left side encoder is backwards (?)
+  clockwise = !clockwise;  // encoders are wired backwards (??)
 
   // This goes in two phases. First, handle anything that need to preserve mods between clicks
 #ifdef OS_SHORTCUTS
