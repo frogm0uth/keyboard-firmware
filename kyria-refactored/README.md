@@ -6,13 +6,13 @@ This is a refactored version of the [thomasbaart](https://github.com/qmk/qmk_fir
 
 The original keymap.c has been split up into several files. If you are thinking of doing a lot of customization to your keymap, you may find this an easier starting point.
 
-The rules.mk file has been modified a bit so that the source files are compiled and linked only if the corresponding feature is enabled. The main effect of this is that you can remove features without getting compile errors. Any of these can be set to **no** in rules.mk: OLED_DRIVER_ENABLE, ENCODER_ENABLE, LEADER_ENABLE.
+The rules.mk file has been modified that the new source files are compiled and linked only if the corresponding feature is enabled. The main effect of this is that you can remove features in rules.mk by setting them to **no** without getting compile errors. This applies to the following: OLED_DRIVER_ENABLE, ENCODER_ENABLE, LEADER_ENABLE.
 
 ## Default layers
 
-There are four default layers. This might be handy for someone who wanted to try out a different key layout on their Kyria. The keys to switch between them are on the left home row on the Navigation layer.
+There are four default layers. This might be useful for anyone who wants to try out a different key layout on their Kyria. The keys to switch between them are on the left home row on the Navigation layer.
 
-**Important**: if you plan to flash a different firmware, set the default layer back to QERTY first. This will ensure that you dont get stuck in the wrong layer on the other firmware.
+**Important**: if you plan to flash a different firmware, set the default layer back to QWERTY first. This will ensure that you don't boot up stuck in the wrong layer on the other firmware.
 
 The layers are:
 
@@ -21,7 +21,7 @@ The layers are:
 3. [Workman](https://workmanlayout.org)
 4. [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/)
 
-The last uses the left thumb for the E key, so the Space that was previously there has been removed. I removed the Shift as well and put it on the right pinky.
+The last uses the left thumb for the E key, so the Space that was previously there has been removed. (Space is also on the right thumb anyway.) I removed the Shift as well and put it on the right pinky.
 
 ## OS selection and shortcuts
 
