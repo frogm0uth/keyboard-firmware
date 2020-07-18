@@ -74,7 +74,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Third Base Layer: Workman
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * | ESC    |   Q  |   W  |   F  |   P  |   B  |                              |   J  |   F  |   U  |   P  | ;  : |  | \   |
+ * | ESC    |   Q  |   D  |   R  |   W  |   B  |                              |   J  |   F  |   U  |   P  | ;  : |  | \   |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * | LSFT   |   A  |   S  |   H  |   T  |   G  |                              |   Y  |   N  |   E  |   I  |   O  |  ' "   |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
@@ -85,7 +85,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [WORKMAN] = LAYOUT(
-      KC_ESC,  KC_Q,   KC_W,   KC_F,   KC_P,   KC_B,                                         KC_J,    KC_F,    KC_U,    KC_P,    KC_SCLN, KC_PIPE,
+      KC_ESC,  KC_Q,   KC_D,   KC_R,   KC_W,   KC_B,                                         KC_J,    KC_F,    KC_U,    KC_P,    KC_SCLN, KC_PIPE,
       KC_LSFT, KC_A,   KC_S,   KC_H,   KC_T,   KC_G,                                         KC_Y,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
       KC_LCTL, KC_Z,   KC_X,   KC_M,   KC_C,   KC_V,   KC_CCCV,   XXXXXXX, KC_DEL, KC_LEAD,  KC_K,    KC_L,    KC_COMM, KC_DOT,  KC_SLSH, KC_MINS,
               KC_LGUI, KC_LALT, MO(LOWER), MT(MOD_LSFT, KC_SPC), MT(MOD_LALT, KC_ENT), KC_BSPC, LT(NAV, KC_SPC), MO(RAISE), KC_TAB, KC_RALT
