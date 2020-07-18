@@ -10,9 +10,9 @@ The rules.mk file has been modified so that the new source files are compiled an
 
 ## Default layers
 
-There are four default layers. This might be useful for anyone who wants to try out a different key layout on their Kyria. The keys to switch between them are on the left home row on the Navigation layer.
+There are four default layers. This might be useful for anyone interested in trying out different key layouts on their Kyria. The keys to switch between them are on the left home row on the Navigation layer.
 
-**Important**: if you plan to flash a different firmware, set the default layer back to QWERTY first. This will ensure that you don't boot up stuck in the wrong layer on the other firmware.
+**Important**: if you plan to flash a different firmware, set the default layer back to QWERTY first. This will ensure that you aren't stuck in the wrong layer when you boot the other firmware.
 
 The layers are:
 
@@ -21,7 +21,7 @@ The layers are:
 3. [Workman](https://workmanlayout.org)
 4. [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/)
 
-The last uses the left thumb for the E key, so the Space that was previously there has been removed. (Space is also on the right thumb anyway.) I removed the Shift as well and put it on the right pinky.
+The last uses the left thumb for the E key, so the Space that was previously there has been removed. (Space is also on the right thumb anyway.) I also removed the Shift that was on that key and put it on the right pinky.
 
 ## OS selection and shortcuts
 
@@ -33,7 +33,5 @@ If you need more shortcuts, add them to shortcuts.c. You will also need to add e
 
 ## Issues?
 
-This is not fully tested yet, especially on Windows.
-
-If you try this keymap and run into issues, please ping @frogmouth on the [splitkb discord](https://splitkb.com/discord).
+This is not my daily driver, so there could be issues in the code. If you do find an problem, please ping @frogmouth on the [splitkb discord](https://splitkb.com/discord).
 
