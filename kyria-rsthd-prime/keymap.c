@@ -27,12 +27,6 @@ void keyboard_post_init_user(void) {
 #if defined(OS_SHORTCUTS) && !defined(OS_SHORTCUTS_STATIC)
   os_set_raw(user_config.os_selection);
 #endif
-  
-    // DEBUG - Customise these values to desired behaviour
-  //debug_enable=true;
-  //debug_matrix=true;
-  //debug_keyboard=true;
-  //debug_mouse=true;
 }
 
 // #defines for shorter codes for keymap
@@ -81,12 +75,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Layer 1: PRIME
 
   ,-----------------------------------------.                              ,-----------------------------------------.
-  |  Esc |   J  |   C  |   W  |   D  |   Y  |                              |   Z  |   L  |   U  | '  " |   Q  |Leader|
+  |  Esc |   V  |   C  |   W  |   D  |   K  |                              |   J  |   M  |   U  | ,  - |   Q  |Leader|
   |------+------+------+------+------+------|                              |------+------+------+------+------+------|
-  |      |   R  |   S  |   T  |   H  |   P  |                              |   V  |   N  |   I  |   O  |   A  |      |
+  |      |   R  |   S  |   T  |   H  |   P  |                              |   X  |   N  |   I  |   O  |   A  |      |
   | Ctrl |      |      |      |      |      |                              |      |      |      |      |      | Ctrl |
   |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
-  |      |      |   B  |   G  |   F  |   K  |      |      |  |      |      |   X  |   M  | ,  - | .  _ |      |      |
+  |      |      |   B  |   G  |   F  | '  " |      |      |  |      |      |   Z  |   L  |   Y  | .  _ |      |      |
   |  Cmd | Shift|      |      |      |      |   E  |  Tab |  | Enter| Space|      |      |      |      | Shift|  Cmd |
   `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
                        |(EncL)|      |      |      | EDIT |  |CURSOR|      |      |      |(EncR)|
@@ -94,10 +88,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                        `----------------------------------'  `----------------------------------'
  */
     [PRIME] = LAYOUT(
-      KC_ESC,  KC_J,   KC_C,   KC_W,   KC_D,   KC_Y,                                             KC_Z,    KC_L,    KC_U,    KC_QUOT, KC_Q,   CU_DEAD,
-      KC_LCTL, KC_R,   KC_S,   KC_T,   KC_H,   KC_P,                                             KC_V,    KC_N,    KC_I,    KC_O,    KC_A,   KC_RCTL,
-      KC_LGUI, CU_LSFT,KC_B,   KC_G,   KC_F,   KC_K, XXXXXXX, XXXXXXX, /* */ KC_COMM,   XXXXXXX, KC_X,    KC_M,    CU_CMMI, CU_DTUN, CU_RSFT, KC_RGUI,
-                         CU_SLOCK, KC_LALT, CU_NUMPAD, KC_E,  CU_EDIT, /* */ CU_CURSOR, KC_SPACE, CU_SYNTAX, KC_RALT, CU_SLEEP
+      KC_ESC,  KC_V,   KC_C,   KC_W,   KC_D,   KC_K,                                              KC_J,    KC_M,    KC_U,   CU_CMMI, KC_Q,   CU_DEAD,
+      KC_LCTL, KC_R,   KC_S,   KC_T,   KC_H,   KC_P,                                              KC_X,    KC_N,    KC_I,   KC_O,    KC_A,   KC_RCTL,
+      KC_LGUI, CU_LSFT,KC_B,   KC_G,   KC_F,   KC_QUOT, XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, KC_Z,    KC_L,    KC_Y,   CU_DTUN, CU_RSFT, KC_RGUI,
+                            CU_SLOCK, KC_LALT, CU_NUMPAD, KC_E,  CU_EDIT, /* */ CU_CURSOR, KC_SPACE, CU_SYNTAX, KC_RALT, CU_SLEEP
     ),
 
 /*
