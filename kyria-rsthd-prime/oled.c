@@ -35,6 +35,7 @@ static void render_kyria_logo(void) {
     oled_write_raw_P(kyria_logo, sizeof(kyria_logo));
 }
 
+#ifndef COMPOSE_STATUS_ENABLE
 static void render_qmk_logo(void) {
   static const char PROGMEM qmk_logo[] = {
     0x80,0x81,0x82,0x83,0x84,0x85,0x86,0x87,0x88,0x89,0x8a,0x8b,0x8c,0x8d,0x8e,0x8f,0x90,0x91,0x92,0x93,0x94,
@@ -43,17 +44,16 @@ static void render_qmk_logo(void) {
 
   oled_write_P(qmk_logo, false);
 }
+#endif
 
-
-static char* layer_names[] = {
-  [PRIME]  = "PRIME",
-  [RSTHD]  = "RSTHD",
+const static char* layer_names[] = {
+  [RSTHD]  = "RSTHD-s",
+  [PRIME]  = "Prime",
   [NUMPAD] = "NumPad",
   [SYNTAX] = "Syntax",
   [EDIT]   = "Edit",
   [CURSOR] = "Cursor",
-  [FUNC]   = "Func",
-  [ADJUST] = "Adjust"
+  [FUNC]   = "Func"
 };
 
 static void render_status(void) {
@@ -108,7 +108,7 @@ static void render_status(void) {
       break;
 #endif
 #ifdef RGBLIGHT_ENABLE
-    case ADJUST:
+    case FUNC:
       rgblight_oled_status();
       break;
 #endif

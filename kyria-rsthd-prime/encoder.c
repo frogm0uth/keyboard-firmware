@@ -46,10 +46,10 @@ void encoder_update_user(uint8_t index, bool clockwise) {
   switch (layer) {
   case ALPHA:
     if (left) {
-      if (mods & MOD_MASK_ALT) {
-	keycode = clockwise ? SC(SC_NEXT_SEARCH) : SC(SC_PREV_SEARCH);
-      } else if (mods & MOD_MASK_GUI) {
+      if (mods & MOD_MASK_GUI) {
 	keycode = clockwise ? SC(SC_BROWSER_FWD) : SC(SC_BROWSER_BACK);
+      } else if (mods & MOD_MASK_CTRL) {
+	keycode = clockwise ? SC(SC_NEXT_SEARCH) : SC(SC_PREV_SEARCH);
       } else {
 	keycode = clockwise ? KC_PGDN : KC_PGUP;
       }
@@ -72,7 +72,7 @@ void encoder_update_user(uint8_t index, bool clockwise) {
 
   case SYNTAX:
 #ifdef CUSTOM_MOUSE
-    if (left) {
+    if (right) {
       if (mods & MOD_MASK_SHIFT) {
 	custom_wheel_encoder(clockwise, false);
       } else {
@@ -83,44 +83,39 @@ void encoder_update_user(uint8_t index, bool clockwise) {
     break;
     
   case EDIT:
-    if (left) {
-      keycode = clockwise ? SC(SC_REDO_ACTION) : SC(SC_UNDO_ACTION);
-    }
 #ifdef CUSTOM_EDIT
-    if (right) {
+    if (left) {
       custom_edit_encoder(clockwise);
     }
 #endif
-    break;
-    
-    case CURSOR:
-#ifdef CUSTOM_MOUSE
-    if (left) {
-      custom_mouse_encoder(clockwise);
-    }
-#endif
     if (right) {
       keycode = clockwise ? SC(SC_REDO_ACTION) : SC(SC_UNDO_ACTION);
     }
     break;
+    
+    case CURSOR:
+      if (left) {
+#ifdef CUSTOM_MOUSE
+	custom_mouse_encoder(clockwise);
+#endif
+      } else {
+	keycode = clockwise ? SC(SC_REDO_ACTION) : SC(SC_UNDO_ACTION);
+      }
+      break;
 
   case FUNC:
-    // nothing
-    break;
-    
-  case ADJUST:
+#ifdef RGBLIGHT_ENABLE
     if (left) {
+      rgblight_encoder(clockwise, mods);
+    }
+#endif
+    if (right) {
       if (mods & MOD_MASK_SHIFT) {
 	keycode = clockwise ? KC_PAUSE : KC_SLCK;
       } else {
 	keycode = clockwise ? KC_VOLU : KC_VOLD;
       }
     }
-#ifdef RGBLIGHT_ENABLE
-    if (right) {
-      rgblight_encoder(clockwise, mods);
-    }
-#endif
     break;
   }
   if (keycode != KC_NO) {  // If we found a single code to send, send it
