@@ -1,36 +1,38 @@
-# Kyria RSTHD' ("RSTHD-prime")
+# Kyria RSTHD/Prime
 
-This is the keymap I use on my Kyria keyboard from [splitkb.com](https://splitkb.com).
+**Under development.** This is a keymap I'm working on for my Kyria keyboard from [splitkb.com](https://splitkb.com). The apha layouts are based on on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/). There are two default layers, one a lightly modified RSTHD and one heavily modified. For a more standard implementation of RSTHD on the Kyria, see my [Kyria Refactored](https://github.com/frogm0uth/keyboard-firmware/tree/master/kyria-refactored) keymap.
 
 <!--ts-->
-   * [Kyria RSTHD' ("RSTHD-prime")](#kyria-rsthd-rsthd-prime)
+   * [Kyria RSTHD/Prime](#kyria-rsthdprime)
    * [Overview](#overview)
       * [Background/design principles](#backgrounddesign-principles)
       * [Main features](#main-features)
       * [Work in Progress/TODO](#work-in-progresstodo)
    * [Layers](#layers)
-      * [RSTHD](#rsthd)
+      * [RSTHD-s](#rsthd-s)
       * [Prime](#prime)
       * [Numpad](#numpad)
       * [Syntax](#syntax)
       * [Edit](#edit)
       * [Cursor](#cursor)
       * [Func](#func)
-      * [Adjust](#adjust)
-   * [Special keys](#special-keys)
    * [Acknowledgments](#acknowledgments)
 
 <!--te-->
 
 # Overview
 
-The alphabetic layout is based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/). There are two default layers: one which preserves the alphabetic characters but does move Shift and punctuation, and one which is more extensively modified. The selection of default layer is stored in EEPROM.
+The alphabetic layouts in this keymap are based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/), one lightly modified ("RSTHD-s") and one heavily modified ("Prime").
 
-This keymap is perhaps a bit more "traditional" than other QMK layouts that I see being designed for small keyboards, as I haven't used QMK features such as mod-tap, tap-dance, or combos. Instead, each modifier has its own dedicated key on each hand, most of them being on the pinky. The Kyria does have a few more keys than some — mine is configured with 44. I've done a number of other things a bit differently, but I hope the extensive/different customization doesn't put people off trying RSTHD itself, as it's an innovative and effective base layout.
+The first default layer is a lightly modified version of RSTHD that moves the Shift keys underneath pinky home. The second is a further development of my RTSHD' ("RSTHD prime") layout for the Kinesis keyboard but aims to reduce finger travel distance even more.
 
-I have tried to make the keymap work fluidly, both in the base alpha layer and with the interaction between layers. The Kyria has some nice features such as OLEDs and encoders, which I try to use to good effect.
+The two default layers can be selected with keys on the Function layer, and the selection is stored in EEPROM.
 
-*This is still a work in progress.* I'm refining it and polishing rough edges as I use it in my daily work more. 
+This keymap is perhaps a bit more "traditional" than other QMK layouts that I see being designed for small keyboards as I haven't used the QMK features tap-dance, one-shot keys or combos. I've used mod-tap on just one key (Alt) – the other modifiers have dedicated keys on each hand.
+
+I have tried to make the keymap work fluidly, both in the base layers and with the interaction between layers. The Kyria has some nice features such as OLEDs and encoders, which I try to use to good effect.
+
+***This is currently under development.***
 
 ## Background/design principles
 
@@ -44,113 +46,83 @@ Speed and reducing the number of keys in use are not important goals for me.
 
 ## Main features
 
-* A modified RSTHD as the alpha layout.
-* A custom layer switching code, which is like a merger or QMK's LT() and TG() functions. More information is [here](../../../../keyboard-notes/tree/master/qmk-layer-tap-toggle).
+* Two different alpha layers derived from RSTHD.
+* A custom layer switching code, which is like a merger or QMK's LT() and TG() functions. More information (*now out of date*) is [here](../../../../keyboard-notes/tree/master/qmk-layer-tap-toggle).
 * The ability to select the OS in use (currently Mac and Windows supported) from the keyboard, which changes the shortcuts programmed into the keyboard. More information is [here](../../../../keyboard-notes/tree/master/qmk-os-shortcuts).
 * A custom mouse feature to make mouse keys more controllable. More information is [here](../../../../keyboard-notes/tree/master/qmk-custom-mouse).
 * A custom editing layer for platform-independent editing. More information is [here](../../../../keyboard-notes/tree/master/qmk-custom-edit).
-* A *Compose* key. In this keymap, it replaces the Leader key. More information is [here](../../../../keyboard-notes/tree/master/qmk-compose-key).
+* A *Compose* key. In this keymap, it replaces the Leader key. More information (*now out of date*) is [here](../../../../keyboard-notes/tree/master/qmk-compose-key).
 * Matching use of the encoders on each layer.
 * Informative info on the OLED. (Unfortunately, at the moment only the left OLED can be usefully used.) 
 
 ## Work in Progress/TODO
 
-1. Windows functionality is barely tested / needs work
-2. Custom Mouse needs more work on wheel speed.
-5. OLED displays need some refinement.
-7. Is it possible to make selection of the right-handed version of the Cursor layer dynamic?
-5. This doc needs to be fleshed out. Keymap images in particular.
+1. Windows shortcuts are barely tested / need work.
+2. Linux shortcuts are non-existent.
+3. Custom Mouse needs work on acceleration and wheel speed.
+4. OLED displays need some refinement.
+5. This doc needs to be fleshed out.
 
 
 # Layers
 
-There are a total of 8 layers. The first two are alternate base layers, which can be selected from the keyboard. The selection persists across reboots so once set there's no need to change it again.
+There are a total of 7 layers. The first two are alternate base layers, which can be selected from the keyboard. The selection persists across reboots so once set there's no need to change it again.
 
-The remaining 6 layers are alternately activated from the left or right thumb. On each layer, the opposite side to the layer key is considered "primary" and the side with the activation key is "auxiliary". Usually, I hold the layer key to keep the layer activated, but the layer can be toggled on by pressing the layer key with Shift down.
+The remaining 5 layers are activated from the left or right thumb. On each layer, the opposite side to the layer key is considered "primary" and the side with the activation key is "auxiliary". Usually, I hold the layer key to keep the layer activated, but the layer can be locked on by pressing the layer key with Cmd down.
 
-Many of these layers use the inner column for meta-operations like window navigation and screenshots. See Special keys [link] further below.
+Some of these layers use the inner column for window navigation.
 
 Most layers use one or both of the encoders. Where possible, the encoder function is appropriate for the function of that layer. If the encoder on the auxiliary side is used, the layer will need to be locked to use it.
 
 For now, there are no images of the key layout, these will come later once the keymap fully stabilizes. For now, please refer to the ASCII art in keymap.c.
 
-## RSTHD
+## RSTHD-s
 
-This is RSTHD, modified a little to fit into a smaller keyboard (the author of RSTHD used an Ergodox). Most punctuation is moved to other layers. In addition, to reduce lateral movement on the pinkies, the Shift keys are moved to the location underneath pinky home. I've changed the three remaining punctuation keys to use the same pairs as the Prime layer (below) so that it still works well with the other layers in the keymap.
-
-Left encoder is page up/down. With **Alt** held, move forward and back through search results. With **Cmd** held, move forward and back through browser history. Encoder push is screen lock.
-
-Right encoder is the app switcher (Cmd-Tab on Mac, Alt-Tab on Windows). With **Cmd** held, cycle left and right through tabs of a window. With **Ctrl** held, cycle left and right through tabs of a window, for those applications that don't respond to the standard macOS shortcuts (applicable to macOS only). Encoder push is system sleep.
+This layer is fairly close to the original RSTHD, but a) modified to fit the smaller keyboard and b) the Shift keys are moved underneath pinky home to reduce lateral movement. The punctuation has also been changed a bit.
 
 ## Prime
 
-This is my preferred base layer, using a layout I call RSTHD' ("RSTHD prime") [link].
+This layer is my "daily driver". It is originally based on RSTHD but is now so heavily modified that I'm not sure it's proper to use RSTHD in the name. But all credit to the original author of RSTHD. The name comes from a little mathematical wordplay from an earlier version that I called RSTHD' ("RSTHD-prime"), meaning a derivative of RSTHD. Since it's changed so much, I now just call it Prime. (In other words, the name is a combination of a joke and evolution, I'm not being self-aggrandizing :) )
 
-Note that the link above points to a version that I developed for the Kinesis Advantage, which has a 3D keywell. I don't consider it quite optimal for the Kyria. It's very interesting how different actions are easier depending on the physical keyboard, particularly around the pinky keys and the inner column. However, I'm running with it until I find time to re-optimize for the Kyria.
-
-Encoder use is the same as for the RSTHD layer.
+The optimizations that resulted in this layout aimed to reduce lateral finger movement and improve comfort. The layout does perform very well in an analyzer, with very low SFU (same finger utilization) stats and lower travel distance than most other layouts.
 
 ## Numpad
 
 Activation: left thumb. Primary keys on right, auxiliary keys on left.
 
-The number keys 1 – 9 are on the right, arranged in a 3x3 grid. 1 – 3 are on the home row, as these are the most frequent digits. Arithmetic operators are on the left, along with 0 and ".". Note that it's assumed that all digits have their corresponding punctuation character available with Shift, but some of these are duplicated on the Syntax layer.
+The number keys 1 – 9 are on the right, arranged in a 3x3 grid. 1 – 3 are on the home row, as these are the most frequent digits. Arithmetic operators are on the left, along with 0 and ".". Note that it's assumed that all digits have their corresponding punctuation character available with Shift, but some of these are also duplicated on the Syntax layer.
 
-Left encoder (auxiliary side) is screen zoom in/out. Encoder push resets to default (macOS only).
+It's assumed that there will be times when this layer is locked on for an extended period, for numeric entry or spreadsheets. Therefore all the keys to access higher layers are here, which isn't the case for other layers.
 
-Right encoder (primary side) is application window zoom in/out. Encoder push resets to default.
+Select all, cut, copy and paste are chorded on the left hand.
 
 ## Syntax
 
-Activation: right thumb. Primary keys on left, auxiliary keys on right.
+Activation: left thumb. Primary keys on right, auxiliary keys on left.
 
 Named because I think of it as enabling the syntax of common programming languages. (I think a non-programmer will also find this layer easy to use, although the logic behind the key arrangement may not be so obvious.)
 
-On the left are three pairs of pairing punctation: **[ ]**, **{ }**, and **< >**. Space and Enter are duplicated on the left thumb and Tab is duplicated on the right hand, making it easy to "roll" common sequences such as **}<Enter><Tab>**. Parentheses **) (** are on the right hand, ensuring there are no same-finger conflicts in common sequences such as **){**. Other punctuation on this layer is commonly used in a range of coding languages; where possible they are arranged for "rolls," such as **<?** and **/>**.
-
-Left encoder (primary side) is mouse wheel up/down. With Shift pressed, it is wheel right/left.
+On the right are three pairs of pairing punctation: **] [**, **} {**, and **> <**. Parentheses **( )** are on the left hand to avoid same-finger conflicts in common sequences such as **)}**. Other punctuation on this layer is commonly used in a range of coding languages; where possible they are arranged for "rolls," such as **->**, **<?** and **/>**. Various other characters on the layer are there to avoid switching layers for digrams that commonly occur in coding/scripting such as **${**, **=>**, **<!**, and so on.
 
 ## Edit
 
-Activation: left thumb. Primary keys on right, auxiliary keys on left.
+Activation: right thumb. Primary keys on left, auxiliary keys on right.
 
-This is an editing layer based on my [Custom Edit](../../../../keyboard-notes/tree/master/qmk-custom-edit) code.
+This is an editing layer based on my [Custom Edit](../../../../keyboard-notes/tree/master/qmk-custom-edit) code. The navigation keys on the left have the standard four cursor keys, word left/right, and page up/down. Below the navigation keys are "hyper-back" and "hyper-forward" keys. Depending on modifiers pressed, these are undo/redo, browser back/forward, or next/previous search result.
 
-Left encoder (auxiliary side) is history scrubbing i.e. undo and redo.
-
-Right encoder (primary side) moves the cursor left and right by a character. With **Acc1** held, by words; with **Acc2** held, by paragraphs. If **DMod** is held, it deletes instead of moving. If **Rept** is held down, then movement or deletion is vertical.
+Various special modifier keys on the right home row (see the above link). Select all, cut, copy and paste are chorded on the right hand. The inner columns are used for moving between windows, apps and tabs, which is fairly common to do when editing and copy/pasting.
 
 ## Cursor
 
-Activation: right thumb. Primary keys on left, auxiliary keys on right.
+Activation: Ctrl + right thumb. Primary keys on left, auxiliary keys on right.
 
-This is a cursor movement layer based on my [Custom Mouse](../../../../keyboard-notes/tree/master/qmk-custom-mouse) code.
-
-Left encoder (primary side) moves the mouse cursor right/left by the amount set by the accelerator keys. If **Rept** is held down, it moves down/up. Encoder push is mouse button 1. 
-
-Right encoder (auxiliary side) is history scrubbing i.e. undo and redo.
-
-These is also a "right-handed" version of this layer, which places the mouse keys on the right hand. Activation is still on the right thumb. To use the encoders on this layer, the layer will need to be locked. To enable it, uncomment `#define CURSOR_RIGHTHANDED` in config.h.
+This is a cursor movement layer based on my [Custom Mouse](../../../../keyboard-notes/tree/master/qmk-custom-mouse) code. Overall, the layout mimics the Edit layer except that the cursor keys move the mouse and the left thumb is used for mouse buttons. This layer also has keys to trigger various types of screenshot (some of which need moving the mouse before or after).
 
 ## Func
 
-Activation: left thumb and pinky. Primary keys on right, auxiliary keys on left.
+Activation: Ctrl + left thumb. Primary keys on right, auxiliary keys on left.
 
-This layer contains function keys. Since I hardly ever use them, the activation sequence isn't important and requires a chord with pinky and thumb.
-
-## Adjust
-
-Activation: right thumb and pinky. Primary keys on left, auxiliary keys on right.
-
-This layer contains a few keys for adjusting volume and screen brightness. It also contains the keys for switching persistent layers and OS selection. Since it's not frequently used, the activation sequence isn't important and requires a chord with pinky and thumb.
-
-Left encoder (primary side) increases/decreases audio volume. With Shift held, it increases/decreases screen brightness. Encoder push is mute.
-
-Right encoder (auxiliary side) changes backlight hue. With **Cmd** held, it increases/decreases backlight brightness. WIth **Ctrl** held, it increases/decreases backlight saturation. Encoder push saves the current backlight setting to EEPROM.
-
-# Special keys
-
-TBC
+This layer contains function keys. It also contains the keys that change settings stored in EEPROM.
 
 # Acknowledgments
 
