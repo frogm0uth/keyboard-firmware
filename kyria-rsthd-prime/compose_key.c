@@ -53,11 +53,36 @@ static char compose_nextchars[COMPOSE_MAX_WIDTH+1] = "";
 // compiled in. (Also, the shifted quote character is only a single quote.)
 //
 #ifndef TERMINAL_ENABLE
-const char keycode_to_ascii_lut[58] = {0, 0, 0, 0, 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 0, 0, 0, '\t', ' ', '-', '=', '[', ']', '\\', 0, ';', '\'', '`', ',', '.', '/'};
+const char keycode_to_ascii_lut[57] = {
+  0,   0,    0,   0,    'a',  'b', 'c', 'd',
+  'e', 'f',  'g', 'h',  'i',  'j', 'k', 'l',
+  'm', 'n',  'o', 'p',  'q',  'r', 's', 't',
+  'u', 'v',  'w', 'x',  'y',  'z', '1', '2',
+  '3', '4',  '5', '6',  '7',  '8', '9', '0',
+  0,   0,    0,   '\t', ' ',  '-', '=', '[',
+  ']', '\\', 0,   ';',  '\'', '`', ',', '.',
+  '/'
+};
 
-const char shifted_keycode_to_ascii_lut[58] = {0, 0, 0, 0, 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', 0, 0, 0, '\t', ' ', '_', '+', '{', '}', '|', 0, ':', '\"', '~', '<', '>', '?'};
-
+const char shifted_keycode_to_ascii_lut[57] = {
+  0,   0,   0,   0,    'A',  'B', 'C', 'D',
+  'E', 'F', 'G', 'H',  'I',  'J', 'K', 'L',
+  'M', 'N', 'O', 'P',  'Q',  'R', 'S', 'T',
+  'U', 'V', 'W', 'X',  'Y',  'Z', '!', '@',
+  '#', '$', '%', '^',  '&',  '*', '(', ')',
+  0,   0,   0,   '\t', ' ',  '_', '+', '{',
+  '}', '|', 0,   ':',  '\"', '~', '<', '>',
+  '?'
+};
 #endif
+
+// Send a string 
+void my_send_string(char* str) {
+  while (*str) {
+    send_char(*str++);
+  }
+}
+
 
 // Utility functions for managing the array of entered characters
 //
@@ -136,6 +161,7 @@ void process_record_compose(uint16_t keycode, keyrecord_t *record) {
 bool compose_key_intercept(uint16_t keycode, keyrecord_t *record) {
   uint8_t mods = get_mods();
   bool match;
+  uint16_t* keyptr;
   
   if (compose_status != compose_active || !record->event.pressed || keycode > QK_MODS_MAX ) {
     return false;
@@ -175,9 +201,32 @@ bool compose_key_intercept(uint16_t keycode, keyrecord_t *record) {
 	compose_status = compose_success; // Done
 	break;
 
-      case compose_output:
+      case compose_keycode:
 	clear_mods();
 	tap_code16(compose_current->output_keycode);
+	set_mods(mods);
+#ifdef COMPOSE_STATUS_ENABLE
+	compose_status_timer = timer_read();
+#endif
+	compose_status = compose_success; // Done
+	break;
+
+      case compose_array:
+	keyptr = compose_current->output_array;
+	clear_mods();
+	while (*keyptr != KC_NO) {
+	  tap_code16(*keyptr++);
+	}
+	set_mods(mods);
+#ifdef COMPOSE_STATUS_ENABLE
+	compose_status_timer = timer_read();
+#endif
+	compose_status = compose_success; // Done
+	break;
+	
+      case compose_string:
+	clear_mods();
+	my_send_string(compose_current->output_string);
 	set_mods(mods);
 #ifdef COMPOSE_STATUS_ENABLE
 	compose_status_timer = timer_read();

@@ -25,7 +25,9 @@
 
 
 enum compose_type {
-  compose_output = 0,
+  compose_keycode = 0,
+  compose_array,
+  compose_string,
   compose_continue,
   compose_callback,
   compose_terminate
@@ -36,7 +38,9 @@ struct compose_node {
   uint8_t  node_type;
   uint16_t trigger;
   union {
-    uint16_t output_keycode;
+    uint16_t  output_keycode;
+    uint16_t* output_array;
+    char*     output_string;
     struct compose_node* continuation;
     void (*compose_callback)(uint16_t);
   };
@@ -48,7 +52,9 @@ extern struct compose_node compose_tree_root[];
 // Macros to help in writing the compose tree
 #define COMPOSE_CONTINUE(trigger,cont)        {compose_continue,  trigger, {.continuation=cont}}
 #define COMPOSE_CALLBACK(trigger, callback)   {compose_callback,  trigger, {.compose_callback=callback}}
-#define COMPOSE_OUTPUT(trigger, outcode)      {compose_output,    trigger, {.output_keycode=outcode}}
+#define COMPOSE_KEYCODE(trigger, outcode)     {compose_keycode,   trigger, {.output_keycode=outcode}}
+#define COMPOSE_ARRAY(trigger, outarr)        {compose_array,     trigger, {.output_array=outarr}}
+#define COMPOSE_STRING(trigger, outstr)       {compose_string,    trigger, {.output_string=outstr}}
 #define COMPOSE_END                           {compose_terminate, KC_NO}
 
 
@@ -56,6 +62,7 @@ extern struct compose_node compose_tree_root[];
 void process_record_compose(uint16_t keycode, keyrecord_t *record);
 bool compose_key_intercept(uint16_t keycode, keyrecord_t *record);
 void compose_key_reset(void);
+void my_send_string(char* str);
 
 #ifdef COMPOSE_STATUS_ENABLE
 void compose_key_status(void);
