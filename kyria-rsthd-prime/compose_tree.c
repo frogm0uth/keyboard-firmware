@@ -17,49 +17,74 @@
 
 #include "compose_key.h"
 
+//#define COMPOSE_EXAMPLE_CALLBACK
 
+// FIXME these are all Mac-specific, need to use OS-shortcuts for Win/Lin support
 struct compose_node greek_symbols[] = {
-  COMPOSE_OUTPUT(KC_M, A(KC_M)),    // mu
-  COMPOSE_OUTPUT(KC_O, A(KC_Z)),    // Ohm
-  COMPOSE_OUTPUT(KC_P, A(KC_P)),    // pi
+  COMPOSE_KEYCODE(KC_M, A(KC_M)),    // mu
+  COMPOSE_KEYCODE(KC_O, A(KC_Z)),    // Ohm
+  COMPOSE_KEYCODE(KC_P, A(KC_P)),    // pi
   COMPOSE_END
 };
 
 struct compose_node currency_symbols[] = {
-  COMPOSE_OUTPUT(KC_E, S(A(KC_2))),    // Euro
-  COMPOSE_OUTPUT(KC_Y, A(KC_Y)),       // Yen
-  COMPOSE_OUTPUT(KC_P, A(KC_3)),       // Pounds
-  COMPOSE_OUTPUT(KC_C, A(KC_4)),       // cents
+  COMPOSE_KEYCODE(KC_E, S(A(KC_2))),    // Euro
+  COMPOSE_KEYCODE(KC_Y, A(KC_Y)),       // Yen
+  COMPOSE_KEYCODE(KC_P, A(KC_3)),       // Pounds
+  COMPOSE_KEYCODE(KC_C, A(KC_4)),       // cents
   COMPOSE_END
 };
 
 struct compose_node math_symbols[] = {
-  COMPOSE_OUTPUT(KC_RABK, A(KC_DOT)),     // greater or equal
-  COMPOSE_OUTPUT(KC_LABK, A(KC_COMM)),    // less or equal
-  COMPOSE_OUTPUT(KC_SLSH, A(KC_SLSH)),    // division
-  COMPOSE_OUTPUT(KC_DOT,  A(KC_8)),       // mid dot
-  COMPOSE_OUTPUT(KC_PLUS, A(S(KC_EQL))),  // plus or minus
-  COMPOSE_OUTPUT(KC_EQL,  A(KC_X)),       // approx equal
-  COMPOSE_OUTPUT(KC_EXLM, A(KC_EQL)),     // not equal
+  COMPOSE_KEYCODE(KC_RABK, A(KC_DOT)),     // greater or equal
+  COMPOSE_KEYCODE(KC_LABK, A(KC_COMM)),    // less or equal
+  COMPOSE_KEYCODE(KC_SLSH, A(KC_SLSH)),    // division
+  COMPOSE_KEYCODE(KC_DOT,  A(KC_8)),       // mid dot
+  COMPOSE_KEYCODE(KC_PLUS, A(S(KC_EQL))),  // plus or minus
+  COMPOSE_KEYCODE(KC_EQL,  A(KC_X)),       // approx equal
+  COMPOSE_KEYCODE(KC_EXLM, A(KC_EQL)),     // not equal
   COMPOSE_END
 };
 
 struct compose_node print_symbols[] = {
-  COMPOSE_OUTPUT(KC_C, A(KC_G)),       // copyright
-  COMPOSE_OUTPUT(KC_R, A(KC_R)),       // registered
-  COMPOSE_OUTPUT(KC_T, A(KC_2)),       // trademark
-  COMPOSE_OUTPUT(S(KC_D), S(A(KC_7))), // double dagger
-  COMPOSE_OUTPUT(KC_D, A(KC_T)),       // dagger
-  COMPOSE_OUTPUT(KC_F, A(S(KC_8))),    // degrees
+  COMPOSE_KEYCODE(  KC_C,  A(KC_G)),       // copyright
+  COMPOSE_KEYCODE(  KC_R,  A(KC_R)),       // registered
+  COMPOSE_KEYCODE(  KC_T,  A(KC_2)),       // trademark
+  COMPOSE_KEYCODE(S(KC_D), S(A(KC_7))),    // double dagger
+  COMPOSE_KEYCODE(  KC_D,  A(KC_T)),       // dagger
+  COMPOSE_KEYCODE(  KC_F,  A(S(KC_8))),    // degrees
   COMPOSE_END
 };
 
-#ifdef COMPOSE_EXAMPLE_CALLBACK
+//#ifdef COMPOSE_EXAMPLE_CALLBACK
 // Example callback
 void print_email(uint16_t keycode) {
-  SEND_STRING("myname@mydomain.com");
+  //SEND_STRING("myname@mydomain.com");
+  my_send_string("myname@mydomain.com");
 }
-#endif
+//#endif
+
+// Output arrays
+uint16_t array_c_comment[] = {
+  KC_SLASH,
+  KC_ASTERISK,
+  KC_SPACE,
+  KC_SPACE,
+  KC_ASTERISK,
+  KC_SLASH,
+  KC_LEFT,
+  KC_LEFT,
+  KC_LEFT,
+  KC_NO
+};
+
+uint16_t array_c_comment_newline[] = {
+  KC_ENTER,
+  KC_ASTERISK,
+  KC_SPACE,
+  KC_TAB,
+  KC_NO
+};
 
 struct compose_node compose_tree_root[] = {
   // Various symbols
@@ -71,7 +96,17 @@ struct compose_node compose_tree_root[] = {
 #ifdef COMPOSE_EXAMPLE_CALLBACK
   COMPOSE_CALLBACK(KC_AT, print_email),    // print email address (example of callback)
 #endif
+  
+  // strings outputs
+  COMPOSE_STRING(S(KC_Y), "You"),
+  COMPOSE_STRING(  KC_Y,  "you"),
+  COMPOSE_STRING(S(KC_H), "His"),
+  COMPOSE_STRING(  KC_H,  "his"),
+  COMPOSE_STRING(  KC_I,  "ize"),
+  COMPOSE_STRING(  KC_N,  "izing"),
 
-  COMPOSE_END
+  // array outputs
+  COMPOSE_ARRAY(  KC_SLASH,  array_c_comment),
+  COMPOSE_ARRAY(S(KC_SLASH), array_c_comment_newline),
 };
 
