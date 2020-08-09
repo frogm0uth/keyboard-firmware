@@ -32,16 +32,23 @@ void keyboard_post_init_user(void) {
 // #defines for shorter codes for keymap
 #define CU_DTUN CU_DOT_UNDERSCORE
 #define CU_CMMI CU_COMMA_MINUS
+#define CU_EXQU CU_EXCLAIM_QUESTION
+#define CU_SPEN CU_SPACE_ENTER
+
+// #define CU_SLCO CU_SLASH_COMMENT
+// #define CU_DUNL CU_DIRUP_COMMENTNEWLINE
 
 #define CU_HBCK CU_HYPER_BACK
 #define CU_HFWD CU_HYPER_FORWARD
 
+#define CU_AENT ALT_T(KC_ENTER)
+
 #ifdef COMPOSE_KEY
-  #define CU_DEAD CU_COMPOSE  // Compose key
+#    define CU_DEAD CU_COMPOSE  // Compose key
 #elif defined(LEADER_ENABLE)
-  #define CU_DEAD KC_LEAD     // Leader key
+#    define CU_DEAD KC_LEAD     // Leader key
 #else
-  #define CU_DEAD KC_NO       // Nothing
+#    define CU_DEAD KC_NO       // Nothing
 #endif
 
 /**
@@ -49,215 +56,171 @@ void keyboard_post_init_user(void) {
  **/
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* 
- * Layer 0: RSTHD
+ * RSTHD-s
 
-  ,-----------------------------------------.                              ,-----------------------------------------.
-  |  Esc |   J  |   C  |   Y  |   F  |   K  |                              |   Z  |   L  | '  " |   U  |   Q  |Leader|
-  |------+------+------+------+------+------|                              |------+------+------+------+------+------|
-  |      |   R  |   S  |   T  |   H  |   D  |                              |   M  |   N  |   A  |   I  |   O  |      |
-  | Ctrl |      |      |      |      |      |                              |      |      |      |      |      | Ctrl |
-  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
-  |      |      |   V  |   G  |   P  |   B  |      |      |  |      |      |   X  |   W  | .  _ | ,  - |      |      |
-  |  Cmd | Shift|      |      |      |      |   E  |  Tab |  | Enter| Space|      |      |      |      | Shift|  Cmd |
-  `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
-                       |(EncL)|      |      |      | EDIT |  |CURSOR|      |      |      |(EncR)|
-                       |      |  Alt |NUMPAD|      |      |  |      |      |SYNTAX|  Alt |      |
-                       `----------------------------------'  `----------------------------------'
- */
+ ,-----------------------------------------.                              ,-----------------------------------------.
+ |  Esc |   J  |   C  |   Y  |   F  |   K  |                              |   Z  |   L  | ,  - |   U  |   Q  |Leader|
+ |------+------+------+------+------+------|                              |------+------+------+------+------+------|
+ |      |   R  |   S  |   T  |   H  |   D  |                              |   M  |   N  |   A  |   I  |   O  |      |
+ | Ctrl |      |      |      |      |      |                              |      |      |      |      |      | Ctrl |
+ |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
+ |      |      |   V  |   G  |   P  |   B  |      |      |  |      | Enter|   X  |   W  | .  _ | ;  : |      |      |
+ |  Cmd | Shift|      |      |      |      |   E  |  Tab |  | Enter| Space|      |      |      |      | Shift|  Cmd |
+ `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
+ |                    |(EncL)|Compse| '  " |      |      |  |      |      | '  " |Compse|(EncR)|
+ |                    |      |      | FUNC |      |SYNTAX|  |  Alt |      |CURSOR|      |      |
+ |                    |      |      |NUMPAD|      |      |  |      |      | EDIT |      |      |
+ |                    `----------------------------------'  `----------------------------------'
+*/
     [RSTHD] = LAYOUT(
-      KC_ESC,  KC_J,    KC_C,   KC_Y,   KC_F,   KC_K,                                           KC_Z,    KC_L,    KC_QUOT, KC_U,    KC_Q,   CU_DEAD,
-      KC_LCTL, KC_R,    KC_S,   KC_T,   KC_H,   KC_D,                                           KC_M,    KC_N,    KC_A,    KC_I,    KC_O,   KC_RCTL,
-      KC_LGUI, CU_LSFT, KC_V,   KC_G,   KC_P,   KC_B, XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, KC_X,    KC_W,    CU_DTUN, CU_CMMI, CU_RSFT, KC_RGUI,
-                           CU_SLOCK, KC_LALT, CU_NUMPAD, KC_E, CU_EDIT, /* */ CU_CURSOR, KC_SPACE, CU_SYNTAX, KC_RALT, CU_SLEEP
+	KC_ESC,  KC_J,    KC_C,   KC_Y,    KC_F,    KC_K,                                              KC_Z,    KC_L,    CU_CMMI, KC_U,    KC_Q,    XXXXXXX,
+	KC_LCTL, KC_R,    KC_S,   KC_T,    KC_H,    KC_D,                                              KC_M,    KC_N,    KC_A,    KC_I,    KC_O,    KC_RCTL,
+	KC_LGUI, CU_LSFT, KC_V,   KC_G,    KC_P,    KC_B,    XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, KC_X,    KC_W,    CU_DTUN, KC_SCLN, CU_RSFT, KC_RGUI,
+	/* */                     CU_SLCK, CU_DEAD, CL_NUMP, KC_E,    CL_SYNT, /* */ CU_AENT, CU_SPEN, CL_EDIT, CU_DEAD, CU_SSLP
     ),
-    
+
 /* 
- * Layer 1: PRIME
+ * Prime
 
-  ,-----------------------------------------.                              ,-----------------------------------------.
-  |  Esc |   V  |   C  |   W  |   D  |   K  |                              |   J  |   M  |   U  | ,  - |   Q  |Leader|
-  |------+------+------+------+------+------|                              |------+------+------+------+------+------|
-  |      |   R  |   S  |   T  |   H  |   P  |                              |   X  |   N  |   I  |   O  |   A  |      |
-  | Ctrl |      |      |      |      |      |                              |      |      |      |      |      | Ctrl |
-  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
-  |      |      |   B  |   G  |   F  | '  " |      |      |  |      |      |   Z  |   L  |   Y  | .  _ |      |      |
-  |  Cmd | Shift|      |      |      |      |   E  |  Tab |  | Enter| Space|      |      |      |      | Shift|  Cmd |
-  `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
-                       |(EncL)|      |      |      | EDIT |  |CURSOR|      |      |      |(EncR)|
-                       |      |  Alt |NUMPAD|      |      |  |      |      |SYNTAX|  Alt |      |
-                       `----------------------------------'  `----------------------------------'
- */
+ ,-----------------------------------------.                              ,-----------------------------------------.
+ |  Esc |   V  |   C  |   W  |   D  |   K  |                              |   J  |   M  |   U  | .  _ |   Q  |      |
+ |------+------+------+------+------+------|                              |------+------+------+------+------+------|
+ |      |   R  |   S  |   T  |   H  |   P  |                              |   X  |   N  |   I  |   O  |   A  |      |
+ | Ctrl |      |      |      |      |      |                              |      |      |      |      |      | Ctrl |
+ |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
+ |      |      |   B  |   G  |   F  |   Z  |      |      |  |      | Enter| !  ? |   L  |   Y  | ,  - |      |      |
+ |  Cmd | Shift|      |      |      |      |   E  |  Tab |  | Enter| Space|      |      |      |      | Shift|  Cmd |
+ `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
+ |                    |(EncL)|Compse| '  " |      |      |  |      |      | '  " |Compse|(EncR)|
+ |                    |      |      | FUNC |      |SYNTAX|  |  Alt |      |CURSOR|      |      |
+ |                    |      |      |NUMPAD|      |      |  |      |      | EDIT |      |      |
+ |                    `----------------------------------'  `----------------------------------'
+ |                                  +Cmd=Lock                             +Cmd=Lock
+ |                                  +Alt=TAP                              
+ |             	                    +Ctrl=FUNC                            +Ctrl=CURSOR
+*/
     [PRIME] = LAYOUT(
-      KC_ESC,  KC_V,   KC_C,   KC_W,   KC_D,   KC_K,                                              KC_J,    KC_M,    KC_U,   CU_CMMI, KC_Q,   CU_DEAD,
-      KC_LCTL, KC_R,   KC_S,   KC_T,   KC_H,   KC_P,                                              KC_X,    KC_N,    KC_I,   KC_O,    KC_A,   KC_RCTL,
-      KC_LGUI, CU_LSFT,KC_B,   KC_G,   KC_F,   KC_QUOT, XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, KC_Z,    KC_L,    KC_Y,   CU_DTUN, CU_RSFT, KC_RGUI,
-                            CU_SLOCK, KC_LALT, CU_NUMPAD, KC_E,  CU_EDIT, /* */ CU_CURSOR, KC_SPACE, CU_SYNTAX, KC_RALT, CU_SLEEP
-    ),
+	KC_ESC,  KC_V,    KC_C,   KC_W,    KC_D,    KC_K,                                              KC_J,    KC_M,    KC_U,   CU_DTUN, KC_Q,    XXXXXXX,
+	KC_LCTL, KC_R,    KC_S,   KC_T,    KC_H,    KC_P,                                              KC_X,    KC_N,    KC_I,   KC_O,    KC_A,    KC_RCTL,
+	KC_LGUI, CU_LSFT, KC_B,   KC_G,    KC_F,    KC_Z,    XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, CU_EXQU, KC_L,    KC_Y,   CU_CMMI, CU_RSFT, KC_RGUI,
+	/* */                     CU_SLCK, CU_DEAD, CL_NUMP, KC_E,    CL_SYNT, /* */ CU_AENT, CU_SPEN, CL_EDIT, CU_DEAD, CU_SSLP
+	),
 
 /*
- * Layer 2: NUMPAD (R)
+ * NUMPAD
 
-  ,-----------------------------------------.                              ,-----------------------------------------.
-  |  Esc | FUNC |  ../ |   =  |      | AppP |                              | AppN | 4  $ | 5  % | 6  ^ |      | BASE |
-  |------+------+------+------+------+------|                              |------+------+------+------+------+------|
-  |      |   /  |   *  |   .  |   0  |  Up  |                              |AppWin| 1  ! | 2  @ | 3  # | `  ~ |
-  | Ctrl |      |      |      |      |      |                              |      |      |      |      |      | Ctrl |
-  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
-  |      |      |  Tab |   -  |   +  | Left |      |      |  |      |      | Right| 7  & | 8  * | 9  ( |      |      |
-  |  Cmd | Shift|      |      |      |      |      |  Tab |  | Enter| Space|      |      |      |      | Shift|  Cmd |
-  `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
-                       |(EncL)|      |      |      | EDIT |  |CURSOR|      |      |      |(EncR)|
-                       |      |  Alt | (**) |      |      |  |      |      |SYNTAX|  Alt |      |
-                       `----------------------------------'  `----------------------------------'
- */
+ ,-----------------------------------------.                              ,-----------------------------------------.
+ |  Esc |  All |  Cut | Copy | Paste| ScrL |                              | ScrR | 4  $ | 5  % | 6  ^ |  ../ | BASE |
+ |------+------+------+------+------+------|                              |------+------+------+------+------+------|
+ |      |   *  |   -  |   .  |   0  |FulScr|                              |Expose| 1  ! | 2  @ | 3  # |   /  |
+ | Ctrl |      |      |      |      |      |                              |      |      |      |      |      | Ctrl |
+ |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
+ |      |      |   +  |  Tab |   =  |DskTop|      |      |  |      | Enter|DskTop| 7  & | 8  * | 9  ( |      |      |
+ |  Cmd | Shift|      |      |      |      | AppR |  Tab |  | Enter| Space|      |      |      |      | Shift|  Cmd |
+ `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
+ |                    |(EncL)|Compse|      |      |SYNTAX|  |      |      | '  " |Compse|(EncR)|
+ |                    |      |      | (--) |      |      |  |  Alt |      |CURSOR|      |      |
+ |                    |      |      | (**) |      |      |  |      |      | EDIT |      |      |
+ |                    `----------------------------------'  `----------------------------------'
+*/
     [NUMPAD] = LAYOUT(
-      _______, CU_FUNC, CU_DIRU, KC_EQL,  XXXXXXX, CU_APPP,                                           CU_APPN,  KC_4, KC_5, KC_6, XXXXXXX, CU_BASE,
-      _______, KC_SLSH, KC_ASTR, KC_DOT,  KC_0,    KC_UP,                                             CU_WAPP,  KC_1, KC_2, KC_3, KC_GRV,  _______,
-      _______, _______, KC_TAB,  KC_MINS, KC_PLUS,  KC_LEFT, XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, KC_RIGHT, KC_7, KC_8, KC_9, _______, _______,
-                                CU_SCRZ0, _______, _______, XXXXXXX, _______, /* */ _______, _______, _______,  _______,  CU_APPZ0
-    ),
+	_______, CU_ALL,  CU_CUT,  CU_COPY, CU_PAST, CU_SCRL,                                           CU_SCRR, KC_4,    KC_5,    KC_6, CU_DIRU, CL_BASE,
+	_______, KC_PLUS, KC_MINS, KC_DOT,  KC_0,    CU_FSCR,                                           CU_WALL, KC_1,    KC_2,    KC_3, KC_SLSH, _______,
+	_______, _______, KC_PLUS, KC_TAB,  KC_EQL,  CU_DTOP, XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, CU_DTOP, KC_7,    KC_8,    KC_9, _______, _______,
+	/* */                      CU_SCRZ, _______, _______, CU_APPR, _______, /* */ _______, _______, _______, _______, CU_APPZ
+	),
 
 /*
- * Layer 3: SYNTAX (L)
+ * SYNTAX
 
-  ,-----------------------------------------.                              ,-----------------------------------------.
-  |  Esc |      |   [  |   |  |   ]  | WinL |                              | WinR |      |   #  |      |ADJUST| BASE |
-  |------+------+------+------+------+------|                              |------+------+------+------+------+------|
-  |      |   /  |   {  |   ;  |   }  | AppL |                              | AppR |   )  |   :  |   (  |   \  |      |
-  | Ctrl |      |      |      |      |      |                              |      |      |      |      |      | Ctrl |
-  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
-  |      |      |   <  |   ?  |   >  | TabL |      |      |  |      |      | TabR |      |   !  |  Tab |      |      |
-  |  Cmd | Shift|      |      |      |      | Enter|  Tab |  | Enter| Space|      |      |      |      | Shift|  Cmd |
-  `--------------------+------+------+------|      |      |  |      |      |------+------+---------------------------'
-                       |(EncL)|      | Space|      | EDIT |  |CURSOR|      |      |      |(EncR)|
-                       |      |  Alt |      |      |      |  |      |      | (**) |  Alt |      |
-                       `----------------------------------'  `----------------------------------'
- */
+ ,-----------------------------------------.                              ,-----------------------------------------.
+ |  Esc |   =  |   #  |   !  |   $  | AppP |                              | AppN |   >  |   ?  |   <  |   -  | BASE |
+ |------+------+------+------+------+------|                              |------+------+------+------+------+------|
+ |      |   \  |   (  |   :  |   )  |  Up  |                              |AppWin|   }  |   ;  |   {  |   /  |      |
+ | Ctrl |      |      |      |      |      |                              |      |      |      |      |      | Ctrl |
+ |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
+ |      |      | `  ~ |  Tab | '  " | Left |      |      |  |      |      | Right|   ]  |   |  |   [  |      |      |
+ |  Cmd | Shift|      |      |      |      | BkSp |      |  | Enter| Space|      |      |      |      | Shift|  Cmd |
+ `--------------------+------+------+------|      |      |  |      |      |------+------+---------------------------'
+ |                    |(EncL)|Compse|      |      | (**) |  |      |      |      |Compse|(EncR)|
+ |                    |      |      |      |      |      |  |      |      |      |      |      |
+ |                    `----------------------------------'  `----------------------------------'
+*/
     [SYNTAX] = LAYOUT(
-      _______, XXXXXXX, KC_LBRC, KC_PIPE, KC_RBRC, CU_WINL,                                           CU_WINR, XXXXXXX, KC_HASH, XXXXXXX, CU_ADJUST, CU_BASE,
-      _______, KC_SLSH, KC_LCBR, KC_SCLN, KC_RCBR, CU_APPL,                                           CU_APPR, KC_RPRN, KC_COLN, KC_LPRN, KC_BSLS, _______,
-      _______, _______, KC_LABK, KC_QUES, KC_RABK, CU_TABL, XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, CU_TABR, XXXXXXX, KC_EXLM, KC_TAB, _______, _______,
-                               XXXXXXX, _______, KC_SPACE, KC_ENTER, _______, /* */ _______, _______, _______, _______, XXXXXXX
-    ),
+	_______, KC_EQL,  KC_HASH, KC_EXLM, KC_DLR,  CU_APPP,                                           CU_APPN, KC_RABK, KC_QUES, KC_LABK, KC_MINS, CL_BASE,
+	_______, KC_BSLS, KC_LPRN, KC_COLN, KC_RPRN, KC_UP,                                             CU_WAPP, KC_RCBR, KC_SCLN, KC_LCBR, KC_SLSH, _______,
+	_______, _______, KC_GRV,  KC_TAB,  KC_QUOT, KC_LEFT, XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, KC_RGHT, KC_RBRC, KC_PIPE, KC_LBRC, _______, _______,
+	/* */                      XXXXXXX, _______, XXXXXXX, KC_BSPC, _______, /* */ KC_ENT,  KC_SPC,  XXXXXXX, _______, XXXXXXX
+	),
 
 /*
- * Layer 4: EDIT (R)
+ * EDIT (R)
 
-  ,-----------------------------------------.                              ,-----------------------------------------.
-  |  Esc |  All |  Cut | Copy | Paste| WinL |                              | WinR | WordL|  Up  | WordR| PgUp | BASE |
-  |------+------+------+------+------+------|                              |------+------+------+------+------+------|
-  |      |      |      |      |      | AppL |                              | AppR | Left | Down | Right| PgDn |      |
-  | Ctrl |DelMod| Acc1 | Acc2 |Repeat|      |                              |      |      |      |      |      | Ctrl |
-  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
-  |      |      |      |      |      | TabL |      |      |  |      |      | TabR | HBck | Down | HFwd |      |      |
-  |  Cmd | Shift| Ctrl |  Alt |  Cmd |      |      |      |  | Enter| BkSp |      |      |      |      | Shift|  Cmd |
-  `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
-                       |(EncL)|      |      |      | (**) |  |      |      |  Del |      |(EncR)|
-                       |      |  Alt |      |      |      |  |      |      |      |  Alt |      |
-                       `----------------------------------'  `----------------------------------'
- */
-  [EDIT] = LAYOUT(
-      _______, CU_ALL,  CU_CUT,  CU_COPY, CU_PAST, CU_WINL,                                           CU_WINR, CE_WD_L, CE_MV_U, CE_WD_R, CE_PG_U, CU_BASE,
-      _______, CE_DMOD, CE_ACC1, CE_ACC2, CE_REPT, CU_APPL,                                           CU_APPR, CE_MV_L, CE_MV_D, CE_MV_R, CE_PG_D, _______,
-      _______, _______, KC_LCTL, KC_LALT, KC_LGUI, CU_TABL, XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, CU_TABR, CU_HBCK, CE_MV_D, CU_HFWD, _______, _______,
-                                 XXXXXXX, _______, XXXXXXX, XXXXXXX, _______, /* */ KC_ENTER, KC_BSPC, KC_DEL, _______, _______
-    ),
-
-/*
- * Layer 5: CURSOR (L)
-
-  ,-----------------------------------------.                              ,-----------------------------------------.
-  |  Esc |      |      | MS_U |      | ScrL |                              | ScrR | Paste| Copy |  Cut |  All | BASE |
-  |------+------+------+------+------+------|                              |------+------+------+------+------+------|
-  |      |      | MS_L | MS_D | MS_R |Expose|                              |FulScr|      |      |      |      |      |
-  | Ctrl | Wheel|      |      |      |      |                              |      |Repeat| Acc2 | Acc1 | Slow | Ctrl |
-  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
-  |      |      | HBck | MS_D | HFwd |DskTop|      |      |  |      |      |DskTop|      |      |      |      |      | 
-  |  Cmd | Shift|      |      |      |      | Btn_L| Btn_R|  |      | SSScr|      |  Cmd |  Alt | Ctrl | Shift|  Cmd |
-  `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
-                       |(EncL)| Btn_M| SSRgn|      |      |  | (**) |      | SSRgn| SSWin|(EncR)|
-                       |      |      |      |      |      |  |      |      |      |      |      |
-                       `----------------------------------'  `----------------------------------'
+ ,-----------------------------------------.                              ,-----------------------------------------.
+ |  Esc | PgUp | WordL|  Up  | WordR| WinR |                              | WinL | Paste| Copy |  Cut |  All | BASE |
+ |------+------+------+------+------+------|                              |------+------+------+------+------+------|
+ |      | PgDn | Left | Down | Right| AppR |                              | AppL |      |      |      |      |      |
+ | Ctrl |      |      |      |      |      |                              |      |Repeat| Acc2 | Acc1 |DelMod| Ctrl |
+ |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
+ |      |      | HBck | Down | HFwd | TabR |      |      |  |      |      | TabL |      |      |      |      |      |
+ |  Cmd | Shift|      |      |      |      | BkSp |  Tab |  |      | AppR |      |  Cmd |  Alt | Ctrl | Shift|  Cmd |
+ `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
+ |                    |(EncL)|Compse|  Del |      |      |  |      |      |      |Compse|(EncR)|
+ |                    |      |      |      |      |      |  |      |      | (**) |      |      |
+ |                    `----------------------------------'  `----------------------------------'
 */
-#ifndef CURSOR_RIGHTHANDED
-    [CURSOR] = LAYOUT(
-      _______, XXXXXXX, XXXXXXX, CM_MS_U, XXXXXXX, CU_SCRL,                                             CU_SCRR,  CU_PAST, CU_COPY, CU_CUT,  CU_ALL,  CU_BASE,
-      _______, CM_WHEE, CM_MS_L, CM_MS_D, CM_MS_R, CU_WALL,                                             CU_FSCR,  CM_REPT, CM_ACC2, CM_ACC1, CM_SLOW, _______,
-      _______, _______, CU_HBCK, CM_MS_D, CU_HFWD, CU_DTOP,  XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX,  CU_DTOP,  KC_RGUI, KC_RALT, KC_RCTL, _______, _______,
-                                 CM_BTN1, CM_BTN3, CU_SSRGN, CM_BTN1, CM_BTN2, /* */ _______, CU_SSSCR, CU_SSRGN, CU_SSWIN, XXXXXXX
-    ),
-#endif
+    [EDIT] = LAYOUT(
+	_______, CE_PG_U, CE_WD_L, CE_MV_U, CE_WD_R, CU_WINR,                                           CU_WINL, CU_PAST, CU_COPY, CU_CUT,  CU_ALL,  CL_BASE,
+	_______, CE_PG_D, CE_MV_L, CE_MV_D, CE_MV_R, CU_APPR,                                           CU_APPL, CE_REPT, CE_ACC2, CE_ACC1, CE_DMOD, _______,
+	_______, _______, CU_HBCK, CE_MV_D, CU_HFWD, CU_TABR, XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, CU_TABL, KC_RGUI, KC_RALT, KC_RCTL, _______, _______,
+	/* */                      XXXXXXX, _______, KC_DEL,  KC_BSPC, KC_TAB,  /* */ XXXXXXX, CU_APPR, _______, _______, XXXXXXX
+	),
 
 /*
- * Layer 5: CURSOR ALT (L) "Right-handed version"
+ * CURSOR (L)
 
-  ,-----------------------------------------.                              ,-----------------------------------------.
-  |  Esc |  All |  Cut | Copy | Paste| ScrL |                              | ScrR |      | MS_U |      |      | BASE |
-  |------+------+------+------+------+------|                              |------+------+------+------+------+------|
-  |      |      |      |      |      |Expose|                              |FulScr| MS_L | MS_D | MS_R |      |      |
-  | Ctrl | Slow | Acc1 | Acc2 |Repeat|      |                              |      |      |      |      | Wheel| Ctrl |
-  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
-  |      |      |      |      |      |DskTop|      |      |  |      |      |DskTop| HBck | MS_D | HFwd |      |      |
-  |  Cmd | Shift| Ctrl |  Alt |  Cmd |      | Btn_L| Btn_R|  |      | SSScr|      |      |      |      | Shift|  Cmd |
-  `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
-                       |(EncL)| Btn_M| SSRgn|      |      |  | (**) |      | SSRgn| SSWin|(EncR)|
-                       |      |      |      |      |      |  |      |      |      |      |      |
-                       `----------------------------------'  `----------------------------------'
+ ,-----------------------------------------.                              ,-----------------------------------------.
+ |  Esc | SSScr| SSWin| MS_U | SSRgn| WinR |                              | WinL | Paste| Copy |  Cut |  All | BASE |
+ |------+------+------+------+------+------|                              |------+------+------+------+------+------|
+ |      |      | MS_L | MS_D | MS_R | AppR |                              | AppL |      |      |      |      |      |
+ | Ctrl | Wheel|      |      |      |      |                              |      |Repeat| Acc2 | Acc1 | Slow | Ctrl |
+ |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
+ |      |      | HBck | MS_D | HFwd | TabR |      |      |  |      |      | TabL |      |      |      |      |      | 
+ |  Cmd | Shift|      |      |      |      | BtnL | BtnR |  |      |      |      |  Cmd |  Alt | Ctrl | Shift|  Cmd |
+ `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
+ |                    |(EncL)|Compse| BtnM |      |      |  |      |      |      |Compse|(EncR)|
+ |                    |      |      |      |      |      |  |      |      | (**) |      |      |
+ |                    `----------------------------------'  `----------------------------------'
 */
-#ifdef CURSOR_RIGHTHANDED
     [CURSOR] = LAYOUT(
-      _______, CU_ALL,  CU_CUT,  CU_COPY, CU_PAST, CU_SCRL,                                            CU_SCRR,  XXXXXXX, CM_MS_U, XXXXXXX, XXXXXXX, CU_BASE,
-      _______, CM_SLOW, CM_ACC1, CM_ACC2, CM_REPT, CU_WALL,                                            CU_FSCR,  CM_MS_L, CM_MS_D, CM_MS_R, CM_WHEE, _______,
-      _______, _______, KC_LCTL, KC_LALT, KC_LGUI, CU_DTOP, XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX,  CU_DTOP,  CU_HBCK, CM_MS_D, CU_HFWD, _______, _______,
-                                CM_BTN1, CM_BTN3, CM_SSRGN, CM_BTN1, CM_BTN2, /* */ _______, CU_SSSCR, CU_SSRGN, CU_SSWIN, XXXXXXX
-    ),
-#endif
+	_______, CU_SSCR, CU_SWIN, CM_MS_U, CU_SRGN, CU_WINR,                                            CU_WINL, CU_PAST, CU_COPY, CU_CUT,  CU_ALL,  CL_BASE,
+	_______, CM_WHEE, CM_MS_L,  CM_MS_D, CM_MS_R, CU_APPR,                                           CU_APPL, CM_REPT, CM_ACC2, CM_ACC1, CM_SLOW, _______,
+	_______, _______, CU_HBCK,  CM_MS_D, CU_HFWD, CU_TABR, XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, CU_TABL, KC_RGUI, KC_RALT, KC_RCTL, _______, _______,
+	/* */                       CM_BTN1, _______, CM_BTN3, CM_BTN1, CM_BTN2, /* */ XXXXXXX, XXXXXXX, _______, _______, XXXXXXX
+	),
 
 /*
- * Layer 6: FUNC (R)
+ * FUNC (L)
 
-  ,-----------------------------------------.                              ,-----------------------------------------.
-  |  Esc | (**) |      |      |      |      |                              |      |  F4  |  F5  |  F6  |      | BASE |
-  |------+------+------+------+------+------|                              |------+------+------+------+------+------|
-  |      |      |      |      |      |      |                              |      |  F1  |  F2  |  F3  |      |      |
-  | Ctrl |      |      |      |      |      |                              |      |      |      |      |      | Ctrl |
-  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
-  |      |      |      |      |      |      |      |      |  |      |      |      |  F7  |  F8  |  F9  |      |      |
-  |  Cmd | Shift| Ctrl |  Alt |  Cmd |      |      |      |  |      |  F10 |      |      |      |      | Shift|  Cmd |
-  `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
-                       |(EncL)|      |      |      |      |  |      |      | F11  |  F12 |(EncR)|
-                       |      |  Alt | (**) |      |      |  |      |      |      |      |      |
-                       `----------------------------------'  `----------------------------------'
- */
+ ,-----------------------------------------.                              ,-----------------------------------------.
+ |  Esc |      |      | !MAC | !WIN |      |                              |      |  F4  |  F5  |  F6  |      | BASE |
+ |------+------+------+------+------+------|                              |------+------+------+------+------+------|
+ |      |      |      |!PRIME|!RSTHD|      |                              |      |  F1  |  F2  |  F3  |      |      |
+ | Ctrl |      |      |      |      |      |                              |      |      |      |      |      | Ctrl |
+ |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
+ |      |      |      |      |      |      |      |      |  |      |      |      |  F7  |  F8  |  F9  |      |      |
+ |  Cmd | Shift| Ctrl |  Alt |  Cmd |      |      | !WIPE|  |  F10 |  F11 |      |      |      |      | Shift|  Cmd |
+ `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
+ |                    |(EncL)|Compse|      |      |      |  |      |      | F12  |Compse|(EncR)|
+ |                    |      |      | (**) |      |      |  |      |      |      |      |      |
+ |                    `----------------------------------'  `----------------------------------'
+*/
     [FUNC] = LAYOUT(
-      _______, CU_FUNC, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                           XXXXXXX, KC_F4, KC_F5, KC_F6, XXXXXXX, CU_BASE,
-      _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                           XXXXXXX, KC_F1, KC_F2, KC_F3, XXXXXXX, _______,
-      _______, _______, KC_LCTL, KC_LALT, KC_LGUI, XXXXXXX, XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, XXXXXXX, KC_F7, KC_F8, KC_F9, _______, _______,
-                                 XXXXXXX, XXXXXXX, CU_FUNC, XXXXXXX, XXXXXXX, /* */ XXXXXXX, KC_F10, KC_F11, KC_F12, XXXXXXX
-    ),
-    
-/*
- * Layer 7: ADJUST (L)
-
-  ,-----------------------------------------.                              ,-----------------------------------------.
-  |  Esc |      |      | Mute |      |      |                              |      | !WIN | !MAC |      | (**) | BASE |
-  |------+------+------+------+------+------|                              |------+------+------+------+------+------|
-  |      |      |      | VolUp| BrtUp|      |                              |      |!RSTHD|!BASE |      |      |      |
-  | Ctrl |      |      |      |      |      |                              |      |      |      |      |      | Ctrl |
-  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
-  |      |      |      | VolDn| BrtDn|      |      |      |  |      |      |      |      |      |      |      |      |
-  |  Cmd | Shift|      |      |      |      |      |      |  | !WIPE|      |      |      |      |      | Shift|  Cmd |
-  `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
-                       |(EncL)|      |      |      |      |  |      |      |      |      |(EncR)|
-                       |      |  Alt |      |      |      |  |      |      | (**) |  Alt |      |
-                       `----------------------------------'  `----------------------------------'
- */
-    [ADJUST] = LAYOUT(
-      _______, XXXXXXX, XXXXXXX, KC_MUTE, XXXXXXX, XXXXXXX,                                           XXXXXXX, CU_WIN,   CU_MAC,   XXXXXXX, CU_ADJUST, CU_BASE,
-      _______, XXXXXXX, XXXXXXX, KC_VOLU, KC_BRIU, XXXXXXX,                                           XXXXXXX, CU_RSTHD, CU_PRIME, XXXXXXX, XXXXXXX, _______,
-      _______, _______, XXXXXXX, KC_VOLD, KC_BRID, XXXXXXX, XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,  XXXXXXX, _______, _______,
-                                 KC_MUTE, _______, XXXXXXX, XXXXXXX, XXXXXXX, /* */ CU_WIPE, XXXXXXX, CU_ADJUST, _______,  CU_SAVE
-    ),
+	_______, XXXXXXX, XXXXXXX, CU_MAC,  CU_WIN,  XXXXXXX,                                           XXXXXXX, KC_F4,   KC_F5,   KC_F6,   XXXXXXX, CL_BASE,
+	_______, XXXXXXX, XXXXXXX, CU_PRIM, CU_RSTH, XXXXXXX,                                           XXXXXXX, KC_F1,   KC_F2,   KC_F3,   XXXXXXX, _______,
+	_______, _______, KC_LCTL, KC_LALT, KC_LGUI, XXXXXXX, XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, XXXXXXX, KC_F7,   KC_F8,   KC_F9,   _______, _______,
+	/* */                      CU_SAVE, _______, _______, XXXXXXX, CU_WIPE, /* */ KC_F10,  KC_F11,  KC_F12,  _______, KC_MUTE
+	),
 };
 
 
@@ -330,7 +293,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   uint8_t mods = get_mods();
   uint16_t tempcode = KC_NO;
 
-  // First check to see if we intercept for a compose sequence
+  // Check for interrupt to layer-tap-toggle
+  ltt_interrupt(keycode, record);
+  
+  // Check to see if we intercept for a compose sequence
 #ifdef COMPOSE_KEY
   if (compose_key_intercept(keycode, record)) {
     return false;
@@ -360,36 +326,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
      ** Layer switching using the layer-tap-toggle function
      **/
 #ifdef LAYER_TAP_TOGGLE
-  case CU_LLCK:
-    return ltt_lock(record); // Lock the current (highest) layer
-    break;
-    
-  case CU_BASE:
+  case CL_BASE:
     return ltt_base();   // Clear all layers and go back to the default layer
     break;
 
-  case CU_NUMPAD:
-    return layer_tap_toggle(KC_NO, NUMPAD, record);    
+  case CL_NUMP:
+    return layer_tap_toggle2(KC_QUOT, NUMPAD, FUNC, record);
+    break;
+
+  case CL_EDIT:
+    return layer_tap_toggle2(KC_QUOT, EDIT, CURSOR, record);
     break;
     
-  case CU_SYNTAX:
-    return layer_tap_toggle(KC_NO, SYNTAX, record);
-    break;
-    
-  case CU_CURSOR:
-    return layer_tap_toggle(KC_ENTER, CURSOR, record);
-    break;
-    
-  case CU_EDIT:
-    return layer_tap_toggle(KC_TAB, EDIT, record);
-    break;
-    
-  case CU_FUNC:
-    return layer_tap_toggle(KC_NO, FUNC, record);
-    break;
-    
-  case CU_ADJUST:
-    return layer_tap_toggle(KC_NO, ADJUST, record);
+  case CL_SYNT:
+    return layer_tap_toggle(KC_TAB, SYNTAX, record);
     break;
 #endif
     
@@ -401,10 +351,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (record->event.pressed) {
       tap_code(KC_DOT);
       tap_code(KC_DOT);
-      tap_code(KC_SLSH);
+      tap_code(KC_SLASH);
     }
     break;
-    
+
     /** 
      ** Custom keycodes for different code on shift
      **/
@@ -448,12 +398,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     custom_shift(KC_COMMA, KC_MINUS, record);
     break;
 
+  case CU_EXCLAIM_QUESTION:
+    custom_shift(KC_EXCLAIM, KC_QUESTION, record);
+    break;
+
+  case CU_SPACE_ENTER:
+    custom_shift(KC_SPACE, KC_ENTER, record);
+    break;
+
     
     // "Hyper" back and forward -
     //   Normal: undo and redo
     //   Cmd:    browser back and forward
     //   Alt:    next and previous search result
-    // FIXME: error if modifier is released first?
+    //
+    // FIXME: check if there will be an error if the modifier is released first
     //
   case CU_HYPER_BACK:
   case CU_HYPER_FORWARD:
@@ -475,7 +434,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     
     // Take screenshot of the window under the cursor
     // FIXME: needs to have a Windows version
-  case CU_SSWIN:
+  case CU_SWIN:
     if (record->event.pressed){
       tap_code16(SC(SC_SHOT_REGION));
       tap_code(KC_SPC);
@@ -490,7 +449,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     // Take screenshot of a region. This does the initial mouse press, so drag then press the mouse button.
     // FIXME: needs to have a Windows version
-  case CU_SSRGN:
+  case CU_SRGN:
     if (record->event.pressed){
       tap_code16(SC(SC_SHOT_REGION));
 #ifdef CUSTOM_MOUSE
@@ -528,28 +487,38 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // Wipe the EEPROM. Handy if you get stuck when you have multiple default layers.....
     // After doing this, power-cycle the keyboard. There will be no visible indication...
   case CU_WIPE:
-    eeconfig_init();
+    if (record->event.pressed) {
+      eeconfig_init();
+    }
     break;
 
     // Save RGB state to EEPROM
 #ifdef RGBLIGHT_ENABLE
   case CU_SAVE:
-    rgblight_sethsv(rgblight_get_hue(), rgblight_get_sat(), rgblight_get_val());
+    if (record->event.pressed) {
+      rgblight_sethsv(rgblight_get_hue(), rgblight_get_sat(), rgblight_get_val());
+    }
     break;
 #endif
 
     // Switch the default layer
-  case CU_RSTHD:
-    set_single_persistent_default_layer(RSTHD);
-    layer_clear();
+  case CU_PRIM:
+    if (record->event.pressed) {
+      set_single_persistent_default_layer(PRIME);
+      layer_clear();
+      return false;
+    }
     break;
 
-  case CU_PRIME:
-    set_single_persistent_default_layer(PRIME);
-    layer_clear();
+  case CU_RSTH:
+    if (record->event.pressed) {
+      set_single_persistent_default_layer(RSTHD);
+      layer_clear();
+      return false;
+    }
     break;
-    
-    // OS selection
+
+    // Select the OS (for shortcuts)
 #if defined(OS_SHORTCUTS) && !defined(OS_SHORTCUTS_STATIC)
   case CU_SELECT_MACOS:
   case CU_SELECT_WINDOWS:
@@ -563,12 +532,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
   }
 
-  // Default processing for OS shortcuts
+  // Do default processing for all OS shortcuts
 #if defined(OS_SHORTCUTS) && !defined(OS_SHORTCUTS_STATIC)
   process_record_shortcut(keycode, record);
 #endif
   
-  // All done OK, we hope
+  // All done OK
   return true;
 }
 

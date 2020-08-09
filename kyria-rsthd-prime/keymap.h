@@ -33,6 +33,7 @@ typedef union {
   uint32_t raw;
   struct {
     uint8_t     os_selection :2;
+    bool        righthand_cursor_layer;
   };
 } user_config_t;
 
@@ -42,8 +43,6 @@ extern user_config_t user_config;
 #ifdef LEADER_ENABLE
 LEADER_EXTERNS();
 extern void matrix_scan_leader(void);
-#else
-#define KC_LEAD KC_NO
 #endif
 
 // Define the layers
@@ -55,38 +54,29 @@ enum layers {
     EDIT,
     CURSOR,
     FUNC,
-    ADJUST,
     NUM_LAYERS  // <- this is needed for layer-tap-toggle
 };
-#define ALPHA RSTHD // Must be set to the FIRST default layer...(!)
+#define ALPHA RSTHD // MUST be set to the FIRST default layer i.e 0
 
-// Define layer-tap-toggle keys. If not using LTT, define macros for standard layer switching
+// Define layer-tap-toggle keys. If not using LTT, define macros for standard layer switching of a subset
 #ifdef LAYER_TAP_TOGGLE
 #define LAYER_KEYS				\
-  CU_LLCK,					\
-    CU_BASE,					\
-    CU_NUMPAD,					\
-    CU_SYNTAX,					\
-    CU_CURSOR,					\
-    CU_EDIT,					\
-    CU_FUNC,					\
-    CU_ADJUST
+    CL_BASE,					\
+    CL_NUMP,					\
+    CL_SYNT,					\
+    CL_EDIT
 #else
-#define CU_BASE   TO(ALPHA)  
-#define CU_NUMPAD MO(NUMPAD)
-#define CU_SYNTAX MO(SYNTAX)
-#define CU_EDIT   LT(EDIT,   KC_TAB)
-#define CU_CURSOR LT(CURSOR, KC_ENTER)
-#define CU_FUNC   TG(FUNC)
-#define CU_ADJUST TG(ADJUST)
-#define CU_LLCK   KC_NO
+#define CL_BASE  TO(ALPHA)  
+#define CL_NUMP  LT(NUMPAD, KC_QUOT)
+#define CL_SYNT  LT(SYNTAX, KC_TAB)
+#define CL_EDIT  LT(EDIT,   KC_QUOT)
 #endif
 
 enum custom_keycodes {
   CU_IGNORE = SAFE_RANGE,
 
 #ifdef COMPOSE_KEY
-    // Compose key - experimental
+    // Compose key
   CU_COMPOSE,
 #endif
   
@@ -112,17 +102,16 @@ enum custom_keycodes {
 
   CU_DOT_UNDERSCORE, // Custom punctuation keys
   CU_COMMA_MINUS,
+  CU_EXCLAIM_QUESTION,
+  CU_SLASH_COMMENT,
+  CU_DIRUP_COMMENTNEWLINE,
+  CU_SPACE_ENTER,
 
   CU_HYPER_BACK,    // Hyper back and forward
   CU_HYPER_FORWARD,
   
-#ifdef NOTUSED
-  CU_RL,     // Right on press, left on shift-press
-  CU_UD,     // Up on press, down on shift-press
-#endif
-  
-  CU_SSWIN,  // Screenshot a window
-  CU_SSRGN,  // Start drag-select screenshot
+  CU_SWIN,   // Screenshot a window
+  CU_SRGN,   // Start drag-select screenshot
 
   CU_APPR,   // Applications or tab left or right
   CU_APPL,
@@ -131,8 +120,8 @@ enum custom_keycodes {
 
   CU_WIPE,      // Wipe the EEPROM
   CU_SAVE,      // Save current state to EEPROM
-  CU_RSTHD,     // Change default layer and save to EEPROM
-  CU_PRIME,
+  CU_PRIM,      // Change default layer and save to EEPROM
+  CU_RSTH,
 
 #if defined(OS_SHORTCUTS) && !defined(OS_SHORTCUTS_STATIC)
   OS_SELECT_KEYCODES,
@@ -144,8 +133,8 @@ enum custom_keycodes {
 // Since we are using OS shortcuts, here are some #defines to make them fit better into the keymap
 #if defined(OS_SHORTCUTS) && !defined(OS_SHORTCUTS_STATIC)
 
-#define CU_SLOCK SC_SCREEN_LOCK
-#define CU_SLEEP SC_SYSTEM_SLEEP
+#define CU_SLCK  SC_SCREEN_LOCK
+#define CU_SSLP  SC_SYSTEM_SLEEP
 
 #define CU_WALL  SC_EXPOSE_ALL
 #define CU_SCRR  SC_NEXT_SCREEN
@@ -164,21 +153,21 @@ enum custom_keycodes {
 #define CU_UNDO  SC_UNDO_ACTION
 #define CU_REDO  SC_REDO_ACTION
 
-#define CU_SSSCR SC_SHOT_SCREEN
+#define CU_SSCR  SC_SHOT_SCREEN
 
 #define CU_WINR  SC_NEXT_WINDOW
 #define CU_WINL  SC_PREV_WINDOW
 
-#define CU_APPZ0  SC_APP_ZOOM_RESET
-#define CU_SCRZ0  SC_SCR_ZOOM_RESET
+#define CU_APPZ  SC_APP_ZOOM_RESET
+#define CU_SCRZ  SC_SCR_ZOOM_RESET
 
-#define CU_MAC    CU_SELECT_MACOS
-#define CU_WIN    CU_SELECT_WINDOWS
+#define CU_MAC   CU_SELECT_MACOS
+#define CU_WIN   CU_SELECT_WINDOWS
 
 #else
 
-#define CU_SLOCK KC_NO
-#define CU_SLEEP KC_NO
+#define CU_SLCK  KC_NO
+#define CU_SSLP  KC_NO
 
 #define CU_WALL  KC_NO
 #define CU_SCRR  KC_NO
@@ -197,15 +186,15 @@ enum custom_keycodes {
 #define CU_UNDO  KC_NO
 #define CU_REDO  KC_NO
 
-#define CU_SSSCR KC_NO
+#define CU_SSCR  KC_NO
 
 #define CU_WINR  KC_NO
 #define CU_WINL  KC_NO
 
-#define CU_APPZ0  KC_NO
-#define CU_SCRZ0  KC_NO
+#define CU_APPZ  KC_NO
+#define CU_SCRZ  KC_NO
 
-#define CU_MAC    KC_NO
-#define CU_WIN    KC_NO
+#define CU_MAC   KC_NO
+#define CU_WIN   KC_NO
 
 #endif
