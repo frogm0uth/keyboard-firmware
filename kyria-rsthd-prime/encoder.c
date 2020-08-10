@@ -30,8 +30,6 @@ void encoder_update_user(uint8_t index, bool clockwise) {
     layer_state_t layer   = get_highest_layer(layer_state);
     uint16_t      keycode = KC_NO;
 
-    /// clockwise = !clockwise;  // encoders are wired backwards (??) FIXME test this
-
     /* This goes in two phases. First, handle anything that needs to preserve mods
      * between clicks.
      */
@@ -102,11 +100,12 @@ void encoder_update_user(uint8_t index, bool clockwise) {
             break;
 
         case CURSOR:
-            if (left) {
 #ifdef CUSTOM_MOUSE
+            if (left) {
                 custom_mouse_encoder(clockwise);
+            }
 #endif
-            } else {
+            if (right) {
                 keycode = clockwise ? SC(SC_REDO_ACTION) : SC(SC_UNDO_ACTION);
             }
             break;
