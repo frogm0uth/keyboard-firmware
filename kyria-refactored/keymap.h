@@ -22,14 +22,16 @@ enum os {
     OS_SELECTION_MACOS = 0, // Don't change the order
     OS_SELECTION_WINDOWS
 };
-#define IS_MACOS      (os_selection==OS_SELECTION_MACOS)
-#define IS_WINDOWS    (os_selection==OS_SELECTION_WINDOWS)
+#define IS_MACOS   (os_selection==OS_SELECTION_MACOS)
+#define IS_WINDOWS (os_selection==OS_SELECTION_WINDOWS)
 
 enum layers {
     QWERTY = 0,
     COLEDHM,
     WORKMAN,
+    DVORAK,
     RSTHD,
+    MALTRON,
     LOWER,
     RAISE,
     NAV,
@@ -42,7 +44,9 @@ enum custom_keycodes {
     KC_QWERTY, // Default layer change keys 
     KC_COLEDHM,
     KC_WORKMAN,
+    KC_DVORAK,
     KC_RSTHD,
+    KC_MALTRON,
 
     KC_MAC,    // Keys to change OS for shortcuts
     KC_WIN
@@ -71,7 +75,7 @@ enum shortcut_codes {
 typedef union {
     uint32_t raw;
     struct {
-        uint8_t     os_selection :2;
+        uint8_t os_selection:3;
     };
 } user_config_t;
 
@@ -92,5 +96,5 @@ void matrix_scan_encoder(void);
 LEADER_EXTERNS();
 void matrix_scan_leader(void);
 #else
-#define KC_LEAD KC_NO
+#    define KC_LEAD KC_NO
 #endif

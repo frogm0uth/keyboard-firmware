@@ -17,10 +17,9 @@
 
 #include "keymap.h"
 
-
-uint16_t copy_paste_timer;
+uint16_t      copy_paste_timer;
 user_config_t user_config;
-uint8_t os_selection;
+uint8_t       os_selection;
 
 // Initialize from EEPROM 
 void keyboard_post_init_user(void) {
@@ -28,6 +27,8 @@ void keyboard_post_init_user(void) {
     os_selection = user_config.os_selection;
 }
 
+#define NAVENT LT(NAV, KC_ENT)          // Navigation layer on hold, Enter on tap
+#define ALTBSP MT(MOD_LALT, KC_BSPC)    // Alt on hold, Backspace on tap
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* 
@@ -40,15 +41,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * | LCTL   |   Z  |   X  |   C  |   V  |   B  | CCCV |      |  | Del  |Leader|   N  |   M  | ,  < | . >  | /  ? |  - _   |
  * `----------------------+------+------+------+------+      |  |------+------+------+------+------+----------------------'
- *                        | GUI  | Alt  |      | Space| Enter|  | Bspc | Space|      | Tab  | AltGr|
- *                        |      |      | Lower| Shift| Alt  |  |      | Nav  | Raise|      |      |
+ *                        | GUI  | Alt  |      | Shift| Bspc |  | Enter| Space|      | Tab  | AltGr|
+ *                        |      |      | Lower|      | Alt  |  |  Nav |      | Raise|      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [QWERTY] = LAYOUT(
       KC_ESC,  KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                                         KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_PIPE,
       KC_LSFT, KC_A,   KC_S,   KC_D,   KC_F,   KC_G,                                         KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
-      KC_LCTL, KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_CCCV,   KC_LEAD, KC_DEL, KC_LEAD,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_MINS,
-              KC_LGUI, KC_LALT, MO(LOWER), MT(MOD_LSFT, KC_SPC), MT(MOD_LALT, KC_ENT), KC_BSPC, LT(NAV, KC_SPC), MO(RAISE), KC_TAB, KC_RALT
+      KC_LCTL, KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_CCCV, XXXXXXX, KC_DEL,  KC_LEAD,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_MINS,
+                        KC_LGUI,  KC_LALT, MO(LOWER),  KC_LSFT, ALTBSP,  NAVENT,  KC_SPC, MO(RAISE), KC_TAB, KC_RALT
     ),
 /* 
  * Second Base Layer: Colemak-DHM
@@ -60,15 +61,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * | LCTL   |   Z  |   X  |   C  |   D  |   V  | CCCV |      |  | Del  |Leader|   K  |   H  | ,  < | . >  | /  ? |  - _   |
  * `----------------------+------+------+------+------+      |  |------+------+------+------+------+----------------------'
- *                        | GUI  | Alt  |      | Space| Enter|  | Bspc | Space|      | Tab  | AltGr|
- *                        |      |      | Lower| Shift| Alt  |  |      | Nav  | Raise|      |      |
+ *                        | GUI  | Alt  |      |   E  | Bspc |  | Enter| Space|      | Tab  | AltGr|
+ *                        |      |      | Lower|      | Alt  |  |  Nav |      | Raise|      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [COLEDHM] = LAYOUT(
       KC_ESC,  KC_Q,   KC_W,   KC_F,   KC_P,   KC_B,                                         KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_PIPE,
       KC_LSFT, KC_A,   KC_R,   KC_S,   KC_T,   KC_G,                                         KC_M,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
-      KC_LCTL, KC_Z,   KC_X,   KC_C,   KC_D,   KC_V,   KC_CCCV,   XXXXXXX, KC_DEL, KC_LEAD,  KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH, KC_MINS,
-              KC_LGUI, KC_LALT, MO(LOWER), MT(MOD_LSFT, KC_SPC), MT(MOD_LALT, KC_ENT), KC_BSPC, LT(NAV, KC_SPC), MO(RAISE), KC_TAB, KC_RALT
+      KC_LCTL, KC_Z,   KC_X,   KC_C,   KC_D,   KC_V,   KC_CCCV, XXXXXXX, KC_DEL, KC_LEAD,  KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH, KC_MINS,
+                        KC_LGUI,  KC_LALT, MO(LOWER),  KC_LSFT, ALTBSP,  NAVENT,  KC_SPC, MO(RAISE), KC_TAB, KC_RALT
     ),
 /* 
  * Third Base Layer: Workman
@@ -80,35 +81,75 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * | LCTL   |   Z  |   X  |   M  |   C  |   V  | CCCV |      |  | Del  |Leader|   K  |   L  | ,  < | . >  | /  ? |  - _   |
  * `----------------------+------+------+------+------+      |  |------+------+------+------+------+----------------------'
- *                        | GUI  | Alt  |      | Space| Enter|  | Bspc | Space|      | Tab  | AltGr|
- *                        |      |      | Lower| Shift| Alt  |  |      | Nav  | Raise|      |      |
+ *                        | GUI  | Alt  |      |   E  | Bspc |  | Enter| Space|      | Tab  | AltGr|
+ *                        |      |      | Lower|      | Alt  |  |  Nav |      | Raise|      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [WORKMAN] = LAYOUT(
       KC_ESC,  KC_Q,   KC_D,   KC_R,   KC_W,   KC_B,                                         KC_J,    KC_F,    KC_U,    KC_P,    KC_SCLN, KC_PIPE,
       KC_LSFT, KC_A,   KC_S,   KC_H,   KC_T,   KC_G,                                         KC_Y,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
-      KC_LCTL, KC_Z,   KC_X,   KC_M,   KC_C,   KC_V,   KC_CCCV,   XXXXXXX, KC_DEL, KC_LEAD,  KC_K,    KC_L,    KC_COMM, KC_DOT,  KC_SLSH, KC_MINS,
-              KC_LGUI, KC_LALT, MO(LOWER), MT(MOD_LSFT, KC_SPC), MT(MOD_LALT, KC_ENT), KC_BSPC, LT(NAV, KC_SPC), MO(RAISE), KC_TAB, KC_RALT
+      KC_LCTL, KC_Z,   KC_X,   KC_M,   KC_C,   KC_V,   KC_CCCV, XXXXXXX, KC_DEL, KC_LEAD,  KC_K,    KC_L,    KC_COMM, KC_DOT,  KC_SLSH, KC_MINS,
+                        KC_LGUI,  KC_LALT, MO(LOWER),  KC_LSFT, ALTBSP,  NAVENT,  KC_SPC, MO(RAISE), KC_TAB, KC_RALT
     ),
 /* 
- * Fourth Base Layer: RSTHD
+ * Fourth Base Layer: Dvorak
+ *
+ * ,-------------------------------------------.                              ,-------------------------------------------.
+ * | ESC    | '  " | ,  < | .  > |   P  |   Y  |                              |   F  |   G  |   C  |   R  |   L  |  / ?   |
+ * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+ * | LSFT   |   A  |   O  |   E  |   U  |   I  |                              |   D  |   H  |   T  |   N  |   S  |  - _   |
+ * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+ * | LCTL   | ;  : |   Q  |   J  |   K  |   X  | CCCV |      |  | Del  |Leader|   B  |   M  |   W  |   V  |   Z  |  \ |   |
+ * `----------------------+------+------+------+------+      |  |------+------+------+------+------+----------------------'
+ *                        | GUI  | Alt  |      |   E  | Bspc |  | Enter| Space|      | Tab  | AltGr|
+ *                        |      |      | Lower|      | Alt  |  |  Nav |      | Raise|      |      |
+ *                        `----------------------------------'  `----------------------------------'
+ */
+    [DVORAK] = LAYOUT(
+      KC_ESC,  KC_QUOT, KC_COMM, KC_DOT, KC_P,   KC_Y,                                         KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_SLSH,
+      KC_LSFT, KC_A,    KC_O,    KC_E,   KC_U,   KC_I,                                         KC_Y,    KC_N,    KC_E,    KC_I,    KC_O,    KC_MINS,
+      KC_LCTL, KC_SCLN, KC_Q,    KC_J,   KC_K,   KC_X,   KC_CCCV, XXXXXXX, KC_DEL, KC_LEAD,  KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    KC_BSLS,
+                          KC_LGUI,  KC_LALT, MO(LOWER),  KC_LSFT, ALTBSP,  NAVENT,  KC_SPC, MO(RAISE), KC_TAB, KC_RALT
+    ),
+/* 
+ * Fifth Base Layer: RSTHD
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
  * | ESC    |   J  |   C  |   Y  |   F  |   K  |                              |   Z  |   L  | ,  < |   U  |   Q  |  | \   |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * | LSFT   |   R  |   S  |   T  |   H  |   D  |                              |   M  |   N  |   A  |   I  |   O  |  RSFT  |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * | LCTL   |   /  |   V  |   G  |   P  |   B  | CCCV |      |  | Del  |Leader|   X  |   W  | .  > | ;  : | -  _ |  '  "  |
+ * | LCTL   | /  ? |   V  |   G  |   P  |   B  | CCCV |      |  | Del  |Leader|   X  |   W  | .  > | ;  : | -  _ |  '  "  |
  * `----------------------+------+------+------+------+      |  |------+------+------+------+------+----------------------'
- *                        | GUI  | Alt  |      |   E  | Enter|  | Bspc | Space|      | Tab  | AltGr|
- *                        |      |      | Lower|      | Alt  |  |      | Nav  | Raise|      |      |
+ *                        | GUI  | Alt  |      |   E  | Bspc |  | Enter| Space|      | Tab  | AltGr|
+ *                        |      |      | Lower|      | Alt  |  |  Nav |      | Raise|      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [RSTHD] = LAYOUT(
       KC_ESC,  KC_J,    KC_C,   KC_Y,   KC_F,   KC_K,                                         KC_Z,    KC_L,    KC_COMM, KC_U,    KC_Q,    KC_PIPE,
       KC_LSFT, KC_R,    KC_S,   KC_T,   KC_H,   KC_D,                                         KC_M,    KC_N,    KC_A,    KC_I,    KC_O,    KC_RSFT,
-      KC_LCTL, KC_SLSH, KC_V,   KC_G,   KC_P,   KC_B,   KC_CCCV,   XXXXXXX, KC_DEL, KC_LEAD,  KC_X,    KC_W,    KC_DOT,  KC_SCLN, KC_MINS, KC_QUOT,
-              KC_LGUI,  KC_LALT, MO(LOWER),     KC_E,   MT(MOD_LALT, KC_ENT), KC_BSPC, LT(NAV, KC_SPC), MO(RAISE), KC_TAB, KC_RALT
+      KC_LCTL, KC_SLSH, KC_V,   KC_G,   KC_P,   KC_B,   KC_CCCV, XXXXXXX, KC_DEL, KC_LEAD,  KC_X,    KC_W,    KC_DOT,  KC_SCLN, KC_MINS, KC_QUOT,
+                         KC_LGUI,  KC_LALT, MO(LOWER),   KC_E,   ALTBSP,  NAVENT,  KC_SPC, MO(RAISE), KC_TAB, KC_RALT
+    ),
+/* 
+ * Sixth Base Layer: Malt
+ *
+ * ,-------------------------------------------.                              ,-------------------------------------------.
+ * | ESC    |   Q  |   P  |   Y  |   C  |   B  |                              |   V  |   M  |   U  |   Z  |   L  |  | \   |
+ * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+ * | LSFT   |   A  |   N  |   I  |   S  |   F  |                              |   D  |   T  |   H  |   O  |   R  |  RSFT  |
+ * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+ * | LCTL   | ,  < | .  > |   J  |   G  | /  ? | CCCV |      |  | Del  |Leader| ;  : |   W  |   K  | -  _ |   X  |  '  "  |
+ * `----------------------+------+------+------+------+      |  |------+------+------+------+------+----------------------'
+ *                        | GUI  | Alt  |      |   E  | Bspc |  | Enter| Space|      | Tab  | AltGr|
+ *                        |      |      | Lower|      | Alt  |  |  Nav |      | Raise|      |      |
+ *                        `----------------------------------'  `----------------------------------'
+ */
+    [MALTRON] = LAYOUT(
+      KC_ESC,  KC_J,    KC_C,   KC_Y,   KC_F,   KC_K,                                         KC_Z,    KC_L,    KC_COMM, KC_U,    KC_Q,    KC_PIPE,
+      KC_LSFT, KC_R,    KC_S,   KC_T,   KC_H,   KC_D,                                         KC_M,    KC_N,    KC_A,    KC_I,    KC_O,    KC_RSFT,
+      KC_LCTL, KC_SLSH, KC_V,   KC_G,   KC_P,   KC_B,   KC_CCCV, XXXXXXX, KC_DEL, KC_LEAD,  KC_X,    KC_W,    KC_DOT,  KC_SCLN, KC_MINS, KC_QUOT,
+                         KC_LGUI,  KC_LALT, MO(LOWER),   KC_E,   ALTBSP,  NAVENT,  KC_SPC, MO(RAISE), KC_TAB, KC_RALT
     ),
 /*
  * Lower Layer: Numpad, Media
@@ -154,9 +195,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Navigation Layer
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |        |      |      |  MAC |  WIN |      |                              | PgUp | Home | Up   | End  |      | ScrlLk |
+ * |        | RSTHD|MALTRN|  MAC |  WIN |      |                              | PgUp | Home | Up   | End  |      | ScrlLk |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |        |QWERTY|COLDHM|WRKMAN| RSTHD|      |                              | PgDn | Left | Down | Right|      | CapsLk |
+ * |        |QWERTY|COLDHM|WORKMN|DVORAK|      |                              | PgDn | Left | Down | Right|      | CapsLk |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * |        |      |      |      |      |      |      |      |  |      |      |      |      |      |      |      |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
@@ -165,10 +206,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [NAV] = LAYOUT(
-      _______, _______, _______, KC_MAC,  KC_WIN,  _______,                                     KC_PGUP, KC_HOME, KC_UP,   KC_END,  _______, KC_SLCK,
-      _______, KC_QWERTY, KC_COLEDHM, KC_WORKMAN, KC_RSTHD, _______,                            KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, _______, KC_CAPS,
+      _______, KC_RSTHD, KC_MALTRON, KC_MAC,  KC_WIN,  _______,                                     KC_PGUP, KC_HOME, KC_UP,   KC_END,  _______, KC_SLCK,
+      _______, KC_QWERTY, KC_COLEDHM, KC_WORKMAN, KC_DVORAK, _______,                            KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, _______, KC_CAPS,
       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-                                 _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+                                 RGB_M_P, _______, _______, _______, _______, _______, _______, _______, _______, RGB_TOG
     ),
 /*
  * Adjust Layer
@@ -188,7 +229,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______, _______, _______, _______, _______, _______,                                     _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______,
       _______, _______, RGB_SAI, RGB_HUI, RGB_VAI, _______,                                     _______, KC_F4,   KC_F5,   KC_F6,   KC_F11,  _______,
       _______, _______, RGB_SAD, RGB_HUD, RGB_VAD, _______, _______, _______, _______, _______, _______, KC_F1,   KC_F2,   KC_F3,   KC_F12,  _______,
-                                 _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+                                 XXXXXXX, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
 // /*
 //  * Layer template
@@ -230,8 +271,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             break;
 
-	// Switch the default base layer
-	case KC_QWERTY:
+            // Switch the default base layer
+        case KC_QWERTY:
 	    set_single_persistent_default_layer(QWERTY);
 	    layer_clear();
 	    return false;
@@ -249,8 +290,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 	    return false;
 	    break;
 
+	case KC_DVORAK:
+	    set_single_persistent_default_layer(DVORAK);
+	    layer_clear();
+	    return false;
+	    break;
+
 	case KC_RSTHD:
 	    set_single_persistent_default_layer(RSTHD);
+	    layer_clear();
+	    return false;
+	    break;
+
+	case KC_MALTRON:
+	    set_single_persistent_default_layer(MALTRON);
 	    layer_clear();
 	    return false;
 	    break;
