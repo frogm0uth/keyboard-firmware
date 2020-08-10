@@ -45,6 +45,16 @@ void encoder_update_user(uint8_t index, bool clockwise) {
                     tap_code16(SC(SC_UNDO));
                 }
                 break;
+#ifdef RGBLIGHT_ANIMATIONS
+            case NAV:
+                // Change RGB Light mode / animation
+                if (clockwise) {
+                    rgblight_step_noeeprom();
+                } else {
+                    rgblight_step_reverse_noeeprom();
+                }
+                break;
+#endif
             default:
                 // Switch between windows - Alt-tab on Windows, Cmd-tab on Mac.
                 if (!is_alt_tab_active) {
