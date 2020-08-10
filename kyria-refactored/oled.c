@@ -80,6 +80,12 @@ static void render_status(void) {
                 case MALTRON:
                     oled_write_P(PSTR("Maltron\n"), false);
                     break;
+                case BEAKL:
+                    oled_write_P(PSTR("BEAKL 15\n"), false);
+                    break;
+                case MTGAP:
+                    oled_write_P(PSTR("MTGAP\n"), false);
+                    break;
             }
             break;
         case LOWER:

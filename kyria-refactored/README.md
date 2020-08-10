@@ -1,6 +1,6 @@
 # Kyria Refactored
 
-This is a refactored version of the [thomasbaart](https://github.com/qmk/qmk_firmware/tree/master/keyboards/kyria/keymaps/thomasbaart) keymap for the Kyria keyboard from [splitkb.com](https://splitkb.com). It also has six base alpha layers, which can be selected from the keyboard, and support for different shortcuts for macOS and Windows.
+This is a refactored version of the [thomasbaart](https://github.com/qmk/qmk_firmware/tree/master/keyboards/kyria/keymaps/thomasbaart) keymap for the Kyria keyboard from [splitkb.com](https://splitkb.com). It also has eight alpha layers, which can be selected from the keyboard, and support for different shortcuts for macOS and Windows.
 
 ## Refactoring
 
@@ -10,7 +10,7 @@ The rules.mk file has been modified so that the new source files are compiled an
 
 ## Default alpha layers
 
-There are six default alpha layers. This might be useful for anyone interested in trying out different key layouts on their Kyria. The keys to switch between them are on the left home row on the Navigation layer.
+There are eight default alpha layers. This might be useful for anyone interested in trying out different key layouts on their Kyria. The keys to switch between them are on the left home row on the Navigation layer.
 
 **Important**: if you plan to flash a different firmware, set the default layer back to QWERTY first. This will ensure that you aren't stuck in the wrong layer when you boot the other firmware.
 
@@ -21,19 +21,21 @@ The layers are:
 3. [Workman](https://workmanlayout.org)
 4. [Dvorak](https://en.wikipedia.org/wiki/Dvorak_keyboard_layout)
 5. [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/)
-6. [Maltron](https://www.maltron.com/the-maltron-letter-layout-advantage.html)
+6. [Maltron](https://www.maltron.com/the-maltron-letter-layout-advantage.html) (There seem to be variants of the layout with regard to where punctuation characters are placed. I've used the one on the Maltron website which is presumably definitive.)
+7. [BEAKL](https://ieants.cc/code/keyboard/beakl/). (This is version 15. Currently the punctuation pairs do not conform to that page.)
+8. [MTGAP](https://keyboard-design.com/best-keyboard-layouts.html). (Scroll down to MTGap TS ErgoLinear 2. I am unsure of what version of MTGAP this is, as there have been quite a number. Currently the punctuation pairs do not conform to that page.)
 
 In order that all layers work similarly, I have changed the thumb key layout a little. The left innermost thumb key is mod-tap Alt+Backspace, and the right innermost thumb key is a layer-tap Nav+Enter. (The Nav was previously on the Space, but I have moved it to Enter.)
 
 The last two layers use the left thumb for the E key, so the Shift that was there in the other layers has been moved to the right pinky.
 
-To change default layer, press the right inner thumb to activate the Nav layer, and use the left home row and the pinky and ring fingers of the top row. The Nav layer will deactivate so the OLED displays the new default layer.
+To change default layer, press the right inner thumb to activate the Nav layer, and use the left home row and top row. The Nav layer will deactivate so the OLED displays the new default layer.
 
 ## OS selection and shortcuts
 
 There are three places in the thomasbaart keymap where Windows-specific shortcuts are used. In this refactored version, you can press a key on the keyboard to select Windows or macOS. Then the correct shortcuts for the selected OS will be output.
 
-To change default layer, press the right inner thumb to activate the Nav layer, and use the index and middle fingers of the left side top row.
+To change default layer, press the right inner thumb to activate the Nav layer, and use the index and middle fingers of the left side bottom row.
 
 The OS selection is displayed on the OLED.
 

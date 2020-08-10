@@ -32,6 +32,8 @@ enum layers {
     DVORAK,
     RSTHD,
     MALTRON,
+    BEAKL,
+    MTGAP,
     LOWER,
     RAISE,
     NAV,
@@ -47,6 +49,8 @@ enum custom_keycodes {
     KC_DVORAK,
     KC_RSTHD,
     KC_MALTRON,
+    KC_BEAKL,
+    KC_MTGAP,
 
     KC_MAC,    // Keys to change OS for shortcuts
     KC_WIN
