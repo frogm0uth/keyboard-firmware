@@ -71,8 +71,14 @@ static void render_status(void) {
                 case WORKMAN:
                     oled_write_P(PSTR("Workman\n"), false);
                     break;
+                case DVORAK:
+                    oled_write_P(PSTR("Dvorak\n"), false);
+                    break;
                 case RSTHD:
                     oled_write_P(PSTR("RSTHD\n"), false);
+                    break;
+                case MALTRON:
+                    oled_write_P(PSTR("Maltron\n"), false);
                     break;
             }
             break;
