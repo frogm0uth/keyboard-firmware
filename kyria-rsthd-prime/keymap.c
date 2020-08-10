@@ -308,9 +308,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             break;
 
-            /* Custom keycodes related to Shift. Both shift keys are custom keycodes;
-             * both are pressed to toggle caps-lock. In addition, there are a number of
-             * keys that have different character than normal if Shift is pressed.
+            /* Both shift keys are custom keycodes; both are pressed to toggle
+             * caps-lock.
              */
         case CU_LSFT:
             if (record->event.pressed) {
@@ -344,6 +343,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             break;
 
+            /* Process keys that have a different character than normal if Shift
+             * is pressed.
+             */
         case CU_DOT_UNDERSCORE:
             custom_shift(KC_DOT, KC_UNDERSCORE, record);
             break;
@@ -513,12 +515,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             break;
 #endif
 
-            // Custom mouse keycodes
+            // Process custom mouse keycodes
 #ifdef CUSTOM_MOUSE
             CUSTOM_MOUSE_PROCESS_RECORD(keycode, record);
 #endif
 
-            // Custom editing keycodes
+            // Process custom editing keycodes
 #ifdef CUSTOM_EDIT
             CUSTOM_EDIT_PROCESS_RECORD(keycode, record);
 #endif
@@ -547,14 +549,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #endif
 
     }    // switch
-
-#ifdef DELETEME
-        /* Do default processing for all OS shortcut keycodes
-         */
-#    if defined(OS_SHORTCUTS) && !defined(OS_SHORTCUTS_STATIC)
-    process_record_shortcut(keycode, record);
-#    endif
-#endif
 
     return true;
 }
