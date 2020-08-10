@@ -17,6 +17,12 @@
 
 #include "keymap.h"
 
+/**
+ ** Leader key definitions. Not used by default in this keymap, but can be
+ ** enabled by setting LEADER_ENABLE to yes in rules.mk.
+ **/
+
+
 
 LEADER_EXTERNS();
 
@@ -26,40 +32,40 @@ void matrix_scan_leader(void){
         leading = false;
         leader_end();
         SEQ_TWO_KEYS(KC_T, KC_M) { // Trademark symbol
-	  tap_code16(A(KC_2));
+            tap_code16(A(KC_2));
         }
         SEQ_TWO_KEYS(KC_M, KC_U) { // Mu
-	  tap_code16(A(KC_M));
+            tap_code16(A(KC_M));
         }
         SEQ_TWO_KEYS(KC_P, KC_I) { // Pi
-	  tap_code16(A(KC_P));
+            tap_code16(A(KC_P));
         }
-	SEQ_TWO_KEYS(KC_C, KC_P) { // Copyright
-	  tap_code16(A(KC_G));
+        SEQ_TWO_KEYS(KC_C, KC_P) { // Copyright
+            tap_code16(A(KC_G));
         }
         SEQ_THREE_KEYS(KC_Y, KC_E, KC_N) { // Yen
-	  tap_code16(A(KC_Y));
+            tap_code16(A(KC_Y));
         }
         SEQ_THREE_KEYS(KC_G, KC_B, KC_P) { // Pound
-	  tap_code16(A(KC_3));
+            tap_code16(A(KC_3));
         }
         SEQ_THREE_KEYS(KC_E, KC_U, KC_R) { // Euro
-	  tap_code16(S(A(KC_2)));
+            tap_code16(S(A(KC_2)));
         }
         SEQ_THREE_KEYS(KC_O, KC_H, KC_M) { // Ohm
-	  tap_code16(A(KC_Z));
+            tap_code16(A(KC_Z));
         }
         SEQ_THREE_KEYS(KC_D, KC_A, KC_G) { // Dagger
-	  tap_code16(A(KC_T));
+            tap_code16(A(KC_T));
         }
         SEQ_THREE_KEYS(KC_R, KC_E, KC_G) { // Registered
-	  tap_code16(A(KC_R));
+            tap_code16(A(KC_R));
         }
         SEQ_THREE_KEYS(KC_D, KC_E, KC_G) { // Degrees
-	  tap_code16(S(A(KC_8)));
+            tap_code16(S(A(KC_8)));
         }
         SEQ_THREE_KEYS(KC_D, KC_D, KC_G) { // Double dagger
-	  tap_code16(S(A(KC_7)));
+            tap_code16(S(A(KC_7)));
         }
     }
 }

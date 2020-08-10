@@ -21,24 +21,17 @@
  ** Layer-tap-toggle. Layer active while held, Ctrl-tap to toggle on, Tap to send some other key.
  ** Tap to untoggle the layer. Note: there is no auto-repeat on the tap key on second
  ** tap, like with standard LT or mod-tap.
+ **
+ ** For additional documentation, see
+ ** https://github.com/frogm0uth/keyboard-notes/blob/master/qmk-layer-tap-toggle/README.md
  **/
 
-// Update the timer(s) for layer-tap-toggle. Must be called from matrix_scan_user.
+/** 
+ * Extern functions
+ */
 void ltt_update_timer (void) ;
-
-// Toggle back to base layer. Call from process_record_user.
 bool ltt_base(void);
-
-// Check for interrupt to layer-tap-toggle
 void ltt_interrupt(uint16_t keycode, keyrecord_t *record);
-
-// Lock the layer. Call this from process-record_user in response to a lock keypress.
 bool ltt_lock(keyrecord_t *record);
-
-// Update the layer-tap-toggle state. Must be called from process_record_user.
-// Pass KC_NO if you don't want tap to send a key.
-//
 bool layer_tap_toggle(uint16_t keycode, uint8_t layer, keyrecord_t *record);
-
-// Update the layer-tap-toggle state, with a second layer used if Ctrl is down.
 bool layer_tap_toggle2(uint16_t keycode, uint8_t layer, uint8_t layer2, keyrecord_t *record);

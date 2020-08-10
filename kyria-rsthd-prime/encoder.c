@@ -17,109 +17,117 @@
 
 #include "keymap.h"
 
-
+/**
+ * User-level encoder processing. This switches on the layer to decide
+ * what to do for each encoder. Some features may be disabled,
+ * depending on the variables in rules.mk.
+ */
 void encoder_update_user(uint8_t index, bool clockwise) {
-  bool left = (index == 0);
-  bool right = !left;
-  uint8_t mods = get_mods();
-  layer_state_t layer = get_highest_layer(layer_state);
-  uint16_t keycode = KC_NO;
-  
-  clockwise = !clockwise;  // encoders are wired backwards (??)
+    bool left  = (index == 0);    // Just for readibility
+    bool right = !left;
 
-  // This goes in two phases. First, handle anything that need to preserve mods between clicks
+    uint8_t       mods    = get_mods();
+    layer_state_t layer   = get_highest_layer(layer_state);
+    uint16_t      keycode = KC_NO;
+
+    /// clockwise = !clockwise;  // encoders are wired backwards (??) FIXME test this
+
+    /* This goes in two phases. First, handle anything that needs to preserve mods
+     * between clicks.
+     */
 #ifdef OS_SHORTCUTS
-  switch (layer) {
-  case ALPHA:
-    if (right) {
-      if (!(mods & MOD_MASK_CSA)) { // FIXME  for Windows
-	app_switcher_record(clockwise ? CU_APPR : CU_APPL, true);
-	app_switcher_record(clockwise ? CU_APPR : CU_APPL, false);
-	return;
-      }
+    switch (layer) {
+        case ALPHA:
+            if (right) {
+                if (!(mods & MOD_MASK_CSA)) {    // FIXME  for Windows
+                    app_switcher_record(clockwise ? CU_APPR : CU_APPL, true);
+                    app_switcher_record(clockwise ? CU_APPR : CU_APPL, false);
+                    return;
+                }
+            }
     }
-  }
 #endif
-  
-  // Now clear all modifiers and do the rest
-  clear_mods();
-  switch (layer) {
-  case ALPHA:
-    if (left) {
-      if (mods & MOD_MASK_GUI) {
-	keycode = clockwise ? SC(SC_BROWSER_FWD) : SC(SC_BROWSER_BACK);
-      } else if (mods & MOD_MASK_CTRL) {
-	keycode = clockwise ? SC(SC_NEXT_SEARCH) : SC(SC_PREV_SEARCH);
-      } else {
-	keycode = clockwise ? KC_PGDN : KC_PGUP;
-      }
-    } else {
-      if (mods & MOD_MASK_GUI) {
-	keycode = clockwise ? SC(SC_TAB_RIGHT) : SC(SC_TAB_LEFT);
-      } else if (mods & MOD_MASK_CTRL) {
-	keycode = clockwise ? SC(SC_TAB_RIGHT_ALT) : SC(SC_TAB_LEFT_ALT);
-      }
-    }
-    break;
 
-  case NUMPAD:
-    if (left) {
-      keycode = clockwise ? SC(SC_SCR_ZOOM_IN) : SC(SC_SCR_ZOOM_OUT);
-    } else {
-      keycode = clockwise ? SC(SC_APP_ZOOM_IN) : SC(SC_APP_ZOOM_OUT);
-    }
-    break;
+    /* Now clear all modifiers and do the rest.
+     */
+    clear_mods();
+    switch (layer) {
+        case ALPHA:
+            if (left) {
+                if (mods & MOD_MASK_GUI) {
+                    keycode = clockwise ? SC(SC_BROWSER_FWD) : SC(SC_BROWSER_BACK);
+                } else if (mods & MOD_MASK_CTRL) {
+                    keycode = clockwise ? SC(SC_NEXT_SEARCH) : SC(SC_PREV_SEARCH);
+                } else {
+                    keycode = clockwise ? KC_PGDN : KC_PGUP;
+                }
+            } else {
+                if (mods & MOD_MASK_GUI) {
+                    keycode = clockwise ? SC(SC_TAB_RIGHT) : SC(SC_TAB_LEFT);
+                } else if (mods & MOD_MASK_CTRL) {
+                    keycode = clockwise ? SC(SC_TAB_RIGHT_ALT) : SC(SC_TAB_LEFT_ALT);
+                }
+            }
+            break;
 
-  case SYNTAX:
+        case NUMPAD:
+            if (left) {
+                keycode = clockwise ? SC(SC_SCR_ZOOM_IN) : SC(SC_SCR_ZOOM_OUT);
+            } else {
+                keycode = clockwise ? SC(SC_APP_ZOOM_IN) : SC(SC_APP_ZOOM_OUT);
+            }
+            break;
+
+        case SYNTAX:
 #ifdef CUSTOM_MOUSE
-    if (right) {
-      if (mods & MOD_MASK_SHIFT) {
-	custom_wheel_encoder(clockwise, false);
-      } else {
-	custom_wheel_encoder(clockwise, true);
-      }
-    }
+            if (right) {
+                if (mods & MOD_MASK_SHIFT) {
+                    custom_wheel_encoder(clockwise, false);
+                } else {
+                    custom_wheel_encoder(clockwise, true);
+                }
+            }
 #endif
-    break;
-    
-  case EDIT:
+            break;
+
+        case EDIT:
 #ifdef CUSTOM_EDIT
-    if (left) {
-      custom_edit_encoder(clockwise);
-    }
+            if (left) {
+                custom_edit_encoder(clockwise);
+            }
 #endif
-    if (right) {
-      keycode = clockwise ? SC(SC_REDO_ACTION) : SC(SC_UNDO_ACTION);
-    }
-    break;
-    
-    case CURSOR:
-      if (left) {
-#ifdef CUSTOM_MOUSE
-	custom_mouse_encoder(clockwise);
-#endif
-      } else {
-	keycode = clockwise ? SC(SC_REDO_ACTION) : SC(SC_UNDO_ACTION);
-      }
-      break;
+            if (right) {
+                keycode = clockwise ? SC(SC_REDO_ACTION) : SC(SC_UNDO_ACTION);
+            }
+            break;
 
-  case FUNC:
-#ifdef RGBLIGHT_ENABLE
-    if (left) {
-      rgblight_encoder(clockwise, mods);
-    }
+        case CURSOR:
+            if (left) {
+#ifdef CUSTOM_MOUSE
+                custom_mouse_encoder(clockwise);
 #endif
-    if (right) {
-      if (mods & MOD_MASK_SHIFT) {
-	keycode = clockwise ? KC_PAUSE : KC_SLCK;
-      } else {
-	keycode = clockwise ? KC_VOLU : KC_VOLD;
-      }
+            } else {
+                keycode = clockwise ? SC(SC_REDO_ACTION) : SC(SC_UNDO_ACTION);
+            }
+            break;
+
+        case FUNC:
+#ifdef RGBLIGHT_ENABLE
+            if (left) {
+                rgblight_encoder(clockwise, mods);
+            }
+#endif
+            if (right) {
+                if (mods & MOD_MASK_SHIFT) {
+                    keycode = clockwise ? KC_PAUSE : KC_SLCK;
+                } else {
+                    keycode = clockwise ? KC_VOLU : KC_VOLD;
+                }
+            }
+            break;
     }
-    break;
-  }
-  if (keycode != KC_NO) {  // If we found a single code to send, send it
-    tap_code16(keycode);
-  }
-  set_mods(mods);          // Restore the modifiers to original state
+    if (keycode != KC_NO) {    // If we found a single keycode to send, send it
+        tap_code16(keycode);
+    }
+    set_mods(mods);    // Restore the modifiers to original state
 }

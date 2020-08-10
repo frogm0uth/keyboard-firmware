@@ -17,28 +17,29 @@
 #pragma once
 
 
-#define OS_MACOS     // Uncomment to choose macOS shortcuts
-//#define OS_WINDOWS   // Uncomment to choose Windows shortcuts
-
 // uncomment to make all shortcuts be statically compiled.
 //#define OS_SHORTCUTS_STATIC
 
-// uncomment to put custom mouse keys on the right hand
-//#define CURSOR_RIGHTHANDED
+#if defined(OS_SHORTCUTS_STATIC)
+     // Uncomment one of these to choose the OS for static shortcuts,
+     // or the *initial* default for dynamically defined shortcuts
+#    define(OS_MACOS)
+//#    define(OS_WINDOWS)
+#endif
 
-// uncomment to enable detailed compose key status
+// Uncomment to enable detailed compose key status on the OLED
 #define COMPOSE_STATUS_ENABLE
 
 #ifdef OLED_DRIVER_ENABLE
-  #define OLED_DISPLAY_128X64
+#    define OLED_DISPLAY_128X64
 #endif
 
 #ifdef RGBLIGHT_ENABLE
-  // #define RGBLIGHT_ANIMATIONS -- turning this off saves over 3k space...!
-  #define RGBLIGHT_HUE_STEP 6
-  #define RGBLIGHT_SAT_STEP 16
-  #define RGBLIGHT_VAL_STEP 16
-  #define RGBLIGHT_SLEEP
+//#    define RGBLIGHT_ANIMATIONS -- turning this off saves over 3k space...
+#    define RGBLIGHT_HUE_STEP 6
+#    define RGBLIGHT_SAT_STEP 16
+#    define RGBLIGHT_VAL_STEP 16
+#    define RGBLIGHT_SLEEP
 #endif
 #define RGBLIGHT_DISABLE_KEYCODES // Saves about 650 bytes
 #define RGBMATRIX_DISABLE_KEYCODES
@@ -47,6 +48,9 @@
 // When using the default resolution of 4, if you notice your encoder skipping
 // every other tick, lower the resolution to 2.
 #define ENCODER_RESOLUTION 2
+
+// The Kyria seems to have the encoders connected backwards
+#define ENCODER_DIRECTION_FLIP
 
 // The Leader key allows to flexibly assign macros to key sequences.
 #define LEADER_PER_KEY_TIMING
@@ -68,4 +72,4 @@
 #define NO_ACTION_ONESHOT
 //#define NO_ACTION_TAPPING
 
-/// #define DEBUG_MATRIX_SCAN_RATE
+//#define DEBUG_MATRIX_SCAN_RATE

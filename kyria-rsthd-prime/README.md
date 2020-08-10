@@ -47,11 +47,11 @@ Speed and reducing the number of keys in use are not important goals for me.
 ## Main features
 
 * Two different alpha layers derived from RSTHD.
-* A custom layer switching code, which is like a merger or QMK's LT() and TG() functions. More information (*now out of date*) is [here](../../../../keyboard-notes/tree/master/qmk-layer-tap-toggle).
+* A custom layer switching code, which is like a merger or QMK's LT() and TG() functions. More information is [here](../../../../keyboard-notes/tree/master/qmk-layer-tap-toggle).
 * The ability to select the OS in use (currently Mac and Windows supported) from the keyboard, which changes the shortcuts programmed into the keyboard. More information is [here](../../../../keyboard-notes/tree/master/qmk-os-shortcuts).
 * A custom mouse feature to make mouse keys more controllable. More information is [here](../../../../keyboard-notes/tree/master/qmk-custom-mouse).
 * A custom editing layer for platform-independent editing. More information is [here](../../../../keyboard-notes/tree/master/qmk-custom-edit).
-* A *Compose* key. In this keymap, it replaces the Leader key. More information (*now out of date*) is [here](../../../../keyboard-notes/tree/master/qmk-compose-key).
+* A *Compose* key. In this keymap, it replaces the Leader key. More information is [here](../../../../keyboard-notes/tree/master/qmk-compose-key).
 * Matching use of the encoders on each layer.
 * Informative info on the OLED. (Unfortunately, at the moment only the left OLED can be usefully used.) 
 
@@ -61,7 +61,9 @@ Speed and reducing the number of keys in use are not important goals for me.
 2. Linux shortcuts are non-existent.
 3. Custom Mouse needs work on acceleration and wheel speed.
 4. OLED displays need some refinement.
-5. This doc needs to be fleshed out.
+5. A general-purpose status display on the OLED would be useful i.e. generalize the 3-second timeout on compose status.
+6. Defining the strings for OLED status display in response to events rather than on every scan would probably be a good idea.
+7. This doc needs to be fleshed out.
 
 
 # Layers
