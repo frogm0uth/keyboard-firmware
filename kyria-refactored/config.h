@@ -22,7 +22,7 @@
 #endif
 
 #ifdef RGBLIGHT_ENABLE
-//#define RGBLIGHT_ANIMATIONS // Animations uses a lot of space, comment out if you don't need it
+  #define RGBLIGHT_ANIMATIONS // Animations uses a lot of space, comment out if you don't need it
   #define RGBLIGHT_HUE_STEP 8
   #define RGBLIGHT_SAT_STEP 8
   #define RGBLIGHT_VAL_STEP 8
