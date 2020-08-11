@@ -1,6 +1,6 @@
 # Kyria RSTHD/Prime
 
-**Under development.** This is a keymap I'm working on for my Kyria keyboard from [splitkb.com](https://splitkb.com). The alpha layouts are based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/). There are two default layers, one a lightly modified RSTHD and one heavily modified. For a more standard implementation of RSTHD on the Kyria, see my [Kyria Refactored](https://github.com/frogm0uth/keyboard-firmware/tree/master/kyria-refactored) keymap.
+**Under development.** This is a keymap I'm working on for my Kyria keyboard from [splitkb.com](https://splitkb.com). The base alpha layouts are based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/). There are two such layers, one a lightly modified version of RSTHD and one heavily modified. For a more standard implementation of RSTHD on the Kyria, see my [Kyria Refactored](https://github.com/frogm0uth/keyboard-firmware/tree/master/kyria-refactored) keymap.
 
 <!--ts-->
    * [Kyria RSTHD/Prime](#kyria-rsthdprime)
@@ -24,11 +24,11 @@
 
 The alphabetic layouts in this keymap are based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/), one lightly modified ("RSTHD-s") and one heavily modified ("Prime").
 
-The first default layer is a lightly modified version of RSTHD that moves the Shift keys underneath pinky home. The second is a further development of my RSTHD' ("RSTHD prime") layout that I developed for the Kinesis Advantage keyboard but which aims to reduce finger travel distance even more.
+The first alphabetic layer is a lightly modified version of RSTHD that moves the Shift keys underneath pinky home. The second is a further development of my RSTHD' ("RSTHD prime") layout that I developed for the Kinesis Advantage keyboard that aims to reduce finger travel distance even more.
 
-The two default layers can be selected with keys on the Function layer, and the selection is stored in EEPROM.
+The two base layers can be selected with keys on the Function layer, and the selection is stored in EEPROM.
 
-This keymap is perhaps a bit more "traditional" than other QMK layouts that I see being designed for small keyboards, as I haven't used the QMK features tap-dance, one-shot keys or combos. I've used mod-tap on just one key (Alt) – the other modifiers have dedicated keys on each hand.
+This keymap is perhaps a bit more "traditional" than other QMK layouts that I see being designed for small keyboards, as I haven't used the QMK features tap-dance, one-shot keys or combos. I've used mod-tap on one key (Alt) – the other modifiers have dedicated keys on each hand. Caps-lock is toggled by pressing both Shift keys.
 
 I have tried to make the keymap work fluidly, both in the base layers and with the interaction between layers. The Kyria has some nice features such as OLEDs and encoders, which I try to use to good effect.
 
@@ -72,7 +72,7 @@ There are a total of 7 layers. The first two are alternate base layers, which ca
 
 The remaining 5 layers are activated from the left or right thumb. On each layer, the opposite side to the layer key is considered "primary" and the side with the activation key is "auxiliary". Usually, I hold the layer key to keep the layer activated, but the layer can be locked on by pressing the layer key with Cmd down.
 
-Some of these layers use the inner column for window navigation.
+Some of these layers use the inner column for various window navigation operations.
 
 Most layers use one or both of the encoders. Where possible, the encoder function is appropriate for the function of that layer. If the encoder on the auxiliary side is used, the layer will need to be locked to use it.
 
@@ -90,7 +90,7 @@ This layer is my "daily driver". It is originally based on RSTHD but is now so h
 
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/0048853ae7914074816beda3d796558c)
 
-The optimizations that resulted in this layout aimed to reduce lateral finger movement and improve comfort. The layout does perform very well in an analyzer, with very low SFU (same finger utilization) stats and lower travel distance than most other layouts.
+The optimizations that resulted in this layout aimed to reduce lateral finger movement and improve comfort. In particular, I find the lower keys on the inner column uncomfortable on the Kyria, especially on the left hand in bigrams with E. The layout performs very well in an analyzer, with very low SFU (same finger utilization) stats and lower travel distance than most other layouts.
 
 ## Numpad
 
@@ -98,7 +98,7 @@ Activation: left thumb. Primary keys on right, auxiliary keys on left.
 
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/8a97196759bd98f7ef9a4e974423e145)
 
-The number keys 1 – 9 are on the right, arranged in a 3x3 grid. 1 – 3 are on the home row, as these are the most frequent digits. Arithmetic operators are on the left, along with 0 and ".". Note that it's assumed that all digits have their corresponding punctuation character available with Shift, but some of these are also duplicated on the Syntax layer.
+The number keys 1 – 9 are on the right, arranged in a 3x3 grid. 1 – 3 are on the home row, as these are the most frequent digits. 0 and "." are on the left hand home row, and arithmetic operators distributed to other keys. Note that it's assumed that all digits have their corresponding punctuation character available with Shift, but some of these are also duplicated on the Syntax layer.
 
 It's assumed that there will be times when this layer is locked on for an extended period, for numeric entry or spreadsheets. Therefore all the keys to access higher layers are here, which isn't the case for other layers.
 
@@ -112,7 +112,7 @@ Named because I think of it as enabling the syntax of common programming languag
 
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/0b079c6153a029c55cc8b5b7fbe701f2)
 
-On the right are three pairs of pairing punctation: **] [**, **} {**, and **> <**. Parentheses **( )** are on the left hand to avoid same-finger conflicts in common sequences such as **)}**. Other punctuation on this layer is commonly used in a range of coding languages; where possible they are arranged for "rolls," such as **->**, **<?** and **/>**. Various other characters on the layer are there to avoid switching layers for digrams that commonly occur in coding/scripting such as **${**, **=>**, **<!**, and so on.
+On the right are three pairs of pairing punctation: **] [**, **} {**, and **> <**. Parentheses **( )** are on the left hand to avoid same-finger conflicts in common sequences such as **)}**. Other punctuation on this layer is commonly used in a range of coding languages; where possible they are arranged for "rolls," such as **->**, **<?** and **/>**. Various other characters on the layer are there to avoid switching layers for digrams that commonly occur in coding/scripting such as **${**, **=>**, **<!**, and so on. "Inward rolls" with a character and Space or Enter are easily done on the right hand, followed by Tab on the left if needed.
 
 ## Edit
 
@@ -131,6 +131,8 @@ Activation: Ctrl + right thumb. Primary keys on left, auxiliary keys on right.
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/8a2089637ad2a82eecfd5262a5ea9d1f)
 
 This is a cursor movement layer based on my [Custom Mouse](../../../../keyboard-notes/tree/master/qmk-custom-mouse) code. Overall, the layout mimics the Edit layer except that the cursor keys move the mouse and the left thumb is used for mouse buttons. This layer also has keys to trigger various types of screenshot (some of which need moving the mouse before or after).
+
+While it may seem odd to have the cursor keys on the left hand, the way to use this layer is not to repeatedly press the cursor keys, but to press one or two (for diagonal movement), and then press and hold the Repeat key on the right hand to start and stop cursor movement.
 
 ## Func
 
