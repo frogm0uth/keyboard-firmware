@@ -21,11 +21,11 @@
  **/
 
 #ifndef OS_SHORTCUTS_STATIC
-#ifdef OS_WINDOWS
+#    ifdef OS_WINDOWS
 uint8_t os_index = os_platform_windows;
-#else
+#    else
 uint8_t os_index = os_platform_macos;
-#endif
+#    endif
 
 void os_set_raw(uint8_t os) {
     os_index = os;

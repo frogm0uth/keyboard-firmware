@@ -36,8 +36,8 @@ enum {
 
 // State arrays, one element per layer
 static uint16_t ltt_timer[NUM_LAYERS];
-static uint8_t ltt_state[NUM_LAYERS];
-static bool ltt_initialized = false;
+static uint8_t  ltt_state[NUM_LAYERS];
+static bool     ltt_initialized = false;
 
 /**
  * Update the timer(s) for layer-tap-toggle. Must be called from
