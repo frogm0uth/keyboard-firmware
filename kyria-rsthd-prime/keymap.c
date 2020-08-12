@@ -127,7 +127,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 */
     [NUMPAD] = LAYOUT(
         _______, CU_ALL,  CU_CUT,  CU_COPY, CU_PAST, CU_SCRL,                                           CU_SCRR, KC_4,    KC_5,    KC_6, CU_DIRU, CL_BASE,
-        _______, KC_PLUS, KC_MINS, KC_DOT,  KC_0,    CU_FSCR,                                           CU_WALL, KC_1,    KC_2,    KC_3, KC_SLSH, _______,
+        _______, KC_ASTR, KC_MINS, KC_DOT,  KC_0,    CU_FSCR,                                           CU_WALL, KC_1,    KC_2,    KC_3, KC_SLSH, _______,
         _______, _______, KC_PLUS, KC_TAB,  KC_EQL,  CU_DTOP, XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, CU_DTOP, KC_7,    KC_8,    KC_9, _______, _______,
         /* */                      CU_SCRZ, _______, _______, CU_APPR, _______, /* */ _______, _______, _______, _______, CU_APPZ
         ),
@@ -259,6 +259,9 @@ void app_switcher_record(uint16_t keycode, bool pressed) {    // Call from proce
 
 /**
  * Process keys with a custom shift value.
+ *
+ * FIXME use this: https://github.com/seb-ma/qmk_firmware/blob/keymap-kyria-seb-ma/users/seb-ma/custom_keys.c#L167
+ * FIXME implement shift using a lookup table
  */
 void custom_shift(uint16_t key, uint16_t shiftedkey, keyrecord_t *record) {
     uint8_t mods = get_mods();
