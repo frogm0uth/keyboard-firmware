@@ -22,9 +22,8 @@
  ** one level at a time on each keypress.
  **/
 
-
-
-//#define COMPOSE_EXAMPLE_CALLBACK
+#define COMPOSE_EXAMPLE_CALLBACK_1
+#define COMPOSE_EXAMPLE_CALLBACK_2
 
 /**
  * Symbols that are output from key sequences. Lower nodes of the compose tree
@@ -68,13 +67,20 @@ struct compose_node print_symbols[] = {
     COMPOSE_END
 };
 
-//#ifdef COMPOSE_EXAMPLE_CALLBACK
+#ifdef COMPOSE_EXAMPLE_CALLBACK_1
+// Example callback
+void print_exclaim(uint16_t keycode) {
+    tap_code16(KC_EXLM);
+}
+#endif
+
+#ifdef COMPOSE_EXAMPLE_CALLBACK_2
 // Example callback
 void print_email(uint16_t keycode) {
     //SEND_STRING("myname@mydomain.com");
-    my_send_string("myname@mydomain.com");
+    send_literal_string("myname@mydomain.com");
 }
-//#endif
+#endif
 
 /**
  * Keycode arrays
@@ -110,10 +116,14 @@ struct compose_node compose_tree_root[] = {
     COMPOSE_CONTINUE(KC_M,    math_symbols),
     COMPOSE_CONTINUE(KC_P,    print_symbols),
   
-#ifdef COMPOSE_EXAMPLE_CALLBACK
+#ifdef COMPOSE_EXAMPLE_CALLBACK_1
+    COMPOSE_CALLBACK(KC_EXLM, print_exclaim),    // output a keycode (example of callback)
+#endif
+
+#ifdef COMPOSE_EXAMPLE_CALLBACK_2
     COMPOSE_CALLBACK(KC_AT, print_email),    // print email address (example of callback)
 #endif
-  
+
     // String outputs
     COMPOSE_STRING(S(KC_Y), "You"),
     COMPOSE_STRING(  KC_Y,  "you"),

@@ -74,7 +74,7 @@ extern struct compose_node compose_tree_root[];
 void process_record_compose(uint16_t keycode, keyrecord_t* record);
 bool compose_key_intercept(uint16_t keycode, keyrecord_t* record);
 void compose_key_reset(void);
-void my_send_string(char* str);
+void send_literal_string(char* str);
 
 #ifdef COMPOSE_STATUS_ENABLE
 void compose_key_status(void);

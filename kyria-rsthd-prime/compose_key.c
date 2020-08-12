@@ -76,13 +76,6 @@ const char shifted_keycode_to_ascii_lut[57] = {
     '?'};
 #    endif
 
-// Send a string
-void my_send_string(char* str) {
-    while (*str) {
-        send_char(*str++);
-    }
-}
-
 /**
  * Utility functions for managing the array of entered characters
  */
@@ -137,6 +130,16 @@ void compose_status_tick(void) {
 }
 
 #endif
+
+/**
+ * Send a simple literal string.
+ */
+// Send a string
+void send_literal_string(char* str) {
+    while (*str) {
+        send_char(*str++);
+    }
+}
 
 /**
  * Handle compose key press/release
@@ -229,7 +232,7 @@ bool compose_key_intercept(uint16_t keycode, keyrecord_t* record) {
 
                 case compose_string:
                     clear_mods();
-                    my_send_string(compose_current->output_string);
+                    send_literal_string(compose_current->output_string);
                     set_mods(mods);
 #ifdef COMPOSE_STATUS_ENABLE
                     compose_status_timer = timer_read();
