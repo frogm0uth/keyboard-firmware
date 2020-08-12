@@ -22,8 +22,8 @@
  ** one level at a time on each keypress.
  **/
 
-#define COMPOSE_EXAMPLE_CALLBACK_1
-#define COMPOSE_EXAMPLE_CALLBACK_2
+//#define COMPOSE_EXAMPLE_CALLBACK_1
+//#define COMPOSE_EXAMPLE_CALLBACK_2
 
 /**
  * Symbols that are output from key sequences. Lower nodes of the compose tree
@@ -68,16 +68,16 @@ struct compose_node print_symbols[] = {
 };
 
 #ifdef COMPOSE_EXAMPLE_CALLBACK_1
-// Example callback
+// Example callback. Note: not a good example as this can be done with COMPOSE_ARRAY.
 void print_exclaim(uint16_t keycode) {
+    tap_code16(KC_QUES);
     tap_code16(KC_EXLM);
 }
 #endif
 
 #ifdef COMPOSE_EXAMPLE_CALLBACK_2
-// Example callback
+// Example callback. Note: not a good example as this can be done with COMPOSE_STRING.
 void print_email(uint16_t keycode) {
-    //SEND_STRING("myname@mydomain.com");
     send_literal_string("myname@mydomain.com");
 }
 #endif
@@ -135,5 +135,7 @@ struct compose_node compose_tree_root[] = {
     // Array outputs
     COMPOSE_ARRAY(  KC_SLASH,  array_c_comment),
     COMPOSE_ARRAY(S(KC_SLASH), array_c_comment_newline),
+
+    COMPOSE_END // IMPORTANT: leave this at the end!!
 };
 

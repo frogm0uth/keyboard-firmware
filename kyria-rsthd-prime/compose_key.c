@@ -148,15 +148,15 @@ static struct compose_node* compose_current = compose_tree_root;
 
 void process_record_compose(uint16_t keycode, keyrecord_t* record) {
     if (record->event.pressed) {
-        if (compose_state != compose_active) {
+        if (compose_state == compose_active) {
+            compose_state = compose_aborted;
+        } else {
             compose_state   = compose_active;
             compose_current = compose_tree_root;
 #ifdef COMPOSE_STATUS_ENABLE
             reset_sequence_string();
             scan_next_chars(compose_current);
 #endif
-        } else {
-            compose_state = compose_aborted;
         }
     }
 }
@@ -191,54 +191,38 @@ bool compose_key_intercept(uint16_t keycode, keyrecord_t* record) {
             append_keycode_to_sequence_string(compose_current->trigger, mods & MOD_MASK_SHIFT);
 #endif
 
-            switch (compose_current->node_type) {
-                case compose_continue:    // Move down one level
-                    compose_current = compose_current->continuation;
+            if (compose_current->node_type == compose_continue) {
+                compose_current = compose_current->continuation;
 #ifdef COMPOSE_STATUS_ENABLE
-                    scan_next_chars(compose_current);
+                scan_next_chars(compose_current);
 #endif
-                    break;
+            } else {          
+                clear_mods();
+                switch (compose_current->node_type) {
+                    case compose_callback:
+                        (*(compose_current->compose_callback))(keycode);
+                        break;
 
-                case compose_callback:
-                    (*(compose_current->compose_callback))(keycode);
-#ifdef COMPOSE_STATUS_ENABLE
-                    compose_status_timer = timer_read();
-#endif
-                    compose_state = compose_success;    // Done
-                    break;
+                    case compose_keycode:
+                        tap_code16(compose_current->output_keycode);
+                        break;
 
-                case compose_keycode:
-                    clear_mods();
-                    tap_code16(compose_current->output_keycode);
-                    set_mods(mods);
-#ifdef COMPOSE_STATUS_ENABLE
-                    compose_status_timer = timer_read();
-#endif
-                    compose_state = compose_success;    // Done
-                    break;
+                    case compose_array:
+                        keyptr = compose_current->output_array;
+                        while (*keyptr != KC_NO) {
+                            tap_code16(*keyptr++);
+                        }
+                        break;
 
-                case compose_array:
-                    keyptr = compose_current->output_array;
-                    clear_mods();
-                    while (*keyptr != KC_NO) {
-                        tap_code16(*keyptr++);
-                    }
-                    set_mods(mods);
+                    case compose_string:
+                        send_literal_string(compose_current->output_string);
+                        break;
+                }
+                set_mods(mods);
 #ifdef COMPOSE_STATUS_ENABLE
-                    compose_status_timer = timer_read();
+                compose_status_timer = timer_read();
 #endif
-                    compose_state = compose_success;    // Done
-                    break;
-
-                case compose_string:
-                    clear_mods();
-                    send_literal_string(compose_current->output_string);
-                    set_mods(mods);
-#ifdef COMPOSE_STATUS_ENABLE
-                    compose_status_timer = timer_read();
-#endif
-                    compose_state = compose_success;    // Done
-                    break;
+                compose_state = compose_success;    // Done
             }
             return true;
         }
