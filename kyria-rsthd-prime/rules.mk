@@ -24,6 +24,8 @@ EXTRAFLAGS += -Wno-error=unused-variable -Wno-error=unused-function
 
 # Don't edit from here down
 
+SRC += appswitcher.c
+
 ifeq ($(strip $(OLED_DRIVER_ENABLE)), yes)
 	SRC += oled.c
 endif

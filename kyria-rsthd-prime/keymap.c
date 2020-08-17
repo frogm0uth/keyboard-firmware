@@ -222,46 +222,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // clang-format on
 
 /**
- * App switcher i.e. Alt-Tab on Windows, Cmd-Tab on macOS.
- *
- * FIXME: move to separate file
- * FIXME: tie release to layer activation key when using from keyboard
- */
-#ifndef APP_SWITCHER_TERM
-#    define APP_SWITCHER_TERM 1000
-#endif
-
-static bool     app_switcher_active = false;
-static uint16_t app_switcher_timer  = 0;
-
-void app_switcher_tick(void) {    // Call from matrix_scan_user()
-    if (app_switcher_active) {
-        if (timer_elapsed(app_switcher_timer) > APP_SWITCHER_TERM) {
-            unregister_code(SC(SC_APPSWITCH_START));
-            app_switcher_active = false;
-        }
-    }
-}
-
-void app_switcher_record(uint16_t keycode, bool pressed) {    // Call from process_record_user.
-    if (pressed) {
-        if (!app_switcher_active) {
-            app_switcher_active = true;
-            register_code(SC(SC_APPSWITCH_START));
-        }
-        app_switcher_timer = timer_read();
-        register_code16(keycode == CU_APPR ? SC(SC_APPSWITCH_RIGHT) : SC(SC_APPSWITCH_LEFT));
-    } else {
-        unregister_code16(keycode == CU_APPR ? SC(SC_APPSWITCH_RIGHT) : SC(SC_APPSWITCH_LEFT));
-    }
-}
-
-/**
  * Process keys with a custom shift value.
  *
  * FIXME create a lookup table for all such keys?
  */
-void custom_shift(uint16_t key, uint16_t shiftedkey, keyrecord_t *record) {
+void process_custom_shift(uint16_t key, uint16_t shiftedkey, keyrecord_t *record) {
     uint8_t mods = get_mods();
     if (record->event.pressed) {
         if (mods & MOD_MASK_SHIFT && shiftedkey != S(shiftedkey)) {
@@ -342,15 +307,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
              * is pressed.
              */
         case CU_DOT_UNDERSCORE:
-            custom_shift(KC_DOT, KC_UNDERSCORE, record);
+            process_custom_shift(KC_DOT, KC_UNDERSCORE, record);
             break;
 
         case CU_COMMA_MINUS:
-            custom_shift(KC_COMMA, KC_MINUS, record);
+            process_custom_shift(KC_COMMA, KC_MINUS, record);
             break;
 
         case CU_EXCLAIM_QUESTION:
-            custom_shift(KC_EXCLAIM, KC_QUESTION, record);
+            process_custom_shift(KC_EXCLAIM, KC_QUESTION, record);
             break;
 
             /* "Hyper" back and forward -
@@ -421,7 +386,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
              */
         case CU_APPR:
         case CU_APPL:
-            app_switcher_record(keycode, record->event.pressed);
+            app_switcher_record(keycode, record);
             break;
 
             /* Switch between tabs. With some apps on macOS, this doesn't work,
@@ -575,4 +540,14 @@ void matrix_scan_user(void) {
     // Process leader keys
     matrix_scan_leader();
 #endif
+}
+
+/**
+ * User-level layer change hook.
+ */
+layer_state_t layer_state_set_user(layer_state_t state) {
+    /* Release the appswitcher on every layer change.
+     */
+    app_switcher_release();
+    return state;
 }

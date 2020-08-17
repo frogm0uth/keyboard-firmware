@@ -38,8 +38,7 @@ void encoder_update_user(uint8_t index, bool clockwise) {
         case ALPHA:
             if (right) {
                 if (!(mods & MOD_MASK_CSA)) {    // FIXME  for Windows
-                    app_switcher_record(clockwise ? CU_APPR : CU_APPL, true);
-                    app_switcher_record(clockwise ? CU_APPR : CU_APPL, false);
+                    app_switcher_trigger(clockwise);
                     return;
                 }
             }
