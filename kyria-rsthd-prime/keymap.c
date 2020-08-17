@@ -36,7 +36,6 @@ void keyboard_post_init_user(void) {
 #define CU_DTUN CU_DOT_UNDERSCORE
 #define CU_CMMI CU_COMMA_MINUS
 #define CU_EXQU CU_EXCLAIM_QUESTION
-#define CU_SPEN CU_SPACE_ENTER
 
 #define CU_HBCK CU_HYPER_BACK
 #define CU_HFWD CU_HYPER_FORWARD
@@ -65,7 +64,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |      |   R  |   S  |   T  |   H  |   D  |                              |   M  |   N  |   A  |   I  |   O  |      |
  | Ctrl |      |      |      |      |      |                              |      |      |      |      |      | Ctrl |
  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
- |      |      |   V  |   G  |   P  |   B  |      |      |  |      | Enter|   X  |   W  | .  _ | ;  : |      |      |
+ |      |      |   V  |   G  |   P  |   B  |      |      |  |      |      |   X  |   W  | .  _ | ;  : |      |      |
  |  Cmd | Shift|      |      |      |      |   E  |  Tab |  | Enter| Space|      |      |      |      | Shift|  Cmd |
  `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
  |                    |(EncL)|Compse| '  " |      |      |  |      |      | '  " |Compse|(EncR)|
@@ -80,18 +79,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_ESC,  KC_J,    KC_C,   KC_Y,    KC_F,    KC_K,                                              KC_Z,    KC_L,    CU_CMMI, KC_U,    KC_Q,    XXXXXXX,
         KC_LCTL, KC_R,    KC_S,   KC_T,    KC_H,    KC_D,                                              KC_M,    KC_N,    KC_A,    KC_I,    KC_O,    KC_RCTL,
         KC_LGUI, CU_LSFT, KC_V,   KC_G,    KC_P,    KC_B,    XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, KC_X,    KC_W,    CU_DTUN, KC_SCLN, CU_RSFT, KC_RGUI,
-        /* */                     CU_SLCK, CU_DEAD, CL_NUMP, KC_E,    CL_SYNT, /* */ CU_AENT, CU_SPEN, CL_EDIT, CU_DEAD, CU_SSLP
+        /* */                     CU_SLCK, CU_DEAD, CL_NUMP, KC_E,    CL_SYNT, /* */ CU_AENT, KC_SPC,  CL_EDIT, CU_DEAD, CU_SSLP
         ),
 
 /* PRIME
 
  ,-----------------------------------------.                              ,-----------------------------------------.
- |  Esc |   V  |   C  |   W  |   D  |   K  |                              |   J  |   M  |   U  | .  _ |   Q  |      |
+ |  Esc |   V  |   C  |   W  |   P  |   K  |                              |   J  |   M  |   U  | ,  - |   Q  |      |
  |------+------+------+------+------+------|                              |------+------+------+------+------+------|
- |      |   R  |   S  |   T  |   H  |   P  |                              |   X  |   N  |   I  |   O  |   A  |      |
+ |      |   R  |   S  |   T  |   H  |   F  |                              |   X  |   N  |   I  |   O  |   A  |      |
  | Ctrl |      |      |      |      |      |                              |      |      |      |      |      | Ctrl |
  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
- |      |      |   B  |   G  |   F  |   Z  |      |      |  |      | Enter| !  ? |   L  |   Y  | ,  - |      |      |
+ |      |      |   B  |   G  |   D  |   Z  |      |      |  |      |      | !  ? |   L  |   Y  | .  _ |      |      |
  |  Cmd | Shift|      |      |      |      |   E  |  Tab |  | Enter| Space|      |      |      |      | Shift|  Cmd |
  `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
  |                    |(EncL)|Compse| '  " |      |      |  |      |      | '  " |Compse|(EncR)|
@@ -103,10 +102,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |             	                    +Ctrl=FUNC                            +Ctrl=CURSOR
 */
     [PRIME] = LAYOUT(
-        KC_ESC,  KC_V,    KC_C,   KC_W,    KC_D,    KC_K,                                              KC_J,    KC_M,    KC_U,   CU_DTUN, KC_Q,    XXXXXXX,
-        KC_LCTL, KC_R,    KC_S,   KC_T,    KC_H,    KC_P,                                              KC_X,    KC_N,    KC_I,   KC_O,    KC_A,    KC_RCTL,
-        KC_LGUI, CU_LSFT, KC_B,   KC_G,    KC_F,    KC_Z,    XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, CU_EXQU, KC_L,    KC_Y,   CU_CMMI, CU_RSFT, KC_RGUI,
-        /* */                     CU_SLCK, CU_DEAD, CL_NUMP, KC_E,    CL_SYNT, /* */ CU_AENT, CU_SPEN, CL_EDIT, CU_DEAD, CU_SSLP
+        KC_ESC,  KC_V,    KC_C,   KC_W,    KC_P,    KC_K,                                              KC_J,    KC_M,    KC_U,   CU_CMMI, KC_Q,    XXXXXXX,
+        KC_LCTL, KC_R,    KC_S,   KC_T,    KC_H,    KC_F,                                              KC_X,    KC_N,    KC_I,   KC_O,    KC_A,    KC_RCTL,
+        KC_LGUI, CU_LSFT, KC_B,   KC_G,    KC_D,    KC_Z,    XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, CU_EXQU, KC_L,    KC_Y,   CU_DTUN, CU_RSFT, KC_RGUI,
+        /* */                     CU_SLCK, CU_DEAD, CL_NUMP, KC_E,    CL_SYNT, /* */ CU_AENT, KC_SPC,  CL_EDIT, CU_DEAD, CU_SSLP
         ),
 
 /* NUMPAD
@@ -117,7 +116,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |      |   *  |   -  |   .  |   0  |FulScr|                              |Expose| 1  ! | 2  @ | 3  # |   /  |
  | Ctrl |      |      |      |      |      |                              |      |      |      |      |      | Ctrl |
  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
- |      |      |   +  |  Tab |   =  |DskTop|      |      |  |      | Enter|DskTop| 7  & | 8  * | 9  ( |      |      |
+ |      |      |   +  |  Tab |   =  |DskTop|      |      |  |      |      |DskTop| 7  & | 8  * | 9  ( |      |      |
  |  Cmd | Shift|      |      |      |      | AppR |  Tab |  | Enter| Space|      |      |      |      | Shift|  Cmd |
  `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
  |                    |(EncL)|Compse|      |      |SYNTAX|  |      |      | '  " |Compse|(EncR)|
@@ -127,7 +126,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 */
     [NUMPAD] = LAYOUT(
         _______, CU_ALL,  CU_CUT,  CU_COPY, CU_PAST, CU_SCRL,                                           CU_SCRR, KC_4,    KC_5,    KC_6, CU_DIRU, CL_BASE,
-        _______, KC_ASTR, KC_MINS, KC_DOT,  KC_0,    CU_FSCR,                                           CU_WALL, KC_1,    KC_2,    KC_3, KC_SLSH, _______,
+        _______, KC_ASTR, KC_MINS, KC_DOT,  KC_0,    CU_FSCR,                                           CU_XPSE, KC_1,    KC_2,    KC_3, KC_SLSH, _______,
         _______, _______, KC_PLUS, KC_TAB,  KC_EQL,  CU_DTOP, XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, CU_DTOP, KC_7,    KC_8,    KC_9, _______, _______,
         /* */                      CU_SCRZ, _______, _______, CU_APPR, _______, /* */ _______, _______, _______, _______, CU_APPZ
         ),
@@ -137,7 +136,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  ,-----------------------------------------.                              ,-----------------------------------------.
  |  Esc |   =  |   #  |   !  |   $  | AppP |                              | AppN |   >  |   ?  |   <  |   -  | BASE |
  |------+------+------+------+------+------|                              |------+------+------+------+------+------|
- |      |   \  |   (  |   :  |   )  |  Up  |                              |AppWin|   }  |   ;  |   {  |   /  |      |
+ |      |   \  |   (  |   :  |   )  |  Up  |                              | AppX |   }  |   ;  |   {  |   /  |      |
  | Ctrl |      |      |      |      |      |                              |      |      |      |      |      | Ctrl |
  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
  |      |      | `  ~ |  Tab | '  " | Left |      |      |  |      |      | Right|   ]  |   |  |   [  |      |      |
@@ -149,9 +148,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 */
     [SYNTAX] = LAYOUT(
         _______, KC_EQL,  KC_HASH, KC_EXLM, KC_DLR,  CU_APPP,                                           CU_APPN, KC_RABK, KC_QUES, KC_LABK, KC_MINS, CL_BASE,
-        _______, KC_BSLS, KC_LPRN, KC_COLN, KC_RPRN, KC_UP,                                             CU_WAPP, KC_RCBR, KC_SCLN, KC_LCBR, KC_SLSH, _______,
+        _______, KC_BSLS, KC_LPRN, KC_COLN, KC_RPRN, KC_UP,                                             CU_APPX, KC_RCBR, KC_SCLN, KC_LCBR, KC_SLSH, _______,
         _______, _______, KC_GRV,  KC_TAB,  KC_QUOT, KC_LEFT, XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, KC_RGHT, KC_RBRC, KC_PIPE, KC_LBRC, _______, _______,
-        /* */                      XXXXXXX, _______, XXXXXXX, KC_BSPC, _______, /* */ KC_ENT,  KC_SPC,  XXXXXXX, _______, XXXXXXX
+        /* */                      XXXXXXX, _______, XXXXXXX, KC_BSPC, _______, /* */ KC_ENT,  _______, XXXXXXX, _______, XXXXXXX
         ),
 
 /* EDIT
@@ -160,10 +159,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |  Esc | PgUp | WordL|  Up  | WordR| WinR |                              | WinL | Paste| Copy |  Cut |  All | BASE |
  |------+------+------+------+------+------|                              |------+------+------+------+------+------|
  |      | PgDn | Left | Down | Right| AppR |                              | AppL |      |      |      |      |      |
- | Ctrl |      |      |      |      |      |                              |      |Repeat| Acc2 | Acc1 |DelMod| Ctrl |
+ |      |      |      |      |      |      |                              |      |Repeat| Acc2 | Acc1 |DelMod|      |
  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
  |      |      | HBck | Down | HFwd | TabR |      |      |  |      |      | TabL |      |      |      |      |      |
- |  Cmd | Shift|      |      |      |      | BkSp |  Tab |  |      | AppR |      |  Cmd |  Alt | Ctrl | Shift|  Cmd |
+ |      | Shift|      |      |      |      | BkSp |  Tab |  |      | AppR |      |  Cmd |  Alt | Ctrl | Shift|      |
  `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
  |                    |(EncL)|Compse|  Del |      |      |  |      |      |      |Compse|(EncR)|
  |                    |      |      |      |      |      |  |      |      | (**) |      |      |
@@ -171,8 +170,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 */
     [EDIT] = LAYOUT(
         _______, CE_PG_U, CE_WD_L, CE_MV_U, CE_WD_R, CU_WINR,                                           CU_WINL, CU_PAST, CU_COPY, CU_CUT,  CU_ALL,  CL_BASE,
-        _______, CE_PG_D, CE_MV_L, CE_MV_D, CE_MV_R, CU_APPR,                                           CU_APPL, CE_REPT, CE_ACC2, CE_ACC1, CE_DMOD, _______,
-        _______, _______, CU_HBCK, CE_MV_D, CU_HFWD, CU_TABR, XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, CU_TABL, KC_RGUI, KC_RALT, KC_RCTL, _______, _______,
+        XXXXXXX, CE_PG_D, CE_MV_L, CE_MV_D, CE_MV_R, CU_APPR,                                           CU_APPL, CE_REPT, CE_ACC2, CE_ACC1, CE_DMOD, XXXXXXX,
+        XXXXXXX, _______, CU_HBCK, CE_MV_D, CU_HFWD, CU_TABR, XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, CU_TABL, KC_RGUI, KC_RALT, KC_RCTL, _______, XXXXXXX,
         /* */                      XXXXXXX, _______, KC_DEL,  KC_BSPC, KC_TAB,  /* */ XXXXXXX, CU_APPR, _______, _______, XXXXXXX
         ),
 
@@ -181,11 +180,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  ,-----------------------------------------.                              ,-----------------------------------------.
  |  Esc | SSScr| SSWin| MS_U | SSRgn| WinR |                              | WinL | Paste| Copy |  Cut |  All | BASE |
  |------+------+------+------+------+------|                              |------+------+------+------+------+------|
- |      |      | MS_L | MS_D | MS_R | AppR |                              | AppL |      |      |      |      |      |
- | Ctrl | Wheel|      |      |      |      |                              |      |Repeat| Acc2 | Acc1 | Slow | Ctrl |
+ |DskTop|      | MS_L | MS_D | MS_R | AppR |                              | AppL |      |      |      |      |DskTop|
+ |      | Wheel|      |      |      |      |                              |      |Repeat| Acc2 | Acc1 | Slow |      |
  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
- |      |      | HBck | MS_D | HFwd | TabR |      |      |  |      |      | TabL |      |      |      |      |      | 
- |  Cmd | Shift|      |      |      |      | BtnL | BtnR |  |      |      |      |  Cmd |  Alt | Ctrl | Shift|  Cmd |
+ |Expose|      | HBck | MS_D | HFwd | TabR |      |      |  |      |      | TabL |      |      |      |      |Expose| 
+ |      | Shift|      |      |      |      | BtnL | BtnR |  |      |      |      |  Cmd |  Alt | Ctrl | Shift|      |
  `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
  |                    |(EncL)|Compse| BtnM |      |      |  |      |      |      |Compse|(EncR)|
  |                    |      |      |      |      |      |  |      |      | (**) |      |      |
@@ -193,8 +192,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 */
     [CURSOR] = LAYOUT(
         _______, CU_SSCR, CU_SWIN, CM_MS_U, CU_SRGN, CU_WINR,                                            CU_WINL, CU_PAST, CU_COPY, CU_CUT,  CU_ALL,  CL_BASE,
-        _______, CM_WHEE, CM_MS_L,  CM_MS_D, CM_MS_R, CU_APPR,                                           CU_APPL, CM_REPT, CM_ACC2, CM_ACC1, CM_SLOW, _______,
-        _______, _______, CU_HBCK,  CM_MS_D, CU_HFWD, CU_TABR, XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, CU_TABL, KC_RGUI, KC_RALT, KC_RCTL, _______, _______,
+        CU_DTOP, CM_WHEE, CM_MS_L,  CM_MS_D, CM_MS_R, CU_APPR,                                           CU_APPL, CM_REPT, CM_ACC2, CM_ACC1, CM_SLOW, CU_DTOP,
+        CU_XPSE, _______, CU_HBCK,  CM_MS_D, CU_HFWD, CU_TABR, XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, CU_TABL, KC_RGUI, KC_RALT, KC_RCTL, _______, CU_XPSE,
         /* */                       CM_BTN1, _______, CM_BTN3, CM_BTN1, CM_BTN2, /* */ XXXXXXX, XXXXXXX, _______, _______, XXXXXXX
         ),
 
@@ -260,23 +259,16 @@ void app_switcher_record(uint16_t keycode, bool pressed) {    // Call from proce
 /**
  * Process keys with a custom shift value.
  *
- * FIXME use this: https://github.com/seb-ma/qmk_firmware/blob/keymap-kyria-seb-ma/users/seb-ma/custom_keys.c#L167
- * FIXME implement shift using a lookup table
+ * FIXME create a lookup table for all such keys?
  */
 void custom_shift(uint16_t key, uint16_t shiftedkey, keyrecord_t *record) {
     uint8_t mods = get_mods();
     if (record->event.pressed) {
-        if (mods & MOD_MASK_SHIFT) {    // shifted case
-            if (mods & MOD_BIT(KC_LSHIFT)) {
-                unregister_code16(KC_LSHIFT);
-            } else {
-                unregister_code16(KC_RSHIFT);
-            }
-            register_code16(shiftedkey);
-            set_mods(mods);
-        } else {
-            register_code16(key);
+        if (mods & MOD_MASK_SHIFT && shiftedkey != S(shiftedkey)) {
+            del_mods(MOD_MASK_SHIFT);
         }
+        register_code16(mods & MOD_MASK_SHIFT ? shiftedkey : key);
+        set_mods(mods);
     } else {
         unregister_code16(key);
         unregister_code16(shiftedkey);
@@ -359,10 +351,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
         case CU_EXCLAIM_QUESTION:
             custom_shift(KC_EXCLAIM, KC_QUESTION, record);
-            break;
-
-        case CU_SPACE_ENTER:
-            custom_shift(KC_SPACE, KC_ENTER, record);
             break;
 
             /* "Hyper" back and forward -

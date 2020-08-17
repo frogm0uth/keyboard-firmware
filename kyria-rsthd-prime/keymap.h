@@ -86,7 +86,6 @@ enum custom_keycodes {
     CU_DOT_UNDERSCORE,    // Custom punctuation keys
     CU_COMMA_MINUS,
     CU_EXCLAIM_QUESTION,
-    CU_SPACE_ENTER,
 
     CU_HYPER_BACK,    // Hyper back and forward
     CU_HYPER_FORWARD,
@@ -132,12 +131,12 @@ enum custom_keycodes {
 #    define CU_SLCK SC_SCREEN_LOCK
 #    define CU_SSLP SC_SYSTEM_SLEEP
 
-#    define CU_WALL SC_EXPOSE_ALL
+#    define CU_XPSE SC_EXPOSE_ALL
 #    define CU_SCRR SC_NEXT_SCREEN
 #    define CU_SCRL SC_PREV_SCREEN
 #    define CU_FSCR SC_FULLSCREEN
 
-#    define CU_WAPP SC_EXPOSE_WINDOWS
+#    define CU_APPX SC_EXPOSE_WINDOWS
 #    define CU_APPN SC_NEXT_APP
 #    define CU_APPP SC_PREV_APP
 #    define CU_DTOP SC_REVEAL_DESKTOP
@@ -165,12 +164,12 @@ enum custom_keycodes {
 #    define CU_SLCK KC_NO
 #    define CU_SSLP KC_NO
 
-#    define CU_WALL KC_NO
+#    define CU_XPSE KC_NO
 #    define CU_SCRR KC_NO
 #    define CU_SCRL KC_NO
 #    define CU_FSCR KC_NO
 
-#    define CU_WAPP KC_NO
+#    define CU_APPX KC_NO
 #    define CU_APPN KC_NO
 #    define CU_APPP KC_NO
 #    define CU_DTOP KC_NO
