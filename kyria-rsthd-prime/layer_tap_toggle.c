@@ -39,6 +39,9 @@ static uint16_t ltt_timer[NUM_LAYERS];
 static uint8_t  ltt_state[NUM_LAYERS];
 static bool     ltt_initialized = false;
 
+// Remember whether shift was on when key is pressed
+static bool ltt_isshifted;
+
 /**
  * Update the timer(s) for layer-tap-toggle. Must be called from
  * matrix_scan_user.
@@ -110,6 +113,7 @@ bool ltt_lock(keyrecord_t *record) {
  * Always returns false.
  */
 bool layer_tap_toggle(uint16_t keycode, uint8_t layer, keyrecord_t *record) {
+
     if (!ltt_initialized) { // Make sure state array is a known state
         ltt_base();
         ltt_initialized = true;
@@ -127,6 +131,7 @@ bool layer_tap_toggle(uint16_t keycode, uint8_t layer, keyrecord_t *record) {
                     tap_code16(keycode);               // Tap immediately
                 } else {
                     ltt_state[layer] = LTT_TAPPING_ON; // Wait and see
+                    ltt_isshifted = get_mods() & MOD_MASK_SHIFT;
                     layer_on(layer);
                 }
                 break;
@@ -138,10 +143,20 @@ bool layer_tap_toggle(uint16_t keycode, uint8_t layer, keyrecord_t *record) {
     } else {
         switch (ltt_state[layer]) {
             case LTT_TAPPING_ON:
-            case LTT_TAPPED:
                 if (keycode != KC_NO && ltt_state[layer] == LTT_TAPPING_ON) {
-                    tap_code16(keycode);              // Send the tap key
+                    // handle the rolling-shift case
+                    if (ltt_isshifted && !(get_mods() & MOD_MASK_SHIFT)) {
+                        register_code(KC_LSFT);
+                        tap_code16(keycode);              // Send the tap key
+                        unregister_code(KC_LSFT);
+                    } else {
+                        tap_code16(keycode);              // Send the tap key
+                    }
                 }
+                layer_off(layer);
+                ltt_state[layer] = LTT_INACTIVE;
+                break;
+            case LTT_TAPPED:
                 layer_off(layer);
                 ltt_state[layer] = LTT_INACTIVE;
                 break;
