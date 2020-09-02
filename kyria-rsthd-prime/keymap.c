@@ -35,6 +35,8 @@ void keyboard_post_init_user(void) {
  */
 #define CU_DTUN CU_DOT_UNDERSCORE
 #define CU_CMMI CU_COMMA_MINUS
+#define CU_DTMI CU_DOT_MINUS
+#define CU_CMUN CU_COMMA_UNDERSCORE
 #define CU_EXQU CU_EXCLAIM_QUESTION
 
 #define CU_HBCK CU_HYPER_BACK
@@ -59,12 +61,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* RSTHD
 
  ,-----------------------------------------.                              ,-----------------------------------------.
- |  Esc |   J  |   C  |   Y  |   F  |   K  |                              |   Z  |   L  | ,  - |   U  |   Q  |      |
+ |  Esc |   J  |   C  |   Y  |   F  |   K  |                              |   Z  |   L  | .  - |   U  |   Q  |      |
  |------+------+------+------+------+------|                              |------+------+------+------+------+------|
  |      |   R  |   S  |   T  |   H  |   D  |                              |   M  |   N  |   A  |   I  |   O  |      |
  | Ctrl |      |      |      |      |      |                              |      |      |      |      |      | Ctrl |
  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
- |      |      |   V  |   G  |   P  |   B  |      |      |  |      |      |   X  |   W  | .  _ | ;  : |      |      |
+ |      |      |   V  |   G  |   P  |   B  |      |      |  |      |      |   X  |   W  | ,  _ | ;  : |      |      |
  |  Cmd | Shift|      |      |      |      |   E  |  Tab |  | Enter| Space|      |      |      |      | Shift|  Cmd |
  `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
  |                    |(EncL)|Compse| '  " |      |      |  |      |      | '  " |Compse|(EncR)|
@@ -76,35 +78,32 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |             	                    +Ctrl=FUNC                            +Ctrl=CURSOR
 */
     [RSTHD] = LAYOUT(
-        KC_ESC,  KC_J,    KC_C,   KC_Y,    KC_F,    KC_K,                                              KC_Z,    KC_L,    CU_CMMI, KC_U,    KC_Q,    XXXXXXX,
+        KC_ESC,  KC_J,    KC_C,   KC_Y,    KC_F,    KC_K,                                              KC_Z,    KC_L,    CU_DTMI, KC_U,    KC_Q,    XXXXXXX,
         KC_LCTL, KC_R,    KC_S,   KC_T,    KC_H,    KC_D,                                              KC_M,    KC_N,    KC_A,    KC_I,    KC_O,    KC_RCTL,
-        KC_LGUI, CU_LSFT, KC_V,   KC_G,    KC_P,    KC_B,    XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, KC_X,    KC_W,    CU_DTUN, KC_SCLN, CU_RSFT, KC_RGUI,
+        KC_LGUI, CU_LSFT, KC_V,   KC_G,    KC_P,    KC_B,    XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, KC_X,    KC_W,    CU_CMUN, KC_SCLN, CU_RSFT, KC_RGUI,
         /* */                     CU_SLCK, CU_DEAD, CL_NUMP, KC_E,    CL_SYNT, /* */ CU_AENT, KC_SPC,  CL_EDIT, CU_DEAD, CU_SSLP
         ),
 
 /* PRIME
 
  ,-----------------------------------------.                              ,-----------------------------------------.
- |  Esc |   V  |   C  |   W  |   P  |   K  |                              |   J  |   M  |   U  | ,  - |   Q  |      |
+ |  Esc |   V  |   C  |   W  |   D  |   K  |                              |   J  |   M  |   U  | .  - |   Q  |      |
  |------+------+------+------+------+------|                              |------+------+------+------+------+------|
  |      |   R  |   S  |   T  |   H  |   F  |                              |   X  |   N  |   I  |   O  |   A  |      |
  | Ctrl |      |      |      |      |      |                              |      |      |      |      |      | Ctrl |
  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
- |      |      |   B  |   G  |   D  |   Z  |      |      |  |      |      | !  ? |   L  |   Y  | .  _ |      |      |
+ |      |      |   B  |   G  |   P  |   Z  |      |      |  |      |      | !  ? |   L  |   Y  | ,  _ |      |      |
  |  Cmd | Shift|      |      |      |      |   E  |  Tab |  | Enter| Space|      |      |      |      | Shift|  Cmd |
  `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
  |                    |(EncL)|Compse| '  " |      |      |  |      |      | '  " |Compse|(EncR)|
  |                    |      |      | FUNC |      |SYNTAX|  |  Alt |      |CURSOR|      |      |
  |                    |      |      |NUMPAD|      |      |  |      |      | EDIT |      |      |
  |                    `----------------------------------'  `----------------------------------'
- |                                  +Cmd=Lock                             +Cmd=Lock
- |                                  +Alt=TAP                              
- |             	                    +Ctrl=FUNC                            +Ctrl=CURSOR
 */
     [PRIME] = LAYOUT(
-        KC_ESC,  KC_V,    KC_C,   KC_W,    KC_P,    KC_K,                                              KC_J,    KC_M,    KC_U,   CU_CMMI, KC_Q,    XXXXXXX,
+        KC_ESC,  KC_V,    KC_C,   KC_W,    KC_D,    KC_K,                                              KC_J,    KC_M,    KC_U,   CU_DTMI, KC_Q,    XXXXXXX,
         KC_LCTL, KC_R,    KC_S,   KC_T,    KC_H,    KC_F,                                              KC_X,    KC_N,    KC_I,   KC_O,    KC_A,    KC_RCTL,
-        KC_LGUI, CU_LSFT, KC_B,   KC_G,    KC_D,    KC_Z,    XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, CU_EXQU, KC_L,    KC_Y,   CU_DTUN, CU_RSFT, KC_RGUI,
+        KC_LGUI, CU_LSFT, KC_B,   KC_G,    KC_P,    KC_Z,    XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, CU_EXQU, KC_L,    KC_Y,   CU_CMUN, CU_RSFT, KC_RGUI,
         /* */                     CU_SLCK, CU_DEAD, CL_NUMP, KC_E,    CL_SYNT, /* */ CU_AENT, KC_SPC,  CL_EDIT, CU_DEAD, CU_SSLP
         ),
 
@@ -312,6 +311,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
         case CU_COMMA_MINUS:
             process_custom_shift(KC_COMMA, KC_MINUS, record);
+            break;
+
+        case CU_DOT_MINUS:
+            process_custom_shift(KC_DOT, KC_MINUS, record);
+            break;
+
+        case CU_COMMA_UNDERSCORE:
+            process_custom_shift(KC_COMMA, KC_UNDERSCORE, record);
             break;
 
         case CU_EXCLAIM_QUESTION:

@@ -89,6 +89,8 @@ enum custom_keycodes {
 
     CU_DOT_UNDERSCORE,    // Custom punctuation keys
     CU_COMMA_MINUS,
+    CU_DOT_MINUS,
+    CU_COMMA_UNDERSCORE,
     CU_EXCLAIM_QUESTION,
 
     CU_HYPER_BACK,    // Hyper back and forward
