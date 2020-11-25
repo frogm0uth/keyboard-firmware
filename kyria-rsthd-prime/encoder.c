@@ -35,7 +35,7 @@ void encoder_update_user(uint8_t index, bool clockwise) {
      */
 #ifdef OS_SHORTCUTS
     switch (layer) {
-        case ALPHA:
+        case PRIME:
             if (right) {
                 if (!(mods & MOD_MASK_CSA)) {    // FIXME  for Windows
                     app_switcher_trigger(clockwise);
@@ -49,7 +49,7 @@ void encoder_update_user(uint8_t index, bool clockwise) {
      */
     clear_mods();
     switch (layer) {
-        case ALPHA:
+        case PRIME:
             if (left) {
                 if (mods & MOD_MASK_GUI) {
                     keycode = clockwise ? SC(SC_BROWSER_FWD) : SC(SC_BROWSER_BACK);

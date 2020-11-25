@@ -49,7 +49,7 @@ static void render_qmk_logo(void) {
 // clang-format on
 
 const static char* layer_names[] = {
-    [RSTHD]  = "RSTHD-s",
+    //[RSTHD]  = "RSTHD-s",
     [PRIME]  = "Prime",
     [NUMPAD] = "NumPad",
     [SYNTAX] = "Syntax",
@@ -73,9 +73,11 @@ static void render_status(void) {
 
     // Display layer name
     uint8_t layer = get_highest_layer(layer_state);
+#ifdef UNUSED // leftover from when there was more than one default layr
     if (layer == ALPHA) {
         layer = get_highest_layer(default_layer_state);
     }
+#endif
     oled_write_P(PSTR("Layer: "), false);
     oled_write(layer_names[layer], false);
     oled_write_P(PSTR("\n"), false);

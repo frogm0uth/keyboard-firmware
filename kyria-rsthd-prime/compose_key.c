@@ -129,7 +129,8 @@ void compose_status_tick(void) {
     }
 }
 
-#endif
+#endif // COMPOSE_STATUS_ENABLE
+
 
 /**
  * Send a simple literal string.
