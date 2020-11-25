@@ -54,7 +54,7 @@ extern void matrix_scan_leader(void);
 
 // Define the layers
 enum layers {
-    RSTHD = 0,
+    //RSTHD,
     PRIME,
     NUMPAD,
     SYNTAX,
@@ -63,7 +63,7 @@ enum layers {
     FUNC,
     NUM_LAYERS    // <- this is needed for layer-tap-toggle
 };
-#define ALPHA RSTHD    // MUST be set to the FIRST default layer i.e 0
+//#define ALPHA RSTHD    // MUST be set to the FIRST default layer i.e 0
 
 // Define layer-tap-toggle keys. If not using LTT, define macros for standard layer switching of a subset
 #ifdef LAYER_TAP_TOGGLE
@@ -73,7 +73,7 @@ enum layers {
         CL_SYNT,       \
         CL_EDIT
 #else
-#    define CL_BASE TO(ALPHA)
+#    define CL_BASE TO(PRIME)
 #    define CL_NUMP LT(NUMPAD, KC_QUOT)
 #    define CL_SYNT LT(SYNTAX, KC_TAB)
 #    define CL_EDIT LT(EDIT, KC_QUOT)
@@ -82,15 +82,21 @@ enum layers {
 enum custom_keycodes {
     CU_IGNORE = SAFE_RANGE,
 
-    CU_DIRU,    // Directory up
+    //CU_DIRU,    // Directory up
+    CU_ED,      // E-D key
+    //CU_ER,      // E-R key
+    //CU_QU,      // Q-U key
 
     CU_LSFT,    // Shift-caps lock keys
     CU_RSFT,
 
-    CU_DOT_UNDERSCORE,    // Custom punctuation keys
-    CU_COMMA_MINUS,
-    CU_DOT_MINUS,
-    CU_COMMA_UNDERSCORE,
+    // Custom punctuation keys
+    //CU_COMMA_MINUS,
+    //CU_COMMA_UNDERSCORE,
+    CU_COMMA_UPPERE,
+    //CU_DOT_UNDERSCORE,
+    //CU_DOT_MINUS,
+    CU_DOT_SLASH,
     CU_EXCLAIM_QUESTION,
 
     CU_HYPER_BACK,    // Hyper back and forward
@@ -106,8 +112,8 @@ enum custom_keycodes {
 
     CU_WIPE,    // Wipe the EEPROM
     CU_SAVE,    // Save current state to EEPROM
-    CU_PRIM,    // Change default layer and save to EEPROM
-    CU_RSTH,
+    //CU_PRIM,    // Change default layer and save to EEPROM
+    //CU_RSTH,
 
 #ifdef LAYER_TAP_TOGGLE
     LAYER_KEYS,    // Keys for layer-tap-toggle
@@ -198,4 +204,52 @@ enum custom_keycodes {
 #    define CU_MAC KC_NO
 #    define CU_WIN KC_NO
 
+#endif
+
+
+/**
+ *  #defines for shorter keycodes to put in keymap matrix
+ */
+//#define CU_CMMI CU_COMMA_MINUS
+//#define CU_CMUN CU_COMMA_UNDERSCORE
+#define CU_CMUE CU_COMMA_UPPERE
+//#define CU_DTMI CU_DOT_MINUS
+//#define CU_DTUN CU_DOT_UNDERSCORE
+#define CU_DTSL CU_DOT_SLASH
+#define CU_EXQU CU_EXCLAIM_QUESTION
+
+#define CU_HBCK CU_HYPER_BACK
+#define CU_HFWD CU_HYPER_FORWARD
+
+#define CU_CX   CTL_T(KC_X)
+#define CU_CQ   CTL_T(KC_Q)
+#define CU_AENT ALT_T(KC_ENTER)
+
+#ifdef COMPOSE_KEY
+#    define CU_DEAD CU_COMPOSE    // Compose key
+#elif defined(LEADER_ENABLE)
+#    define CU_DEAD KC_LEAD       // Leader key
+#else
+#    define CU_DEAD KC_NO         // Nothing
+#endif
+
+// Home keys
+#ifndef USE_HOMEROWMODS
+#define HK_R KC_R
+#define HK_S KC_S
+#define HK_T KC_T
+#define HK_H KC_H
+#define HK_N KC_N
+#define HK_I KC_I
+#define HK_O KC_O
+#define HK_A KC_A
+#else
+#define HK_R MODIFIER_PINKY(KC_R)
+#define HK_S MODIFIER_RING(KC_S)
+#define HK_T MODIFIER_MIDDLE(KC_T)
+#define HK_H MODIFIER_INDEX(KC_H)
+#define HK_N MODIFIER_INDEX(KC_N)
+#define HK_I MODIFIER_MIDDLE(KC_I)
+#define HK_O MODIFIER_PINKY(KC_O)
+#define HK_A MODIFIER_RING(KC_A)
 #endif
