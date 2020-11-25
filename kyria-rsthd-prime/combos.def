@@ -1,0 +1,128 @@
+
+/* Copyright 2020 @frogm0uth
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#if (__has_include("secrets.h"))
+#include "secrets.h"
+#endif
+
+/** My combo definitions
+ */
+
+// Single keycode combos - left hand
+CMB_KEY(lparen,    S(KC_9),   KC_D,    KC_K)
+CMB_KEY(tab,       KC_TAB,    HK_H,    KC_F)
+
+// Single keycode combos - right hand
+CMB_KEY(rparen,    S(KC_0),   KC_J,    KC_M)
+CMB_KEY(backspace, KC_BSPC,   KC_SCLN, HK_N)
+CMB_KEY(spotlight, G(KC_SPC), KC_SPC,  KC_ENT)
+
+// Single keycode combos - thumbs
+CMB_KEY(shift,     KC_LSFT,   KC_E,    KC_SPC)
+CMB_KEY(tab2,      KC_TAB,    CU_ED,   KC_ENT)
+
+
+// One-hand string combos - left hand
+// (none)
+
+// One-hand string combos - right hand
+CMB_STR(ui,              KC_U, CU_DOT_SLASH)
+CMB_STR(ally,            CU_DOT_SLASH, KC_MINS)
+CMB_STR(er,              HK_I, HK_O)
+CMB_STR(es,              HK_O, HK_A)
+CMB_LIT(youre, "you're", KC_Y, HK_O)
+
+CMB_STR(qui, HK_I, CU_CQ)
+CMB_STR(quo, HK_O, CU_CQ)
+CMB_STR(qua, HK_A, CU_CQ)
+
+// Combos with thumb-E
+CMB_NUL(                    KC_E, KC_J) // secrets.h
+CMB_STR(ould,               KC_E, KC_U)
+CMB_LIT(dotdotslash, "../", KC_E, CU_DOT_SLASH)
+CMB_NUL(                    KC_E, KC_MINS)
+
+CMB_LIT(iapostrophe,  "I'", KC_E, HK_I)
+CMB_STR(of,                 KC_E, HK_O)
+CMB_STR(abo,                KC_E, HK_A)
+CMB_STR(que,                KC_E, CU_CQ)
+
+CMB_STR(you,                KC_E, KC_Y)
+CMB_STR(ough,               KC_E, CU_COMMA_UPPERE)
+
+
+// String outputs, both hands
+CMB_LIT(dotcom, ".com", KC_C, KC_M)
+CMB_STR(ing,            KC_W, KC_M)
+CMB_NUL(                KC_D, KC_M)
+CMB_STR(my,             HK_H, KC_M)
+
+CMB_NUL(                KC_C, KC_U) // secrets.h
+CMB_NUL(                KC_W, KC_U) // secrets.h
+CMB_LIT(ing2,    "ing", KC_D, KC_U) // duplicate
+
+CMB_STR(able, KC_B, HK_N)
+CMB_STR(ion,  HK_H, HK_N)
+CMB_STR(tion, KC_P, HK_N)
+
+CMB_NUL(      KC_B, HK_I)
+CMB_STR(did,  KC_G, HK_I)
+CMB_STR(ight, KC_P, HK_I)
+CMB_LIT(its,  "it's", KC_T, CL_NUMP, HK_I)
+
+CMB_STR(but,  KC_B, KC_L)
+CMB_STR(been, KC_G, KC_L)
+CMB_STR(ever, KC_P, KC_L)
+
+CMB_STR(even, KC_V, KC_Y)
+CMB_STR(very, KC_C, KC_Y)
+CMB_STR(ious, KC_W, KC_Y)
+CMB_STR(minu, KC_D, KC_Y)
+
+CMB_STR(ere,  HK_R, KC_Y)
+CMB_STR(scr,  HK_S, KC_Y)
+CMB_STR(her,  HK_T, KC_Y)
+CMB_STR(his,  HK_H, KC_Y)
+
+CMB_STR(from, KC_B, KC_Y)
+CMB_STR(for,  KC_G, KC_Y)
+CMB_STR(pho,  KC_P, KC_Y)
+
+
+// Array output combos
+CMB_ARR(ccomment,
+        ARRAY_PROTECT(
+            KC_SLASH,
+            KC_ASTERISK,
+            KC_SPACE,
+            KC_SPACE,
+            KC_ASTERISK,
+            KC_SLASH,
+            KC_LEFT,
+            KC_LEFT,
+            KC_LEFT
+    ),
+    KC_C, CU_COMMA_UPPERE)
+
+CMB_ARR(comment_newline,
+        ARRAY_PROTECT(
+            KC_ENTER,
+            KC_ASTERISK,
+            KC_SPACE,
+            KC_TAB
+    ),
+    KC_W, CU_COMMA_UPPERE)
