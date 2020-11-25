@@ -9,7 +9,6 @@
       * [Main features](#main-features)
       * [Work in Progress/TODO](#work-in-progresstodo)
    * [Layers](#layers)
-      * [RSTHD-s](#rsthd-s)
       * [Prime](#prime)
       * [Numpad](#numpad)
       * [Syntax](#syntax)
