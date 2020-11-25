@@ -93,7 +93,7 @@ enum custom_keycodes {
     // Custom punctuation keys
     //CU_COMMA_MINUS,
     //CU_COMMA_UNDERSCORE,
-    CU_COMMA_UPPERE,
+    CU_COMMA_DOUBLEQUOTE,
     //CU_DOT_UNDERSCORE,
     //CU_DOT_MINUS,
     CU_DOT_SLASH,
@@ -212,7 +212,7 @@ enum custom_keycodes {
  */
 //#define CU_CMMI CU_COMMA_MINUS
 //#define CU_CMUN CU_COMMA_UNDERSCORE
-#define CU_CMUE CU_COMMA_UPPERE
+#define CU_CMDQ CU_COMMA_DOUBLEQUOTE
 //#define CU_DTMI CU_DOT_MINUS
 //#define CU_DTUN CU_DOT_UNDERSCORE
 #define CU_DTSL CU_DOT_SLASH

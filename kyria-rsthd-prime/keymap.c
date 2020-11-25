@@ -74,7 +74,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |   X  |   R  |   S  |   T  |   H  |   F  |                              | ;  : |   N  |   I  |   O  |   A  |  Q   |
  | Ctrl |      |      |      |      |      |                              |      |      |      |      |      | Ctrl |
  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
- |  Tab |      |   B  |   G  |   P  |   Z  |      |      |  |      |      | !  ? |   L  |   Y  | ,  E |      |  Tab |
+ |  Tab |      |   B  |   G  |   P  |   Z  |      |      |  |      |      | !  ? |   L  |   Y  | ,  " |      |  Tab |
  |SYNTAX| Shift|      |      |      |      |   E  |  ED  |  | Enter| Space|      |      |      |      | Shift|SYNTAX|
  `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
  |                    |(EncL)|      | '  " |      |      |  |      |      | '  " |      |(EncR)|
@@ -85,7 +85,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [PRIME] = LAYOUT(
         KC_ESC,  KC_V,    KC_C,   KC_W,    KC_D,    KC_K,                                              KC_J,    KC_M,    KC_U,   CU_DTSL, KC_MINS, CU_DEAD,
         CU_CX,   HK_R,    HK_S,   HK_T,    HK_H,    KC_F,                                              KC_SCLN, HK_N,    HK_I,   HK_O,    HK_A,    CU_CQ,
-        CL_SYNT, CU_LSFT, KC_B,   KC_G,    KC_P,    KC_Z,    XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, CU_EXQU, KC_L,    KC_Y,   CU_CMUE, CU_RSFT, CL_SYNT,
+        CL_SYNT, CU_LSFT, KC_B,   KC_G,    KC_P,    KC_Z,    XXXXXXX, XXXXXXX, /* */ XXXXXXX, XXXXXXX, CU_EXQU, KC_L,    KC_Y,   CU_CMDQ, CU_RSFT, CL_SYNT,
         /* */                     CU_SLCK, KC_LALT, CL_NUMP, KC_E,    CU_ED,   /* */ KC_ENTER, KC_SPC, CL_EDIT, KC_RGUI, CU_SSLP
         ),
 
@@ -354,8 +354,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             process_custom_shift(KC_DOT, KC_SLASH, record);
             break;
 
-        case CU_COMMA_UPPERE:
-            process_custom_shift(KC_COMMA, S(KC_E), record);
+        case CU_COMMA_DOUBLEQUOTE:
+            process_custom_shift(KC_COMMA, S(KC_QUOT), record);
             break;
 
         case CU_EXCLAIM_QUESTION:
