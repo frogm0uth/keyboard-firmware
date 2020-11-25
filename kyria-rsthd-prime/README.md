@@ -22,13 +22,11 @@
 
 # Overview
 
-The alphabetic layouts in this keymap are based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/), one lightly modified ("RSTHD-s") and one heavily modified ("Prime").
+The alphabetic layouts in this keymap was original based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/), hence the name "RSTHD Prime". However, it has evolved so heavily that it can't really be called RSTHD any more, so in future it will just be known as "Prime".
 
-The first alphabetic layer is a lightly modified version of RSTHD that moves the Shift keys underneath pinky home. The second is a further development of my RSTHD' ("RSTHD prime") layout that I developed for the Kinesis Advantage keyboard that aims to reduce finger travel distance even more.
+The initial reason for the changes to RSTHD was to a. reduce SFU and b. Reduce finger travel especially to the inner column.
 
-The two base layers can be selected with keys on the Function layer, and the selection is stored in EEPROM.
-
-This keymap is perhaps a bit more "traditional" than other QMK layouts that I see being designed for small keyboards, as I haven't used the QMK features tap-dance, one-shot keys or combos. I've used mod-tap on one key (Alt) – the other modifiers have dedicated keys on each hand. Caps-lock is toggled by pressing both Shift keys.
+This keymap is perhaps a bit more "traditional" than other QMK layouts that I see being designed for small keyboards as it makes fairly minimal use of tap-dance and one-shot keys. Dual-function keys are used but not heavily. Combos are used heavily, but mostly for letter sequences. Caps-lock is toggled by pressing both Shift keys.
 
 I have tried to make the keymap work fluidly, both in the base layers and with the interaction between layers. The Kyria has some nice features such as OLEDs and encoders, which I try to use to good effect.
 
@@ -46,7 +44,7 @@ Speed and reducing the number of keys in use are not important goals for me.
 
 ## Main features
 
-* Two different alpha layers derived from RSTHD.
+* Alpha layer originally derived from RSTHD hence maintaining the RSTH left hand home row, NIOA right home row (same letter but different order) and the E key on the left thumb.
 * A custom layer switching code, which is like a merger or QMK's LT() and TG() functions. More information is [here](../../../../keyboard-notes/tree/master/qmk-layer-tap-toggle).
 * The ability to select the OS in use (currently Mac and Windows supported) from the keyboard, which changes the shortcuts programmed into the keyboard. More information is [here](../../../../keyboard-notes/tree/master/qmk-os-shortcuts).
 * A custom mouse feature to make mouse keys more controllable. More information is [here](../../../../keyboard-notes/tree/master/qmk-custom-mouse).
@@ -68,25 +66,19 @@ Speed and reducing the number of keys in use are not important goals for me.
 
 # Layers
 
-There are a total of 7 layers. The first two are alternate base layers, which can be selected from the keyboard. The selection persists across reboots so once set there's no need to change it again.
+There are a total of 6 layers. The first is the main alpha layer, "Prime".
 
-The remaining 5 layers are activated from the left or right thumb. On each layer, the opposite side to the layer key is considered "primary" and the side with the activation key is "auxiliary". Usually, I hold the layer key to keep the layer activated, but the layer can be locked on by pressing the layer key with Cmd down.
+The other 5 layers are activated from the left or right thumb. Usually, I hold the layer key to keep the layer activated, but the layer can be locked on by pressing the layer key with Cmd down.
 
 Some of these layers use the inner column for various window navigation operations.
 
 Most layers use one or both of the encoders. Where possible, the encoder function is appropriate for the function of that layer. If the encoder on the auxiliary side is used, the layer will need to be locked to use it.
 
-Click on the KLE links to see images of each layer. You can also refer to the ASCII art in keymap.c.
-
-## RSTHD-s
-
-This layer is fairly close to the original RSTHD, but a) modified to fit the smaller keyboard and b) the Shift keys are moved underneath pinky home to reduce lateral movement. The punctuation has also been changed a bit.
-
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/8e10a6af1d87573d14b4e6fdcc52b9dd)
+Click on the KLE links to see images of each layer. You can also refer to the ASCII art in keymap.c. NOTE: THESE ARE NOW VERY OUT OF DATE.
 
 ## Prime
 
-This layer is my "daily driver". It is originally based on RSTHD but is now so heavily modified that I'm not sure it's proper to use RSTHD in the name. But all credit to the original author of RSTHD. The name comes from a little mathematical wordplay from an earlier version that I called RSTHD' ("RSTHD-prime"), meaning a derivative of RSTHD. Since it's changed so much, I now just call it Prime. (In other words, the name is a combination of a joke and evolution, I'm not being self-aggrandizing :) )
+This is now my "daily driver" (when I'm at my desk). It is originally based on RSTHD but is now so heavily modified that I'm not sure it's proper to use RSTHD in the name. But all credit to the original author of RSTHD. The name comes from a little mathematical wordplay from an earlier version that I called RSTHD' ("RSTHD-prime"), meaning a derivative of RSTHD. Since it's changed so much, I now just call it Prime. (In other words, the name is a combination of a joke and evolution, I'm not being self-aggrandizing :) )
 
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/0048853ae7914074816beda3d796558c)
 
