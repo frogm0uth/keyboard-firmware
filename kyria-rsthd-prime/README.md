@@ -1,6 +1,6 @@
 # Kyria RSTHD/Prime
 
-**Under development.** This is a keymap I'm working on for my Kyria keyboard from [splitkb.com](https://splitkb.com). The base alpha layouts are based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/). There are two such layers, one a lightly modified version of RSTHD and one heavily modified. For a more standard implementation of RSTHD on the Kyria, see my [Kyria Refactored](https://github.com/frogm0uth/keyboard-firmware/tree/master/kyria-refactored) keymap.
+**Under development.** This is a keymap I'm working on for my Kyria keyboard from [splitkb.com](https://splitkb.com). The base alpha layout is based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/) but is heavily modified. For a standard implementation of RSTHD on the Kyria, see my [Kyria Refactored](https://github.com/frogm0uth/keyboard-firmware/tree/master/kyria-refactored) keymap.
 
 <!--ts-->
    * [Kyria RSTHD/Prime](#kyria-rsthdprime)
@@ -22,7 +22,7 @@
 
 # Overview
 
-The alphabetic layouts in this keymap was original based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/), hence the name "RSTHD Prime". However, it has evolved so heavily that it can't really be called RSTHD any more, so in future it will just be known as "Prime".
+The alphabetic layout in this keymap was originally based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/), hence the name "RSTHD Prime". However, it has evolved so heavily that it can't really be called RSTHD-anything any more, so in future it will just be known as "Prime".
 
 The initial reason for the changes to RSTHD was to a. reduce SFU and b. Reduce finger travel especially to the inner column.
 
