@@ -14,7 +14,7 @@ COMBO_ENABLE = yes	       # Enable combo (chording) functionality
 # frogm0uth features
 OS_SHORTCUTS = yes	    # Enable OS shortcut mapping
 CUSTOM_EDIT = yes	    # Enable custom editing keys
-CUSTOM_MOUSE = yes	    # Enable custom mouse keys
+CUSTOM_MOUSE = no	    # Enable custom mouse keys
 LAYER_TAP_TOGGLE = yes	# Enable the layer-tap-toggle feature
 COMPOSE_KEY = no	    # Enable the custom compose key feature
 
