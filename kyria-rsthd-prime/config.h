@@ -16,6 +16,23 @@
 
 #pragma once
 
+// Timerout for combos
+#define COMBO_TERM 80
+
+// Uncomment to use home row mods 
+//#define USE_HOMEROWMODS
+
+// Alter these if needed
+#define MODIFIER_INDEX  CTL_T
+#define MODIFIER_MIDDLE SFT_T
+#define MODIFIER_RING   CMD_T
+#define MODIFIER_PINKY  ALT_T
+
+// Tapping control
+#define TAPPING_TERM 180
+//#define TAPPING_TOGGLE 2
+#define IGNORE_MOD_TAP_INTERRUPT
+#define PERMISSIVE_HOLD
 
 // uncomment to make all shortcuts be statically compiled.
 //#define OS_SHORTCUTS_STATIC
@@ -55,9 +72,6 @@
 // The Leader key allows to flexibly assign macros to key sequences.
 #define LEADER_PER_KEY_TIMING
 #define LEADER_TIMEOUT 400
-
-#define TAPPING_TERM 200
-#define TAPPING_TOGGLE 2
 
 // Allows to use either side as the master. Look at the documentation for info:
 // https://docs.qmk.fm/#/config_options?id=setting-handedness
