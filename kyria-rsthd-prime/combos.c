@@ -44,7 +44,7 @@
 
 #define COMBO_ARR_DATA(name, protected_array, ...)  \
     const uint16_t PROGMEM COMBO_SEQ_##name[] = {__VA_ARGS__, COMBO_END}; \
-    uint16_t combo_array_##name[] = { protected_array, KC_NO };
+    const uint16_t combo_array_##name[] = { protected_array, KC_NO };
 
 #define COMBO_ARR_MAP(name, protected_array, ...)  \
     [COMBO_ID_##name] = COMBO_ACTION(COMBO_SEQ_##name),
@@ -85,8 +85,8 @@
     break;
 
 
-void process_combo_array(uint16_t *keyptr);
-void process_combo_string(char* str);
+void process_combo_array(const uint16_t *keyptr);
+void process_combo_string(const char* str);
 
     
 // Enum for combo codes
@@ -130,14 +130,14 @@ combo_t key_combos[] = {
 
 
 // Emit an array of keycodes
-void process_combo_array(uint16_t *keyptr) {
+void process_combo_array(const uint16_t *keyptr) {
     while (*keyptr != KC_NO) {
         tap_code16(*keyptr++);
     }
 }
 
 // Emit a string, clear shift after first character
-void process_combo_string(char* str) {
+void process_combo_string(const char* str) {
     send_char(*str++);
     clear_mods();
     while (*str) {

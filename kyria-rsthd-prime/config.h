@@ -16,8 +16,14 @@
 
 #pragma once
 
-// Timerout for combos
-#define COMBO_TERM 80
+// Timeout for combos
+#define COMBO_TERM 70
+
+// This MIGHT cause the Kyria to crash
+//#define EXTRA_LONG_COMBOS
+
+// This WILL cause the Kyria to crash immediately
+//#define EXTRA_EXTRA_LONG_COMBOS
 
 // Uncomment to use home row mods 
 //#define USE_HOMEROWMODS
