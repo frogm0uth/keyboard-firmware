@@ -1,139 +1,152 @@
 # Kyria RSTHD/Prime
 
-**Under development.** This is a keymap I'm working on for my Kyria keyboard from [splitkb.com](https://splitkb.com). The base alpha layout is based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/) but is heavily modified. For a standard implementation of RSTHD on the Kyria, see my [Kyria Refactored](https://github.com/frogm0uth/keyboard-firmware/tree/master/kyria-refactored) keymap.
+**Under development.** This is a keymap I'm working on for my Kyria keyboard from [splitkb.com](https://splitkb.com). The alpha layout was based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/) but is now heavily modified. For a standard implementation of RSTHD on the Kyria, see my [Kyria Refactored](https://github.com/frogm0uth/keyboard-firmware/tree/master/kyria-refactored) keymap.
 
 <!--ts-->
-   * [Kyria RSTHD/Prime](#kyria-rsthdprime)
+* [Kyria RSTHD/Prime](#kyria-rsthdprime)
    * [Overview](#overview)
-      * [Background/design principles](#backgrounddesign-principles)
-      * [Main features](#main-features)
-      * [Work in Progress/TODO](#work-in-progresstodo)
+      * [Goals](#goals)
+      * [QMK notes](#qmk-notes)
+   * [Features](#features)
+      * [Platform-dependent shortcuts](#platform-dependent-shortcuts)
+      * [Comborolls](#comborolls)
    * [Layers](#layers)
-      * [Prime](#prime)
-      * [Numpad](#numpad)
-      * [Syntax](#syntax)
-      * [Edit](#edit)
-      * [Cursor](#cursor)
-      * [Func](#func)
-   * [Acknowledgments](#acknowledgments)
+      * [ALPHA](#alpha)
+      * [SYMS](#syms)
+      * [EDIT](#edit)
+      * [SNAP](#snap)
+      * [FUNC](#func)
+      * [META](#meta)
+   * [Other](#other)
+      * [RSTHD variants and similar layouts](#rsthd-variants-and-similar-layouts)
+      * [Acknowledgments](#acknowledgments)
+
+<!-- Created by https://github.com/ekalinin/github-markdown-toc -->
+<!-- Added by: username, at: Mon 20 Jun 2022 01:34:50 AEST -->
 
 <!--te-->
 
-# Overview
+## Overview
 
-The alphabetic layout in this keymap was originally based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/), hence the name "RSTHD Prime". However, it has evolved so heavily that it can't really be called RSTHD-anything any more, so in future it will just be known as "Prime".
+***This is under development.***
 
-The initial reason for the changes to RSTHD was to a. reduce SFU and b. Reduce finger travel especially to the inner column.
+The alphabetic layout in this keymap was originally based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/). I tried it, liked it, tweaked it, and tweaked some more. For better or worse, this is the result...
 
-This keymap is perhaps a bit more "traditional" than other QMK layouts that I see being designed for small keyboards as it makes fairly minimal use of tap-dance and one-shot keys. Dual-function keys are used but not heavily. Combos are used heavily, but mostly for letter sequences. Caps-lock is toggled by pressing both Shift keys.
+When I originally started making changes to RSTHD, I called it RSTHD'. The `'`, pronounced "prime", is [used in maths](https://en.wikipedia.org/wiki/Prime_(symbol)#Use_in_mathematics,_statistics,_and_science) to indicate a derivative of the named thing. The layout still very much retains its RSTHD DNA despite all the changes. I figure calling it *RSTHD/Prime* acknowledges its origin while still indicating that it's different.
 
-I have tried to make the keymap work fluidly, both in the base layers and with the interaction between layers. The Kyria has some nice features such as OLEDs and encoders, which I try to use to good effect.
+### Keyboard configuration
 
-***This is currently under development.***
+My Kyria uses all 6 columns on each hand, four thumb keys on each hand, one encoder on each hand. The top two thumb keys on each side are not on the board.
 
-## Background/design principles
+Controller is Pro Micro, so this keymap only just squeezes in.
 
-My desires with this keyboard layout are:
+### Goals
 
-1. Accuracy
-2. Platform-independence
-3. Comfort
+Coming from a "slab" QWERTY keyboard to a programmable ergo split, I wanted to optimize:
 
-Speed and reducing the number of keys in use are not important goals for me.
+- Cross-platform portability. I need to switch between macOS and Windows frequently. The differences in shortcuts and location of Ctrl/Cmd keys was frustrating and programmable keyboards seemed to be the answer.
+- Comfort. For me, that largely means de-emphasizing the inner index columns.
+- Better support for ambidextrous use of the trackpad or mouses (I use two). That is, it should be possible to do things like cut-copy-paste from either hand alone.
 
-## Main features
+Typing speed and reducing the number of keys on the keyboard are not important goals to me.
 
-* Alpha layer originally derived from RSTHD hence maintaining the RSTH left hand home row, NIOA right home row (same letter but different order) and the E key on the left thumb.
-* A custom layer switching code, which is like a merger or QMK's LT() and TG() functions. More information is [here](../../../../keyboard-notes/tree/master/qmk-layer-tap-toggle).
-* The ability to select the OS in use (currently Mac and Windows supported) from the keyboard, which changes the shortcuts programmed into the keyboard. More information is [here](../../../../keyboard-notes/tree/master/qmk-os-shortcuts).
-* A custom mouse feature to make mouse keys more controllable. More information is [here](../../../../keyboard-notes/tree/master/qmk-custom-mouse).
-* A custom editing layer for platform-independent editing. More information is [here](../../../../keyboard-notes/tree/master/qmk-custom-edit).
-* A *Compose* key. In this keymap, it replaces the Leader key. More information is [here](../../../../keyboard-notes/tree/master/qmk-compose-key).
-* Matching use of the encoders on each layer.
-* Informative info on the OLED. (Unfortunately, at the moment only the left OLED can be usefully used.) 
+### QMK notes
 
-## Work in Progress/TODO
+Features of QMK that I've used:
 
-1. Windows shortcuts are barely tested / need work.
-2. Linux shortcuts are non-existent.
-3. Custom Mouse needs work on acceleration and wheel speed.
-4. OLED displays need some refinement.
-5. A general-purpose status display on the OLED would be useful i.e. generalize the 3-second timeout on compose status.
-6. Defining the strings for OLED status display in response to events rather than on every scan would probably be a good idea.
-7. This doc needs to be fleshed out.
+- Layers
+- Mod-taps
+- Custom code ("macros")
 
+Features that I haven't used:
 
-# Layers
+- One-shots
+- Tap dance
 
-There are a total of 6 layers. The first is the main alpha layer, "Prime".
+I did use combos extensively but the QMK version has been replaced by my userspace version, comborolls.
 
-The other 5 layers are activated from the left or right thumb. Usually, I hold the layer key to keep the layer activated, but the layer can be locked on by pressing the layer key with Cmd down.
+## Features
+The code is written so that most features can be turned on and off in rules.mk and it will still compile. The default settings leave almost no space in the Pro Micro, so turning anything on will require that something else be turned off.
 
-Some of these layers use the inner column for various window navigation operations.
+### Platform-dependent shortcuts
 
-Most layers use one or both of the encoders. Where possible, the encoder function is appropriate for the function of that layer. If the encoder on the auxiliary side is used, the layer will need to be locked to use it.
+Some layers have a modifier called CmdCtl. This acts as Cmd (aka Gui) in macOS and Ctrl in Windows and Linux. A number of shortcuts in applications morph this way between platforms.
 
-Click on the KLE links to see images of each layer. You can also refer to the ASCII art in keymap.c. NOTE: THESE ARE NOW VERY OUT OF DATE.
+However, there are big differences still. To avoid confusion when switching platforms, the keyboard can be switched between shortcuts for each platform at run-time. See os_shortcuts.h/c and os_shortcut_defs.h.
 
-## Prime
+### Comborolls
 
-This is now my "daily driver" (when I'm at my desk). It is originally based on RSTHD but is now so heavily modified that I'm not sure it's proper to use RSTHD in the name. But all credit to the original author of RSTHD. The name comes from a little mathematical wordplay from an earlier version that I called RSTHD' ("RSTHD-prime"), meaning a derivative of RSTHD. Since it's changed so much, I now just call it Prime. (In other words, the name is a combination of a joke and evolution, I'm not being self-aggrandizing :) )
+This is my userspace implementation of either (depending on how you look at it) combos or the "adaptive keys" from Hands Down. Compared to QMK combos, the order of trigger keys presses matters, only two trigger keys can be used, and the second one must be pressed before the first is released. Compared to adaptive keys, nothing is emitted until the second trigger key matches and there's no need for the emitted keys to have any relation to the trigger keys.
 
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/0048853ae7914074816beda3d796558c)
+Comborolls are defined with the aid of a set of macros, see `combo_defs.h`. 
+Although the order of keys matters, you can use the macros to define combos that trigger in either direction, for use with vertical pairs or even thumb keys. 
 
-The optimizations that resulted in this layout aimed to reduce lateral finger movement and improve comfort. In particular, I find the lower keys on the inner column uncomfortable on the Kyria, especially on the left hand in bigrams with E. The layout performs very well in an analyzer, with very low SFU (same finger utilization) stats and lower travel distance than most other layouts.
+Comborolls are used to:
+- remove SFUs e.g. SC, TW
+- remove other awkward sequences e.g. CR, PR, MY, MIN
+- remove reversals aka "pinballing". Combos for ER, ES, and ED on the right hand convert many of the reversals on the left hand into a simple hand swap.
+- Make common words or word endings easier: YOU, VERY, IGHT, OULD, OUGH.
+- Reduce inner column usage further: B: BR,  BE,  BLE,  BUT,  BY.
 
-## Numpad
+## Layers
 
-Activation: left thumb. Primary keys on right, auxiliary keys on left.
+There are a total of 6 layers. The first is the main alpha layer.
 
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/8a97196759bd98f7ef9a4e974423e145)
+The other layers are activated with a thumb key. All are hold-to-activate &ndash; that is, no toggles or one-shots. Layer activation is done with custom code - see `layer-tap-toggle.h/c`.
 
-The number keys 1 – 9 are on the right, arranged in a 3x3 grid. 1 – 3 are on the home row, as these are the most frequent digits. 0 and "." are on the left hand home row, and arithmetic operators distributed to other keys. Note that it's assumed that all digits have their corresponding punctuation character available with Shift, but some of these are also duplicated on the Syntax layer.
+I used to have KLE drawings of every layer, but keeping them up to date with the keymap was too tedious. Instead, see the ASCII art in keymap.c.
 
-It's assumed that there will be times when this layer is locked on for an extended period, for numeric entry or spreadsheets. Therefore all the keys to access higher layers are here, which isn't the case for other layers.
+### ALPHA
 
-Select all, cut, copy and paste are chorded on the left hand.
+The alpha layout aims to reduce lateral finger movement on the index finger. It performs very well in an analyzer, with low SFU (same finger utilization) stats and low travel distance.
 
-## Syntax
+### SYMS
 
-Activation: left thumb. Primary keys on right, auxiliary keys on left.
+Activated by the left thumb (hold).
 
-Named because I think of it as enabling the syntax of common programming languages. (I think a non-programmer will also find this layer easy to use, although the logic behind the key arrangement may not be so obvious.)
+Unshifted, this layer contains most of the punctuation keys. I've arranged them so that many common (in programming) two-letter sequences can be typed with an inward roll: `{% %} <% %> </ /> <? ?> <! => -> ~/`. Since most are on the right hand, they become an easy three-key roll with Space and Enter. 
 
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/0b079c6153a029c55cc8b5b7fbe701f2)
+Semicolon is, surprisingly enough, not in this layer: instead there is a combo for `);`.
 
-On the right are three pairs of pairing punctation: **] [**, **} {**, and **> <**. Parentheses **( )** are on the left hand to avoid same-finger conflicts in common sequences such as **)}**. Other punctuation on this layer is commonly used in a range of coding languages; where possible they are arranged for "rolls," such as **->**, **<?** and **/>**. Various other characters on the layer are there to avoid switching layers for digrams that commonly occur in coding/scripting such as **${**, **=>**, **<!**, and so on. "Inward rolls" with a character and Space or Enter are easily done on the right hand, followed by Tab on the left if needed.
+The ten digits are accessed with Shift, akin to [Programmer Dvorak](https://www.kaufmann.no/roland/dvorak/), arranged in a 3x3 numpad-like grid. However the most frequent `0 1 2` can also be accessed as a single chord with no shift on the left hand.
 
-## Edit
+### EDIT
 
-Activation: right thumb. Primary keys on left, auxiliary keys on right.
+Activated by the right thumb (hold).
 
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/380d4d3d2a51e2a0e125e939fe2eb56f)
+This is an editing layer that extends the idea of platform-independent shortcuts to the whole editing layer. The navigation keys on the left have the standard four cursor keys, word left/right, and page up/down. The lower row contains keys for undo/redo and browser back/forward. The inner and pinky columns contain window/desktop manipulation keys.
 
-This is an editing layer based on my [Custom Edit](../../../../keyboard-notes/tree/master/qmk-custom-edit) code. The navigation keys on the left have the standard four cursor keys, word left/right, and page up/down. Below the navigation keys are "hyper-back" and "hyper-forward" keys. Depending on modifiers pressed, these are undo/redo, browser back/forward, or next/previous search result.
+On the right hand there are various special modifier keys on the right home row to speed up editing. These will be documented one day... Select all, cut, copy and paste are chorded on the  top row, and keys to switch applications, windows and tabs on the inner column.
 
-Various special modifier keys on the right home row (see the above link). Select all, cut, copy and paste are chorded on the right hand. The inner columns are used for moving between windows, apps and tabs, which is fairly common to do when editing and copy/pasting.
+### SNAP
 
-## Cursor
+Activated by the left thumb (hold).
 
-Activation: Ctrl + right thumb. Primary keys on left, auxiliary keys on right.
+So called because of the keys for window snapping. (For macOS, these require that [Rectangle](https://rectangleapp.com) is installed.)
 
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/8a2089637ad2a82eecfd5262a5ea9d1f)
+There are also keys for mouse movement using some custom code. To be honest, it doesn't work as well as I'd hoped. Needs more work.
 
-This is a cursor movement layer based on my [Custom Mouse](../../../../keyboard-notes/tree/master/qmk-custom-mouse) code. Overall, the layout mimics the Edit layer except that the cursor keys move the mouse and the left thumb is used for mouse buttons. This layer also has keys to trigger various types of screenshot (some of which need moving the mouse before or after).
+### FUNC
+Activated by a combo on the left thumb (hold).
 
-While it may seem odd to have the cursor keys on the left hand, the way to use this layer is not to repeatedly press the cursor keys, but to press one or two (for diagonal movement), and then press and hold the Repeat key on the right hand to start and stop cursor movement.
+This layer contains function keys on the right hand, arranged roughly the same as the numpad. It also contains the keys that switch between macOS, Windows and Linux shortcuts.
 
-## Func
+### META
+Activated by the right thumb (hold).
 
-Activation: Ctrl + left thumb. Primary keys on right, auxiliary keys on left.
+This layer contains common shortcut keys. They are mostly arranged according to the letter used in the Mac/Windows shortcut. For example, the S key invokes Save (Cmd-S on Mac, Ctrl-S on Windows). However, the mapping is not always that straightforward (e.g. Cmd-Q on Mac and Alt-F4 on Windows), hence the need for a dedicated layer.
 
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/e09a2e00f963d27b25cdaf5962b9cb7f)
+## Other
 
-This layer contains function keys. It also contains the keys that change settings stored in EEPROM.
+### RSTHD variants and similar layouts
+- [T-34](https://www.jonashietala.se/blog/2021/06/03/the-t-34-keyboard-layout/) (swaps E and space)
+- [New layout for lateral movement haters](https://www.reddit.com/r/KeyboardLayouts/comments/mnumbs/new_layout_for_lateral_movement_haters/) (Some similarities to this layout)
+- [RSTHD today](https://xsznix.wordpress.com/2021/01/13/rsthd-today/) (Latest layout generated by keygen with revised scoring and different corpus)
+- [andrewjrae/kyria-keymap](https://github.com/andrewjrae/kyria-keymap) (Swaps E and Space)
+- [johnm/keymap.c](https://gist.github.com/johnm/e3c129b20bbcae97601e547a7dd9fa0a) (Mirrors the complete alpha block, and some other tweaks)
+- [Pressing E with the thumb‽](https://precondition.github.io/pressing-e-with-the-thumb) (Nice survey article of layouts with letters on a thumb key)
 
-# Acknowledgments
+### Acknowledgments
 
 Table of contents created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc). To update, run
 
