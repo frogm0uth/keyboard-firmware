@@ -197,13 +197,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Process keys with a custom shift value. Shift codes are defined in shift_defs.h.
  * FIXME make it able to handle custom keycodes.
  */
+// clang-format off
 #undef DEFINE_SHIFT
 #define DEFINE_SHIFT(name, normal, shifted) [name - SHIFT_ID_START] = {normal, shifted},
 
-const uint16_t PROGMEM shift_keycodes[][2] = {DEFINE_SHIFT(SHIFT_ID_START, KC_NO, KC_NO)
-#include "shift_defs.h"
-                                                  DEFINE_SHIFT(SHIFT_ID_END, KC_NO, KC_NO)};
+const uint16_t PROGMEM shift_keycodes[][2] = {
+    DEFINE_SHIFT(SHIFT_ID_START, KC_NO, KC_NO)
+#   include "shift_defs.h"
+    DEFINE_SHIFT(SHIFT_ID_END, KC_NO, KC_NO)
+};
 #define READ_SHIFT_KEY(k, i) (pgm_read_word(&shift_keycodes[k - SHIFT_ID_START][i]))
+// clang-format on
 
 // Handle a single key based on passed values
 void process_shift_key(uint16_t key, uint16_t shiftedkey, keyrecord_t *record) {
