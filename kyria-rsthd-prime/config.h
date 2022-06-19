@@ -19,39 +19,20 @@
 // Timeout for combos
 #define COMBO_TERM 70
 
-// This MIGHT cause the Kyria to crash
-//#define EXTRA_LONG_COMBOS
-
-// This WILL cause the Kyria to crash immediately
-//#define EXTRA_EXTRA_LONG_COMBOS
-
-// Uncomment to use home row mods 
-//#define USE_HOMEROWMODS
-
-// Alter these if needed
-#define MODIFIER_INDEX  CTL_T
-#define MODIFIER_MIDDLE SFT_T
-#define MODIFIER_RING   CMD_T
-#define MODIFIER_PINKY  ALT_T
-
 // Tapping control
 #define TAPPING_TERM 180
 //#define TAPPING_TOGGLE 2
 #define IGNORE_MOD_TAP_INTERRUPT
 #define PERMISSIVE_HOLD
 
-// uncomment to make all shortcuts be statically compiled.
+// uncomment to make OS-dependent shortcuts be statically compiled.
 //#define OS_SHORTCUTS_STATIC
-
-#if defined(OS_SHORTCUTS_STATIC)
-     // Uncomment one of these to choose the OS for static shortcuts,
-     // or the *initial* default for dynamically defined shortcuts
-#    define(OS_MACOS)
-//#    define(OS_WINDOWS)
+#ifdef OS_SHORTCUTS_STATIC
+     // Uncomment one of these to choose the OS for static shortcuts
+#    define OS_MACOS
+//#    define OS_WINDOWS
+//#    define OS_LINUX
 #endif
-
-// Uncomment to enable detailed compose key status on the OLED
-#define COMPOSE_STATUS_ENABLE
 
 #ifdef OLED_DRIVER_ENABLE
 #    define OLED_DISPLAY_128X64
@@ -75,10 +56,6 @@
 // The Kyria seems to have the encoders connected backwards
 #define ENCODER_DIRECTION_FLIP
 
-// The Leader key allows to flexibly assign macros to key sequences.
-#define LEADER_PER_KEY_TIMING
-#define LEADER_TIMEOUT 400
-
 // Allows to use either side as the master. Look at the documentation for info:
 // https://docs.qmk.fm/#/config_options?id=setting-handedness
 #define EE_HANDS
@@ -93,3 +70,11 @@
 //#define NO_ACTION_TAPPING
 
 //#define DEBUG_MATRIX_SCAN_RATE
+
+// See https://thomasbaart.nl/2018/12/01/reducing-firmware-size-in-qmk/
+#ifndef NO_DEBUG
+#define NO_DEBUG
+#endif // !NO_DEBUG
+#if !defined(NO_PRINT) && !defined(CONSOLE_ENABLE)
+#define NO_PRINT
+#endif // !NO_PRINT
