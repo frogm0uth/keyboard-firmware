@@ -16,7 +16,6 @@
 #include QMK_KEYBOARD_H
 #include "keymap.h"
 
-
 /**
  ** App switcher i.e. Alt-Tab on Windows, Cmd-Tab on macOS.
  **/

@@ -20,34 +20,35 @@
 void rgblight_encoder(bool clockwise, uint8_t mods) {
     if (mods & MOD_MASK_GUI) {
         if (clockwise) {
-            rgblight_increase_val_noeeprom();
-        } else {
-            rgblight_decrease_val_noeeprom();
-        }
-    } else if (mods & MOD_MASK_CTRL) {
-        if (clockwise) {
             rgblight_increase_sat_noeeprom();
         } else {
             rgblight_decrease_sat_noeeprom();
         }
-    } else {
+    } else if (mods & MOD_MASK_ALT) {
         if (clockwise) {
             rgblight_increase_hue_noeeprom();
         } else {
             rgblight_decrease_hue_noeeprom();
         }
+    } else if (mods & MOD_MASK_CTRL) {
+        if (clockwise) {
+            rgblight_increase_val_noeeprom();
+        } else {
+            rgblight_decrease_val_noeeprom();
+        }
     }
 }
 
 #ifdef OLED_DRIVER_ENABLE
-void rgblight_oled_status () {
+void rgblight_oled_status() {
     uint8_t mods = get_mods();
-    if (mods & MOD_MASK_GUI) {
-        oled_write_P(PSTR("Adj: VAL"), false);
-    } else if (mods & MOD_MASK_CTRL) {
+
+    if (mods & (MOD_MASK_CTRL || MOD_MASK_ALT)) {
         oled_write_P(PSTR("Adj: SAT"), false);
-    } else {
+    } else if (mods & MOD_MASK_ALT) {
         oled_write_P(PSTR("Adj: HUE"), false);
+    } else if (mods & MOD_MASK_CTRL) {
+        oled_write_P(PSTR("Adj: VAL"), false);
     }
 }
 #endif

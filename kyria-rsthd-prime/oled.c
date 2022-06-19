@@ -18,7 +18,7 @@
 #include "keymap.h"
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
-	return OLED_ROTATION_180;
+    return OLED_ROTATION_180;
 }
 
 // clang-format off
@@ -46,60 +46,70 @@ static void render_qmk_logo(void) {
     oled_write_P(qmk_logo, false);
 }
 #endif
-// clang-format on
 
 const static char* layer_names[] = {
-    //[RSTHD]  = "RSTHD-s",
-    [PRIME]  = "Prime",
-    [NUMPAD] = "NumPad",
-    [SYNTAX] = "Syntax",
-    [EDIT]   = "Edit",
-    [CURSOR] = "Cursor",
-    [FUNC]   = "Func"
+    [ALPHA]  = "ALPHA",
+    [SYMS] =   "SYMS",
+    [EDIT]   = "EDIT",
+    [SNAP] =   "SNAP",
+    [FUNC]   = "FUNC",
+    [META]   = "META"
 };
+
+const static char* encoder_info[] = {
+    [ALPHA]  = "<Volume | AltTab>",
+    [EDIT] =   "<Undo/Redo",
+    [SYMS]   = "Next/Prev Search>",
+    [SNAP] =   "  Browser Bk/Fwd>",
+    [FUNC]   = "(S)  Mouse Wheel>",
+    [META]   = "<Zoom/RGB (CAG)"
+};
+
+// clang-format on
+
+static void render_version(void) {
+    oled_write_P(PSTR("\nRSTHD/Prime v32\n"), false);
+}
 
 static void render_status(void) {
     // QMK Logo and version information
-#ifndef COMPOSE_STATUS_ENABLE // not enough room in display
     render_qmk_logo();
-#endif
-    //    oled_write_P(PSTR("       Kyria rev1.0\n\n"), false);
 
     // OS status
-#ifdef OS_SHORTCUTS
-    os_shortcut_status();
+    // render_version();
     oled_write_P(PSTR("\n"), false);
-#endif
 
     // Display layer name
     uint8_t layer = get_highest_layer(layer_state);
-#ifdef UNUSED // leftover from when there was more than one default layr
-    if (layer == ALPHA) {
-        layer = get_highest_layer(default_layer_state);
-    }
+#ifdef OS_SHORTCUTS
+    os_shortcut_status();
+    oled_write_P(PSTR(" :: "), false);
 #endif
-    oled_write_P(PSTR("Layer: "), false);
     oled_write(layer_names[layer], false);
     oled_write_P(PSTR("\n"), false);
 
-    
-    // Display modifiers
-    uint8_t mods = get_mods();
-    if (mods & MOD_MASK_SHIFT) {
-        oled_write_P(PSTR("Shift "), false);
-    }
-    if (mods & MOD_MASK_ALT) {
-        oled_write_P(PSTR("Alt "), false);
-    }
-    if (mods & MOD_MASK_CTRL) {
-        oled_write_P(PSTR("Ctrl "), false);
-    }
-    if (mods & MOD_MASK_GUI) {
-        oled_write_P(PSTR("Cmd "), false);
-    }
+    oled_write(encoder_info[layer], false);
     oled_write_P(PSTR("\n"), false);
 
-    // Custom mouse and edit status
+    // Display modifiers
+    uint8_t mods = get_mods();
+    if (mods & MOD_MASK_CSAG) {
+        if (mods & MOD_MASK_SHIFT) {
+            oled_write_P(PSTR("Shift "), false);
+        }
+        if (mods & MOD_MASK_ALT) {
+            oled_write_P(PSTR("Alt "), false);
+        }
+        if (mods & MOD_MASK_CTRL) {
+            oled_write_P(PSTR("Ctrl "), false);
+        }
+        if (mods & MOD_MASK_GUI) {
+            oled_write_P(PSTR("Cmd "), false);
+        }
+        // oled_write_P(PSTR("\n"), false);
+    }
+
+    // Custom status
     switch (get_highest_layer(layer_state)) {
 #ifdef CUSTOM_EDIT
         case EDIT:
@@ -107,44 +117,31 @@ static void render_status(void) {
             break;
 #endif
 #ifdef CUSTOM_MOUSE
-        case CURSOR:
+        case SNAP:
             custom_mouse_status();
             break;
 #endif
 #ifdef RGBLIGHT_ENABLE
-        case FUNC:
-            rgblight_oled_status();
+        case META:
+            // rgblight_oled_status();
             break;
 #endif
         default:
             oled_write_P(PSTR("\n"), false);
     }
-#ifdef COMPOSE_STATUS_ENABLE
-    compose_key_status();
-#endif
 
     // Host Keyboard LED Status
     uint8_t led_usb_state = host_keyboard_leds();
-    //oled_write_P(IS_LED_ON(led_usb_state, USB_LED_NUM_LOCK)    ? PSTR("NUMLCK ") : PSTR("       "), false);
-    oled_write_P(IS_LED_ON(led_usb_state, USB_LED_CAPS_LOCK)   ? PSTR("CAPLCK ") : PSTR("       "), false);
-    //oled_write_P(IS_LED_ON(led_usb_state, USB_LED_SCROLL_LOCK) ? PSTR("SCRLCK ") : PSTR("       "), false);
-    
-    // How fast are you??
-#ifdef WPM_ENABLE
-    uint8_t wpm = get_current_wpm();
-    
-    char wpm_s[5];
-    itoa(wpm, wpm_s, 10);
-    oled_write_P(PSTR("Speed: "), false);
-    oled_write(wpm_s, false);
-    oled_write("\n", false);
-#endif
+    oled_write_P(IS_LED_ON(led_usb_state, USB_LED_CAPS_LOCK) ? PSTR("CAPLCK ") : PSTR("       "), false);
 }
 
-void oled_task_user(void) {
+bool oled_task_user(void) {
     if (is_keyboard_master()) {
-        render_status();    // Renders the current keyboard state
+        render_status(); // Renders the current keyboard state
     } else {
-        render_kyria_logo();    // Static display
+        // render_kyria_logo();    // Static display -> uses WAY too much firmware space!!
+        render_qmk_logo(); // Static display
+        render_version();
     }
+    return false;
 }

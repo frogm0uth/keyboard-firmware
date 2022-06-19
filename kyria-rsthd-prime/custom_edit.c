@@ -243,6 +243,7 @@ void custom_edit_tap(uint16_t keycode) {
     edit_keycode = KC_NO;
 }
 
+#ifdef ENCODER_ENABLE
 void custom_edit_encoder(bool clockwise) {
     uint16_t keycode = KC_NO;
     if (IS_EDIT_REPT) {    // Not really repeat, just change to vertical
@@ -279,6 +280,7 @@ void custom_edit_encoder(bool clockwise) {
         }
     }
 }
+#endif
 
 #ifdef OLED_DRIVER_ENABLE
 void custom_edit_status() {

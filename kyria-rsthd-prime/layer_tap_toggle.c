@@ -89,7 +89,7 @@ bool ltt_base(void) {
 
 
 /**
- * Lock the layer. Call this from process-record_user() in response to a lock
+ * Lock the layer. Call this from process_record_user() in response to a lock
  * keypress.
  */
 bool ltt_lock(keyrecord_t *record) {
@@ -122,6 +122,7 @@ bool layer_tap_toggle(uint16_t keycode, uint8_t layer, keyrecord_t *record) {
         ltt_timer[layer] = timer_read();
         switch (ltt_state[layer]) {
             case LTT_INACTIVE:
+#ifdef NOTUSEDNOW
                 if (get_mods() & MOD_MASK_GUI) {
                     ltt_state[layer] = LTT_TOGGLED;    // Toggle immediately
                     layer_on(layer);
@@ -130,10 +131,13 @@ bool layer_tap_toggle(uint16_t keycode, uint8_t layer, keyrecord_t *record) {
                     unregister_code16(KC_RALT);
                     tap_code16(keycode);               // Tap immediately
                 } else {
-                    ltt_state[layer] = LTT_TAPPING_ON; // Wait and see
+#endif
+		    ltt_state[layer] = LTT_TAPPING_ON; // Wait and see
                     ltt_isshifted = get_mods() & MOD_MASK_SHIFT;
                     layer_on(layer);
+#ifdef NOTUSEDNOW
                 }
+#endif
                 break;
             case LTT_TOGGLED:
                 ltt_state[layer] = LTT_INACTIVE;     // If toggled on, toggle off
@@ -150,8 +154,15 @@ bool layer_tap_toggle(uint16_t keycode, uint8_t layer, keyrecord_t *record) {
                         tap_code16(keycode);              // Send the tap key
                         unregister_code(KC_LSFT);
                     } else {
+		      if (keycode > SAFE_RANGE) { // handle custom keycodes
+                  record->event.pressed = true;
+			process_record_user(keycode, record);
+                  record->event.pressed = false;
+			process_record_user(keycode, record);
+		      } else {
                         tap_code16(keycode);              // Send the tap key
-                    }
+		      }
+		    }
                 }
                 layer_off(layer);
                 ltt_state[layer] = LTT_INACTIVE;

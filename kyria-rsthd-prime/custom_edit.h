@@ -35,6 +35,7 @@
 #endif
 
 #ifdef CUSTOM_EDIT
+// clang-format off
 #    define CUSTOM_EDIT_KEYS \
         CE_MV_L,             \
             CE_MV_R,         \
@@ -51,6 +52,7 @@
             CE_ACC1,         \
             CE_ACC2,         \
             CE_DMOD
+// clang-format on
 
 #    define CUSTOM_EDIT_PROCESS_RECORD(kc, rec)         \
         case CE_MV_L:                                   \
