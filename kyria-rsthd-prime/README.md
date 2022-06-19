@@ -94,8 +94,6 @@ There are a total of 6 layers. The first is the main alpha layer.
 
 The other layers are activated with a thumb key. All are hold-to-activate &ndash; that is, no toggles or one-shots. Layer activation is done with custom code - see `layer-tap-toggle.h/c`.
 
-I used to have KLE drawings of every layer, but keeping them up to date with the keymap was too tedious. Instead, see the ASCII art in keymap.c.
-
 ### ALPHA
 
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/69cf0f771159d920a34d882d696af6aa)
@@ -127,6 +125,8 @@ On the right hand there are various special modifier keys on the right home row 
 ### SNAP
 
 Activated by the left thumb (hold).
+
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/6aa3ef0fcb5c886dc105a94b62690fe0)
 
 So called because of the keys for window snapping. (For macOS, these require that [Rectangle](https://rectangleapp.com) is installed.)
 
