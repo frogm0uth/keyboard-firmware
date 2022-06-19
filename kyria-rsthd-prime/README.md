@@ -98,11 +98,15 @@ I used to have KLE drawings of every layer, but keeping them up to date with the
 
 ### ALPHA
 
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/69cf0f771159d920a34d882d696af6aa)
+
 The alpha layout aims to reduce lateral finger movement on the index finger. It performs very well in an analyzer, with low SFU (same finger utilization) stats and low travel distance.
 
 ### SYMS
 
 Activated by the left thumb (hold).
+
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/0b079c6153a029c55cc8b5b7fbe701f2)
 
 Unshifted, this layer contains most of the punctuation keys. I've arranged them so that many common (in programming) two-letter sequences can be typed with an inward roll: `{% %} <% %> </ /> <? ?> <! => -> ~/`. Since most are on the right hand, they become an easy three-key roll with Space and Enter. 
 
@@ -113,6 +117,8 @@ The ten digits are accessed with Shift, akin to [Programmer Dvorak](https://www.
 ### EDIT
 
 Activated by the right thumb (hold).
+
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/24a80f5840733d6384fd21e20e1f28a0)
 
 This is an editing layer that extends the idea of platform-independent shortcuts to the whole editing layer. The navigation keys on the left have the standard four cursor keys, word left/right, and page up/down. The lower row contains keys for undo/redo and browser back/forward. The inner and pinky columns contain window/desktop manipulation keys.
 
