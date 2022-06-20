@@ -40,9 +40,9 @@
 
 #ifdef RGBLIGHT_ENABLE
 //#    define RGBLIGHT_ANIMATIONS -- turning this off saves over 3k space...
-#    define RGBLIGHT_HUE_STEP 6
+#    define RGBLIGHT_HUE_STEP 4
 #    define RGBLIGHT_SAT_STEP 16
-#    define RGBLIGHT_VAL_STEP 16
+#    define RGBLIGHT_VAL_STEP 8
 #    define RGBLIGHT_SLEEP
 #endif
 #define RGBLIGHT_DISABLE_KEYCODES // Saves about 650 bytes
