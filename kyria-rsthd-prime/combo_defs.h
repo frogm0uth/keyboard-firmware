@@ -21,7 +21,8 @@
  * keypresses instead of pressing both keys at the same time as with combos.
  *
  * QMK combos support any number of trigger keys. Comborolls support only two
- * keys.
+ * keys. Comborolls cannot use mod-taps, either as trigger or output. Comborolls
+ * allow modifiers as trigger keys but not as output.
  *
  * The macros are named (CMBO|LtoR|RtoL|LRRL )_(KEY|ARR|LIT|STR ). To
  * use the CMBO_* macros, set COMBO_ENABLE=yes on rule.mk. To use the

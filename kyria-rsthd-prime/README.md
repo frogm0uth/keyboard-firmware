@@ -3,8 +3,8 @@
 **Under development.** This is a keymap I'm working on for my Kyria keyboard from [splitkb.com](https://splitkb.com). The alpha layout was based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/) but is now heavily modified. For a standard implementation of RSTHD on the Kyria, see my [Kyria Refactored](https://github.com/frogm0uth/keyboard-firmware/tree/master/kyria-refactored) keymap.
 
 <!--ts-->
-* [Kyria RSTHD/Prime](#kyria-rsthdprime)
    * [Overview](#overview)
+      * [Keyboard configuration](#keyboard-configuration)
       * [Goals](#goals)
       * [QMK notes](#qmk-notes)
    * [Features](#features)
@@ -22,7 +22,7 @@
       * [Acknowledgments](#acknowledgments)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: username, at: Mon 20 Jun 2022 01:34:50 AEST -->
+<!-- Added by: username, at: Mon 20 Jun 2022 16:07:27 AEST -->
 
 <!--te-->
 
@@ -76,15 +76,14 @@ However, there are big differences still. To avoid confusion when switching plat
 
 ### Comborolls
 
-This is my userspace implementation of either (depending on how you look at it) combos or the "adaptive keys" from Hands Down. Compared to QMK combos, the order of trigger keys presses matters, only two trigger keys can be used, and the second one must be pressed before the first is released. Compared to adaptive keys, nothing is emitted until the second trigger key matches and there's no need for the emitted keys to have any relation to the trigger keys.
+This is my userspace implementation/variant of combos triggered by rolling keys rather than keys pressed at the same time. Since I started on this, QMK [acquired](https://github.com/qmk/qmk_firmware/pull/15083) the COMBO_MUST_PRESS_IN_ORDER flag, which AFAIK does the same thing. However I've kept my version for now as it uses less space and the Pro Micro is *very* tight on space.
 
 Comborolls are defined with the aid of a set of macros, see `combo_defs.h`. 
 Although the order of keys matters, you can use the macros to define combos that trigger in either direction, for use with vertical pairs or even thumb keys. 
 
 Comborolls are used to:
-- remove SFUs e.g. SC, TW
-- remove other awkward sequences e.g. CR, PR, MY, MIN
-- remove reversals aka "pinballing". Combos for ER, ES, and ED on the right hand convert many of the reversals on the left hand into a simple hand swap.
+- Remove SFUs e.g. SC, TW and other awkward sequences e.g. CR, PR, MY, MIN.
+- Remove reversals aka "pinballing". Combos for ER, ES, and ED on the right hand convert many of the reversals on the left hand into a simple hand swap.
 - Make common words or word endings easier: YOU, VERY, IGHT, OULD, OUGH.
 - Reduce inner column usage further: B: BR,  BE,  BLE,  BUT,  BY.
 

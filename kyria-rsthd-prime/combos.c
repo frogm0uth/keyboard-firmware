@@ -170,23 +170,17 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
 #endif // COMBO_ENABLE
 // clang-format on
 
-/** Comboroll data/functions.  This is my userspace implementation of either
- * (depending on how you look at it) combos or Alan Reiser's "adaptive keys."
- * Compared to QMK combos, the order of trigger keys pressed matters, only two
- * trigger keys can be used, and the second one must be pressed before the first
- * is released. Compared to adaptive keys, nothing is emitted until the second
- * trigger key matches and there's no need for the emitted keys to have any
- * relation to the trigger keys.
+/** Comboroll data/functions. This is my userspace implementation/variant of
+ * combos triggered by rolling keys rather than keys pressed at the same
+ * time. Since I started on this, QMK acquired the COMBO_MUST_PRESS_IN_ORDER
+ * flag, which AFAIK does the same thing. However I've kept my version for now
+ * as it's more space-efficent and the Pro Micro is *very* tight on space.
  *
  * Comborolls are defined by macros in combo_defs.h. There is a macro that
  * defines the trigger keys in both directions for cases where the direction of
  * the roll is not obvious, or for triggering from both hands or thumb keys when
  * you can't roll.  The time allowed to trigger a comboroll is relatively short
  * (between the QMK combo and tap-hold delay).
- *
- * I considered having the trigger sequence be more than two keys, but decided
- * that it would be used rarely and the implementation with just two keys is
- * simpler. For 3+ keys, use regular QMK combos.
  */
 
 // clang-format off
@@ -344,7 +338,8 @@ bool process_record_comboroll(uint16_t keycode, keyrecord_t *record) {
             // If we're here, the first key was just released. So send it and cancel the combo
             tap_combo_key(firstkey_matched, &firstkey_record);
             is_in_comboroll = false;
-            return false; // We already unregistered it in the tap, so QMK should leave it alone (?)
+            // not enirely sure why, but letting this fall through and have QMK also handle
+	    // release of the key prevents stuck modifiers
         }
     }
     return true;
