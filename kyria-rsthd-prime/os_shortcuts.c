@@ -102,27 +102,24 @@ void os_set_from_keycode(uint16_t keycode) {
 void os_shortcut_status () {
 #ifdef OS_SHORTCUTS_STATIC
 #ifdef OS_MACOS
-    oled_write_P(PSTR("MACOS "), false);
+    oled_write_P(PSTR("   MACOS"), false);
 #else
     #ifdef OS_WINDOWS
-        oled_write_P(PSTR("WINDOWS "), false);
+        oled_write_P(PSTR(" WINDOWS"), false);
     #else
-        oled_write_P(PSTR("LINUX "), false);
+        oled_write_P(PSTR("   LINUX"), false);
     #endif
 #endif
 #else
     switch (os_index) {
         case os_platform_macos:
-            oled_write_P(PSTR("MACOS"), false);
+            oled_write_P(PSTR("   MACOS"), false);
             break;
         case os_platform_windows:
-            oled_write_P(PSTR("WINDOWS"), false);
+            oled_write_P(PSTR(" WINDOWS"), false);
             break;
         case os_platform_linux:
-            oled_write_P(PSTR("LINUX"), false);
-            break;
-        default:
-            oled_write_P(PSTR("?OS?"), false);
+            oled_write_P(PSTR("   LINUX"), false);
             break;
     }
 #endif

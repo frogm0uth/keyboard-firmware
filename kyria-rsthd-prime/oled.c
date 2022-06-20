@@ -57,12 +57,12 @@ const static char* layer_names[] = {
 };
 
 const static char* encoder_info[] = {
-    [ALPHA]  = "<Volume | AltTab>",
-    [EDIT] =   "<Undo/Redo",
-    [SYMS]   = "Next/Prev Search>",
-    [SNAP] =   "  Browser Bk/Fwd>",
-    [FUNC]   = "(S)  Mouse Wheel>",
-    [META]   = "<Zoom/RGB (CAG)"
+    [ALPHA] = "<Volume      AltTab>",
+    [EDIT]  = "<Undo/Redo",
+    [SYMS]  = "             Search>",
+    [SNAP]  = "            Browser>",
+    [FUNC]  = "          (S) Wheel>",
+    [META]  = "<Zoom/RGB (CAG)"
 };
 
 // clang-format on
@@ -75,20 +75,20 @@ static void render_status(void) {
     // QMK Logo and version information
     render_qmk_logo();
 
-    // OS status
-    // render_version();
+    // Host Keyboard LED Status
+    uint8_t led_usb_state = host_keyboard_leds();
+    if (IS_LED_ON(led_usb_state, USB_LED_CAPS_LOCK)) {
+      oled_write_P(PSTR("        CAPS"), false);
+    }
     oled_write_P(PSTR("\n"), false);
 
-    // Display layer name
+    // Display OS and layer
     uint8_t layer = get_highest_layer(layer_state);
 #ifdef OS_SHORTCUTS
     os_shortcut_status();
     oled_write_P(PSTR(" :: "), false);
 #endif
     oled_write(layer_names[layer], false);
-    oled_write_P(PSTR("\n"), false);
-
-    oled_write(encoder_info[layer], false);
     oled_write_P(PSTR("\n"), false);
 
     // Display modifiers
@@ -106,7 +106,6 @@ static void render_status(void) {
         if (mods & MOD_MASK_GUI) {
             oled_write_P(PSTR("Cmd "), false);
         }
-        // oled_write_P(PSTR("\n"), false);
     }
 
     // Custom status
@@ -123,16 +122,15 @@ static void render_status(void) {
 #endif
 #ifdef RGBLIGHT_ENABLE
         case META:
-            // rgblight_oled_status();
+            rgblight_oled_status();
             break;
 #endif
-        default:
-            oled_write_P(PSTR("\n"), false);
     }
+    oled_write_P(PSTR("\n"), false);
 
-    // Host Keyboard LED Status
-    uint8_t led_usb_state = host_keyboard_leds();
-    oled_write_P(IS_LED_ON(led_usb_state, USB_LED_CAPS_LOCK) ? PSTR("CAPLCK ") : PSTR("       "), false);
+    // encoder help
+    oled_write(encoder_info[layer], false);
+    oled_write_P(PSTR("\n"), false);
 }
 
 bool oled_task_user(void) {
