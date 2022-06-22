@@ -132,12 +132,16 @@ So called because of the keys for window snapping. (For macOS, these require tha
 There are also keys for mouse movement using some custom code. To be honest, it doesn't work as well as I'd hoped. Needs more work.
 
 ### FUNC
-Activated by a combo on the left thumb (hold).
+Activated by the pinky from the SNAP layer (hold).
+
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/e09a2e00f963d27b25cdaf5962b9cb7f)
 
 This layer contains function keys on the right hand, arranged roughly the same as the numpad. It also contains the keys that switch between macOS, Windows and Linux shortcuts.
 
 ### META
 Activated by the right thumb (hold).
+
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/c3f3f925be48f9c67de27b1e3b21ee37)
 
 This layer contains common shortcut keys. They are mostly arranged according to the letter used in the Mac/Windows shortcut. For example, the S key invokes Save (Cmd-S on Mac, Ctrl-S on Windows). However, the mapping is not always that straightforward (e.g. Cmd-Q on Mac and Alt-F4 on Windows), hence the need for a dedicated layer.
 
