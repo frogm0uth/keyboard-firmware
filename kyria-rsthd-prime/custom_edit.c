@@ -261,7 +261,7 @@ void custom_edit_encoder(bool clockwise) {
             }
         } else {    // Delete modifier is active
             if (IS_EDIT_ACC1) {
-                keycode = clockwise ? SC(SC_DEL_WORD_RIGHT) : SC(SC_DEL_WORD_RIGHT);
+                keycode = clockwise ? SC(SC_DEL_WORD_RIGHT) : SC(SC_DEL_WORD_LEFT);
             } else if (IS_EDIT_ACC2) {
                 if (clockwise) {
                     tap_code16(S(SC(SC_END_OF_PARA)));    // Delete to end of paragraph
