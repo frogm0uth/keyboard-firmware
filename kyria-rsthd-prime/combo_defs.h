@@ -40,6 +40,9 @@
  *
  * Note: by convention, the trigger keys should be listed from left to right
  * location in the keymap (where it makes sense to do so ).
+ *
+ * Currently, using layer switch keys doesn't work properly: as a source, the layer
+ * doesn't activate with a quick roll. As an output, it doesn't work. Needs more work.
  */
 // clang-format off
 
@@ -96,7 +99,6 @@ LRRL_STR( his,  KC_H, KC_Y )
 
 // Utilities
 LRRL_KEY( search,   SC_SEARCH,      KC_SPC,  KC_ENT )       // System search box, right thumb
-LRRL_KEY( capslock, KC_CAPS,        KC_E,    CL_SYMS )      // Capslock, left thumb
 LtoR_ARR( esc_x,                                            // Escape-X for emacs
         ARRAY_PROTECT( 
             KC_ESC,
