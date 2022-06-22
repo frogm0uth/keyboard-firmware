@@ -56,14 +56,14 @@ LRRL_STR( ui, KC_U, KC_I )
 // Anti-pinballing
 RtoL_STR( er,  KC_O,    KC_A )
 RtoL_STR( es,  KC_O,    CU_RSFT )
-RtoL_STR( ed,  CU_COMM, CU_RSFT )
+LRRL_STR( ed,  CU_COMM, CU_RSFT )
 
 // Awkward bigrams/trigrams
 LtoR_STR( qu,  KC_C, KC_W )
 LtoR_STR( cr,  KC_W, KC_F )
 LtoR_STR( pr,  KC_G, KC_D )
 RtoL_STR( my,  KC_M, CU_DOT )
-LtoR_STR( min, KC_P, KC_N )
+LRRL_STR( min, KC_P, KC_N )
 
 // Inner column minimization
 LtoR_STR( br,  KC_R, KC_H )
@@ -73,8 +73,8 @@ LRRL_STR( but, KC_G, CU_COMM )
 LRRL_STR( by,  KC_D, CU_COMM )
 
 // Alternate punctuation on left hand
-LtoR_KEY( comma,  KC_COMM, CU_LSFT, KC_P )
-LtoR_KEY( period, KC_DOT,  CU_LSFT, KC_G )
+LRRL_KEY( comma,  KC_COMM, CU_LSFT, KC_P )
+LRRL_KEY( period, KC_DOT,  CU_LSFT, KC_G )
 
 LtoR_KEY( caps, KC_X,  CU_LSFT, KC_D )
 

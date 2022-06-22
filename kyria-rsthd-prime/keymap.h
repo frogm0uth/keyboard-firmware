@@ -33,7 +33,7 @@ void app_switcher_trigger(bool forward);
 void app_switcher_release(void);
 void rgblight_encoder(bool clockwise, uint8_t mods);
 void rgblight_oled_status(void);
-bool process_record_user_character(uint16_t keycode, keyrecord_t *record);
+bool process_record_user_emit(uint16_t keycode, keyrecord_t *record);
 
 /**
  * User config structure. Defined here instead of keymap.c in case other files
@@ -87,10 +87,8 @@ enum custom_keycodes {
     CU_SWIN, // Screenshot a window
     CU_SRGN, // Start drag-select screenshot
 
-    CU_APPR, // Applications or tab left or right
-    CU_APPL,
-    CU_TABR,
-    CU_TABL,
+    CU_APPSWITCH_RIGHT, // Application switcher
+    CU_APPSWITCH_LEFT,
 
     CU_WIPE, // Wipe the EEPROM
     CU_WRIT, // Save current state to EEPROM

@@ -45,7 +45,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |  Esc |   V  |   C  |   W  |   F  |   K  |                              |   J  |   M  |   U  | .  / | -  _ | BkSp |
  |------+------+------+------+------+------|                              |------+------+------+------+------+------|
  |   X  |   R  |   S  |   T  |   H  |   B  |                              | ;  : |   N  |   I  |   O  |   A  |   Q  |
- | Ctrl |      |      |      |      |      |     Caps           Search    |      |      |      |      |      | Ctrl |
+ | Ctrl |      |      |      |      |      |                    Search    |      |      |      |      |      | Ctrl |
  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
  |  Tab |      |   P  |   G  |   D  |   Z  |      |      |  |      |      | !  ? |   L  |   Y  | ,  | |      | Caps |
  |  Alt | Shift|      |      |      |      |   E  |   '  |  | Enter| Space|      |      |      |      | Shift|  Alt |
@@ -86,39 +86,39 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* EDIT
 
  ,-----------------------------------------.                              ,-----------------------------------------.
- |Expose| ScrL | WordL|  Up  | WordR| ScrR |                              | TabR | Paste| Copy |  All |  Cut | BkSp |
+ |Expose|FulScr| WordL|  Up  | WordR| WinR |                              | WinR | Paste| Copy |  All |  Cut | BkSp |
  |------+------+------+------+------+------|                              |------+------+------+------+------+------|
- |FulScr| PgUp | Left | Down | Right|      |                              | AppR |      |      |      |      |AppWin|
+ | ScrL | PgUp | Left | Down | Right| AppR |                              | AppR |      |      |      |      | ScrR |
  |      |      |      |      |      |      |                              |      |Repeat| Acc2 | Acc1 |DelMod|      |
  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
- |DskTop| PgDn | Undo |  Del | Redo |      |      |      |  |      |      | WinR |      |      |      |      |      |
- |      |      |      |      |      |      | Space| Enter|  |      |      |      |  Cmd |  Alt | Ctrl | Shift|      |
+ |  Tab | PgDn | Undo/|  Del | Redo/| TabR |      |      |  |      |      | TabR |      |      |      |      |AppWin|
+ |      |      | Back |      |  Fwd |      | Space| Enter|  |      |      |      |  Cmd |  Alt | Ctrl | Shift|      |
  `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
  |                    |      |      | BkSp |      |      |  |      |      |      |      |      |
  |                    |      |CmdCtl|      |      |      |  |      |      | (**) |      |      |
  |                    `----------------------------------'  `----------------------------------'
 */
      [EDIT] = LAYOUT_stack(
-	SC_EXPOSE_ALL,     SC_PREV_SCREEN, CE_WD_L,         CE_MV_U,   CE_WD_R,         SC_NEXT_SCREEN,
-	SC_FULLSCREEN,     CE_PG_U,        CE_MV_L,         CE_MV_D,   CE_MV_R,         ___X___,
-	SC_REVEAL_DESKTOP, CE_PG_D,        SC_UNDO_ACTION,  KC_DEL,    SC_REDO_ACTION,  ___X___,        ___X___, ___X___,
-	                                                    ___X___,   SC_CMD_CTRL,     KC_BSPC,        KC_SPC,  KC_ENT,
+	SC_EXPOSE_ALL,     SC_FULLSCREEN, CE_WD_L,         CE_MV_U,   CE_WD_R,         CU_NEXT_WINDOW,
+	SC_PREV_SCREEN,    CE_PG_U,       CE_MV_L,         CE_MV_D,   CE_MV_R,         CU_APPSWITCH_RIGHT,
+	KC_TAB,            CE_PG_D,       CU_UNDO_OR_BACK, KC_DEL,    CU_REDO_OR_FWD,  CU_TAB_RIGHT,        ___X___, ___X___,
+	                                                    ___X___,   SC_CMD_CTRL,     KC_BSPC,            KC_SPC,  KC_ENT,
 
-	                  CU_TABR,        SC_PASTE_CLIPBOARD, SC_COPY_SELECTION, SC_SELECT_ALL,  SC_CUT_SELECTION, _______,
-	                  CU_APPR,        CE_REPT,            CE_ACC2,           CE_ACC1,        CE_DMOD,          SC_EXPOSE_WINDOWS,
-	___X___, ___X___, SC_NEXT_WINDOW, KC_RGUI,            KC_RALT,           KC_RCTL,        KC_RSFT,          ___X___,
+	                  CU_NEXT_WINDOW,     SC_PASTE_CLIPBOARD, SC_COPY_SELECTION, SC_SELECT_ALL,  SC_CUT_SELECTION, _______,
+	                  CU_APPSWITCH_RIGHT, CE_REPT,            CE_ACC2,           CE_ACC1,        CE_DMOD,          SC_NEXT_SCREEN,
+	___X___, ___X___, CU_TAB_RIGHT,       KC_RGUI,            KC_RALT,           KC_RCTL,        KC_RSFT,          SC_EXPOSE_WINDOWS,
 	___X___, ___X___, _______,        ___X___,            ___X___
 	),
      
 /* SNAP
 
  ,-----------------------------------------.                              ,-----------------------------------------.
- |  Esc |  All |  Cut | Copy | Paste| TabR |                              | ScrL |SnapTL| MS_U |SnapTR| ScrR |Expose|
+ |  Esc |  All |  Cut | Copy | Paste| WinR |                              | WinL |SnapTL| MS_U |SnapTR|FulScr|Expose|
  |------+------+------+------+------+------|                              |------+------+------+------+------+------|
- |      |      |      |      |      | AppR |                              | SnapL| MS_L | MS_D | MS_R | SnapR|FulScr|
+ | ScrL |      |      |      |      | AppR |                              | SnapL| MS_L | MS_D | MS_R | SnapR| ScrR |
  |      | Wheel| Acc1 | Acc2 |Repeat|      |                              |      |      |      |      |      |      |
  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
- |      |      |      |      |      | WinR |      |      |  |      |      | Back |SnapBL| SnapV|SnapBR|  Fwd |DskTop|
+ |      |      |      |      |      | TabR |      |      |  |      |      | TabL |SnapBL| SnapV|SnapBR|      |DskTop|
  | FUNC | Shift| Ctrl |  Alt |  Cmd |      |      |      |  | BtnM | BtnL |      |      |      |      |      |      |
  `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
                       |      |      |      |      |      |  |      |      | BtnR |      |      |
@@ -126,15 +126,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                       `----------------------------------'  `----------------------------------'
 */
     [SNAP] = LAYOUT_stack(
-	_______, SC_CUT_SELECTION, SC_SELECT_ALL,  SC_COPY_SELECTION, SC_PASTE_CLIPBOARD, CU_TABR,
-	___X___, CM_WHEE,          CM_ACC1,        CM_ACC2,           CM_REPT,            CU_APPR,
-	CL_FUNC, KC_LSFT,          KC_LCTL,        KC_LALT,           KC_LGUI,            SC_NEXT_WINDOW, ___X___, ___X___,
-                                                   ___X___,           ___X___,            _______,        ___X___, ___X___,
+	_______,        SC_CUT_SELECTION, SC_SELECT_ALL,  SC_COPY_SELECTION, SC_PASTE_CLIPBOARD, CU_NEXT_WINDOW,
+	SC_PREV_SCREEN, CM_WHEE,          CM_ACC1,        CM_ACC2,           CM_REPT,            CU_APPSWITCH_RIGHT,
+	CL_FUNC,        KC_LSFT,          KC_LCTL,        KC_LALT,           KC_LGUI,            CU_TAB_RIGHT, ___X___, ___X___,
+                                                   ___X___,           ___X___,            _______,             ___X___, ___X___,
 
-	                  SC_PREV_SCREEN,  SC_SNAP_TOPLEFT,    CM_MS_U,          SC_SNAP_TOPRIGHT,    SC_NEXT_SCREEN, SC_EXPOSE_ALL,
-	                  SC_SNAP_LEFT,    CM_MS_L,            CM_MS_D,          CM_MS_R,             SC_SNAP_RIGHT,  SC_FULLSCREEN,
-        ___X___, ___X___, SC_BROWSER_BACK, SC_SNAP_BOTTOMLEFT, SC_SNAP_VERTICAL, SC_SNAP_BOTTOMRIGHT, SC_BROWSER_FWD, SC_REVEAL_DESKTOP,
-        CM_BTN3, CM_BTN1, CM_BTN2,         CM_SLOW,            ___X___
+	                      CU_PREV_WINDOW, SC_SNAP_TOPLEFT,    CM_MS_U,          SC_SNAP_TOPRIGHT,    SC_FULLSCREEN,  SC_EXPOSE_ALL,
+	                      SC_SNAP_LEFT,   CM_MS_L,            CM_MS_D,          CM_MS_R,             SC_SNAP_RIGHT,  SC_NEXT_SCREEN,
+        ___X___,   ___X___,   CU_TAB_LEFT,    SC_SNAP_BOTTOMLEFT, SC_SNAP_VERTICAL, SC_SNAP_BOTTOMRIGHT, ___X___,        SC_REVEAL_DESKTOP,
+        CM_BTN3,   CM_BTN1,   CM_BTN2,        CM_SLOW,            ___X___
     ),
 
 /* FUNC
@@ -169,13 +169,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  ,-----------------------------------------.                              ,-----------------------------------------.
  |      |      | Close|      | Find |      |                              |      |      |      |      |      |      |
  |------+------+------+------+------+------|                              |------+------+------+------+------+------|
- | eXit |      | Save |newTab|      |  Bin |                              |      |  New |      | Open |saveAs|      |
+ | eXit |      | Save |newTab|      |  Bin |                              |      |  New |      | Open |saveAs| Quit |
  |      |      |      |      |      |      |                              |      |      |      |      |      |      |
  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
  |      |      | Print|      |      |      |      |      |  |      |      |      |      |      |      |      |      |
- |      |      |      |      |      |      | Next |      |  |!WRITE|      |      |  Cmd |  Alt | Ctrl | Shift|      |
+ |      |      |      |      |      |      | Next |      |  |      |      |      |  Cmd |  Alt | Ctrl | Shift|      |
  `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
- |                    |      |      | Prev |      |      |  |      |      |      | (**) |      |
+ |                    |!WRITE|      | Prev |      |      |  |      |      |      | (**) |      |
  |                    |      |      |      |      |      |  |      |      |      |      |      |
  |                    `----------------------------------'  `----------------------------------'
 */
@@ -183,15 +183,52 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         ___X___, ___X___, SC_CLOSE_TAB, ___X___,    SC_FIND,   ___X___,
         SC_QUIT, ___X___, SC_SAVE,      SC_NEW_TAB, ___X___,   SC_BIN, 
         ___X___, ___X___, SC_PRINT,     ___X___,    ___X___,   ___X___,        ___X___,        ___X___,
-                                        ___X___,    ___X___,   SC_PREV_SEARCH, SC_NEXT_SEARCH, ___X___,
+                                        CU_WRIT,    ___X___,   SC_PREV_SEARCH, SC_NEXT_SEARCH, ___X___,
 
                            ___X___,  ___X___,  ___X___,  ___X___,  ___X___,    ___X___,
-                           ___X___,  SC_NEW,   ___X___,  SC_OPEN,  SC_SAVE_AS, ___X___,
+                           ___X___,  SC_NEW,   ___X___,  SC_OPEN,  SC_SAVE_AS, SC_QUIT,
         ___X___, ___X___,  ___X___, KC_RGUI,   KC_RALT,  KC_RCTL,  KC_RSFT,    ___X___,
-        CU_WRIT, ___X___,  ___X___,  _______,  ___X___
+        ___X___, ___X___,  ___X___,  _______,  ___X___
         ),
 };
 // clang-format on
+
+// Register a single key. Handles custom keycodes.
+void register_custom_key(uint16_t keycode, keyrecord_t *record) {
+    uint8_t mods = get_mods();
+    del_mods(MOD_MASK_SHIFT);
+     if (keycode > SAFE_RANGE) { // handle custom keycodes, a bit iffy but seems to work...
+        record->event.pressed = true;
+        process_record_user_emit(keycode, record);
+    } else {
+        if (keycode == KC_CAPS) { // needs special treatment!??
+            tap_code16(keycode);
+        } else {
+            register_code16(keycode);
+        }
+    }
+    set_mods(mods);
+}
+
+// Unregister a single key. Handles custom keycodes.
+void unregister_custom_key(uint16_t keycode, keyrecord_t *record) {
+    uint8_t mods = get_mods();
+    del_mods(MOD_MASK_SHIFT);
+    if (keycode > SAFE_RANGE) { // handle custom keycodes, a bit iffy but seems to work...
+        record->event.pressed = false;
+        process_record_user_emit(keycode, record);
+    } else {
+        del_mods(MOD_MASK_SHIFT);
+        unregister_code16(keycode);
+    }
+    set_mods(mods);
+}
+
+// Tap a single key. Handles custom keycodes.
+void tap_custom_key(uint16_t keycode, keyrecord_t *record) {
+    register_custom_key(keycode, record);
+    unregister_custom_key(keycode, record);
+}
 
 /**
  * Process keys with a custom shift value. Shift codes are defined in shift_defs.h.
@@ -213,14 +250,10 @@ const uint16_t PROGMEM shift_keycodes[][2] = {
 void process_shift_key(uint16_t key, uint16_t shiftedkey, keyrecord_t *record) {
     uint8_t mods = get_mods();
     if (record->event.pressed) {
-        if (mods & MOD_MASK_SHIFT && shiftedkey != S(shiftedkey)) {
-            del_mods(MOD_MASK_SHIFT);
-        }
-        register_code16(mods & MOD_MASK_SHIFT ? shiftedkey : key);
-        set_mods(mods);
+        register_custom_key(mods & MOD_MASK_SHIFT ? shiftedkey : key, record);
     } else {
-        unregister_code16(key);
-        unregister_code16(shiftedkey);
+        unregister_custom_key(key, record);
+        unregister_custom_key(shiftedkey, record);
     }
 }
 
@@ -301,15 +334,31 @@ bool process_layer_switch(uint16_t keycode, keyrecord_t *record) {
 #endif
 
 /**
- * User-level processing of custom keycodes, for those that output characters only.
+ * User-level processing of custom keycodes, for those that might output characters.
  * This is split out from process_record_user so that it can be called from other
  * places e.g. combo or layer tap processing.
  */
-bool process_record_user_character(uint16_t keycode, keyrecord_t *record) {
+bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
+    uint8_t  mods     = get_mods();
+    uint16_t tempcode = KC_NO;
+
+    // Turn off caps lock at the end of a word
+    process_caps_cancel(keycode, record);
+
+    /* Layer switching
+     */
 #ifdef LAYER_TAP_TOGGLE
     if (!process_layer_switch(keycode, record)) {
         return false;
     }
+#endif
+    
+    // Process custom shift keys
+    process_custom_shift(keycode, record);
+
+    // Process OS shortcut keycodes
+#if defined(OS_SHORTCUTS) && !defined(OS_SHORTCUTS_STATIC)
+    process_record_shortcut(keycode, record);
 #endif
 
     switch (keycode) {
@@ -322,70 +371,14 @@ bool process_record_user_character(uint16_t keycode, keyrecord_t *record) {
             }
             break;
 
-        default:
-            // Process custom shift keys
-            process_custom_shift(keycode, record);
-
-            // Process OS shortcut keycodes
-#if defined(OS_SHORTCUTS) && !defined(OS_SHORTCUTS_STATIC)
-            process_record_shortcut(keycode, record);
-#endif
-            break;
-    }
-    return true;
-}
-
-/**
- * User-level processing of custom keycodes.
- */
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    uint8_t  mods     = get_mods();
-    uint16_t tempcode = KC_NO;
-
-    // Turn off caps lock at the end of a word
-    process_caps_cancel(keycode, record);
-
-#ifdef LAYER_TAP_TOGGLE
-    // Check for interrupt to layer-tap-toggle
-    ltt_interrupt(keycode, record);
-#endif
-
-#ifdef COMBOROLL_ENABLE
-    // Check for and process comboroll keys
-    if (!process_record_comboroll(keycode, record)) {
-        return false;
-    }
-#endif
-
-    /* Layer switching
-     */
-#ifdef LAYER_TAP_TOGGLE
-    //      if (!process_layer_switch(keycode, record)) {
-    //	return false;
-    //      }
-#endif
-
-    switch (keycode) {
-            /* Switch between applications (Alt-Tab on Windows or Cmd-Tab on macOS).
+            /* Switch between applications (like Alt-Tab on Windows or Cmd-Tab on macOS) This must be triggered from
+	     * a layer so the release event is called from layer_state_set_user() when the layer is released.
              */
-        case CU_APPR:
-        case CU_APPL:
+        case CU_APPSWITCH_RIGHT:
+        case CU_APPSWITCH_LEFT:
             app_switcher_record(keycode, record);
             break;
-
-            /* Switch between tabs of a single application window
-             */
-        case CU_TABR:
-        case CU_TABL:
-            tempcode = keycode == CU_TABR ? (mods & MOD_MASK_SHIFT ? SC(SC_TAB_LEFT) : SC(SC_TAB_RIGHT)) : (mods & MOD_MASK_SHIFT ? SC(SC_TAB_RIGHT) : SC(SC_TAB_LEFT));
-
-            if (record->event.pressed) {
-                register_code16(tempcode);
-            } else {
-                unregister_code16(tempcode);
-            }
-            break;
-
+	    
             /* Take a screenshot of the window under the cursor.
              *
              * FIXME: currently works on macOS only, need a Windows version
@@ -467,13 +460,30 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             break;
 #endif
 
-        default:
-            break;
+    }
+    return true;
+}
 
-    } // switch
+/**
+ * User-level processing of custom keycodes.
+ */
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+
+#ifdef LAYER_TAP_TOGGLE
+    // Check for interrupt to layer-tap-toggle
+    ltt_interrupt(keycode, record);
+#endif
+
+#ifdef COMBOROLL_ENABLE
+    // Check for and process comboroll keys
+    if (!process_record_comboroll(keycode, record)) {
+        return false;
+    }
+#endif
+
 
     // Process custom keycodes that output characters
-    return process_record_user_character(keycode, record);
+    return process_record_user_emit(keycode, record);
     //    return true;
 }
 

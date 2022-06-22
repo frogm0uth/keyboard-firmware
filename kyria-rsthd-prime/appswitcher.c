@@ -59,9 +59,9 @@ void app_switcher_record(uint16_t keycode, keyrecord_t *record) {
             app_switcher_active = true;
             register_code16(SC(SC_APPSWITCH_START));
         }
-        register_code16(keycode == CU_APPR ? SC(SC_APPSWITCH_RIGHT) : SC(SC_APPSWITCH_LEFT));
+        register_code16(keycode == CU_APPSWITCH_RIGHT ? SC(SC_APPSWITCH_RIGHT) : SC(SC_APPSWITCH_LEFT));
     } else {
-        unregister_code16(keycode == CU_APPR ? SC(SC_APPSWITCH_RIGHT) : SC(SC_APPSWITCH_LEFT));
+        unregister_code16(keycode == CU_APPSWITCH_RIGHT ? SC(SC_APPSWITCH_RIGHT) : SC(SC_APPSWITCH_LEFT));
     }
 }
 

@@ -47,7 +47,7 @@ void process_combo_string(const char *str) {
 void register_combo_key(uint16_t keycode, keyrecord_t *record) {
     if (keycode > SAFE_RANGE) { // handle custom keycodes, a bit iffy but seems to work...
         record->event.pressed = true;
-        process_record_user_character(keycode, record);
+        process_record_user_emit(keycode, record);
     } else {
         if (keycode == KC_CAPS) { // needs special treatment!??
             tap_code16(keycode);
@@ -61,7 +61,7 @@ void register_combo_key(uint16_t keycode, keyrecord_t *record) {
 void unregister_combo_key(uint16_t keycode, keyrecord_t *record) {
     if (keycode > SAFE_RANGE) { // handle custom keycodes, a bit iffy but seems to work...
         record->event.pressed = false;
-        process_record_user_character(keycode, record);
+        process_record_user_emit(keycode, record);
     } else {
         unregister_code16(keycode);
     }
