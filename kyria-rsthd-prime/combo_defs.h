@@ -105,7 +105,9 @@ LtoR_ARR( esc_x,                                            // Escape-X for emac
     KC_V, KC_C )
 
 // Syntax layer
-LRRL_LIT( php, "<?php", KC_QUES, KC_LBRC )
+RtoL_LIT( openphp,        "<?php", KC_RBRC, KC_QUES )
+RtoL_LIT( closeparensemi, ");",    KC_QUES, KC_LBRC )
+RtoL_LIT( dirup,          "../",   KC_LBRC, CU_MNCM )
 
 // Window snapping
 LRRL_KEY( snaptop,    SC_SNAP_TOP,    SC_SNAP_TOPLEFT,    SC_SNAP_TOPRIGHT )       // Top two quadrants = snap top
