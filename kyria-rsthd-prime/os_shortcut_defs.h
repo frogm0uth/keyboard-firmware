@@ -83,7 +83,7 @@ DEFINE_SHORTCUT( SNAP_TOPRIGHT,    C(A(KC_I)),      G(KC_Z),      KC_NO )       
 DEFINE_SHORTCUT( SNAP_BOTTOMLEFT,  C(A(KC_J)),      KC_NO,        KC_NO )       // Snap to bottom left quadrant of screen
 DEFINE_SHORTCUT( SNAP_BOTTOMRIGHT, C(A(KC_K)),      KC_NO,        KC_NO )       // Snap to bottom right quadrant of screen
 
-DEFINE_SHORTCUT( SNAP_VERTICAL,    S((A(KC_UP))),   S(G(KC_UP)),  KC_NO )       // Snap vertical i.e. maximize height
+DEFINE_SHORTCUT( SNAP_VERTICAL,    S(C(A(KC_UP))),  S(G(KC_UP)),  KC_NO )       // Snap vertical i.e. maximize height
 
 
 /**
