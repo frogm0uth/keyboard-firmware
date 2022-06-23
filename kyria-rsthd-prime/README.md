@@ -6,10 +6,6 @@
    * [Overview](#overview)
       * [Keyboard configuration](#keyboard-configuration)
       * [Goals](#goals)
-      * [QMK notes](#qmk-notes)
-   * [Features](#features)
-      * [Platform-dependent shortcuts](#platform-dependent-shortcuts)
-      * [Comborolls](#comborolls)
    * [Layers](#layers)
       * [ALPHA](#alpha)
       * [SYMS](#syms)
@@ -22,7 +18,7 @@
       * [Acknowledgments](#acknowledgments)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: username, at: Mon 20 Jun 2022 16:07:27 AEST -->
+<!-- Added by: username, at: Fri 24 Jun 2022 04:38:53 AEST -->
 
 <!--te-->
 
