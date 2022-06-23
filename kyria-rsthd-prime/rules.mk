@@ -20,7 +20,6 @@ OS_SHORTCUTS = yes	    # Enable OS shortcut mapping. If this is turned off, the 
 
 CUSTOM_EDIT = yes	    # Enable custom editing keys
 LAYER_TAP_TOGGLE = yes      # Enable the layer-tap-toggle feature
-CUSTOM_MOUSE = no	    # Enable custom mouse keys
 COMBOROLL_ENABLE = yes	    # Enable comborolls - not compatible with COMBO_ENABLE
 
 # Uncomment one of the next lines to prevent unused variable/function errors
@@ -67,13 +66,6 @@ ifeq ($(strip $(CUSTOM_EDIT)), yes)
 	SRC += custom_edit.c
 	SRC += os_shortcuts.c
 	OPT_DEFS += -DCUSTOM_EDIT -DOS_SHORTCUTS
-endif
-
-ifeq ($(strip $(CUSTOM_MOUSE)), yes)
-	POINTING_DEVICE_ENABLE = yes
-	POINTING_DEVICE_DRIVER = custom
-	SRC += custom_mouse.c
-	OPT_DEFS += -DCUSTOM_MOUSE
 endif
 
 ifeq ($(strip $(LAYER_TAP_TOGGLE)), yes)

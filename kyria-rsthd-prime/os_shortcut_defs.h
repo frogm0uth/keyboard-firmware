@@ -130,8 +130,9 @@ DEFINE_SHORTCUT( SCR_ZOOM_RESET,    A(G(KC_8)),      KC_NO,        G(KC_0) )    
 /**
  * Screenshots - may need additional OS-specific code
  */
-DEFINE_SHORTCUT( SHOT_SCREEN,   S(G(KC_3)),   G(KC_PSCR),   G(KC_PSCR) )  // Take whole screen and save to file
-DEFINE_SHORTCUT( SHOT_REGION,   S(G(KC_4)),   G(S(KC_S)),   KC_NO )       // Then drag-select region (macOS), start Snip and swtch (Windows) FIXME
+DEFINE_SHORTCUT( SCREENSHOT_SCREEN,   S(G(KC_3)),   G(KC_PSCR),   G(KC_PSCR) )  // Take whole screen
+DEFINE_SHORTCUT( SCREENSHOT_REGION,   S(G(KC_4)),   G(S(KC_S)),   KC_NO )       // Start screenshot of region
+DEFINE_SHORTCUT( SCREENSHOT_APP,      S(G(KC_5)),   G(S(KC_S)),   KC_NO )       // Start screen shot app
 
 
 /**

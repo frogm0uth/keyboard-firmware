@@ -118,7 +118,3 @@ CMBO_KEY( funclayer, CL_FUNC,        CU_LCMD, CL_SNAP )      // Activate FUNC la
 RtoL_LIT( openphp,        "<?php", KC_RBRC, KC_QUES )
 RtoL_LIT( closeparensemi, ");",    KC_QUES, KC_LBRC )
 RtoL_LIT( dirup,          "../",   KC_LBRC, CU_MNCM )
-
-// Window snapping
-CMBO_KEY( snaptop,    SC_SNAP_TOP,    SC_SNAP_TOPLEFT,    SC_SNAP_TOPRIGHT )       // Top two quadrants = snap top
-CMBO_KEY( snapbottom, SC_SNAP_BOTTOM, SC_SNAP_BOTTOMLEFT, SC_SNAP_BOTTOMRIGHT )    // Bottom two quadrants = snap bottom

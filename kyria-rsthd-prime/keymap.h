@@ -19,7 +19,6 @@
 
 #include "os_shortcuts.h"
 #include "custom_edit.h"
-#include "custom_mouse.h"
 #include "layer_tap_toggle.h"
 #include "combos.h"
 
