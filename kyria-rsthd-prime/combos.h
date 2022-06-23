@@ -16,15 +16,15 @@
 #pragma once
 #include QMK_KEYBOARD_H
 
-#include "keymap.h"
-
-/**
- ** Definitions for comborolls
- **/
+/*
+ * Timeout for comborolls and directional QMK combos 
+ */
 #ifndef COMBOROLL_TIMEOUT
-#define COMBOROLL_TIMEOUT 150
+#    define COMBOROLL_TIMEOUT 150
 #endif
 
+
+#ifdef COMBOROLL_ENABLE
 // Types of comboroll output
 enum compose_type {
     comboroll_t_keycode = 0,
@@ -50,3 +50,5 @@ typedef struct comboroll_node {
  */
 bool process_record_comboroll(uint16_t keycode, keyrecord_t* record);
 void comboroll_tick(void);
+
+#endif // COMBOROLL_ENABLE
