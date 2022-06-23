@@ -20,16 +20,14 @@ OS_SHORTCUTS = yes	    # Enable OS shortcut mapping. If this is turned off, the 
 
 CUSTOM_EDIT = yes	    # Enable custom editing keys
 LAYER_TAP_TOGGLE = yes      # Enable the layer-tap-toggle feature
-CUSTOM_MOUSE = yes	    # Enable custom mouse keys
-COMBOROLL_ENABLE = yes	    # Enable comborolls
+CUSTOM_MOUSE = no	    # Enable custom mouse keys
+COMBOROLL_ENABLE = yes	    # Enable comborolls - not compatible with COMBO_ENABLE
 
 # Uncomment one of the next lines to prevent unused variable/function errors
 # in qmk_firmware/quantum/process_keycode/process_rgb.c from halting the compile
-EXTRAFLAGS += -Wno-unused-function -Wno-unused-variable
+//EXTRAFLAGS += -Wno-unused-function -Wno-unused-variable
 EXTRAFLAGS += -Wno-error=unused-variable -Wno-error=unused-function
 
-### FIXME no longer needed?
-EXTRAFLAGS += -flto
 
 # Don't edit from here down
 
@@ -52,11 +50,11 @@ endif
 
 ifeq ($(strip $(COMBO_ENABLE)), yes)
 	SRC += combos.c
-	OPT_DEFS += -DCOMBO_ENABLE
+	OPT_DEFS += -DCOMBO_ENABLE -DCOMBO_MUST_PRESS_IN_ORDER_PER_COMBO -DCOMBO_TERM_PER_COMBO
 endif
 
 ifeq ($(strip $(COMBOROLL_ENABLE)), yes)
-	SRC += combos.c
+	SRC += comboroll.c
 	OPT_DEFS += -DCOMBOROLL_ENABLE
 endif
 
