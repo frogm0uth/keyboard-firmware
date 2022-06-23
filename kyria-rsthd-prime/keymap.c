@@ -50,7 +50,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |  Tab |      |   P  |   G  |   D  |   Z  |      |      |  |      |      | !  ? |   L  |   Y  | ,  | |      | Caps |
  |  Alt | Shift|      |      |      |      |   E  |   '  |  | Enter| Space|      |      |      |      | Shift|  Alt |
  `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
- |                    |      |      |   "  |      | SYMS |  |      |      | BkSp |   K  |      |
+ |                    | Mute |      |   "  |      | SYMS |  |      |      | BkSp |   K  |      |
  |                    |      |  Cmd | SNAP |      |      |  |      |      | EDIT | META |      |
  |                    `----------------------------------'  `----------------------------------'
 */
@@ -58,7 +58,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_ESC,  KC_V,    KC_C,   KC_W,    KC_F,    KC_K,                                              KC_J,    KC_M,    KC_U,   CU_DOT,  KC_MINS, KC_BSPC,
         CU_LCTL, KC_R,    KC_S,   KC_T,    KC_H,    KC_B,                                              KC_SCLN, KC_N,    KC_I,   KC_O,    KC_A,    CU_RCTL,
         CU_LALT, CU_LSFT, KC_P,   KC_G,    KC_D,    KC_Z,    ___X___, ___X___, /* */ ___X___, ___X___, CU_EXQU, KC_L,    KC_Y,   CU_COMM, CU_RSFT, CU_RALT,
-        /* */                     ___X___, CU_LCMD, CL_SNAP, KC_E,    CL_SYMS, /* */ KC_ENT,  KC_SPC,  CL_EDIT, CL_META, ___X___
+        /* */                     KC_MUTE, CU_LCMD, CL_SNAP, KC_E,    CL_SYMS, /* */ KC_ENT,  KC_SPC,  CL_EDIT, CL_META, ___X___
         ),
      
 /* SYMS
@@ -113,28 +113,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* SNAP
 
  ,-----------------------------------------.                              ,-----------------------------------------.
- |  Esc |  All |  Cut | Copy | Paste| WinR |                              | WinL |SnapTL| MS_U |SnapTR|FulScr|Expose|
+ |  Esc |  All |  Cut | Copy | Paste| WinR |                              | WinL |SnapTL| SnapT|SnapTR|FulScr|Expose|
  |------+------+------+------+------+------|                              |------+------+------+------+------+------|
- | ScrL |      |      |      |      | AppR |                              | SnapL| MS_L | MS_D | MS_R | SnapR| ScrR |
- |      | Wheel| Acc1 | Acc2 |Repeat|      |                              |      |      |      |      |      |      |
+ | ScrL |      | SSScr| SSRgn| SSApp| AppR |                              | AppL | SnapL| SnapV| SnapR| Back | ScrR |
+ |      |      |      |      |      |      |                              |      |      |      |      |      |      |
  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
- |      |      |      |      |      | TabR |      |      |  |      |      | TabL |SnapBL| SnapV|SnapBR|      |DskTop|
- | FUNC | Shift| Ctrl |  Alt |  Cmd |      |      |      |  | BtnM | BtnL |      |      |      |      |      |      |
+ |      |      |      |      |      | TabR |      |      |  |      |      | TabL |SnapBL| SnapB|SnapBR|  Fwd |DskTop|
+ | FUNC | Shift| Ctrl |  Alt |  Cmd |      |      |      |  |      |      |      |      |      |      |      |      |
  `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
-                      |      |      |      |      |      |  |      |      | BtnR |      |      |
-                      |      |      | (**) |      |      |  |      |      |      | Slow |      |
+                      |      |      |      |      |      |  |      |      |      |      |      |
+                      |      |      | (**) |      |      |  |      |      |      |      |      |
                       `----------------------------------'  `----------------------------------'
 */
     [SNAP] = LAYOUT_stack(
-	_______,        SC_CUT_SELECTION, SC_SELECT_ALL,  SC_COPY_SELECTION, SC_PASTE_CLIPBOARD, CU_NEXT_WINDOW,
-	SC_PREV_SCREEN, CM_WHEE,          CM_ACC1,        CM_ACC2,           CM_REPT,            CU_APPSWITCH_RIGHT,
-	CL_FUNC,        KC_LSFT,          KC_LCTL,        KC_LALT,           KC_LGUI,            CU_TAB_RIGHT, ___X___, ___X___,
-                                                   ___X___,           ___X___,            _______,             ___X___, ___X___,
+	_______,        SC_CUT_SELECTION, SC_SELECT_ALL,        SC_COPY_SELECTION,    SC_PASTE_CLIPBOARD, CU_NEXT_WINDOW,
+	SC_PREV_SCREEN, ___X___,          SC_SCREENSHOT_SCREEN, SC_SCREENSHOT_REGION, SC_SCREENSHOT_APP,  CU_APPSWITCH_RIGHT,
+	CL_FUNC,        KC_LSFT,          KC_LCTL,              KC_LALT,              KC_LGUI,            CU_TAB_RIGHT,        ___X___, ___X___,
+                                                                ___X___,              ___X___,            _______,             ___X___, ___X___,
 
-	                      CU_PREV_WINDOW, SC_SNAP_TOPLEFT,    CM_MS_U,          SC_SNAP_TOPRIGHT,    SC_FULLSCREEN,  SC_EXPOSE_ALL,
-	                      SC_SNAP_LEFT,   CM_MS_L,            CM_MS_D,          CM_MS_R,             SC_SNAP_RIGHT,  SC_NEXT_SCREEN,
-        ___X___,   ___X___,   CU_TAB_LEFT,    SC_SNAP_BOTTOMLEFT, SC_SNAP_VERTICAL, SC_SNAP_BOTTOMRIGHT, ___X___,        SC_REVEAL_DESKTOP,
-        CM_BTN3,   CM_BTN1,   CM_BTN2,        CM_SLOW,            ___X___
+	                      CU_PREV_WINDOW,    SC_SNAP_TOPLEFT,    SC_SNAP_TOP,      SC_SNAP_TOPRIGHT,    SC_FULLSCREEN,   SC_EXPOSE_ALL,
+	                      CU_APPSWITCH_LEFT, SC_SNAP_LEFT,       SC_SNAP_VERTICAL, SC_SNAP_RIGHT,       SC_BROWSER_BACK, SC_NEXT_SCREEN,
+        ___X___,   ___X___,   CU_TAB_LEFT,       SC_SNAP_BOTTOMLEFT, SC_SNAP_BOTTOM,   SC_SNAP_BOTTOMRIGHT, SC_BROWSER_FWD,  SC_REVEAL_DESKTOP,
+        ___X___,   ___X___,   ___X___,           ___X___,            ___X___
     ),
 
 /* FUNC
@@ -218,7 +218,6 @@ void unregister_custom_key(uint16_t keycode, keyrecord_t *record) {
         record->event.pressed = false;
         process_record_user_emit(keycode, record);
     } else {
-        del_mods(MOD_MASK_SHIFT);
         unregister_code16(keycode);
     }
     set_mods(mods);
@@ -336,7 +335,7 @@ bool process_layer_switch(uint16_t keycode, keyrecord_t *record) {
 /**
  * User-level processing of custom keycodes, for those that might output characters.
  * This is split out from process_record_user so that it can be called from other
- * places e.g. combo or layer tap processing.
+ * places specifically custom shift and comboroll processing.
  */
 bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
     uint8_t  mods     = get_mods();
@@ -378,41 +377,6 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
         case CU_APPSWITCH_LEFT:
             app_switcher_record(keycode, record);
             break;
-	    
-            /* Take a screenshot of the window under the cursor.
-             *
-             * FIXME: currently works on macOS only, need a Windows version
-             */
-#ifdef NOTYET
-        case CU_SWIN:
-            if (record->event.pressed) {
-                tap_code16(SC(SC_SHOT_REGION));
-                tap_code(KC_SPC);
-#    ifdef CUSTOM_MOUSE
-                _delay_ms(100);
-                custom_mouse_button_press(CM_BTN1, true);
-                _delay_ms(100);
-                custom_mouse_button_press(CM_BTN1, false);
-#    endif
-            }
-            break;
-
-            /* Take screenshot of a region. This does the initial mouse press,
-             * so after pressing the key, drag with the mouse keys then press
-             * mouse button 1 to complete the screenshot.
-             *
-             * FIXME: currently works on macOS only, need a Windows version
-             */
-        case CU_SRGN:
-            if (record->event.pressed) {
-                tap_code16(SC(SC_SHOT_REGION));
-#    ifdef CUSTOM_MOUSE
-                _delay_ms(100);
-                custom_mouse_button_press(CM_BTN1, true);
-#    endif
-            }
-            break;
-#endif
 
 #ifdef NOTUSED
             /* Wipe the EEPROM. Handy if you get stuck when you have multiple
@@ -481,10 +445,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
 #endif
 
-
     // Process custom keycodes that output characters
     return process_record_user_emit(keycode, record);
-    //    return true;
 }
 
 /**
