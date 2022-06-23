@@ -173,7 +173,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |      |      |      |      |      |      |                              |      |      |      |      |      |      |
  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
  |      |      | Print|      |      |      |      |      |  |      |      |      |      |      |      |      |      |
- |      |      |      |      |      |      | Next |      |  |      |      |      |  Cmd |  Alt | Ctrl | Shift|      |
+ |      |      |      |      |      |      | Next |      |  | !WIPE|      |      |  Cmd |  Alt | Ctrl | Shift|      |
  `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
  |                    |!WRITE|      | Prev |      |      |  |      |      |      | (**) |      |
  |                    |      |      |      |      |      |  |      |      |      |      |      |
@@ -188,7 +188,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                            ___X___,  ___X___,  ___X___,  ___X___,  ___X___,    ___X___,
                            ___X___,  SC_NEW,   ___X___,  SC_OPEN,  SC_SAVE_AS, SC_QUIT,
         ___X___, ___X___,  ___X___, KC_RGUI,   KC_RALT,  KC_RCTL,  KC_RSFT,    ___X___,
-        ___X___, ___X___,  ___X___,  _______,  ___X___
+        CU_WIPE, ___X___,  ___X___,  _______,  ___X___
         ),
 };
 // clang-format on
@@ -268,9 +268,8 @@ void process_custom_shift(uint16_t key, keyrecord_t *record) {
  */
 void process_caps_cancel(uint16_t keycode, keyrecord_t *record) {
     uint8_t mods          = get_mods();
-    uint8_t led_usb_state = host_keyboard_leds();
 
-    if (IS_LED_ON(led_usb_state, USB_LED_CAPS_LOCK) && record->event.pressed) {
+    if (host_keyboard_led_state().caps_lock && record->event.pressed) {
         if (mods & MOD_MASK_SHIFT) {
             switch (keycode) { // Keys that cancel caps lock only on shifted version
                 case KC_1 ... KC_0:
@@ -338,8 +337,6 @@ bool process_layer_switch(uint16_t keycode, keyrecord_t *record) {
  * places specifically custom shift and comboroll processing.
  */
 bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
-    uint8_t  mods     = get_mods();
-    uint16_t tempcode = KC_NO;
 
     // Turn off caps lock at the end of a word
     process_caps_cancel(keycode, record);
@@ -378,7 +375,6 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
             app_switcher_record(keycode, record);
             break;
 
-#ifdef NOTUSED
             /* Wipe the EEPROM. Handy if you get stuck when you have multiple
              * default layers.....  After doing this, power-cycle the
              * keyboard. There will be no visible indication...
@@ -388,7 +384,6 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
                 eeconfig_init();
             }
             break;
-#endif
 
             /* Save RGB state to EEPROM.
              */

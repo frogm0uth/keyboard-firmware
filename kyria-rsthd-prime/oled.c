@@ -76,8 +76,7 @@ static void render_status(void) {
     render_qmk_logo();
 
     // Host Keyboard LED Status
-    uint8_t led_usb_state = host_keyboard_leds();
-    if (IS_LED_ON(led_usb_state, USB_LED_CAPS_LOCK)) {
+    if (host_keyboard_led_state().caps_lock) {
       oled_write_P(PSTR("        CAPS"), false);
     }
     oled_write_P(PSTR("\n"), false);

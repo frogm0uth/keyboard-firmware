@@ -33,6 +33,7 @@ void app_switcher_release(void);
 void rgblight_encoder(bool clockwise, uint8_t mods);
 void rgblight_oled_status(void);
 bool process_record_user_emit(uint16_t keycode, keyrecord_t *record);
+void process_caps_cancel(uint16_t keycode, keyrecord_t *record);
 
 /**
  * User config structure. Defined here instead of keymap.c in case other files

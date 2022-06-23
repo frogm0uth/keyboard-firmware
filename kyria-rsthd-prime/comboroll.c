@@ -49,7 +49,10 @@ void register_combo_key(uint16_t keycode, keyrecord_t *record) {
         record->event.pressed = true;
         process_record_user_emit(keycode, record);
     } else {
-        if (keycode == KC_CAPS) { // needs special treatment!??
+        // Turn off caps lock at the end of a word
+        process_caps_cancel(keycode, record);
+
+        if (keycode == KC_CAPS) { // needs special treatment...
             tap_code16(keycode);
         } else {
             register_code16(keycode);
