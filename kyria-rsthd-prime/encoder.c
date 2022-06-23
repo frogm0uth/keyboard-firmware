@@ -57,7 +57,9 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 
         case EDIT:
             if (left) {
-                keycode = clockwise ? SC(SC_REDO_ACTION) : SC(SC_UNDO_ACTION);
+#ifdef CUSTOM_EDIT
+	      custom_edit_encoder(clockwise);
+#endif
             }
             break;
 
@@ -69,7 +71,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 
         case SNAP:
             if (right) {
-                keycode = clockwise ? SC(SC_BROWSER_FWD) : SC(SC_BROWSER_BACK);
+                keycode = clockwise ? SC(SC_REDO_ACTION) : SC(SC_UNDO_ACTION);
             }
             break;
 

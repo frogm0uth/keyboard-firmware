@@ -53,17 +53,13 @@ void rgblight_oled_status() {
     uint8_t mods = get_mods();
 
     if (mods & (MOD_MASK_CTRL)) {
-        oled_write_P(PSTR("HUE "), false);
-    } else if (mods & MOD_MASK_ALT) {
-        oled_write_P(PSTR("SAT "), false);
-    } else if (mods & MOD_MASK_GUI) {
-        oled_write_P(PSTR("VAL "), false);
-    }
-    if (mods & (MOD_MASK_CAG)) {
+        oled_write_P(PSTR("HUE="), false);
         print_hex(rgblight_get_hue());
-        oled_write_char(',', false);
+    } else if (mods & MOD_MASK_ALT) {
+        oled_write_P(PSTR("SAT="), false);
         print_hex(rgblight_get_sat());
-        oled_write_char(',', false);
+    } else if (mods & MOD_MASK_GUI) {
+        oled_write_P(PSTR("VAL="), false);
         print_hex(rgblight_get_val());
     }
 }

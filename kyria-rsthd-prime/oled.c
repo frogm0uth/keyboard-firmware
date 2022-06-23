@@ -58,9 +58,9 @@ const static char* layer_names[] = {
 
 const static char* encoder_info[] = {
     [ALPHA] = "<Volume      AltTab>",
-    [EDIT]  = "<Undo/Redo",
+    [EDIT]  = "<Edit (Rept=Vert)",
     [SYMS]  = "             Search>",
-    [SNAP]  = "            Browser>",
+    [SNAP]  = "          Undo/Redo>",
     [FUNC]  = "          (S) Wheel>",
     [META]  = "<Zoom/RGB (CAG)"
 };
@@ -131,6 +131,7 @@ static void render_status(void) {
     // encoder help
     oled_write(encoder_info[layer], false);
     oled_write_P(PSTR("\n"), false);
+    oled_write_P(PSTR("         v32"), false);
 }
 
 bool oled_task_user(void) {
