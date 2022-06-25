@@ -68,10 +68,19 @@ void ce_action_move_end_of_paragraph(void) {
 
 // Delete to end of paragaph
 void ce_action_delete_end_of_paragraph(void) {
+    tap_code16(KC_RIGHT);
+    tap_code16(S(SC(SC_END_OF_PARA)));
+    tap_code16(S(KC_LEFT));
+    tap_code(KC_BSPC);
+    tap_code(KC_BSPC);
+}
+#ifdef NOTSUREWHICHISBETTER
+void ce_action_delete_end_of_paragraph(void) {
     tap_code16(S(SC(SC_END_OF_PARA)));
     tap_code16(S(KC_LEFT));
     tap_code(KC_DEL);
 }
+#endif
 
 /*
  * Response callbacks. Each must do an action ce_action_count times.
@@ -353,8 +362,8 @@ void custom_edit_tap(uint16_t keycode) {
 
 #ifdef ENCODER_ENABLE
 // Temporary
-void custom_edit_encoder(bool clockwise) {
-  return;
+bool custom_edit_encoder(bool clockwise) {
+  return false;
 }
 #else
 void custom_edit_encoder(bool clockwise) {

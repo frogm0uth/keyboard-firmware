@@ -108,5 +108,5 @@ void custom_edit_action(void);
 void custom_edit_tick(void);
 void custom_edit_mod(uint16_t keycode, keyrecord_t *record);
 void custom_edit_record(uint16_t keycode, bool pressed);
-void custom_edit_encoder(bool clockwise);
+bool custom_edit_encoder(bool clockwise);
 void custom_edit_status(void);
