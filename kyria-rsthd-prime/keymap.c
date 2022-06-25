@@ -86,26 +86,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* EDIT
 
  ,-----------------------------------------.                              ,-----------------------------------------.
- |Expose|FulScr| WordL|  Up  | WordR| WinR |                              | WinR | Paste| Copy |  All |  Cut | BkSp |
+ |Expose|FulScr| Home |  Up  |  End | WinR |                              | WinR | Paste| Copy |  All |  Cut | BkSp |
  |------+------+------+------+------+------|                              |------+------+------+------+------+------|
  | ScrL | PgUp | Left | Down | Right| AppR |                              | AppR |      |      |      |      | ScrR |
- |      |      |      |      |      |      |                              |      |Repeat| Acc2 | Acc1 |DelMod|      |
+ |      |      |      |      |      |      |                              |      | Fast |  x5  | More |Delete|      |
  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
- |  Tab | PgDn | Undo/|  Del | Redo/| TabR |      |      |  |      |      | TabR |      |      |      |      |AppWin|
- |      |      | Back |      |  Fwd |      | Space| Enter|  |      |      |      |  Cmd |  Alt | Ctrl | Shift|      |
+ |  Tab | PgDn | Undo |  Del | Redo | TabR |      |      |  |      |      | TabR |      |      |      |      |AppWin|
+ |      |      |      |      |      |      | Space| Enter|  |      |      |      |  Cmd |  Alt | Ctrl | Shift|      |
  `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
  |                    |      |      | BkSp |      |      |  |      |      |      |      |      |
  |                    |      |CmdCtl|      |      |      |  |      |      | (**) |      |      |
  |                    `----------------------------------'  `----------------------------------'
 */
      [EDIT] = LAYOUT_stack(
-	SC_EXPOSE_ALL,     SC_FULLSCREEN, CE_WD_L,         CE_MV_U,   CE_WD_R,         CU_NEXT_WINDOW,
-	SC_PREV_SCREEN,    CE_PG_U,       CE_MV_L,         CE_MV_D,   CE_MV_R,         CU_APPSWITCH_RIGHT,
-	KC_TAB,            CE_PG_D,       CU_UNDO_OR_BACK, KC_DEL,    CU_REDO_OR_FWD,  CU_TAB_RIGHT,        ___X___, ___X___,
-	                                                    ___X___,   SC_CMD_CTRL,     KC_BSPC,            KC_SPC,  KC_ENT,
+	SC_EXPOSE_ALL,     SC_FULLSCREEN, CE_HOME,         CE_UP,     CE_END,          CU_NEXT_WINDOW,
+	SC_PREV_SCREEN,    CE_PAGE_UP,    CE_LEFT,         CE_DOWN,   CE_RIGHT,        CU_APPSWITCH_RIGHT,
+	KC_TAB,            CE_PAGE_DOWN,  CU_UNDO_OR_BACK, KC_DEL,    CU_REDO_OR_FWD,  CU_TAB_RIGHT,        ___X___, ___X___,
+	                                                   ___X___,   SC_CMD_CTRL,     KC_BSPC,             KC_SPC,  KC_ENT,
 
 	                  CU_NEXT_WINDOW,     SC_PASTE_CLIPBOARD, SC_COPY_SELECTION, SC_SELECT_ALL,  SC_CUT_SELECTION, _______,
-	                  CU_APPSWITCH_RIGHT, CE_REPT,            CE_ACC2,           CE_ACC1,        CE_DMOD,          SC_NEXT_SCREEN,
+	                  CU_APPSWITCH_RIGHT, CE_FAST,            CE_X5,             CE_MORE,        CE_DELETE,        SC_NEXT_SCREEN,
 	___X___, ___X___, CU_TAB_RIGHT,       KC_RGUI,            KC_RALT,           KC_RCTL,        KC_RSFT,          SC_EXPOSE_WINDOWS,
 	___X___, ___X___, _______,        ___X___,            ___X___
 	),

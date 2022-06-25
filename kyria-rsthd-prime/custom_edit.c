@@ -21,190 +21,257 @@
  ** Custom editing operations.  These are intended to make text editing more
  ** platform-independent (and faster).
  **/
+enum {
+    ce_inactive,
+    ce_waiting,
+    ce_repeating
+};
+static uint8_t custom_edit_state = ce_inactive;
 
-static uint8_t  custom_edit_mods  = 0;
-static uint16_t edit_keycode      = KC_NO;
-static uint16_t custom_edit_timer = 0;
-static uint16_t edit_repeat_term  = EDIT_REPEAT_TERM;
+static uint8_t  custom_edit_mods        = 0;
+static uint16_t custom_edit_timer       = 0;
+static uint16_t custom_edit_term        = CE_WAIT_TERM;
+static uint16_t custom_edit_pressed_key = KC_NO;
 
-#define IS_EDIT_REPT (custom_edit_mods & CE_MOD_BIT(CE_REPT))
-#define IS_EDIT_ACC1 (custom_edit_mods & CE_MOD_BIT(CE_ACC1))
-#define IS_EDIT_ACC2 (custom_edit_mods & CE_MOD_BIT(CE_ACC2))
-#define IS_EDIT_DMOD (custom_edit_mods & CE_MOD_BIT(CE_DMOD))
+static uint16_t ce_output_key             = KC_NO;
+static uint8_t  ce_action_count           = 1;
+static void (*ce_action_callback)(void)   = NULL;
+static void (*ce_response_callback)(void) = NULL;
 
-void custom_edit_delete(void) {
-    int i, n;    //loop counters;
+#define IS_EDIT_DELETE (custom_edit_mods & CE_MOD_BIT(CE_DELETE))
+#define IS_EDIT_MORE (custom_edit_mods & CE_MOD_BIT(CE_MORE))
+#define IS_EDIT_X5 (custom_edit_mods & CE_MOD_BIT(CE_X5))
+#define IS_EDIT_FAST (custom_edit_mods & CE_MOD_BIT(CE_FAST))
 
-    switch (edit_keycode) {
-        case CE_MV_L:
-            if (IS_EDIT_ACC2) {
-                tap_code16(S(SC(SC_START_OF_LINE)));    // Delete to start of line
-                tap_code(KC_BSPC);
-            } else {
-                n = IS_EDIT_ACC1 ? 5 : 1;
-                for (i = n; i > 0; i--) {
-                    tap_code(KC_BSPC);    // Delete left
-                }
-            }
-            break;
+#define CE_MOD_BIT(kc) (1U << (kc - CE_DELETE))
 
-        case CE_MV_R:
-            if (IS_EDIT_ACC2) {
-                tap_code16(S(SC(SC_END_OF_LINE)));    // Delete to end of line
-                tap_code(KC_DEL);
-            } else {
-                n = IS_EDIT_ACC1 ? 5 : 1;
-                for (i = n; i > 0; i--) {
-                    tap_code(KC_DEL);    // Delete right
-                }
-            }
-            break;
+/*
+ * Action callbacks. Each must do the thing only once.
+ */
+// Single key
+void ce_action_tap_key(void) {
+    tap_code16(ce_output_key);
+}
 
-        case CE_WD_L:
-            if (IS_EDIT_ACC2) {
-                tap_code16(S(SC(SC_START_OF_PARA)));    // Delete to start of paragraph
-                tap_code(KC_BSPC);
-            } else {
-                n = IS_EDIT_ACC1 ? 5 : 1;
-                for (i = n; i > 0; i--) {
-                    tap_code16(SC(SC_DEL_WORD_LEFT));    // Delete words left
-                }
-            }
-            break;
+// Shift the current keycode then emit delete
+void ce_action_shift_and_delete(void) {
+    tap_code16(S(ce_output_key));
+    tap_code(KC_BSPC);
+}
 
-        case CE_WD_R:
-            if (IS_EDIT_ACC2) {
-                tap_code16(S(SC(SC_END_OF_PARA)));    // Delete to end of paragraph
-                tap_code16(S(KC_LEFT));
-                tap_code(KC_DEL);
-            } else {
-                n = IS_EDIT_ACC1 ? 5 : 1;
-                for (i = n; i > 0; i--) {
-                    tap_code16(SC(SC_DEL_WORD_RIGHT));    // Delete words right
-                }
-            }
-            break;
+// Move to end of paragaph
+void ce_action_move_end_of_paragraph(void) {
+    tap_code16(SC(SC_END_OF_PARA));
+    tap_code16(KC_LEFT);
+}
 
-        case CE_MV_U:
-        case CE_MV_D:
-            n = IS_EDIT_ACC2 ? 12 : (IS_EDIT_ACC1 ? 5 : 1);
-            tap_code16(SC(SC_START_OF_LINE));    // Delete whole lines up or down
-            for (i = n; i > 0; i--) {
-                tap_code16(edit_keycode == CE_MV_U ? S(KC_UP) : S(KC_DOWN));
-                tap_code(KC_BSPC);
-            }
-            tap_code(KC_LEFT);    // Helps reset cursor if it ends up on the wrong line... (macOS)
-            tap_code(KC_RIGHT);
-            break;
+// Delete to end of paragaph
+void ce_action_delete_end_of_paragraph(void) {
+    tap_code16(S(SC(SC_END_OF_PARA)));
+    tap_code16(S(KC_LEFT));
+    tap_code(KC_DEL);
+}
 
-        case CE_PG_U:
-            if (IS_EDIT_ACC2) {
-                tap_code16(S(SC(SC_START_OF_DOC)));    // Delete to start of document
-                tap_code(KC_BSPC);
-            } else {
-                // do nothing (?)
-            }
-            break;
+/*
+ * Response callbacks. Each must do an action ce_action_count times.
+ */
 
-        case CE_PG_D:
-            if (IS_EDIT_ACC2) {
-                tap_code16(S(SC(SC_END_OF_DOC)));    // Delete to end of document
-                tap_code(KC_DEL);
-            } else {
-                // do nothing (?)
-            }
-            break;
+// Call the current action ce_action_count times
+void ce_call_action_n_times(void) {
+    for (int n = 0; n < ce_action_count; n++) {
+        (*ce_action_callback)();
     }
 }
 
+// Delete ce_action_count lines up or down
+void ce_response_delete_lines_up_down(void) {
+    tap_code16(SC(SC_START_OF_LINE));
+    for (int n = 0; n < ce_action_count; n++) {
+        tap_code16(ce_output_key == CE_UP ? S(KC_UP) : S(KC_DOWN));
+        tap_code(KC_BSPC);
+    }
+    tap_code(KC_LEFT); // Helps reset cursor if it ends up on the wrong line... (macOS)
+    tap_code(KC_RIGHT);
+}
+
+/*
+ * Move the cursor in response to a keypress.
+ */
 void custom_edit_move(void) {
-    int     i, n;    //loop counters;
-    uint8_t mods = get_mods();
-    uint8_t key  = KC_NO;
+    // Set the default keycode
+    switch (custom_edit_pressed_key) {
+        case CE_LEFT:
+            ce_output_key = KC_LEFT;
+            break;
 
-    if (mods & MOD_MASK_CAG) {
-        // Act like conventional keys plus modifier
-        switch (edit_keycode) {
-            case CE_MV_L:
-                key = KC_LEFT;
-                break;
-            case CE_MV_R:
-                key = KC_RIGHT;
-                break;
-            case CE_WD_L:
-                key = KC_HOME;
-                break;
-            case CE_WD_R:
-                key = KC_END;
-                break;
-            case CE_MV_U:
-                key = KC_UP;
-                break;
-            case CE_MV_D:
-                key = KC_DOWN;
-                break;
-            case CE_PG_U:
-                key = KC_PGUP;
-                break;
-            case CE_PG_D:
-                key = KC_PGDN;
-                break;
-        }
-        tap_code(key);
+        case CE_RIGHT:
+            ce_output_key = KC_RIGHT;
+            break;
 
-    } else {
-        switch (edit_keycode) {
-            case CE_MV_L:
-            case CE_MV_R:
-                if (IS_EDIT_ACC2) {
-                    tap_code16(edit_keycode == CE_MV_L ? SC(SC_START_OF_LINE) : SC(SC_END_OF_LINE));    // Start or end of line
-                } else {
-                    n = IS_EDIT_ACC1 ? 5 : 1;
-                    for (i = n; i > 0; i--) {
-                        tap_code(edit_keycode == CE_MV_L ? KC_LEFT : KC_RIGHT);    // Move left or right
-                    }
-                }
-                break;
+        case CE_UP:
+            ce_output_key = KC_UP;
+            break;
 
-            case CE_WD_L:
-            case CE_WD_R:
-                if (IS_EDIT_ACC2) {
-                    tap_code16(edit_keycode == CE_WD_L ? SC(SC_START_OF_PARA) : SC(SC_END_OF_PARA));    // Start or end of paragraph
-                } else {
-                    n = IS_EDIT_ACC1 ? 5 : 1;
-                    for (i = n; i > 0; i--) {
-                        tap_code16(edit_keycode == CE_WD_L ? SC(SC_WORD_LEFT) : SC(SC_WORD_RIGHT));    // Move word left or right
-                    }
-                }
-                break;
+        case CE_DOWN:
+            ce_output_key = KC_DOWN;
+            break;
 
-            case CE_MV_U:
-            case CE_MV_D:
-                n = IS_EDIT_ACC2 ? 12 : (IS_EDIT_ACC1 ? 5 : 1);
-                for (i = n; i > 0; i--) {
-                    tap_code(edit_keycode == CE_MV_U ? KC_UP : KC_DOWN);    // Move lines up or down
-                }
-                break;
+        case CE_HOME:
+            ce_output_key = KC_HOME;
+            break;
 
-            case CE_PG_U:
-            case CE_PG_D:
-                if (IS_EDIT_ACC2) {
-                    // Move to start or end of document NB Doesn't work in Word on macOS
-                    tap_code16(edit_keycode == CE_PG_U ? SC(SC_START_OF_DOC) : SC(SC_END_OF_DOC));
-                } else {
-                    n = IS_EDIT_ACC1 ? 6 : 1;
-                    for (i = n; i > 0; i--) {
-                        tap_code(edit_keycode == CE_PG_U ? KC_PGUP : KC_PGDN);    // Move page/s up or down
-                    }
-                }
-                break;
-        }
-        custom_edit_timer = timer_read();
+        case CE_END:
+            ce_output_key = KC_END;
+            break;
+
+        case CE_PAGE_UP:
+            ce_output_key = KC_PGUP;
+            break;
+
+        case CE_PAGE_DOWN:
+            ce_output_key = KC_PGDN;
+            break;
     }
+
+    // If any normal modifiers are pressed, emit the key and return
+    if (get_mods() & MOD_MASK_CAG) {
+        tap_code16(ce_output_key);
+        return;
+    }
+
+    // set defaults for callbacks
+    ce_action_callback   = ce_action_tap_key;
+    ce_response_callback = ce_call_action_n_times;
+
+    // Change keycodes or callbacks as needed for custom edit
+    if (!IS_EDIT_MORE) {
+        switch (custom_edit_pressed_key) {
+            case CE_HOME:
+                ce_output_key = SC(SC_START_OF_LINE); // KC_HOME may not work on macOS, get better shortcut
+                break;
+
+            case CE_END:
+                ce_output_key = SC(SC_END_OF_LINE); // KC_END may not work on macOS, get better shortcut
+                break;
+        }
+    } else {
+        switch (custom_edit_pressed_key) {
+            case CE_LEFT:
+                ce_output_key = SC(SC_WORD_LEFT);
+                break;
+
+            case CE_RIGHT:
+                ce_output_key = SC(SC_WORD_RIGHT);
+                break;
+
+            case CE_UP:
+                ce_output_key = KC_UP;
+                break;
+
+            case CE_DOWN:
+                ce_output_key = KC_DOWN;
+                break;
+
+            case CE_HOME:
+                ce_output_key = SC(SC_START_OF_PARA);
+                break;
+
+            case CE_END:
+                ce_action_callback = ce_action_move_end_of_paragraph;
+                break;
+
+            case CE_PAGE_UP:
+                ce_output_key = SC(SC_START_OF_DOC);
+                break;
+
+            case CE_PAGE_DOWN:
+                ce_output_key = SC(SC_END_OF_DOC);
+                break;
+        }
+    }
+    // Do it
+    (*ce_response_callback)();
 }
 
-void custom_edit_action(void) {
-    if (IS_EDIT_DMOD) {
+/*
+ * Delete text in response to a keypress.
+ */
+void custom_edit_delete(void) {
+    // defaults for callbacks so we don't have to repeat it below
+    ce_action_callback   = ce_action_tap_key;
+    ce_response_callback = ce_call_action_n_times;
+
+    if (!IS_EDIT_MORE) {
+        switch (custom_edit_pressed_key) {
+            case CE_LEFT:
+                ce_output_key = KC_BSPC;
+                break;
+
+            case CE_RIGHT:
+                ce_output_key = KC_DEL;
+                break;
+
+            case CE_UP:
+            case CE_DOWN:
+                ce_response_callback = ce_response_delete_lines_up_down;
+                break;
+
+            case CE_HOME:
+                ce_output_key      = SC(SC_START_OF_LINE);
+                ce_action_callback = ce_action_shift_and_delete;
+                break;
+
+            case CE_END:
+                ce_output_key      = SC(SC_END_OF_LINE);
+                ce_action_callback = ce_action_shift_and_delete;
+                break;
+        }
+    } else {
+        switch (custom_edit_pressed_key) {
+            case CE_LEFT:
+                ce_output_key = SC(SC_DEL_WORD_LEFT);
+                break;
+
+            case CE_RIGHT:
+                ce_output_key = SC(SC_DEL_WORD_RIGHT);
+                break;
+
+            case CE_UP:
+            case CE_DOWN:
+                ce_response_callback = ce_response_delete_lines_up_down;
+                break;
+
+            case CE_HOME:
+                ce_output_key      = SC(SC_START_OF_PARA);
+                ce_action_callback = ce_action_shift_and_delete;
+                break;
+
+            case CE_END:
+                ce_action_callback = ce_action_delete_end_of_paragraph;
+                break;
+
+            case CE_PAGE_UP:
+                ce_output_key      = SC(SC_START_OF_DOC);
+                ce_action_callback = ce_action_shift_and_delete;
+                break;
+
+            case CE_PAGE_DOWN:
+                ce_output_key      = SC(SC_END_OF_DOC);
+                ce_action_callback = ce_action_shift_and_delete;
+                break;
+        }
+    }
+    // Do it
+    (*ce_response_callback)();
+}
+
+void custom_edit_do(void) {
+    if (IS_EDIT_X5) {
+        ce_action_count = 5;
+    } else {
+        ce_action_count = 1;
+    }
+    if (IS_EDIT_DELETE) {
         custom_edit_delete();
     } else {
         custom_edit_move();
@@ -212,11 +279,24 @@ void custom_edit_action(void) {
     custom_edit_timer = timer_read();
 }
 
-void custom_edit_tick(void) {    // Call from matrix_scan_user()
-    if (IS_EDIT_REPT) {
-        if (timer_elapsed(custom_edit_timer) > edit_repeat_term) {
-            custom_edit_action();
-        }
+void custom_edit_tick(void) { // Call from matrix_scan_user()
+    switch (custom_edit_state) {
+        case ce_inactive:
+            break;
+
+        case ce_waiting:
+            if (timer_elapsed(custom_edit_timer) > custom_edit_term) {
+                custom_edit_do();
+                custom_edit_state = ce_repeating;
+                custom_edit_term  = CE_REPEAT_TERM;
+            }
+            break;
+
+        case ce_repeating:
+            if (timer_elapsed(custom_edit_timer) > custom_edit_term) {
+                custom_edit_do();
+            }
+            break;
     }
 }
 
@@ -226,27 +306,49 @@ void custom_edit_mod(uint16_t keycode, keyrecord_t *record) {
     } else {
         custom_edit_mods &= ~CE_MOD_BIT(keycode);
     }
+    if (IS_EDIT_FAST && custom_edit_pressed_key != KC_NO) {
+        custom_edit_do();
+        custom_edit_state = ce_repeating;
+        custom_edit_term  = CE_FAST_TERM;
+    } else {
+        custom_edit_term = CE_REPEAT_TERM;
+    }
 }
 
 void custom_edit_record(uint16_t keycode, bool pressed) {
     if (pressed) {
-        edit_keycode = keycode;
-        custom_edit_action();
+        custom_edit_pressed_key = keycode;
+        if (IS_EDIT_FAST) {
+            custom_edit_state = ce_repeating;
+            custom_edit_term  = CE_FAST_TERM;
+        } else {
+            custom_edit_state = ce_waiting;
+            custom_edit_term  = CE_WAIT_TERM;
+        }
+        custom_edit_do();
     } else {
-        edit_keycode = KC_NO;
+        custom_edit_pressed_key = KC_NO;
+        custom_edit_state       = ce_inactive;
     }
 }
 
+#ifdef lsdkfjlsk
 void custom_edit_tap(uint16_t keycode) {
-    edit_keycode = keycode;
-    custom_edit_action();
-    edit_keycode = KC_NO;
+    custom_edit_pressed_key = keycode;
+    custom_edit_do();
+    custom_edit_pressed_key = KC_NO;
 }
+#endif
 
 #ifdef ENCODER_ENABLE
+// Temporary
+void custom_edit_encoder(bool clockwise) {
+  return;
+}
+#else
 void custom_edit_encoder(bool clockwise) {
     uint16_t keycode = KC_NO;
-    if (IS_EDIT_REPT) {    // Not really repeat, just change to vertical
+    if (IS_EDIT_REPT) { // Not really repeat, just change to vertical
         custom_edit_record(clockwise ? CE_MV_D : CE_MV_U, true);
         custom_edit_record(clockwise ? CE_MV_D : CE_MV_U, false);
     } else {
@@ -259,16 +361,16 @@ void custom_edit_encoder(bool clockwise) {
             } else {
                 keycode = clockwise ? KC_RIGHT : KC_LEFT;
             }
-        } else {    // Delete modifier is active
+        } else { // Delete modifier is active
             if (IS_EDIT_ACC1) {
                 keycode = clockwise ? SC(SC_DEL_WORD_RIGHT) : SC(SC_DEL_WORD_LEFT);
             } else if (IS_EDIT_ACC2) {
                 if (clockwise) {
-                    tap_code16(S(SC(SC_END_OF_PARA)));    // Delete to end of paragraph
+                    tap_code16(S(SC(SC_END_OF_PARA))); // Delete to end of paragraph
                     tap_code16(S(KC_LEFT));
                     tap_code(KC_DEL);
                 } else {
-                    tap_code16(S(SC(SC_START_OF_PARA)));    // Delete to start of paragraph
+                    tap_code16(S(SC(SC_START_OF_PARA))); // Delete to start of paragraph
                     tap_code(KC_BSPC);
                 }
             } else {
@@ -284,17 +386,17 @@ void custom_edit_encoder(bool clockwise) {
 
 #ifdef OLED_DRIVER_ENABLE
 void custom_edit_status() {
-    if (IS_EDIT_DMOD) {
+    if (IS_EDIT_DELETE) {
         oled_write_P(PSTR("DEL "), false);
     }
-    if (IS_EDIT_REPT) {
-        oled_write_P(PSTR("RPT "), false);
+    if (IS_EDIT_MORE) {
+        oled_write_P(PSTR("MORE "), false);
     }
-    if (IS_EDIT_ACC1) {
-        oled_write_P(PSTR("+1 "), false);
+    if (IS_EDIT_X5) {
+        oled_write_P(PSTR("X5 "), false);
     }
-    if (IS_EDIT_ACC2) {
-        oled_write_P(PSTR("+2 "), false);
+    if (IS_EDIT_FAST) {
+        oled_write_P(PSTR("FAST "), false);
     }
 }
 #endif

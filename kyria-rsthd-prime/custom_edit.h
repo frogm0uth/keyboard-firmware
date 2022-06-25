@@ -26,69 +26,78 @@
  ** https://github.com/frogm0uth/keyboard-notes/blob/master/qmk-custom-edit/README.md
  **/
 
-#ifdef CUSTOM_EDIT
-#    define CE_MOD_BIT(kc) (1U << (kc - CE_REPT))
+//#ifdef CUSTOM_EDIT
+//#    define CE_MOD_BIT(kc) (1U << (kc - CE_DELETE))
+
+// time until first repeat keypress
+#ifndef CE_WAIT_TERM
+#    define CE_WAIT_TERM 250
 #endif
 
-#ifndef EDIT_REPEAT_TERM
-#    define EDIT_REPEAT_TERM 50
+#ifndef CE_REPEAT_TERM
+#    define CE_REPEAT_TERM 80
 #endif
 
-#ifdef CUSTOM_EDIT
+#ifndef CE_FAST_TERM
+#    define CE_FAST_TERM 20
+#endif
+
 // clang-format off
-#    define CUSTOM_EDIT_KEYS \
-        CE_MV_L,             \
-            CE_MV_R,         \
-            CE_MV_U,         \
-            CE_MV_D,         \
-                             \
-            CE_WD_L,         \
-            CE_WD_R,         \
-                             \
-            CE_PG_U,         \
-            CE_PG_D,         \
-                             \
-            CE_REPT,         \
-            CE_ACC1,         \
-            CE_ACC2,         \
-            CE_DMOD
+#ifdef CUSTOM_EDIT // NB Don't change the order
+#    define CUSTOM_EDIT_KEYS         \
+         CE_LEFT,		     \
+         CE_RIGHT,		     \
+         CE_UP,                      \
+         CE_DOWN,		     \
+         			     \
+         CE_HOME,		     \
+         CE_END,		     \
+         			     \
+         CE_PAGE_UP,		     \
+         CE_PAGE_DOWN,		     \
+         			     \
+	 CE_DELETE,                  \
+         CE_MORE,                    \
+         CE_X5,                      \
+         CE_FAST
+
 // clang-format on
 
 #    define CUSTOM_EDIT_PROCESS_RECORD(kc, rec)         \
-        case CE_MV_L:                                   \
-        case CE_MV_R:                                   \
-        case CE_MV_U:                                   \
-        case CE_MV_D:                                   \
-        case CE_WD_L:                                   \
-        case CE_WD_R:                                   \
-        case CE_PG_U:                                   \
-        case CE_PG_D:                                   \
+        case CE_LEFT:                                   \
+        case CE_RIGHT:                                  \
+        case CE_UP:                                     \
+        case CE_DOWN:                                   \
+        case CE_HOME:                                   \
+        case CE_END:                                    \
+        case CE_PAGE_UP:                                \
+        case CE_PAGE_DOWN:                              \
             custom_edit_record(kc, rec->event.pressed); \
             break;                                      \
                                                         \
-        case CE_REPT:                                   \
-        case CE_DMOD:                                   \
-        case CE_ACC1:                                   \
-        case CE_ACC2:                                   \
+        case CE_DELETE:                                 \
+        case CE_MORE:                                   \
+        case CE_X5:                                     \
+        case CE_FAST:                                   \
             custom_edit_mod(kc, rec);                   \
             break
 
 #else
-#    define CE_MV_L KC_LEFT
-#    define CE_MV_R KC_RIGHT
-#    define CE_MV_U KC_UP
-#    define CE_MV_D KC_DOWN
+#    define CE_LEFT KC_LEFT
+#    define CE_RIGHT KC_RIGHT
+#    define CE_UP KC_UP
+#    define CE_DOWN KC_DOWN
 
-#    define CE_WD_L KC_HOME
-#    define CE_WD_R KC_END
+#    define CE_HOME KC_HOME
+#    define CE_END KC_END
 
-#    define CE_PG_U KC_PGUP
-#    define CE_PG_D KC_PGDN
+#    define CE_PAGE_UP KC_PGUP
+#    define CE_PAGE_DOWN KC_PGDN
 
-#    define CE_DMOD KC_NO
-#    define CE_ACC1 KC_NO
-#    define CE_ACC2 KC_NO
-#    define CE_REPT KC_NO
+#    define CE_DELETE KC_NO
+#    define CE_MORE KC_NO
+#    define CE_X5 KC_NO
+#    define CE_FAST KC_NO
 
 #endif
 
