@@ -52,13 +52,16 @@ The other layers are activated with a thumb key. All are hold-to-activate &ndash
 
 All layers have the OS-specific shortcuts in various places. These can be selected at run-time. For more info, see `os_shortcuts.h/c` and `os_shortcut_defs.h`.
 
+
 ### ALPHA
 
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/69cf0f771159d920a34d882d696af6aa)
 
 The alpha layout aims to reduce lateral finger movement on the index finger. It performs very well in an analyzer, with low SFU (same finger utilization) stats and low travel distance.
 
-Some of the punctuation keys use non-standard shift mappings. The SYMs layer does this for the numbers also. See `shift_defs.h`.
+Some of the punctuation keys use non-standard shift mappings. The SYMS layer does this for the numbers also. See `shift_defs.h`.
+
+There are a number of combos on this layer, to make typing more comfortable in some cases. While QMK combos are awesome, I have a userspace implementation called "comboroll" for space reasons &ndash; it uses about 2kbytes less than QMK combos. QMK combos can be enabled instead in `rules.mk`. See `comboroll.c` and `combo_defs.h`.
 
 ### SYMS
 
@@ -68,9 +71,9 @@ Activated by the left thumb (hold).
 
 Unshifted, this layer contains most of the punctuation keys. I've arranged them so that many common (in programming) two-letter sequences can be typed with an inward roll: `{% %} <% %> </ /> <? ?> <! => -> ~/`. Since most are on the right hand, they become an easy three-key roll with Space and Enter. 
 
-Semicolon is, surprisingly enough, not in this layer: instead there is a combo for `);`.
+Semicolon is, oddly enough, not in this layer. There is however a combo for `);`.
 
-The ten digits are accessed with Shift, akin to [Programmer Dvorak](https://www.kaufmann.no/roland/dvorak/), arranged in a 3x3 numpad-like grid. However the most frequent `0 1 2` can also be accessed as a single chord with no shift on the left hand.
+The ten digits are accessed with Shift, akin to [Programmer Dvorak](https://www.kaufmann.no/roland/dvorak/), arranged in a 3x3 numpad-like grid. However the most frequent `0 1 2` can also be accessed as a chord with no shift on the left hand.
 
 ### EDIT
 
@@ -78,9 +81,16 @@ Activated by the right thumb (hold).
 
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/24a80f5840733d6384fd21e20e1f28a0)
 
-This is an editing layer that extends the idea of platform-independent shortcuts to a complete editing layer. The navigation keys on the left have the standard cursor keys, home/end and page up/down. There are various other window keys on this side. 
+This layer extends the idea of platform-independent shortcuts to a complete editing layer. The navigation keys on the left have the standard cursor keys, home, end and page up/down. With no modifiers, they act as normal. If one of the standard modifiers (Ctrl, Alt, Gui) is pressed, the emitted code is the normal modifier + keycode. With one of the custom modifiers, they behave differently:
 
-On the right side are various special modifier keys on the right home row to speed up editing. These will be documented one day... Select all, cut, copy and paste are chorded on the  top row, and keys to switch applications, windows and tabs on the inner column.
+- **Delete** makes the action delete instead of moving.
+- **More** makes the key be "more" : left and right move a word left or right; home and end move to the start and end of a paragraph; up and down move a physical page up and down (mostly for Word); page up/down move to the start and end of the document.
+- **X5** makes the action repeat 5 times on every keypress or repeat.
+- **Fast** removes the initial repeat delay and does repeats at a faster interval.
+
+All actions have auto-repeat, even those that are not a single key. You can change the modifiers while holding down a navigation key and the action changes accordingly.
+
+On the right side are various special modifier keys on the right home row to speed up editing. Select all, cut, copy and paste are chorded on the  top row, and keys to switch applications, windows and tabs on the inner column.
 
 ### SNAP
 
@@ -88,7 +98,7 @@ Activated by the left thumb (hold).
 
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/6aa3ef0fcb5c886dc105a94b62690fe0)
 
-So called because of the keys for window snapping. (For macOS, these require that [Rectangle](https://rectangleapp.com) is installed.)
+So called because of the keys for window snapping, which snap to one of the screen halves or quadrants. The center key sets the window to the full vertical height. This works on macOS if [Rectangle](https://rectangleapp.com) is running; Windows and Linux are still in development.
 
 Select all, cut, copy and paste are chorded on the left hand top row, and keys to switch applications, windows and tabs on the inner column.
 
