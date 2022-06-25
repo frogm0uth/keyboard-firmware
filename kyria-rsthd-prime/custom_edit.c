@@ -61,6 +61,7 @@ void ce_action_shift_and_delete(void) {
 
 // Move to end of paragaph
 void ce_action_move_end_of_paragraph(void) {
+    tap_code16(KC_RIGHT);
     tap_code16(SC(SC_END_OF_PARA));
     tap_code16(KC_LEFT);
 }
@@ -223,6 +224,16 @@ void custom_edit_delete(void) {
 
             case CE_END:
                 ce_output_key      = SC(SC_END_OF_LINE);
+                ce_action_callback = ce_action_shift_and_delete;
+                break;
+
+            case CE_PAGE_UP:
+                ce_output_key      = KC_PGUP;
+                ce_action_callback = ce_action_shift_and_delete;
+                break;
+
+            case CE_PAGE_DOWN:
+                ce_output_key      = KC_PGDN;
                 ce_action_callback = ce_action_shift_and_delete;
                 break;
         }
