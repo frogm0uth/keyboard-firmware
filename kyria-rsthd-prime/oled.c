@@ -42,11 +42,11 @@ const static char* layer_names[] = {
 
 const static char* encoder_info[] = {
     [ALPHA] = "<Volume      AltTab>",
-    [EDIT]  = "<Edit (Rept=Vert)",
-    [SYMS]  = "             Search>",
-    [SNAP]  = "          Undo/Redo>",
-    [FUNC]  = "          (S) Wheel>",
-    [META]  = "<Zoom/RGB (CAG)"
+    [EDIT]  = "<Zoom/Edit          ",
+    [SYMS]  = "                    ",
+    [SNAP]  = "                    ",
+    [FUNC]  = "                    ",
+    [META]  = "<Search/RGB (CAG)   "
 };
 
 // clang-format on

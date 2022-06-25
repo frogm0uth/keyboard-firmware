@@ -99,10 +99,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |                    `----------------------------------'  `----------------------------------'
 */
      [EDIT] = LAYOUT_stack(
-	SC_EXPOSE_ALL,     SC_FULLSCREEN, CE_HOME,         CE_UP,     CE_END,          CU_NEXT_WINDOW,
-	SC_PREV_SCREEN,    CE_PAGE_UP,    CE_LEFT,         CE_DOWN,   CE_RIGHT,        CU_APPSWITCH_RIGHT,
-	KC_TAB,            CE_PAGE_DOWN,  CU_UNDO_OR_BACK, KC_DEL,    CU_REDO_OR_FWD,  CU_TAB_RIGHT,        ___X___, ___X___,
-	                                                   ___X___,   SC_CMD_CTRL,     KC_BSPC,             KC_SPC,  KC_ENT,
+	SC_EXPOSE_ALL,   SC_FULLSCREEN, CE_HOME,         CE_UP,             CE_END,          CU_NEXT_WINDOW,
+	SC_PREV_SCREEN,  CE_PAGE_UP,    CE_LEFT,         CE_DOWN,           CE_RIGHT,        CU_APPSWITCH_RIGHT,
+	KC_TAB,          CE_PAGE_DOWN,  CU_UNDO_OR_BACK, KC_DEL,            CU_REDO_OR_FWD,  CU_TAB_RIGHT,        ___X___, ___X___,
+	                                                   SC_APP_ZOOM_RESET, SC_CMD_CTRL,     KC_BSPC,             KC_SPC,  KC_ENT,
 
 	                  CU_NEXT_WINDOW,     SC_PASTE_CLIPBOARD, SC_COPY_SELECTION, SC_SELECT_ALL,  SC_CUT_SELECTION, _______,
 	                  CU_APPSWITCH_RIGHT, CE_FAST,            CE_X5,             CE_MORE,        CE_DELETE,        SC_NEXT_SCREEN,
