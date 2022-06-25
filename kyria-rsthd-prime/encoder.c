@@ -35,7 +35,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 #ifdef OS_SHORTCUTS
     switch (layer) {
         case ALPHA:
-            if (right) {
+            if (left) {
                 if (!(mods & ~(MOD_BIT(SC(SC_APPSWITCH_START))))) {
                     app_switcher_trigger(clockwise);
                     return false;
@@ -50,7 +50,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     switch (layer) {
         // Left encoder by default does volume control
         case ALPHA:
-            if (left) {
+	    if (left && (mods & MOD_MASK_CTRL) ) {
 	      keycode = clockwise ? KC_VOLU : KC_VOLD;
             }
             break;

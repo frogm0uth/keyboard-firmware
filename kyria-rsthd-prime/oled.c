@@ -41,7 +41,7 @@ const static char* layer_names[] = {
 };
 
 const static char* encoder_info[] = {
-    [ALPHA] = "<Volume      AltTab>",
+    [ALPHA] = "<AltTab/Volume      ",
     [EDIT]  = "<Zoom/Edit          ",
     [SYMS]  = "                    ",
     [SNAP]  = "                    ",
