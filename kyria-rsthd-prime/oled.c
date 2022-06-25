@@ -130,7 +130,7 @@ static void render_status(void) {
     // encoder help
     oled_write(encoder_info[layer], false);
     oled_write_P(PSTR("\n"), false);
-    oled_write_P(PSTR("         v32"), false);
+    oled_write_P(PSTR("         v32        "), false);
 }
 
 bool oled_task_user(void) {
