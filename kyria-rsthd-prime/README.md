@@ -1,6 +1,6 @@
 # Kyria RSTHD/Prime
 
-**Under development.** This is a keymap I'm working on for my Kyria keyboard from [splitkb.com](https://splitkb.com). The alpha layout was based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/) but is now heavily modified. For a standard implementation of RSTHD on the Kyria, see my [Kyria Refactored](https://github.com/frogm0uth/keyboard-firmware/tree/master/kyria-refactored) keymap.
+This is the keymap for my Kyria keyboard from [splitkb.com](https://splitkb.com). The alpha layout was based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/) but is now heavily modified. For a standard implementation of RSTHD on the Kyria, see my [Kyria Refactored](https://github.com/frogm0uth/keyboard-firmware/tree/master/kyria-refactored) keymap.
 
 <!--ts-->
    * [Overview](#overview)
@@ -30,7 +30,7 @@ When I originally started making changes to RSTHD, I called it RSTHD'. The `'`, 
 
 ### Keyboard configuration
 
-My Kyria uses all 6 columns on each hand, four thumb keys on each hand, one encoder on each hand. The top two thumb keys on each side are not on the board.
+My Kyria uses all 6 columns on each hand. The left side has an OLED, an encoder, and four thumb keys. The right side has no OLED or encoder, and four thumb keys. The top two thumb keys on each side are not on the board.
 
 The controller is a Pro Micro and this keymap only just squeezes in.
 
