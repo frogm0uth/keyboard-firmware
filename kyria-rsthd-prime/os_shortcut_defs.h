@@ -39,6 +39,9 @@ DEFINE_SHORTCUT( END_OF_PARA,    A(KC_DOWN),   C(KC_DOWN),   C(KC_DOWN) )    // 
 DEFINE_SHORTCUT( START_OF_DOC,   G(KC_UP),     C(KC_HOME),   C(KC_HOME) )    // Move to start of document
 DEFINE_SHORTCUT( END_OF_DOC,     G(KC_DOWN),   C(KC_END),    C(KC_END) )     // Move to end of document
 
+DEFINE_SHORTCUT( REALPAGE_UP,    G(KC_PGUP),   KC_UP,     KC_UP )    // Move up a physical page
+DEFINE_SHORTCUT( REALPAGE_DOWN,  G(KC_PGDN),   KC_UP,     KC_UP )    // Move down a physical page
+
 
 /**
  * Text deletion

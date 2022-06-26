@@ -171,11 +171,11 @@ void custom_edit_move(void) {
                 break;
 
             case CE_UP:
-                ce_output_key = KC_UP;
+                ce_output_key = SC(SC_REALPAGE_UP);
                 break;
 
             case CE_DOWN:
-                ce_output_key = KC_DOWN;
+                ce_output_key = SC(SC_REALPAGE_DOWN);
                 break;
 
             case CE_HOME:
@@ -253,8 +253,13 @@ void custom_edit_delete(void) {
                 break;
 
             case CE_UP:
+                ce_output_key = SC(SC_REALPAGE_UP);
+                // ce_action_callback = ce_action_shift_and_delete;// doesn't work
+                break;
+
             case CE_DOWN:
-                ce_response_callback = ce_response_delete_lines_up_down;
+                ce_output_key = SC(SC_REALPAGE_DOWN);
+                // ce_action_callback = ce_action_shift_and_delete; // doesn't work
                 break;
 
             case CE_HOME:
@@ -347,7 +352,6 @@ void custom_edit_record(uint16_t keycode, bool pressed) {
         custom_edit_state       = ce_inactive;
     }
 }
-
 
 #ifdef ENCODER_ENABLE
 bool custom_edit_encoder_ready() {
