@@ -2,6 +2,23 @@
 
 Keyboard analyzers are a useful tool for working on a custom keymap. They do have some significant limitations though, so results must always be "taken with a grain of salt."
 
+**Contents**
+
+<!--ts-->
+   * [SteveP's analyzer](#steveps-analyzer)
+      * [Fitting the keymap into the analyzer](#fitting-the-keymap-into-the-analyzer)
+      * [Heatmap](#heatmap)
+      * [Finger distribution](#finger-distribution)
+      * [SFUs](#sfus)
+      * [Travel distance](#travel-distance)
+      * [Summary scores](#summary-scores)
+   * [keygen](#keygen)
+
+<!-- Created by https://github.com/ekalinin/github-markdown-toc -->
+<!-- Added by: username, at: Mon 27 Jun 2022 02:54:36 AEST -->
+
+<!--te-->
+
 ## SteveP's analyzer
 
 [SteveP's analyzer](https://stevep99.github.io/keyboard-layout-analyzer/#/main) ([github](https://github.com/stevep99/keyboard-layout-analyzer)) is a fork of the [original KLA](https://patorjk.com/keyboard-layout-analyzer/#/main) ([github](https://github.com/patorjk/keyboard-layout-analyzer)). This is a moderately powerful analyzer with a nice web-based GUI that allows for a single extra layer. The metrics are baked in (you can't change the weighting of the penalties yourself) and it doesn't analyze key sequences except for looking at SFUs.
