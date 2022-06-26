@@ -57,7 +57,7 @@ All layers have the OS-specific shortcuts in various places. These can be select
 
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/69cf0f771159d920a34d882d696af6aa)
 
-The alpha layout aims to reduce lateral finger movement on the index finger. It performs very well in an analyzer, with low SFU (same finger utilization) stats and low travel distance.
+The alpha layout aims to reduce lateral finger movement on the index finger. It performs very well in an [analyzer](docs/prime-on-the-analyzer.md), with low SFU (same finger utilization) stats and low travel distance.
 
 Some of the punctuation keys use non-standard shift mappings. The SYMS layer does this for the numbers also. See `shift_defs.h`.
 
