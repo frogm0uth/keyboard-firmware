@@ -15,7 +15,7 @@ I compare against a number of other built-in layouts: RSTHD, Colemak thumbshift,
 ### Fitting the keymap into the analyzer
 The actual keymap can't be fully expressed in the analyzer. Ignoring combos, I also have a number of characters that are duplicated in the keymap, so for the analyzer I've picked the likely best location.
 
-You can load the [kyria-rsthd-prime-v32.json](JSON) into the analyser yourself to have a closer look.
+You can load the [JSON](kyria-rsthd-prime-v32.json) into the analyser yourself to have a closer look.
 
 ### Heatmap
 
