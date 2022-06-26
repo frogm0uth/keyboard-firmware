@@ -142,7 +142,7 @@ static void render_status(void) {
             break;
 
         default:
-            oled_write(encoder_info[encstring_zoom], false);
+            oled_write(encoder_info[encstring_blank], false);
     }
     oled_write_P(PSTR("\n"), false);
     oled_write_P(PSTR("         v32        "), false);
