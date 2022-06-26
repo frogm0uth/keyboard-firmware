@@ -1,5 +1,4 @@
-/* Copyright 2019 Thomas Baart <thomas@splitkb.com>
- *
+/*
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 2 of the License, or
@@ -32,21 +31,28 @@ static void render_qmk_logo(void) {
 }
 
 const static char* layer_names[] = {
-    [ALPHA]  = "ALPHA",
-    [SYMS] =   "SYMS",
-    [EDIT]   = "EDIT",
-    [SNAP] =   "SNAP",
-    [FUNC]   = "FUNC",
-    [META]   = "META"
+    [ALPHA] = "ALPHA",
+    [SYMS]  = "SYMS",
+    [EDIT]  = "EDIT",
+    [SNAP]  = "SNAP",
+    [FUNC]  = "FUNC",
+    [META]  = "META"
+};
+
+enum encoder_info_id {
+  encstring_alttab = 0,
+  encstring_volume,
+  encstring_zoom,
+  encstring_search,
+  encstring_blank
 };
 
 const static char* encoder_info[] = {
-    [ALPHA] = "<AltTab/Volume      ",
-    [EDIT]  = "<Zoom/Edit          ",
-    [SYMS]  = "                    ",
-    [SNAP]  = "                    ",
-    [FUNC]  = "                    ",
-    [META]  = "<Search/RGB (CAG)   "
+    [encstring_alttab] = "<App            App>",
+    [encstring_volume] = "<-     Volume     +>",
+    [encstring_zoom]   = "<-      Zoom      +>",
+    [encstring_search] = "<Prev  Search  Next>",
+    [encstring_blank]  = "                    "
 };
 
 // clang-format on
@@ -61,7 +67,7 @@ static void render_status(void) {
 
     // Host Keyboard LED Status
     if (host_keyboard_led_state().caps_lock) {
-      oled_write_P(PSTR("        CAPS"), false);
+        oled_write_P(PSTR("        CAPS"), false);
     }
     oled_write_P(PSTR("\n"), false);
 
@@ -92,22 +98,52 @@ static void render_status(void) {
     }
 
     // Custom status
-    switch (get_highest_layer(layer_state)) {
+    switch (layer) {
 #ifdef CUSTOM_EDIT
         case EDIT:
             custom_edit_status();
-            break;
-#endif
-#ifdef RGBLIGHT_ENABLE
-        case META:
-            rgblight_oled_status();
             break;
 #endif
     }
     oled_write_P(PSTR("\n"), false);
 
     // encoder help
-    oled_write(encoder_info[layer], false);
+    switch (layer) {
+        case ALPHA:
+            if (!(mods & MOD_MASK_CTRL)) {
+                oled_write(encoder_info[encstring_alttab], false);
+            } else {
+                oled_write(encoder_info[encstring_volume], false);
+            }
+            break;
+
+        case EDIT:
+#ifdef CUSTOM_EDIT
+            if (custom_edit_encoder_ready()) {
+                custom_edit_encoder_status();
+            } else {
+                oled_write(encoder_info[encstring_zoom], false);
+            }
+#else
+            oled_write(encoder_info[encstring_zoom], false);
+#endif
+            break;
+
+        case META:
+#ifdef RGBLIGHT_ENABLE
+            if (!(mods & MOD_MASK_CAG)) {
+                oled_write(encoder_info[encstring_search], false);
+            } else {
+                rgblight_oled_encoder_status();
+            }
+#else
+            oled_write(encoder_info[encstring_search], false);
+#endif
+            break;
+
+        default:
+            oled_write(encoder_info[encstring_zoom], false);
+    }
     oled_write_P(PSTR("\n"), false);
     oled_write_P(PSTR("         v32        "), false);
 }

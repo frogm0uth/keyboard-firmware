@@ -45,12 +45,14 @@ char hexchars[16] = {
 };
 
 void print_hex(uint8_t n) {
-  oled_write_char(hexchars[(n>>4) & 0x0F], false);
-  oled_write_char(hexchars[n & 0x0F], false);
+    oled_write_P(PSTR("0x"), false);
+    oled_write_char(hexchars[(n>>4) & 0x0F], false);
+    oled_write_char(hexchars[n & 0x0F], false);
 }
 
-void rgblight_oled_status() {
+void rgblight_oled_encoder_status() {
     uint8_t mods = get_mods();
+    oled_write_P(PSTR("<-    "), false);
 
     if (mods & (MOD_MASK_CTRL)) {
         oled_write_P(PSTR("HUE="), false);
@@ -62,5 +64,6 @@ void rgblight_oled_status() {
         oled_write_P(PSTR("VAL="), false);
         print_hex(rgblight_get_val());
     }
+    oled_write_P(PSTR("    +>"), false);
 }
 #endif

@@ -21,11 +21,7 @@
  ** Custom editing operations.  These are intended to make text editing more
  ** platform-independent (and faster).
  **/
-enum {
-    ce_inactive,
-    ce_waiting,
-    ce_repeating
-};
+enum { ce_inactive, ce_waiting, ce_repeating };
 static uint8_t custom_edit_state = ce_inactive;
 
 static uint8_t  custom_edit_mods        = 0;
@@ -352,55 +348,59 @@ void custom_edit_record(uint16_t keycode, bool pressed) {
     }
 }
 
-#ifdef lsdkfjlsk
-void custom_edit_tap(uint16_t keycode) {
-    custom_edit_pressed_key = keycode;
-    custom_edit_do();
-    custom_edit_pressed_key = KC_NO;
-}
-#endif
 
 #ifdef ENCODER_ENABLE
-// Temporary
-bool custom_edit_encoder(bool clockwise) {
-  return false;
+bool custom_edit_encoder_ready() {
+    return custom_edit_mods != 0;
 }
-#else
+
+// The encoder uses the modifiers differently to normal. MORE is word left/right,
+// X5 is paragraph start/end, FAST is page up/down. DELETE is delete.
 void custom_edit_encoder(bool clockwise) {
-    uint16_t keycode = KC_NO;
-    if (IS_EDIT_REPT) { // Not really repeat, just change to vertical
-        custom_edit_record(clockwise ? CE_MV_D : CE_MV_U, true);
-        custom_edit_record(clockwise ? CE_MV_D : CE_MV_U, false);
-    } else {
-        // encoder is more limited than keys, so special handling of accelerators
-        if (!IS_EDIT_DMOD) {
-            if (IS_EDIT_ACC1) {
-                keycode = clockwise ? SC(SC_WORD_RIGHT) : SC(SC_WORD_LEFT);
-            } else if (IS_EDIT_ACC2) {
-                keycode = clockwise ? SC(SC_END_OF_PARA) : SC(SC_START_OF_PARA);
+    // Default is to emit the keycode
+    ce_action_callback = ce_action_tap_key;
+    if (!IS_EDIT_DELETE) {
+        if (IS_EDIT_FAST) {
+            ce_output_key = clockwise ? KC_PGDN : KC_PGUP;
+
+        } else if (IS_EDIT_X5) {
+            if (clockwise) {
+                ce_action_callback = ce_action_move_end_of_paragraph;
             } else {
-                keycode = clockwise ? KC_RIGHT : KC_LEFT;
+                ce_output_key = SC(SC_START_OF_PARA);
             }
-        } else { // Delete modifier is active
-            if (IS_EDIT_ACC1) {
-                keycode = clockwise ? SC(SC_DEL_WORD_RIGHT) : SC(SC_DEL_WORD_LEFT);
-            } else if (IS_EDIT_ACC2) {
-                if (clockwise) {
-                    tap_code16(S(SC(SC_END_OF_PARA))); // Delete to end of paragraph
-                    tap_code16(S(KC_LEFT));
-                    tap_code(KC_DEL);
-                } else {
-                    tap_code16(S(SC(SC_START_OF_PARA))); // Delete to start of paragraph
-                    tap_code(KC_BSPC);
-                }
-            } else {
-                keycode = clockwise ? KC_DEL : KC_BSPC;
-            }
+
+        } else if (IS_EDIT_MORE) {
+            ce_output_key = clockwise ? SC(SC_WORD_RIGHT) : SC(SC_WORD_LEFT);
         }
-        if (keycode != KC_NO) {
-            tap_code16(keycode);
+    } else {
+        if (IS_EDIT_FAST) {
+            if (clockwise) {
+                ce_output_key      = KC_PGDN;
+                ce_action_callback = ce_action_shift_and_delete;
+            } else {
+                ce_output_key      = KC_PGUP;
+                ce_action_callback = ce_action_shift_and_delete;
+            }
+
+        } else if (IS_EDIT_X5) {
+            if (clockwise) {
+                ce_action_callback = ce_action_delete_end_of_paragraph;
+            } else {
+                ce_output_key      = SC(SC_START_OF_PARA);
+                ce_action_callback = ce_action_shift_and_delete;
+            }
+
+        } else if (IS_EDIT_MORE) {
+            ce_output_key = clockwise ? SC(SC_DEL_WORD_RIGHT) : SC(SC_DEL_WORD_LEFT);
+
+        } else {
+            ce_output_key = clockwise ? KC_DEL : KC_BSPC;
         }
     }
+    // Do it
+    (*ce_action_callback)();
+    ce_output_key = KC_NO;
 }
 #endif
 
@@ -418,5 +418,30 @@ void custom_edit_status() {
     if (IS_EDIT_FAST) {
         oled_write_P(PSTR("FAST "), false);
     }
+}
+
+void custom_edit_encoder_status() {
+    char *leftstring, *rightstring;
+
+    if (IS_EDIT_FAST) {
+        leftstring  = "^page  ";
+        rightstring = "  pagev";
+    } else if (IS_EDIT_X5) {
+        leftstring  = "<para  ";
+        rightstring = "  para>";
+    } else if (IS_EDIT_MORE) {
+        leftstring  = "<word  ";
+        rightstring = "  word>";
+    } else {
+        leftstring  = "<char  ";
+        rightstring = "  char>";
+    }
+    oled_write(leftstring, false);
+    if (IS_EDIT_DELETE) {
+        oled_write_P(PSTR("DELETE"), false);
+    } else {
+        oled_write_P(PSTR("      "), false);
+    }
+    oled_write(rightstring, false);
 }
 #endif

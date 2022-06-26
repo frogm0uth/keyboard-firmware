@@ -22,15 +22,14 @@
  * encoder. Some features may be disabled, depending on the variables in rules.mk.
  */
 bool encoder_update_user(uint8_t index, bool clockwise) {
-    bool left  = (index == 0); // Just for readibility
-    bool right = !left;
-    
+    bool left = (index == 0); // Just for readibility
+
     uint8_t       mods    = get_mods();
     layer_state_t layer   = get_highest_layer(layer_state);
     uint16_t      keycode = KC_NO;
 
     /* This goes in two phases. First, handle anything that needs to preserve mods
-     * between clicks.
+     * between clicks. Left encoder by default is alt-tab.
      */
 #ifdef OS_SHORTCUTS
     switch (layer) {
@@ -48,32 +47,35 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
      */
     clear_mods();
     switch (layer) {
-        // Left encoder by default does volume control
+        // Left encoder does volume control if Ctrl is held
         case ALPHA:
-	    if (left && (mods & MOD_MASK_CTRL) ) {
-	      keycode = clockwise ? KC_VOLU : KC_VOLD;
+            if (left && (mods & MOD_MASK_CTRL)) {
+                keycode = clockwise ? KC_VOLU : KC_VOLD;
             }
             break;
 
-	// On the Edit layer, zoom the application window, unless a modifier is held
+            // On the Edit layer, zoom the application window, unless an edit modifier is held.
+            // If one is, move within or delete text.
         case EDIT:
             if (left) {
 #ifdef CUSTOM_EDIT
-                if (!custom_edit_encoder(clockwise)) {
-		    keycode = clockwise ? SC(SC_APP_ZOOM_IN) : SC(SC_APP_ZOOM_OUT);
-		}
+                if (custom_edit_encoder_ready()) {
+                    custom_edit_encoder(clockwise);
+                } else {
+                    keycode = clockwise ? SC(SC_APP_ZOOM_IN) : SC(SC_APP_ZOOM_OUT);
+                }
 #else
-		keycode = clockwise ? SC(SC_APP_ZOOM_IN) : SC(SC_APP_ZOOM_OUT);
+                keycode = clockwise ? SC(SC_APP_ZOOM_IN) : SC(SC_APP_ZOOM_OUT);
 #endif
             }
             break;
 
-        // On the Meta layer, scroll through search results, unless a modifier is held. If one is,
-	// change backlight color
+            // On the Meta layer, scroll through search results, unless a modifier is held. If one is,
+            // change backlight color
         case META:
             if (left) {
                 if (!(mods & MOD_MASK_CAG)) {
-		    keycode = clockwise ? SC(SC_NEXT_SEARCH) : SC(SC_PREV_SEARCH);
+                    keycode = clockwise ? SC(SC_NEXT_SEARCH) : SC(SC_PREV_SEARCH);
                 }
 #ifdef RGBLIGHT_ENABLE
                 rgblight_encoder(clockwise, mods);

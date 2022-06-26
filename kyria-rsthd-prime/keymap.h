@@ -31,7 +31,7 @@ void app_switcher_record(uint16_t keycode, keyrecord_t *record);
 void app_switcher_trigger(bool forward);
 void app_switcher_release(void);
 void rgblight_encoder(bool clockwise, uint8_t mods);
-void rgblight_oled_status(void);
+void rgblight_oled_encoder_status(void);
 bool process_record_user_emit(uint16_t keycode, keyrecord_t *record);
 void process_caps_cancel(uint16_t keycode, keyrecord_t *record);
 
