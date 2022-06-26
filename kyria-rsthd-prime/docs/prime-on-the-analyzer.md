@@ -21,7 +21,7 @@ You can load the [JSON](kyria-rsthd-prime-v32.json) into the analyser yourself t
 
 Here is the heatmap (Alice):
 
-![Prime v32 heatmap alice](docs/images/Prime%20v32%20heatmap%20alice.png)
+![Prime v32 heatmap alice](images/Prime%20v32%20heatmap%20alice.png)
 
 As you can see, nice tight symmetric distribution.
 
@@ -29,7 +29,7 @@ As you can see, nice tight symmetric distribution.
 
 Here is the finger usage distribution (Alice):
 
-![Finger usage distribution](Finger%20usage%20distribution.png)
+![Finger usage distribution](images/Finger%20usage%20distribution.png)
 
 Finger usage increases nicely from pinky to index. (Note: this does vary depending on the corpus.)
 
@@ -37,7 +37,7 @@ What the bargraph above doesn't show is that usage of the inner index column is 
 
 Comparing left-right hand usage, Prime is well balanced, slightly to the left when looking at fingers alone, and slightly to the right when looking at the whole hand: 
 
-![Left-right balance](Left-right%20balance.png)
+![Left-right balance](images/Left-right%20balance.png)
 
 The other layouts tested here (apart from RSTHD) are all biased more to the right. As they are all ergo layouts with thumb shift, they have space on one hand only. If using a slab keyboard with single space bar, a typist who uses both hands for Space would or could even out the left-right hand scores.
 
@@ -45,7 +45,7 @@ The other layouts tested here (apart from RSTHD) are all biased more to the righ
 
 SFU metrics are generally very low. Compared to other layouts that claim to have low SFUs:
 
-![SFUs](SFUs.png)
+![SFUs](images/SFUs.png)
 
 It is possible to get lower SFU scores, but not without unbalancing the layout in some other way. Realistically, I don't know that SFU scores are going to get much lower than this, short of the analyzers understanding features like combos.
 
@@ -55,7 +55,7 @@ Note also: the combos in this layout will reduce the actual SFUs. However, the s
 
 The travel distance is low:
 
-![Total distance](Total%20distance.png)
+![Total distance](images/Total%20distance.png)
 
 Note: SteveP's fork no longer outputs travel distance so I obtained these numbers from the original patorjk analyzer.
 
@@ -65,7 +65,7 @@ Note also: All the other layouts use a number row; their travel distance would p
 
 Here are the overall scores with other high-performing layouts (don't forget your grain of salt!):
 
-![Overall score](Overall%20score.png)
+![Overall score](images/Overall%20score.png)
 
 However, I've come to think that bench-racing keyboard layouts with a single score as produced above is not all that helpful. The analyzers have too many limitations and too many assumptions built in to be able to trust a simple scoring table like this. (Put the same layouts into a different version of this analyzer and the results will be different, for example.)
 
