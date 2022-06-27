@@ -73,9 +73,9 @@ enum layers {
 #    define CL_BASE TO(ALPHA)
 #    define CL_SYMS LT(SYMS,   KC_QUOT)
 #    define CL_SNAP LT(SNAP,   KC_DQUO)
-#    define CL_EDIT LT(EDIT,   KC_BSPC)
+#    define CL_EDIT LT(EDIT,   KC_QUOT)
 #    define CL_FUNC LT(FUNC,   KC_NO)
-#    define CL_META LT(META,   KC_NO)
+#    define CL_META LT(META,   KC_K)
 #endif
 // clang-format on
 

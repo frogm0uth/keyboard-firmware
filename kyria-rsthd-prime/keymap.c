@@ -197,7 +197,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 void register_custom_key(uint16_t keycode, keyrecord_t *record) {
     uint8_t mods = get_mods();
     del_mods(MOD_MASK_SHIFT);
-     if (keycode > SAFE_RANGE) { // handle custom keycodes, a bit iffy but seems to work...
+    if (keycode > SAFE_RANGE) { // handle custom keycodes, a bit iffy but seems to work...
         record->event.pressed = true;
         process_record_user_emit(keycode, record);
     } else {
@@ -267,7 +267,7 @@ void process_custom_shift(uint16_t key, keyrecord_t *record) {
  * Cancel caps-lock automatically ("caps word").
  */
 void process_caps_cancel(uint16_t keycode, keyrecord_t *record) {
-    uint8_t mods          = get_mods();
+    uint8_t mods = get_mods();
 
     if (host_keyboard_led_state().caps_lock && record->event.pressed) {
         if (mods & MOD_MASK_SHIFT) {
@@ -302,53 +302,14 @@ void process_caps_cancel(uint16_t keycode, keyrecord_t *record) {
 }
 
 /**
- * Handle layer switching
- */
-#ifdef LAYER_TAP_TOGGLE
-bool process_layer_switch(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case CL_SYMS:
-            return layer_tap_toggle(CU_QTQT, SYMS, record);
-            break;
-
-        case CL_SNAP:
-            return layer_tap_toggle(KC_DQUO, SNAP, record);
-            break;
-
-        case CL_EDIT:
-            return layer_tap_toggle(CU_QTQT, EDIT, record);
-            break;
-
-        case CL_META:
-            return layer_tap_toggle(KC_K, META, record);
-            break;
-
-        case CL_FUNC:
-            return layer_tap_toggle(KC_NO, FUNC, record);
-            break;
-    }
-    return true;
-}
-#endif
-
-/**
  * User-level processing of custom keycodes, for those that might output characters.
  * This is split out from process_record_user so that it can be called from other
  * places specifically custom shift and comboroll processing.
  */
 bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
-
     // Turn off caps lock at the end of a word
     process_caps_cancel(keycode, record);
 
-    /* Layer switching
-     */
-#ifdef LAYER_TAP_TOGGLE
-    if (!process_layer_switch(keycode, record)) {
-        return false;
-    }
-#endif
-    
     // Process custom shift keys
     process_custom_shift(keycode, record);
 
@@ -358,6 +319,50 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
 #endif
 
     switch (keycode) {
+#ifdef LAYER_TAP_TOGGLE
+        switch (keycode) {
+            case CL_SYMS:
+                return layer_tap_toggle(CU_QTQT, SYMS, record);
+                break;
+
+            case CL_SNAP:
+                return layer_tap_toggle(KC_DQUO, SNAP, record);
+                break;
+
+            case CL_EDIT:
+                return layer_tap_toggle(CU_QTQT, EDIT, record);
+                break;
+
+            case CL_META:
+                return layer_tap_toggle(KC_K, META, record);
+                break;
+
+            case CL_FUNC:
+                return layer_tap_toggle(KC_NO, FUNC, record);
+                break;
+        }
+#else
+            // handle cases where tap code is 16-bit
+        case CL_SNAP:
+            if (record->tap.count) {
+                if (record->event.pressed) {
+                    register_code16(KC_DQUO); // Register KC_DQUO on tap
+                } else {
+                    unregister_code16(KC_DQUO);
+                }
+                return false; // Return false to ignore further processing of key
+            }
+            break;
+
+        case CL_SYMS: 
+        case CL_EDIT: 
+            if (record->tap.count) {
+	        process_shift_key(KC_QUOT, KC_QUOT, record);
+                return false;
+            }
+            break;
+#endif
+
             // Directory up
         case CU_DIRU: // directory up
             if (record->event.pressed) {
@@ -368,7 +373,7 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
             break;
 
             /* Switch between applications (like Alt-Tab on Windows or Cmd-Tab on macOS) This must be triggered from
-	     * a layer so the release event is called from layer_state_set_user() when the layer is released.
+             * a layer so the release event is called from layer_state_set_user() when the layer is released.
              */
         case CU_APPSWITCH_RIGHT:
         case CU_APPSWITCH_LEFT:
@@ -418,7 +423,6 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
             }
             break;
 #endif
-
     }
     return true;
 }
@@ -427,7 +431,6 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
  * User-level processing of custom keycodes.
  */
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-
 #ifdef LAYER_TAP_TOGGLE
     // Check for interrupt to layer-tap-toggle
     ltt_interrupt(keycode, record);
