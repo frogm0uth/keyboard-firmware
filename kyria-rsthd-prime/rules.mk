@@ -5,13 +5,16 @@ LEADER_ENABLE = no          # Enable the Leader Key feature
 MOUSEKEY_ENABLE = no        # Enable the inbuilt mouse key feature
 TAP_DANCE_ENABLE = no       # Enable tap-dance (NB also uncomment #define NO_ACTION_TAPPING in config.h)
 WPM_ENABLE = no		    # Enable simple WPM display
-COMBO_ENABLE = no	    # Enable combo (chording) functionality
+COMBO_ENABLE = yes	    # Enable combo (chording) functionality
 CAPS_WORD_ENABLE = no	    # Enable the caps-word feature. Doesn't work properly with combos.
-# COMMAND_ENABLE = no
-# EXTRAKEY_ENABLE = no
-# CONSOLE_ENABLE = yes
 
+LTO_ENABLE = yes            # firmware size reduction - https://docs.qmk.fm/#/squeezing_avr
+EXTRAKEY_ENABLE = yes       # Needed for volume control, system sleep/lock
+COMMAND_ENABLE = no
 CONSOLE_ENABLE = no
+SPACE_CADET_ENABLE = no
+GRAVE_ESC_ENABLE = no 
+MAGIC_ENABLE = no
 
 # frogm0uth features
 OS_SHORTCUTS = yes	    # Enable OS shortcut mapping. If this is turned off, the keymap
@@ -19,11 +22,11 @@ OS_SHORTCUTS = yes	    # Enable OS shortcut mapping. If this is turned off, the 
 			    # definition of OS_SHORTCUTS_STATIC in config.h.
 
 CUSTOM_EDIT = yes	    # Enable custom editing keys
-LAYER_TAP_TOGGLE = yes      # Enable the layer-tap-toggle feature
-COMBOROLL_ENABLE = yes	    # Enable comborolls - not compatible with COMBO_ENABLE
+LAYER_TAP_TOGGLE = no      # Enable the layer-tap-toggle feature
+COMBOROLL_ENABLE = no	    # Enable comborolls - not compatible with COMBO_ENABLE
 
 # Uncomment one of the next lines to prevent unused variable/function errors
-# in qmk_firmware/quantum/process_keycode/process_rgb.c from halting the compile
+# from halting the compile
 //EXTRAFLAGS += -Wno-unused-function -Wno-unused-variable
 EXTRAFLAGS += -Wno-error=unused-variable -Wno-error=unused-function
 

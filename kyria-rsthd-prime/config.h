@@ -67,7 +67,9 @@
 #define NO_ACTION_MACRO
 #define NO_ACTION_FUNCTION
 #define NO_ACTION_ONESHOT
-//#define NO_ACTION_TAPPING
+//#define NO_ACTION_TAPPING // This is needed for mod-taps
+#define LAYER_STATE_8BIT
+#define EXTRA_SHORT_COMBOS
 
 //#define DEBUG_MATRIX_SCAN_RATE
 
