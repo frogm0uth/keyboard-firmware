@@ -45,7 +45,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |  Esc |   V  |   C  |   W  |   F  |   K  |                              |   J  |   M  |   U  | .  / | -  _ | BkSp |
  |------+------+------+------+------+------|                              |------+------+------+------+------+------|
  |   X  |   R  |   S  |   T  |   H  |   B  |                              | ;  : |   N  |   I  |   O  |   A  |   Q  |
- | Ctrl |      |      |      |      |      |                    Search    |      |      |      |      |      | Ctrl |
+ | Ctrl |      |      |      |      |      |  Shift/Caps        Search    |      |      |      |      |      | Ctrl |
  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
  |  Tab |      |   P  |   G  |   D  |   Z  |      |      |  |      |      | !  ? |   L  |   Y  | ,  | |      | Caps |
  |  Alt | Shift|      |      |      |      |   E  |   '  |  | Enter| Space|      |      |      |      | Shift|  Alt |
@@ -53,6 +53,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |                    | Mute |      |   "  |      | SYMS |  |      |      |   '  |   K  |      |
  |                    |      |  Cmd | SNAP |      |      |  |      |      | EDIT | META |      |
  |                    `----------------------------------'  `----------------------------------'
+                                  FUNC
 */
      [ALPHA] = LAYOUT(
         KC_ESC,  KC_V,    KC_C,   KC_W,    KC_F,    KC_K,                                              KC_J,    KC_M,    KC_U,   CU_DOT,  KC_MINS, KC_BSPC,
@@ -69,7 +70,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |   `  |   \  |   (  |   *  |   )  |   !  |                              |   ;  | >  1 | /  2 | <  3 | =  0 |   ~  |
  |      |      |      |      |      |      |                              |      |      |      |      |      |      |
  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
- |  Tab |      |   2  |   0  |   1  |   @  |      |      |  |      |      |   +  | ]  4 | ?  5 | [  6 | -  , |  ../ |
+ |  Tab |      |   2  |   0  |   1  |   @  |      |      |  |      |      |   +  | ]  4 | ?  5 | [  6 | -  , |      |
  |      | Shift| Ctrl |  Alt |  Cmd |      |      | (**) |  | Enter| Space|      |      |      |      |      |      |
  `--------------------+------+------+------|      |      |  |      |      |------+------+---------------------------'
  |                    |      |      |      |      |      |  |      |      |   .  |      |      |
@@ -79,7 +80,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [SYMS] = LAYOUT(
         _______, KC_HASH, CU_QTQT, KC_COLN, KC_DQUO, KC_AMPR,                                           KC_CIRC, CU_7,       CU_8,    CU_9,    CU_DLUN, _______,
         KC_GRV,  KC_BSLS, KC_LPRN, KC_ASTR, KC_RPRN, KC_EXLM,                                           CU_SCSC, CU_1,       CU_2,    CU_3,    CU_0,    KC_TILD,
-        _______, CU_SSFT, CU_SCTL, CU_SALT, CU_SGUI, KC_AT,   ___X___, ___X___, /* */ ___X___, ___X___, KC_PLUS, CU_4,       CU_5,    CU_6,    CU_MNCM, CU_DIRU,
+        _______, CU_SSFT, CU_SCTL, CU_SALT, CU_SGUI, KC_AT,   ___X___, ___X___, /* */ ___X___, ___X___, KC_PLUS, CU_4,       CU_5,    CU_6,    CU_MNCM, ___X___,
         /* */                      ___X___, ___X___, ___X___, ___X___, _______, /* */ _______, _______, CU_DTDT, SC_CMD_CTRL, ___X___
         ),
 
@@ -101,7 +102,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      [EDIT] = LAYOUT_stack(
 	SC_EXPOSE_ALL,   SC_FULLSCREEN, CE_HOME,         CE_UP,             CE_END,          CU_NEXT_WINDOW,
 	SC_PREV_SCREEN,  CE_PAGE_UP,    CE_LEFT,         CE_DOWN,           CE_RIGHT,        CU_APPSWITCH_RIGHT,
-	KC_TAB,          CE_PAGE_DOWN,  CU_UNDO_OR_BACK, KC_DEL,            CU_REDO_OR_FWD,  CU_TAB_RIGHT,        ___X___, ___X___,
+	KC_TAB,          CE_PAGE_DOWN,  SC_UNDO_ACTION,  KC_DEL,            SC_REDO_ACTION,  CU_TAB_RIGHT,        ___X___, ___X___,
 	                                                 SC_APP_ZOOM_RESET, SC_CMD_CTRL,     KC_SPC,             KC_BSPC,  KC_ENT,
 
 	                  CU_NEXT_WINDOW,     SC_PASTE_CLIPBOARD, SC_COPY_SELECTION, SC_SELECT_ALL,  SC_CUT_SELECTION, _______,
@@ -119,7 +120,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |      |      |      |      |      |      |                              |      |      |      |      |      |      |
  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
  |      |      |      |      |      | TabR |      |      |  |      |      | TabL |SnapBL| SnapB|SnapBR|  Fwd |DskTop|
- | FUNC | Shift| Ctrl |  Alt |  Cmd |      |      |      |  |      |      |      |      |      |      |      |      |
+ |      | Shift| Ctrl |  Alt |  Cmd |      |      |      |  |      |      |      |      |      |      |      |      |
  `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
                       |      |      |      |      |      |  |      |      |      |      |      |
                       |      |      | (**) |      |      |  |      |      |      |      |      |
@@ -128,7 +129,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [SNAP] = LAYOUT_stack(
 	_______,        SC_CUT_SELECTION, SC_SELECT_ALL,        SC_COPY_SELECTION,    SC_PASTE_CLIPBOARD, CU_NEXT_WINDOW,
 	SC_PREV_SCREEN, ___X___,          SC_SCREENSHOT_SCREEN, SC_SCREENSHOT_REGION, SC_SCREENSHOT_APP,  CU_APPSWITCH_RIGHT,
-	CL_FUNC,        KC_LSFT,          KC_LCTL,              KC_LALT,              KC_LGUI,            CU_TAB_RIGHT,        ___X___, ___X___,
+	___X___,        KC_LSFT,          KC_LCTL,              KC_LALT,              KC_LGUI,            CU_TAB_RIGHT,        ___X___, ___X___,
                                                                 ___X___,              ___X___,            _______,             ___X___, ___X___,
 
 	                      CU_PREV_WINDOW,    SC_SNAP_TOPLEFT,    SC_SNAP_TOP,      SC_SNAP_TOPRIGHT,    SC_FULLSCREEN,   SC_EXPOSE_ALL,
@@ -146,17 +147,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |      |      |      |      |      |      |                              |      |      |      |      |      |      |
  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
  |      |      |      |      |      |      |      |      |  |      |      |      |  F4  |  F5  |  F6  |  F12 |      |
- | (**) | Shift| Ctrl |  Alt |  Cmd |      |      |      |  |      |      |      |      |      |      |      |      |
+ |      | Shift| Ctrl |  Alt |  Cmd |      |      |      |  |      |      |      |      |      |      |      |      |
  `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
  |                    |      |      |      |      |      |  |      |      |      |      |      |
- |                    |      |      | (**) |      |      |  |      |      |      |CmdCtl|      |
+ |                    |      | (**) | (**) |      |      |  |      |      |      |CmdCtl|      |
  |                    `----------------------------------'  `----------------------------------'
 */
      [FUNC] = LAYOUT_stack(
         ___X___, ___X___, ___X___,         ___X___,           ___X___,         ___X___,
 	___X___, ___X___, CU_SELECT_MACOS, CU_SELECT_WINDOWS, CU_SELECT_LINUX, ___X___,
 	_______, KC_LSFT, KC_LCTL,         KC_LALT,           KC_LGUI,         ___X___, ___X___, ___X___,
-	                                   ___X___,           ___X___,         _______, ___X___, ___X___,
+	                                   ___X___,           _______,         _______, ___X___, ___X___,
 
                           ___X___, KC_F7,       KC_F8,   KC_F9,   KC_F10,  ___X___,
 	                  ___X___, KC_F1,       KC_F2,   KC_F3,   KC_F11,  ___X___,
@@ -282,7 +283,7 @@ void process_caps_cancel(uint16_t keycode, keyrecord_t *record) {
                     tap_code(KC_CAPS);
             }
         }
-        switch (keycode) { // Keycodes that cancel caps lock regardless of shift
+        switch (keycode) {     // Keycodes that cancel caps lock regardless of shift
             case KC_ENTER:
             case KC_ESCAPE:
             case KC_TAB:
@@ -347,14 +348,10 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
             return layer_tap_toggle(KC_NO, FUNC, record);
             break;
 #else
-            // layer switching - handle cases where tap code is 16-bit or otherwise special
+            // layer switching - handle cases where tap code is 16-bit or has custom shift
         case CL_SNAP:
             if (record->tap.count) {
-                if (record->event.pressed) {
-                    register_code16(KC_DQUO); // Register KC_DQUO on tap
-                } else {
-                    unregister_code16(KC_DQUO);
-                }
+                process_shift_key(KC_DQUO, KC_DQUO, record);
                 return false; // Return false to ignore further processing of key
             }
             break;
@@ -367,15 +364,6 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
             }
             break;
 #endif
-
-            // Directory up
-        case CU_DIRU: // directory up
-            if (record->event.pressed) {
-                tap_code(KC_DOT);
-                tap_code(KC_DOT);
-                tap_code(KC_SLASH);
-            }
-            break;
 
             /* Switch between applications (like Alt-Tab on Windows or Cmd-Tab on macOS) This must be triggered from
              * a layer so the release event is called from layer_state_set_user() when the layer is released.
@@ -457,11 +445,6 @@ void matrix_scan_user(void) {
     // Editing repeat
 #ifdef CUSTOM_EDIT
     custom_edit_tick();
-#endif
-
-    // Mouse repeat
-#ifdef CUSTOM_MOUSE
-    custom_mouse_tick();
 #endif
 
     // Comboroll timing repeat

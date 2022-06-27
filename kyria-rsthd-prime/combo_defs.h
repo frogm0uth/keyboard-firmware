@@ -60,7 +60,7 @@ CMBO_STR( tw, KC_T, KC_W )
 CMBO_STR( ui, KC_U, KC_I )
 
 // Anti-pinballing
-RtoL_STR( er,  KC_O,    KC_A )
+CMBO_STR( er,  KC_O,    KC_A )
 RtoL_STR( es,  KC_O,    CU_RSFT )
 CMBO_STR( ed,  CU_COMM, CU_RSFT )
 
@@ -81,8 +81,6 @@ CMBO_STR( by,  KC_D, CU_COMM )
 // Alternate punctuation on left hand
 CMBO_KEY( comma,  KC_COMM, CU_LSFT, KC_P )
 CMBO_KEY( period, KC_DOT,  CU_LSFT, KC_G )
-
-LtoR_KEY( caps, KC_X,  CU_LSFT, KC_D )
 
 // Common word endings, right hand
 RtoL_STR( ould, CU_DOT, KC_MINS )
@@ -117,4 +115,4 @@ CMBO_KEY( funclayer, CL_FUNC,        CU_LCMD, CL_SNAP )      // Activate FUNC la
 // Syntax layer
 RtoL_LIT( openphp,        "<?php", KC_RBRC, KC_QUES )
 RtoL_LIT( closeparensemi, ");",    KC_QUES, KC_LBRC )
-RtoL_LIT( dirup,          "../",   KC_LBRC, CU_MNCM )
+RtoL_LIT( dirup,          "../",   CU_DTDT, CU_2 )

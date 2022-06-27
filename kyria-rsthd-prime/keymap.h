@@ -82,8 +82,6 @@ enum layers {
 enum custom_keycodes {
     CU_IGNORE = SAFE_RANGE,
 
-    CU_DIRU, // Directory up macro
-
     CU_SWIN, // Screenshot a window
     CU_SRGN, // Start drag-select screenshot
 
@@ -99,10 +97,6 @@ enum custom_keycodes {
 
 #ifdef CUSTOM_EDIT
     CUSTOM_EDIT_KEYS, // Custom editing and navigation
-#endif
-
-#ifdef CUSTOM_MOUSE
-    CUSTOM_MOUSE_KEYS, // Custom mouse and wheel movement
 #endif
 
 // Custom shift keys. Unfortunately we can't do this simply
@@ -158,7 +152,7 @@ enum custom_keycodes {
  */
 // ALPHA layer
 #define CU_COMM CU_COMMA_PIPE
-#define CU_DOT CU_DOT_SLASH
+#define CU_DOT  CU_DOT_SLASH
 #define CU_EXQU CU_EXCLAIM_QUESTION
 
 // SYMS layer
