@@ -26,9 +26,6 @@
  ** https://github.com/frogm0uth/keyboard-notes/blob/master/qmk-custom-edit/README.md
  **/
 
-//#ifdef CUSTOM_EDIT
-//#    define CE_MOD_BIT(kc) (1U << (kc - CE_DELETE))
-
 // time until first repeat keypress
 #ifndef CE_WAIT_TERM
 #    define CE_WAIT_TERM 250
@@ -63,25 +60,6 @@
 
 // clang-format on
 
-#    define CUSTOM_EDIT_PROCESS_RECORD(kc, rec)         \
-        case CE_LEFT:                                   \
-        case CE_RIGHT:                                  \
-        case CE_UP:                                     \
-        case CE_DOWN:                                   \
-        case CE_HOME:                                   \
-        case CE_END:                                    \
-        case CE_PAGE_UP:                                \
-        case CE_PAGE_DOWN:                              \
-            custom_edit_record(kc, rec->event.pressed); \
-            break;                                      \
-                                                        \
-        case CE_DELETE:                                 \
-        case CE_MORE:                                   \
-        case CE_X5:                                     \
-        case CE_FAST:                                   \
-            custom_edit_mod(kc, rec);                   \
-            break
-
 #else
 #    define CE_LEFT KC_LEFT
 #    define CE_RIGHT KC_RIGHT
@@ -106,8 +84,7 @@
  */
 void custom_edit_action(void);
 void custom_edit_tick(void);
-void custom_edit_mod(uint16_t keycode, keyrecord_t *record);
-void custom_edit_record(uint16_t keycode, bool pressed);
+bool custom_edit_process_record(uint16_t keycode, keyrecord_t *record);
 bool custom_edit_encoder_ready(void);
 void custom_edit_encoder(bool clockwise);
 void custom_edit_status(void);

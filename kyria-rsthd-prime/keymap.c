@@ -318,31 +318,36 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
     process_record_shortcut(keycode, record);
 #endif
 
+    // Process custom editing keycodes
+#ifdef CUSTOM_EDIT
+    if (!custom_edit_process_record(keycode, record)) {
+        return false;
+    }
+#endif
+
     switch (keycode) {
 #ifdef LAYER_TAP_TOGGLE
-        switch (keycode) {
-            case CL_SYMS:
-                return layer_tap_toggle(CU_QTQT, SYMS, record);
-                break;
+        case CL_SYMS:
+            return layer_tap_toggle(CU_QTQT, SYMS, record);
+            break;
 
-            case CL_SNAP:
-                return layer_tap_toggle(KC_DQUO, SNAP, record);
-                break;
+        case CL_SNAP:
+            return layer_tap_toggle(KC_DQUO, SNAP, record);
+            break;
 
-            case CL_EDIT:
-                return layer_tap_toggle(CU_QTQT, EDIT, record);
-                break;
+        case CL_EDIT:
+            return layer_tap_toggle(CU_QTQT, EDIT, record);
+            break;
 
-            case CL_META:
-                return layer_tap_toggle(KC_K, META, record);
-                break;
+        case CL_META:
+            return layer_tap_toggle(KC_K, META, record);
+            break;
 
-            case CL_FUNC:
-                return layer_tap_toggle(KC_NO, FUNC, record);
-                break;
-        }
+        case CL_FUNC:
+            return layer_tap_toggle(KC_NO, FUNC, record);
+            break;
 #else
-            // handle cases where tap code is 16-bit
+            // layer switching - handle cases where tap code is 16-bit or otherwise special
         case CL_SNAP:
             if (record->tap.count) {
                 if (record->event.pressed) {
@@ -354,10 +359,10 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
             }
             break;
 
-        case CL_SYMS: 
-        case CL_EDIT: 
+        case CL_SYMS:
+        case CL_EDIT:
             if (record->tap.count) {
-	        process_shift_key(KC_QUOT, KC_QUOT, record);
+                process_shift_key(KC_QUOT, KC_QUOT, record);
                 return false;
             }
             break;
@@ -398,16 +403,6 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
                 rgblight_sethsv(rgblight_get_hue(), rgblight_get_sat(), rgblight_get_val());
             }
             break;
-#endif
-
-            // Process custom editing keycodes
-#ifdef CUSTOM_EDIT
-            CUSTOM_EDIT_PROCESS_RECORD(keycode, record);
-#endif
-
-            // Process custom mouse keycodes
-#ifdef CUSTOM_MOUSE
-            CUSTOM_MOUSE_PROCESS_RECORD(keycode, record);
 #endif
 
             /* Select the OS used for shortcuts and write to EEPROM.

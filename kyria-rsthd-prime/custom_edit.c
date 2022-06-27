@@ -321,36 +321,56 @@ void custom_edit_tick(void) { // Call from matrix_scan_user()
     }
 }
 
-void custom_edit_mod(uint16_t keycode, keyrecord_t *record) {
-    if (record->event.pressed) {
-        custom_edit_mods |= CE_MOD_BIT(keycode);
-    } else {
-        custom_edit_mods &= ~CE_MOD_BIT(keycode);
-    }
-    if (IS_EDIT_FAST && custom_edit_pressed_key != KC_NO) {
-        custom_edit_do();
-        custom_edit_state = ce_repeating;
-        custom_edit_term  = CE_FAST_TERM;
-    } else {
-        custom_edit_term = CE_REPEAT_TERM;
-    }
-}
+/*
+ * Handle a custom edit keypress
+ */
+bool custom_edit_process_record(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case CE_LEFT:
+        case CE_RIGHT:
+        case CE_UP:
+        case CE_DOWN:
+        case CE_HOME:
+        case CE_END:
+        case CE_PAGE_UP:
+        case CE_PAGE_DOWN:
+            if (record->event.pressed) {
+                custom_edit_pressed_key = keycode;
+                if (IS_EDIT_FAST) {
+                    custom_edit_state = ce_repeating;
+                    custom_edit_term  = CE_FAST_TERM;
+                } else {
+                    custom_edit_state = ce_waiting;
+                    custom_edit_term  = CE_WAIT_TERM;
+                }
+                custom_edit_do();
+            } else {
+                custom_edit_pressed_key = KC_NO;
+                custom_edit_state       = ce_inactive;
+            }
+            return false;
+            break;
 
-void custom_edit_record(uint16_t keycode, bool pressed) {
-    if (pressed) {
-        custom_edit_pressed_key = keycode;
-        if (IS_EDIT_FAST) {
-            custom_edit_state = ce_repeating;
-            custom_edit_term  = CE_FAST_TERM;
-        } else {
-            custom_edit_state = ce_waiting;
-            custom_edit_term  = CE_WAIT_TERM;
-        }
-        custom_edit_do();
-    } else {
-        custom_edit_pressed_key = KC_NO;
-        custom_edit_state       = ce_inactive;
+        case CE_DELETE:
+        case CE_MORE:
+        case CE_X5:
+        case CE_FAST:
+            if (record->event.pressed) {
+                custom_edit_mods |= CE_MOD_BIT(keycode);
+            } else {
+                custom_edit_mods &= ~CE_MOD_BIT(keycode);
+            }
+            if (IS_EDIT_FAST && custom_edit_pressed_key != KC_NO) {
+                custom_edit_do();
+                custom_edit_state = ce_repeating;
+                custom_edit_term  = CE_FAST_TERM;
+            } else {
+                custom_edit_term = CE_REPEAT_TERM;
+            }
+            return false;
+            break;
     }
+    return true;
 }
 
 #ifdef ENCODER_ENABLE
