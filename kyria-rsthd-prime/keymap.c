@@ -50,7 +50,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |  Tab |      |   P  |   G  |   D  |   Z  |      |      |  |      |      | !  ? |   L  |   Y  | ,  | |      | Caps |
  |  Alt | Shift|      |      |      |      |   E  |   '  |  | Enter| Space|      |      |      |      | Shift|  Alt |
  `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
- |                    | Mute |      |   "  |      | SYMS |  |      |      | BkSp |   K  |      |
+ |                    | Mute |      |   "  |      | SYMS |  |      |      |   '  |   K  |      |
  |                    |      |  Cmd | SNAP |      |      |  |      |      | EDIT | META |      |
  |                    `----------------------------------'  `----------------------------------'
 */
@@ -66,21 +66,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  ,-----------------------------------------.                              ,-----------------------------------------.
  |  Esc |   #  |   '  |   :  |   "  |   &  |                              |   ^  | }  7 | %  8 | {  9 | $  _ | BkSp |
  |------+------+------+------+------+------|                              |------+------+------+------+------+------|
- |   `  |   \  |   (  |   *  |   )  |   .  |                              |   !  | >  1 | /  2 | <  3 | =  0 |   ~  |
+ |   `  |   \  |   (  |   *  |   )  |   !  |                              |   ;  | >  1 | /  2 | <  3 | =  0 |   ~  |
  |      |      |      |      |      |      |                              |      |      |      |      |      |      |
  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
  |  Tab |      |   2  |   0  |   1  |   @  |      |      |  |      |      |   +  | ]  4 | ?  5 | [  6 | -  , |  ../ |
  |      | Shift| Ctrl |  Alt |  Cmd |      |      | (**) |  | Enter| Space|      |      |      |      |      |      |
  `--------------------+------+------+------|      |      |  |      |      |------+------+---------------------------'
- |                    |      |      |      |      |      |  |      |      | BkSp |      |      |
+ |                    |      |      |      |      |      |  |      |      |   .  |      |      |
  |                    |      |      |      |      |      |  |      |      |      |CmdCtl|      |
  |                    `----------------------------------'  `----------------------------------'
 */
     [SYMS] = LAYOUT(
         _______, KC_HASH, CU_QTQT, KC_COLN, KC_DQUO, KC_AMPR,                                           KC_CIRC, CU_7,       CU_8,    CU_9,    CU_DLUN, _______,
-        KC_GRV,  KC_BSLS, KC_LPRN, KC_ASTR, KC_RPRN, CU_DTDT,                                           KC_EXLM, CU_1,       CU_2,    CU_3,    CU_0,    KC_TILD,
+        KC_GRV,  KC_BSLS, KC_LPRN, KC_ASTR, KC_RPRN, KC_EXLM,                                           CU_SCSC, CU_1,       CU_2,    CU_3,    CU_0,    KC_TILD,
         _______, CU_SSFT, CU_SCTL, CU_SALT, CU_SGUI, KC_AT,   ___X___, ___X___, /* */ ___X___, ___X___, KC_PLUS, CU_4,       CU_5,    CU_6,    CU_MNCM, CU_DIRU,
-        /* */                      ___X___, ___X___, ___X___, ___X___, _______, /* */ _______, _______, KC_BSPC, SC_CMD_CTRL, ___X___
+        /* */                      ___X___, ___X___, ___X___, ___X___, _______, /* */ _______, _______, CU_DTDT, SC_CMD_CTRL, ___X___
         ),
 
 /* EDIT
@@ -92,9 +92,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |      |      |      |      |      |      |                              |      | Fast |  x5  | More |Delete|      |
  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
  |  Tab | PgDn | Undo |  Del | Redo | TabR |      |      |  |      |      | TabR |      |      |      |      |AppWin|
- |      |      |      |      |      |      | Space| Enter|  |      |      |      |  Cmd |  Alt | Ctrl | Shift|      |
+ |      |      |      |      |      |      | BkSp | Enter|  |      |      |      |  Cmd |  Alt | Ctrl | Shift|      |
  `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
- |                    |      |      | BkSp |      |      |  |      |      |      |      |      |
+ |                    |      |      | Space|      |      |  |      |      |      |      |      |
  |                    |      |CmdCtl|      |      |      |  |      |      | (**) |      |      |
  |                    `----------------------------------'  `----------------------------------'
 */
@@ -102,12 +102,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	SC_EXPOSE_ALL,   SC_FULLSCREEN, CE_HOME,         CE_UP,             CE_END,          CU_NEXT_WINDOW,
 	SC_PREV_SCREEN,  CE_PAGE_UP,    CE_LEFT,         CE_DOWN,           CE_RIGHT,        CU_APPSWITCH_RIGHT,
 	KC_TAB,          CE_PAGE_DOWN,  CU_UNDO_OR_BACK, KC_DEL,            CU_REDO_OR_FWD,  CU_TAB_RIGHT,        ___X___, ___X___,
-	                                                   SC_APP_ZOOM_RESET, SC_CMD_CTRL,     KC_BSPC,             KC_SPC,  KC_ENT,
+	                                                 SC_APP_ZOOM_RESET, SC_CMD_CTRL,     KC_SPC,             KC_BSPC,  KC_ENT,
 
 	                  CU_NEXT_WINDOW,     SC_PASTE_CLIPBOARD, SC_COPY_SELECTION, SC_SELECT_ALL,  SC_CUT_SELECTION, _______,
 	                  CU_APPSWITCH_RIGHT, CE_FAST,            CE_X5,             CE_MORE,        CE_DELETE,        SC_NEXT_SCREEN,
 	___X___, ___X___, CU_TAB_RIGHT,       KC_RGUI,            KC_RALT,           KC_RCTL,        KC_RSFT,          SC_EXPOSE_WINDOWS,
-	___X___, ___X___, _______,        ___X___,            ___X___
+	___X___, ___X___, _______,            ___X___,            ___X___
 	),
      
 /* SNAP
@@ -316,7 +316,7 @@ bool process_layer_switch(uint16_t keycode, keyrecord_t *record) {
             break;
 
         case CL_EDIT:
-            return layer_tap_toggle(KC_BSPC, EDIT, record);
+            return layer_tap_toggle(CU_QTQT, EDIT, record);
             break;
 
         case CL_META:

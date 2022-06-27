@@ -165,4 +165,5 @@ enum custom_keycodes {
 #define CU_DTDT CU_DOT_DOT
 #define CU_MNCM CU_MINUS_COMMA
 #define CU_QTQT CU_QUOTE_QUOTE
+#define CU_SCSC CU_SCLN_SCLN
 #define CU_DLUN CU_DOLLAR_UNDERSCORE
