@@ -48,10 +48,9 @@ Typing speed and reducing the number of keys on the keyboard are not important g
 
 There are a total of 6 layers. The first is the main alpha layer.
 
-The other layers are activated with a thumb key. All are hold-to-activate &ndash; that is, no toggles or one-shots.
+The other layers are activated with a thumb key. All are hold-to-activate &ndash; that is, no toggles or one-shots &ndash; and most are hold-taps. This is done with custom code, so that a. shifted and custom keys can be emitted on the tap and b. so that the layer activates immediately for faster use of layer keys. See `layer_tap_toggle.c/h`.
 
-All layers have the OS-specific shortcuts in various places. These can be selected at run-time. For more info, see `os_shortcuts.h/c` and `os_shortcut_defs.h`.
-
+The layers have OS-specific shortcuts in various places. The platform (macOS, Windows, Linux) can be selected at run-time. For more info, see `os_shortcuts.h/c` and `os_shortcut_defs.h`.
 
 ### ALPHA
 
@@ -61,7 +60,7 @@ The alpha layout aims to reduce lateral finger movement on the index finger. It 
 
 Some of the punctuation keys use non-standard shift mappings. The SYMS layer does this for the numbers also. See `shift_defs.h`.
 
-There are a number of combos on this layer, to make typing more comfortable in some cases. While QMK combos are awesome, I have a userspace implementation called "comboroll" for space reasons &ndash; it uses about 2kbytes less than QMK combos. QMK combos can be enabled instead in `rules.mk`. See `comboroll.c` and `combo_defs.h`.
+There are a number of combos on this layer, defined with a bunch of macros to reduce boilerplate. See `combo_defs.h`.
 
 ### SYMS
 
@@ -69,11 +68,9 @@ Activated by the left thumb (hold).
 
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/0b079c6153a029c55cc8b5b7fbe701f2)
 
-Unshifted, this layer contains most of the punctuation keys. I've arranged them so that many common (in programming) two-letter sequences can be typed with an inward roll: `{% %} <% %> </ /> <? ?> <! => -> ~/`. Since most are on the right hand, they become an easy three-key roll with Space and Enter. 
+Unshifted, this layer contains most of the punctuation keys. I've arranged them so that many common (in programming) two-letter sequences can be typed with an inward roll: `{% %} <% %> </ /> <? ?> => -> ~/`.
 
-Semicolon is, oddly enough, not in this layer. There is however a combo for `);`.
-
-The ten digits are accessed with Shift, akin to [Programmer Dvorak](https://www.kaufmann.no/roland/dvorak/), arranged in a 3x3 numpad-like grid. However the most frequent `0 1 2` can also be accessed as a chord with no shift on the left hand.
+The ten digits are accessed with Shift, akin to [Programmer Dvorak](https://www.kaufmann.no/roland/dvorak/), arranged in a 3x3 numpad-like grid. The most frequent `0 1 2` can also be accessed as a chord with no shift on the left hand.
 
 ### EDIT
 
@@ -81,16 +78,18 @@ Activated by the right thumb (hold).
 
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/24a80f5840733d6384fd21e20e1f28a0)
 
-This layer extends the idea of platform-independent shortcuts to a complete editing layer. The navigation keys on the left have the standard cursor keys, home, end and page up/down. With no modifiers, they act as normal. If one of the standard modifiers (Ctrl, Alt, Gui) is pressed, the emitted code is the normal modifier + keycode. With one of the custom modifiers, they behave differently:
+This layer extends the idea of platform-independent shortcuts to a complete editing layer. The navigation keys on the left have the standard cursor keys, home, end and page up/down. On the right side are various special modifier keys on the right home row to speed up editing:
 
 - **Delete** makes the action delete instead of moving.
 - **More** makes the key be "more" : left and right move a word left or right; home and end move to the start and end of a paragraph; up and down move a physical page up and down (mostly for Word); page up/down move to the start and end of the document.
 - **X5** makes the action repeat 5 times on every keypress or repeat.
 - **Fast** removes the initial repeat delay and does repeats at a faster interval.
 
-All actions have auto-repeat, even those that are not a single key. You can change the modifiers while holding down a navigation key and the action changes accordingly.
+If one of the standard modifiers (Ctrl, Alt, Gui) is pressed, the emitted code is just the normal modifier + keycode.
 
-On the right side are various special modifier keys on the right home row to speed up editing. Select all, cut, copy and paste are chorded on the  top row, and keys to switch applications, windows and tabs on the inner column.
+All actions have auto-repeat. You can change the modifiers while holding down a navigation key and the action changes accordingly.
+
+Select all, cut, copy and paste are chorded on the right hand top row, and keys to switch applications, windows and tabs on the inner column.
 
 ### SNAP
 
@@ -103,7 +102,7 @@ So called because of the keys for window snapping, which snap to one of the scre
 Select all, cut, copy and paste are chorded on the left hand top row, and keys to switch applications, windows and tabs on the inner column.
 
 ### FUNC
-Activated by the pinky from the SNAP layer (hold).
+Activated either as a combo on two left thumb keys, or by pressing the SNAP layer key while holding Alt.
 
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/e09a2e00f963d27b25cdaf5962b9cb7f)
 
