@@ -107,6 +107,8 @@ Activated by the left thumb (hold).
 
 So called because of the keys for window snapping, which snap to one of the screen halves or quadrants. The center key sets the window to the full vertical height. This works on macOS if [Rectangle](https://rectangleapp.com) is running; Windows and Linux are still in development.
 
+Three mouse buttons are available on the right thumb.
+
 Select all, cut, copy and paste are chorded on the left hand top row, and keys to switch applications, windows and tabs on the inner column.
 
 ### FUNC
