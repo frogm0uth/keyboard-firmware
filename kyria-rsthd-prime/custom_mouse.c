@@ -34,24 +34,14 @@ bool custom_mouse_process_record(uint16_t keycode, keyrecord_t *record) {
     if (record->event.pressed) {
         switch (keycode) {
             case CM_BTN1:
-	      //if (IS_MOUSE_BTN1) { // ignore if already pressed
-	  //     return false;
-	      //     }
                 currentReport.buttons |= MOUSE_BTN1;
                 break;
             case CM_BTN2:
-	      //if (IS_MOUSE_BTN2) { // ignore if already pressed
-	  //    return false;
-	      //    }
                 currentReport.buttons |= MOUSE_BTN2;
                 break;
             case CM_BTN3:
-	      //if (IS_MOUSE_BTN3) { // ignore if already pressed
-	  //    return false;
-	      //    }
                 currentReport.buttons |= MOUSE_BTN3;
                 break;
-
 	    default:
 	        return true;
         }

@@ -43,11 +43,4 @@
 #    endif
 #endif
 
-#define CUSTOM_MOUSE_PROCESS_RECORD(kc, rec)         \
-    case CM_BTN1:                                    \
-    case CM_BTN2:                                    \
-    case CM_BTN3:                                    \
-        custom_mouse_button_record(keycode, record); \
-        break
-
 bool custom_mouse_process_record(uint16_t keycode, keyrecord_t *record);
