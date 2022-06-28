@@ -44,11 +44,6 @@
  *
  * 2. The RtoL version works only for two trigger keys.
  *
- * 3. None of the macros above work with more than two trigger keys if COMBOROLL_ENABLED
- * is defined. So if you want > 2 trigger keys, wrap them in a #ifdef COMBO_ENABLED. 
- *
- * 4. Currently, using layer switch keys doesn't work properly: as a source, the layer
- * doesn't activate with a quick roll. As an output, it doesn't work. Needs more work.
  */
 // clang-format off
 
