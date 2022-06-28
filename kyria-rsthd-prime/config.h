@@ -17,7 +17,7 @@
 #pragma once
 
 // Timeout for combos
-#define COMBO_TERM 70
+#define COMBO_TERM 80
 
 // Tapping control
 #define TAPPING_TERM 180
