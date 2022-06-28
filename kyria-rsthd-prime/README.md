@@ -24,7 +24,7 @@ This is the keymap for my Kyria keyboard from [splitkb.com](https://splitkb.com)
 
 ## Overview
 
-The alphabetic layout in this keymap was originally based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/). I tried it, liked it, tweaked it, and tweaked some more. For better or worse, this is the result...
+The alphabetic layout in this keymap was originally based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/). I tried it, liked it, tweaked it, and tweaked some more. This is the result...
 
 When I originally started making changes to RSTHD, I called it RSTHD'. The `'`, pronounced "prime", is [used in maths](https://en.wikipedia.org/wiki/Prime_(symbol)#Use_in_mathematics,_statistics,_and_science) to indicate a derivative of the named thing. The layout still very much retains its RSTHD DNA despite all the changes. I figure calling it *RSTHD/Prime* acknowledges its origin while still indicating that it's different.
 
@@ -48,7 +48,7 @@ Typing speed and reducing the number of keys on the keyboard are not important g
 
 There are a total of 6 layers. The first is the main alpha layer.
 
-The other layers are activated with a thumb key. All are hold-to-activate &ndash; that is, no toggles or one-shots &ndash; and most are hold-taps. This is done with custom code, so that a. shifted and custom keys can be emitted on the tap and b. so that the layer activates immediately for faster use of layer keys. See `layer_tap_toggle.c/h`.
+The other layers are activated with a thumb key. All are hold-to-activate &ndash; that is, no toggles or one-shots &ndash; and most are hold-taps. Layer switching is done with custom code, so that a. shifted and custom keys can be emitted on the tap and b. so that the layer activates immediately for faster use of layer keys. See `layer_tap_toggle.c/h`.
 
 The layers have OS-specific shortcuts in various places. The platform (macOS, Windows, Linux) can be selected at run-time. For more info, see `os_shortcuts.h/c` and `os_shortcut_defs.h`.
 
@@ -58,7 +58,7 @@ The layers have OS-specific shortcuts in various places. The platform (macOS, Wi
 
 The alpha layout aims to reduce lateral finger movement on the index finger. It performs very well in an [analyzer](docs/prime-on-the-analyzer.md), with low SFU (same finger utilization) stats and low travel distance.
 
-Some of the punctuation keys use non-standard shift mappings. The SYMS layer does this for the numbers also. See `shift_defs.h`.
+Some of the punctuation keys use non-standard shift mappings. The SYMS layer also does this. See `shift_defs.h`.
 
 There are a number of combos on this layer, defined with a bunch of macros to reduce boilerplate. See `combo_defs.h`.
 
@@ -68,9 +68,9 @@ Activated by the left thumb (hold).
 
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/0b079c6153a029c55cc8b5b7fbe701f2)
 
-Unshifted, this layer contains most of the punctuation keys. I've arranged them so that many common (in programming) two-letter sequences can be typed with an inward roll: `{% %} <% %> </ /> <? ?> => -> ~/`.
+Unshifted, this layer contains most of the punctuation keys. I've arranged them so that many common (in programming) two-letter sequences can be typed with an inward roll. For example: `{% %} <% %> </ /> <? ?> => -> ~/`.
 
-The ten digits are accessed with Shift, akin to [Programmer Dvorak](https://www.kaufmann.no/roland/dvorak/), arranged in a 3x3 numpad-like grid. The most frequent `0 1 2` can also be accessed as a chord with no shift on the left hand.
+The ten digits are accessed with Shift, akin to [Programmer Dvorak](https://www.kaufmann.no/roland/dvorak/), but arranged in a 3x3 numpad-like grid. The most frequent `0 1 2` can also be accessed as a chord with no shift on the left hand.
 
 ### EDIT
 
