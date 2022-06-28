@@ -54,6 +54,8 @@ The layers have OS-specific shortcuts in various places. The platform (macOS, Wi
 
 ### ALPHA
 
+![kyria-rsthd-prime-alpha](docs/images/kyria-rsthd-prime-alpha.png)
+
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/69cf0f771159d920a34d882d696af6aa)
 
 The alpha layout aims to reduce lateral finger movement on the index finger. It performs very well in an [analyzer](docs/prime-on-the-analyzer.md), with low SFU (same finger utilization) stats and low travel distance.
@@ -66,6 +68,8 @@ There are a number of combos on this layer, defined with a bunch of macros to re
 
 Activated by the left thumb (hold).
 
+![kyria-rsthd-prime-syms](docs/images/kyria-rsthd-prime-syms.png)
+
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/0b079c6153a029c55cc8b5b7fbe701f2)
 
 Unshifted, this layer contains most of the punctuation keys. I've arranged them so that many common (in programming) two-letter sequences can be typed with an inward roll. For example: `{% %} <% %> </ /> <? ?> => -> ~/`.
@@ -75,6 +79,8 @@ The ten digits are accessed with Shift, akin to [Programmer Dvorak](https://www.
 ### EDIT
 
 Activated by the right thumb (hold).
+
+![kyria-rsthd-prime-edit](docs/images/kyria-rsthd-prime-edit.png)
 
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/24a80f5840733d6384fd21e20e1f28a0)
 
@@ -95,6 +101,8 @@ Select all, cut, copy and paste are chorded on the right hand top row, and keys 
 
 Activated by the left thumb (hold).
 
+![kyria-rsthd-prime-snap](docs/images/kyria-rsthd-prime-snap.png)
+
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/6aa3ef0fcb5c886dc105a94b62690fe0)
 
 So called because of the keys for window snapping, which snap to one of the screen halves or quadrants. The center key sets the window to the full vertical height. This works on macOS if [Rectangle](https://rectangleapp.com) is running; Windows and Linux are still in development.
@@ -104,12 +112,16 @@ Select all, cut, copy and paste are chorded on the left hand top row, and keys t
 ### FUNC
 Activated either as a combo on two left thumb keys, or by pressing the SNAP layer key while holding Alt.
 
+![kyria-rsthd-prime-func](docs/images/kyria-rsthd-prime-func.png)
+
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/e09a2e00f963d27b25cdaf5962b9cb7f)
 
 This layer contains function keys on the right hand, arranged roughly the same as the numpad. It also contains the keys that switch between macOS, Windows and Linux shortcuts.
 
 ### META
 Activated by the right thumb (hold).
+
+![kyria-rsthd-prime-meta](docs/images/kyria-rsthd-prime-meta.png)
 
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/c3f3f925be48f9c67de27b1e3b21ee37)
 
