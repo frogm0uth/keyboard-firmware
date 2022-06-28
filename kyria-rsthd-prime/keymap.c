@@ -120,9 +120,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |      |      |      |      |      |      |                              |      |      |      |      |      |      |
  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
  |      |      |      |      |      | TabR |      |      |  |      |      | TabL |SnapBL| SnapB|SnapBR|  Fwd |DskTop|
- |      | Shift| Ctrl |  Alt |  Cmd |      |      |      |  |      |      |      |      |      |      |      |      |
+ |      | Shift| Ctrl |  Alt |  Cmd |      |      |      |  | Btn3 | Btn1 |      |      |      |      |      |      |
  `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
-                      |      |      |      |      |      |  |      |      |      |      |      |
+                      |      |      |      |      |      |  |      |      | Btn2 |      |      |
                       |      |      | (**) |      |      |  |      |      |      |      |      |
                       `----------------------------------'  `----------------------------------'
 */
@@ -135,7 +135,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	                      CU_PREV_WINDOW,    SC_SNAP_TOPLEFT,    SC_SNAP_TOP,      SC_SNAP_TOPRIGHT,    SC_FULLSCREEN,   SC_EXPOSE_ALL,
 	                      CU_APPSWITCH_LEFT, SC_SNAP_LEFT,       SC_SNAP_VERTICAL, SC_SNAP_RIGHT,       SC_BROWSER_BACK, SC_NEXT_SCREEN,
         ___X___,   ___X___,   CU_TAB_LEFT,       SC_SNAP_BOTTOMLEFT, SC_SNAP_BOTTOM,   SC_SNAP_BOTTOMRIGHT, SC_BROWSER_FWD,  SC_REVEAL_DESKTOP,
-        ___X___,   ___X___,   ___X___,           ___X___,            ___X___
+        CM_BTN3,   CM_BTN1,   CM_BTN2,           ___X___,            ___X___
     ),
 
 /* FUNC
@@ -322,6 +322,13 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
     // Process custom editing keycodes
 #ifdef CUSTOM_EDIT
     if (!custom_edit_process_record(keycode, record)) {
+        return false;
+    }
+#endif
+
+    // Process custom mouse keycodes
+#ifdef CUSTOM_MOUSE
+    if (!custom_mouse_process_record(keycode, record)) {
         return false;
     }
 #endif

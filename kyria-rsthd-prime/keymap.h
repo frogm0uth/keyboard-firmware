@@ -19,6 +19,7 @@
 
 #include "os_shortcuts.h"
 #include "custom_edit.h"
+#include "custom_mouse.h"
 #include "layer_tap_toggle.h"
 #include "combos.h"
 
@@ -98,6 +99,10 @@ enum custom_keycodes {
 
 #ifdef CUSTOM_EDIT
     CUSTOM_EDIT_KEYS, // Custom editing and navigation
+#endif
+
+#ifdef CUSTOM_MOUSE
+    CUSTOM_MOUSE_KEYS,    // Custom mouse buttons
 #endif
 
 // Custom shift keys. Unfortunately we can't do this simply
