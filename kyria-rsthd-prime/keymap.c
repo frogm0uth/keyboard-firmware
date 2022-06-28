@@ -87,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* EDIT
 
  ,-----------------------------------------.                              ,-----------------------------------------.
- |Expose|FulScr| Home |  Up  |  End | WinR |                              | WinR | Paste| Copy |  All |  Cut | BkSp |
+ |Expose|FulScr| Home |  Up  |  End | WinR |                              | WinR | Paste| Copy |  Cut |  All | BkSp |
  |------+------+------+------+------+------|                              |------+------+------+------+------+------|
  | ScrL | PgUp | Left | Down | Right| AppR |                              | AppR |      |      |      |      | ScrR |
  |      |      |      |      |      |      |                              |      | Fast |  x5  | More |Delete|      |
@@ -105,9 +105,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	KC_TAB,          CE_PAGE_DOWN,  SC_UNDO_ACTION,  KC_DEL,            SC_REDO_ACTION,  CU_TAB_RIGHT,        ___X___, ___X___,
 	                                                 SC_APP_ZOOM_RESET, SC_CMD_CTRL,     KC_SPC,             KC_BSPC,  KC_ENT,
 
-	                  CU_NEXT_WINDOW,     SC_PASTE_CLIPBOARD, SC_COPY_SELECTION, SC_SELECT_ALL,  SC_CUT_SELECTION, _______,
-	                  CU_APPSWITCH_RIGHT, CE_FAST,            CE_X5,             CE_MORE,        CE_DELETE,        SC_NEXT_SCREEN,
-	___X___, ___X___, CU_TAB_RIGHT,       KC_RGUI,            KC_RALT,           KC_RCTL,        KC_RSFT,          SC_EXPOSE_WINDOWS,
+	                  CU_NEXT_WINDOW,     SC_PASTE_CLIPBOARD, SC_COPY_SELECTION, SC_CUT_SELECTION,  SC_SELECT_ALL, _______,
+	                  CU_APPSWITCH_RIGHT, CE_FAST,            CE_X5,             CE_MORE,           CE_DELETE,     SC_NEXT_SCREEN,
+	___X___, ___X___, CU_TAB_RIGHT,       KC_RGUI,            KC_RALT,           KC_RCTL,           KC_RSFT,       SC_EXPOSE_WINDOWS,
 	___X___, ___X___, _______,            ___X___,            ___X___
 	),
      
@@ -127,7 +127,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                       `----------------------------------'  `----------------------------------'
 */
     [SNAP] = LAYOUT_stack(
-	_______,        SC_CUT_SELECTION, SC_SELECT_ALL,        SC_COPY_SELECTION,    SC_PASTE_CLIPBOARD, CU_NEXT_WINDOW,
+	_______,        SC_SELECT_ALL,    SC_CUT_SELECTION,     SC_COPY_SELECTION,    SC_PASTE_CLIPBOARD, CU_NEXT_WINDOW,
 	SC_PREV_SCREEN, ___X___,          SC_SCREENSHOT_SCREEN, SC_SCREENSHOT_REGION, SC_SCREENSHOT_APP,  CU_APPSWITCH_RIGHT,
 	___X___,        KC_LSFT,          KC_LCTL,              KC_LALT,              KC_LGUI,            CU_TAB_RIGHT,        ___X___, ___X___,
                                                                 ___X___,              ___X___,            _______,             ___X___, ___X___,
@@ -327,13 +327,15 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
 #endif
 
     switch (keycode) {
+
+      // layer switching
 #ifdef LAYER_TAP_TOGGLE
         case CL_SYMS:
             return layer_tap_toggle(CU_QTQT, SYMS, record);
             break;
 
         case CL_SNAP:
-            return layer_tap_toggle(KC_DQUO, SNAP, record);
+            return layer_tap_toggle2(KC_DQUO, SNAP, FUNC, record);
             break;
 
         case CL_EDIT:
@@ -343,16 +345,12 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
         case CL_META:
             return layer_tap_toggle(KC_K, META, record);
             break;
-
-        case CL_FUNC:
-            return layer_tap_toggle(KC_NO, FUNC, record);
-            break;
 #else
-            // layer switching - handle cases where tap code is 16-bit or has custom shift
+            // layer switching using QMK layer-tap: handle cases where tap code is 16-bit or has custom shift
         case CL_SNAP:
             if (record->tap.count) {
                 process_shift_key(KC_DQUO, KC_DQUO, record);
-                return false; // Return false to ignore further processing of key
+                return false; // Return false to ignore further processing
             }
             break;
 

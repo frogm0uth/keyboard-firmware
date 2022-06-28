@@ -22,7 +22,7 @@ OS_SHORTCUTS = yes	    # Enable OS shortcut mapping. If this is turned off, the 
 			    # definition of OS_SHORTCUTS_STATIC in config.h.
 
 CUSTOM_EDIT = yes	    # Enable custom editing keys
-LAYER_TAP_TOGGLE = no      # Enable the layer-tap-toggle feature
+LAYER_TAP_TOGGLE = yes      # Enable the layer-tap-toggle feature
 COMBOROLL_ENABLE = no	    # Enable comborolls - not compatible with COMBO_ENABLE
 
 # Uncomment one of the next lines to prevent unused variable/function errors

@@ -19,20 +19,27 @@
 #include "keymap.h"
 
 /**
- ** Layer-tap-toggle. Layer active while held, Cmd/Gui-tap to toggle on, Tap to
- ** send some other key, Alt-Tap to immediately send the tap key, Ctrl-Tap to
- ** activate a second layer.  Tap to untoggle the layer. Note: there is no
- ** auto-repeat on the tap key on second tap.
- **/
+ * Layer-tap-toggle. Layer active while held, Tap to send some other key. Note: auto-repeat not
+ * implemented. Has functinos to support custom keys to lock the layer (toggle it on) and return to
+ * the base layer.  The main entry is layer_tap_toggle() which should be called from
+ * process_record_user.. A second entry is layer_tap_toggle2, which will activate a different layer
+ * if Alt is held.
+ *
+ * This is used instead of the QMK layer-tap functionality to a. support shifted and custom keys and
+ * b. because QMK layer-tap doesn't activate the layer until the end of the tapping term, which
+ * makes it hard to quickly press a key on a layer.
+ */
 
 // State of the layer-tap-toggle for a single layer
-enum { 
+// clang-format off
+enum {
     LTT_INACTIVE,
     LTT_TAPPING_ON,
     LTT_TAPPED,
     LTT_HOLDING,
     LTT_TOGGLED
 };
+// clang-format on
 
 // State arrays, one element per layer
 static uint16_t ltt_timer[NUM_LAYERS];
@@ -46,8 +53,8 @@ static bool ltt_isshifted;
  * Update the timer(s) for layer-tap-toggle. Must be called from
  * matrix_scan_user.
  */
-void ltt_update_timer (void) {
-    for (int i=0; i<NUM_LAYERS; i++) {
+void ltt_update_timer(void) {
+    for (int i = 0; i < NUM_LAYERS; i++) {
         if (ltt_state[i] == LTT_TAPPING_ON) {
             if (timer_elapsed(ltt_timer[i]) > TAPPING_TERM) {
                 ltt_state[i] = LTT_HOLDING; // Go to holding state when timer expires
@@ -74,19 +81,17 @@ void ltt_interrupt(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
-
 /**
  * Go back to the base layer. Call this from process_record_user() in response
  * to a custom keycode.
  */
 bool ltt_base(void) {
-    for (int i=0; i<NUM_LAYERS; i++) {
+    for (int i = 0; i < NUM_LAYERS; i++) {
         ltt_state[i] = LTT_INACTIVE;
     }
     layer_clear();
     return false;
 }
-
 
 /**
  * Lock the layer. Call this from process_record_user() in response to a lock
@@ -105,7 +110,6 @@ bool ltt_lock(keyrecord_t *record) {
     return false;
 }
 
-
 /**
  * Update the layer-tap-toggle state. Must be called from process_record_user().
  * Pass KC_NO if you don't want tap to send a key.
@@ -113,7 +117,6 @@ bool ltt_lock(keyrecord_t *record) {
  * Always returns false.
  */
 bool layer_tap_toggle(uint16_t keycode, uint8_t layer, keyrecord_t *record) {
-
     if (!ltt_initialized) { // Make sure state array is a known state
         ltt_base();
         ltt_initialized = true;
@@ -122,25 +125,12 @@ bool layer_tap_toggle(uint16_t keycode, uint8_t layer, keyrecord_t *record) {
         ltt_timer[layer] = timer_read();
         switch (ltt_state[layer]) {
             case LTT_INACTIVE:
-#ifdef NOTUSEDNOW
-                if (get_mods() & MOD_MASK_GUI) {
-                    ltt_state[layer] = LTT_TOGGLED;    // Toggle immediately
-                    layer_on(layer);
-                } else if (get_mods() & MOD_MASK_ALT) {
-                    unregister_code16(KC_LALT);
-                    unregister_code16(KC_RALT);
-                    tap_code16(keycode);               // Tap immediately
-                } else {
-#endif
-		    ltt_state[layer] = LTT_TAPPING_ON; // Wait and see
-                    ltt_isshifted = get_mods() & MOD_MASK_SHIFT;
-                    layer_on(layer);
-#ifdef NOTUSEDNOW
-                }
-#endif
+                ltt_state[layer] = LTT_TAPPING_ON; // Wait and see
+                ltt_isshifted    = get_mods() & MOD_MASK_SHIFT;
+                layer_on(layer);
                 break;
             case LTT_TOGGLED:
-                ltt_state[layer] = LTT_INACTIVE;     // If toggled on, toggle off
+                ltt_state[layer] = LTT_INACTIVE; // If toggled on, toggle off
                 layer_off(layer);
                 break;
         }
@@ -151,18 +141,13 @@ bool layer_tap_toggle(uint16_t keycode, uint8_t layer, keyrecord_t *record) {
                     // handle the rolling-shift case
                     if (ltt_isshifted && !(get_mods() & MOD_MASK_SHIFT)) {
                         register_code(KC_LSFT);
-                        tap_code16(keycode);              // Send the tap key
+                        tap_code16(keycode); // Send the tap key
                         unregister_code(KC_LSFT);
+                    } else if (keycode > SAFE_RANGE) { // handle custom keycodes
+                        tap_custom_key(keycode, record);
                     } else {
-		      if (keycode > SAFE_RANGE) { // handle custom keycodes
-                  record->event.pressed = true;
-			process_record_user(keycode, record);
-                  record->event.pressed = false;
-			process_record_user(keycode, record);
-		      } else {
-                        tap_code16(keycode);              // Send the tap key
-		      }
-		    }
+                        tap_code16(keycode); // Send the tap key
+                    }
                 }
                 layer_off(layer);
                 ltt_state[layer] = LTT_INACTIVE;
@@ -173,7 +158,7 @@ bool layer_tap_toggle(uint16_t keycode, uint8_t layer, keyrecord_t *record) {
                 break;
             case LTT_HOLDING:
                 layer_off(layer);
-                ltt_state[layer] = LTT_INACTIVE;   // Release the hold
+                ltt_state[layer] = LTT_INACTIVE; // Release the hold
                 break;
         }
     }
@@ -181,13 +166,13 @@ bool layer_tap_toggle(uint16_t keycode, uint8_t layer, keyrecord_t *record) {
 }
 
 /**
- * Update the layer-tap-toggle state, but use an alternate layer if Ctrl is
+ * Update the layer-tap-toggle state, but use an alternate layer if Alt is
  * down.
  *
  * FIXME check there is no race condition here.
  */
 bool layer_tap_toggle2(uint16_t keycode, uint8_t layer, uint8_t layer2, keyrecord_t *record) {
-    if ((get_mods() & MOD_MASK_CTRL) || (get_highest_layer(layer_state) == layer2)) {
+    if ((get_mods() & MOD_MASK_ALT) || (get_highest_layer(layer_state) == layer2)) {
         return layer_tap_toggle(keycode, layer2, record);
     } else {
         return layer_tap_toggle(keycode, layer, record);
