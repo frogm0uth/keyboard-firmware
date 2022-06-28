@@ -24,7 +24,6 @@ OS_SHORTCUTS = yes	    # Enable OS shortcut mapping. If this is turned off, the 
 CUSTOM_EDIT = yes	    # Enable custom editing keys
 LAYER_TAP_TOGGLE = yes      # Enable the layer-tap-toggle feature
 CUSTOM_MOUSE = yes	    # Enable custom mouse keys
-COMBOROLL_ENABLE = no	    # Enable comborolls - not compatible with COMBO_ENABLE
 
 # Uncomment one of the next lines to prevent unused variable/function errors
 # from halting the compile
@@ -54,11 +53,6 @@ endif
 ifeq ($(strip $(COMBO_ENABLE)), yes)
 	SRC += combos.c
 	OPT_DEFS += -DCOMBO_ENABLE -DCOMBO_MUST_PRESS_IN_ORDER_PER_COMBO -DCOMBO_TERM_PER_COMBO
-endif
-
-ifeq ($(strip $(COMBOROLL_ENABLE)), yes)
-	SRC += comboroll.c
-	OPT_DEFS += -DCOMBOROLL_ENABLE
 endif
 
 ifeq ($(strip $(OS_SHORTCUTS)), yes)

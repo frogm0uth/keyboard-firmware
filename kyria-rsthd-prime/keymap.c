@@ -305,7 +305,7 @@ void process_caps_cancel(uint16_t keycode, keyrecord_t *record) {
 /**
  * User-level processing of custom keycodes, for those that might output characters.
  * This is split out from process_record_user so that it can be called from other
- * places specifically custom shift and comboroll processing.
+ * places e.g. custom shift.
  */
 bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
     // Turn off caps lock at the end of a word
@@ -424,13 +424,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     ltt_interrupt(keycode, record);
 #endif
 
-#ifdef COMBOROLL_ENABLE
-    // Check for and process comboroll keys
-    if (!process_record_comboroll(keycode, record)) {
-        return false;
-    }
-#endif
-
     // Process custom keycodes that output characters
     return process_record_user_emit(keycode, record);
 }
@@ -450,11 +443,6 @@ void matrix_scan_user(void) {
     // Editing repeat
 #ifdef CUSTOM_EDIT
     custom_edit_tick();
-#endif
-
-    // Comboroll timing repeat
-#ifdef COMBOROLL_ENABLE
-    comboroll_tick();
 #endif
 }
 

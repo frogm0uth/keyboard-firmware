@@ -21,7 +21,6 @@
 #include "custom_edit.h"
 #include "custom_mouse.h"
 #include "layer_tap_toggle.h"
-#include "combos.h"
 
 /**
  * Extern functions for core files

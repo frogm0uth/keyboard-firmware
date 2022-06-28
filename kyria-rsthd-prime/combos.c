@@ -27,6 +27,14 @@
 #include "keymap.h"
 
 
+/*
+ * Timeout for comborolls / directional QMK combos 
+ */
+#ifndef COMBOROLL_TIMEOUT
+#    define COMBOROLL_TIMEOUT 150
+#endif
+
+
 // Emit an array of keycodes
 void process_combo_array(const uint16_t *keyptr) {
     while (*keyptr != KC_NO) {
