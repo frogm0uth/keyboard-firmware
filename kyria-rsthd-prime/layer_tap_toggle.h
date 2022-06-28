@@ -18,13 +18,10 @@
 #include QMK_KEYBOARD_H
 
 /**
- ** Layer-tap-toggle. Layer active while held, Ctrl-tap to toggle on, Tap to send some other key.
- ** Tap to untoggle the layer. Note: there is no auto-repeat on the tap key on second
- ** tap, like with standard LT or mod-tap.
- **
- ** For additional documentation, see
- ** https://github.com/frogm0uth/keyboard-notes/blob/master/qmk-layer-tap-toggle/README.md
- **/
+ * Layer-tap-toggle. Layer active while held, Ctrl-tap to toggle on, Tap to send some other key.
+ * Tap to untoggle the layer. Note: there is no auto-repeat on the tap key on second
+ * tap, like with standard LT or mod-tap.
+ */
 
 /** 
  * Extern functions

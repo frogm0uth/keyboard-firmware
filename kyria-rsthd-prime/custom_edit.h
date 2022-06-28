@@ -19,12 +19,9 @@
 #include "os_shortcuts.h"
 
 /**
- ** Custom editing operations.  These are intended to make text editing more
- ** platform-independent (and faster).
- **
- ** For additional documentation, see
- ** https://github.com/frogm0uth/keyboard-notes/blob/master/qmk-custom-edit/README.md
- **/
+ * Custom editing operations.  These are intended to make text editing more
+ * platform-independent (and faster).
+ */
 
 // time until first repeat keypress
 #ifndef CE_WAIT_TERM

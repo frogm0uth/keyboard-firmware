@@ -18,12 +18,9 @@
 #include QMK_KEYBOARD_H
 
 /**
- ** Platform-dependent shortcuts. This can either have platform-specific
- ** shortcuts compiled in statically, or selected dynamically (i.e. at runtime).
- **
- ** For additional documentation, see
- ** https://github.com/frogm0uth/keyboard-notes/blob/master/qmk-os-shortcuts/README.md
- **/
+ * Platform-dependent shortcuts. This can either have platform-specific
+ * shortcuts compiled in statically, or selected dynamically (i.e. at runtime).
+ */
 
 #ifndef OS_WINDOWS
 #    ifndef OS_LINUX
