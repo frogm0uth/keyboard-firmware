@@ -3,6 +3,7 @@
 This is the keymap for my Kyria keyboard from [splitkb.com](https://splitkb.com). The alpha layout was based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/) but is now heavily modified. For a standard implementation of RSTHD on the Kyria, see my [Kyria Refactored](https://github.com/frogm0uth/keyboard-firmware/tree/master/kyria-refactored) keymap.
 
 <!--ts-->
+* [Kyria RSTHD/Prime](#kyria-rsthdprime)
    * [Overview](#overview)
       * [Keyboard configuration](#keyboard-configuration)
       * [Goals](#goals)
@@ -14,11 +15,13 @@ This is the keymap for my Kyria keyboard from [splitkb.com](https://splitkb.com)
       * [FUNC](#func)
       * [META](#meta)
    * [Other](#other)
+      * [How to build](#how-to-build)
       * [RSTHD variants and similar layouts](#rsthd-variants-and-similar-layouts)
+      * [Relevant articles and resources](#relevant-articles-and-resources)
       * [Acknowledgments](#acknowledgments)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: username, at: Fri 24 Jun 2022 04:38:53 AEST -->
+<!-- Added by: username, at: Wed 29 Jun 2022 12:45:29 AEST -->
 
 <!--te-->
 
