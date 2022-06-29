@@ -29,6 +29,9 @@ void keyboard_post_init_user(void) {
 #if defined(OS_SHORTCUTS) && !defined(OS_SHORTCUTS_STATIC)
     os_set_raw(user_config.os_selection);
 #endif
+#if defined(OLED_DRIVER_ENABLE)
+    oled_set_brightness(user_config.oled_brightness);
+#endif
 }
 
 // Make it easier to read null key (instead of XXXXXXX)
@@ -390,13 +393,17 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
 
             /* Save RGB state to EEPROM.
              */
-#ifdef RGBLIGHT_ENABLE
         case CU_WRIT:
             if (record->event.pressed) {
+#ifdef RGBLIGHT_ENABLE
                 rgblight_sethsv(rgblight_get_hue(), rgblight_get_sat(), rgblight_get_val());
+#endif
+#ifdef OLED_DRIVER_ENABLE
+                user_config.oled_brightness = oled_get_brightness();
+                eeconfig_update_user(user_config.raw);
+#endif
             }
             break;
-#endif
 
             /* Select the OS used for shortcuts and write to EEPROM.
              */

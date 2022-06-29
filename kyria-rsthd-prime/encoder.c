@@ -71,15 +71,20 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             break;
 
             // On the Meta layer, scroll through search results, unless a modifier is held. If one is,
-            // change backlight color
+            // change backlight color or OLED brightness
         case META:
             if (left) {
-                if (!(mods & MOD_MASK_CAG)) {
+                if (mods & MOD_MASK_CAG) {
+#ifdef RGBLIGHT_ENABLE
+                    rgblight_encoder(clockwise, mods);
+#endif
+                } else if (mods & MOD_MASK_SHIFT) {
+#ifdef OLED_DRIVER_ENABLE
+                    oled_brightness_encoder(clockwise);
+#endif
+                } else {
                     keycode = clockwise ? SC(SC_NEXT_SEARCH) : SC(SC_PREV_SEARCH);
                 }
-#ifdef RGBLIGHT_ENABLE
-                rgblight_encoder(clockwise, mods);
-#endif
             }
             break;
     }

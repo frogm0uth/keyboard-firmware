@@ -16,8 +16,21 @@
 
 #include "keymap.h"
 
+#ifndef OLED_BRIGHTNESS_INCREMENT
+#    define OLED_BRIGHTNESS_INCREMENT 0x10
+#endif
+
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     return OLED_ROTATION_180;
+}
+
+// Print byte as hex
+static char hexchars[16] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+
+void print_hex(uint8_t n) {
+    oled_write_P(PSTR("0x"), false);
+    oled_write_char(hexchars[(n >> 4) & 0x0F], false);
+    oled_write_char(hexchars[n & 0x0F], false);
 }
 
 // clang-format off
@@ -96,17 +109,14 @@ static void render_status(void) {
             oled_write_P(PSTR("Cmd "), false);
         }
     }
-
-    // Custom status
-    switch (layer) {
 #ifdef CUSTOM_EDIT
-        case EDIT:
-            custom_edit_status();
-            break;
-#endif
+    if (layer == EDIT) {
+        custom_edit_status();
     }
+#endif
     oled_write_P(PSTR("\n"), false);
 
+#ifdef ENCODER_ENABLE
     // encoder help
     switch (layer) {
         case ALPHA:
@@ -118,38 +128,39 @@ static void render_status(void) {
             break;
 
         case EDIT:
-#ifdef CUSTOM_EDIT
+#    ifdef CUSTOM_EDIT
             if (custom_edit_encoder_ready()) {
                 custom_edit_encoder_status();
             } else {
                 oled_write(encoder_info[encstring_zoom], false);
             }
-#else
+#    else
             oled_write(encoder_info[encstring_zoom], false);
-#endif
+#    endif
             break;
 
         case META:
-#ifdef RGBLIGHT_ENABLE
-            if (!(mods & MOD_MASK_CAG)) {
-                oled_write(encoder_info[encstring_search], false);
-            } else {
+            if (mods & MOD_MASK_CAG) {
+#    ifdef RGBLIGHT_ENABLE
                 rgblight_oled_encoder_status();
+#    endif
+            } else if (mods & MOD_MASK_SHIFT) {
+                oled_brightness_encoder_status();
+            } else {
+                oled_write(encoder_info[encstring_search], false);
             }
-#else
-            oled_write(encoder_info[encstring_search], false);
-#endif
             break;
 
         default:
             oled_write(encoder_info[encstring_blank], false);
     }
+#endif
     oled_write_P(PSTR("\n"), false);
     oled_write_P(PSTR("         v32        "), false);
 }
 
 bool oled_task_user(void) {
-    if (is_keyboard_left()) {
+    if (is_keyboard_master()) {
         render_status(); // Renders the current keyboard state
     } else {
         render_qmk_logo(); // Static display
@@ -157,3 +168,21 @@ bool oled_task_user(void) {
     }
     return false;
 }
+
+#ifdef ENCODER_ENABLE
+void oled_brightness_encoder(bool clockwise) {
+    int16_t brightness = oled_get_brightness();
+    if (clockwise) {
+        brightness = MIN(brightness + OLED_BRIGHTNESS_INCREMENT, 0xff);
+    } else {
+        brightness = MAX(brightness - OLED_BRIGHTNESS_INCREMENT, 0x01);
+    }
+    oled_set_brightness(brightness);
+}
+
+void oled_brightness_encoder_status() {
+    oled_write_P(PSTR("<-   OLED="), false);
+    print_hex(oled_get_brightness());
+    oled_write_P(PSTR("    +>"), false);
+}
+#endif

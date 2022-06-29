@@ -40,16 +40,6 @@ void rgblight_encoder(bool clockwise, uint8_t mods) {
 }
 
 #ifdef OLED_DRIVER_ENABLE
-char hexchars[16] = {
-  '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
-};
-
-void print_hex(uint8_t n) {
-    oled_write_P(PSTR("0x"), false);
-    oled_write_char(hexchars[(n>>4) & 0x0F], false);
-    oled_write_char(hexchars[n & 0x0F], false);
-}
-
 void rgblight_oled_encoder_status() {
     uint8_t mods = get_mods();
     oled_write_P(PSTR("<-    "), false);

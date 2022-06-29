@@ -35,6 +35,11 @@ void rgblight_oled_encoder_status(void);
 bool process_record_user_emit(uint16_t keycode, keyrecord_t *record);
 void process_caps_cancel(uint16_t keycode, keyrecord_t *record);
 void tap_custom_key(uint16_t keycode, keyrecord_t *record);
+void print_hex(uint8_t n);
+
+void oled_brightness_encoder(bool clockwise);
+void oled_brightness_encoder_status(void);
+
 
 /**
  * User config structure. Defined here instead of keymap.c in case other files
@@ -44,6 +49,7 @@ typedef union {
     uint32_t raw;
     struct {
         uint8_t os_selection : 2;
+        uint8_t oled_brightness : 8;
     };
 } user_config_t;
 
