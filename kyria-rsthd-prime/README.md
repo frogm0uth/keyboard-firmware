@@ -65,9 +65,9 @@ The layers have OS-specific shortcuts in various places. The platform (macOS, Wi
 
 The alpha layout aims to reduce lateral finger movement on the index finger. It performs very well in an [analyzer](docs/prime-on-the-analyzer.md), with low SFU (same finger utilization) stats and low travel distance.
 
-Some of the punctuation keys use non-standard shift mappings. The SYMS layer also does this. See `shift_defs.h`.
+Some of the punctuation keys use non-standard shift mappings. See `shift_defs.h`.
 
-There are a number of combos on this layer, defined with a bunch of macros to reduce boilerplate. See `combo_defs.h`.
+There are a number of combos on this layer, defined with a bunch of macros to reduce boilerplate. See `combos.c` and `combo_defs.h`.
 
 ### SYMS
 
@@ -89,18 +89,18 @@ Activated by the right thumb (hold).
 
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/24a80f5840733d6384fd21e20e1f28a0)
 
-This layer extends the idea of platform-independent shortcuts to a complete editing layer. The navigation keys on the left have the standard cursor keys, home, end and page up/down. On the right side are various special modifier keys on the right home row to speed up editing:
+This layer extends the idea of platform-independent shortcuts to a complete layer. The navigation keys on the left have the standard cursor keys, home, end and page up/down.
+
+Modifiers are on the right hand. If one of the standard modifiers (Ctrl, Alt, Gui) is held, the emitted code is just the normal modifier + keycode. The special modifiers on the home row act as follows:
 
 - **Delete** makes the action delete instead of moving.
-- **More** makes the key be "more" : left and right move a word left or right; home and end move to the start and end of a paragraph; up and down move a physical page up and down (mostly for Word); page up/down move to the start and end of the document.
+- **More** makes the key do "more" : left and right move a word left or right; home and end move to the start and end of a paragraph; up and down move a physical page up and down (mostly for Word); page up/down move to the start and end of the document.
 - **X5** makes the action repeat 5 times on every keypress or repeat.
-- **Fast** removes the initial repeat delay and does repeats at a faster interval.
+- **Fast** removes the initial repeat delay and repeats at a faster interval.
 
-If one of the standard modifiers (Ctrl, Alt, Gui) is pressed, the emitted code is just the normal modifier + keycode.
+All actions have auto-repeat. You can change the special modifiers while holding down a navigation key and the action changes accordingly.
 
-All actions have auto-repeat. You can change the modifiers while holding down a navigation key and the action changes accordingly.
-
-Select all, cut, copy and paste are chorded on the right hand top row, and keys to switch applications, windows and tabs on the inner column.
+Select all, cut, copy and paste are chorded on the right hand top row, and keys to switch applications, windows and tabs are on the inner column.
 
 ### SNAP
 
