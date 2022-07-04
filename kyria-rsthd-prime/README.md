@@ -67,7 +67,7 @@ The alpha layout aims to reduce lateral finger movement on the index finger. It 
 
 Some of the punctuation keys use non-standard shift mappings. See `shift_defs.h`.
 
-There are a number of combos on this layer, defined with a bunch of macros to reduce boilerplate. See `combos.c` and `combo_defs.h`.
+There are a number of combos on this layer, defined with a bunch of macros to reduce boilerplate. I have a userspace implementation called "comboroll" to avoid timing issues with overlapping combos. See `combos.c` for the QMK version, `comborolls.c/h` for the userspace version, and `combo_defs.h` for combo definitions (works with either implementation).
 
 ### SYMS
 
@@ -117,7 +117,7 @@ Three mouse buttons are available on the right thumb.
 Select all, cut, copy and paste are chorded on the left hand top row, and keys to switch applications, windows and tabs on the inner column.
 
 ### FUNC
-Activated either as a combo on two left thumb keys, or by pressing the SNAP layer key while holding Alt.
+Activated by pressing the SNAP layer key while holding Alt.
 
 ![kyria-rsthd-prime-func](docs/images/kyria-rsthd-prime-func.png)
 
