@@ -30,8 +30,8 @@
 /*
  * Timeout for comborolls / directional QMK combos 
  */
-#ifndef COMBOROLL_TIMEOUT
-#    define COMBOROLL_TIMEOUT 150
+#ifndef COMBOROLL_TERM
+#    define COMBOROLL_TERM 120
 #endif
 
 
@@ -55,6 +55,8 @@ void process_combo_string(const char *str) {
 #undef  ARRAY_PROTECT
 #define ARRAY_PROTECT(...) __VA_ARGS__ 
 
+// _____TRM is empty until the last set
+#define _____TRM(name, ms)
 
 // Enum for combo codes
 #define CMBO_KEY(name, out, ...)  COMBO_ID_##name,
@@ -254,7 +256,7 @@ bool get_combo_must_press_in_order(uint16_t combo_index, combo_t *combo) {
 #define CMBO_LIT(name, out, ...)
 #define CMBO_STR(name, ...)
 
-#define LtoR_KEY(name, out, ...) case COMBO_ID_##name: return COMBOROLL_TIMEOUT; break;
+#define LtoR_KEY(name, out, ...) case COMBO_ID_##name: combo_term = COMBOROLL_TERM; break;
 #define LtoR_ARR LtoR_KEY
 #define LtoR_LIT LtoR_KEY
 #define LtoR_STR LtoR_KEY
@@ -265,10 +267,42 @@ bool get_combo_must_press_in_order(uint16_t combo_index, combo_t *combo) {
 #define RtoL_STR LtoR_KEY
 
 uint16_t get_combo_term(uint16_t index, combo_t *combo) {
+    uint16_t combo_term = COMBO_TERM;
     switch (index) {
 #       include "combo_defs.h"
-        default:
-        return COMBO_TERM;
     }
+
+#undef  _____TRM
+#define _____TRM(name, ms) case COMBO_ID_##name: combo_term = ms; break;
+
+#undef  LtoR_KEY
+#undef  LtoR_ARR
+#undef  LtoR_LIT
+#undef  LtoR_STR
+
+#undef  RtoL_KEY
+#undef  RtoL_ARR
+#undef  RtoL_LIT
+#undef  RtoL_STR
+
+#define LtoR_KEY(name, out, ...)
+#define LtoR_ARR LtoR_KEY
+#define LtoR_LIT LtoR_KEY
+#define LtoR_STR LtoR_KEY
+
+#define RtoL_KEY LtoR_KEY
+#define RtoL_ARR LtoR_KEY
+#define RtoL_LIT LtoR_KEY
+#define RtoL_STR LtoR_KEY
+
+    switch (index) {
+#       include "combo_defs.h"
+    }
+    
+    return combo_term;
 }
 
+// Make all combos tap-only, to avoid late triggering if combos overlap
+bool get_combo_must_tap(uint16_t index, combo_t *combo) {
+    return true;
+}
