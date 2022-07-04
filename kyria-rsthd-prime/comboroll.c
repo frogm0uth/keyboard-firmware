@@ -16,10 +16,14 @@
 
 /** Comboroll implementation. Comborolls are defined in combo_defs.h.
  *
- * Macros for combos adapted from:
- *
- * https://github.com/sevanteri/qmk_firmware/blob/9cca95785e6fd5001367d02fceddae628f6d48c9/users/sevanteri/combos.h
- * https://github.com/qmk/qmk_firmware/blob/master/keyboards/gboards/g/keymap_combo.h
+ * This is my userspace implementation/variant of combos triggered by rolling keys rather than keys
+ * pressed at the same time. Since I started on this, two things happened: QMK acquired the
+ * COMBO_MUST_PRESS_IN_ORDER flag, which does the same thing; and I've made the implementation able
+ * to handle keys pressed in either order. So basically either can work, and combo_defs.h can be
+ * compiled for either. The issue I've had with the QMK combos is that overlapping combos trigger
+ * the second one, which is not what I want. There's a #define that can turn it off but also
+ * requires that you release quickly. Also, this implmentation is more space-efficient (about
+ * 2kbytes with ~40 combos).
  */
 
 #include "config.h"
@@ -78,19 +82,6 @@ void tap_comboroll_key(uint16_t keycode, keyrecord_t *record) {
 #undef  ARRAY_PROTECT
 #define ARRAY_PROTECT(...) __VA_ARGS__ 
 
-
-/** Comboroll data/functions. This is my userspace implementation/variant of
- * combos triggered by rolling keys rather than keys pressed at the same
- * time. Since I started on this, QMK acquired the COMBO_MUST_PRESS_IN_ORDER
- * flag, which AFAIK does the same thing. However I've kept my version for now
- * as it's more space-efficent and the Pro Micro is *very* tight on space.
- *
- * Comborolls are defined by macros in combo_defs.h. There is a macro that
- * defines the trigger keys in both directions for cases where the direction of
- * the roll is not obvious, or for triggering from both hands or thumb keys when
- * you can't roll.  The time allowed to trigger a comboroll is relatively short
- * (between the QMK combo and tap-hold delay).
- */
 
 // clang-format off
 
@@ -153,7 +144,6 @@ enum comboroll_ids {
 #   include "combo_defs.h"
     COMBOROLL_COUNT
 };
-//static uint16_t comboroll_count = COMBOROLL_COUNT;
 
 
 // Define the array of comboroll nodes
@@ -242,12 +232,10 @@ static uint16_t    comboroll_longest_term = 0;
 // Produce output for the given comboroll
 void process_comboroll(comboroll_t *cr) {
     switch (cr->type) {
-            // We have to do a tap for an output key. We can't register it, because we don't have a way to
-            // remember it to unregister later. This is why we can't have hold type keys as combo
-            // output. To be able to remember a held key, we would need a stack or list of active combos
-            // (or something along those lines), as we could activate a second hold key while the first is
-            // still active. Perhaps a single remembered combo would be enough, and any subsequent would
-            // be forced to be a tap.
+            // We have to do a tap for an output key. We can't register it, because we don't have a
+            // way to remember it to unregister later. This is why we can't have hold type keys as
+            // combo output. To be able to remember a held key, we would need a stack or list of
+            // active combos (or something along those lines).
         case comboroll_t_keycode:
             tap_comboroll_key(cr->output_keycode, &firstkey_record);
             break;
@@ -263,13 +251,12 @@ void process_comboroll(comboroll_t *cr) {
 }
 
 // Scan for match on first key. Return true on success, and comboroll_longest_term is set
-// to the highest possible metch
+// to the highest term of possible matches
 bool comboroll_scan_firstkey(uint16_t keycode) {
     comboroll_t *cr = comboroll_data;
     bool         found = false;
 
     comboroll_longest_term = 0;
-    //    for (int i = 0; i < sizeof comboroll_data / sizeof *comboroll_data; cr++, i++) {
     for (int i = 0; i < COMBOROLL_COUNT; cr++, i++) {
         if ((CMB_IS_MATCHES_LEFT(cr->direction) && keycode == cr->key1) || (CMB_IS_MATCHES_RIGHT(cr->direction) && keycode == cr->key2)) {
             found = true;
@@ -281,14 +268,13 @@ bool comboroll_scan_firstkey(uint16_t keycode) {
     return found;
 }
 
-// Scan for match on second key. If a match is found, AND the term is less than the
-// than the time elapsed since the first key was pressed, return the pointer to
-// the comboroll_t structure. Otherwise return NULL.
+// Scan for match on second key. If a match is found, AND the elapsed time since the first key was
+// pressed is less than its term, return the pointer to the comboroll_t struct. Otherwise return
+// NULL.
 comboroll_t *comboroll_scan_secondkey(uint16_t firstkey, uint16_t secondkey) {
     comboroll_t *cr = comboroll_data;
     comboroll_t *result = NULL;
 
-    //    for (int i = 0; i < sizeof comboroll_data / sizeof *comboroll_data; cr++, i++) {
     for (int i = 0; i < COMBOROLL_COUNT; cr++, i++) {
         if ((CMB_IS_MATCHES_LEFT(cr->direction) && firstkey == cr->key1 && secondkey == cr->key2) || (CMB_IS_MATCHES_RIGHT(cr->direction) && firstkey == cr->key2 && secondkey == cr->key1)) {
 	    if (timer_elapsed(comboroll_timer) <= cr->term) { // don't match combo if it took too long
@@ -300,7 +286,8 @@ comboroll_t *comboroll_scan_secondkey(uint16_t firstkey, uint16_t secondkey) {
     return result;
 }
 
-// Process comboroll.
+// Process comboroll. Call from process_record_user().
+//
 bool process_record_comboroll(uint16_t keycode, keyrecord_t *record) {
     if (record->event.pressed) {
         if (is_in_comboroll) {
@@ -333,13 +320,14 @@ bool process_record_comboroll(uint16_t keycode, keyrecord_t *record) {
             tap_comboroll_key(firstkey_matched, &firstkey_record);
             is_in_comboroll = false;
             // not entirely sure why, but letting this fall through and have QMK also handle
-            // release of the key prevents stuck modifiers
+            // release of the key seems to prevent stuck modifiers
         }
     }
     return true;
 }
 
 // Handle timing and output first key if too long for second. Must call from matrix_scan_user()
+//
 void comboroll_tick() {
     if (is_in_comboroll) {
         if (timer_elapsed(comboroll_timer) > comboroll_longest_term) {
