@@ -16,8 +16,11 @@
 
 #pragma once
 
-// Timeout for combos
-#define COMBO_TERM 80
+// Configuration for combos
+#define COMBO_TERM 70
+#define COMBOROLL_TERM 150
+#define COMBO_MUST_TAP_PER_COMBO // With QMK combos, avoids having the second combo trigger when
+				 // overlapping, but means that holds don't work.
 
 // Tapping control
 #define TAPPING_TERM 180
