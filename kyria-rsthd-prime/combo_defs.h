@@ -126,7 +126,7 @@ LtoR_ARR( esc_x,                                            // Escape-X for emac
     KC_V, KC_C )
 
 // Utilities that work only for QMK combos
-#ifdef COMBO_ENABLE
+#if defined COMBO_ENABLE && !defined COMBO_MUST_TAP_PER_COMBO
 CMBO_KEY( shiftcaps, SFT_T(KC_CAPS), KC_E,   CL_SYMS )       // Thumb shift on hold, caps lock on tap
 CMBO_KEY( funclayer, CL_FUNC,        CU_LCMD, CL_SNAP )      // Activate FUNC layer from thumb
 #endif
