@@ -32,6 +32,12 @@ void keyboard_post_init_user(void) {
 #if defined(OLED_DRIVER_ENABLE)
     oled_set_brightness(user_config.oled_brightness);
 #endif
+
+    // Other functions init
+#if defined(COMBOROLL_ENABLE)
+    comboroll_post_init();
+#endif
+    
 }
 
 // Make it easier to read null key (instead of XXXXXXX)
@@ -48,7 +54,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |  Esc |   V  |   C  |   W  |   F  |   K  |                              |   J  |   M  |   U  | .  / | -  _ | BkSp |
  |------+------+------+------+------+------|                              |------+------+------+------+------+------|
  |   X  |   R  |   S  |   T  |   H  |   B  |                              | ;  : |   N  |   I  |   O  |   A  |   Q  |
- | Ctrl |      |      |      |      |      |  Shift/Caps        Search    |      |      |      |      |      | Ctrl |
+ | Ctrl |      |      |      |      |      |                    Search    |      |      |      |      |      | Ctrl |
  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
  |  Tab |      |   P  |   G  |   D  |   Z  |      |      |  |      |      | !  ? |   L  |   Y  | ,  | |      | Caps |
  |  Alt | Shift|      |      |      |      |   E  |   '  |  | Enter| Space|      |      |      |      | Shift|  Alt |
@@ -56,7 +62,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |                    | Mute |      |   "  |      | SYMS |  |      |      |   '  |   K  |      |
  |                    |      |  Cmd | SNAP |      |      |  |      |      | EDIT | META |      |
  |                    `----------------------------------'  `----------------------------------'
-                                  FUNC
+                                    Alt=FUNC 
 */
      [ALPHA] = LAYOUT(
         KC_ESC,  KC_V,    KC_C,   KC_W,    KC_F,    KC_K,                                              KC_J,    KC_M,    KC_U,   CU_DOT,  KC_MINS, KC_BSPC,
@@ -338,8 +344,8 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
 
     switch (keycode) {
 
-      // layer switching
 #ifdef LAYER_TAP_TOGGLE
+            // layer switching using layer-tap-toggle custom code
         case CL_SYMS:
             return layer_tap_toggle(CU_QTQT, SYMS, record);
             break;
@@ -431,6 +437,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     ltt_interrupt(keycode, record);
 #endif
 
+#ifdef COMBOROLL_ENABLE
+    // Check for and process comboroll keys
+    if (!process_record_comboroll(keycode, record)) {
+        return false;
+    }
+#endif
+
     // Process custom keycodes that output characters
     return process_record_user_emit(keycode, record);
 }
@@ -445,6 +458,11 @@ void matrix_scan_user(void) {
     // Update ltt_timer
 #ifdef LAYER_TAP_TOGGLE
     ltt_update_timer();
+#endif
+
+    // Comboroll timing repeat
+#ifdef COMBOROLL_ENABLE
+    comboroll_tick();
 #endif
 
     // Editing repeat
