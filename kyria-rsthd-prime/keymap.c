@@ -30,7 +30,7 @@ void keyboard_post_init_user(void) {
     os_set_raw(user_config.os_selection);
 #endif
 #if defined(OLED_DRIVER_ENABLE)
-    oled_set_brightness(user_config.oled_brightness);
+    oled_set_brightness(MAX( user_config.oled_brightness, 0x10 )); // set a minimum, to avoid blank display
 #endif
 
     // Other functions init
