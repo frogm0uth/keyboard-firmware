@@ -16,6 +16,7 @@
 
 #pragma once
 
+
 // Configuration for combos
 #define COMBO_TERM 70
 #define COMBOROLL_TERM 150
@@ -23,7 +24,7 @@
 				 // overlapping, but means that holds don't work.
 
 // Tapping control
-#define TAPPING_TERM 180
+#define TAPPING_TERM 250
 //#define TAPPING_TOGGLE 2
 #define IGNORE_MOD_TAP_INTERRUPT
 #define PERMISSIVE_HOLD
