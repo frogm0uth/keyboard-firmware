@@ -316,11 +316,14 @@ bool process_record_comboroll(uint16_t keycode, keyrecord_t *record) {
         }
     } else {
         if (is_in_comboroll) {
-            // If we're here, the first key was just released. So send it and cancel the combo
-            tap_comboroll_key(firstkey_matched, &firstkey_record);
-            is_in_comboroll = false;
-            // not entirely sure why, but letting this fall through and have QMK also handle
-            // release of the key seems to prevent stuck modifiers
+            // If we're here, check to see if it was the first key that was just released. If so,
+            // send it and cancel the combo
+            if (keycode == firstkey_matched) {
+                tap_comboroll_key(firstkey_matched, &firstkey_record);
+                is_in_comboroll = false;
+                // not entirely sure why, but letting this fall through and have QMK also handle
+                // release of the key seems to prevent stuck modifiers
+            }
         }
     }
     return true;
