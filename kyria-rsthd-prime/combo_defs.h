@@ -79,6 +79,7 @@ RtoL_STR( ed, KC_L, KC_Y )
 _____TRM( ed, 200 )
 RtoL_STR( es, KC_L, CU_COMM )
 _____TRM( es, 200 )
+RtoL_STR( ve, KC_I, CU_COMM )
 
 // Awkward bigrams/trigrams
 LtoR_STR( qu,  KC_V, KC_F )
@@ -91,56 +92,73 @@ LtoR_STR( ght, KC_P, KC_D )
 RtoL_STR( my,  KC_M, KC_MINS )
 RtoL_STR( you, KC_U, CU_DOT )
 
-CMBO_STR( min, KC_H, CU_DOT )
+CMBO_STR( min, KC_S, CU_DOT )
+CMBO_STR( ex,  KC_H, CU_COMM )
 
 // Inner column minimization
 LtoR_STR( ck,  KC_C, KC_F )
+LtoR_STR( rk,  KC_R, KC_W )
 LtoR_STR( br,  KC_R, KC_H )
 LtoR_STR( bl,  KC_T, KC_D )
 LtoR_STR( ble, KC_S, KC_D )
 
-RtoL_STR( by,  KC_N, KC_Y )
+RtoL_STR( by,  CU_DOT, KC_MINS )
+_____TRM( by,  200 )
 
 CMBO_STR( be,  KC_R, CU_COMM )
-CMBO_STR( but, KC_P, CU_COMM )
+CMBO_LIT( napost, "n't", KC_T, CU_COMM )
 
 // More typing comfort
 LtoR_STR( fr,   KC_S, KC_F )
 LtoR_STR( ft,   KC_T, KC_F )
-LtoR_STR( ful,  KC_R, KC_W )
-
-CMBO_STR( for,  KC_R, CU_DOT ) 
+LtoR_STR( ful,  KC_S, KC_G )
 
 CMBO_STR( of,   KC_S, CU_COMM )
+CMBO_STR( for,  KC_R, CU_DOT ) 
 
 // Common word endings, right hand
-RtoL_STR( ough, KC_M, CU_DOT )
-RtoL_STR( ould, KC_I, CU_COMM )
+RtoL_STR( ally, KC_M, CU_DOT )
+RtoL_STR( ould, KC_N, CU_COMM )
 RtoL_STR( ess,  KC_Y, CU_COMM )
-RtoL_STR( ally, KC_N, CU_COMM )
+RtoL_STR( ough, KC_N, KC_Y )
 
 // Alternate punctuation on left hand
-CMBO_KEY( comma,  KC_COMM, CU_LSFT, KC_P )
-_____TRM( comma, 200 )
-CMBO_KEY( period, KC_DOT,  CU_LSFT, KC_G )
+RtoL_KEY( comma,  KC_COMM, KC_P, KC_G )
+_____TRM( comma,  200 )
+RtoL_KEY( period, KC_DOT,  KC_C, KC_W )
 _____TRM( period, 200 )
 
-// Common words
-CMBO_STR( very, KC_V, CU_DOT )
-_____TRM( very, 120 )
-CMBO_STR( ever, KC_E, CU_COMM )
-_____TRM( ever, 100 )
-CMBO_STR( key,  KC_T, CU_COMM )
+#ifdef NOTWORKINGYET
+RtoL_LIT( commaspace, ", ", KC_P, KC_D )
+_____TRM( commaspace,  200 )
+
+RtoL_ARR( periodspaceOSS,   // precondition's next sentence macro
+	ARRAY_PROTECT( 
+            KC_DOT,
+            KC_SPC,
+            OSM(MOD_LSFT)
+     ),
+    KC_C, KC_F )
+
+_____TRM( periodspaceOSS, 200 )
+#endif
+
+// More words
+CMBO_STR( key,  KC_T, CU_DOT )
+CMBO_STR( but,  KC_H, CU_DOT )
+CMBO_STR( qmk,  KC_C, CU_DOT )
 
 
 // Utilities
 CMBO_KEY( search,   SC_SEARCH,      KC_SPC,  KC_ENT )       // System search box, right thumb
+//#ifdef NOROOM
 CMBO_ARR( esc_x,                                            // Escape-X for emacs
         ARRAY_PROTECT( 
             KC_ESC,
             KC_X
      ),
     KC_V, KC_C )
+//#endif
 
 // Utilities that work only for QMK combos
 #if defined COMBO_ENABLE && !defined COMBO_MUST_TAP_PER_COMBO
