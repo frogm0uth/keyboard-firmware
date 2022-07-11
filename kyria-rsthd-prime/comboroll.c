@@ -31,17 +31,21 @@
 
 // Emit an array of keycodes
 void process_comboroll_array(const uint16_t *keyptr) {
-    while (*keyptr != KC_NO) {
-        tap_code16(*keyptr++);
+    uint16_t keycode = pgm_read_word(keyptr++);
+    while (keycode != KC_NO) {
+        tap_code16(keycode);
+        keycode = pgm_read_word(keyptr++);
     }
 }
 
-// Emit a string, clear shift after first character
+// Emit a PROGMEM string, clear shift after first character
 void process_comboroll_string(const char *str) {
-    send_char(*str++);
+    char ch = pgm_read_byte(str++);
+    send_char(ch);
     clear_mods();
-    while (*str) {
-        send_char(*str++);
+    while (ch) {
+        ch = pgm_read_byte(str++);
+        send_char(ch);
     }
 }
 
@@ -88,43 +92,8 @@ void tap_comboroll_key(uint16_t keycode, keyrecord_t *record) {
 // This is empty until the last definition
 #define _____TRM(name, term)
 
-// Define the data arrays for array output comborolls
-#define LtoR_ARR(name, out, k1, k2)  const uint16_t comboroll_array_##name[] = { out, KC_NO };
-#define RtoL_ARR(name, out, k1, k2)  const uint16_t comboroll_array_##name[] = { out, KC_NO };
-#define CMBO_ARR(name, out, k1, k2)  const uint16_t comboroll_array_##name[] = { out, KC_NO };
-
-// Empty defs
-#define LtoR_KEY(name, out, k1, k2)
-#define LtoR_LIT(name, out, k1, k2)
-#define LtoR_STR(name,      k1, k2)
-
-#define RtoL_KEY(name, out, k1, k2)
-#define RtoL_LIT(name, out, k1, k2)
-#define RtoL_STR(name,      k1, k2)
-
-#define CMBO_KEY(name, out, k1, k2)
-#define CMBO_LIT(name, out, k1, k2)
-#define CMBO_STR(name,      k1, k2)
-
-#include "combo_defs.h"
-
 
 // Define an enum of identifiers.
-#undef  LtoR_KEY
-#undef  LtoR_ARR
-#undef  LtoR_LIT
-#undef  LtoR_STR
-
-#undef  RtoL_KEY
-#undef  RtoL_ARR
-#undef  RtoL_LIT
-#undef  RtoL_STR
-
-#undef  CMBO_KEY
-#undef  CMBO_ARR
-#undef  CMBO_LIT
-#undef  CMBO_STR
-
 #define LtoR_KEY(name, ...) COMBOROLL_ID_##name,
 #define LtoR_ARR LtoR_KEY
 #define LtoR_LIT LtoR_KEY
@@ -146,6 +115,41 @@ enum comboroll_ids {
 };
 
 
+// Define the data arrays and output strings
+#undef  LtoR_KEY
+#undef  LtoR_ARR
+#undef  LtoR_LIT
+#undef  LtoR_STR
+
+#undef  RtoL_KEY
+#undef  RtoL_ARR
+#undef  RtoL_LIT
+#undef  RtoL_STR
+
+#undef  CMBO_KEY
+#undef  CMBO_ARR
+#undef  CMBO_LIT
+#undef  CMBO_STR
+
+#define LtoR_KEY(name, out, k1, k2)
+#define LtoR_ARR(name, out, k1, k2)  const uint16_t PROGMEM comboroll_array_##name[] = { out, KC_NO };
+#define LtoR_LIT(name, out, k1, k2)  const char PROGMEM comboroll_string_##name[] = out;
+#define LtoR_STR(name,      k1, k2)  const char PROGMEM comboroll_string_##name[] = #name;
+
+#define RtoL_KEY LtoR_KEY
+#define RtoL_ARR LtoR_ARR
+#define RtoL_LIT LtoR_LIT
+#define RtoL_STR LtoR_STR
+
+#define CMBO_KEY LtoR_KEY
+#define CMBO_ARR LtoR_ARR
+#define CMBO_LIT LtoR_LIT
+#define CMBO_STR LtoR_STR
+
+#include "combo_defs.h"
+
+
+
 // Define the array of comboroll nodes
 #undef  LtoR_KEY
 #undef  LtoR_ARR
@@ -162,25 +166,64 @@ enum comboroll_ids {
 #undef  CMBO_LIT
 #undef  CMBO_STR
 
-#define LtoR_KEY(name, out, k1, k2) {comboroll_t_keycode, CMB_MATCH_LEFT, COMBOROLL_TERM, k1, k2, {.output_keycode=out}},
-#define LtoR_ARR(name, out, k1, k2) {comboroll_t_array,   CMB_MATCH_LEFT, COMBOROLL_TERM, k1, k2, {.output_array=comboroll_array_##name}},
-#define LtoR_LIT(name, out, k1, k2) {comboroll_t_string,  CMB_MATCH_LEFT, COMBOROLL_TERM, k1, k2, {.output_string=out}},
-#define LtoR_STR(name,      k1, k2) {comboroll_t_string,  CMB_MATCH_LEFT, COMBOROLL_TERM, k1, k2, {.output_string=#name}},
+#define LtoR_KEY(name, out, k1, k2) {comboroll_t_keycode, CMB_MATCH_LEFT, COMBOROLL_TERM, {.output_keycode=out}},
+#define LtoR_ARR(name, out, k1, k2) {comboroll_t_array,   CMB_MATCH_LEFT, COMBOROLL_TERM, {.output_array=comboroll_array_##name}},
+#define LtoR_LIT(name, out, k1, k2) {comboroll_t_string,  CMB_MATCH_LEFT, COMBOROLL_TERM, {.output_string=comboroll_string_##name}},
+#define LtoR_STR(name,      k1, k2) {comboroll_t_string,  CMB_MATCH_LEFT, COMBOROLL_TERM, {.output_string=comboroll_string_##name}},
 
-#define RtoL_KEY(name, out, k1, k2) {comboroll_t_keycode, CMB_MATCH_RIGHT, COMBOROLL_TERM, k1, k2, {.output_keycode=out}},
-#define RtoL_ARR(name, out, k1, k2) {comboroll_t_array,   CMB_MATCH_RIGHT, COMBOROLL_TERM, k1, k2, {.output_array=comboroll_array_##name}},
-#define RtoL_LIT(name, out, k1, k2) {comboroll_t_string,  CMB_MATCH_RIGHT, COMBOROLL_TERM, k1, k2, {.output_string=out}},
-#define RtoL_STR(name,      k1, k2) {comboroll_t_string,  CMB_MATCH_RIGHT, COMBOROLL_TERM, k1, k2, {.output_string=#name}},
+#define RtoL_KEY(name, out, k1, k2) {comboroll_t_keycode, CMB_MATCH_RIGHT, COMBOROLL_TERM, {.output_keycode=out}},
+#define RtoL_ARR(name, out, k1, k2) {comboroll_t_array,   CMB_MATCH_RIGHT, COMBOROLL_TERM, {.output_array=comboroll_array_##name}},
+#define RtoL_LIT(name, out, k1, k2) {comboroll_t_string,  CMB_MATCH_RIGHT, COMBOROLL_TERM, {.output_string=comboroll_string_##name}},
+#define RtoL_STR(name,      k1, k2) {comboroll_t_string,  CMB_MATCH_RIGHT, COMBOROLL_TERM, {.output_string=comboroll_string_##name}},
 
-#define CMBO_KEY(name, out, k1, k2) {comboroll_t_keycode, CMB_MATCH_BOTH, COMBO_TERM, k1, k2, {.output_keycode=out}},
-#define CMBO_ARR(name, out, k1, k2) {comboroll_t_array,   CMB_MATCH_BOTH, COMBO_TERM, k1, k2, {.output_array=comboroll_array_##name}},
-#define CMBO_LIT(name, out, k1, k2) {comboroll_t_string,  CMB_MATCH_BOTH, COMBO_TERM, k1, k2, {.output_string=out}},
-#define CMBO_STR(name,      k1, k2) {comboroll_t_string,  CMB_MATCH_BOTH, COMBO_TERM, k1, k2, {.output_string=#name}},
+#define CMBO_KEY(name, out, k1, k2) {comboroll_t_keycode, CMB_MATCH_BOTH, COMBO_TERM, {.output_keycode=out}},
+#define CMBO_ARR(name, out, k1, k2) {comboroll_t_array,   CMB_MATCH_BOTH, COMBO_TERM, {.output_array=comboroll_array_##name}},
+#define CMBO_LIT(name, out, k1, k2) {comboroll_t_string,  CMB_MATCH_BOTH, COMBO_TERM, {.output_string=comboroll_string_##name}},
+#define CMBO_STR(name,      k1, k2) {comboroll_t_string,  CMB_MATCH_BOTH, COMBO_TERM, {.output_string=comboroll_string_##name}},
 
 
 comboroll_t comboroll_data[] = {
 #   include "combo_defs.h"
 };
+
+// Define the array of trigger keys
+#undef  LtoR_KEY
+#undef  LtoR_ARR
+#undef  LtoR_LIT
+#undef  LtoR_STR
+
+#undef  RtoL_KEY
+#undef  RtoL_ARR
+#undef  RtoL_LIT
+#undef  RtoL_STR
+
+#undef  CMBO_KEY
+#undef  CMBO_ARR
+#undef  CMBO_LIT
+#undef  CMBO_STR
+
+#define LtoR_KEY(name, out, k1, k2) {k1, k2},
+#define LtoR_ARR(name, out, k1, k2) {k1, k2},
+#define LtoR_LIT(name, out, k1, k2) {k1, k2},
+#define LtoR_STR(name,      k1, k2) {k1, k2},
+
+#define RtoL_KEY(name, out, k1, k2) {k1, k2},
+#define RtoL_ARR(name, out, k1, k2) {k1, k2},
+#define RtoL_LIT(name, out, k1, k2) {k1, k2},
+#define RtoL_STR(name,      k1, k2) {k1, k2},
+
+#define CMBO_KEY(name, out, k1, k2) {k1, k2},
+#define CMBO_ARR(name, out, k1, k2) {k1, k2},
+#define CMBO_LIT(name, out, k1, k2) {k1, k2},
+#define CMBO_STR(name,      k1, k2) {k1, k2},
+
+
+const uint16_t PROGMEM comboroll_keys[][2] = {
+#   include "combo_defs.h"
+};
+
+#define CMB_KEY_1(id) (pgm_read_word(&comboroll_keys[id][0]))
+#define CMB_KEY_2(id) (pgm_read_word(&comboroll_keys[id][1]))
 
 // Initialize terms with any exceptions
 #undef  CMBO_KEY
@@ -253,15 +296,18 @@ void process_comboroll(comboroll_t *cr) {
 // Scan for match on first key. Return true on success, and comboroll_longest_term is set
 // to the highest term of possible matches
 bool comboroll_scan_firstkey(uint16_t keycode) {
-    comboroll_t *cr = comboroll_data;
+  //comboroll_t *cr = comboroll_data;
     bool         found = false;
 
     comboroll_longest_term = 0;
-    for (int i = 0; i < COMBOROLL_COUNT; cr++, i++) {
-        if ((CMB_IS_MATCHES_LEFT(cr->direction) && keycode == cr->key1) || (CMB_IS_MATCHES_RIGHT(cr->direction) && keycode == cr->key2)) {
+    for (int i = 0; i < COMBOROLL_COUNT; i++) {
+        if (
+            (CMB_IS_MATCHES_LEFT(comboroll_data[i].direction) && keycode == CMB_KEY_1(i))
+            || (CMB_IS_MATCHES_RIGHT(comboroll_data[i].direction) && keycode == CMB_KEY_2(i))) {
+
             found = true;
-            if (cr->term > comboroll_longest_term) {
-                comboroll_longest_term = cr->term;
+            if (comboroll_data[i].term > comboroll_longest_term) {
+                comboroll_longest_term = comboroll_data[i].term;
             }
         }
     }
@@ -272,13 +318,16 @@ bool comboroll_scan_firstkey(uint16_t keycode) {
 // pressed is less than its term, return the pointer to the comboroll_t struct. Otherwise return
 // NULL.
 comboroll_t *comboroll_scan_secondkey(uint16_t firstkey, uint16_t secondkey) {
-    comboroll_t *cr = comboroll_data;
+  //comboroll_t *cr = comboroll_data;
     comboroll_t *result = NULL;
 
-    for (int i = 0; i < COMBOROLL_COUNT; cr++, i++) {
-        if ((CMB_IS_MATCHES_LEFT(cr->direction) && firstkey == cr->key1 && secondkey == cr->key2) || (CMB_IS_MATCHES_RIGHT(cr->direction) && firstkey == cr->key2 && secondkey == cr->key1)) {
-	    if (timer_elapsed(comboroll_timer) <= cr->term) { // don't match combo if it took too long
-                result = cr;
+    for (int i = 0; i < COMBOROLL_COUNT; i++) {
+        if (
+            (CMB_IS_MATCHES_LEFT(comboroll_data[i].direction) && firstkey == CMB_KEY_1(i) && secondkey == CMB_KEY_2(i))
+            || (CMB_IS_MATCHES_RIGHT(comboroll_data[i].direction) && firstkey == CMB_KEY_2(i) && secondkey == CMB_KEY_1(i))) {
+
+	    if (timer_elapsed(comboroll_timer) <= comboroll_data[i].term) { // don't match combo if it took too long
+                result = &comboroll_data[i];
             }
             break;
         }

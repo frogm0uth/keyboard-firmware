@@ -33,13 +33,13 @@ enum comboroll_type {
 typedef struct comboroll_node {
     uint8_t  type:2;
     uint8_t  direction:2;
-    uint16_t term;
-    uint16_t key1;
-    uint16_t key2;
+    uint16_t term:12;
+    //uint16_t key1; // key1 and key2 are stored in a separate array to reduce RAM usage
+    //uint16_t key2;
     union {
         uint16_t         output_keycode;
         const uint16_t*  output_array;
-        char*            output_string;
+        const char*      output_string;
     };
 } comboroll_t;
 
