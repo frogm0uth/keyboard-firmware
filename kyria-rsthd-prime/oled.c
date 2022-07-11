@@ -42,37 +42,37 @@ static void render_qmk_logo(void) {
 
     oled_write_P(qmk_logo, host_keyboard_led_state().caps_lock);
 }
-
-const static char* layer_names[] = {
-    [ALPHA] = "ALPHA",
-    [SYMS]  = "SYMS",
-    [EDIT]  = "EDIT",
-    [SNAP]  = "SNAP",
-    [FUNC]  = "FUNC",
-    [META]  = "META"
-};
-
-enum encoder_info_id {
-  encstring_alttab = 0,
-  encstring_volume,
-  encstring_zoom,
-  encstring_search,
-  encstring_blank
-};
-
-const static char* encoder_info[] = {
-    [encstring_alttab] = "<App            App>",
-    [encstring_volume] = "<-     Volume     +>",
-    [encstring_zoom]   = "<-      Zoom      +>",
-    [encstring_search] = "<Prev  Search  Next>",
-    [encstring_blank]  = "                    "
-};
-
 // clang-format on
 
-static void render_version(void) {
-    oled_write_P(PSTR("\nRSTHD/Prime v32\n"), false);
-}
+static const char PROGMEM str_layer_alpha[] = "ALPHA";
+static const char PROGMEM str_layer_syms[]  = "SYMS";
+static const char PROGMEM str_layer_edit[]  = "EDIT";
+static const char PROGMEM str_layer_snap[]  = "SNAP";
+static const char PROGMEM str_layer_func[]  = "FUNC";
+static const char PROGMEM str_layer_meta[]  = "META";
+
+// clang-format off
+const static char* layer_names[] = {
+    [ALPHA] = str_layer_alpha,
+    [SYMS]  = str_layer_syms,
+    [EDIT]  = str_layer_edit,
+    [SNAP]  = str_layer_snap,
+    [FUNC]  = str_layer_func,
+    [META]  = str_layer_meta
+};
+//clang-format on
+
+static const char PROGMEM str_encoder_alttab[]  = "<App            App>";
+static const char PROGMEM str_encoder_volume[]  = "<-     Volume     +>";
+static const char PROGMEM str_encoder_zoom[]    = "<-      Zoom      +>";
+static const char PROGMEM str_encoder_search[]  = "<Prev  Search  Next>";
+static const char PROGMEM str_encoder_blank[]   = "                    ";
+
+static const char PROGMEM str_oled_header[]     = "     RSTHD/Prime    ";
+static const char PROGMEM str_oled_version[]    = "         v32        ";
+static const char PROGMEM str_oled_caps[]       = "        CAPS        ";
+static const char PROGMEM str_oled_newline[]    = "\n";
+
 
 static void render_status(void) {
     // QMK Logo and version information
@@ -80,9 +80,9 @@ static void render_status(void) {
 
     // Host Keyboard LED Status
     if (host_keyboard_led_state().caps_lock) {
-        oled_write_P(PSTR("        CAPS"), false);
+        oled_write_P(str_oled_caps, false);
     }
-    oled_write_P(PSTR("\n"), false);
+    oled_write_P(str_oled_newline, false);
 
     // Display OS and layer
     uint8_t layer = get_highest_layer(layer_state);
@@ -90,7 +90,7 @@ static void render_status(void) {
     os_shortcut_status();
     oled_write_P(PSTR(" :: "), false);
 #endif
-    oled_write(layer_names[layer], false);
+    oled_write_P(layer_names[layer], false);
     oled_write_P(PSTR("\n"), false);
 
     // Display modifiers
@@ -114,16 +114,16 @@ static void render_status(void) {
         custom_edit_status();
     }
 #endif
-    oled_write_P(PSTR("\n"), false);
+    oled_write_P(str_oled_newline, false);
 
 #ifdef ENCODER_ENABLE
     // encoder help
     switch (layer) {
         case ALPHA:
             if (!(mods & MOD_MASK_CTRL)) {
-                oled_write(encoder_info[encstring_alttab], false);
+                oled_write_P(str_encoder_alttab, false);
             } else {
-                oled_write(encoder_info[encstring_volume], false);
+                oled_write_P(str_encoder_volume, false);
             }
             break;
 
@@ -132,10 +132,10 @@ static void render_status(void) {
             if (custom_edit_encoder_ready()) {
                 custom_edit_encoder_status();
             } else {
-                oled_write(encoder_info[encstring_zoom], false);
+                oled_write_P(str_encoder_zoom, false);
             }
 #    else
-            oled_write(encoder_info[encstring_zoom], false);
+            oled_write_P(str_encoder_zoom, false);
 #    endif
             break;
 
@@ -147,16 +147,16 @@ static void render_status(void) {
             } else if (mods & MOD_MASK_SHIFT) {
                 oled_brightness_encoder_status();
             } else {
-                oled_write(encoder_info[encstring_search], false);
+                oled_write_P(str_encoder_search, false);
             }
             break;
 
         default:
-            oled_write(encoder_info[encstring_blank], false);
+            oled_write_P(str_encoder_blank, false);
     }
 #endif
-    oled_write_P(PSTR("\n"), false);
-    oled_write_P(PSTR("         v32        "), false);
+    oled_write_P(str_oled_newline, false);
+    oled_write_P(str_oled_version, false);
 }
 
 bool oled_task_user(void) {
@@ -164,7 +164,12 @@ bool oled_task_user(void) {
         render_status(); // Renders the current keyboard state
     } else {
         render_qmk_logo(); // Static display
-        render_version();
+        oled_write_P(str_oled_newline, false);
+        oled_write_P(str_oled_header,  false);
+        oled_write_P(str_oled_newline, false);
+        oled_write_P(str_oled_newline, false);
+        oled_write_P(str_oled_newline, false);
+        oled_write_P(str_oled_version, false);
     }
     return false;
 }

@@ -444,28 +444,37 @@ void custom_edit_status() {
     }
 }
 
+static const char PROGMEM str_fast_left[]  = "^page  ";
+static const char PROGMEM str_fast_right[] = "  pagev";
+static const char PROGMEM str_x5_left[]    = "<para  ";
+static const char PROGMEM str_x5_right[]   = "  para>";
+static const char PROGMEM str_more_left[]  = "<word  ";
+static const char PROGMEM str_more_right[] = "  word>";
+static const char PROGMEM str_dflt_left[]  = "<char  ";
+static const char PROGMEM str_dflt_right[] = "  char>";
+
 void custom_edit_encoder_status() {
-    char *leftstring, *rightstring;
+    const char *leftstring, *rightstring;
 
     if (IS_EDIT_FAST) {
-        leftstring  = "^page  ";
-        rightstring = "  pagev";
+        leftstring  = str_fast_left;
+        rightstring = str_fast_right;
     } else if (IS_EDIT_X5) {
-        leftstring  = "<para  ";
-        rightstring = "  para>";
+        leftstring  = str_x5_left;
+        rightstring = str_x5_right;
     } else if (IS_EDIT_MORE) {
-        leftstring  = "<word  ";
-        rightstring = "  word>";
+        leftstring  = str_more_left;
+        rightstring = str_more_right;
     } else {
-        leftstring  = "<char  ";
-        rightstring = "  char>";
+        leftstring  = str_dflt_left;
+        rightstring = str_dflt_right;
     }
-    oled_write(leftstring, false);
+    oled_write_P(leftstring, false);
     if (IS_EDIT_DELETE) {
         oled_write_P(PSTR("DELETE"), false);
     } else {
         oled_write_P(PSTR("      "), false);
     }
-    oled_write(rightstring, false);
+    oled_write_P(rightstring, false);
 }
 #endif
