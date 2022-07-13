@@ -76,9 +76,7 @@ CMBO_STR( ui, KC_U, KC_I )
 // Anti-pinballing
 RtoL_STR( er, KC_O, KC_A )
 RtoL_STR( ed, KC_L, KC_Y )
-_____TRM( ed, 200 )
 RtoL_STR( es, KC_L, CU_COMM )
-_____TRM( es, 200 )
 RtoL_STR( ve, KC_I, CU_COMM )
 
 // Awkward bigrams/trigrams
@@ -87,12 +85,12 @@ LtoR_STR( cr,  KC_W, KC_F )
 _____TRM( cr,  200 )
 LtoR_STR( pr,  KC_G, KC_D )
 _____TRM( pr,  200 )
-LtoR_STR( ght, KC_P, KC_D )
+LtoR_STR( ght, KC_S, KC_D )
 
 RtoL_STR( my,  KC_M, KC_MINS )
 RtoL_STR( you, KC_U, CU_DOT )
 
-CMBO_STR( min, KC_S, CU_DOT )
+CMBO_STR( min, KC_H, CU_DOT )
 CMBO_STR( ex,  KC_H, CU_COMM )
 
 // Inner column minimization
@@ -100,27 +98,23 @@ LtoR_STR( ck,  KC_C, KC_F )
 LtoR_STR( rk,  KC_R, KC_W )
 LtoR_STR( br,  KC_R, KC_H )
 LtoR_STR( bl,  KC_T, KC_D )
-LtoR_STR( ble, KC_S, KC_D )
-
-RtoL_STR( by,  CU_DOT, KC_MINS )
-_____TRM( by,  200 )
 
 CMBO_STR( be,  KC_R, CU_COMM )
-CMBO_LIT( napost, "n't", KC_T, CU_COMM )
+CMBO_STR( by,  KC_S, CU_COMM )
+CMBO_STR( ke,  KC_T, CU_COMM )
 
 // More typing comfort
 LtoR_STR( fr,   KC_S, KC_F )
 LtoR_STR( ft,   KC_T, KC_F )
 LtoR_STR( ful,  KC_S, KC_G )
 
-CMBO_STR( of,   KC_S, CU_COMM )
 CMBO_STR( for,  KC_R, CU_DOT ) 
 
 // Common word endings, right hand
 RtoL_STR( ally, KC_M, CU_DOT )
-RtoL_STR( ould, KC_N, CU_COMM )
+RtoL_STR( ould, KC_I, CU_DOT )
+RtoL_STR( ough, KC_N, CU_COMM )
 RtoL_STR( ess,  KC_Y, CU_COMM )
-RtoL_STR( ough, KC_N, KC_Y )
 
 // Alternate punctuation on left hand
 RtoL_KEY( comma,  KC_COMM, KC_P, KC_G )
@@ -144,21 +138,24 @@ _____TRM( periodspaceOSS, 200 )
 #endif
 
 // More words
-CMBO_STR( key,  KC_T, CU_DOT )
-CMBO_STR( but,  KC_H, CU_DOT )
+CMBO_STR( abo,  KC_T, CU_DOT )
+CMBO_STR( but,  KC_S, CU_DOT )
 CMBO_STR( qmk,  KC_C, CU_DOT )
+
+// Trialing/temporary
+RtoL_STR( io,  CU_DOT, KC_MINS )
+RtoL_STR( any, KC_U, KC_MINS )
+RtoL_STR( et,  KC_N, KC_Y )
 
 
 // Utilities
 CMBO_KEY( search,   SC_SEARCH,      KC_SPC,  KC_ENT )       // System search box, right thumb
-//#ifdef NOROOM
 CMBO_ARR( esc_x,                                            // Escape-X for emacs
         ARRAY_PROTECT( 
             KC_ESC,
             KC_X
      ),
     KC_V, KC_C )
-//#endif
 
 // Utilities that work only for QMK combos
 #if defined COMBO_ENABLE && !defined COMBO_MUST_TAP_PER_COMBO
