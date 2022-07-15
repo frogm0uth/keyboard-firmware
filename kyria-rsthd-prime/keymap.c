@@ -59,7 +59,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |  Tab |      |   P  |   G  |   D  |   Z  |      |      |  |      |      | !  ? |   L  |   Y  | ,  | |      | Caps |
  |  Alt | Shift|      |      |      |      |   E  |   '  |  | Enter| Space|      |      |      |      | Shift|  Alt |
  `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
- |                    | Mute |      |   "  |      | SYMS |  |      |      |   '  |   K  |      |
+ |                    | Mute |  Tab |   "  |      | SYMS |  |      |      |   '  |  Tab |      |
  |                    |      |  Cmd | SNAP |      |      |  |      |      | EDIT | META |      |
  |                    `----------------------------------'  `----------------------------------'
                                     Alt=FUNC 
@@ -206,7 +206,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Register a single key. Handles custom keycodes.
 void register_custom_key(uint16_t keycode, keyrecord_t *record) {
     uint8_t mods = get_mods();
+    uint8_t ossmods = get_oneshot_mods();
+
     del_mods(MOD_MASK_SHIFT);
+    del_oneshot_mods(MOD_MASK_SHIFT);
     if (keycode > SAFE_RANGE) { // handle custom keycodes, a bit iffy but seems to work...
         record->event.pressed = true;
         process_record_user_emit(keycode, record);
@@ -218,11 +221,14 @@ void register_custom_key(uint16_t keycode, keyrecord_t *record) {
         }
     }
     set_mods(mods);
+    set_oneshot_mods(ossmods);
 }
 
 // Unregister a single key. Handles custom keycodes.
 void unregister_custom_key(uint16_t keycode, keyrecord_t *record) {
     uint8_t mods = get_mods();
+    uint8_t ossmods = get_oneshot_mods();
+
     del_mods(MOD_MASK_SHIFT);
     if (keycode > SAFE_RANGE) { // handle custom keycodes, a bit iffy but seems to work...
         record->event.pressed = false;
@@ -231,6 +237,7 @@ void unregister_custom_key(uint16_t keycode, keyrecord_t *record) {
         unregister_code16(keycode);
     }
     set_mods(mods);
+    set_oneshot_mods(ossmods);
 }
 
 // Tap a single key. Handles custom keycodes.
@@ -258,8 +265,13 @@ const uint16_t PROGMEM shift_keycodes[][2] = {
 // Handle a single key based on passed values
 void process_shift_key(uint16_t key, uint16_t shiftedkey, keyrecord_t *record) {
     uint8_t mods = get_mods();
+    uint8_t ossmods = get_oneshot_mods();
+
     if (record->event.pressed) {
-        register_custom_key(mods & MOD_MASK_SHIFT ? shiftedkey : key, record);
+        register_custom_key((mods | ossmods) & MOD_MASK_SHIFT ? shiftedkey : key, record);
+        if (ossmods & MOD_MASK_SHIFT) {
+            del_oneshot_mods(MOD_MASK_SHIFT);
+        }
     } else {
         unregister_custom_key(key, record);
         unregister_custom_key(shiftedkey, record);
@@ -278,15 +290,16 @@ void process_custom_shift(uint16_t key, keyrecord_t *record) {
  */
 void process_caps_cancel(uint16_t keycode, keyrecord_t *record) {
     uint8_t mods = get_mods();
+    uint8_t ossmods = get_oneshot_mods();
 
     if (host_keyboard_led_state().caps_lock && record->event.pressed) {
-        if (mods & MOD_MASK_SHIFT) {
+        if ((mods | ossmods) & MOD_MASK_SHIFT) {
             switch (keycode) { // Keys that cancel caps lock only on shifted version
                 case KC_1 ... KC_0:
                     tap_code(KC_CAPS);
             }
         }
-        if (!(mods & MOD_MASK_SHIFT)) {
+        if (!((mods | ossmods) & MOD_MASK_SHIFT)) {
             switch (keycode) { // Keys that cancel caps lock only on UNshifted version
                 case CU_0 ... CU_9:
                     tap_code(KC_CAPS);
@@ -359,7 +372,7 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
             break;
 
         case CL_META:
-            return layer_tap_toggle(KC_K, META, record);
+            return layer_tap_toggle(KC_TAB, META, record);
             break;
 #else
             // layer switching using QMK layer-tap: handle cases where tap code is 16-bit or has custom shift

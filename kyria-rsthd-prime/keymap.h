@@ -83,7 +83,7 @@ enum layers {
 #    define CL_SNAP LT(SNAP,   KC_DQUO)
 #    define CL_EDIT LT(EDIT,   KC_QUOT)
 #    define CL_FUNC LT(FUNC,   KC_NO)
-#    define CL_META LT(META,   KC_K)
+#    define CL_META LT(META,   KC_TAB)
 #endif
 // clang-format on
 
@@ -143,13 +143,13 @@ enum custom_keycodes {
  * ways makes it easier to change the tap action. If you change these, combos
  * might need to be updated!
  */
-#define CU_LSFT KC_LSFT
-#define CU_RSFT KC_RSFT
+#define CU_LSFT OSM(MOD_LSFT) //KC_LSFT
+#define CU_RSFT OSM(MOD_RSFT) //KC_RSFT
 #define CU_LALT ALT_T(KC_TAB)
 #define CU_RALT ALT_T(KC_CAPS)
 #define CU_LCTL CTL_T(KC_X)
 #define CU_RCTL CTL_T(KC_Q)
-#define CU_LCMD KC_LGUI
+#define CU_LCMD GUI_T(KC_TAB) //KC_LGUI
 #define CU_RCMD KC_RGUI // not actually used
 
 // Mod-taps on symbols layer
