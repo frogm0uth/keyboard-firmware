@@ -26,6 +26,7 @@
 // Tapping control
 #define TAPPING_TERM 250
 //#define TAPPING_TOGGLE 2
+#define ONESHOT_TAP_TOGGLE 2
 #define IGNORE_MOD_TAP_INTERRUPT
 #define PERMISSIVE_HOLD
 
@@ -67,10 +68,10 @@
 // Allows media codes to properly register in macros and rotary encoder code
 #define TAP_CODE_DELAY 10
 
-// Save some space by removing things I don't use
+// Save some space by removing things I don't use. See https://docs.qmk.fm/#/squeezing_avr
 #define NO_ACTION_MACRO
 #define NO_ACTION_FUNCTION
-#define NO_ACTION_ONESHOT
+//#define NO_ACTION_ONESHOT
 //#define NO_ACTION_TAPPING // This is needed for mod-taps
 #define LAYER_STATE_8BIT
 #define EXTRA_SHORT_COMBOS
