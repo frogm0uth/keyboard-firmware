@@ -3,7 +3,6 @@
 This is the keymap for my Kyria keyboard from [splitkb.com](https://splitkb.com). The alpha layout was based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/) but is now heavily modified. It's optimized for cross-platform portability and minimized usage of the inner index column.
 
 <!--ts-->
-* [Kyria RSTHD/Prime](#kyria-rsthdprime)
    * [Overview](#overview)
       * [Keyboard configuration](#keyboard-configuration)
       * [Goals](#goals)
@@ -67,7 +66,7 @@ The alpha layout aims to reduce lateral finger movement on the index finger. It 
 
 Some of the punctuation keys use non-standard shift mappings. See `shift_defs.h`.
 
-There are a number of combos on this layer, defined with a bunch of macros to reduce boilerplate. I have a userspace implementation called "comboroll" to avoid timing issues with overlapping combos. See `combos.c` for the QMK version, `comborolls.c/h` for the userspace version, and `combo_defs.h` for combo definitions (works with either implementation).
+There are a number of combos on this layer, defined with a bunch of macros to reduce boilerplate. I have a userspace implementation called "[comboroll](docs/comborolls.md)" to avoid timing issues with QMK's overlapping combos. See `combo_defs.h` for combo definitions.
 
 ### SYMS
 
