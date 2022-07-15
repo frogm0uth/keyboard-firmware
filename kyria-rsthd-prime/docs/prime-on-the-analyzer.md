@@ -60,15 +60,17 @@ The other layouts tested here (apart from RSTHD) are all biased more to the righ
 
 ### SFUs
 
-SFU metrics are generally very low. Compared to other layouts that claim to have low SFUs:
+SFU metrics are generally very low. On this analyzer, these are the results compared to other layouts with low SFUs:
 
 ![SFUs](images/SFUs.png)
 
-It is possible to get lower SFU scores, but not without unbalancing the layout in some other way. Realistically, I don't know that SFU scores are going to get much lower than this, short of the analyzers understanding features like combos.
+Realistically, I don't know that SFU scores are going to get much lower than this, short of the analyzers understanding features like combos.
 
 Note: it's possible that the SFU scores for Prime are artificially low because of a bug in the analyzer. If you enter `(cod) (cod)` as the corpus, it reports no SFUs, whereas there should be four (`(` and `c` are on the same finger, `d` and `)` are on the same finger).
 
-Note also: combos will reduce the actual SFUs. However, the same could be said for any of the other layouts, once optimized.
+Note 2: combos will reduce the actual SFUs. However, the same could be said for any of the other layouts, once optimized.
+
+Note 3: since writing this page, I've noticed that there is *definitely* a bug in the analyzer that makes the Prime results artificially low. If the corpus is `RAVISH`, the analyzer shows no SFUs, whereas there should be two because of the conflict between the shift and the pinky letters.
 
 ### Travel distance
 
@@ -86,7 +88,9 @@ Here are the overall scores with other high-performing layouts (don't forget you
 
 ![Overall score](images/Overall%20score.png)
 
-However, I've come to think that bench-racing keyboard layouts with a single score as above is not all that helpful. The analyzers have too many limitations and too many assumptions built in to be able to trust a simple scoring table like this. (Put the same layouts into a different version of this analyzer and the results will be different, for example.)
+However, I've come to think that bench-racing keyboard layouts with a single score as above is not all that helpful. The analyzers have too many limitations and too many assumptions built in to be able to trust a simple scoring table like this. As noted above, there are also bugs that will skew the results.
+
+So, they are a very useful tool, but be careful how you interpret the results!
 
 ## keygen
 
