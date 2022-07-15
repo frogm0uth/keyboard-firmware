@@ -5,7 +5,6 @@ A "combo" is the QMK name for a chord - when two keys pressed simultaneously pro
 
 <!--ts-->
    * [Introduction](#introduction)
-   * [The example key layout](#the-example-key-layout)
    * [The "method"](#the-method)
       * [Identify candidate locations for rolls](#identify-candidate-locations-for-rolls)
       * [Filter the candidates](#filter-the-candidates)
@@ -31,7 +30,7 @@ A "combo" is the QMK name for a chord - when two keys pressed simultaneously pro
       * [RAM usage](#ram-usage)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: username, at: Sat 16 Jul 2022 05:02:31 AEST -->
+<!-- Added by: username, at: Sat 16 Jul 2022 07:04:10 AEST -->
 
 <!--te-->
 
@@ -50,12 +49,6 @@ There are some issues in doing this in QMK, so for now I am using a custom imple
 - Combos with a trigger on each hand are a regular combo.
 
 The idea of triggering a combo by rolling keys was inspired by the "adaptive keys" of the [Hands Down](https://sites.google.com/alanreiser.com/handsdown/home) series of keyboard layouts. There, a key may output a different letter depending on the preceding letter. However, if we think of a roll as just a different way to trigger a combo, we don't tie the output keys to the trigger keys. The thinking gets turned around: first, discover desirable sequences of output characters, and second, decide where to place them in the keymap.
-
-## The example key layout
-
-For reference, this is my key layout. It's necessary to show it to explain the examples, but otherwise the actual layout itself is not that important for this note. (That is, the placement of E on the thumb or the shift keys doesn't really affect the method being described.)
-
-![](images/comboroll/kyria-rsthd-prime-letters.png)
 
 ## The "method"
 
@@ -81,7 +74,11 @@ For a second set, also consider rolls that jump a row.
 
 Now filter the initial candidates by looking at the underlying letters. The simple method is to exclude any bigrams that occur with more than a certain frequency. Using the numbers in the bigram matrix of [Norvig's analysis](http://norvig.com/mayzner.html), my threshold seems to be 0.02%.
 
-In my layout, any rolls involving the Shift keys are filtered out, because my implementation of comborolls doesn't work with one-shot shift.
+Here is my layout, which I'll use for the examples:
+
+![](images/comboroll/kyria-rsthd-prime-letters.png)
+
+In my layout, any rolls involving the Shift keys are also filtered out, because my implementation of comborolls doesn't work with one-shot shift.
 
 Here are my same-row roll candidates after filtering:
 
@@ -194,7 +191,7 @@ When identifying combos, longer is not necessarily better. It might seem that sp
 
 ### Number of combo/rolls
 
-It's tempting to keep adding combos. However, it becomes harder to remember them and traing yourself to use them as the number gets higher.
+It's tempting to keep adding combos. However, it becomes harder to remember them and train yourself to use them as the number gets higher.
 
 My ability to remember and use combos starts to hit its limits at about three dozen (on the alpha layer). There are 28 locations in my keymap for comborolls, of which 25 are currently used, plus 8 two-hand combos and a few special cases (verticals and outward rolls).
 
