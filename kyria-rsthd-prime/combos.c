@@ -34,20 +34,23 @@
 #    define COMBOROLL_TERM 120
 #endif
 
-
-// Emit an array of keycodes
+// Emit an array of keycodes in PROGMEM
 void process_combo_array(const uint16_t *keyptr) {
-    while (*keyptr != KC_NO) {
-        tap_code16(*keyptr++);
+    uint16_t keycode = pgm_read_word(keyptr++);
+    while (keycode != KC_NO) {
+        tap_code16(keycode);
+        keycode = pgm_read_word(keyptr++);
     }
 }
 
-// Emit a string, clear shift after first character
+// Emit a PROGMEM string, clear shift after first character
 void process_combo_string(const char *str) {
-    send_char(*str++);
+    char ch = pgm_read_byte(str++);
+    send_char(ch);
     clear_mods();
-    while (*str) {
-        send_char(*str++);
+    while (ch) {
+        ch = pgm_read_byte(str++);
+        send_char(ch);
     }
 }
 
@@ -99,7 +102,7 @@ uint16_t COMBO_LEN = COMBO_LENGTH;
 
 #define CMBO_KEY(name, out, ...)  const uint16_t PROGMEM COMBO_SEQ_##name[] = {__VA_ARGS__, COMBO_END};
 #define CMBO_ARR(name, out, ...)  const uint16_t PROGMEM COMBO_SEQ_##name[] = {__VA_ARGS__, COMBO_END}; \
-                                  const uint16_t combo_array_##name[] = { out, KC_NO };
+                                  const uint16_t PROGMEM combo_array_##name[] = { out, KC_NO };
 #define CMBO_LIT(name, out, ...)  const uint16_t PROGMEM COMBO_SEQ_##name[] = {__VA_ARGS__, COMBO_END};
 #define CMBO_STR(name, ...)       const uint16_t PROGMEM COMBO_SEQ_##name[] = {__VA_ARGS__, COMBO_END};
 
@@ -110,7 +113,7 @@ uint16_t COMBO_LEN = COMBO_LENGTH;
 
 #define RtoL_KEY(name, out, k1, k2)  const uint16_t PROGMEM COMBO_SEQ_##name[] = {k2, k1, COMBO_END};
 #define RtoL_ARR(name, out, k1, k2)  const uint16_t PROGMEM COMBO_SEQ_##name[] = {k2, k1, COMBO_END}; \
-                                          const uint16_t combo_array_##name[] = { out, KC_NO };
+                                     const uint16_t PROGMEM combo_array_##name[] = { out, KC_NO };
 #define RtoL_LIT(name, out, k1, k2)  const uint16_t PROGMEM COMBO_SEQ_##name[] = {k2, k1, COMBO_END};
 #define RtoL_STR(name, k1, k2)       const uint16_t PROGMEM COMBO_SEQ_##name[] = {k2, k1, COMBO_END};
 
@@ -171,8 +174,8 @@ combo_t key_combos[] = {
 
 #define CMBO_KEY(name, out, ...)
 #define CMBO_ARR(name, out, ...)  case COMBO_ID_##name: process_combo_array(combo_array_##name); break;
-#define CMBO_LIT(name, out, ...)  case COMBO_ID_##name: process_combo_string(out); break;
-#define CMBO_STR(name, ...)       case COMBO_ID_##name: process_combo_string(#name); break;
+#define CMBO_LIT(name, out, ...)  case COMBO_ID_##name: process_combo_string(PSTR(out)); break;
+#define CMBO_STR(name, ...)       case COMBO_ID_##name: process_combo_string(PSTR(#name)); break;
 
 #define LtoR_KEY CMBO_KEY
 #define LtoR_ARR CMBO_ARR
