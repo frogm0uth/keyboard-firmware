@@ -235,7 +235,12 @@ COMBO_ENABLE = yes
 COMBOROLL_ENABLE = no
 ```
 
-in `rules.mk`. In this case, `combos.c` is compiled in.
+in `rules.mk`. In this case, `combos.c` is compiled in. QMK is compiled with (in effect):
+
+```
+#define COMBO_MUST_PRESS_IN_ORDER_PER_COMBO 
+#define COMBO_TERM_PER_COMBO
+```
 
 There is an issue with the QMK implementation. Specifically, if two combos are overlapping, QMK will output the second. However, when rolling, you really want the first to be output. As a workaround, specify in `config.h`:
 
@@ -256,7 +261,7 @@ COMBOROLL_ENABLE = yes
 
 in `rules.mk`. In this case, `comboroll.c` is compiled in.
 
-This only supports two trigger keys and is less flexible in terms of what it can output (you can't use it to activate a modifier, for example), but the behavior with normal characters is better for the rolling typing described in this note.
+This only supports two trigger keys and is less flexible in terms of what it can output (you can't use it to activate a modifier, for example), but the behavior with normal characters is usually better for the rolling typing described in this note.
 
 It's also more space-efficient, so I don't have to turn anything else off to fit it into a Pro Micro.
 
