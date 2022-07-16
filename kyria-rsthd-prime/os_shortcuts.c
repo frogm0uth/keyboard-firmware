@@ -99,27 +99,27 @@ void os_set_from_keycode(uint16_t keycode) {
  */
 // clang-format off
 #ifdef OLED_DRIVER_ENABLE
-void os_shortcut_status () {
+void os_shortcut_status (bool invert) {
 #ifdef OS_SHORTCUTS_STATIC
 #ifdef OS_MACOS
-    oled_write_P(PSTR("   MACOS"), false);
+    oled_write_P(PSTR("   MACOS"), invert);
 #else
     #ifdef OS_WINDOWS
-        oled_write_P(PSTR(" WINDOWS"), false);
+        oled_write_P(PSTR(" WINDOWS"), invert);
     #else
-        oled_write_P(PSTR("   LINUX"), false);
+        oled_write_P(PSTR("   LINUX"), invert);
     #endif
 #endif
 #else
     switch (os_index) {
         case os_platform_macos:
-            oled_write_P(PSTR("   MACOS"), false);
+            oled_write_P(PSTR("   MACOS"), invert);
             break;
         case os_platform_windows:
-            oled_write_P(PSTR(" WINDOWS"), false);
+            oled_write_P(PSTR(" WINDOWS"), invert);
             break;
         case os_platform_linux:
-            oled_write_P(PSTR("   LINUX"), false);
+            oled_write_P(PSTR("   LINUX"), invert);
             break;
     }
 #endif

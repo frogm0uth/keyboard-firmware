@@ -203,6 +203,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 // clang-format on
 
+// Caps lock
+static bool bool_capsword = false;
+bool is_capsword() {
+    return bool_capsword;
+}
+
 // Register a single key. Handles custom keycodes.
 void register_custom_key(uint16_t keycode, keyrecord_t *record) {
     uint8_t mods = get_mods();
@@ -292,7 +298,7 @@ void process_caps_cancel(uint16_t keycode, keyrecord_t *record) {
     uint8_t mods = get_mods();
     uint8_t ossmods = get_oneshot_mods();
 
-    if (host_keyboard_led_state().caps_lock && record->event.pressed) {
+    if (bool_capsword && host_keyboard_led_state().caps_lock && record->event.pressed) {
         if ((mods | ossmods) & MOD_MASK_SHIFT) {
             switch (keycode) { // Keys that cancel caps lock only on shifted version
                 case KC_1 ... KC_0:
@@ -445,6 +451,9 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
  * User-level processing of custom keycodes.
  */
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    uint8_t mods = get_mods();
+    uint8_t ossmods = get_oneshot_mods();
+
 #ifdef LAYER_TAP_TOGGLE
     // Check for interrupt to layer-tap-toggle
     ltt_interrupt(keycode, record);
@@ -456,6 +465,29 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
     }
 #endif
+
+    // Handle caps lock switching. Pressing both shift keys or double-tapping one of them turns on
+    // caps-word. Same again to turn off, or type a non-word character such as space. Also turns
+    // off full caps lock.
+    switch (keycode) {
+        case CU_LSFT:
+        case CU_RSFT:
+            if (record->event.pressed) {
+                if ((mods | ossmods) & MOD_MASK_SHIFT) {
+                    bool_capsword = true;
+                    del_mods(MOD_MASK_SHIFT);
+                    del_oneshot_mods(MOD_MASK_SHIFT);
+                    tap_code(KC_CAPS);
+                    return false;
+                }
+            }
+            break;
+        // Toggle full caps lock
+        case KC_CAPS:
+        case ALT_T(KC_CAPS):
+            bool_capsword = false;
+            break; // let QMK process
+    }
 
     // Process custom keycodes that output characters
     return process_record_user_emit(keycode, record);

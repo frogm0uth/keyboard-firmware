@@ -26,6 +26,7 @@
 /**
  * Extern functions for core files
  */
+bool is_capsword(void);
 bool app_switcher_isactive(void);
 void app_switcher_tick(void);
 void app_switcher_record(uint16_t keycode, keyrecord_t *record);

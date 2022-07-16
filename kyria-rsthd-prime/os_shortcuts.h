@@ -95,4 +95,4 @@ void    process_record_shortcut(uint16_t keycode, keyrecord_t *record);
 void    os_set_from_keycode(uint16_t keycode);
 void    os_set_raw(uint8_t os);
 uint8_t os_get_raw(void);
-void    os_shortcut_status(void);
+void    os_shortcut_status(bool);
