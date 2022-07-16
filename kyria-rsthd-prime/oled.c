@@ -95,17 +95,21 @@ static void render_status(void) {
 
     // Display modifiers
     uint8_t mods = get_mods();
-    if (mods & MOD_MASK_CSAG) {
-        if (mods & MOD_MASK_SHIFT) {
+    uint8_t ossmods = get_oneshot_mods();
+    if (ossmods & MOD_MASK_CSAG) {
+        oled_write_P(PSTR("One-shot "), false);
+    }
+    if ((mods | ossmods) & MOD_MASK_CSAG) {
+        if ((mods | ossmods) & MOD_MASK_SHIFT) {
             oled_write_P(PSTR("Shift "), false);
         }
-        if (mods & MOD_MASK_ALT) {
+        if ((mods | ossmods) & MOD_MASK_ALT) {
             oled_write_P(PSTR("Alt "), false);
         }
-        if (mods & MOD_MASK_CTRL) {
+        if ((mods | ossmods) & MOD_MASK_CTRL) {
             oled_write_P(PSTR("Ctrl "), false);
         }
-        if (mods & MOD_MASK_GUI) {
+        if ((mods | ossmods) & MOD_MASK_GUI) {
             oled_write_P(PSTR("Cmd "), false);
         }
     }
@@ -156,7 +160,7 @@ static void render_status(void) {
     }
 #endif
     oled_write_P(str_oled_newline, false);
-    oled_write_P(str_oled_version, false);
+    oled_write_P(str_oled_version, ossmods & MOD_MASK_CSAG);
 }
 
 bool oled_task_user(void) {
