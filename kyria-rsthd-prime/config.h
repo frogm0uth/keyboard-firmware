@@ -39,7 +39,8 @@
 //#    define OS_LINUX
 #endif
 
-#ifdef OLED_DRIVER_ENABLE
+#ifdef OLED_ENABLE
+#    define OLED_DRIVER SSD1306
 #    define OLED_DISPLAY_128X64
 #endif
 

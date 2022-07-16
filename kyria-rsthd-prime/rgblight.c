@@ -39,7 +39,7 @@ void rgblight_encoder(bool clockwise, uint8_t mods) {
     }
 }
 
-#ifdef OLED_DRIVER_ENABLE
+#ifdef OLED_ENABLE
 void rgblight_oled_encoder_status() {
     uint8_t mods = get_mods();
     oled_write_P(PSTR("<-    "), false);

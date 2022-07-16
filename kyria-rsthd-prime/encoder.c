@@ -79,7 +79,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                     rgblight_encoder(clockwise, mods);
 #endif
                 } else if (mods & MOD_MASK_SHIFT) {
-#ifdef OLED_DRIVER_ENABLE
+#ifdef OLED_ENABLE
                     oled_brightness_encoder(clockwise);
 #endif
                 } else {

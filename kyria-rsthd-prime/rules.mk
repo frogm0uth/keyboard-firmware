@@ -1,4 +1,4 @@
-OLED_DRIVER_ENABLE = yes    # Enables the use of OLED displays
+OLED_ENABLE = yes           # Enables the use of OLED displays
 ENCODER_ENABLE = yes        # Enables the use of one or more encoders
 RGBLIGHT_ENABLE = yes       # Enable keyboard RGB underglow
 LEADER_ENABLE = no          # Enable the Leader Key feature
@@ -43,9 +43,9 @@ EXTRAFLAGS += -Wno-error=unused-variable -Wno-error=unused-function
 
 SRC += appswitcher.c
 
-ifeq ($(strip $(OLED_DRIVER_ENABLE)), yes)
+ifeq ($(strip $(OLED_ENABLE)), yes)
         SRC += oled.c
-        OPT_DEFS += -DOLED_DRIVER_ENABLE
+        OPT_DEFS += -DOLED_ENABLE
 endif
 
 ifeq ($(strip $(ENCODER_ENABLE)), yes)

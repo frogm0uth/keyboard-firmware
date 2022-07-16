@@ -428,7 +428,7 @@ void custom_edit_encoder(bool clockwise) {
 }
 #endif
 
-#ifdef OLED_DRIVER_ENABLE
+#ifdef OLED_ENABLE
 void custom_edit_status() {
     if (IS_EDIT_DELETE) {
         oled_write_P(PSTR("DEL "), false);

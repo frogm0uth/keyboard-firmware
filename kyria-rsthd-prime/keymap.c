@@ -29,7 +29,7 @@ void keyboard_post_init_user(void) {
 #if defined(OS_SHORTCUTS) && !defined(OS_SHORTCUTS_STATIC)
     os_set_raw(user_config.os_selection);
 #endif
-#if defined(OLED_DRIVER_ENABLE)
+#if defined(OLED_ENABLE)
     oled_set_brightness(MAX( user_config.oled_brightness, 0x10 )); // set a minimum, to avoid blank display
 #endif
 
@@ -423,7 +423,7 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
 #ifdef RGBLIGHT_ENABLE
                 rgblight_sethsv(rgblight_get_hue(), rgblight_get_sat(), rgblight_get_val());
 #endif
-#ifdef OLED_DRIVER_ENABLE
+#ifdef OLED_ENABLE
                 user_config.oled_brightness = oled_get_brightness();
                 eeconfig_update_user(user_config.raw);
 #endif
@@ -466,9 +466,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
 #endif
 
-    // Handle caps lock switching. Pressing both shift keys or double-tapping one of them turns on
-    // caps-word. Same again to turn off, or type a non-word character such as space. Also turns
-    // off full caps lock.
+    // Handle caps lock switching. Pressing both shift keys turns on caps-word. If the shift keys
+    // are one-shot shift, double-tap on one of them also turns on caps-word. Same again to turn
+    // off, or type a non-word character such as space. Also turns off full caps lock.
     switch (keycode) {
         case CU_LSFT:
         case CU_RSFT:

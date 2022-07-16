@@ -98,7 +98,7 @@ void os_set_from_keycode(uint16_t keycode) {
  * Display the selected OS on the OLED.
  */
 // clang-format off
-#ifdef OLED_DRIVER_ENABLE
+#ifdef OLED_ENABLE
 void os_shortcut_status (bool invert) {
 #ifdef OS_SHORTCUTS_STATIC
 #ifdef OS_MACOS
