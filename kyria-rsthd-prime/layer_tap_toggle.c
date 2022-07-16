@@ -34,8 +34,7 @@
 // clang-format off
 enum {
     LTT_INACTIVE,
-    LTT_TAPPING_ON,
-    LTT_TAPPED,
+    LTT_TAPPING,
     LTT_HOLDING,
     LTT_TOGGLED
 };
@@ -53,11 +52,11 @@ static bool ltt_isshifted;
  * Update the timer(s) for layer-tap-toggle. Must be called from
  * matrix_scan_user.
  */
-void ltt_update_timer(void) {
-    for (int i = 0; i < NUM_LAYERS; i++) {
-        if (ltt_state[i] == LTT_TAPPING_ON) {
-            if (timer_elapsed(ltt_timer[i]) > TAPPING_TERM) {
-                ltt_state[i] = LTT_HOLDING; // Go to holding state when timer expires
+void ltt_tick(void) {
+    for (int layer = 0; layer < NUM_LAYERS; layer++) {
+        if (ltt_state[layer] == LTT_TAPPING) {
+            if (timer_elapsed(ltt_timer[layer]) > TAPPING_TERM) {
+                ltt_state[layer] = LTT_HOLDING; // Go to holding state when timer expires
             }
         }
     }
@@ -69,14 +68,10 @@ void ltt_update_timer(void) {
  * within the tapping term.
  */
 void ltt_interrupt(uint16_t keycode, keyrecord_t *record) {
-    if (keycode < QK_MODS_MAX) {
-        layer_state_t layer = get_highest_layer(layer_state);
-        if (record->event.pressed) {
-            switch (ltt_state[layer]) {
-                case LTT_TAPPING_ON:
-                    ltt_state[layer] = LTT_TAPPED;
-                    break;
-            }
+    layer_state_t layer = get_highest_layer(layer_state);
+    if (record->event.pressed) {
+        if (ltt_state[layer] == LTT_TAPPING) {
+            ltt_state[layer] = LTT_HOLDING; // Go to holding state on any keypress
         }
     }
 }
@@ -86,8 +81,8 @@ void ltt_interrupt(uint16_t keycode, keyrecord_t *record) {
  * to a custom keycode.
  */
 bool ltt_base(void) {
-    for (int i = 0; i < NUM_LAYERS; i++) {
-        ltt_state[i] = LTT_INACTIVE;
+    for (int layer = 0; layer < NUM_LAYERS; layer++) {
+        ltt_state[layer] = LTT_INACTIVE;
     }
     layer_clear();
     return false;
@@ -101,7 +96,7 @@ bool ltt_lock(keyrecord_t *record) {
     layer_state_t layer = get_highest_layer(layer_state);
     if (record->event.pressed) {
         switch (ltt_state[layer]) {
-            case LTT_TAPPING_ON:
+            case LTT_TAPPING:
             case LTT_HOLDING:
                 ltt_state[layer] = LTT_TOGGLED; // Lock it on
                 break;
@@ -125,7 +120,7 @@ bool layer_tap_toggle(uint16_t keycode, uint8_t layer, keyrecord_t *record) {
         ltt_timer[layer] = timer_read();
         switch (ltt_state[layer]) {
             case LTT_INACTIVE:
-                ltt_state[layer] = LTT_TAPPING_ON; // Wait and see
+                ltt_state[layer] = LTT_TAPPING; // Wait and see
                 ltt_isshifted    = get_mods() & MOD_MASK_SHIFT;
                 layer_on(layer);
                 break;
@@ -136,8 +131,7 @@ bool layer_tap_toggle(uint16_t keycode, uint8_t layer, keyrecord_t *record) {
         }
     } else {
         switch (ltt_state[layer]) {
-            case LTT_TAPPING_ON:
-                if (keycode != KC_NO && ltt_state[layer] == LTT_TAPPING_ON) {
+            case LTT_TAPPING:
                     // handle the rolling-shift case
                     if (ltt_isshifted && !(get_mods() & MOD_MASK_SHIFT)) {
                         register_code(KC_LSFT);
@@ -148,14 +142,7 @@ bool layer_tap_toggle(uint16_t keycode, uint8_t layer, keyrecord_t *record) {
                     } else {
                         tap_code16(keycode); // Send the tap key
                     }
-                }
-                layer_off(layer);
-                ltt_state[layer] = LTT_INACTIVE;
-                break;
-            case LTT_TAPPED:
-                layer_off(layer);
-                ltt_state[layer] = LTT_INACTIVE;
-                break;
+					// fall through
             case LTT_HOLDING:
                 layer_off(layer);
                 ltt_state[layer] = LTT_INACTIVE; // Release the hold
@@ -168,8 +155,6 @@ bool layer_tap_toggle(uint16_t keycode, uint8_t layer, keyrecord_t *record) {
 /**
  * Update the layer-tap-toggle state, but use an alternate layer if Alt is
  * down.
- *
- * FIXME check there is no race condition here.
  */
 bool layer_tap_toggle2(uint16_t keycode, uint8_t layer, uint8_t layer2, keyrecord_t *record) {
     if ((get_mods() & MOD_MASK_ALT) || (get_highest_layer(layer_state) == layer2)) {

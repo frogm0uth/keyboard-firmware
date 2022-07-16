@@ -502,7 +502,7 @@ void matrix_scan_user(void) {
 
     // Update ltt_timer
 #ifdef LAYER_TAP_TOGGLE
-    ltt_update_timer();
+    ltt_tick();
 #endif
 
     // Comboroll timing repeat

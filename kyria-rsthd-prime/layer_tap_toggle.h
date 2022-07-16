@@ -18,15 +18,13 @@
 #include QMK_KEYBOARD_H
 
 /**
- * Layer-tap-toggle. Layer active while held, Ctrl-tap to toggle on, Tap to send some other key.
- * Tap to untoggle the layer. Note: there is no auto-repeat on the tap key on second
- * tap, like with standard LT or mod-tap.
+ * Layer-tap-toggle.
  */
 
 /** 
  * Extern functions
  */
-void ltt_update_timer (void) ;
+void ltt_tick(void) ;
 bool ltt_base(void);
 void ltt_interrupt(uint16_t keycode, keyrecord_t *record);
 bool ltt_lock(keyrecord_t *record);
