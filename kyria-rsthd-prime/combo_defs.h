@@ -45,7 +45,7 @@
  * 2. If COMBOROLL_ENABLED is defined, none of the macros work with more than two trigger keys. For
  * defs with > 2 trigger keys, wrap them in a #ifdef COMBO_ENABLED.
  *
- * 3. The RtoL version works only for two trigger keys even for QMK comboes.
+ * 3. The RtoL version works only for two trigger keys even for QMK combos.
  *
  * 4. If COMBOROLL_ENABLED is defined, don't use layer switch keys as trigers or output.
  */
@@ -114,15 +114,10 @@ _____TRM( comma,  200 )
 RtoL_KEY( period, KC_DOT,  KC_C, KC_W )
 _____TRM( period, 200 )
 
-RtoL_LIT( commaspace, ", ", KC_P, KC_D )
-_____TRM( commaspace,  200 )
-RtoL_LIT( periodspace, ". ", KC_C, KC_F )
-_____TRM( periodspace,  200 )
-
 // Trialing/temporary
 RtoL_STR( et,  CU_DOT, KC_MINS )
 RtoL_STR( any, KC_U, KC_MINS )
-RtoL_STR( ing,  KC_N, KC_Y )
+//RtoL_STR( ing,  KC_N, KC_Y )
 
 // Utilities
 CMBO_KEY( search,   SC_SEARCH,      KC_SPC,  KC_ENT )       // System search box, right thumb
@@ -150,7 +145,8 @@ RtoL_LIT( dirup,          "../",   CU_DTDT, CU_2 )
 // Not working yet
 //
 
-// precondition's next sentence macro
+// precondition's next sentence macro. Not working yet because comboroll implementation does not
+// work with one-shots
 #ifdef NOTWORKINGYET
 RtoL_ARR( periodspaceOSS,
 	ARRAY_PROTECT( 
@@ -162,7 +158,7 @@ RtoL_ARR( periodspaceOSS,
 _____TRM( periodspaceOSS, 200 )
 #endif
 
-// Shell etc. Not working yet because comboroll implementation does work with mod taps
+// Shell etc. Not working yet because comboroll implementation does not work with mod taps
 #ifdef NOTWORKINGYET
 CMBO_STR( qmk,  KC_H, CU_RCTL )
 CMBO_STR( cd,   KC_D, CU_RCTL )
