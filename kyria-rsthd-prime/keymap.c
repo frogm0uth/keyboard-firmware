@@ -64,13 +64,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |                    `----------------------------------'  `----------------------------------'
                                     Alt=FUNC 
 */
-     [ALPHA] = LAYOUT(
+    [ALPHA] = LAYOUT(
         KC_ESC,  KC_V,    KC_C,   KC_W,    KC_F,    KC_K,                                              KC_J,    KC_M,    KC_U,   CU_DOT,  KC_MINS, KC_BSPC,
         CU_LCTL, KC_R,    KC_S,   KC_T,    KC_H,    KC_B,                                              KC_SCLN, KC_N,    KC_I,   KC_O,    KC_A,    CU_RCTL,
         CU_LALT, CU_LSFT, KC_P,   KC_G,    KC_D,    KC_Z,    ___X___, ___X___, /* */ ___X___, ___X___, CU_EXQU, KC_L,    KC_Y,   CU_COMM, CU_RSFT, CU_RALT,
         /* */                     KC_MUTE, CU_LCMD, CL_SNAP, KC_E,    CL_SYMS, /* */ KC_ENT,  KC_SPC,  CL_EDIT, CL_META, ___X___
         ),
-     
+
 /* SYMS
 
  ,-----------------------------------------.                              ,-----------------------------------------.
@@ -108,18 +108,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |                    |      |CmdCtl|      |      |      |  |      |      | (**) |      |      |
  |                    `----------------------------------'  `----------------------------------'
 */
-     [EDIT] = LAYOUT_stack(
-	SC_EXPOSE_ALL,   SC_FULLSCREEN, CE_HOME,         CE_UP,             CE_END,          CU_NEXT_WINDOW,
-	SC_PREV_SCREEN,  CE_PAGE_UP,    CE_LEFT,         CE_DOWN,           CE_RIGHT,        CU_APPSWITCH_RIGHT,
-	KC_TAB,          CE_PAGE_DOWN,  SC_UNDO_ACTION,  KC_DEL,            SC_REDO_ACTION,  CU_TAB_RIGHT,        ___X___, ___X___,
-	                                                 SC_APP_ZOOM_RESET, SC_CMD_CTRL,     KC_SPC,             KC_BSPC,  KC_ENT,
+    [EDIT] = LAYOUT_stack(
+        SC_EXPOSE_ALL,   SC_FULLSCREEN, CE_HOME,         CE_UP,             CE_END,          CU_NEXT_WINDOW,
+        SC_PREV_SCREEN,  CE_PAGE_UP,    CE_LEFT,         CE_DOWN,           CE_RIGHT,        CU_APPSWITCH_RIGHT,
+        KC_TAB,          CE_PAGE_DOWN,  SC_UNDO_ACTION,  KC_DEL,            SC_REDO_ACTION,  CU_TAB_RIGHT,        ___X___, ___X___,
+                                                         SC_APP_ZOOM_RESET, SC_CMD_CTRL,     KC_SPC,              KC_BSPC,  KC_ENT,
 
-	                  CU_NEXT_WINDOW,     SC_PASTE_CLIPBOARD, SC_COPY_SELECTION, SC_CUT_SELECTION,  SC_SELECT_ALL, _______,
-	                  CU_APPSWITCH_RIGHT, CE_FAST,            CE_X5,             CE_MORE,           CE_DELETE,     SC_NEXT_SCREEN,
-	___X___, ___X___, CU_TAB_RIGHT,       KC_RGUI,            KC_RALT,           KC_RCTL,           KC_RSFT,       SC_EXPOSE_WINDOWS,
-	___X___, ___X___, _______,            ___X___,            ___X___
-	),
-     
+                          CU_NEXT_WINDOW,     SC_PASTE_CLIPBOARD, SC_COPY_SELECTION, SC_CUT_SELECTION,  SC_SELECT_ALL, _______,
+                          CU_APPSWITCH_RIGHT, CE_FAST,            CE_X5,             CE_MORE,           CE_DELETE,     SC_NEXT_SCREEN,
+        ___X___, ___X___, CU_TAB_RIGHT,       KC_RGUI,            KC_RALT,           KC_RCTL,           KC_RSFT,       SC_EXPOSE_WINDOWS,
+        ___X___, ___X___, _______,            ___X___,            ___X___
+    ),
+
 /* SNAP
 
  ,-----------------------------------------.                              ,-----------------------------------------.
@@ -136,15 +136,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                       `----------------------------------'  `----------------------------------'
 */
     [SNAP] = LAYOUT_stack(
-	_______,        SC_SELECT_ALL,    SC_CUT_SELECTION,     SC_COPY_SELECTION,    SC_PASTE_CLIPBOARD, CU_NEXT_WINDOW,
-	SC_PREV_SCREEN, ___X___,          SC_SCREENSHOT_SCREEN, SC_SCREENSHOT_REGION, SC_SCREENSHOT_APP,  CU_APPSWITCH_RIGHT,
-	___X___,        KC_LSFT,          KC_LCTL,              KC_LALT,              KC_LGUI,            CU_TAB_RIGHT,        ___X___, ___X___,
+        _______,        SC_SELECT_ALL,    SC_CUT_SELECTION,     SC_COPY_SELECTION,    SC_PASTE_CLIPBOARD, CU_NEXT_WINDOW,
+        SC_PREV_SCREEN, ___X___,          SC_SCREENSHOT_SCREEN, SC_SCREENSHOT_REGION, SC_SCREENSHOT_APP,  CU_APPSWITCH_RIGHT,
+        ___X___,        KC_LSFT,          KC_LCTL,              KC_LALT,              KC_LGUI,            CU_TAB_RIGHT,        ___X___, ___X___,
                                                                 ___X___,              ___X___,            _______,             ___X___, ___X___,
 
-	                      CU_PREV_WINDOW,    SC_SNAP_TOPLEFT,    SC_SNAP_TOP,      SC_SNAP_TOPRIGHT,    SC_FULLSCREEN,   SC_EXPOSE_ALL,
-	                      CU_APPSWITCH_LEFT, SC_SNAP_LEFT,       SC_SNAP_VERTICAL, SC_SNAP_RIGHT,       SC_BROWSER_BACK, SC_NEXT_SCREEN,
-        ___X___,   ___X___,   CU_TAB_LEFT,       SC_SNAP_BOTTOMLEFT, SC_SNAP_BOTTOM,   SC_SNAP_BOTTOMRIGHT, SC_BROWSER_FWD,  SC_REVEAL_DESKTOP,
-        CM_BTN3,   CM_BTN1,   CM_BTN2,           ___X___,            ___X___
+                          CU_PREV_WINDOW,    SC_SNAP_TOPLEFT,    SC_SNAP_TOP,      SC_SNAP_TOPRIGHT,    SC_FULLSCREEN,   SC_EXPOSE_ALL,
+                          CU_APPSWITCH_LEFT, SC_SNAP_LEFT,       SC_SNAP_VERTICAL, SC_SNAP_RIGHT,       SC_BROWSER_BACK, SC_NEXT_SCREEN,
+        ___X___, ___X___, CU_TAB_LEFT,       SC_SNAP_BOTTOMLEFT, SC_SNAP_BOTTOM,   SC_SNAP_BOTTOMRIGHT, SC_BROWSER_FWD,  SC_REVEAL_DESKTOP,
+        CM_BTN3, CM_BTN1, CM_BTN2,           ___X___,            ___X___
     ),
 
 /* FUNC
@@ -162,17 +162,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |                    |      | (**) | (**) |      |      |  |      |      |      |CmdCtl|      |
  |                    `----------------------------------'  `----------------------------------'
 */
-     [FUNC] = LAYOUT_stack(
+    [FUNC] = LAYOUT_stack(
         ___X___, ___X___, ___X___,         ___X___,           ___X___,         ___X___,
-	___X___, ___X___, CU_SELECT_MACOS, CU_SELECT_WINDOWS, CU_SELECT_LINUX, ___X___,
-	_______, KC_LSFT, KC_LCTL,         KC_LALT,           KC_LGUI,         ___X___, ___X___, ___X___,
-	                                   ___X___,           _______,         _______, ___X___, ___X___,
+        ___X___, ___X___, CU_SELECT_MACOS, CU_SELECT_WINDOWS, CU_SELECT_LINUX, ___X___,
+        _______, KC_LSFT, KC_LCTL,         KC_LALT,           KC_LGUI,         ___X___, ___X___, ___X___,
+                                           ___X___,           _______,         _______, ___X___, ___X___,
 
                           ___X___, KC_F7,       KC_F8,   KC_F9,   KC_F10,  ___X___,
-	                  ___X___, KC_F1,       KC_F2,   KC_F3,   KC_F11,  ___X___,
-	___X___, ___X___, ___X___, KC_F4,       KC_F5,   KC_F6,   KC_F12,  ___X___,
-	___X___, ___X___, ___X___, SC_CMD_CTRL, ___X___
-	),
+                          ___X___, KC_F1,       KC_F2,   KC_F3,   KC_F11,  ___X___,
+        ___X___, ___X___, ___X___, KC_F4,       KC_F5,   KC_F6,   KC_F12,  ___X___,
+        ___X___, ___X___, ___X___, SC_CMD_CTRL, ___X___
+    ),
 
 /* META
 
@@ -189,7 +189,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |                    |      |      |      |      |      |  |      |      |      |      |      |
  |                    `----------------------------------'  `----------------------------------'
 */
-     [META] = LAYOUT_stack(
+    [META] = LAYOUT_stack(
         ___X___, ___X___, SC_CLOSE_TAB, ___X___,    SC_FIND,   ___X___,
         SC_QUIT, ___X___, SC_SAVE,      SC_NEW_TAB, ___X___,   SC_BIN, 
         ___X___, ___X___, SC_PRINT,     ___X___,    ___X___,   ___X___,        ___X___,        ___X___,
@@ -199,18 +199,47 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                            ___X___,  SC_NEW,   ___X___,  SC_OPEN,  SC_SAVE_AS, SC_QUIT,
         ___X___, ___X___,  ___X___, KC_RGUI,   KC_RALT,  KC_RCTL,  KC_RSFT,    ___X___,
         CU_WIPE, ___X___,  ___X___,  _______,  ___X___
-        ),
+    ),
 };
 // clang-format on
 
-// Caps lock
-static bool bool_capsword = false;
-bool is_capsword() {
-    return bool_capsword;
-}
 
 // Register a single key. Handles custom keycodes.
 void register_custom_key(uint16_t keycode, keyrecord_t *record) {
+    record->event.pressed = true; // force it on
+    if (keycode > SAFE_RANGE) { // handle custom keycodes, a bit iffy but seems to work...
+        process_record_user_emit(keycode, record);
+    } else {
+        if (keycode == KC_CAPS) { // needs special treatment
+            tap_code16(KC_CAPS);
+        } else {
+#ifdef CUSTOM_CAPSWORD
+            // Check for capsword cancel 
+            process_caps_cancel(keycode, record);
+#endif
+            register_code16(keycode);
+        }
+    }
+}
+
+// Unregister a single key. Handles custom keycodes.
+void unregister_custom_key(uint16_t keycode, keyrecord_t *record) {
+    record->event.pressed = false; // force it off
+    if (keycode > SAFE_RANGE) { // handle custom keycodes, a bit iffy but seems to work...
+        process_record_user_emit(keycode, record);
+    } else {
+        unregister_code16(keycode);
+    }
+}
+
+// Tap a single key. Handles custom keycodes.
+void tap_custom_key(uint16_t keycode, keyrecord_t *record) {
+    register_custom_key(keycode, record);
+    unregister_custom_key(keycode, record);
+}
+
+// Register a single key, ignoring shift.
+void register_custom_key_ignoreshift(uint16_t keycode, keyrecord_t *record) {
     uint8_t mods = get_mods();
 #ifndef NO_ACTION_ONESHOT
     uint8_t ossmods = get_oneshot_mods();
@@ -220,54 +249,38 @@ void register_custom_key(uint16_t keycode, keyrecord_t *record) {
 #ifndef NO_ACTION_ONESHOT
     del_oneshot_mods(MOD_MASK_SHIFT);
 #endif
-    if (keycode > SAFE_RANGE) { // handle custom keycodes, a bit iffy but seems to work...
-        record->event.pressed = true;
-        process_record_user_emit(keycode, record);
-    } else {
-        if (keycode == KC_CAPS) { // needs special treatment!??
-            tap_code16(keycode);
-        } else {
-            register_code16(keycode);
-        }
-    }
+
+    register_custom_key(keycode, record);
+
     set_mods(mods);
 #ifndef NO_ACTION_ONESHOT
     set_oneshot_mods(ossmods);
 #endif
 }
 
-// Unregister a single key. Handles custom keycodes.
-void unregister_custom_key(uint16_t keycode, keyrecord_t *record) {
+// Unregister a single key, ignoring shift.
+void unregister_custom_key_ignoreshift(uint16_t keycode, keyrecord_t *record) {
     uint8_t mods = get_mods();
 #ifndef NO_ACTION_ONESHOT
     uint8_t ossmods = get_oneshot_mods();
 #endif
 
     del_mods(MOD_MASK_SHIFT);
-    if (keycode > SAFE_RANGE) { // handle custom keycodes, a bit iffy but seems to work...
-        record->event.pressed = false;
-        process_record_user_emit(keycode, record);
-    } else {
-        unregister_code16(keycode);
-    }
+
+    unregister_custom_key(keycode, record);
+
     set_mods(mods);
 #ifndef NO_ACTION_ONESHOT
     set_oneshot_mods(ossmods);
 #endif
 }
 
-// Tap a single key. Handles custom keycodes.
-void tap_custom_key(uint16_t keycode, keyrecord_t *record) {
-    register_custom_key(keycode, record);
-    unregister_custom_key(keycode, record);
-}
 
 /**
  * Process keys with a custom shift value. Shift codes are defined in shift_defs.h.
- * FIXME make it able to handle custom keycodes.
  */
 // clang-format off
-#undef DEFINE_SHIFT
+#undef  DEFINE_SHIFT
 #define DEFINE_SHIFT(name, normal, shifted) [name - SHIFT_ID_START] = {normal, shifted},
 
 const uint16_t PROGMEM shift_keycodes[][2] = {
@@ -288,15 +301,15 @@ void process_shift_key(uint16_t key, uint16_t shiftedkey, keyrecord_t *record) {
 #endif
 
     if (record->event.pressed) {
-        register_custom_key((mods | ossmods) & MOD_MASK_SHIFT ? shiftedkey : key, record);
+        register_custom_key_ignoreshift((mods | ossmods) & MOD_MASK_SHIFT ? shiftedkey : key, record);
 #ifndef NO_ACTION_ONESHOT
         if (ossmods & MOD_MASK_SHIFT) {
             del_oneshot_mods(MOD_MASK_SHIFT);
         }
 #endif
     } else {
-        unregister_custom_key(key, record);
-        unregister_custom_key(shiftedkey, record);
+        unregister_custom_key_ignoreshift(key, record);
+        unregister_custom_key_ignoreshift(shiftedkey, record);
     }
 }
 
@@ -307,57 +320,17 @@ void process_custom_shift(uint16_t key, keyrecord_t *record) {
     }
 }
 
-/**
- * Cancel caps-lock automatically ("caps word").
- */
-void process_caps_cancel(uint16_t keycode, keyrecord_t *record) {
-    uint8_t mods = get_mods();
-#ifndef NO_ACTION_ONESHOT
-    uint8_t ossmods = get_oneshot_mods();
-#else
-    uint8_t ossmods = mods;
-#endif
-
-    if (bool_capsword && host_keyboard_led_state().caps_lock && record->event.pressed) {
-        if ((mods | ossmods) & MOD_MASK_SHIFT) {
-            switch (keycode) { // Keys that cancel caps lock only on shifted version
-                case KC_1 ... KC_0:
-                    tap_code(KC_CAPS);
-            }
-        }
-        if (!((mods | ossmods) & MOD_MASK_SHIFT)) {
-            switch (keycode) { // Keys that cancel caps lock only on UNshifted version
-                case CU_0 ... CU_9:
-                    tap_code(KC_CAPS);
-            }
-        }
-        switch (keycode) {     // Keycodes that cancel caps lock regardless of shift
-            case KC_ENTER:
-            case KC_ESCAPE:
-            case KC_TAB:
-            case KC_SPACE:
-
-            case KC_EXCLAIM ... KC_RIGHT_PAREN:
-            case KC_EQUAL ... KC_SLASH:
-            case KC_PLUS ... KC_QUESTION:
-
-            case CU_COMMA_PIPE:
-            case CU_DOT_SLASH:
-            case CU_EXCLAIM_QUESTION:
-                // add any other custom keycodes as needed here
-                tap_code(KC_CAPS);
-        }
-    }
-}
 
 /**
  * User-level processing of custom keycodes, for those that might output characters.
  * This is split out from process_record_user so that it can be called from other
- * places e.g. custom shift.
+ * places (via tap_custom_key()).
  */
 bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
-    // Turn off caps lock at the end of a word
+#ifdef CUSTOM_CAPSWORD
+    // Check for capsword cancel 
     process_caps_cancel(keycode, record);
+#endif
 
     // Process custom shift keys
     process_custom_shift(keycode, record);
@@ -471,12 +444,6 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
  * User-level processing of custom keycodes.
  */
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    uint8_t mods = get_mods();
-#ifndef NO_ACTION_ONESHOT
-    uint8_t ossmods = get_oneshot_mods();
-#else
-    uint8_t ossmods = mods;
-#endif
 
 #ifdef LAYER_TAP_TOGGLE
     // Check for interrupt to layer-tap-toggle
@@ -489,31 +456,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
     }
 #endif
-
-    // Handle caps lock switching. Pressing both shift keys turns on caps-word. If the shift keys
-    // are one-shot shift, double-tap on one of them also turns on caps-word. Same again to turn
-    // off, or type a non-word character such as space. Also turns off full caps lock.
-    switch (keycode) {
-        case CU_LSFT:
-        case CU_RSFT:
-            if (record->event.pressed) {
-                if ((mods | ossmods) & MOD_MASK_SHIFT) {
-                    bool_capsword = true;
-                    del_mods(MOD_MASK_SHIFT);
-#ifndef NO_ACTION_ONESHOT
-                    del_oneshot_mods(MOD_MASK_SHIFT);
-#endif
-                    tap_code(KC_CAPS);
-                    return false;
-                }
-            }
-            break;
-        // Toggle full caps lock
-        case KC_CAPS:
-        case ALT_T(KC_CAPS):
-            bool_capsword = false;
-            break; // let QMK process
+    
+#ifdef CUSTOM_CAPSWORD
+    // Toggle caps word and caps lock
+    if (!process_record_capsword(keycode, record)) {
+        return false;
     }
+#endif
 
     // Process custom keycodes that output characters
     return process_record_user_emit(keycode, record);

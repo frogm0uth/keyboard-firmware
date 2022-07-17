@@ -6,7 +6,7 @@ MOUSEKEY_ENABLE = yes       # Enable the inbuilt mouse key feature
 TAP_DANCE_ENABLE = no       # Enable tap-dance (NB also uncomment #define NO_ACTION_TAPPING in config.h)
 WPM_ENABLE = no             # Enable simple WPM display
 COMBO_ENABLE = no           # Enable combo (chording) functionality
-CAPS_WORD_ENABLE = no       # Enable the caps-word feature. Doesn't work properly with combos.
+CAPS_WORD_ENABLE = no       # Enable the caps-word feature. Doesn't work properly.
 
 LTO_ENABLE = yes            # Firmware size reduction - https://docs.qmk.fm/#/squeezing_avr
 EXTRAKEY_ENABLE = yes       # Needed for volume control, system sleep/lock
@@ -32,6 +32,7 @@ CUSTOM_MOUSE = no           # Enable custom mouse keys. If disabled and MOUSEKEY
 CUSTOM_EDIT = yes           # Enable custom editing keys. Turns on OS_SHORTCUTS.
 LAYER_TAP_TOGGLE = yes      # Enable the layer-tap-toggle feature
 COMBOROLL_ENABLE = yes      # Enable comborolls - not compatible with COMBO_ENABLE
+CUSTOM_CAPSWORD = yes       # Enable custom capsword
 
 # Uncomment one of the next lines to prevent unused variable/function errors
 # from halting the compile
@@ -42,6 +43,11 @@ EXTRAFLAGS += -Wno-error=unused-variable -Wno-error=unused-function
 # Don't edit from here down
 
 SRC += appswitcher.c
+
+ifeq ($(strip $(CUSTOM_CAPSWORD)), yes)
+        SRC += custom_capsword.c
+        OPT_DEFS += -DCUSTOM_CAPSWORD
+endif
 
 ifeq ($(strip $(OLED_ENABLE)), yes)
         SRC += oled.c

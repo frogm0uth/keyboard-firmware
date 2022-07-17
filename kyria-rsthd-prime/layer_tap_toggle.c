@@ -15,7 +15,6 @@
  */
 #include QMK_KEYBOARD_H
 
-#include "layer_tap_toggle.h"
 #include "keymap.h"
 
 /**
@@ -132,17 +131,16 @@ bool layer_tap_toggle(uint16_t keycode, uint8_t layer, keyrecord_t *record) {
     } else {
         switch (ltt_state[layer]) {
             case LTT_TAPPING:
-                    // handle the rolling-shift case
-                    if (ltt_isshifted && !(get_mods() & MOD_MASK_SHIFT)) {
-                        register_code(KC_LSFT);
-                        tap_code16(keycode); // Send the tap key
-                        unregister_code(KC_LSFT);
-                    } else if (keycode > SAFE_RANGE) { // handle custom keycodes
-                        tap_custom_key(keycode, record);
-                    } else {
-                        tap_code16(keycode); // Send the tap key
-                    }
-					// fall through
+                // handle the rolling-shift case
+                if (ltt_isshifted && !(get_mods() & MOD_MASK_SHIFT)) {
+                    register_code(KC_LSFT);
+                    tap_code16(keycode); // Send the tap key
+                    unregister_code(KC_LSFT);
+                } else {
+                    // tap the key
+                    tap_custom_key(keycode, record);
+                }
+                // fall through
             case LTT_HOLDING:
                 layer_off(layer);
                 ltt_state[layer] = LTT_INACTIVE; // Release the hold

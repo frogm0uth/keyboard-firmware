@@ -56,8 +56,7 @@ const uint16_t PROGMEM os_shortcut_codes[][3] = {
 // clang-format on
 
 /**
- * Implement default processing for custom keycodes for each shortcut. Call this
- * from the default case of the switch(keycode) in process_record_user().
+ * Implement default processing for custom keycodes for each shortcut.
  */
 #ifndef OS_SHORTCUTS_STATIC
 void process_record_shortcut(uint16_t keycode, keyrecord_t *record) {

@@ -49,39 +49,6 @@ void process_comboroll_string(const char *str) {
     }
 }
 
-// Register a single key. Handles custom keycodes.
-void register_comboroll_key(uint16_t keycode, keyrecord_t *record) {
-    if (keycode > SAFE_RANGE) { // handle custom keycodes, a bit iffy but seems to work...
-        record->event.pressed = true;
-        process_record_user_emit(keycode, record);
-    } else {
-        // Turn off caps lock at the end of a word
-        process_caps_cancel(keycode, record);
-
-        if (keycode == KC_CAPS) { // needs special treatment...
-            tap_code16(keycode);
-        } else {
-            register_code16(keycode);
-        }
-    }
-}
-
-// Unregister a single key. Handles custom keycodes.
-void unregister_comboroll_key(uint16_t keycode, keyrecord_t *record) {
-    if (keycode > SAFE_RANGE) { // handle custom keycodes, a bit iffy but seems to work...
-        record->event.pressed = false;
-        process_record_user_emit(keycode, record);
-    } else {
-        unregister_code16(keycode);
-    }
-}
-
-// Tap a single key. Handles custom keycodes.
-void tap_comboroll_key(uint16_t keycode, keyrecord_t *record) {
-    register_comboroll_key(keycode, record);
-    unregister_comboroll_key(keycode, record);
-}
-
 // clang-format off
 #undef  ARRAY_PROTECT
 #define ARRAY_PROTECT(...) __VA_ARGS__ 
@@ -280,7 +247,7 @@ void process_comboroll(comboroll_t *cr) {
             // combo output. To be able to remember a held key, we would need a stack or list of
             // active combos (or something along those lines).
         case comboroll_t_keycode:
-            tap_comboroll_key(cr->output_keycode, &firstkey_record);
+            tap_custom_key(cr->output_keycode, &firstkey_record);
             break;
 
         case comboroll_t_array:
@@ -296,7 +263,6 @@ void process_comboroll(comboroll_t *cr) {
 // Scan for match on first key. Return true on success, and comboroll_longest_term is set
 // to the highest term of possible matches
 bool comboroll_scan_firstkey(uint16_t keycode) {
-  //comboroll_t *cr = comboroll_data;
     bool         found = false;
 
     comboroll_longest_term = 0;
@@ -318,7 +284,6 @@ bool comboroll_scan_firstkey(uint16_t keycode) {
 // pressed is less than its term, return the pointer to the comboroll_t struct. Otherwise return
 // NULL.
 comboroll_t *comboroll_scan_secondkey(uint16_t firstkey, uint16_t secondkey) {
-  //comboroll_t *cr = comboroll_data;
     comboroll_t *result = NULL;
 
     for (int i = 0; i < COMBOROLL_COUNT; i++) {
@@ -344,13 +309,13 @@ bool process_record_comboroll(uint16_t keycode, keyrecord_t *record) {
             // Look for match on second key
             comboroll_t *second = comboroll_scan_secondkey(firstkey_matched, keycode);
             if (second) {
-                process_comboroll(second);                                    // matched second key, so emit the combo
-                unregister_comboroll_key(firstkey_matched, &firstkey_record); // unregister first key prematurely to avoid hanging mods
-                return false;                                                 // no further processing
+                process_comboroll(second);                                 // matched second key, so emit the combo
+                unregister_custom_key(firstkey_matched, &firstkey_record); // unregister first key prematurely to avoid hanging mods
+                return false;                                              // no further processing
 
-            } else {                                                        // no match
-                register_comboroll_key(firstkey_matched, &firstkey_record); // register the first key
-                                                                            // fall through to check for start of comboroll again
+            } else {                                                       // no match
+                register_custom_key(firstkey_matched, &firstkey_record);   // register the first key
+                                                                           // fall through to check for start of comboroll again
             }
         }
         // If still here, check for a match as first key
@@ -368,7 +333,7 @@ bool process_record_comboroll(uint16_t keycode, keyrecord_t *record) {
             // If we're here, check to see if it was the first key that was just released. If so,
             // send it and cancel the combo
             if (keycode == firstkey_matched) {
-                tap_comboroll_key(firstkey_matched, &firstkey_record);
+                tap_custom_key(firstkey_matched, &firstkey_record);
                 is_in_comboroll = false;
                 // not entirely sure why, but letting this fall through and have QMK also handle
                 // release of the key seems to prevent stuck modifiers
@@ -384,7 +349,7 @@ void comboroll_tick() {
     if (is_in_comboroll) {
         if (timer_elapsed(comboroll_timer) > comboroll_longest_term) {
             is_in_comboroll = false;
-            register_comboroll_key(firstkey_matched, &firstkey_record); // register the first key
+            register_custom_key(firstkey_matched, &firstkey_record); // register the first key
         }
     }
 }

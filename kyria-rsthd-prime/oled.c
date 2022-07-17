@@ -27,7 +27,7 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 // Print byte as hex
 static char hexchars[16] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
-void print_hex(uint8_t n) {
+void oled_print_hex(uint8_t n) {
     oled_write_P(PSTR("0x"), false);
     oled_write_char(hexchars[(n >> 4) & 0x0F], false);
     oled_write_char(hexchars[n & 0x0F], false);
@@ -89,7 +89,11 @@ static void render_status(void) {
     oled_write_P(str_oled_newline, false);
 
     // Display OS and layer
+#ifdef CUSTOM_CAPSWORD
     invert = capslock && !is_capsword();
+#else
+    invert = capslock;
+#endif
     uint8_t layer = get_highest_layer(layer_state);
 #ifdef OS_SHORTCUTS
     os_shortcut_status(invert);
@@ -207,7 +211,7 @@ void oled_brightness_encoder(bool clockwise) {
 
 void oled_brightness_encoder_status() {
     oled_write_P(PSTR("<-   OLED="), false);
-    print_hex(oled_get_brightness());
+    oled_print_hex(oled_get_brightness());
     oled_write_P(PSTR("    +>"), false);
 }
 #endif
