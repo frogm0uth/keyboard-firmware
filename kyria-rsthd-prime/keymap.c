@@ -212,10 +212,14 @@ bool is_capsword() {
 // Register a single key. Handles custom keycodes.
 void register_custom_key(uint16_t keycode, keyrecord_t *record) {
     uint8_t mods = get_mods();
+#ifndef NO_ACTION_ONESHOT
     uint8_t ossmods = get_oneshot_mods();
+#endif
 
     del_mods(MOD_MASK_SHIFT);
+#ifndef NO_ACTION_ONESHOT
     del_oneshot_mods(MOD_MASK_SHIFT);
+#endif
     if (keycode > SAFE_RANGE) { // handle custom keycodes, a bit iffy but seems to work...
         record->event.pressed = true;
         process_record_user_emit(keycode, record);
@@ -227,13 +231,17 @@ void register_custom_key(uint16_t keycode, keyrecord_t *record) {
         }
     }
     set_mods(mods);
+#ifndef NO_ACTION_ONESHOT
     set_oneshot_mods(ossmods);
+#endif
 }
 
 // Unregister a single key. Handles custom keycodes.
 void unregister_custom_key(uint16_t keycode, keyrecord_t *record) {
     uint8_t mods = get_mods();
+#ifndef NO_ACTION_ONESHOT
     uint8_t ossmods = get_oneshot_mods();
+#endif
 
     del_mods(MOD_MASK_SHIFT);
     if (keycode > SAFE_RANGE) { // handle custom keycodes, a bit iffy but seems to work...
@@ -243,7 +251,9 @@ void unregister_custom_key(uint16_t keycode, keyrecord_t *record) {
         unregister_code16(keycode);
     }
     set_mods(mods);
+#ifndef NO_ACTION_ONESHOT
     set_oneshot_mods(ossmods);
+#endif
 }
 
 // Tap a single key. Handles custom keycodes.
@@ -271,13 +281,19 @@ const uint16_t PROGMEM shift_keycodes[][2] = {
 // Handle a single key based on passed values
 void process_shift_key(uint16_t key, uint16_t shiftedkey, keyrecord_t *record) {
     uint8_t mods = get_mods();
+#ifndef NO_ACTION_ONESHOT
     uint8_t ossmods = get_oneshot_mods();
+#else
+    uint8_t ossmods = mods;
+#endif
 
     if (record->event.pressed) {
         register_custom_key((mods | ossmods) & MOD_MASK_SHIFT ? shiftedkey : key, record);
+#ifndef NO_ACTION_ONESHOT
         if (ossmods & MOD_MASK_SHIFT) {
             del_oneshot_mods(MOD_MASK_SHIFT);
         }
+#endif
     } else {
         unregister_custom_key(key, record);
         unregister_custom_key(shiftedkey, record);
@@ -296,7 +312,11 @@ void process_custom_shift(uint16_t key, keyrecord_t *record) {
  */
 void process_caps_cancel(uint16_t keycode, keyrecord_t *record) {
     uint8_t mods = get_mods();
+#ifndef NO_ACTION_ONESHOT
     uint8_t ossmods = get_oneshot_mods();
+#else
+    uint8_t ossmods = mods;
+#endif
 
     if (bool_capsword && host_keyboard_led_state().caps_lock && record->event.pressed) {
         if ((mods | ossmods) & MOD_MASK_SHIFT) {
@@ -452,7 +472,11 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
  */
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     uint8_t mods = get_mods();
+#ifndef NO_ACTION_ONESHOT
     uint8_t ossmods = get_oneshot_mods();
+#else
+    uint8_t ossmods = mods;
+#endif
 
 #ifdef LAYER_TAP_TOGGLE
     // Check for interrupt to layer-tap-toggle
@@ -476,7 +500,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 if ((mods | ossmods) & MOD_MASK_SHIFT) {
                     bool_capsword = true;
                     del_mods(MOD_MASK_SHIFT);
+#ifndef NO_ACTION_ONESHOT
                     del_oneshot_mods(MOD_MASK_SHIFT);
+#endif
                     tap_code(KC_CAPS);
                     return false;
                 }

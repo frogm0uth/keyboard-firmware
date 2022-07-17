@@ -100,10 +100,17 @@ static void render_status(void) {
 
     // Display modifiers
     uint8_t mods = get_mods();
+#ifndef NO_ACTION_ONESHOT
     uint8_t ossmods = get_oneshot_mods();
+#else
+    uint8_t ossmods = mods;
+#endif
+
+#ifndef NO_ACTION_ONESHOT
     if (ossmods & MOD_MASK_CSAG) {
         oled_write_P(PSTR("One-shot "), false);
     }
+#endif
     if ((mods | ossmods) & MOD_MASK_CSAG) {
         if ((mods | ossmods) & MOD_MASK_SHIFT) {
             oled_write_P(PSTR("Shift "), false);
@@ -165,7 +172,11 @@ static void render_status(void) {
     }
 #endif
     oled_write_P(str_oled_newline, false);
+#ifndef NO_ACTION_ONESHOT
     oled_write_P(str_oled_version, ossmods & MOD_MASK_CSAG);
+#else
+    oled_write_P(str_oled_version, false);
+#endif
 }
 
 bool oled_task_user(void) {

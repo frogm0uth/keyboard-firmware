@@ -144,10 +144,13 @@ enum custom_keycodes {
  * ways makes it easier to change the tap action. If you change these, combos
  * might need to be updated!
  */
-#define CU_LSFT OSM(MOD_LSFT)
-#define CU_RSFT OSM(MOD_RSFT)
-//define CU_LSFT KC_LSFT
-//#define CU_RSFT KC_RSFT
+#ifdef NO_ACTION_ONESHOT
+#   define CU_LSFT KC_LSFT
+#   define CU_RSFT KC_RSFT
+#else
+#   define CU_LSFT OSM(MOD_LSFT)
+#   define CU_RSFT OSM(MOD_RSFT)
+#endif
 #define CU_LALT ALT_T(KC_TAB)
 #define CU_RALT ALT_T(KC_CAPS)
 #define CU_LCTL CTL_T(KC_X)
