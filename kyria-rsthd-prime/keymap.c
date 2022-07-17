@@ -238,43 +238,6 @@ void tap_custom_key(uint16_t keycode, keyrecord_t *record) {
     unregister_custom_key(keycode, record);
 }
 
-// Register a single key, ignoring shift.
-void register_custom_key_ignoreshift(uint16_t keycode, keyrecord_t *record) {
-    uint8_t mods = get_mods();
-#ifndef NO_ACTION_ONESHOT
-    uint8_t ossmods = get_oneshot_mods();
-#endif
-
-    del_mods(MOD_MASK_SHIFT);
-#ifndef NO_ACTION_ONESHOT
-    del_oneshot_mods(MOD_MASK_SHIFT);
-#endif
-
-    register_custom_key(keycode, record);
-
-    set_mods(mods);
-#ifndef NO_ACTION_ONESHOT
-    set_oneshot_mods(ossmods);
-#endif
-}
-
-// Unregister a single key, ignoring shift.
-void unregister_custom_key_ignoreshift(uint16_t keycode, keyrecord_t *record) {
-    uint8_t mods = get_mods();
-#ifndef NO_ACTION_ONESHOT
-    uint8_t ossmods = get_oneshot_mods();
-#endif
-
-    del_mods(MOD_MASK_SHIFT);
-
-    unregister_custom_key(keycode, record);
-
-    set_mods(mods);
-#ifndef NO_ACTION_ONESHOT
-    set_oneshot_mods(ossmods);
-#endif
-}
-
 
 /**
  * Process keys with a custom shift value. Shift codes are defined in shift_defs.h.
@@ -291,7 +254,8 @@ const uint16_t PROGMEM shift_keycodes[][2] = {
 #define READ_SHIFT_KEY(k, i) (pgm_read_word(&shift_keycodes[k - SHIFT_ID_START][i]))
 // clang-format on
 
-// Handle a single key based on passed values
+
+// Process a single custom shift key based on passed values
 void process_shift_key(uint16_t key, uint16_t shiftedkey, keyrecord_t *record) {
     uint8_t mods = get_mods();
 #ifndef NO_ACTION_ONESHOT
@@ -300,20 +264,28 @@ void process_shift_key(uint16_t key, uint16_t shiftedkey, keyrecord_t *record) {
     uint8_t ossmods = mods;
 #endif
 
-    if (record->event.pressed) {
-        register_custom_key_ignoreshift((mods | ossmods) & MOD_MASK_SHIFT ? shiftedkey : key, record);
+    del_mods(MOD_MASK_SHIFT);
 #ifndef NO_ACTION_ONESHOT
-        if (ossmods & MOD_MASK_SHIFT) {
-            del_oneshot_mods(MOD_MASK_SHIFT);
-        }
+    del_oneshot_mods(MOD_MASK_SHIFT);
 #endif
+
+    if (record->event.pressed) {
+        register_custom_key((mods | ossmods) & MOD_MASK_SHIFT ? shiftedkey : key, record);
     } else {
-        unregister_custom_key_ignoreshift(key, record);
-        unregister_custom_key_ignoreshift(shiftedkey, record);
+        unregister_custom_key(key, record);
+        unregister_custom_key(shiftedkey, record);
     }
+    set_mods(mods);
+#ifndef NO_ACTION_ONESHOT
+    set_oneshot_mods(ossmods);
+    if (ossmods & MOD_MASK_SHIFT) {
+        del_oneshot_mods(MOD_MASK_SHIFT);
+    }
+#endif
 }
 
-// Call this from the default case at the end of switch(keycode) in process_record_user
+
+// Process a single custom shift key based on the keycode
 void process_custom_shift(uint16_t key, keyrecord_t *record) {
     if (key > SHIFT_ID_START && key < SHIFT_ID_END) {
         process_shift_key(READ_SHIFT_KEY(key, 0), READ_SHIFT_KEY(key, 1), record);
