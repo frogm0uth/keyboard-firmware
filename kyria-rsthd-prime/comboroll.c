@@ -16,20 +16,17 @@
 
 /** Comboroll implementation. Comborolls are defined in combo_defs.h.
  *
- * This is my userspace implementation/variant of combos triggered by rolling keys rather than keys
- * pressed at the same time. Since I started on this, two things happened: QMK acquired the
- * COMBO_MUST_PRESS_IN_ORDER flag, which does the same thing; and I've made the implementation able
- * to handle keys pressed in either order. So basically either can work, and combo_defs.h can be
- * compiled for either. The issue I've had with the QMK combos is that overlapping combos trigger
- * the second one, which is not what I want. There's a #define that can turn it off but also
- * requires that you release quickly. Also, this implmentation is more space-efficient (about
- * 2kbytes with ~40 combos).
+ * This is my userspace implementation/variant of combos triggered by rolling
+ * keys rather than keys pressed at the same time. This is an alternative to
+ * QMK combos that handles "rolling" combos better. It's also more
+ * space-efficient (about 2kbytes with ~40 combos), which helps if space is
+ * tight.
  */
 
 #include "config.h"
 #include "keymap.h"
 
-// Emit an array of keycodes
+// Emit an array of keycodes in PROGMEM
 void process_comboroll_array(const uint16_t *keyptr) {
     uint16_t keycode = pgm_read_word(keyptr++);
     while (keycode != KC_NO) {
@@ -43,9 +40,10 @@ void process_comboroll_string(const char *str) {
     char ch = pgm_read_byte(str++);
     send_char(ch);
     clear_mods();
+    ch = pgm_read_byte(str++);
     while (ch) {
-        ch = pgm_read_byte(str++);
         send_char(ch);
+        ch = pgm_read_byte(str++);
     }
 }
 
