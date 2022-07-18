@@ -43,14 +43,15 @@ void process_combo_array(const uint16_t *keyptr) {
     }
 }
 
-// Emit a PROGMEM string, clear shift after first character
+// Emit a PROGMEM string, clear all mods after first character
 void process_combo_string(const char *str) {
     char ch = pgm_read_byte(str++);
     send_char(ch);
     clear_mods();
+    ch = pgm_read_byte(str++);
     while (ch) {
-        ch = pgm_read_byte(str++);
         send_char(ch);
+        ch = pgm_read_byte(str++);
     }
 }
 
