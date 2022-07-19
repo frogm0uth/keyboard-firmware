@@ -11,7 +11,7 @@ This is a *thought experiment* on tapping early and holding later. (So it could 
    * [Resulting behavior](#resulting-behavior)
    * [Scenarios (textual)](#scenarios-textual)
    * [Variants](#variants)
-      * [Combo-like modtaps](#combo-like-modtaps)
+      * [Combo-like mod-taps](#combo-like-mod-taps)
       * [One-shots](#one-shots)
       * ["Forced" one-shots](#forced-one-shots)
    * [Scenarios (graphical)](#scenarios-graphical)
@@ -20,7 +20,7 @@ This is a *thought experiment* on tapping early and holding later. (So it could 
    * [Implementation](#implementation)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: username, at: Wed 20 Jul 2022 03:39:33 AEST -->
+<!-- Added by: username, at: Wed 20 Jul 2022 06:13:25 AEST -->
 
 <!--te-->
 
