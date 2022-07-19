@@ -1,6 +1,6 @@
 # Eager tap-mods
 
-** WORK IN PROGRESS **
+**WORK IN PROGRESS**
 
 This is a *thought experiment* on tapping early and holding later. (So it could also be called early tap-mods, late mod-taps, delayed mod-taps, lazy holds, ...) The word "eager" is used to mean that it outputs a tap code as soon as there's any indication that you *might not* want to hold.
 
@@ -31,7 +31,7 @@ I'm one of those unfortunates that can't use home-row mods. The timing just thro
 As far as I know, this behavior is not currently available in either QMK or ZMK (the latter based only on reading the documentation).
 
 ## Principles
-As far as modtaps go, the keyboard is in one of three modes:
+The keyboard is always in one of three modes:
 1. *Deciding*
 2. *Tapping*
 3. *Holding*
@@ -42,14 +42,14 @@ Each mod-tap key has two codes: the tap code and the hold code (i.e. a modifier)
 
 While *deciding*, no characters or modifiers are output to the computer. Pressed mod-tap keys will be suspended.
 
-When the keyboard decides to start *tapping*, any suspended modtap keys are unsuspended and their *tap codes* are registered. Subsequent keys are then processed as normal &ndash; key presses cause a register event, key releases cause an unregister event. If any of these keys are mod-taps, the *tap code* is registered/unregistered.
+When the keyboard decides to start *tapping*, any suspended mod-tap keys are unsuspended and their *tap codes* are registered. Subsequent keys are then processed as normal &ndash; key presses cause a register event, key releases cause an unregister event. If any of these keys are mod-taps, the *tap code* is registered/unregistered.
 
-When the keyboard decides to start *holding*, any suspended modtap keys are unsuspended and their *hold codes* are registered. Any subsequent keys are then processed as normal &ndash; key presses cause a register event, key releases cause an unregister event. If any of these keys are mod-taps, the *tap code* is registered/unregistered.
+When the keyboard decides to start *holding*, any suspended mod-tap keys are unsuspended and their *hold codes* are registered. Any subsequent keys are then processed as normal &ndash; key presses cause a register event, key releases cause an unregister event. If any of these keys are mod-taps, the *tap code* is registered/unregistered unless it's a release event for one of the held mod-tap keys, in which case the *hold code* is unregistered.
 
 The rules for changing modes are:
 1. The keyboard decides to start or continue *tapping* when:
-	a. A Non-MT key is pressed or released, or
-	b. An MT key is released.
+    - A non-MT key is pressed or released, or
+    - An MT key is released.
 2. The keyboard decides to start *holding* when one or more MT keys are suspended and TT is reached.
 3. The keyboard decides to stop *tapping* and go back to *deciding* when TT has elapsed since the last key release.
 4. The keyboard decides to stop *holding* and go back to *deciding* when the last held MT key is released.
@@ -96,18 +96,18 @@ Notes:
 5. Also same as (3)
 6. Same as (2), decision is made at end of tapping term
 7. If already in hold mode, another MT key is always tap
-8. If second key within TT is also HRM, wait until end of term to activate mods. This should maybe be a shorter time like say COMBO_TERM 
+8. If second key within TT is also MT, wait until end of term to activate mods. This should maybe be a shorter time like say COMBO_TERM 
 9. Same as (8), decision already made at end of term
-10. Releasing HRM within TT triggers tap
+10. Releasing MT within TT triggers tap
 11. Same as (10) 
-12. Non-HRM key triggers tap outputs
+12. Non-MT key triggers tap outputs
 13. This is ZMK "global quick tap"
 
 ## Variants
 
-### Combo-like modtaps
+### Combo-like mod-taps
 
-It might be desirable to limit activation of multiple modifiers to "being pressed at the same time". For example, it might seem irregular that typing OJ will produce output immediately, but typing ON will not produce output until one of them is released. If all modtaps had to be pressed within CT (instead of TT) to be held, this might be allieviated (\*). In effect, activating multiple modifiers would be like triggering a combo.
+It might be desirable to limit activation of multiple modifiers to "being pressed at the same time". For example, it might seem irregular that typing OJ will produce output immediately, but typing ON will not produce output until one of them is released. If all mod-taps had to be pressed within CT (instead of TT) to be held, this might be allieviated (\*). In effect, activating multiple modifiers would be like triggering a combo.
 
 Let `|` indicate expiration of CT, then (8) and (9) become two scenarios each:
 
@@ -148,11 +148,11 @@ Those have the same output as the earlier (6) and (7), so to emphasize the point
 
 ## Scenarios (graphical)
 
-The image below shows a number of scenarios that shoudl result from following *Principles* above. I'm assuming now that the "combo-like" multiple modtaps are implemented.
+The image below shows a number of scenarios that shoudl result from following *Principles* above. I'm assuming now that the "combo-like" multiple mod-taps are implemented.
 
 ![](images/eager-tapmods.png)
 
-1. Modtap key is released before TT: its tap code is output.
+1. Mod-tap key is released before TT: its tap code is output.
 2. Non-MT key is pressed before TT: both keys have the tap code output.
 3. MT key is held until TT: its hold code is output. 
 4. A second MT key is pressed after CT but before TT: both tap codes are output.
