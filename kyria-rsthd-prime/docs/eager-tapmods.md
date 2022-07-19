@@ -9,17 +9,18 @@ This is a *thought experiment* on tapping early and holding later. (So it could 
    * [Rationale/background](#rationalebackground)
    * [Principles](#principles)
    * [Resulting behavior](#resulting-behavior)
-   * [Scenarios](#scenarios)
+   * [Scenarios (textual)](#scenarios-textual)
    * [Variants](#variants)
       * [Combo-like modtaps](#combo-like-modtaps)
       * [One-shots](#one-shots)
       * ["Forced" one-shots](#forced-one-shots)
+   * [Scenarios (graphical)](#scenarios-graphical)
    * [Versus QMK](#versus-qmk)
    * [Versus ZMK](#versus-zmk)
    * [Implementation](#implementation)
 
 <!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: username, at: Wed 20 Jul 2022 00:23:12 AEST -->
+<!-- Added by: username, at: Wed 20 Jul 2022 03:39:33 AEST -->
 
 <!--te-->
 
@@ -41,55 +42,50 @@ Each mod-tap key has two codes: the tap code and the hold code (i.e. a modifier)
 
 While *deciding*, no characters or modifiers are output to the computer. Pressed mod-tap keys will be suspended.
 
-When it decides to start *tapping*, any suspended modtap keys are unsuspended and their *tap codes* are registered. Subsequent keys are then processed as normal &ndash; key presses cause a register event, key releases cause an unregister event. In any of these keys are mod-taps, the *tap code* is registered/unregistered.
+When the keyboard decides to start *tapping*, any suspended modtap keys are unsuspended and their *tap codes* are registered. Subsequent keys are then processed as normal &ndash; key presses cause a register event, key releases cause an unregister event. If any of these keys are mod-taps, the *tap code* is registered/unregistered.
 
-When it decides to start *holding*, any suspended modtap keys are unsuspended and their *hold codes* are registered. Any subsequent keys are then processed as normal &ndash; key presses cause a register event, key releases cause an unregister event. In any of these keys are mod-taps, the *tap code* is registered/unregistered.
+When the keyboard decides to start *holding*, any suspended modtap keys are unsuspended and their *hold codes* are registered. Any subsequent keys are then processed as normal &ndash; key presses cause a register event, key releases cause an unregister event. If any of these keys are mod-taps, the *tap code* is registered/unregistered.
 
-The keyboard decides to start or continue *tapping* when:
-1. A Non-MT key is pressed or released, or
-2. An MT key is released.
+The rules for changing modes are:
+1. The keyboard decides to start or continue *tapping* when:
+	a. A Non-MT key is pressed or released, or
+	b. An MT key is released.
+2. The keyboard decides to start *holding* when one or more MT keys are suspended and TT is reached.
+3. The keyboard decides to stop *tapping* and go back to *deciding* when TT has elapsed since the last key release.
+4. The keyboard decides to stop *holding* and go back to *deciding* when the last held MT key is released.
 
-The keyboard decides to start *holding* when:
-1. One or more MT keys are suspended and TT is reached. TT is counted from the press of the first suspended MT key.
-
-The keyboard decides to stop *tapping* and go back to *deciding* when:
-1. TT has elapsed since the last key release.
-
-The keyboard decides to stop *holding* and go back to *deciding* when:
-1. The last held MT key is released.
-
-The keyboard never moves directly from *tapping* to *holding* or vice versa.
+Note that the keyboard never moves directly from *tapping* to *holding* or vice versa.
 
 ## Resulting behavior
 
-The result (I hope) of the above is that the mod-tap behavior is very oriented towards generating the tap codes. So in normal typing, even I wouldn't accidentally generate modifier codes. Generating the hold codes however, is a more deliberate action that requires that you:
+The result (I hope) of the above is that the mod-tap behavior is very oriented towards generating the tap codes. So in normal typing, even I wouldn't accidentally generate modifier codes. Generating the hold codes however, is a more deliberate action that requires:
 
-1. Wait a short time after pressing any key before pressing a mod-tap key
-2. Wait a short time after pressing a mod-tap key or keys and pressing another key
+1. Waiting a short time after pressing any key before pressing a mod-tap key
+2. Waiting a short time after pressing a mod-tap key or keys and pressing another key
 
-The "short time" here is of course the tapping term, or 200 ms. More a slight pause than a wait. At any rate, I'm hoping that rather than having to get the timing right in the common case (typing), I only need to try and get it right in the uncommon case (modifiers).
+The "short time" here is of course the tapping term, or 200 ms. More a slight pause than a wait. For some people, this might slow things down for regular typing (using shift), but I'm thinking not really any more than say auto-shift. However, it needs to be implemented and tried out to really know.
 
-For some people, this might slow things down for regular typing (using shift), but I'm thinking not really any more than say auto-shift. However, it needs to be implemented and tried out to really know.
+## Scenarios (textual)
 
+Below are a number of scenarios illustrating the behavior. See further below for a graphical version.
 
-## Scenarios
-
-Below are a number of scenarios illustrating the behavior. If I get further with this I'll do some diagrams which will be easier to comprehend. For now, the notation is as follows: `A.` means the A key is pressed, `A^` means the A key is released, `||` means the end of tapping term, `(x.)` means `register_code(KC_X)`, `(x^) `means `unregister_code(KC_X)`. O and N are on the home row, O is the shift mod-tap, N is Ctrl mod-tap, J is not a home row key. `->` indicates the characters that will be seen on screen.  
+The notation is as follows: `A.` means the A key is pressed, `A^` means the A key is released, `||` means the end of tapping term, `(x.)` means `register_code(KC_X)`, `(x^) `means `unregister_code(KC_X)`. O and N are on the home row, O is the shift mod-tap, N is Ctrl mod-tap, J is not a home row key. `->` indicates the characters that will be seen on screen.  
 
 ```
-1.  O. O^ (o. o^)         ||                                                     -> o
-2.  O.                    || (SFT.)       O^ (SFT^)                              -> 
-3.  O. J. (o. j.)         ||              O^ (o^) J^ (j^)                        -> oj
-4.  O. J. (o. j.) J^ (j^) ||              O^ (o^)                                -> oj
-5.  O. J. (o. j.) O^ (o^) ||              J^ (j^)                                -> oj
-6.  O.                    || (SFT.)       J. (j.) O^ (SFT^) J^ (j^)              -> J
-7.  O.                    || (SFT.)       N. (n.) O^ (SFT^) N^ (n^)              -> N
-8.  O. N.                 || (SFT. CTL.)  O^ (SFT^) N^ (CTL^)                    -> 
-9.  O. N.                 || (SFT. CTL.)  J. (j.) O^ (SFT^) N^ (CTL^) J^ (j^)    -> Ctrl-J
-10. O. N. O^ (o. n. o^)   ||              N^ (n^)                                -> on
-11. O. N. N^ (o. n. n^)   ||              O^ (o^)                                -> on
-12. O. N. J. (o. n. j.)   ||              O^ (o^) N^ (n^) J^ (j^)                -> onj
-13. J. O. (j. o.)         ||              O^ (o^) J^ (j^)                        -> jo
+1.   O. O^ (o. o^)           ||                                                     -> o
+2.   O.                      || (SFT.)       O^ (SFT^)                              -> 
+3.   O. J. (o. j.)           ||              O^ (o^) J^ (j^)                        -> oj
+4.   O. J. (o. j.) J^ (j^)   ||              O^ (o^)                                -> oj
+5.   O. J. (o. j.) O^ (o^)   ||              J^ (j^)                                -> oj
+6.   O.                      || (SFT.)       J. (j.) O^ (SFT^) J^ (j^)              -> J
+7.   O.                      || (SFT.)       N. (n.) O^ (SFT^) N^ (n^)              -> N
+8.   O. N.                   || (SFT. CTL.)  O^ (SFT^) N^ (CTL^)                    -> 
+9.   O. N.                   || (SFT. CTL.)  J. (j.) O^ (SFT^) N^ (CTL^) J^ (j^)    -> Ctrl-J
+10.  O. N. O^ (o. n. o^)     ||              N^ (n^)                                -> on
+11.  O. N. N^ (o. n. n^)     ||              O^ (o^)                                -> on
+12.  O. N. J. (o. n. j.)     ||              O^ (o^) N^ (n^) J^ (j^)                -> onj
+13.  J. (j.) O. (o.)         ||              O^ (o^) J^ (j^)                        -> jo
+13a. J. (j.) J^ (j^) O. (o.) ||              O^ (o^)                                -> jo
 ```
 
 Notes:
@@ -149,6 +145,21 @@ Those have the same output as the earlier (6) and (7), so to emphasize the point
 17. O.                   || (SFT.)       N. (n. SFT^) J. (j.) O^ N^ (n^) J^ (j^) -> Nj
 ``` 
 
+
+## Scenarios (graphical)
+
+The image below shows a number of scenarios that shoudl result from following *Principles* above. I'm assuming now that the "combo-like" multiple modtaps are implemented.
+
+![](images/eager-tapmods.png)
+
+1. Modtap key is released before TT: its tap code is output.
+2. Non-MT key is pressed before TT: both keys have the tap code output.
+3. MT key is held until TT: its hold code is output. 
+4. A second MT key is pressed after CT but before TT: both tap codes are output.
+5. Two MT keys are pressed before CT and both held until TT: both hold codes are output.
+6.  Two MT keys are pressed before CT and one is released before TT: both tap codes are output.
+7.  Two MT keys are pressed before CT and a non-MT key is pressed before TT: all tap codes are output.
+8. A non-MT key is pressed and an MT key is then pressed within TT: both tap codes are output.
 
 ## Versus QMK
 
