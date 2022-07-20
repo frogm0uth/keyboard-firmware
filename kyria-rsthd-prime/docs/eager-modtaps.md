@@ -226,10 +226,7 @@ In these cases, the output timing is a little different but the result is the sa
 
 It's easy to see that QMK will register the hold codes in more cases than eager mod-taps (q3, q4, q10, q12). In order to register the tap codes while overlapping keypresses, the mod-tap key must be *released* before TT elapses. If the second key is a non-MT key, it makes no difference whether it is released before TT or not (q5, q5a). If it's an MT key, however, it's tap code is not output if it's not released before TT (q11).
 
-This is the first time I've looked closely at QMK mod-taps to try and understand why HRMs don't work for me, and I think it's probably because whether to register the modifier is decided not just on the timing but also the **order** of key *releases*. For example, comparing q4 and q4a, the timing and ordering here is too tricky for me to get right consistently.
-
-Considering that shortcuts (Cmd-, Ctrl-) have powerful and potentially disastrous actions, I would rather err on the side of accidentally typing some extra characters over accidentally invoking a shortcut.
-
+While I understand the logic that the MT key must be released before TT elapses in order to register the tap codes, the result is inconsistent and I think this may be the source of my difficulty using HRMs.
 
 ## Scenarios (graphical)
 
