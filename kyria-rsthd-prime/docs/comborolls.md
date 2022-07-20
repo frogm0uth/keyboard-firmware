@@ -23,15 +23,12 @@ A "combo" is the QMK name for a chord - when two keys pressed simultaneously pro
       * [On typing with comborolls](#on-typing-with-comborolls)
       * [Length of combos](#length-of-combos)
       * [Number of combo/rolls](#number-of-comborolls)
+      * [Implications for layout design](#implications-for-layout-design)
    * [Implementation](#implementation)
       * [Combo definitions](#combo-definitions)
       * [QMK](#qmk)
       * [Custom implementation](#custom-implementation)
       * [RAM usage](#ram-usage)
-
-<!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: username, at: Sat 16 Jul 2022 07:04:10 AEST -->
-
 <!--te-->
 
 ## Introduction
@@ -194,6 +191,15 @@ When identifying combos, longer is not necessarily better. It might seem that sp
 It's tempting to keep adding combos. However, it becomes harder to remember them and train yourself to use them as the number gets higher.
 
 My ability to remember and use combos starts to hit its limits at about three dozen (on the alpha layer). There are 28 locations in my keymap for comborolls, of which 25 are currently used, plus 8 two-hand combos and a few special cases (verticals and outward rolls).
+
+### Implications for layout design
+
+I wonder how key layout design would change if comborolls were considered during the design phase. In my case, I deliberately placed P in a "bad" location to reduce usage of the inner index column. I did this knowing that I could define comborolls for SP and PR to counteract the resulting SFUs and awkward pinky-ring movement.
+
+However, that was the only letter placement directly affected by comborolls. If it were possible to consider comborolls earlier in the layout design, might there be a better layout waiting?
+
+I think the only way for this to happen is through an analyzer that understands comborolls. Doing it by trial-and-error or intuition would be impossible or at least, very time-consuming.
+
 
 ## Implementation
 

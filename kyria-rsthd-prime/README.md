@@ -18,10 +18,6 @@ This is the keymap for my Kyria keyboard from [splitkb.com](https://splitkb.com)
       * [RSTHD variants and similar layouts](#rsthd-variants-and-similar-layouts)
       * [Relevant articles and resources](#relevant-articles-and-resources)
       * [Acknowledgments](#acknowledgments)
-
-<!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: username, at: Wed 29 Jun 2022 12:45:29 AEST -->
-
 <!--te-->
 
 ## Overview
@@ -31,12 +27,6 @@ The alphabetic layout in this keymap was originally based on [RSTHD](https://xsz
 When I originally started making changes to RSTHD, I called it RSTHD'. The `'`, pronounced "prime", is [used in maths](https://en.wikipedia.org/wiki/Prime_(symbol)#Use_in_mathematics,_statistics,_and_science) to indicate a derivative of the named thing. The layout still very much retains its RSTHD DNA despite all the changes. I figure calling it *RSTHD/Prime* acknowledges its origin while still indicating that it's different.
 
 If you're interested in a standard implementation of RSTHD on the Kyria, see my [Kyria Refactored](https://github.com/frogm0uth/keyboard-firmware/tree/master/kyria-refactored) keymap. See also the links to other layouts at the bottom of the page.
-
-### Keyboard configuration
-
-My Kyria uses all 6 columns on each hand. The left side has an OLED, an encoder, and four thumb keys. The right side has no OLED or encoder, and four thumb keys. The top two thumb keys on each side are not on the board.
-
-The controller is a Pro Micro and this keymap only just squeezes in.
 
 ### Goals
 
@@ -48,11 +38,17 @@ Coming from a "slab" QWERTY keyboard to a programmable ergo split, I wanted to o
 
 Typing speed and reducing the number of keys on the keyboard are not important goals to me.
 
+### Keyboard configuration
+
+My Kyria uses all 6 columns on each hand. The left side has an OLED, an encoder, and four thumb keys. The right side has no OLED or encoder, and four thumb keys. The top two thumb keys on each side are not on the board.
+
+The controller is a Pro Micro and this keymap only just squeezes in.
+
 ## Layers
 
 There are a total of 6 layers. The first is the main alpha layer.
 
-The other layers are activated with a thumb key. All are hold-to-activate &ndash; that is, no toggles or one-shots &ndash; and most are hold-taps. Layer switching is done with custom code, so that a. shifted and custom keys can be emitted on the tap and b. so that the layer activates immediately for faster use of layer keys. See `layer_tap_toggle.c/h`.
+The other layers are activated with a thumb key. All are hold-to-activate. Layer switching is done with custom code, so that a. shifted and custom keys can be emitted on the tap and b. so that the layer activates immediately for faster use of layer keys. See `layer_tap_toggle.c/h`.
 
 The layers have OS-specific shortcuts in various places. The platform (macOS, Windows, Linux) can be selected at run-time. For more info, see `os_shortcuts.h/c` and `os_shortcut_defs.h`. macOS shortcuts are pretty stable, Windows and Linux still need work.
 

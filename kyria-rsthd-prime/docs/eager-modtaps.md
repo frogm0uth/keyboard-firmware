@@ -2,26 +2,23 @@
 
 **WORK IN PROGRESS**
 
-This is a *thought experiment* on tapping early and holding later. (So it could also be called early tapping, late mod-taps, delayed mod-taps, lazy holds, ...) It sort of depends on which half of "mod-tap" you are applying the adjective to. Anyway, I use the word "eager" to mean that it outputs a tap code as soon as there's any indication that you don't want to hold.
+This is a *thought experiment* on tapping early and holding later when using mod-taps. I use the word "eager" to mean that it outputs a tap code as soon as possible. Modifiers are produced in fewer cases.
 
 
 <!--ts-->
    * [Rationale/background](#rationalebackground)
    * [Principles](#principles)
+   * [Detailed rules](#detailed-rules)
    * [Resulting behavior](#resulting-behavior)
    * [Scenarios (textual)](#scenarios-textual)
    * [Variants](#variants)
-      * [Combo-like mod-taps](#combo-like-mod-taps)
+      * [Combo-like multiple mods](#combo-like-multiple-mods)
       * [One-shots](#one-shots)
       * ["Forced" one-shots](#forced-one-shots)
-   * [Scenarios (graphical)](#scenarios-graphical)
    * [Versus QMK](#versus-qmk)
    * [Versus ZMK](#versus-zmk)
+   * [Scenarios (graphical)](#scenarios-graphical)
    * [Implementation](#implementation)
-
-<!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: username, at: Wed 20 Jul 2022 06:13:25 AEST -->
-
 <!--te-->
 
 ## Rationale/background
@@ -170,24 +167,32 @@ Those have the same output as the earlier (6) and (7), so to emphasize the point
 ``` 
 
 
-## Scenarios (graphical)
+## Versus ZMK
 
-The image below shows a number of scenarios that should result from following *Principles* above. I'm assuming now that the "combo-like" multiple mod-taps are implemented.
+The [ZMK docs on hold-tap](https://zmk.dev/docs/behaviors/hold-tap) (see also [proposal PDF](https://github.com/zmkfirmware/zmk/files/5111053/zmk-modtap-proposal.pdf)) state that "The 'tap-preferred' flavor triggers the hold behavior when the `tapping-term-ms` has expired. *It triggers the tap behavior when another key is pressed.*" (My emphasis.) However, examining the tap-preferred diagrams that follow, here are those scenarios ("**z**N.x") using my notation:
 
-![](images/eager-tapmods.png)
+```
+z4.a O. J.                         || (SFT. j.)    J^ (j^) O^ (SFT^)                      -> J
+z4.b O. J. J^                      || (SFT. j. j^) O^ (SFT^)                              -> J
+z4.c O. J. J^ O^ (o. j. j^ o^)     ||                                                     -> oj
+z4.d O. J. O^ (o. j. o^)           ||              J^ (j^)                                -> oj
+```
 
-1. Mod-tap key is released before TT: its tap code is output.
-2. Non-MT key is pressed before TT: both keys have the tap code output.
-3. MT key is held until TT: its hold code is output. 
-4. A second MT key is pressed after CT but before TT: both tap codes are output.
-5. Two MT keys are pressed before CT and both held until TT: both hold codes are output.
-6.  Two MT keys are pressed before CT and one is released before TT: both tap codes are output.
-7.  Two MT keys are pressed before CT and a non-MT key is pressed before TT: all tap codes are output.
-8. A non-MT key is pressed and an MT key is then pressed within TT: both tap codes are output.
+Here are the equivalent scenarios for eager mod-taps:
+
+```
+3.   O. J. (o. j.)                 ||              J^ (j^) O^ (o^)                        -> oj
+4.   O. J. (o. j.) J^ (j^)         ||              O^ (o^)                                -> oj
+4a.  O. J. (o. j.) J^ (j^) O^ (o^) ||                                                     -> oj
+5.   O. J. (o. j.) O^ (o^)         ||              J^ (j^)                                -> oj
+```
+
+As can be seen, ZMK will output the hold code (producing J) in cases where eager mod-taps will output the tap codes (oj). After doing the same exercise for QMK (next section), I realize now that the ZMK behavior is intended to mimic QMK.
+
 
 ## Versus QMK
 
-In QMK, the nearest you can get to eager mod-taps is with IGNORE_MOD_TAP_INTERRUPTS defined and PERMISSIVE_HOLD **not** defined. Here are the scenarios for the key timing given earlier, with a few extras:
+In QMK, the nearest you can get to eager mod-taps is with IGNORE_MOD_TAP_INTERRUPTS defined and PERMISSIVE_HOLD **not** defined. Here are the scenarios for the key timings given earlier, with a few extras:
 
 ```
 q1.   O. O^ (o. o^)               ||                                                       -> o
@@ -219,28 +224,29 @@ For the sake of completeness, here are the new scenarios with eager mod-tap beha
 
 In these cases, the output timing is a little different but the result is the same.
 
-In general, it's easy to see that QMK will register the hold codes in more cases than eager mod-taps. But there are a number of inconsistencies. Why would q4 and q5 produce a different result? Same for q10 and q11.  In fact, q11 seems like it must be a bug. 
+It's easy to see that QMK will register the hold codes in more cases than eager mod-taps (q3, q4, q10, q12). In order to register the tap codes while overlapping keypresses, the mod-tap key must be *released* before TT elapses. If the second key is a non-MT key, it makes no difference whether it is released before TT or not (q5, q5a). If it's an MT key, however, it's tap code is not output if it's not released before TT (q11).
 
-This is the first time I've looked closely at QMK mod-taps to try and understand why HRMs don't work for me, but I think mostly it's the fact that whether to choose the modifier is decided not just on the timing but also the **order** of key *releases*. For example, comparing q4 and q4a, I think the timing and ordering here is too tricky to get right consistently.
+This is the first time I've looked closely at QMK mod-taps to try and understand why HRMs don't work for me, but I think it's probably because whether to register the modifier is decided not just on the timing but also the **order** of key *releases*. For example, comparing q4 and q4a, the timing and ordering here is too tricky for me to get right consistently.
 
-Considering that shortcuts (Cmd-, Ctrl-) have powerful and potentially disastrous actions, I think it would be better to err on the side of accidentally typing some extra characters over accidentally invoking a shortcut. QMK mod-taps were originally modifiers with tap codes added on; eager mod-taps is more the other way around: tap codes with modifiers added on.
+Considering that shortcuts (Cmd-, Ctrl-) have powerful and potentially disastrous actions, I would rather err on the side of accidentally typing some extra characters over accidentally invoking a shortcut.
 
-## Versus ZMK
 
-The [ZMK docs on hold-tap](https://zmk.dev/docs/behaviors/hold-tap) (see also [proposal PDF](https://github.com/zmkfirmware/zmk/files/5111053/zmk-modtap-proposal.pdf)) state that "The 'tap-preferred' flavor triggers the hold behavior when the `tapping-term-ms` has expired. *It triggers the tap behavior when another key is pressed.*" (My emphasis.) However, examining the tap-preferred diagrams that follow, here are those scenarios ("**z**N.x") using my notation, followed by the scenario with the same key press/release/timing for eager mod-taps:
+## Scenarios (graphical)
 
-```
-z4.a O. J.                         || (SFT. j.)    J^ (j^) O^ (SFT^)                      -> J
-3a.  O. J. (o. j.)                 ||              J^ (j^) O^ (o^)                        -> oj
-z4.b O. J. J^                      || (SFT. j. j^) O^ (SFT^)                              -> J
-4.   O. J. (o. j.) J^ (j^)         ||              O^ (o^)                                -> oj
-z4.c O. J. J^ O^ (o. j. j^ o^)     ||                                                     -> oj
-4.   O. J. (o. j.) J^ (j^) O^ (o^) ||                                                     -> oj
-z4.d O. J. O^ (o. j. o^)           ||              J^ (j^)                                -> oj
-5.   O. J. (o. j.) O^ (o^)         ||              J^ (j^)                                -> oj
-```
+The image below shows a number of scenarios in graphical form. These use the "combo-like" timing for multiple mod-taps. Note that the numbering is not the same as the textual scenarios given earlier.
 
-As can be seen, eager mod-taps prefers taps more than ZMK tap-preferred, as it will output the tap codes (oj) in cases where ZMK will output the hold code (producing J). I was initially mystified by this behavior considering the "tap-preferred" designation, until I analyzed QMK (previous section). It's the same.
+The light bars above the line indicate key down. Brighter bars below the line indicate output: red is a modifier, blue is the tap code of a mod-tap, green is a non-MT key.
+
+![](images/eager-tapmods.png)
+
+1. Mod-tap key is released before TT: its tap code is output.
+2. Non-MT key is pressed before TT: both keys have the tap code output.
+3. MT key is held until TT: its hold code is output. 
+4. A second MT key is pressed after CT but before TT: both tap codes are output.
+5. Two MT keys are pressed before CT and both held until TT: both hold codes are output.
+6.  Two MT keys are pressed before CT and one is released before TT: both tap codes are output.
+7.  Two MT keys are pressed before CT and a non-MT key is pressed before TT: all tap codes are output.
+8. A non-MT key is pressed and an MT key is then pressed within TT: both tap codes are output.
 
 ## Implementation
 I'm wondering if I can implement this as a userspace proof-of-concept in QMK. If so, I'll see what it's like to use...

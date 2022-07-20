@@ -13,10 +13,6 @@ Keyboard analyzers are a useful tool for working on a custom keymap. They do hav
       * [Travel distance](#travel-distance)
       * [Summary scores](#summary-scores)
    * [keygen](#keygen)
-
-<!-- Created by https://github.com/ekalinin/github-markdown-toc -->
-<!-- Added by: username, at: Mon 27 Jun 2022 02:54:36 AEST -->
-
 <!--te-->
 
 ## SteveP's analyzer
@@ -70,7 +66,7 @@ Note: it's possible that the SFU scores for Prime are artificially low because o
 
 Note 2: combos will reduce the actual SFUs. However, the same could be said for any of the other layouts, once optimized.
 
-Note 3: since writing this page, I've noticed that there is *definitely* a bug in the analyzer that makes the Prime results artificially low. If the corpus is `RAVISH`, the analyzer shows no SFUs, whereas there should be two because of the conflict between the shift and the pinky letters.
+Note 3: since writing this page, I've noticed another bug in the analyzer that makes the Prime results artificially low. If the corpus is `RAVISH`, the analyzer shows no SFUs, whereas there should be two because of the conflict between the shift and the pinky letters.
 
 ### Travel distance
 
