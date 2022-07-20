@@ -2,7 +2,7 @@
 
 **WORK IN PROGRESS**
 
-This is a *thought experiment* on tapping early and holding later when using mod-taps. I use the word "eager" to mean that it outputs a tap code as soon as possible. Modifiers are produced in fewer cases.
+This is a *thought experiment* on a different mode of operation for mod-taps. I use the word "eager" to mean that mod-tap keys output their tap code as soon as possible.
 
 
 <!--ts-->
@@ -17,7 +17,7 @@ This is a *thought experiment* on tapping early and holding later when using mod
    * [Versus ZMK](#versus-zmk)
    * [Versus QMK](#versus-qmk)
    * [Scenarios (graphical)](#scenarios-graphical)
-   * [Implementation](#implementation)
+   * [Implementation and other thoughts](#implementation-and-other-thoughts)
 <!--te-->
 
 ## Rationale/background
@@ -44,11 +44,12 @@ Initially, the keyboard is *deciding* what to do. If a mod-tap key is pressed, i
 
 If, however, another key that is not a mod-tap is pressed before tapping term elapses, the keyboard shifts to *tapping* mode. The tap code of the MT is sent, as well as the new keycode. The keyboard stays in *tapping* mode until no keys are pressed for at least TT, when it switches back to *deciding*.
 
-As a result, the mod-tap behavior is very oriented towards generating the tap codes in preference to hold codes (modifiers). So in normal typing, even I wouldn't accidentally register modifiers. That requires a more deliberate action:
+As a result, the mod-tap behavior is very oriented towards generating the tap codes in preference to hold codes (modifiers). So in normal typing, it should hopefully be very uncommon to accidentally register a modifier. That would requires a more deliberate action:
 
 1. Wait a short time (TT) after pressing any key before pressing a mod-tap key
 2. Wait a short time (TT) after pressing a mod-tap key before pressing another key
 
+Granted, this might slow typing down when Shift is considered, but I'm thinking it would be no worse than say auto-shift.
 
 ## Detailed rules
 
@@ -225,7 +226,7 @@ In these cases, the output timing is a little different but the result is the sa
 
 It's easy to see that QMK will register the hold codes in more cases than eager mod-taps (q3, q4, q10, q12). In order to register the tap codes while overlapping keypresses, the mod-tap key must be *released* before TT elapses. If the second key is a non-MT key, it makes no difference whether it is released before TT or not (q5, q5a). If it's an MT key, however, it's tap code is not output if it's not released before TT (q11).
 
-This is the first time I've looked closely at QMK mod-taps to try and understand why HRMs don't work for me, but I think it's probably because whether to register the modifier is decided not just on the timing but also the **order** of key *releases*. For example, comparing q4 and q4a, the timing and ordering here is too tricky for me to get right consistently.
+This is the first time I've looked closely at QMK mod-taps to try and understand why HRMs don't work for me, and I think it's probably because whether to register the modifier is decided not just on the timing but also the **order** of key *releases*. For example, comparing q4 and q4a, the timing and ordering here is too tricky for me to get right consistently.
 
 Considering that shortcuts (Cmd-, Ctrl-) have powerful and potentially disastrous actions, I would rather err on the side of accidentally typing some extra characters over accidentally invoking a shortcut.
 
@@ -247,8 +248,10 @@ The light bars above the line indicate key down. Brighter bars below the line in
 7.  Two MT keys are pressed before CT and a non-MT key is pressed before TT: all tap codes are output.
 8. A non-MT key is pressed and an MT key is then pressed within TT: both tap codes are output.
 
-## Implementation
+## Implementation and other thoughts
 
 I'm wondering if I can implement this as a userspace proof-of-concept in QMK. If so, I'll see what it's like to use.
 
 There will be no doubt be some interactions with combos. TBD. Initially, I will most likely have to disable them. 
+
+This idea of eager mod-taps could be thought of as adding modifiers to normal keys, rather than adding tap codes to modifer keys (which is how I assume QMK mod-taps evolved).
