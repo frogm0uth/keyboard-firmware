@@ -7,43 +7,51 @@ This is a *thought experiment* on tapping early and holding later when using mod
 
 <!--ts-->
    * [Rationale/background](#rationalebackground)
-   * [Principles](#principles)
+   * [Basic operation](#basic-operation)
    * [Detailed rules](#detailed-rules)
-   * [Resulting behavior](#resulting-behavior)
    * [Scenarios (textual)](#scenarios-textual)
    * [Variants](#variants)
       * [Combo-like multiple mods](#combo-like-multiple-mods)
       * [One-shots](#one-shots)
       * ["Forced" one-shots](#forced-one-shots)
-   * [Versus QMK](#versus-qmk)
    * [Versus ZMK](#versus-zmk)
+   * [Versus QMK](#versus-qmk)
    * [Scenarios (graphical)](#scenarios-graphical)
    * [Implementation](#implementation)
 <!--te-->
 
 ## Rationale/background
 
-I'm one of those unfortunates that can't use home-row mods. The timing throws me off and I instantly make errors. However, I recently learnt in the splitkb discord about ZMK's "tap-preferred" flavor of mod-tap and the "global-quicktap" option. It turned out they weren't quite what I thought they were, so I decided to take a step back and think about what variant of these ideas might make home-row mods work for me.
+I'm one of those unfortunates that can't use home-row mods. The timing throws me off and I accidentally trigger who-knows-what shortcuts. This is a fairly scary thing to happen, so I turned them off fairly quickly after trying them. (Twice.)
 
-As far as I know, this behavior is not currently available in either QMK or ZMK (the latter based only on reading the documentation).
+However, I recently learnt in the splitkb discord about ZMK's "tap-preferred" flavor of mod-tap and the "global-quicktap" option. It turned out they weren't quite what I thought they were, so I decided to take a step back and think about what variant of these ideas might make home-row mods work for me.
 
-## Principles
-The keyboard is always in one of three modes:
+As far as I know, the behavior described here is not currently available in either QMK or ZMK (the latter based only on reading the documentation).
+
+## Basic operation
+
+The keyboard is in one of three modes:
+
 1. *Deciding*
 2. *Tapping*
 3. *Holding*
 
-There are two *terms* of interest: *tapping term* (TT) which is by default 200 ms, and *combo term* (CT) which is by default 50 ms. For now, we use only TT, CT will be considered later.
+There are two *terms* of interest: *tapping term* (TT) which is by default 200 ms, and *combo term* (CT) which is by default 50 ms. For now, we use only TT; CT will be considered later.
 
 Each mod-tap key has two codes: the tap code and the hold code (i.e. a modifier). To avoid ambiguous use of the word "hold", if an MT key has been pressed but it's not yet time to register either its tap code or hold code, it is "suspended".
 
-Initially, the keyboard is *deciding* what to do. If a mod-tap key is pressed, it's suspended because we don't yet know which code to register. If the MT key is held down and no other keys are pressed, then *holding* starts when tapping term elapses. Any subsequent key presses will have that modifier active.
+Initially, the keyboard is *deciding* what to do. If a mod-tap key is pressed, it's suspended because we don't yet know which code to register. If the MT key is held down until TT elapses and no other keys are pressed, then *holding* mode starts and the hold code i.e. modifier is registered. Any subsequent key presses will therefore have that modifier active. The keyboard stays in *holding* mode until all mod-taps are released, when it switches back to *deciding*.
 
-If, however, another key that is not a mod-tap is pressed before tapping term elapses, the keyboard shifts to *tapping*. The tap code of the MT key is sent, as well as the new key. Any other keys after that including mod-taps are just tapped.
+If, however, another key that is not a mod-tap is pressed before tapping term elapses, the keyboard shifts to *tapping* mode. The tap code of the MT is sent, as well as the new keycode. The keyboard stays in *tapping* mode until no keys are pressed for at least TT, when it switches back to *deciding*.
 
-Once the keyboard starts *holding* or *tapping*, it stays there until things are "quiet," when it goes back to the *deciding* state. Exact details are in the next section.
+As a result, the mod-tap behavior is very oriented towards generating the tap codes in preference to hold codes (modifiers). So in normal typing, even I wouldn't accidentally register modifiers. That requires a more deliberate action:
+
+1. Wait a short time (TT) after pressing any key before pressing a mod-tap key
+2. Wait a short time (TT) after pressing a mod-tap key before pressing another key
+
 
 ## Detailed rules
+
 The behavior in each state is as follows:
 
 **deciding**
@@ -52,37 +60,28 @@ The behavior in each state is as follows:
 
 **tapping**
 
-- When entered, any suspended mod-tap keys are unsuspended and their *tap codes* are registered. Subsequent keys are then processed as normal &ndash; key presses cause a register event, key releases cause an unregister event. If any of these keys are mod-taps, its *tap code* is registered/unregistered.
+- When this state is entered, any suspended mod-tap keys are unsuspended and their *tap codes* are registered. Any keys pressed while in this mode are processed as normal &ndash; key presses cause a register event, key releases cause an unregister event. If any of these keys is a mod-tap, its *tap code* is registered/unregistered.
 
 **holding**
 
-- When entered, any suspended mod-tap keys are unsuspended and their *hold codes* are registered. Any subsequent keys are then processed as normal &ndash; key presses cause a register event, key releases cause an unregister event. If any of these keys are mod-taps, its *tap code* is registered/unregistered unless it's a release event of a held mod-tap key, in which case its *hold code* is unregistered.
+- When this state is entered, any suspended mod-tap keys are unsuspended and their *hold codes* are registered. Any keys pressed while in this mode are processed as normal &ndash; key presses cause a register event, key releases cause an unregister event. If any of these keys is a mod-tap, its *tap code* is registered/unregistered **unless** it's a release event of a held mod-tap key, in which case its *hold code* is unregistered.
 
-The rules to change modes are as follows. The mode only changes between *deciding* and *tapping* or *deciding* and *holding*, never directly from *tapping* to *holding* or vice versa. Starting from *deciding*:
+The rules to change modes are as follows. Starting from *deciding*:
 
 1. Start *tapping* when:
     - A non-MT key is pressed, or
-    - An MT key is released; or
+    - An MT key is released
 2. Start *holding* when one or more MT keys are suspended and TT has elapsed since the first was pressed.
 
 To go back to *deciding*, the rules are:
 
-1. Stop *tapping* when TT has elapsed since the last key press or release. (Ideally, this rule would be to stop *tapping* when there are no keys currently pressed and TT has elapsed since the last key release. However this probably can't be implemented.)
+1. Stop *tapping* when TT has elapsed since the last key press or release. (Ideally, this rule would be to stop *tapping* when there are no keys currently pressed and TT has elapsed since the last key release. However I'm not sure if this can be implemented.)
 2. Stop *holding* when the last held MT key is released.
 
 
-## Resulting behavior
-
-The result of the above is that the mod-tap behavior is very oriented towards generating the tap codes. So in normal typing, even I wouldn't accidentally register modifiers. To do so is a more deliberate action that requires:
-
-1. Waiting a short time after pressing any key before pressing a mod-tap key
-2. Waiting a short time after pressing a mod-tap key or keys before pressing another key
-
-The "short time" here is of course the tapping term, or 200 ms &ndash; more a slight pause than a wait. For some people, this might slow things down for regular typing (using shift), but I'm thinking probably not any more than say auto-shift.
-
 ## Scenarios (textual)
 
-Below are a number of scenarios illustrating the behavior. See further below for a graphical version.
+Below are a number of scenarios illustrating the behavior. See  [below](#scenarios-graphical) for a friendlier graphical version.
 
 The notation is as follows: `A.` means the A key is pressed, `A^` means the A key is released, `||` means the end of tapping term, `(x.)` means `register_code(KC_X)`, `(x^) `means `unregister_code(KC_X)`. O is Shift mod-tap, N is Ctrl mod-tap, J is not a mod-tap. `->` indicates the characters that will be seen on screen.  
 
@@ -249,4 +248,7 @@ The light bars above the line indicate key down. Brighter bars below the line in
 8. A non-MT key is pressed and an MT key is then pressed within TT: both tap codes are output.
 
 ## Implementation
-I'm wondering if I can implement this as a userspace proof-of-concept in QMK. If so, I'll see what it's like to use...
+
+I'm wondering if I can implement this as a userspace proof-of-concept in QMK. If so, I'll see what it's like to use.
+
+There will be no doubt be some interactions with combos. TBD. Initially, I will most likely have to disable them. 
