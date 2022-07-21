@@ -14,7 +14,7 @@ This is a *thought experiment* on a different mode of operation for mod-taps. I 
       * [Tapping](#tapping)
       * [Holding](#holding)
       * [Discussion](#discussion)
-   * [Scenarios](#scenarios)
+   * [Key press-release scenarios](#key-press-release-scenarios)
    * [Implementation and other thoughts](#implementation-and-other-thoughts)
 <!--te-->
 
