@@ -16,6 +16,7 @@ This is a *thought experiment* and proof-of-concept implementation of a differen
       * [Discussion](#discussion)
    * [Key press-release scenarios](#key-press-release-scenarios)
    * [Proof-of-concept implementation](#proof-of-concept-implementation)
+   * [Conclusion](#conclusion)
 <!--te-->
 
 ## Rationale/background
@@ -120,6 +121,4 @@ The lag on Shift is quite noticeable, which could be improved with:
 - Forced one-shot shift - shift is deactivated after the first key pressed (even if the mod is still held).
 - Caps-word activated with both shift mod-taps.
 
-For typing, this seems to works really well while testing things out. However, when I start to just type without thinking about mod-taps, I **still** have the problem of accidentally activating modifiers. The problem is that I don't even know what the mistyped shortcut was - like some shortcut in emacs that I don't normally use.
-
-Regretfully I conclude (for the third time) that home-row mod-taps are just not for me.
+For typing, this seems to works really well while testing things out. However, when I start to just type without thinking about mod-taps, I **still** have the problem of accidentally activating modifiers. At this point, I think I just have to accept that home-row mod-taps are not for me.
