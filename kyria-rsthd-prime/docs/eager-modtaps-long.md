@@ -26,8 +26,6 @@ I'm one of those unfortunates that can't use home-row mods. The timing throws me
 
 However, I recently learnt in the splitkb discord about ZMK's "tap-preferred" flavor of mod-tap and the "global-quicktap" option. It turned out they weren't quite what I thought they were, so I decided to take a step back and think about what variant of these ideas might make home-row mods work for me.
 
-As far as I know, the behavior described here is not currently available in either QMK or ZMK (the latter based only on reading the documentation).
-
 ## Basic operation
 
 The keyboard is in one of three modes:
@@ -226,8 +224,14 @@ In these cases, the output timing is a little different but the result is the sa
 
 It's easy to see that QMK will register the hold codes in more cases than eager mod-taps (q3, q4, q10, q12). In order to register the tap codes while overlapping keypresses, the mod-tap key must be *released* before TT elapses. If the second key is a non-MT key, it makes no difference whether it is released before TT or not (q5, q5a). If it's an MT key, however, it's tap code is not output if it's not released before TT (q11).
 
-While I understand the logic that the MT key must be released before TT elapses in order to register the tap codes, the result is inconsistent and I think this may be the source of my difficulty using HRMs.
+If PERMISSIVE_HOLD is defined, the following scenarios change:
 
+```
+ph4.   O. J. J^ (SFT. j. j^)           ||            O^ (SFT^)                              -> J
+ph4a.  O. J. J^ (SFT. j. j^) O^ (SFT^) ||                                                   -> J
+ph10.  O. N. N^ (SFT. n. n^)           ||            O^ (SFT^)                              -> N
+ph10a. O. N. N^ (SFT. n. n^) O^ (SFT^) ||                                                   -> N
+```
 
 ## Implementation and other thoughts
 
