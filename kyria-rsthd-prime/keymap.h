@@ -20,6 +20,7 @@
 #include "os_shortcuts.h"
 #include "custom_capsword.h"
 #include "custom_edit.h"
+#include "eager_modtap.h"
 #include "custom_mouse.h"
 #include "layer_tap_toggle.h"
 #include "comboroll.h"

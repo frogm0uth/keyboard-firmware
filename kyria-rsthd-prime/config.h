@@ -16,6 +16,9 @@
 
 #pragma once
 
+// Configuration for early mod-taps
+#define EMT_EARLY_TERM 40
+#define EMT_LATE_TERM  180
 
 // Configuration for combos
 #define COMBO_TERM 70
