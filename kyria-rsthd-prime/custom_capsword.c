@@ -106,12 +106,14 @@ bool process_record_capsword(uint16_t keycode, keyrecord_t *record) {
             break; // let QMK process
 
         // Monitor mod-taps to check for cancel caps-word
+#ifndef NO_ACTION_TAPPING
         case ALT_T(KC_TAB):
         case GUI_T(KC_TAB):
             if (record->event.pressed && record->tap.count) {
                 process_caps_cancel(KC_TAB, record);
             }
             break; // let QMK process otherwise
+#endif
     }
 	return true;
 }
