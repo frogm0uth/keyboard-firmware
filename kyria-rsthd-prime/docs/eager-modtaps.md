@@ -2,7 +2,7 @@
 
 **WORK IN PROGRESS**
 
-This is a *thought experiment* on a different mode of operation for mod-taps. I use the word "eager" to mean that mod-tap keys output their tap code as soon as possible. Activating the modifier requires a deliberate pause.
+This is a *thought experiment* and proof-of-concept implementation of a different mode of operation for mod-taps. I use the word "eager" to mean that mod-tap keys output their tap code as soon as possible. Activating the modifier requires a deliberate pause.
 
 (This is the new version with graphical scenarios. For more detailed analysis with textual scenarios, see the [old version](eager-modtaps-long.md).) 
 
@@ -87,28 +87,21 @@ The image below illustrates a number of key press-release scenarios. **A** and *
 
 ![](images/eager-modtaps.png)
 
-Here is a brief explanation of each scenario. A comparison to QMK behavior (\*) is given if it is different.
+Here is a brief explanation of each scenario. For comparison to QMK, see the [old version](eager-modtaps-long.md#versus-qmk) of this note.
 
 1. A mod-tap key is pressed and then released before TT. Start  *tapping* mode. The output is `a`.
-2. A mod-tap key is pressed, then a non-MT key is pressed before TT. Start  *tapping* mode. The output is `ak`. (In QMK, this sequence would output `K`. In order to output `ak`, the MT key must be released before TT.)
+2. A mod-tap key is pressed, then a non-MT key is pressed before TT. Start  *tapping* mode. The output is `ak`.
 3. A mod-tap key is held until TT and no other keys are pressed. Start  *holding* and register the MT hold code. Then a non-MT key is pressed. The output is `K`.
 4. Two MT keys are pressed before CT and held until TT, and no other keys are pressed. Start  *holding* and register both MT hold codes.  Then a normal key is pressed. The output is `Ctrl-K`.
-5. Two MT keys are pressed before CT, then a non-MT key is pressed before TT. Start  *tapping* mode. The output is `ank`. (In QMK, this sequence would output `Ctrl-K`. In order to output `ank`, both MT keys must be released before TT.)
-6.  Two MT keys are pressed before CT and the first is released before TT. Start  *tapping* mode. The output is `an`. (In QMK, this sequence would output `a`. In order to output `an`, the second MT key must also be released before TT.)
-7.  Two MT keys are pressed before CT and the second is released before TT. Start  *tapping* mode. The output is `an`. (In QMK, this sequence would output `N`. In order to output `an`, the first MT key must also be released before TT.)
-8. An MT key is pressed before CT and a second is pressed after CT but before TT. Start  *tapping* mode. The output is `an`. (In QMK, this sequence would output `Ctrl-K`. In order to output `an`, both MT keys must be released before TT.)
+5. Two MT keys are pressed before CT, then a non-MT key is pressed before TT. Start  *tapping* mode. The output is `ank`.
+6.  Two MT keys are pressed before CT and the first is released before TT. Start  *tapping* mode. The output is `an`.
+7.  Two MT keys are pressed before CT and the second is released before TT. Start  *tapping* mode. The output is `an`.
+8. An MT key is pressed before CT and a second is pressed after CT but before TT. Start  *tapping* mode. The output is `an`.
 9. A non-MT key is pressed. Start  *tapping* mode. An MT key is then pressed within a further tapping term. The output is `ka`. This is like ZMK's "global quicktap".
 
 ## Proof-of-concept implementation
 
 I've implemented a userspace **proof-of-concept** in QMK. It seems to work with everything else, including (to my surprise) QMK combos. It does not work (unsurprisingly) with my userspace comborolls.
-
-The lag on Shift is quite noticeable, which could be improved with:
-
-- Disable rule 2. This removes the delay needed prior to pressing a mod-tap. DONE: disable by `#define EMT_DISABLE_RULE_2`.
-- @precondition's next-sentence macro.
-- Forced one-shot shift - shift is deactivated after the first key pressed (even if the mod is still held).
-- Caps-word activated with both shift mod-taps.
 
 This is a "bolt-on" implementation, by which I mean that the mod-taps are not specified in the keymap but are intercepted in process_record_user().
 
@@ -118,8 +111,15 @@ This is a "bolt-on" implementation, by which I mean that the mod-taps are not sp
 
 keymap.c will need to have two calls made to the eager mod-tap code. See my keymap.c for an example. Note that the keymap must use regular keycodes on the home row (e.g. `KC_N`). It will not work if it contains mod-tap keycodes (`SFT_T(KC_N)` etc).
 
-**Footnotes**
+## Conclusion
 
-(\*) By "QMK behavior", I mean the case where IGNORE_MOD_TAP_INTERRUPT is defined and PERMISSIVE_HOLD is **not** defined. For a more detailed analysis, see the [old version](eager-modtaps-long.md#versus-qmk) of this note.
+The lag on Shift is quite noticeable, which could be improved with:
 
-(\*\*) There are actually separate defines, EMT_EARLY_TERM and EMT_LATE_TERM, which are by default equal to COMBO_TERM and TAPPING_TERM.
+- Disable rule 2. This removes the delay needed prior to pressing a mod-tap. DONE: disable by `#define EMT_DISABLE_RULE_2`.
+- @precondition's next-sentence macro.
+- Forced one-shot shift - shift is deactivated after the first key pressed (even if the mod is still held).
+- Caps-word activated with both shift mod-taps.
+
+For typing, this seems to works really well while testing things out. However, when I start to just type without thinking about mod-taps, I **still** have the problem of accidentally activating modifiers. The problem is that I don't even know what the mistyped shortcut was - like some shortcut in emacs that I don't normally use.
+
+Regretfully I conclude (for the third time) that home-row mod-taps are just not for me.
