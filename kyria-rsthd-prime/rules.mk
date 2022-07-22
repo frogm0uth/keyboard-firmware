@@ -2,10 +2,10 @@ OLED_ENABLE = yes           # Enables the use of OLED displays
 ENCODER_ENABLE = yes        # Enables the use of one or more encoders
 RGBLIGHT_ENABLE = yes       # Enable keyboard RGB underglow
 LEADER_ENABLE = no          # Enable the Leader Key feature
-MOUSEKEY_ENABLE = no       # Enable the inbuilt mouse key feature
+MOUSEKEY_ENABLE = yes       # Enable the inbuilt mouse key feature
 TAP_DANCE_ENABLE = no       # Enable tap-dance (NB also uncomment #define NO_ACTION_TAPPING in config.h)
 WPM_ENABLE = no             # Enable simple WPM display
-COMBO_ENABLE = yes           # Enable combo (chording) functionality
+COMBO_ENABLE = no           # Enable combo (chording) functionality
 CAPS_WORD_ENABLE = no       # Enable the caps-word feature. Doesn't work properly.
 
 LTO_ENABLE = yes            # Firmware size reduction - https://docs.qmk.fm/#/squeezing_avr
@@ -29,11 +29,11 @@ OS_SHORTCUTS = yes          # Enable OS shortcut mapping. If OS_SHORTCUTS_STATIC
 CUSTOM_MOUSE = no           # Enable custom mouse keys. If disabled and MOUSEKEY_ENABLED is defined,
                             # the key codes in custom_mouse.h are #defined to the QMK keycodes.
 
-CUSTOM_EDIT = no           # Enable custom editing keys. Turns on OS_SHORTCUTS.
+CUSTOM_EDIT = yes           # Enable custom editing keys. Turns on OS_SHORTCUTS.
 LAYER_TAP_TOGGLE = yes      # Enable the layer-tap-toggle feature
-COMBOROLL_ENABLE = no      # Enable comborolls - not compatible with COMBO_ENABLE
+COMBOROLL_ENABLE = yes      # Enable comborolls - not compatible with COMBO_ENABLE
 CUSTOM_CAPSWORD = yes       # Enable custom capsword
-EAGER_MODTAP = yes          # Enable eager mod-taps
+EAGER_MODTAP = no          # Enable eager mod-taps
 
 # Uncomment one of the next lines to prevent unused variable/function errors
 # from halting the compile

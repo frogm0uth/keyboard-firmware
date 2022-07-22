@@ -18,7 +18,7 @@
 
 // Configuration for early mod-taps
 #define EMT_EARLY_TERM 40
-#define EMT_LATE_TERM  180
+#define EMT_LATE_TERM  200
 
 // Configuration for combos
 #define COMBO_TERM 70
@@ -27,11 +27,11 @@
 				 // overlapping, but means that holds don't work.
 
 // Tapping control
-#define TAPPING_TERM 250
+#define TAPPING_TERM 220
 //#define TAPPING_TOGGLE 2
 //#define ONESHOT_TAP_TOGGLE 2
 #define IGNORE_MOD_TAP_INTERRUPT
-#define PERMISSIVE_HOLD
+//#define PERMISSIVE_HOLD
 
 // uncomment to make OS-dependent shortcuts be statically compiled.
 //#define OS_SHORTCUTS_STATIC
