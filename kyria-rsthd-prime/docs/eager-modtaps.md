@@ -117,8 +117,8 @@ There *is* a noticable lag on Shift, which could be improved with some changes:
 
 This is a "bolt-on" implementation, meaning that the mod-taps are not actually specified in the keymap but are intercepted in process_record_user() to create the eager mod-tap behavior.
 
-- [`eager_modtaps.c`](../eager_modtaps.c) is the implementation. It is a direct translation into code of the Operation section above.
-- [`eager_modtaps.h`](../eager_modtaps.h) will need to be included in keymap.h.
+- [`eager_modtap.c`](../eager_modtap.c) is the implementation. It is a direct translation into code of the Operation section above.
+- [`eager_modtap.h`](../eager_modtap.h) will need to be included in keymap.h.
 - [`emt_defs.h`](../emt_defs.h) will need to be modified to define the bolt-on modifiers.
 
 keymap.c will need to have two calls made to the eager modtap code. See my keymap.c for an example. Note also that the keymap must use regular keycodes on the home row (e.g. `KC_N`). It will not work if it contains mod-tap keycodes (`SFT_T(KC_N)` etc).
