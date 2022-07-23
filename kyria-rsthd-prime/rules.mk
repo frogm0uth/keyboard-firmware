@@ -26,14 +26,11 @@ OS_SHORTCUTS = yes          # Enable OS shortcut mapping. If OS_SHORTCUTS_STATIC
                             # keymap will still compile but a bunch of things won't work. Note that
                             # this is forced on by CUSTOM_EDIT.
 
-CUSTOM_MOUSE = no           # Enable custom mouse keys. If disabled and MOUSEKEY_ENABLED is defined,
-                            # the key codes in custom_mouse.h are #defined to the QMK keycodes.
-
 CUSTOM_EDIT = yes           # Enable custom editing keys. Turns on OS_SHORTCUTS.
 LAYER_TAP_TOGGLE = yes      # Enable the layer-tap-toggle feature
 COMBOROLL_ENABLE = yes      # Enable comborolls - not compatible with COMBO_ENABLE
 CUSTOM_CAPSWORD = yes       # Enable custom capsword
-EAGER_MODTAP = no          # Enable eager mod-taps
+
 
 # Uncomment one of the next lines to prevent unused variable/function errors
 # from halting the compile
@@ -44,11 +41,6 @@ EXTRAFLAGS += -Wno-error=unused-variable -Wno-error=unused-function
 # Don't edit from here down
 
 SRC += appswitcher.c
-
-ifeq ($(strip $(EAGER_MODTAP)), yes)
-        SRC += eager_modtap.c
-        OPT_DEFS += -DEAGER_MODTAP
-endif
 
 ifeq ($(strip $(CUSTOM_CAPSWORD)), yes)
         SRC += custom_capsword.c
@@ -89,13 +81,6 @@ ifeq ($(strip $(CUSTOM_EDIT)), yes)
         SRC += custom_edit.c
         SRC += os_shortcuts.c
         OPT_DEFS += -DCUSTOM_EDIT -DOS_SHORTCUTS
-endif
-
-ifeq ($(strip $(CUSTOM_MOUSE)), yes)
-        POINTING_DEVICE_ENABLE = yes
-        POINTING_DEVICE_DRIVER = custom
-        SRC += custom_mouse.c
-        OPT_DEFS += -DCUSTOM_MOUSE
 endif
 
 ifeq ($(strip $(LAYER_TAP_TOGGLE)), yes)

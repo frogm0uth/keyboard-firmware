@@ -20,8 +20,6 @@
 #include "os_shortcuts.h"
 #include "custom_capsword.h"
 #include "custom_edit.h"
-#include "eager_modtap.h"
-#include "custom_mouse.h"
 #include "layer_tap_toggle.h"
 #include "comboroll.h"
 
@@ -110,10 +108,6 @@ enum custom_keycodes {
     CUSTOM_EDIT_KEYS, // Custom editing and navigation
 #endif
 
-#ifdef CUSTOM_MOUSE
-    CUSTOM_MOUSE_KEYS,    // Custom mouse buttons
-#endif
-
 // Custom shift keys. Unfortunately we can't do this simply
 // by invoking a macro defined elsewhere.
 //
@@ -165,6 +159,21 @@ enum custom_keycodes {
 #define CU_SCTL CTL_T(KC_2)
 #define CU_SALT ALT_T(KC_0)
 #define CU_SGUI GUI_T(KC_1)
+
+
+/**
+ * Cope with not compiling in mouse keys
+ */
+#ifdef MOUSEKEY_ENABLE
+#    define CM_BTN1 KC_BTN1
+#    define CM_BTN2 KC_BTN2
+#    define CM_BTN3 KC_BTN3
+#else
+#    define CM_BTN1 KC_TRNS
+#    define CM_BTN2 KC_TRNS
+#    define CM_BTN3 KC_TRNS
+#endif
+
 
 /**
  * Shorter keycodes to put in keymap matrix. These are those with

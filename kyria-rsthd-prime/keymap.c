@@ -319,13 +319,6 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
     }
 #endif
 
-    // Process custom mouse keycodes
-#ifdef CUSTOM_MOUSE
-    if (!custom_mouse_process_record(keycode, record)) {
-        return false;
-    }
-#endif
-
     switch (keycode) {
 
 #ifdef LAYER_TAP_TOGGLE
@@ -422,13 +415,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     ltt_interrupt(keycode, record);
 #endif
 
-#ifdef EAGER_MODTAP
-    // Check for and process eager mod-taps
-    if (!process_record_emt(keycode, record)) {
-        return false;
-    }
-#endif
-	
 #ifdef COMBOROLL_ENABLE
     // Check for and process comboroll keys
     if (!process_record_comboroll(keycode, record)) {
@@ -467,11 +453,6 @@ void matrix_scan_user(void) {
     // Editing repeat
 #ifdef CUSTOM_EDIT
     custom_edit_tick();
-#endif
-
-    // Eager modtap timing
-#ifdef EAGER_MODTAP
-    emt_tick();
 #endif
 }
 
