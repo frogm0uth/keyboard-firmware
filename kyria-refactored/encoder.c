@@ -30,7 +30,7 @@ void matrix_scan_encoder(void) {
     }
 }
 
-void encoder_update_user(uint8_t index, bool clockwise) {
+bool encoder_update_user(uint8_t index, bool clockwise) {
     // If both encoder operate backwards, comment out this next line
     clockwise = !clockwise;
 
@@ -89,4 +89,5 @@ void encoder_update_user(uint8_t index, bool clockwise) {
                 break;
         }
     }
+	return false;
 }
