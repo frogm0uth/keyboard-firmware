@@ -8,3 +8,4 @@ Documentation and analysis for certain things in my keymap. Ignore the .md files
 
 > Results of running my keymap through an analyzer (or two).
 
+Older stuff, failed experiments etc are in the [attic](attic.md).
