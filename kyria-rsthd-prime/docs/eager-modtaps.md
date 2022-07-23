@@ -106,9 +106,9 @@ I've implemented a userspace **proof-of-concept** in QMK. It seems to work with 
 
 This is a "bolt-on" implementation, by which I mean that the mod-taps are not specified in the keymap but are intercepted in process_record_user().
 
-- [`eager_modtap.c`](../eager_modtap.c) is the implementation.
-- [`eager_modtap.h`](../eager_modtap.h) will need to be included in keymap.h.
-- [`emt_defs.h`](../emt_defs.h) will need to be modified to define the bolt-on modifiers.
+- [`eager_modtap.c`](../attic/eager_modtap.c) is the implementation.
+- [`eager_modtap.h`](../attic/eager_modtap.h) will need to be included in keymap.h.
+- [`emt_defs.h`](../attic/emt_defs.h) will need to be modified to define the bolt-on modifiers.
 
 keymap.c will need to have two calls made to the eager mod-tap code. See my keymap.c for an example. Note that the keymap must use regular keycodes on the home row (e.g. `KC_N`). It will not work if it contains mod-tap keycodes (`SFT_T(KC_N)` etc).
 
