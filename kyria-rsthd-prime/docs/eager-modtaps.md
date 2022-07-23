@@ -1,6 +1,6 @@
 # Eager mod-taps
 
-**WORK IN PROGRESS**
+**THIS IS NOW IN THE [ATTIC](attic.md).**
 
 This is a *thought experiment* and proof-of-concept implementation of a different mode of operation for mod-taps. I use the word "eager" to mean that mod-tap keys output their tap code as soon as possible. Activating the modifier requires a deliberate pause.
 
