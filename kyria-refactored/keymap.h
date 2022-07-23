@@ -94,11 +94,3 @@ extern uint16_t alt_tab_timer;
 
 // functions defined in other files
 void matrix_scan_encoder(void);
-
-// Leader support
-#ifdef LEADER_ENABLE
-LEADER_EXTERNS();
-void matrix_scan_leader(void);
-#else
-#    define KC_LEAD KC_NO
-#endif
