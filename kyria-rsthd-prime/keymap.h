@@ -82,7 +82,7 @@ enum layers {
 #    define CL_BASE TO(ALPHA)
 #    define CL_SYMS LT(SYMS,   KC_QUOT)
 #    define CL_SNAP LT(SNAP,   KC_DQUO)
-#    define CL_EDIT LT(EDIT,   KC_QUOT)
+#    define CL_EDIT LT(EDIT,   KC_MINS)
 #    define CL_FUNC LT(FUNC,   KC_NO)
 #    define CL_META LT(META,   KC_TAB)
 #endif
@@ -90,6 +90,9 @@ enum layers {
 
 enum custom_keycodes {
     CU_IGNORE = SAFE_RANGE,
+
+    CU_NEXT_SENTENCE,  // Next-sentence macro
+    CU_NEXT_PARAGRAPH, // Next-paragraph macro
 
     CU_SWIN, // Screenshot a window
     CU_SRGN, // Start drag-select screenshot
@@ -156,9 +159,9 @@ enum custom_keycodes {
 
 // Mod-taps on symbols layer
 #define CU_SSFT KC_LSFT
-#define CU_SCTL CTL_T(KC_2)
-#define CU_SALT ALT_T(KC_0)
-#define CU_SGUI GUI_T(KC_1)
+#define CU_SCTL CTL_T(KC_UNDS) // Will need to intercept in process_record_user to do the underscore
+#define CU_SALT ALT_T(KC_MINS)
+#define CU_SGUI GUI_T(KC_0)
 
 
 /**
@@ -180,13 +183,12 @@ enum custom_keycodes {
  * custom processing, for direct shortcuts, see os_shortcut_defs.h
  */
 // ALPHA layer
-#define CU_COMM CU_COMMA_PIPE
+#define CU_COMM CU_COMMA_HASH
 #define CU_DOT  CU_DOT_SLASH
 #define CU_EXQU CU_EXCLAIM_QUESTION
 
 // SYMS layer
 #define CU_DTDT CU_DOT_DOT
-#define CU_MNCM CU_MINUS_COMMA
 #define CU_QTQT CU_QUOTE_QUOTE
 #define CU_SCSC CU_SCLN_SCLN
-#define CU_DLUN CU_DOLLAR_UNDERSCORE
+#define CU_EQEQ CU_EQUAL_EQUAL

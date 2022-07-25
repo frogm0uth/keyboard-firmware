@@ -30,14 +30,13 @@ void keyboard_post_init_user(void) {
     os_set_raw(user_config.os_selection);
 #endif
 #if defined(OLED_ENABLE)
-    oled_set_brightness(MAX( user_config.oled_brightness, 0x10 )); // set a minimum, to avoid blank display
+    oled_set_brightness(MAX(user_config.oled_brightness, 0x10)); // set a minimum, to avoid blank display
 #endif
 
     // Other functions init
 #if defined(COMBOROLL_ENABLE)
     comboroll_post_init();
 #endif
-    
 }
 
 // Make it easier to read null key (instead of XXXXXXX)
@@ -48,38 +47,38 @@ void keyboard_post_init_user(void) {
  */
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  
-/* ALPHA v32
+
+/* ALPHA v32a
  ,-----------------------------------------.                              ,-----------------------------------------.
- |  Esc |   V  |   C  |   W  |   F  |   K  |                              |   J  |   M  |   U  | .  / | -  _ | BkSp |
+ |  Esc |   V  |   C  |   W  |   F  |   K  |                              |   J  |   M  |   U  | .  / | '  " | BkSp |
  |------+------+------+------+------+------|                              |------+------+------+------+------+------|
  |   X  |   R  |   S  |   T  |   H  |   B  |                              | ;  : |   N  |   I  |   O  |   A  |   Q  |
  | Ctrl |      |      |      |      |      |                    Search    |      |      |      |      |      | Ctrl |
  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
- |  Tab |      |   P  |   G  |   D  |   Z  |      |      |  |      |      | !  ? |   L  |   Y  | ,  | |      | Caps |
+ |  Tab |      |   P  |   G  |   D  |   Z  |      |      |  |      |      | !  ? |   L  |   Y  | ,  # |      | Caps |
  |  Alt | Shift|      |      |      |      |   E  |   '  |  | Enter| Space|      |      |      |      | Shift|  Alt |
  `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
- |                    | Mute |  Tab |   "  |      | SYMS |  |      |      |   '  |  Tab |      |
+ |                    | Mute |  Tab |   "  |      | SYMS |  |      |      | -  _ |  Tab |      |
  |                    |      |  Cmd | SNAP |      |      |  |      |      | EDIT | META |      |
  |                    `----------------------------------'  `----------------------------------'
                                     Alt=FUNC 
 */
     [ALPHA] = LAYOUT(
-        KC_ESC,  KC_V,    KC_C,   KC_W,    KC_F,    KC_K,                                              KC_J,    KC_M,    KC_U,   CU_DOT,  KC_MINS, KC_BSPC,
+        KC_ESC,  KC_V,    KC_C,   KC_W,    KC_F,    KC_K,                                              KC_J,    KC_M,    KC_U,   CU_DOT,  KC_QUOT, KC_BSPC,
         CU_LCTL, KC_R,    KC_S,   KC_T,    KC_H,    KC_B,                                              KC_SCLN, KC_N,    KC_I,   KC_O,    KC_A,    CU_RCTL,
         CU_LALT, CU_LSFT, KC_P,   KC_G,    KC_D,    KC_Z,    ___X___, ___X___, /* */ ___X___, ___X___, CU_EXQU, KC_L,    KC_Y,   CU_COMM, CU_RSFT, CU_RALT,
         /* */                     KC_MUTE, CU_LCMD, CL_SNAP, KC_E,    CL_SYMS, /* */ KC_ENT,  KC_SPC,  CL_EDIT, CL_META, ___X___
         ),
-
-/* SYMS
+    
+/* SYMS v32a
 
  ,-----------------------------------------.                              ,-----------------------------------------.
- |  Esc |   #  |   '  |   :  |   "  |   &  |                              |   ^  | }  7 | %  8 | {  9 | $  _ | BkSp |
+ |  Esc |   ^  |   '  |   :  |   "  |   &  |                              |   @  | }  7 | %  8 | {  9 |   $  | BkSp |
  |------+------+------+------+------+------|                              |------+------+------+------+------+------|
- |   `  |   \  |   (  |   *  |   )  |   !  |                              |   ;  | >  1 | /  2 | <  3 | =  0 |   ~  |
+ |   `  |   \  |   (  |   *  |   )  |   !  |                              |   ;  | >  1 | /  2 | <  3 | -  0 |   ~  |
  |      |      |      |      |      |      |                              |      |      |      |      |      |      |
  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
- |  Tab |      |   2  |   0  |   1  |   @  |      |      |  |      |      |   +  | ]  4 | ?  5 | [  6 | -  , |      |
+ |  Tab |      |   _  |   -  |   0  |   |  |      |      |  |      |      |   +  | ]  4 | ?  5 | [  6 |   =  |      |
  |      | Shift| Ctrl |  Alt |  Cmd |      |      | (**) |  | Enter| Space|      |      |      |      |      |      |
  `--------------------+------+------+------|      |      |  |      |      |------+------+---------------------------'
  |                    |      |      |      |      |      |  |      |      |   .  |      |      |
@@ -87,9 +86,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |                    `----------------------------------'  `----------------------------------'
 */
     [SYMS] = LAYOUT(
-        _______, KC_HASH, CU_QTQT, KC_COLN, KC_DQUO, KC_AMPR,                                           KC_CIRC, CU_7,       CU_8,    CU_9,    CU_DLUN, _______,
+        _______, KC_CIRC, CU_QTQT, KC_COLN, KC_DQUO, KC_AMPR,                                           KC_AT,   CU_7,       CU_8,    CU_9,    KC_DLR,  _______,
         KC_GRV,  KC_BSLS, KC_LPRN, KC_ASTR, KC_RPRN, KC_EXLM,                                           CU_SCSC, CU_1,       CU_2,    CU_3,    CU_0,    KC_TILD,
-        _______, CU_SSFT, CU_SCTL, CU_SALT, CU_SGUI, KC_AT,   ___X___, ___X___, /* */ ___X___, ___X___, KC_PLUS, CU_4,       CU_5,    CU_6,    CU_MNCM, ___X___,
+        _______, CU_SSFT, CU_SCTL, CU_SALT, CU_SGUI, KC_PIPE, ___X___, ___X___, /* */ ___X___, ___X___, KC_PLUS, CU_4,       CU_5,    CU_6,    CU_EQEQ, ___X___,
         /* */                      ___X___, ___X___, ___X___, ___X___, _______, /* */ _______, _______, CU_DTDT, SC_CMD_CTRL, ___X___
         ),
 
@@ -203,18 +202,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 // clang-format on
 
-
 // Register a single key. Handles custom keycodes.
 void register_custom_key(uint16_t keycode, keyrecord_t *record) {
     record->event.pressed = true; // force it on
-    if (keycode > SAFE_RANGE) { // handle custom keycodes, a bit iffy but seems to work...
+    if (keycode > SAFE_RANGE) {   // handle custom keycodes, a bit iffy but seems to work...
         process_record_user_emit(keycode, record);
     } else {
         if (keycode == KC_CAPS) { // needs special treatment
-            tap_code16(KC_CAPS);
+            tap_code(KC_CAPS);
         } else {
 #ifdef CUSTOM_CAPSWORD
-            // Check for capsword cancel 
+            // Check for capsword cancel
             process_caps_cancel(keycode, record);
 #endif
             register_code16(keycode);
@@ -225,7 +223,7 @@ void register_custom_key(uint16_t keycode, keyrecord_t *record) {
 // Unregister a single key. Handles custom keycodes.
 void unregister_custom_key(uint16_t keycode, keyrecord_t *record) {
     record->event.pressed = false; // force it off
-    if (keycode > SAFE_RANGE) { // handle custom keycodes, a bit iffy but seems to work...
+    if (keycode > SAFE_RANGE) {    // handle custom keycodes, a bit iffy but seems to work...
         process_record_user_emit(keycode, record);
     } else {
         unregister_code16(keycode);
@@ -237,7 +235,6 @@ void tap_custom_key(uint16_t keycode, keyrecord_t *record) {
     register_custom_key(keycode, record);
     unregister_custom_key(keycode, record);
 }
-
 
 /**
  * Process keys with a custom shift value. Shift codes are defined in shift_defs.h.
@@ -254,36 +251,34 @@ const uint16_t PROGMEM shift_keycodes[][2] = {
 #define READ_SHIFT_KEY(k, i) (pgm_read_word(&shift_keycodes[k - SHIFT_ID_START][i]))
 // clang-format on
 
-
 // Process a single custom shift key based on passed values
 void process_shift_key(uint16_t key, uint16_t shiftedkey, keyrecord_t *record) {
-    uint8_t mods = get_mods();
-#ifndef NO_ACTION_ONESHOT
-    uint8_t ossmods = get_oneshot_mods();
-#else
-    uint8_t ossmods = mods;
-#endif
-
-    del_mods(MOD_MASK_SHIFT);
-#ifndef NO_ACTION_ONESHOT
-    del_oneshot_mods(MOD_MASK_SHIFT);
-#endif
-
     if (record->event.pressed) {
+#ifndef NO_ACTION_ONESHOT
+        uint8_t mods    = get_mods();
+        uint8_t ossmods = get_oneshot_mods();
+
+        del_mods(MOD_MASK_SHIFT);
+        del_oneshot_mods(MOD_MASK_SHIFT);
+
         register_custom_key((mods | ossmods) & MOD_MASK_SHIFT ? shiftedkey : key, record);
+
+        set_mods(mods);
+        set_oneshot_mods(ossmods);
+        if (ossmods & MOD_MASK_SHIFT) {
+            del_oneshot_mods(MOD_MASK_SHIFT);
+        }
+#else
+        uint8_t mods = get_mods();
+        del_mods(MOD_MASK_SHIFT);
+        register_custom_key(mods & MOD_MASK_SHIFT ? shiftedkey : key, record);
+        set_mods(mods);
+#endif
     } else {
         unregister_custom_key(key, record);
         unregister_custom_key(shiftedkey, record);
     }
-    set_mods(mods);
-#ifndef NO_ACTION_ONESHOT
-    set_oneshot_mods(ossmods);
-    if (ossmods & MOD_MASK_SHIFT) {
-        del_oneshot_mods(MOD_MASK_SHIFT);
-    }
-#endif
 }
-
 
 // Process a single custom shift key based on the keycode
 void process_custom_shift(uint16_t key, keyrecord_t *record) {
@@ -292,7 +287,6 @@ void process_custom_shift(uint16_t key, keyrecord_t *record) {
     }
 }
 
-
 /**
  * User-level processing of custom keycodes, for those that might output characters.
  * This is split out from process_record_user so that it can be called from other
@@ -300,7 +294,7 @@ void process_custom_shift(uint16_t key, keyrecord_t *record) {
  */
 bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
 #ifdef CUSTOM_CAPSWORD
-    // Check for capsword cancel 
+    // Check for capsword cancel
     process_caps_cancel(keycode, record);
 #endif
 
@@ -320,6 +314,24 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
 #endif
 
     switch (keycode) {
+            // Handle the underscore mod-tap on the symbol layer
+        case CU_SCTL:
+            if (record->tap.count) {
+                process_shift_key(KC_UNDS, KC_UNDS, record);
+                return false; // Return false to ignore further processing
+            }
+            break;
+
+            // Next-sentence and next-paragraph macros: period, space/enter, one-shot shift
+        case CU_NEXT_SENTENCE:
+        case CU_NEXT_PARAGRAPH:
+            if (record->event.pressed) {
+                tap_code(KC_DOT);
+                tap_code(keycode == CU_NEXT_SENTENCE ? KC_SPC : KC_ENT);
+                set_oneshot_mods(MOD_MASK_SHIFT);
+                return false;
+            }
+            break;
 
 #ifdef LAYER_TAP_TOGGLE
             // layer switching using layer-tap-toggle custom code
@@ -332,7 +344,7 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
             break;
 
         case CL_EDIT:
-            return layer_tap_toggle(CU_QTQT, EDIT, record);
+            return layer_tap_toggle(KC_MINS, EDIT, record);
             break;
 
         case CL_META:
@@ -348,7 +360,6 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
             break;
 
         case CL_SYMS:
-        case CL_EDIT:
             if (record->tap.count) {
                 process_shift_key(KC_QUOT, KC_QUOT, record);
                 return false;
@@ -409,7 +420,6 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
  * User-level processing of custom keycodes.
  */
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-
 #ifdef LAYER_TAP_TOGGLE
     // Check for interrupt to layer-tap-toggle
     ltt_interrupt(keycode, record);
@@ -421,7 +431,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
     }
 #endif
-    
+
 #ifdef CUSTOM_CAPSWORD
     // Toggle caps word and caps lock
     if (!process_record_capsword(keycode, record)) {

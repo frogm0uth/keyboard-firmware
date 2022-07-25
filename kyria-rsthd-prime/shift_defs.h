@@ -23,7 +23,7 @@
 
 // Punctuation with numbers on shift
 //
-DEFINE_SHIFT( CU_0, KC_EQL,  KC_0 )
+DEFINE_SHIFT( CU_0, KC_MINS, KC_0 )
 DEFINE_SHIFT( CU_1, KC_RABK, KC_1 )
 DEFINE_SHIFT( CU_2, KC_SLSH, KC_2 )
 DEFINE_SHIFT( CU_3, KC_LABK, KC_3 )
@@ -35,17 +35,14 @@ DEFINE_SHIFT( CU_8, KC_PERC, KC_8 )
 DEFINE_SHIFT( CU_9, KC_LCBR, KC_9 )
 
 // Custom punctuation pairs on alpha layer
-DEFINE_SHIFT( CU_COMMA_PIPE,        KC_COMM, KC_PIPE )
+DEFINE_SHIFT( CU_COMMA_HASH,        KC_COMM, KC_HASH )
 DEFINE_SHIFT( CU_DOT_SLASH,         KC_DOT,  KC_SLASH )
 DEFINE_SHIFT( CU_EXCLAIM_QUESTION,  KC_EXLM, KC_QUES )
-
-// Custom punctuation pairs on symbols layer
-DEFINE_SHIFT( CU_MINUS_COMMA,       KC_MINS, KC_COMM )
-DEFINE_SHIFT( CU_DOLLAR_UNDERSCORE, KC_DLR,  KC_UNDS )
 
 // Keys that are the same whether shifted or not
 DEFINE_SHIFT( CU_DOT_DOT,           KC_DOT,  KC_DOT )
 DEFINE_SHIFT( CU_QUOTE_QUOTE,       KC_QUOT, KC_QUOT )
+DEFINE_SHIFT( CU_EQUAL_EQUAL,       KC_EQL,  KC_EQL )
 DEFINE_SHIFT( CU_SCLN_SCLN,         KC_SCLN, KC_SCLN )
 
 // Custom keys

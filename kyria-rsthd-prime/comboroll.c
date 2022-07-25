@@ -308,7 +308,7 @@ bool process_record_comboroll(uint16_t keycode, keyrecord_t *record) {
             comboroll_t *second = comboroll_scan_secondkey(firstkey_matched, keycode);
             if (second) {
                 process_comboroll(second);                                 // matched second key, so emit the combo
-                unregister_custom_key(firstkey_matched, &firstkey_record); // unregister first key prematurely to avoid hanging mods
+                //unregister_custom_key(firstkey_matched, &firstkey_record); // unregister first key prematurely to avoid hanging mods
                 return false;                                              // no further processing
 
             } else {                                                       // no match

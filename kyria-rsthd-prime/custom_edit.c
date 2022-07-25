@@ -57,14 +57,14 @@ void ce_action_shift_and_delete(void) {
 
 // Move to end of paragaph
 void ce_action_move_end_of_paragraph(void) {
-    tap_code16(KC_RIGHT);
+    tap_code(KC_RIGHT);
     tap_code16(SC(SC_END_OF_PARA));
-    tap_code16(KC_LEFT);
+    tap_code(KC_LEFT);
 }
 
 // Delete to end of paragaph
 void ce_action_delete_end_of_paragraph(void) {
-    tap_code16(KC_RIGHT);
+    tap_code(KC_RIGHT);
     tap_code16(S(SC(SC_END_OF_PARA)));
     tap_code16(S(KC_LEFT));
     tap_code(KC_BSPC);

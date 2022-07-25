@@ -77,7 +77,6 @@ LtoR_STR( pr,  KC_G, KC_D )
 _____TRM( pr,  200 )
 LtoR_STR( ght, KC_S, KC_D )
 
-RtoL_STR( my,  KC_M, KC_MINS )
 RtoL_STR( you, KC_U, CU_DOT )
 
 CMBO_STR( min, KC_S, CU_DOT )
@@ -110,14 +109,27 @@ RtoL_STR( ough, KC_N, CU_COMM )
 
 // Alternate punctuation on left hand
 RtoL_KEY( comma,  KC_COMM, KC_P, KC_G )
-_____TRM( comma,  200 )
-RtoL_KEY( period, KC_DOT,  KC_C, KC_W )
-_____TRM( period, 200 )
+_____TRM( comma,  300 )
+RtoL_LIT( space,  " ",     KC_G, KC_D )
+_____TRM( space,  300 )
 
-// Trialing/temporary
-RtoL_STR( et,  CU_DOT, KC_MINS )
-RtoL_STR( any, KC_U, KC_MINS )
-//RtoL_STR( ing,  KC_N, KC_Y )
+RtoL_KEY( period, KC_DOT,  KC_C, KC_W )
+_____TRM( period, 300 )
+
+RtoL_KEY( next_sentence_l,  CU_NEXT_SENTENCE,  KC_W,   KC_F ) // period space oss
+RtoL_KEY( next_paragraph,   CU_NEXT_PARAGRAPH, KC_C,   KC_F ) // period enter oss
+
+// next sentence on right hand vertical
+CMBO_KEY( next_sentence_R,  CU_NEXT_SENTENCE,  CU_DOT, KC_O ) // period space oss
+
+// Shell etc.
+CMBO_LIT( qmk,  "qmk ",   KC_V, CU_COMM )
+CMBO_LIT( cd,   "cd ",    KC_C, CU_COMM )
+CMBO_LIT( pwd,  "pwd ",   KC_W, CU_COMM )
+CMBO_LIT( ls,   "ls -al", KC_F, CU_COMM )
+CMBO_LIT( cp,   "cp ",    KC_P, CU_COMM )
+CMBO_LIT( grep, "grep ",  KC_G, CU_COMM )
+CMBO_LIT( rm,   "rm ",    KC_D, CU_COMM )
 
 // Utilities
 CMBO_KEY( search,   SC_SEARCH,      KC_SPC,  KC_ENT )       // System search box, right thumb
@@ -135,34 +147,15 @@ CMBO_KEY( funclayer, CL_FUNC,        CU_LCMD, CL_SNAP )      // Activate FUNC la
 #endif
 
 // Syntax layer
-RtoL_LIT( openphp,        "<?php", KC_RBRC, KC_QUES )
-RtoL_LIT( closeparensemi, ");",    KC_QUES, KC_LBRC )
+RtoL_LIT( openphp,        "<?php", CU_5, CU_6 )
+RtoL_LIT( closeparensemi, ");",    CU_4, CU_5 )
 RtoL_LIT( dirup,          "../",   CU_DTDT, CU_2 )
 
 
+// Trialing/temporary
+LtoR_KEY( m,   KC_M, KC_P, KC_D )
 
-//
-// Not working yet
-//
+RtoL_STR( et,  CU_DOT, KC_QUOT )
+RtoL_STR( any, KC_U,   KC_QUOT )
 
-// precondition's next sentence macro. Not working yet because comboroll implementation does not
-// work with one-shots
-#ifdef NOTWORKINGYET
-RtoL_ARR( periodspaceOSS,
-	ARRAY_PROTECT( 
-            KC_DOT,
-            KC_SPC,
-            OSM(MOD_LSFT)
-     ),
-    KC_C, KC_F )
-_____TRM( periodspaceOSS, 200 )
-#endif
 
-// Shell etc. Not working yet because comboroll implementation does not work with mod taps
-#ifdef NOTWORKINGYET
-CMBO_STR( qmk,  KC_H, CU_RCTL )
-CMBO_STR( cd,   KC_D, CU_RCTL )
-CMBO_STR( cp,   KC_C, CU_RCTL )
-CMBO_STR( pwd,  KC_P, CU_RCTL )
-CMBO_LIT( ls,   "ls -al", KC_P, CU_RCTL )
-#endif

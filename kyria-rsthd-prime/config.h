@@ -16,9 +16,10 @@
 
 #pragma once
 
+
 // Configuration for combos
 #define COMBO_TERM 70
-#define COMBOROLL_TERM 150
+#define COMBOROLL_TERM 180
 #define COMBO_MUST_TAP_PER_COMBO // With QMK combos, avoids having the second combo trigger when
 				 // overlapping, but means that holds don't work.
 
@@ -26,7 +27,7 @@
 #define TAPPING_TERM 220
 //#define TAPPING_TOGGLE 2
 //#define ONESHOT_TAP_TOGGLE 2
-#define IGNORE_MOD_TAP_INTERRUPT
+//#define IGNORE_MOD_TAP_INTERRUPT
 //#define PERMISSIVE_HOLD
 
 // uncomment to make OS-dependent shortcuts be statically compiled.
