@@ -65,7 +65,7 @@ Some of the punctuation keys use non-standard shift mappings. See `shift_defs.h`
 
 There are a number of combos on this layer, defined with a bunch of macros to reduce boilerplate. I have a userspace implementation called "[comboroll](docs/comborolls.md)" to avoid timing issues with QMK's overlapping combos. See `combo_defs.h` for combo definitions.
 
-With this key layout, I recommend at a minimum setting up a combo for ER on the right hand. If that works out, add ES, ED, and VE on the rght and PR on the left. Then consider the rest of the "essential" combos in the [comborolls](docs/comborolls.md) note. For absolute minimum SFBs *without* combos, swap P and F.  For lower left pinky usage (but higher inner index), swap V and Z.
+With this key layout, I recommend at a minimum setting up a combo for ER on the right hand and SP on the left. If that works out, add ES, ED, and VE, then consider the rest of the "essential" combos in the [comborolls](docs/comborolls.md) note. For absolute minimum SFBs *without* combos, swap P and F.  For lower left pinky usage (but higher inner index), swap V and Z.
 
 ### SYMS
 
