@@ -54,7 +54,6 @@
 // Anti-SFU - rolls
 LtoR_STR( sc, KC_C, KC_W )
 LtoR_STR( sp, KC_P, KC_G )
-
 RtoL_STR( ee, KC_Y, CU_COMM )
 
 // Anti-SFU - vertical
@@ -68,6 +67,7 @@ RtoL_STR( er, KC_O, KC_A )
 RtoL_STR( ed, KC_L, KC_Y )
 RtoL_STR( es, KC_L, CU_COMM )
 RtoL_STR( ve, KC_I, CU_COMM )
+LtoR_STR( m,  KC_S, KC_D )
 
 // Awkward bigrams/trigrams
 LtoR_STR( qu,  KC_V, KC_F )
@@ -75,7 +75,7 @@ LtoR_STR( cr,  KC_W, KC_F )
 _____TRM( cr,  200 )
 LtoR_STR( pr,  KC_G, KC_D )
 _____TRM( pr,  200 )
-LtoR_STR( ght, KC_S, KC_D )
+LtoR_STR( ght, KC_S, KC_G )
 
 RtoL_STR( you, KC_U, CU_DOT )
 
@@ -87,19 +87,19 @@ LtoR_STR( ck,  KC_C, KC_F )
 LtoR_STR( rk,  KC_R, KC_W )
 LtoR_STR( br,  KC_R, KC_H )
 LtoR_STR( bl,  KC_T, KC_D )
+LtoR_STR( bo,  KC_P, KC_D )
 
 CMBO_STR( be,  KC_R, CU_COMM )
 CMBO_STR( by,  KC_S, CU_COMM )
 CMBO_STR( ke,  KC_T, CU_COMM )
-CMBO_STR( abo, KC_H, CU_DOT )
-CMBO_STR( but, KC_T, CU_DOT )
+CMBO_STR( but, KC_H, CU_DOT )
 
 // More typing comfort
 LtoR_STR( fr,   KC_S, KC_F )
 LtoR_STR( ft,   KC_T, KC_F )
-LtoR_STR( ful,  KC_S, KC_G )
 
 CMBO_STR( for,  KC_R, CU_DOT ) 
+CMBO_STR( lway, KC_T, CU_DOT )
 
 // Common word endings, right hand
 RtoL_STR( ally, KC_M, CU_DOT )
@@ -110,8 +110,6 @@ RtoL_STR( ough, KC_N, CU_COMM )
 // Alternate punctuation on left hand
 RtoL_KEY( comma,  KC_COMM, KC_P, KC_G )
 _____TRM( comma,  300 )
-RtoL_LIT( space,  " ",     KC_G, KC_D )
-_____TRM( space,  300 )
 
 RtoL_KEY( period, KC_DOT,  KC_C, KC_W )
 _____TRM( period, 300 )
@@ -123,13 +121,21 @@ RtoL_KEY( next_paragraph,   CU_NEXT_PARAGRAPH, KC_C,   KC_F ) // period enter os
 CMBO_KEY( next_sentence_R,  CU_NEXT_SENTENCE,  CU_DOT, KC_O ) // period space oss
 
 // Shell etc.
-CMBO_LIT( qmk,  "qmk ",   KC_V, CU_COMM )
+CMBO_LIT( mv,   "mv ",    KC_V, CU_COMM )
 CMBO_LIT( cd,   "cd ",    KC_C, CU_COMM )
 CMBO_LIT( pwd,  "pwd ",   KC_W, CU_COMM )
 CMBO_LIT( ls,   "ls -al", KC_F, CU_COMM )
 CMBO_LIT( cp,   "cp ",    KC_P, CU_COMM )
 CMBO_LIT( grep, "grep ",  KC_G, CU_COMM )
 CMBO_LIT( rm,   "rm ",    KC_D, CU_COMM )
+CMBO_LIT( qmk,  "qmk ",   KC_K, CU_COMM )
+
+// Trialing/temporary
+LtoR_STR( ful,  KC_V, KC_W )
+RtoL_STR( et,   CU_DOT, KC_MINS )
+RtoL_STR( any,  KC_U,   KC_MINS )
+RtoL_LIT( space,  " ",     KC_G, KC_D )
+_____TRM( space,  300 )
 
 // Utilities
 CMBO_KEY( search,   SC_SEARCH,      KC_SPC,  KC_ENT )       // System search box, right thumb
@@ -150,12 +156,4 @@ CMBO_KEY( funclayer, CL_FUNC,        CU_LCMD, CL_SNAP )      // Activate FUNC la
 RtoL_LIT( openphp,        "<?php", CU_5, CU_6 )
 RtoL_LIT( closeparensemi, ");",    CU_4, CU_5 )
 RtoL_LIT( dirup,          "../",   CU_DTDT, CU_2 )
-
-
-// Trialing/temporary
-LtoR_KEY( m,   KC_M, KC_P, KC_D )
-
-RtoL_STR( et,  CU_DOT, KC_QUOT )
-RtoL_STR( any, KC_U,   KC_QUOT )
-
 
