@@ -49,8 +49,9 @@ void keyboard_post_init_user(void) {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* ALPHA v32a
+
  ,-----------------------------------------.                              ,-----------------------------------------.
- |  Esc |   V  |   C  |   W  |   F  |   K  |                              |   J  |   M  |   U  | .  / | '  " | BkSp |
+ |  Esc |   V  |   C  |   W  |   F  |   K  |                              |   J  |   M  |   U  | .  / | -  _ | BkSp |
  |------+------+------+------+------+------|                              |------+------+------+------+------+------|
  |   X  |   R  |   S  |   T  |   H  |   B  |                              | ;  : |   N  |   I  |   O  |   A  |   Q  |
  | Ctrl |      |      |      |      |      |                    Search    |      |      |      |      |      | Ctrl |
@@ -58,13 +59,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |  Tab |      |   P  |   G  |   D  |   Z  |      |      |  |      |      | !  ? |   L  |   Y  | ,  # |      | Caps |
  |  Alt | Shift|      |      |      |      |   E  |   '  |  | Enter| Space|      |      |      |      | Shift|  Alt |
  `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
- |                    | Mute |  Tab |   "  |      | SYMS |  |      |      | -  _ |  Tab |      |
+ |                    | Mute |      |   "  |      | SYMS |  |      |      |  Tab |      |      |
  |                    |      |  Cmd | SNAP |      |      |  |      |      | EDIT | META |      |
  |                    `----------------------------------'  `----------------------------------'
                                     Alt=FUNC 
 */
     [ALPHA] = LAYOUT(
-        KC_ESC,  KC_V,    KC_C,   KC_W,    KC_F,    KC_K,                                              KC_J,    KC_M,    KC_U,   CU_DOT,  KC_QUOT, KC_BSPC,
+        KC_ESC,  KC_V,    KC_C,   KC_W,    KC_F,    KC_K,                                              KC_J,    KC_M,    KC_U,   CU_DOT,  KC_MINS, KC_BSPC,
         CU_LCTL, KC_R,    KC_S,   KC_T,    KC_H,    KC_B,                                              KC_SCLN, KC_N,    KC_I,   KC_O,    KC_A,    CU_RCTL,
         CU_LALT, CU_LSFT, KC_P,   KC_G,    KC_D,    KC_Z,    ___X___, ___X___, /* */ ___X___, ___X___, CU_EXQU, KC_L,    KC_Y,   CU_COMM, CU_RSFT, CU_RALT,
         /* */                     KC_MUTE, CU_LCMD, CL_SNAP, KC_E,    CL_SYMS, /* */ KC_ENT,  KC_SPC,  CL_EDIT, CL_META, ___X___
@@ -314,14 +315,6 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
 #endif
 
     switch (keycode) {
-            // Handle the underscore mod-tap on the symbol layer
-        case CU_SCTL:
-            if (record->tap.count) {
-                process_shift_key(KC_UNDS, KC_UNDS, record);
-                return false; // Return false to ignore further processing
-            }
-            break;
-
             // Next-sentence and next-paragraph macros: period, space/enter, one-shot shift
         case CU_NEXT_SENTENCE:
         case CU_NEXT_PARAGRAPH:
@@ -344,11 +337,11 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
             break;
 
         case CL_EDIT:
-            return layer_tap_toggle(KC_MINS, EDIT, record);
+            return layer_tap_toggle(KC_TAB, EDIT, record);
             break;
 
         case CL_META:
-            return layer_tap_toggle(KC_TAB, META, record);
+            return layer_tap_toggle(KC_NO, META, record);
             break;
 #else
             // layer switching using QMK layer-tap: handle cases where tap code is 16-bit or has custom shift

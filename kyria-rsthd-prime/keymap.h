@@ -82,9 +82,9 @@ enum layers {
 #    define CL_BASE TO(ALPHA)
 #    define CL_SYMS LT(SYMS,   KC_QUOT)
 #    define CL_SNAP LT(SNAP,   KC_DQUO)
-#    define CL_EDIT LT(EDIT,   KC_MINS)
+#    define CL_EDIT LT(EDIT,   KC_TAB)
 #    define CL_FUNC LT(FUNC,   KC_NO)
-#    define CL_META LT(META,   KC_TAB)
+#    define CL_META LT(META,   KC_NO)
 #endif
 // clang-format on
 
@@ -154,14 +154,14 @@ enum custom_keycodes {
 #define CU_RALT ALT_T(KC_CAPS)
 #define CU_LCTL CTL_T(KC_X)
 #define CU_RCTL CTL_T(KC_Q)
-#define CU_LCMD GUI_T(KC_TAB) //KC_LGUI
+#define CU_LCMD KC_LGUI // GUI_T(KC_TAB)
 #define CU_RCMD KC_RGUI // not actually used
 
 // Mod-taps on symbols layer
 #define CU_SSFT KC_LSFT
-#define CU_SCTL CTL_T(KC_UNDS) // Will need to intercept in process_record_user to do the underscore
-#define CU_SALT ALT_T(KC_MINS)
-#define CU_SGUI GUI_T(KC_0)
+#define CU_SCTL CTL_T(KC_2)
+#define CU_SALT ALT_T(KC_0)
+#define CU_SGUI GUI_T(KC_1)
 
 
 /**
