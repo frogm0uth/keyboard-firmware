@@ -79,7 +79,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |   `  |   \  |   (  |   *  |   )  |   !  |                              |   ;  | >  1 | /  2 | <  3 | -  0 |   ~  |
  |      |      |      |      |      |      |                              |      |      |      |      |      |      |
  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
- |  Tab |      |   _  |   -  |   0  |   |  |      |      |  |      |      |   +  | ]  4 | ?  5 | [  6 |   =  |      |
+ |  Tab |      |   2  |   0  |   1  |   |  |      |      |  |      |      |   +  | ]  4 | ?  5 | [  6 |   =  |      |
  |      | Shift| Ctrl |  Alt |  Cmd |      |      | (**) |  | Enter| Space|      |      |      |      |      |      |
  `--------------------+------+------+------|      |      |  |      |      |------+------+---------------------------'
  |                    |      |      |      |      |      |  |      |      |   .  |      |      |
@@ -101,18 +101,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  | ScrL | PgUp | Left | Down | Right| AppR |                              | AppR |      |      |      |      | ScrR |
  |      |      |      |      |      |      |                              |      | Fast |  x5  | More |Delete|      |
  |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
- |  Tab | PgDn | Undo |  Del | Redo | TabR |      |      |  |      |      | TabR |      |      |      |      |AppWin|
+ |  Tab | PgDn | Undo | Space| Redo | TabR |      |      |  |      |      | TabR |      |      |      |      |AppWin|
  |      |      |      |      |      |      | BkSp | Enter|  |      |      |      |  Cmd |  Alt | Ctrl | Shift|      |
  `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
- |                    |      |      | Space|      |      |  |      |      |      |      |      |
+ |                    |      |      |  Del |      |      |  |      |      |      |      |      |
  |                    |      |CmdCtl|      |      |      |  |      |      | (**) |      |      |
  |                    `----------------------------------'  `----------------------------------'
 */
     [EDIT] = LAYOUT_stack(
         SC_EXPOSE_ALL,   SC_FULLSCREEN, CE_HOME,         CE_UP,             CE_END,          CU_NEXT_WINDOW,
         SC_PREV_SCREEN,  CE_PAGE_UP,    CE_LEFT,         CE_DOWN,           CE_RIGHT,        CU_APPSWITCH_RIGHT,
-        KC_TAB,          CE_PAGE_DOWN,  SC_UNDO_ACTION,  KC_DEL,            SC_REDO_ACTION,  CU_TAB_RIGHT,        ___X___, ___X___,
-                                                         SC_APP_ZOOM_RESET, SC_CMD_CTRL,     KC_SPC,              KC_BSPC,  KC_ENT,
+        KC_TAB,          CE_PAGE_DOWN,  SC_UNDO_ACTION,  KC_SPC,            SC_REDO_ACTION,  CU_TAB_RIGHT,        ___X___, ___X___,
+                                                         SC_APP_ZOOM_RESET, SC_CMD_CTRL,     KC_DEL,              KC_BSPC,  KC_ENT,
 
                           CU_NEXT_WINDOW,     SC_PASTE_CLIPBOARD, SC_COPY_SELECTION, SC_CUT_SELECTION,  SC_SELECT_ALL, _______,
                           CU_APPSWITCH_RIGHT, CE_FAST,            CE_X5,             CE_MORE,           CE_DELETE,     SC_NEXT_SCREEN,
