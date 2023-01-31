@@ -147,6 +147,7 @@ DEFINE_SHORTCUT( QUIT,        G(KC_Q),     A(KC_F4),   A(KC_F4) )   // Quit app
 DEFINE_SHORTCUT( NEW,         G(KC_N),     C(KC_N),    C(KC_N) )    // New file/window
 DEFINE_SHORTCUT( NEW_TAB,     G(KC_T),     C(KC_T),    C(KC_T) )    // New tab
 
+DEFINE_SHORTCUT( RELOAD,      G(KC_R),     C(KC_R),    C(KC_R) )    // Reload file/page
 DEFINE_SHORTCUT( SAVE,        G(KC_S),     C(KC_N),    C(KC_N) )    // Save file
 DEFINE_SHORTCUT( SAVE_AS,     S(G(KC_S)),  KC_F12,     C(S(KC_S)) ) // Save to different file
 DEFINE_SHORTCUT( PRINT,       G(KC_P),     C(KC_P),    C(KC_P) )    // Print
