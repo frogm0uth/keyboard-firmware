@@ -42,164 +42,277 @@ void keyboard_post_init_user(void) {
 // Make it easier to read null key (instead of XXXXXXX)
 #define ___X___ KC_NO
 
+
 /**
  * Keymap
  */
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-/* ALPHA v32a
+/* ALPHA v33
 
- ,-----------------------------------------.                              ,-----------------------------------------.
- |  Esc |   V  |   C  |   W  |   F  |   K  |                              |   J  |   M  |   U  | .  / | -  _ | BkSp |
- |------+------+------+------+------+------|                              |------+------+------+------+------+------|
- |   X  |   R  |   S  |   T  |   H  |   B  |                              | ;  : |   N  |   I  |   O  |   A  |   Q  |
- | Ctrl |      |      |      |      |      |                    Search    |      |      |      |      |      | Ctrl |
- |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
- |  Tab |      |   P  |   G  |   D  |   Z  |      |      |  |      |      | !  ? |   L  |   Y  | ,  # |      | Caps |
- |  Alt | Shift|      |      |      |      |   E  |   '  |  | Enter| Space|      |      |      |      | Shift|  Alt |
- `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
- |                    | Mute |      |   "  |      | SYMS |  |      |      |  Tab |      |      |
- |                    |      |  Cmd | SNAP |      |      |  |      |      | EDIT | META |      |
- |                    `----------------------------------'  `----------------------------------'
-                                    Alt=FUNC 
-*/
-    [ALPHA] = LAYOUT(
-        KC_ESC,  KC_V,    KC_C,   KC_W,    KC_F,    KC_K,                                              KC_J,    KC_M,    KC_U,   CU_DOT,  KC_MINS, KC_BSPC,
-        CU_LCTL, KC_R,    KC_S,   KC_T,    KC_H,    KC_B,                                              KC_SCLN, KC_N,    KC_I,   KC_O,    KC_A,    CU_RCTL,
-        CU_LALT, CU_LSFT, KC_P,   KC_G,    KC_D,    KC_Z,    ___X___, ___X___, /* */ ___X___, ___X___, CU_EXQU, KC_L,    KC_Y,   CU_COMM, CU_RSFT, CU_RALT,
-        /* */                     KC_MUTE, CU_LCMD, CL_SNAP, KC_E,    CL_SYMS, /* */ KC_ENT,  KC_SPC,  CL_EDIT, CL_META, ___X___
-        ),
-    
-/* SYMS v32a
+ ,-----------------------------------------.                        ,-----------------------------------------.
+ |  Esc |   V  |   C  |   W  |   F  |   K  |                        |   J  |   M  |   U  | .  ! | -  _ | BkSp |
+ |------+------+------+------+---Z--+------|                        |------+------+------+------+------+------|
+ |   X  |   R  |   S  |   T  |   H  |   B  |                        | ;  : |   N  |   I  |   O  |   A  |   Q  |
+ |------+------+------+------+------+------'                        `------+------+------+------+------+------|
+ | Enter|      |   P  |   G  |   D  |                                      |   L  |   Y  | ,  ? |      |      |
+ | META | Shift|      |      |      |                                      |      |      |      | Shift| META |
+ `----------------------------------'                                      `----------------------------------'
 
- ,-----------------------------------------.                              ,-----------------------------------------.
- |  Esc |   ^  |   '  |   :  |   "  |   &  |                              |   @  | }  7 | %  8 | {  9 |   $  | BkSp |
- |------+------+------+------+------+------|                              |------+------+------+------+------+------|
- |   `  |   \  |   (  |   *  |   )  |   !  |                              |   ;  | >  1 | /  2 | <  3 | -  0 |   ~  |
- |      |      |      |      |      |      |                              |      |      |      |      |      |      |
- |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
- |  Tab |      |   2  |   0  |   1  |   |  |      |      |  |      |      |   +  | ]  4 | ?  5 | [  6 |   =  |      |
- |      | Shift| Ctrl |  Alt |  Cmd |      |      | (**) |  | Enter| Space|      |      |      |      |      |      |
- `--------------------+------+------+------|      |      |  |      |      |------+------+---------------------------'
- |                    |      |      |      |      |      |  |      |      |   .  |      |      |
- |                    |      |      |      |      |      |  |      |      |      |CmdCtl|      |
- |                    `----------------------------------'  `----------------------------------'
-*/
-    [SYMS] = LAYOUT(
-        _______, KC_CIRC, CU_QTQT, KC_COLN, KC_DQUO, KC_AMPR,                                           KC_AT,   CU_7,       CU_8,    CU_9,    KC_DLR,  _______,
-        KC_GRV,  KC_BSLS, KC_LPRN, KC_ASTR, KC_RPRN, KC_EXLM,                                           CU_SCSC, CU_1,       CU_2,    CU_3,    CU_0,    KC_TILD,
-        _______, CU_SSFT, CU_SCTL, CU_SALT, CU_SGUI, KC_PIPE, ___X___, ___X___, /* */ ___X___, ___X___, KC_PLUS, CU_4,       CU_5,    CU_6,    CU_EQEQ, ___X___,
-        /* */                      ___X___, ___X___, ___X___, ___X___, _______, /* */ _______, _______, CU_DTDT, SC_CMD_CTRL, ___X___
-        ),
+ .                 ,------.      ,--------------------.  ,---------------------------.
+ .                 |ScrLck|      |   "  |   E  |   '  |  | Enter| Space|  Tab |      |
+ .                 |      |      | SYMS |      |      |  |      |      | EDIT | CURS |
+ .                 `------'      `--------------------'  `---------------------------'
+ */
+
+    [ALPHA] = KEY_LAYOUT_stack(
+        /* Left hand */
+        KC_ESC,   KC_V,     KC_C,  KC_W,  KC_F,  KC_K,
+        KC_X,     KC_R,     KC_S,  KC_T,  KC_H,  KC_B,
+        CL_META,  KC_LSFT,  KC_P,  KC_G,  KC_D,
+
+        /* Right hand */
+                  KC_J,     KC_M,  KC_U,  CU_DOT,  KC_MINS, KC_BSPC,
+                  KC_SCLN,  KC_N,  KC_I,  KC_O,    KC_A,    KC_Q,
+                            KC_L,  KC_Y,  CU_COMM, KC_RSFT, CL_META,
+
+        /* Encoder & Thumbs */
+        SC_SCREEN_LOCK, CL_SYMS, KC_E, CU_QTQT, KC_ENT, KC_SPC, CL_EDIT, CL_CURS
+    ),
+
+
+/* SYMS
+
+ ,-----------------------------------------.                        ,-----------------------------------------.
+ | LOCK |   |  |   !  |   .  |   -  | WinR |                        |   ^  | ]  7 | #  8 | [  9 |   $  | LOCK |
+ |------+------+------+------+------+------|                        |------+------+------+------+------+------|
+ |  Tab |   \  |   (  |   *  |   )  | AppR |                        | &  @ | >  1 | /  2 | <  3 | =  0 | ~  ` |
+ |------+------+------+------+------+------'                        `------+------+------+------+------+------|
+ |      |      |      |      |      |                                      | }  4 | %  5 | {  6 |   +  |      |
+ |      | Shift| Ctrl |  Alt |  Cmd |                                      |      |      |      |      |      |
+ `----------------------------------'                                      `----------------------------------'
+
+ .                 ,------.      ,--------------------.  ,---------------------------.
+ .                 |      |      |      |      |      |  | Enter| Space|   .  |      |
+ .                 |      |      | (**) |      |      |  |      |      |      |      |
+ .                 `------'      `--------------------'  `---------------------------'
+ */
+
+    [SYMS] = KEY_LAYOUT_stack(
+        /* Left hand */
+        CU_LOCK,  KC_PIPE,  KC_EXLM,  CU_DOT_DOT,  CU_MINUS_MINUS,  CU_NEXT_WINDOW,
+        KC_TAB,   KC_BSLS,  KC_LPRN,  KC_ASTR,     KC_RPRN,         CU_APPSWITCH_RIGHT,
+        ___X___,  KC_LSFT,  KC_LCTL,  KC_LALT,     KC_LGUI,
+
+        /* Right hand */
+                  KC_CIRC,    CU_7,  CU_8,  CU_9,  KC_DLR,  CU_LOCK,
+                  CU_AMP_AT,  CU_1,  CU_2,  CU_3,  CU_0,    CU_TILDE_GRAVE,
+                              CU_4,  CU_5,  CU_6,  KC_PLUS, ___X___,
+
+        /* Encoder & Thumbs */
+        ___X___, _______, ___X___, ___X___, KC_ENT, KC_SPC, CU_DOT_DOT, ___X___
+    ),
+
 
 /* EDIT
 
- ,-----------------------------------------.                              ,-----------------------------------------.
- |Expose|FulScr| Home |  Up  |  End | WinR |                              | WinR | Paste| Copy |  Cut |  All | BkSp |
- |------+------+------+------+------+------|                              |------+------+------+------+------+------|
- | ScrL | PgUp | Left | Down | Right| AppR |                              | AppR |      |      |      |      | ScrR |
- |      |      |      |      |      |      |                              |      | Fast |  x5  | More |Delete|      |
- |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
- |  Tab | PgDn | Undo | Space| Redo | TabR |      |      |  |      |      | TabR |      |      |      |      |AppWin|
- |      |      |      |      |      |      | BkSp | Enter|  |      |      |      |  Cmd |  Alt | Ctrl | Shift|      |
- `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
- |                    |      |      |  Del |      |      |  |      |      |      |      |      |
- |                    |      |CmdCtl|      |      |      |  |      |      | (**) |      |      |
- |                    `----------------------------------'  `----------------------------------'
-*/
-    [EDIT] = LAYOUT_stack(
-        SC_EXPOSE_ALL,   SC_FULLSCREEN, CE_HOME,         CE_UP,             CE_END,          CU_NEXT_WINDOW,
-        SC_PREV_SCREEN,  CE_PAGE_UP,    CE_LEFT,         CE_DOWN,           CE_RIGHT,        CU_APPSWITCH_RIGHT,
-        KC_TAB,          CE_PAGE_DOWN,  SC_UNDO_ACTION,  KC_SPC,            SC_REDO_ACTION,  CU_TAB_RIGHT,        ___X___, ___X___,
-                                                         SC_APP_ZOOM_RESET, SC_CMD_CTRL,     KC_DEL,              KC_BSPC,  KC_ENT,
+ ,-----------------------------------------.                        ,-----------------------------------------.
+ | LOCK | PgUp | Home |  Up  |  End | WinL |                        | WinR | Paste| Copy |  Cut |  All | LOCK |
+ |------+------+------+------+------+------|                        |------+------+------+------+------+------|
+ | TabL | PgDn | Left | Down | Right| AppL |                        | AppR |      |      |      |      | TabR |
+ |      |      |      |      |      |      |                        |      | Fast |  x5  | More |Delete|      |
+ |------+------+------+------+------+------'                        `------+------+------+------+------+------|
+ |TabEnt|      | Undo | Space| Redo |                                      |      |      |      |      |      |
+ |      | Shift|      |      |      |                                      |  Cmd |  Alt | Ctrl | Shift|      |
+ `----------------------------------'                                      `----------------------------------'
 
-                          CU_NEXT_WINDOW,     SC_PASTE_CLIPBOARD, SC_COPY_SELECTION, SC_CUT_SELECTION,  SC_SELECT_ALL, _______,
-                          CU_APPSWITCH_RIGHT, CE_FAST,            CE_X5,             CE_MORE,           CE_DELETE,     SC_NEXT_SCREEN,
-        ___X___, ___X___, CU_TAB_RIGHT,       KC_RGUI,            KC_RALT,           KC_RCTL,           KC_RSFT,       SC_EXPOSE_WINDOWS,
-        ___X___, ___X___, _______,            ___X___,            ___X___
+ .                 ,------.      ,--------------------.  ,---------------------------.
+ .                 |      |      |  Del | BkSp | Enter|  |      |      |      |      |
+ .                 |      |      |      |      |      |  |      |      | (**) |      |
+ .                 `------'      `--------------------'  `---------------------------'
+ */
+
+    [EDIT] = KEY_LAYOUT_stack(
+        /* Left hand */
+        CU_LOCK,      CE_PAGE_UP,   CE_HOME,        CE_UP,    CE_END,         CU_PREV_WINDOW,
+        CU_TAB_LEFT,  CE_PAGE_DOWN, CE_LEFT,        CE_DOWN,  CE_RIGHT,       CU_APPSWITCH_LEFT,
+        CU_TABENT,    _______,      SC_UNDO_ACTION, KC_SPC,   SC_REDO_ACTION,
+
+
+        /* Right hand */
+                     CU_NEXT_WINDOW,     SC_PASTE_CLIPBOARD, SC_COPY_SELECTION, SC_CUT_SELECTION,  SC_SELECT_ALL, CU_LOCK,
+                     CU_APPSWITCH_RIGHT, CE_FAST,            CE_X5,             CE_MORE,           CE_DELETE,     CU_TAB_RIGHT,
+                                         KC_RGUI,            KC_RALT,           KC_RCTL,           KC_RSFT,       ___X___,
+
+        /* Encoder & Thumbs */
+        SC_APP_ZOOM_RESET, KC_DEL, KC_BSPC, KC_ENT, ___X___, ___X___, _______, ___X___
     ),
 
-/* SNAP
-
- ,-----------------------------------------.                              ,-----------------------------------------.
- |  Esc |  All |  Cut | Copy | Paste| WinR |                              | WinL |SnapTL| SnapT|SnapTR|FulScr|Expose|
- |------+------+------+------+------+------|                              |------+------+------+------+------+------|
- | ScrL |      | SSScr| SSRgn| SSApp| AppR |                              | AppL | SnapL| SnapV| SnapR| Back | ScrR |
- |      |      |      |      |      |      |                              |      |      |      |      |      |      |
- |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
- |      |      |      |      |      | TabR |      |      |  |      |      | TabL |SnapBL| SnapB|SnapBR|  Fwd |DskTop|
- |      | Shift| Ctrl |  Alt |  Cmd |      |      |      |  | Btn3 | Btn1 |      |      |      |      |      |      |
- `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
-                      |      |      |      |      |      |  |      |      | Btn2 |      |      |
-                      |      |      | (**) |      |      |  |      |      |      |      |      |
-                      `----------------------------------'  `----------------------------------'
-*/
-    [SNAP] = LAYOUT_stack(
-        _______,        SC_SELECT_ALL,    SC_CUT_SELECTION,     SC_COPY_SELECTION,    SC_PASTE_CLIPBOARD, CU_NEXT_WINDOW,
-        SC_PREV_SCREEN, ___X___,          SC_SCREENSHOT_SCREEN, SC_SCREENSHOT_REGION, SC_SCREENSHOT_APP,  CU_APPSWITCH_RIGHT,
-        ___X___,        KC_LSFT,          KC_LCTL,              KC_LALT,              KC_LGUI,            CU_TAB_RIGHT,        ___X___, ___X___,
-                                                                ___X___,              ___X___,            _______,             ___X___, ___X___,
-
-                          CU_PREV_WINDOW,    SC_SNAP_TOPLEFT,    SC_SNAP_TOP,      SC_SNAP_TOPRIGHT,    SC_FULLSCREEN,   SC_EXPOSE_ALL,
-                          CU_APPSWITCH_LEFT, SC_SNAP_LEFT,       SC_SNAP_VERTICAL, SC_SNAP_RIGHT,       SC_BROWSER_BACK, SC_NEXT_SCREEN,
-        ___X___, ___X___, CU_TAB_LEFT,       SC_SNAP_BOTTOMLEFT, SC_SNAP_BOTTOM,   SC_SNAP_BOTTOMRIGHT, SC_BROWSER_FWD,  SC_REVEAL_DESKTOP,
-        CM_BTN3, CM_BTN1, CM_BTN2,           ___X___,            ___X___
-    ),
-
-/* FUNC
-
- ,-----------------------------------------.                              ,-----------------------------------------.
- |      |      |      |      |      |      |                              |      |  F7  |  F8  |  F9  |  F10 |      |
- |------+------+------+------+------+------|                              |------+------+------+------+------+------|
- |      |      | !MAC | !WIN |!LINUX|      |                              |      |  F1  |  F2  |  F3  |  F11 |      |
- |      |      |      |      |      |      |                              |      |      |      |      |      |      |
- |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
- |      |      |      |      |      |      |      |      |  |      |      |      |  F4  |  F5  |  F6  |  F12 |      |
- |      | Shift| Ctrl |  Alt |  Cmd |      |      |      |  |      |      |      |      |      |      |      |      |
- `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
- |                    |      |      |      |      |      |  |      |      |      |      |      |
- |                    |      | (**) | (**) |      |      |  |      |      |      |CmdCtl|      |
- |                    `----------------------------------'  `----------------------------------'
-*/
-    [FUNC] = LAYOUT_stack(
-        ___X___, ___X___, ___X___,         ___X___,           ___X___,         ___X___,
-        ___X___, ___X___, CU_SELECT_MACOS, CU_SELECT_WINDOWS, CU_SELECT_LINUX, ___X___,
-        _______, KC_LSFT, KC_LCTL,         KC_LALT,           KC_LGUI,         ___X___, ___X___, ___X___,
-                                           ___X___,           _______,         _______, ___X___, ___X___,
-
-                          ___X___, KC_F7,       KC_F8,   KC_F9,   KC_F10,  ___X___,
-                          ___X___, KC_F1,       KC_F2,   KC_F3,   KC_F11,  ___X___,
-        ___X___, ___X___, ___X___, KC_F4,       KC_F5,   KC_F6,   KC_F12,  ___X___,
-        ___X___, ___X___, ___X___, SC_CMD_CTRL, ___X___
-    ),
 
 /* META
 
- ,-----------------------------------------.                              ,-----------------------------------------.
- |      |      | Close|      | Find |      |                              |      |      |      |      |      |      |
- |------+------+------+------+------+------|                              |------+------+------+------+------+------|
- | eXit |      | Save |newTab|      |  Bin |                              |      |  New |      | Open |saveAs| Quit |
- |      |      |      |      |      |      |                              |      |      |      |      |      |      |
- |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
- |      |      | Print|      |      |      |      |      |  |      |      |      |      |      |      |      |      |
- |      |      |      |      |      |      | Next |      |  | !WIPE|      |      |  Cmd |  Alt | Ctrl | Shift|      |
- `--------------------+------+------+------|      |      |  |      |      |------+------+------+--------------------'
- |                    |!WRITE|      | Prev |      |      |  |      |      |      | (**) |      |
- |                    |      |      |      |      |      |  |      |      |      |      |      |
- |                    `----------------------------------'  `----------------------------------'
-*/
-    [META] = LAYOUT_stack(
-        ___X___, ___X___, SC_CLOSE_TAB, ___X___,    SC_FIND,   ___X___,
-        SC_QUIT, ___X___, SC_SAVE,      SC_NEW_TAB, ___X___,   SC_BIN, 
-        ___X___, ___X___, SC_PRINT,     ___X___,    ___X___,   ___X___,        ___X___,        ___X___,
-                                        CU_WRIT,    ___X___,   SC_PREV_SEARCH, SC_NEXT_SEARCH, ___X___,
+ ,-----------------------------------------.                        ,-----------------------------------------.
+ | LOCK |      | Close|      | Find |      |                        |      |      |      |      |      | LOCK |
+ |------+------+------+------+------+------|                        |------+------+------+------+------+------|
+ | eXit |Reload| Save |newTab|      |  Bin |                        |      |  New |      | Open |saveAs| Quit |
+ |------+------+------+------+------+------'                        `------+------+------+------+------+------|
+ |      |      | Print| Prev | Next |                                      | Back |  Fwd |      |      |      |
+ | (**) | Shift|      |      |      |                                      |      |      |      | Shift| (**) |
+ `----------------------------------'                                      `----------------------------------'
 
-                           ___X___,  ___X___,  ___X___,  ___X___,  ___X___,    ___X___,
-                           ___X___,  SC_NEW,   ___X___,  SC_OPEN,  SC_SAVE_AS, SC_QUIT,
-        ___X___, ___X___,  ___X___, KC_RGUI,   KC_RALT,  KC_RCTL,  KC_RSFT,    ___X___,
-        CU_WIPE, ___X___,  ___X___,  _______,  ___X___
+ .                 ,------.      ,--------------------.  ,---------------------------.
+ .                 | Mute |      |      | AppR | WinR |  | WinR | AppR |      |      |
+ .                 |      |      | FUNC |      |      |  |      |      | SNAP |      |
+ .                 `------'      `--------------------'  `---------------------------'
+ */
+
+    [META] = KEY_LAYOUT_stack(
+        /* Left hand */
+        CU_LOCK, ___X___,   SC_CLOSE_TAB, ___X___,        SC_FIND,        ___X___,
+        SC_QUIT, SC_RELOAD, SC_SAVE,      SC_NEW_TAB,     ___X___,        SC_BIN,
+        _______, _______,   SC_PRINT,     SC_PREV_SEARCH, SC_NEXT_SEARCH,
+
+        /* Right hand */
+                 ___X___,  ___X___,         ___X___,        ___X___,  ___X___,    CU_LOCK,
+                 ___X___,  SC_NEW,          ___X___,        SC_OPEN,  SC_SAVE_AS, SC_QUIT,
+                           SC_BROWSER_BACK, SC_BROWSER_FWD, ___X___,  _______,    _______,
+
+        /* Encoder & Thumbs */
+        KC_MUTE, CL_FUNC, CU_APPSWITCH_RIGHT, CU_NEXT_WINDOW, CU_NEXT_WINDOW, CU_APPSWITCH_RIGHT, CL_SNAP, ___X___
     ),
+
+
+/* FUNC
+
+ ,-----------------------------------------.                        ,-----------------------------------------.
+ | LOCK |      |      |      |      |      |                        |      |  F7  |  F8  |  F9  |  F10 | LOCK |
+ |------+------+------+------+------+------|                        |------+------+------+------+------+------|
+ |      |      | !MAC | !WIN |!LINUX|      |                        |      |  F1  |  F2  |  F3  |  F11 |      |
+ |------+------+------+------+------+------'                        `------+------+------+------+------+------|
+ |      |      |      |      |      |                                      |  F4  |  F5  |  F6  |  F12 |      |
+ |      | Shift| Ctrl |  Alt |  Cmd |                                      |      |      |      |      |      |
+ `----------------------------------'                                      `----------------------------------'
+
+ .                 ,------.      ,--------------------.  ,---------------------------.
+ .                 |      |      |      |      |      |  | Btn3 | Btn1 | Btn2 |      |
+ .                 |      |      | (**) |      |      |  |      |      |      |      |
+ .                 `------'      `--------------------'  `---------------------------'
+ */
+
+    [FUNC] = KEY_LAYOUT_stack(
+        /* Left hand */
+        CU_LOCK, ___X___, ___X___,         ___X___,           ___X___,         ___X___,
+        ___X___, ___X___, CU_SELECT_MACOS, CU_SELECT_WINDOWS, CU_SELECT_LINUX, ___X___,
+        _______, KC_LSFT, KC_LCTL,         KC_LALT,           KC_LGUI,
+
+         /* Right hand */
+                 ___X___, KC_F7,   KC_F8,   KC_F9,   KC_F10,  CU_LOCK,
+                 ___X___, KC_F1,   KC_F2,   KC_F3,   KC_F11,  ___X___,
+                          KC_F4,   KC_F5,   KC_F6,   KC_F12,  ___X___,
+
+        /* Encoder & Thumbs */
+        ___X___, _______, ___X___, ___X___, CM_BTN3, CM_BTN1, CM_BTN2, ___X___
+    ),
+
+
+/* SNAP
+
+ ,-----------------------------------------.                        ,-----------------------------------------.
+ | LOCK |      |SnapTL| SnapT|SnapTR|      |                        |      |      |      |      |      | LOCK |
+ |------+------+------+------+------+------|                        |------+------+------+------+------+------|
+ |      |      | SnapL| SnapV| SnapR|      |                        |      |      |      |      |      |      |
+ |------+------+------+------+------+------'                        `------+------+------+------+------+------|
+ |      |      |SnapBL| SnapB|SnapBR|                                      |      |      |      |      |      |
+ |      |      |      |      |      |                                      |  Cmd |  Alt | Ctrl | Shift|      |
+ `----------------------------------'                                      `----------------------------------'
+
+ .                 ,------.      ,--------------------.  ,---------------------------.
+ .                 |!WRITE|      | Btn3 | Btn1 | Btn2 |  |      | !WIPE|      |      |
+ .                 |      |      |      |      |      |  |      |      | (**) |      |
+ .                 `------'      `--------------------'  `---------------------------'
+ */
+
+    [SNAP] = KEY_LAYOUT_stack(
+        /* Left hand */
+        CU_LOCK, ___X___,  SC_SNAP_TOPLEFT,    SC_SNAP_TOP,      SC_SNAP_TOPRIGHT,    ___X___,
+        ___X___, ___X___,  SC_SNAP_LEFT,       SC_SNAP_VERTICAL, SC_SNAP_RIGHT,       ___X___,
+        ___X___, ___X___,  SC_SNAP_BOTTOMLEFT, SC_SNAP_BOTTOM,   SC_SNAP_BOTTOMRIGHT,
+
+         /* Right hand */
+                 ___X___, ___X___, ___X___, ___X___, ___X___, CU_LOCK,
+                 ___X___, ___X___, ___X___, ___X___, ___X___, ___X___,
+                          KC_RGUI, KC_RALT, KC_RCTL, KC_RSFT, ___X___,
+
+        /* Encoder & Thumbs */
+        CU_WRIT, CM_BTN3, CM_BTN1, CM_BTN2, ___X___, CU_WIPE, _______, ___X___
+    ),
+
+/* CURS
+
+ ,-----------------------------------------.                        ,-----------------------------------------.
+ | LOCK |   V  |   C  |   W  |   F  |   K  |                        |      |      |      | BkSp |  Tab | LOCK |
+ |------+------+------+------+---Z--+------|                        |------+------+------+------+------+------|
+ |   X  |   R  |   S  |   T  |   H  |   B  |                        |      |      | FLIP |  Up  | Right| Enter|
+ |------+------+------+------+------+------'                        `------+------+------+------+------+------|
+ |      |      |   P  |   G  |   D  |                                      |      | Left | Down |      |      |
+ |      | Shift|      |      |      |                                      |      |      |      |      | Shift|
+ `----------------------------------'                                      `----------------------------------'
+
+ .                 ,------.      ,--------------------.  ,---------------------------.
+ .                 | Zoom0|      |   "  |   E  |   '  |  |      |      |      |      |
+ .                 |      |      |      |      |      |  |      |      |      | (**) |
+ .                 `------'      `--------------------'  `---------------------------'
+
+ */
+    [CURS] = KEY_LAYOUT_stack(
+        /* Left hand */
+        CU_LOCK, KC_V,    KC_C,   KC_W,    KC_F,    KC_K,
+        KC_X,    KC_R,    KC_S,   KC_T,    KC_H,    KC_B,
+        ___X___, KC_LSFT, KC_P,   KC_G,    KC_D,
+
+         /* Right hand */
+                 ___X___, ___X___, ___X___, KC_BSPC, KC_TAB,   CU_LOCK,
+                 ___X___, ___X___, CL_FLIP, KC_UP,   KC_RIGHT, KC_ENT,
+                          ___X___, KC_LEFT, KC_DOWN, ___X___,  KC_RSFT, 
+
+        /* Encoder & Thumbs */
+        SC_APP_ZOOM_RESET, KC_DQUO, KC_E, CU_QTQT, ___X___, ___X___, ___X___, _______
+    ),
+
+
+/* FLIP
+
+ ,-----------------------------------------.                        ,-----------------------------------------.
+ | LOCK |   -  |   .  |   U  |   M  |   J  |                        |      |      |      | BkSp |  Tab | LOCK |
+ |------+------+------+------+------+------|                        |------+------+------+------+------+------|
+ |   Q  |   A  |   O  |   I  |   N  |   ;  |                        |      |      | (**) |  Up  | Right| Enter|
+ |------+------+------+------+------+------.                        `------+------+------+------+------+------|
+ |      |      |   ,  |   Y  |   L  |                                      |      | Left | Down |      |      |
+ |      | Shift|      |      |      |                                      |      |      |      |      | Shift|
+ `----------------------------------'                                      `----------------------------------'
+
+ .                 ,------.      ,--------------------.  ,---------------------------.
+ .                 |      |      |  Tab | Space| Enter|  |      |      |      |      |
+ .                 |      |      |      |      |      |  |      |      |      | (**) |
+ .                 `------'      `--------------------'  `---------------------------'
+ */
+
+    [FLIP] = KEY_LAYOUT_stack(
+        /* Left hand */
+        CU_LOCK, KC_MINS, CU_DOT,  KC_U,    KC_M,    KC_J,
+        KC_Q,    KC_A,    KC_O,    KC_I,    KC_N,    KC_SCLN,
+        ___X___, KC_LSFT, CU_COMM, KC_Y,    KC_L, 
+
+        /* Right hand */ 
+                 ___X___, ___X___, ___X___, KC_BSPC, KC_TAB,   CU_LOCK,
+                 ___X___, ___X___, _______, KC_UP,   KC_RIGHT, KC_ENT,
+                          ___X___, KC_LEFT, KC_DOWN, ___X___,  KC_RSFT, 
+
+        /* Encoder & Thumbs */
+        ___X___, KC_TAB,  KC_SPC,  KC_ENT, ___X___, ___X___, ___X___, _______
+    ),
+
 };
 // clang-format on
 
@@ -315,13 +428,11 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
 #endif
 
     switch (keycode) {
-            // Next-sentence and next-paragraph macros: period, space/enter, one-shot shift
-        case CU_NEXT_SENTENCE:
-        case CU_NEXT_PARAGRAPH:
+            // Tab followed by Enter
+        case CU_TABENT:
             if (record->event.pressed) {
-                tap_code(KC_DOT);
-                tap_code(keycode == CU_NEXT_SENTENCE ? KC_SPC : KC_ENT);
-                set_oneshot_mods(MOD_MASK_SHIFT);
+                tap_code(KC_TAB);
+                tap_code(KC_ENTER);
                 return false;
             }
             break;
@@ -329,11 +440,7 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
 #ifdef LAYER_TAP_TOGGLE
             // layer switching using layer-tap-toggle custom code
         case CL_SYMS:
-            return layer_tap_toggle(CU_QTQT, SYMS, record);
-            break;
-
-        case CL_SNAP:
-            return layer_tap_toggle2(KC_DQUO, SNAP, FUNC, record);
+            return layer_tap_toggle(KC_DQUO, SYMS, record);
             break;
 
         case CL_EDIT:
@@ -341,20 +448,30 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
             break;
 
         case CL_META:
-            return layer_tap_toggle(KC_NO, META, record);
-            break;
-#else
-            // layer switching using QMK layer-tap: handle cases where tap code is 16-bit or has custom shift
-        case CL_SNAP:
-            if (record->tap.count) {
-                process_shift_key(KC_DQUO, KC_DQUO, record);
-                return false; // Return false to ignore further processing
-            }
+            return layer_tap_toggle(KC_ENT, META, record);
             break;
 
+        case CL_FUNC:
+            return layer_tap_toggle(KC_NO, FUNC, record);
+            break;
+
+        case CL_SNAP:
+            return layer_tap_toggle(KC_NO, SNAP, record);
+            break;
+
+        case CL_CURS:
+            return layer_tap_toggle(KC_NO, CURS, record);
+            break;
+
+        case CL_FLIP:
+            return layer_tap_toggle(KC_NO, FLIP, record);
+            break;
+
+#else
+            // layer switching using QMK layer-tap: handle cases where tap code is 16-bit or has custom shift
         case CL_SYMS:
             if (record->tap.count) {
-                process_shift_key(KC_QUOT, KC_QUOT, record);
+                process_shift_key(KC_DQUO, KC_DQUO, record);
                 return false;
             }
             break;
@@ -432,6 +549,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
 #endif
 
+    switch (keycode) {
+        // Lock/unlock current layer 
+        case CU_LOCK:
+            ltt_lock(record);
+            return false;
+            break;
+    }
     // Process custom keycodes that output characters
     return process_record_user_emit(keycode, record);
 }
