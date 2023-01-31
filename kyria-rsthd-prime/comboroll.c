@@ -52,8 +52,6 @@ void process_comboroll_string(const char *str) {
 #define ARRAY_PROTECT(...) __VA_ARGS__ 
 
 
-// clang-format off
-
 // This is empty until the last definition
 #define _____TRM(name, term)
 
@@ -259,10 +257,13 @@ void process_comboroll(comboroll_t *cr) {
 }
 
 // Scan for match on first key. Return true on success, and comboroll_longest_term is set
-// to the highest term of possible matches
+// to the highest term of possible matches. Shift keys never match.
 bool comboroll_scan_firstkey(uint16_t keycode) {
-    bool         found = false;
+    bool found = false;
 
+    if (keycode == KC_LSFT || keycode == KC_RSFT) {
+        return false;
+    }
     comboroll_longest_term = 0;
     for (int i = 0; i < COMBOROLL_COUNT; i++) {
         if (
@@ -280,10 +281,13 @@ bool comboroll_scan_firstkey(uint16_t keycode) {
 
 // Scan for match on second key. If a match is found, AND the elapsed time since the first key was
 // pressed is less than its term, return the pointer to the comboroll_t struct. Otherwise return
-// NULL.
+// NULL. Shift keys never match.
 comboroll_t *comboroll_scan_secondkey(uint16_t firstkey, uint16_t secondkey) {
     comboroll_t *result = NULL;
 
+    if (secondkey == KC_LSFT || secondkey == KC_RSFT) {
+        return NULL;
+    }
     for (int i = 0; i < COMBOROLL_COUNT; i++) {
         if (
             (CMB_IS_MATCHES_LEFT(comboroll_data[i].direction) && firstkey == CMB_KEY_1(i) && secondkey == CMB_KEY_2(i))
@@ -302,6 +306,7 @@ comboroll_t *comboroll_scan_secondkey(uint16_t firstkey, uint16_t secondkey) {
 //
 bool process_record_comboroll(uint16_t keycode, keyrecord_t *record) {
     if (record->event.pressed) {
+        // Key press
         if (is_in_comboroll) {
             is_in_comboroll = false;
             // Look for match on second key
@@ -327,14 +332,22 @@ bool process_record_comboroll(uint16_t keycode, keyrecord_t *record) {
             return true; // let QMK handle the key as normal
         }
     } else {
+        // Key release
         if (is_in_comboroll) {
             // If we're here, check to see if it was the first key that was just released. If so,
-            // send it and cancel the combo
+            // send it and cancel the wait for combo
             if (keycode == firstkey_matched) {
                 tap_custom_key(firstkey_matched, &firstkey_record);
                 is_in_comboroll = false;
-                // not entirely sure why, but letting this fall through and have QMK also handle
-                // release of the key seems to prevent stuck modifiers
+	            return false;
+            } else if (keycode == KC_LSFT || keycode == KC_RSFT) {
+                // If shift was just released, then this is a rolling shift, so send the
+                // first key, shifted
+                register_code16(keycode);
+                tap_custom_key(firstkey_matched, &firstkey_record);
+                unregister_code16(keycode);
+                is_in_comboroll = false;
+                return false;
             }
         }
     }
