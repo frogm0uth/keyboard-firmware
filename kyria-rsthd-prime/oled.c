@@ -47,18 +47,22 @@ static void render_qmk_logo(bool invert) {
 static const char PROGMEM str_layer_alpha[] = "ALPHA   ";
 static const char PROGMEM str_layer_syms[]  = "SYMS    ";
 static const char PROGMEM str_layer_edit[]  = "EDIT    ";
-static const char PROGMEM str_layer_snap[]  = "SNAP    ";
-static const char PROGMEM str_layer_func[]  = "FUNC    ";
 static const char PROGMEM str_layer_meta[]  = "META    ";
+static const char PROGMEM str_layer_func[]  = "FUNC    ";
+static const char PROGMEM str_layer_snap[]  = "SNAP    ";
+static const char PROGMEM str_layer_curs[]  = "CURS    ";
+static const char PROGMEM str_layer_flip[]  = "FLIP    ";
 
 // clang-format off
 const static char* layer_names[] = {
     [ALPHA] = str_layer_alpha,
     [SYMS]  = str_layer_syms,
     [EDIT]  = str_layer_edit,
-    [SNAP]  = str_layer_snap,
+    [META]  = str_layer_meta,
     [FUNC]  = str_layer_func,
-    [META]  = str_layer_meta
+    [SNAP]  = str_layer_snap,
+    [CURS]  = str_layer_curs,
+    [FLIP]  = str_layer_flip
 };
 //clang-format on
 
@@ -66,12 +70,28 @@ static const char PROGMEM str_encoder_alttab[]  = "<App            App>";
 static const char PROGMEM str_encoder_volume[]  = "<-     Volume     +>";
 static const char PROGMEM str_encoder_zoom[]    = "<-      Zoom      +>";
 static const char PROGMEM str_encoder_search[]  = "<Prev  Search  Next>";
+static const char PROGMEM str_encoder_browser[] = "<Back  Browser  Fwd>";
+static const char PROGMEM str_encoder_history[] = "<Undo          Redo>";
 static const char PROGMEM str_encoder_blank[]   = "                    ";
 
 static const char PROGMEM str_oled_header[]     = "     RSTHD/Prime    ";
-static const char PROGMEM str_oled_version[]    = "         v32        ";
+static const char PROGMEM str_oled_version[]    = "         v33        ";
 static const char PROGMEM str_oled_caps[]       = "        CAPS        ";
 static const char PROGMEM str_oled_newline[]    = "\n";
+
+static const char PROGMEM str_mod_shift[] = "Shift ";
+static const char PROGMEM str_mod_ctrl[]  = "Ctrl ";
+static const char PROGMEM str_mod_alt[]   = "Alt ";
+static const char PROGMEM str_mod_gui[]   = "Gui ";
+
+//static const char PROGMEM str_mod_alt_macos[]   = "Opt ";
+
+//static const char PROGMEM str_mod_gui_macos[]   = "Cmd";
+//static const char PROGMEM str_mod_gui_linux[]   = "Super";
+
+static const char PROGMEM str_blank4[]   = "    ";
+static const char PROGMEM str_blank5[]   = "     ";
+static const char PROGMEM str_blank6[]   = "      ";
 
 
 static void render_status(void) {
@@ -115,23 +135,33 @@ static void render_status(void) {
         oled_write_P(PSTR("One-shot "), false);
     }
 #endif
-    if ((mods | ossmods) & MOD_MASK_CSAG) {
-        if ((mods | ossmods) & MOD_MASK_SHIFT) {
-            oled_write_P(PSTR("Shift "), false);
+    if ((mods | ossmods) & MOD_MASK_SHIFT) {
+        oled_write_P(str_mod_shift, false);
+    } else {
+        if (layer != EDIT) {
+            oled_write_P(str_blank6, false);                        
+        }
+    }
+    if ((mods | ossmods) & MOD_MASK_CAG) {
+        if ((mods | ossmods) & MOD_MASK_CTRL) {
+            oled_write_P(str_mod_ctrl, false);
+        } else {
+            oled_write_P(str_blank5, false);            
         }
         if ((mods | ossmods) & MOD_MASK_ALT) {
-            oled_write_P(PSTR("Alt "), false);
-        }
-        if ((mods | ossmods) & MOD_MASK_CTRL) {
-            oled_write_P(PSTR("Ctrl "), false);
+            oled_write_P(str_mod_alt, false);
+        } else {
+            oled_write_P(str_blank4, false);            
         }
         if ((mods | ossmods) & MOD_MASK_GUI) {
-            oled_write_P(PSTR("Cmd "), false);
+            oled_write_P(str_mod_gui, false);
         }
     }
 #ifdef CUSTOM_EDIT
-    if (layer == EDIT) {
-        custom_edit_status();
+    else {
+        if (layer == EDIT) {
+            custom_edit_status((mods | ossmods) & MOD_MASK_SHIFT);
+        }
     }
 #endif
     oled_write_P(str_oled_newline, false);
@@ -140,11 +170,7 @@ static void render_status(void) {
     // encoder help
     switch (layer) {
         case ALPHA:
-            if (!(mods & MOD_MASK_CTRL)) {
-                oled_write_P(str_encoder_alttab, false);
-            } else {
-                oled_write_P(str_encoder_volume, false);
-            }
+            oled_write_P(str_encoder_alttab, false);
             break;
 
         case EDIT:
@@ -152,14 +178,22 @@ static void render_status(void) {
             if (custom_edit_encoder_ready()) {
                 custom_edit_encoder_status();
             } else {
-                oled_write_P(str_encoder_zoom, false);
+                oled_write_P(str_encoder_history, false);
             }
 #    else
-            oled_write_P(str_encoder_zoom, false);
+            oled_write_P(str_encoder_history, false);
 #    endif
             break;
 
         case META:
+            if (mods & MOD_MASK_SHIFT) {
+                oled_write_P(str_encoder_browser, false);
+            } else {
+                oled_write_P(str_encoder_volume, false);
+            }
+            break;
+
+        case SNAP:
             if (mods & MOD_MASK_CAG) {
 #    ifdef RGBLIGHT_ENABLE
                 rgblight_oled_encoder_status();
@@ -169,6 +203,10 @@ static void render_status(void) {
             } else {
                 oled_write_P(str_encoder_search, false);
             }
+            break;
+
+        case CURS:
+            oled_write_P(str_encoder_zoom, false);
             break;
 
         default:

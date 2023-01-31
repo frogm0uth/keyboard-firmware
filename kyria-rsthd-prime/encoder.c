@@ -47,14 +47,11 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
      */
     clear_mods();
     switch (layer) {
-        // Left encoder does volume control if Ctrl is held
+            // Alpha already done
         case ALPHA:
-            if (left && (mods & MOD_MASK_CTRL)) {
-                keycode = clockwise ? KC_VOLU : KC_VOLD;
-            }
             break;
 
-            // On the Edit layer, zoom the application window, unless an edit modifier is held.
+            // On the Edit layer, scrub history, unless an edit modifier is held.
             // If one is, move within or delete text.
         case EDIT:
             if (left) {
@@ -62,17 +59,28 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                 if (custom_edit_encoder_ready()) {
                     custom_edit_encoder(clockwise);
                 } else {
-                    keycode = clockwise ? SC(SC_APP_ZOOM_IN) : SC(SC_APP_ZOOM_OUT);
+                    keycode = clockwise ? SC(SC_REDO_ACTION) : SC(SC_UNDO_ACTION);
                 }
 #else
-                keycode = clockwise ? SC(SC_APP_ZOOM_IN) : SC(SC_APP_ZOOM_OUT);
+                keycode = clockwise ? SC(SC_REDO_ACTION) : SC(SC_UNDO_ACTION);
 #endif
             }
             break;
 
-            // On the Meta layer, scroll through search results, unless a modifier is held. If one is,
-            // change backlight color or OLED brightness
+            // On the Meta layer, control volume. If Shift is down, browser back and forward.
         case META:
+            if (left) {
+                if (mods & MOD_MASK_SHIFT) {
+                    keycode = clockwise ? SC(SC_BROWSER_FWD) : SC(SC_BROWSER_BACK);
+                } else {
+                    keycode = clockwise ? KC_VOLU : KC_VOLD;
+                }
+            }
+            break;
+
+            // On the Snap layer, scroll through search results, unless a modifier is held. If one is,
+            // change backlight color or OLED brightness
+        case SNAP:
             if (left) {
                 if (mods & MOD_MASK_CAG) {
 #ifdef RGBLIGHT_ENABLE
@@ -87,7 +95,14 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                 }
             }
             break;
-    }
+
+            // On the Cursor layer, zoom the application window.
+        case CURS:
+            if (left) {
+                keycode = clockwise ? SC(SC_APP_ZOOM_IN) : SC(SC_APP_ZOOM_OUT);
+            }
+            break;
+      }
 
     if (keycode != KC_NO) { // Send the keycode, if there is one
         tap_code16(keycode);
