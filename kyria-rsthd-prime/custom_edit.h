@@ -84,5 +84,5 @@ void custom_edit_tick(void);
 bool custom_edit_process_record(uint16_t keycode, keyrecord_t *record);
 bool custom_edit_encoder_ready(void);
 void custom_edit_encoder(bool clockwise);
-void custom_edit_status(void);
+void custom_edit_status(bool shift);
 void custom_edit_encoder_status(void);

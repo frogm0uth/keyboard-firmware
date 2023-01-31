@@ -429,18 +429,32 @@ void custom_edit_encoder(bool clockwise) {
 #endif
 
 #ifdef OLED_ENABLE
-void custom_edit_status() {
-    if (IS_EDIT_DELETE) {
-        oled_write_P(PSTR("DEL "), false);
+static const char PROGMEM str_blank1[]   = " ";
+static const char PROGMEM str_blank3[]   = "   ";
+static const char PROGMEM str_blank5[]   = "     ";
+static const char PROGMEM str_blank6[]   = "      ";
+
+void custom_edit_status(bool shift) {
+    if (!shift) {
+        if (IS_EDIT_DELETE) {
+            oled_write_P(PSTR("DELETE"), false);
+        } else {
+            oled_write_P(str_blank6, false);
+        }
+    }
+    oled_write_P(str_blank1, false);
+    if (IS_EDIT_FAST) {
+        oled_write_P(PSTR("FAST "), false);
+    } else {
+        oled_write_P(str_blank5, false);
+    }
+     if (IS_EDIT_X5) {
+        oled_write_P(PSTR("X5 "), false);
+    } else {
+        oled_write_P(str_blank3, false);
     }
     if (IS_EDIT_MORE) {
         oled_write_P(PSTR("MORE "), false);
-    }
-    if (IS_EDIT_X5) {
-        oled_write_P(PSTR("X5 "), false);
-    }
-    if (IS_EDIT_FAST) {
-        oled_write_P(PSTR("FAST "), false);
     }
 }
 
@@ -471,7 +485,7 @@ void custom_edit_encoder_status() {
     }
     oled_write_P(leftstring, false);
     if (IS_EDIT_DELETE) {
-        oled_write_P(PSTR("DELETE"), false);
+        oled_write_P(PSTR(" xxxx "), false);
     } else {
         oled_write_P(PSTR("      "), false);
     }
