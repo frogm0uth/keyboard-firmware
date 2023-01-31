@@ -16,7 +16,6 @@
 
 #pragma once
 
-
 // Configuration for combos
 #define COMBO_TERM 70
 #define COMBOROLL_TERM 200
@@ -72,8 +71,8 @@
 // Save some space by removing things I don't use. See https://docs.qmk.fm/#/squeezing_avr
 #define NO_ACTION_MACRO
 #define NO_ACTION_FUNCTION
-//#define NO_ACTION_ONESHOT   // Comment out to use one-shot shifts. Needs ~800 bytes
-//#define NO_ACTION_TAPPING   // Comment out to use mod-taps
+#define NO_ACTION_ONESHOT   // Comment out to use one-shot shifts. Needs ~800 bytes
+#define NO_ACTION_TAPPING   // Comment out to use mod-taps
 #define LAYER_STATE_8BIT
 #define EXTRA_SHORT_COMBOS
 
