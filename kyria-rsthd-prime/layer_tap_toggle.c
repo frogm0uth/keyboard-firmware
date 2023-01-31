@@ -88,8 +88,8 @@ bool ltt_base(void) {
 }
 
 /**
- * Lock the layer. Call this from process_record_user() in response to a lock
- * keypress.
+ * Lock the layer on if it's being held. If it's already toggled, turn it off.
+ * Call this from process_record_user() in response to a lock keypress.
  */
 bool ltt_lock(keyrecord_t *record) {
     layer_state_t layer = get_highest_layer(layer_state);
@@ -98,6 +98,10 @@ bool ltt_lock(keyrecord_t *record) {
             case LTT_TAPPING:
             case LTT_HOLDING:
                 ltt_state[layer] = LTT_TOGGLED; // Lock it on
+                break;
+            case LTT_TOGGLED:
+                ltt_state[layer] = LTT_INACTIVE; // If toggled on, toggle off
+                layer_off(layer);
                 break;
         }
     }
@@ -155,9 +159,17 @@ bool layer_tap_toggle(uint16_t keycode, uint8_t layer, keyrecord_t *record) {
  * down.
  */
 bool layer_tap_toggle2(uint16_t keycode, uint8_t layer, uint8_t layer2, keyrecord_t *record) {
-    if ((get_mods() & MOD_MASK_ALT) || (get_highest_layer(layer_state) == layer2)) {
-        return layer_tap_toggle(keycode, layer2, record);
+    if (record->event.pressed) {
+        if (get_mods() & MOD_MASK_ALT) {
+            return layer_tap_toggle(keycode, layer2, record);
+        } else {
+            return layer_tap_toggle(keycode, layer, record);
+        }
     } else {
-        return layer_tap_toggle(keycode, layer, record);
+        if (get_highest_layer(layer_state) == layer2) {
+            return layer_tap_toggle(keycode, layer2, record);
+        } else {
+            return layer_tap_toggle(keycode, layer, record);
+        }
     }
 }
