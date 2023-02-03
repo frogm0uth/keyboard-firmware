@@ -117,16 +117,16 @@ CMBO_STR( ke,  KC_T, CU_COMM )
 CMBO_STR( ex,  KC_H, CU_COMM )
 
 // Shell etc.
-/*
-CMBO_LIT( mv,   "mv ",    KC_V, CU_COMM )
-CMBO_LIT( cd,   "cd ",    KC_C, CU_COMM )
-CMBO_LIT( pwd,  "pwd ",   KC_W, CU_COMM )
+CMBO_LIT( cd,   "cd",     KC_C, CU_COMM )
+CMBO_LIT( pwd,  "pwd",    KC_W, CU_COMM )
 CMBO_LIT( ls,   "ls -al", KC_F, CU_COMM )
-CMBO_LIT( cp,   "cp ",    KC_P, CU_COMM )
-CMBO_LIT( grep, "grep ",  KC_G, CU_COMM )
-CMBO_LIT( rm,   "rm ",    KC_D, CU_COMM )
-CMBO_LIT( qmk,  "qmk ",   KC_K, CU_COMM )
-*/
+CMBO_LIT( cp,   "cp",     KC_P, CU_COMM )
+CMBO_LIT( grep, "grep",   KC_G, CU_COMM )
+CMBO_LIT( diff, "diff",   KC_D, CU_COMM )
+
+CMBO_LIT( ifdef,  "#ifdef",  KC_F, CU_DOT )
+CMBO_LIT( define, "#define", KC_D, CU_DOT )
+
 
 // More rolls, which may or may not be kept
 LtoR_LIT( heapos, "he'", KC_H, CU_QTQT )
