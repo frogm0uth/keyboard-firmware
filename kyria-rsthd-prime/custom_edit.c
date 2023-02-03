@@ -171,11 +171,11 @@ void custom_edit_move(void) {
                 break;
 
             case CE_UP:
-                ce_output_key = SC(SC_REALPAGE_UP);
+                ce_output_key = KC_MS_WH_UP /*SC(SC_REALPAGE_UP)*/;
                 break;
 
             case CE_DOWN:
-                ce_output_key = SC(SC_REALPAGE_DOWN);
+                ce_output_key = KC_MS_WH_DOWN /*SC(SC_REALPAGE_DOWN)*/;
                 break;
 
             case CE_HOME:
