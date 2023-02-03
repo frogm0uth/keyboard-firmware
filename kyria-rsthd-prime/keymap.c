@@ -191,7 +191,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |      |      | !MAC | !WIN |!LINUX|      |                        |      |  F1  |  F2  |  F3  |  F11 |      |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
  |      |      |      |      |      |                                      |  F4  |  F5  |  F6  |  F12 |      |
- |      | Shift| Ctrl |  Alt |  Cmd |                                      |      |      |      |      |      |
+ | (**) | Shift| Ctrl |  Alt |  Cmd |                                      |      |      |      |      | (**) |
  `----------------------------------'                                      `----------------------------------'
 
  .                 ,------.      ,--------------------.  ,---------------------------.
@@ -209,7 +209,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
          /* Right hand */
                  ___X___, KC_F7,   KC_F8,   KC_F9,   KC_F10,  CU_LOCK,
                  ___X___, KC_F1,   KC_F2,   KC_F3,   KC_F11,  ___X___,
-                          KC_F4,   KC_F5,   KC_F6,   KC_F12,  ___X___,
+                          KC_F4,   KC_F5,   KC_F6,   KC_F12,  _______,
 
         /* Encoder & Thumbs */
         ___X___, _______, ___X___, ___X___, CM_BTN3, CM_BTN1, CM_BTN2, ___X___
@@ -224,7 +224,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |      |      | SnapL| SnapV| SnapR|      |                        |      |      |      |      |      |      |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
  |      |      |SnapBL| SnapB|SnapBR|                                      |      |      |      |      |      |
- |      |      |      |      |      |                                      |  Cmd |  Alt | Ctrl | Shift|      |
+ | (**) |      |      |      |      |                                      |  Cmd |  Alt | Ctrl | Shift| (**) |
  `----------------------------------'                                      `----------------------------------'
 
  .                 ,------.      ,--------------------.  ,---------------------------.
@@ -237,12 +237,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         /* Left hand */
         CU_LOCK, ___X___,  SC_SNAP_TOPLEFT,    SC_SNAP_TOP,      SC_SNAP_TOPRIGHT,    ___X___,
         ___X___, ___X___,  SC_SNAP_LEFT,       SC_SNAP_VERTICAL, SC_SNAP_RIGHT,       ___X___,
-        ___X___, ___X___,  SC_SNAP_BOTTOMLEFT, SC_SNAP_BOTTOM,   SC_SNAP_BOTTOMRIGHT,
+        _______, ___X___,  SC_SNAP_BOTTOMLEFT, SC_SNAP_BOTTOM,   SC_SNAP_BOTTOMRIGHT,
 
          /* Right hand */
                  ___X___, ___X___, ___X___, ___X___, ___X___, CU_LOCK,
                  ___X___, ___X___, ___X___, ___X___, ___X___, ___X___,
-                          KC_RGUI, KC_RALT, KC_RCTL, KC_RSFT, ___X___,
+                          KC_RGUI, KC_RALT, KC_RCTL, KC_RSFT, _______,
 
         /* Encoder & Thumbs */
         CU_WRIT, CM_BTN3, CM_BTN1, CM_BTN2, ___X___, CU_WIPE, _______, ___X___
