@@ -1,23 +1,25 @@
-# Kyria RSTHD/Prime
+# Kyria RSTHD/Prime v33
 
 This is the keymap for my Kyria keyboard from [splitkb.com](https://splitkb.com). The alpha layout was based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/) but is now heavily modified. It's optimized for minimized usage of the inner index column. Features in the code include runtime switching between Mac/Windows/Linux shortcuts and a custom implementation of "comborolls".
 
 <!--ts-->
    * [Overview](#overview)
-      * [Keyboard configuration](#keyboard-configuration)
       * [Goals](#goals)
+      * [Keyboard configuration](#keyboard-configuration)
    * [Layers](#layers)
       * [ALPHA](#alpha)
       * [SYMS](#syms)
       * [EDIT](#edit)
-      * [SNAP](#snap)
-      * [FUNC](#func)
       * [META](#meta)
+      * [FUNC](#func)
+      * [SNAP](#snap)
+      * [CURS and FLIP](#curs-and-flip)
    * [Other](#other)
       * [How to build](#how-to-build)
       * [RSTHD variants and similar layouts](#rsthd-variants-and-similar-layouts)
       * [Relevant articles and resources](#relevant-articles-and-resources)
       * [Acknowledgments](#acknowledgments)
+
 <!--te-->
 
 ## Overview
@@ -41,15 +43,19 @@ Typing speed and reducing the number of keys on the keyboard are not important g
 
 ### Keyboard configuration
 
-My Kyria uses all 6 columns on each hand. The left side has an OLED, an encoder, and four thumb keys. The right side has no OLED or encoder, and four thumb keys. The top two thumb keys on each side are not on the board.
+My Kyria uses all 6 columns on each hand. The left side has an OLED, an encoder, and three thumb keys. The right side has no OLED or encoder, and four thumb keys. The top two thumb keys on each side are not on the board.
 
 The controller is a Pro Micro and this keymap only just squeezes in.
 
+Currently this might compile or work properly only on a v1 keyboard.
+
 ## Layers
 
-There are a total of 6 layers. The first is the main alpha layer.
+There are a total of 8 layers. The first is the main alpha layer.
 
-The other layers are activated with a thumb key. All are hold-to-activate. Layer switching is done with custom code, so that a. shifted and custom keys can be emitted on the tap and b. so that the layer activates immediately for faster use of layer keys. See `layer_tap_toggle.c/h`.
+The other layers are activated with either a thumb or pinky. All are hold-to-activate. However the top corner keys are layer lock keys, which lock the layer on, or release it if it is locked. (A locked layer can also be released by pressing the layer key.)
+
+Layer switching is done with custom code, so that a. shifted and custom keys can be emitted on the tap and b. so that the layer activates immediately for faster access to the keys in the layer. See `layer_tap_toggle.c/h`.
 
 The layers have OS-specific shortcuts in various places. The platform (macOS, Windows, Linux) can be selected at run-time. For more info, see `os_shortcuts.h/c` and `os_shortcut_defs.h`. macOS shortcuts are pretty stable, Windows and Linux still need work.
 
@@ -57,15 +63,19 @@ The layers have OS-specific shortcuts in various places. The platform (macOS, Wi
 
 ![kyria-rsthd-prime-alpha](docs/images/kyria-rsthd-prime-alpha.png)
 
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/69cf0f771159d920a34d882d696af6aa)
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/fd8f2b651f6708b30a515ef4f236e277)
 
-The alpha layout aims to reduce lateral finger movement on the index finger. It performs very well in an [analyzer](docs/prime-on-the-analyzer.md), with low SFU (same finger utilization) stats and low travel distance.
+The alpha layout aims to reduce lateral finger movement on the index finger. In fact the lower key of the inner column has been completely removed in this version. A slightly older version performed very well in an [analyzer](docs/prime-on-the-analyzer.md), with low SFU (same finger utilization) stats and low travel distance.
 
 Some of the punctuation keys use non-standard shift mappings. See `shift_defs.h`.
 
+Except for Shift, there are no modifiers on the alpha layer. To access them, use the SYMS or EDIT layer, hold the modifiers down, then release the layer key. (This is a bit like Callum mods except it doesn't use a one-shot. It's not exactly how I wanted to do it, but it was easy to implement. I'll do a writeup on it some other time.)
+
 There are a number of combos on this layer, defined with a bunch of macros to reduce boilerplate. I have a userspace implementation called "[comboroll](docs/comborolls.md)" to avoid timing issues with QMK's overlapping combos. See `combo_defs.h` for combo definitions.
 
-With this key layout, I recommend at a minimum setting up a combo for ER on the right hand and SP on the left. If that works out, add ES, ED, and VE, then consider the rest of the "essential" combos in the [comborolls](docs/comborolls.md) note. For absolute minimum SFBs *without* combos, swap P and F.  For lower left pinky usage (but higher inner index), swap V and Z.
+This key layout works best with the combos or comborolls described at the link above. I recommend at a minimum setting up a combo for ER on the right hand. If that works out, add SP, ES, ED, and VE, then consider the rest of the combos in the [comborolls](docs/comborolls.md) note.
+
+For absolute minimum SFBs *without* combos, swap P and F.  For lower left pinky usage (but higher inner index), swap V and J.
 
 ### SYMS
 
@@ -73,11 +83,11 @@ Activated by the left thumb (hold).
 
 ![kyria-rsthd-prime-syms](docs/images/kyria-rsthd-prime-syms.png)
 
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/0b079c6153a029c55cc8b5b7fbe701f2)
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/1fe2cfee9a3cba7f4a122ce6527332ab)
 
-Unshifted, this layer contains most of the punctuation keys. I've arranged them so that many common (in programming) two-letter sequences can be typed with an inward roll. For example: `{% %} <% %> </ /> <? ?> => -> ~/`.
+Unshifted, this layer contains most of the punctuation keys. I've arranged them so that many common (in programming) two-letter sequences can be typed with an inward roll. For example: `{% %} <% %> </ /> => ~/`.
 
-The ten digits are accessed with Shift, akin to [Programmer Dvorak](https://www.kaufmann.no/roland/dvorak/), but arranged in a 3x3 numpad-like grid. The most frequent `0 1 2` can also be accessed as a chord with no shift on the left hand.
+The ten digits are accessed with Shift, akin to [Programmer Dvorak](https://www.kaufmann.no/roland/dvorak/), but arranged in a 3x3 numpad-like grid.
 
 ### EDIT
 
@@ -85,11 +95,11 @@ Activated by the right thumb (hold).
 
 ![kyria-rsthd-prime-edit](docs/images/kyria-rsthd-prime-edit.png)
 
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/24a80f5840733d6384fd21e20e1f28a0)
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/f6370a99eab0b9170893fc12354dc4c7)
 
 This layer extends the idea of platform-independent shortcuts to a complete layer. The navigation keys on the left have the standard cursor keys, home, end and page up/down.
 
-Modifiers are on the right hand. If one of the standard modifiers (Ctrl, Alt, Gui) is held, the emitted code is just the normal modifier + keycode. The special modifiers on the home row act as follows:
+Modifiers are on the right hand. If one of the standard modifiers (Shift, Ctrl, Alt, Gui) is held, the emitted code is just the normal modifier + keycode. The special modifiers on the home row act as follows:
 
 - **Delete** makes the action delete instead of moving.
 - **More** makes the key do "more" : left and right move a word left or right; home and end move to the start and end of a paragraph; up and down move a physical page up and down (mostly for Word); page up/down move to the start and end of the document.
@@ -98,39 +108,60 @@ Modifiers are on the right hand. If one of the standard modifiers (Ctrl, Alt, Gu
 
 All actions have auto-repeat. You can change the special modifiers while holding down a navigation key and the action changes accordingly.
 
-Select all, cut, copy and paste are chorded on the right hand top row, and keys to switch applications, windows and tabs are on the inner column.
-
-### SNAP
-
-Activated by the left thumb (hold).
-
-![kyria-rsthd-prime-snap](docs/images/kyria-rsthd-prime-snap.png)
-
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/6aa3ef0fcb5c886dc105a94b62690fe0)
-
-So called because of the keys for window snapping, which snap to one of the screen halves or quadrants. The center key sets the window to the full vertical height. This works on macOS if [Rectangle](https://rectangleapp.com) is running; not really working on Windows and Linux yet.
-
-Three mouse buttons are available on the right thumb.
-
-Select all, cut, copy and paste are chorded on the left hand top row, and keys to switch applications, windows and tabs on the inner column.
-
-### FUNC
-Activated by pressing the SNAP layer key while holding Alt.
-
-![kyria-rsthd-prime-func](docs/images/kyria-rsthd-prime-func.png)
-
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/e09a2e00f963d27b25cdaf5962b9cb7f)
-
-This layer contains function keys on the right hand, arranged roughly the same as the numpad. It also contains the keys that switch between macOS, Windows and Linux shortcuts.
+Select all, cut, copy and paste are chorded on the right hand top row.
 
 ### META
-Activated by the right thumb (hold).
+Activated by either pinky (hold).
 
 ![kyria-rsthd-prime-meta](docs/images/kyria-rsthd-prime-meta.png)
 
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/c3f3f925be48f9c67de27b1e3b21ee37)
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/0c14a73c58276dd44af1fd28eef638b6)
 
 This layer contains common shortcut keys. They are mostly arranged according to the letter used in the Mac/Windows shortcut. For example, the S key invokes Save (Cmd-S on Mac, Ctrl-S on Windows). However, the mapping is not always that straightforward (e.g. Cmd-Q on Mac and Alt-F4 on Windows), hence the need for a dedicated layer.
+
+This layer is also how the FUNC and SNAP layers are accessed.
+
+
+### FUNC
+
+Activated by the left thumb from the META layer (hold).
+
+![kyria-rsthd-prime-func](docs/images/kyria-rsthd-prime-func.png)
+
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/f449a968f9a64c6ebeebe3ff4b5ee3c6)
+
+This layer contains function keys on the right hand, arranged roughly the same as the numpad. It also contains the keys that switch between macOS, Windows and Linux shortcuts.
+
+Three mouse buttons are available on the right thumb.
+
+### SNAP
+
+Activated by the right thumb from the META layer (hold).
+
+![kyria-rsthd-prime-snap](docs/images/kyria-rsthd-prime-snap.png)
+
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/6b8a2ef2ab72df3c36839a2a106f6303)
+
+So called because of the keys for window snapping, which snap to one of the screen halves or quadrants. The center key sets the window to the full vertical height. This works on macOS if [Rectangle](https://rectangleapp.com) is running; not really working on Windows and Linux yet.
+
+Three mouse buttons are available on the left thumb.
+
+The encoder is used to control the backlight LEDs and OLED brightness (depending on which modifier is held.)
+
+### CURS and FLIP
+
+Activated by the right thumb (hold).
+
+![kyria-rsthd-prime-curs](docs/images/kyria-rsthd-prime-curs.png)
+
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/5b6ce99346e3a8f9fffa5e4b39318664)
+
+![kyria-rsthd-prime-flip](docs/images/kyria-rsthd-prime-flip.png)
+
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/8474e615b698442e7567f966f6e6c8df)
+
+One-hand cursor diamond and flippable alpha keys. The alpha keys are for navigation in the macOS finder.
+
 
 ## Other
 
