@@ -153,7 +153,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* META
 
  ,-----------------------------------------.                        ,-----------------------------------------.
- | LOCK |      | Close|      | Find |      |                        |      |      |      |      |      | LOCK |
+ | LOCK |      | Close|      | Find |      |                        |      |PrvTrk| Play |NxtTrk| Mute | LOCK |
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
  | eXit |Reload| Save |newTab|      |  Bin |                        |      |  New |      | Open |saveAs| Quit |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
@@ -174,7 +174,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______,   SC_PRINT,     SC_PREV_SEARCH, SC_NEXT_SEARCH,
 
         /* Right hand */
-                 ___X___,  ___X___,         ___X___,        ___X___,  ___X___,    CU_LOCK,
+                 ___X___,  KC_MPRV,         KC_MPLY,        KC_MNXT,  KC_MUTE,    CU_LOCK,
                  ___X___,  SC_NEW,          ___X___,        SC_OPEN,  SC_SAVE_AS, SC_QUIT,
                            SC_BROWSER_BACK, SC_BROWSER_FWD, ___X___,  _______,    _______,
 
