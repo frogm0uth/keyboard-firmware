@@ -147,9 +147,12 @@ CMBO_KEY( search, SC_SEARCH, KC_ENTER, KC_SPC )      // System search box, right
 
 
 // Syntax layer
+LtoR_LIT( not_equal,       "!=",    KC_PIPE, KC_BSLS )
+    
 RtoL_LIT( langleques,      "<?",    CU_8, CU_9 )
 RtoL_LIT( phpopen,         "<?php", CU_8, CU_0 )
 RtoL_LIT( phpecho,         "<?=",   CU_9, CU_0 )
+
 RtoL_LIT( quesrangle,      "?>",    CU_7, CU_8 )
 RtoL_LIT( closeparensemi,  ");",    CU_3, CU_0 )
 RtoL_LIT( dirup,           "../",   CU_2, CU_6 )

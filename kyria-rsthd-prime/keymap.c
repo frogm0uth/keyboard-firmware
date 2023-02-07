@@ -84,12 +84,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* SYMS
 
- ,-----------------------------------------.                        ,-----------------------------------------.
- | LOCK |   |  |   !  |   .  |   -  | WinR |                        |   ^  | ]  7 | #  8 | [  9 |   $  | LOCK |
+ ,------------------- != ------------------.                        ,-----------------------------------------.
+ | LOCK |      |   |  |   \  |      | WinR |                        |   ^  | ]  7 | #  8 | [  9 |   $  | LOCK |
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
- |  Tab |   \  |   (  |   *  |   )  | AppR |                        | &  @ | >  1 | /  2 | <  3 | =  0 | ~  ` |
+ |  Tab |   -  |   (  |   *  |   )  | AppR |                        | &  @ | >  1 | /  2 | <  3 | +  0 | ~  ` |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
- |      |      |      |      |      |                                      | }  4 | %  5 | {  6 |   +  |      |
+ |      |      |      |      |      |                                      | }  4 | %  5 | {  6 |   =  |      |
  |      | Shift| Ctrl |  Alt |  Cmd |                                      |      |      |      |      |      |
  `----------------------------------'                                      `----------------------------------'
 
@@ -101,14 +101,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [SYMS] = KEY_LAYOUT_stack(
         /* Left hand */
-        CU_LOCK,  KC_PIPE,  KC_EXLM,  CU_DOT_DOT,  CU_MINUS_MINUS,  CU_NEXT_WINDOW,
-        KC_TAB,   KC_BSLS,  KC_LPRN,  KC_ASTR,     KC_RPRN,         CU_APPSWITCH_RIGHT,
-        ___X___,  KC_LSFT,  KC_LCTL,  KC_LALT,     KC_LGUI,
+        CU_LOCK,  ___X___,         KC_PIPE,  KC_BSLS,  ___X___,  CU_NEXT_WINDOW,
+        KC_TAB,   CU_MINUS_MINUS,  KC_LPRN,  KC_ASTR,  KC_RPRN,  CU_APPSWITCH_RIGHT,
+        ___X___,  KC_LSFT,         KC_LCTL,  KC_LALT,  KC_LGUI,
 
         /* Right hand */
-                  KC_CIRC,    CU_7,  CU_8,  CU_9,  KC_DLR,  CU_LOCK,
-                  CU_AMP_AT,  CU_1,  CU_2,  CU_3,  CU_0,    CU_TILDE_GRAVE,
-                              CU_4,  CU_5,  CU_6,  KC_PLUS, ___X___,
+                  KC_CIRC,    CU_7,  CU_8,  CU_9,  KC_DLR,      CU_LOCK,
+                  CU_AMP_AT,  CU_1,  CU_2,  CU_3,  CU_0,        CU_TILDE_GRAVE,
+                              CU_4,  CU_5,  CU_6,  CU_EQL_EQL,  ___X___,
 
         /* Encoder & Thumbs */
         ___X___, _______, ___X___, ___X___, KC_ENT, KC_SPC, CU_DOT_DOT, ___X___
