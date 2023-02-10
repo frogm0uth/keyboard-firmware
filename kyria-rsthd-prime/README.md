@@ -28,16 +28,13 @@ The alphabetic layout in this keymap was originally based on [RSTHD](https://xsz
 
 When I originally started making changes to RSTHD, I called it RSTHD'. The `'`, pronounced "prime", is [used in maths](https://en.wikipedia.org/wiki/Prime_(symbol)#Use_in_mathematics,_statistics,_and_science) to indicate a derivative of the named thing. The layout still very much retains its RSTHD DNA despite all the changes. I figure calling it *RSTHD/Prime* acknowledges its origin while still indicating that it's different.
 
-If you're interested in a standard implementation of RSTHD on the Kyria, see my [Kyria Refactored](https://github.com/frogm0uth/keyboard-firmware/tree/master/kyria-refactored) keymap. See also the links to other layouts at the bottom of the page.
-
-
 ### Goals
 
 Coming from a "slab" QWERTY keyboard to a programmable ergo split, I wanted to optimize:
 
 - Cross-platform portability. I need to switch between macOS and Windows frequently. The differences in shortcuts and location of Ctrl/Cmd keys was frustrating and programmable keyboards seemed to be the answer.
 - Comfort. For me, that largely means de-emphasizing the inner index columns.
-- Better support for ambidextrous use of the trackpad or mouses (I use two). That is, it should be possible to do things like cut-copy-paste from either hand alone.
+- Better support for ambidextrous use of the trackpad or mouses (I use two). For example, it should be possible to do things like cut-copy-paste from either hand alone.
 
 Typing speed and reducing the number of keys on the keyboard are not important goals to me.
 
@@ -65,33 +62,34 @@ The layers have OS-specific shortcuts in various places. The platform (macOS, Wi
 
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/fd8f2b651f6708b30a515ef4f236e277)
 
-The alpha layout aims to reduce lateral finger movement on the index finger. In fact the lower key of the inner column has been completely removed in this version. A slightly older version performed very well in an [analyzer](docs/prime-on-the-analyzer.md), with low SFU (same finger utilization) stats and low travel distance.
+The alpha layout aims to reduce lateral finger movement on the index finger. In fact the lower key of the inner column has been completely removed in this version. A slightly older version performed very well in an [analyzer](docs/prime-on-the-analyzer.md), with low SFU (same finger utilization) stats and low travel distance. For absolute minimum SFBs, swap P and F.  For lower left pinky usage (but higher inner index), swap V and J.
 
 Some of the punctuation keys use non-standard shift mappings. See `shift_defs.h`.
 
-Except for Shift, there are no modifiers on the alpha layer. To access them, use the SYMS or EDIT layer, hold the modifiers down, then release the layer key. (This is a bit like Callum mods except it doesn't use a one-shot. It's not exactly how I wanted to do it, but it was easy to implement. I'll do a writeup on it some other time.)
+Except for Shift, there are no modifiers on the alpha layer. To access them, use the SYMS or EDIT layer, hold the modifiers down, then release the layer key. (This is a bit like Callum mods except it doesn't use one-shots. It's not exactly how I wanted to do it, but it was easy to implement.)
 
 There are a number of combos on this layer, defined with a bunch of macros to reduce boilerplate. I have a userspace implementation called "[comboroll](docs/comborolls.md)" to avoid timing issues with QMK's overlapping combos. See `combo_defs.h` for combo definitions.
 
-This key layout works best with the combos or comborolls described at the link above. I recommend at a minimum setting up a combo for ER on the right hand. If that works out, add SP, ES, ED, and VE, then consider the rest of the combos in the [comborolls](docs/comborolls.md) note.
-
-For absolute minimum SFBs *without* combos, swap P and F.  For lower left pinky usage (but higher inner index), swap V and J.
+This layout works best with comborolls as described at the link above. I recommend at a minimum setting up a combo for ER on the right hand. If that works out, add SP, ES, ED, and VE, then consider the rest of the combos in the [comborolls](docs/comborolls.md) note.
 
 ### SYMS
 
-Activated by the left thumb (hold).
+Activated by the left thumb.
 
 ![kyria-rsthd-prime-syms](docs/images/kyria-rsthd-prime-syms.png)
 
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/1fe2cfee9a3cba7f4a122ce6527332ab)
 
-Unshifted, this layer contains most of the punctuation keys. I've arranged them so that many common (in programming) two-letter sequences can be typed with an inward roll. For example: `{% %} <% %> </ /> => ~/`.
+Unshifted, this layer contains the rest of the punctuation characters. I've arranged them so that many common (for me) two-letter sequences can be typed with an inward roll. For example: `{% %} <% %> </ /> => ~/`. Additional sequences such as `<?` `?>`  `!=` `);` are accessed with comborolls, to avoid flipping between the alpha and syms layers.
 
 The ten digits are accessed with Shift, akin to [Programmer Dvorak](https://www.kaufmann.no/roland/dvorak/), but arranged in a 3x3 numpad-like grid.
 
+Cut, copy and paste are chorded on the left hand top row.
+
+
 ### EDIT
 
-Activated by the right thumb (hold).
+Activated by the right thumb.
 
 ![kyria-rsthd-prime-edit](docs/images/kyria-rsthd-prime-edit.png)
 
@@ -102,16 +100,16 @@ This layer extends the idea of platform-independent shortcuts to a complete laye
 Modifiers are on the right hand. If one of the standard modifiers (Shift, Ctrl, Alt, Gui) is held, the emitted code is just the normal modifier + keycode. The special modifiers on the home row act as follows:
 
 - **Delete** makes the action delete instead of moving.
-- **More** makes the key do "more" : left and right move a word left or right; home and end move to the start and end of a paragraph; up and down move a physical page up and down (mostly for Word); page up/down move to the start and end of the document.
-- **X5** makes the action repeat 5 times on every keypress or repeat.
+- **More** makes the key do "more" : left and right move a word left or right; home and end move to the start and end of a paragraph; page up/down move to the start and end of the document. Up and down are an exception: these activate mouse wheel scrolling.
+- **X4** makes the action repeat 4 times on every keypress or repeat.
 - **Fast** removes the initial repeat delay and repeats at a faster interval.
 
 All actions have auto-repeat. You can change the special modifiers while holding down a navigation key and the action changes accordingly.
 
-Select all, cut, copy and paste are chorded on the right hand top row.
+Cut, copy and paste are chorded on the right hand top row.
 
 ### META
-Activated by either pinky (hold).
+Activated by either pinky.
 
 ![kyria-rsthd-prime-meta](docs/images/kyria-rsthd-prime-meta.png)
 
@@ -124,7 +122,7 @@ This layer is also how the FUNC and SNAP layers are accessed.
 
 ### FUNC
 
-Activated by the left thumb from the META layer (hold).
+Activated by the left thumb from the META layer.
 
 ![kyria-rsthd-prime-func](docs/images/kyria-rsthd-prime-func.png)
 
@@ -136,7 +134,7 @@ Three mouse buttons are available on the right thumb.
 
 ### SNAP
 
-Activated by the right thumb from the META layer (hold).
+Activated by the right thumb from the META layer.
 
 ![kyria-rsthd-prime-snap](docs/images/kyria-rsthd-prime-snap.png)
 
@@ -150,7 +148,7 @@ The encoder is used to control the backlight LEDs and OLED brightness (depending
 
 ### CURS and FLIP
 
-Activated by the right thumb (hold).
+Activated by the right thumb. Experimental.
 
 ![kyria-rsthd-prime-curs](docs/images/kyria-rsthd-prime-curs.png)
 
@@ -182,7 +180,6 @@ ln -s /path/to/workingdir/keyboard-firmware/kyria-rsthd-prime .
 qmk compile -kb splitkb/kyria/rev1 -km kyria-rsthd-prime
 ```
 
-(My Kyria is a rev1, if you have a rev2 then change the compile command above. I don't know if code changes are needed.)
 
 ### RSTHD variants and similar layouts
 - [T-34](https://www.jonashietala.se/blog/2021/06/03/the-t-34-keyboard-layout/) (swaps E and space)

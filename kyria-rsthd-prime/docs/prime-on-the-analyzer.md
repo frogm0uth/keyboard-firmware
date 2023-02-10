@@ -6,13 +6,12 @@ Keyboard analyzers are a useful tool for working on a custom keymap. They do hav
 
 <!--ts-->
    * [SteveP's analyzer](#steveps-analyzer)
-      * [Fitting the keymap into the analyzer](#fitting-the-keymap-into-the-analyzer)
-      * [Heatmap](#heatmap)
-      * [Finger distribution](#finger-distribution)
-      * [SFUs](#sfus)
-      * [Travel distance](#travel-distance)
-      * [Summary scores](#summary-scores)
-   * [keygen](#keygen)
+   * [Fitting the keymap into the analyzer](#fitting-the-keymap-into-the-analyzer)
+   * [Heatmap](#heatmap)
+   * [Finger distribution](#finger-distribution)
+   * [SFUs](#sfus)
+   * [Travel distance](#travel-distance)
+   * [Summary scores](#summary-scores)
 <!--te-->
 
 ## SteveP's analyzer
@@ -25,12 +24,12 @@ I've not included code samples because the analyzer counts leading white space. 
 
 I compare against a number of other built-in layouts: RSTHD, Colemak thumbshift, Colemak-DH thumbshift, and MT-GAP thumbshift. They generally perform best of all the pre-loaded layouts (that I've found). I also include the newer [Hands Down Gold](https://sites.google.com/alanreiser.com/handsdown/home/hands-down-neu) layout in the comparisons, as it has a letter (T) on a thumb key and the author has helpfully provided a JSON file.
 
-### Fitting the keymap into the analyzer
+## Fitting the keymap into the analyzer
 The actual keymap can't be fully expressed in the analyzer. Ignoring combos, I also have a number of characters that are duplicated in the keymap, so for the analyzer I've picked the likely best location.
 
 You can load the [JSON](kyria-rsthd-prime-v32.json) into the analyser yourself to have a closer look.
 
-### Heatmap
+## Heatmap
 
 Here is the heatmap (Alice):
 
@@ -38,7 +37,7 @@ Here is the heatmap (Alice):
 
 As you can see, nice tight symmetric distribution.
 
-### Finger distribution
+## Finger distribution
 
 Here is the finger usage distribution (Alice):
 
@@ -54,7 +53,7 @@ Comparing left-right hand usage, Prime is well balanced, slightly to the left wh
 
 The other layouts tested here (apart from RSTHD) are all biased more to the right. As they are all ergo layouts with thumb shift, they have space on one hand only. If using a slab keyboard with single space bar, a typist who uses both hands for Space would or could even out the left-right hand scores.
 
-### SFUs
+## SFUs
 
 SFU metrics are generally very low. On this analyzer, these are the results compared to other layouts with low SFUs:
 
@@ -68,7 +67,7 @@ Note 2: combos will reduce the actual SFUs. However, the same could be said for 
 
 Note 3: since writing this page, I've noticed another bug in the analyzer that makes the Prime results artificially low. If the corpus is `RAVISH`, the analyzer shows no SFUs, whereas there should be two because of the conflict between the shift and the pinky letters.
 
-### Travel distance
+## Travel distance
 
 The travel distance is low:
 
@@ -78,7 +77,7 @@ Note: SteveP's fork no longer outputs travel distance so I obtained these number
 
 Note also: All the other layouts use a number row; their travel distance would presumably be reduced by using a symbols layer (AltGr) to make the layout more compact.
 
-### Summary scores
+## Summary scores
 
 Here are the overall scores with other high-performing layouts (don't forget your grain of salt!):
 
@@ -87,15 +86,3 @@ Here are the overall scores with other high-performing layouts (don't forget you
 However, I've come to think that bench-racing keyboard layouts with a single score as above is not all that helpful. The analyzers have too many limitations and too many assumptions built in to be able to trust a simple scoring table like this. As noted above, there are also bugs that will skew the results.
 
 So, they are a very useful tool, but be careful how you interpret the results!
-
-## keygen
-
-**UNFINISHED**
-
-Keygen is the optimizer that generated RSTHD - unlike other analyzers, keygen can generate a layout for you! The author has since generated an alternate layout that groups E with the vowels rather than most of the consonants.
-
-Keygen looks only at the layout of the unshifted keys and ignores shift and any punctuation that is not present on an unshifted key. It does have the ability to examine and penalize sequences of up to three keys - in other words, it tries to optimize for inward or outward rolls.
-
-keygen can also be used purely as an analyzer. (More coming later)
-
-
