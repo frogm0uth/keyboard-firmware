@@ -110,12 +110,12 @@ DEFINE_SHORTCUT( BROWSER_FWD,     G(KC_RBRC),  A(KC_RIGHT),  A(KC_RIGHT) )   // 
 /**
  * Selection/cut/copy/paste/undo
  */
-DEFINE_SHORTCUT( SELECT_ALL,        G(KC_A),      C(KC_A),    C(KC_A) )     // Select all
-DEFINE_SHORTCUT( CUT_SELECTION,     G(KC_X),      C(KC_X),    C(KC_X) )     // Cut
-DEFINE_SHORTCUT( COPY_SELECTION,    G(KC_C),      C(KC_C),    C(KC_C) )     // Copy
-DEFINE_SHORTCUT( PASTE_CLIPBOARD,   G(KC_V),      C(KC_V),    C(KC_V) )     // Paste
-DEFINE_SHORTCUT( UNDO_ACTION,       G(KC_Z),      C(KC_Z),    C(KC_Z) )     // Undo
-DEFINE_SHORTCUT( REDO_ACTION,       S(G(KC_Z)),   C(KC_Y),    S(C(KC_Z)) )  // Redo
+DEFINE_SHORTCUT( SELECT_ALL,  G(KC_A),      C(KC_A),    C(KC_A) )     // Select all
+DEFINE_SHORTCUT( CUT,         G(KC_X),      C(KC_X),    C(KC_X) )     // Cut
+DEFINE_SHORTCUT( COPY,        G(KC_C),      C(KC_C),    C(KC_C) )     // Copy
+DEFINE_SHORTCUT( PASTE,       G(KC_V),      C(KC_V),    C(KC_V) )     // Paste
+DEFINE_SHORTCUT( UNDO,        G(KC_Z),      C(KC_Z),    C(KC_Z) )     // Undo
+DEFINE_SHORTCUT( REDO,        S(G(KC_Z)),   C(KC_Y),    S(C(KC_Z)) )  // Redo
 
 
 /**
@@ -147,6 +147,7 @@ DEFINE_SHORTCUT( QUIT,        G(KC_Q),     A(KC_F4),   A(KC_F4) )   // Quit app
 DEFINE_SHORTCUT( NEW,         G(KC_N),     C(KC_N),    C(KC_N) )    // New file/window
 DEFINE_SHORTCUT( NEW_TAB,     G(KC_T),     C(KC_T),    C(KC_T) )    // New tab
 
+DEFINE_SHORTCUT( RELOAD,      G(KC_R),     C(KC_R),    C(KC_R) )    // Reload file/page
 DEFINE_SHORTCUT( SAVE,        G(KC_S),     C(KC_N),    C(KC_N) )    // Save file
 DEFINE_SHORTCUT( SAVE_AS,     S(G(KC_S)),  KC_F12,     C(S(KC_S)) ) // Save to different file
 DEFINE_SHORTCUT( PRINT,       G(KC_P),     C(KC_P),    C(KC_P) )    // Print

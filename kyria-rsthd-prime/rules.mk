@@ -1,5 +1,6 @@
 OLED_ENABLE = yes           # Enables the use of OLED displays
 ENCODER_ENABLE = yes        # Enables the use of one or more encoders
+RGB_MATRIX_ENABLE = no      # Disable keyboard RGB matrix, as it is enabled by default on rev3
 RGBLIGHT_ENABLE = yes       # Enable keyboard RGB underglow
 LEADER_ENABLE = no          # Enable the Leader Key feature
 MOUSEKEY_ENABLE = yes       # Enable the inbuilt mouse key feature
@@ -28,7 +29,7 @@ OS_SHORTCUTS = yes          # Enable OS shortcut mapping. If OS_SHORTCUTS_STATIC
 
 CUSTOM_EDIT = yes           # Enable custom editing keys. Turns on OS_SHORTCUTS.
 LAYER_TAP_TOGGLE = yes      # Enable the layer-tap-toggle feature
-COMBOROLL_ENABLE = yes      # Enable comborolls - not compatible with COMBO_ENABLE
+COMBOROLL_ENABLE = yes      # Enable comborolls. Either this or COMBO_ENABLE, not both
 CUSTOM_CAPSWORD = yes       # Enable custom capsword
 
 

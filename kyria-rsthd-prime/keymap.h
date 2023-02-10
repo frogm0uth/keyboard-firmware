@@ -62,9 +62,11 @@ enum layers {
     ALPHA,
     SYMS,
     EDIT,
-    SNAP,
-    FUNC,
     META,
+    FUNC,
+    SNAP,
+    CURS,
+    FLIP,
     NUM_LAYERS // <- this is needed for layer-tap-toggle
 };
 
@@ -75,27 +77,30 @@ enum layers {
         CL_BASE,       \
         CL_SYMS,       \
         CL_EDIT,       \
-        CL_SNAP,       \
+        CL_META,       \
         CL_FUNC,       \
-        CL_META
+        CL_SNAP,       \
+        CL_CURS,       \
+        CL_FLIP
 #else
 #    define CL_BASE TO(ALPHA)
-#    define CL_SYMS LT(SYMS,   KC_QUOT)
-#    define CL_SNAP LT(SNAP,   KC_DQUO)
+#    define CL_SYMS LT(SYMS,   KC_DQUO)
 #    define CL_EDIT LT(EDIT,   KC_TAB)
-#    define CL_FUNC LT(FUNC,   KC_NO)
 #    define CL_META LT(META,   KC_NO)
+#    define CL_FUNC LT(FUNC,   KC_NO)
+#    define CL_SNAP LT(SNAP,   KC_NO)
+#    define CL_CURS LT(CURS,   KC_NO)
+#    define CL_FLIP LT(FLIP,   KC_NO)
 #endif
 // clang-format on
 
 enum custom_keycodes {
     CU_IGNORE = SAFE_RANGE,
 
-    CU_NEXT_SENTENCE,  // Next-sentence macro
-    CU_NEXT_PARAGRAPH, // Next-paragraph macro
+    CU_LOCK,   // Lock the current layer
 
-    CU_SWIN, // Screenshot a window
-    CU_SRGN, // Start drag-select screenshot
+    CU_SCRSHOT_WIN, // Screenshot a window
+    CU_SCRSHOT_RGN, // Start drag-select screenshot
 
     CU_APPSWITCH_RIGHT, // Application switcher
     CU_APPSWITCH_LEFT,
@@ -138,31 +143,6 @@ enum custom_keycodes {
     // clang-format on
 };
 
-/**
- * Keycodes for modifiers. Most of these are mod-taps, and defining them this
- * ways makes it easier to change the tap action. If you change these, combos
- * might need to be updated!
- */
-#ifdef NO_ACTION_ONESHOT
-#   define CU_LSFT KC_LSFT
-#   define CU_RSFT KC_RSFT
-#else
-#   define CU_LSFT OSM(MOD_LSFT)
-#   define CU_RSFT OSM(MOD_RSFT)
-#endif
-#define CU_LALT ALT_T(KC_TAB)
-#define CU_RALT ALT_T(KC_CAPS)
-#define CU_LCTL CTL_T(KC_X)
-#define CU_RCTL CTL_T(KC_Q)
-#define CU_LCMD KC_LGUI // GUI_T(KC_TAB)
-#define CU_RCMD KC_RGUI // not actually used
-
-// Mod-taps on symbols layer
-#define CU_SSFT KC_LSFT
-#define CU_SCTL CTL_T(KC_2)
-#define CU_SALT ALT_T(KC_0)
-#define CU_SGUI GUI_T(KC_1)
-
 
 /**
  * Cope with not compiling in mouse keys
@@ -182,13 +162,33 @@ enum custom_keycodes {
  * Shorter keycodes to put in keymap matrix. These are those with
  * custom processing, for direct shortcuts, see os_shortcut_defs.h
  */
-// ALPHA layer
-#define CU_COMM CU_COMMA_HASH
-#define CU_DOT  CU_DOT_SLASH
-#define CU_EXQU CU_EXCLAIM_QUESTION
-
-// SYMS layer
-#define CU_DTDT CU_DOT_DOT
+#define CU_COMM CU_COMMA_QUES
+#define CU_DOT  CU_DOT_EXLM
 #define CU_QTQT CU_QUOTE_QUOTE
-#define CU_SCSC CU_SCLN_SCLN
-#define CU_EQEQ CU_EQUAL_EQUAL
+
+/**
+ * Define custom version of the layout stack
+ */
+// clang-format off
+#define KEY_LAYOUT_stack(                           \
+    L00, L01, L02, L03, L04, L05,                   \
+    L12, L13, L14, L15, L16, L17,                   \
+    L24, L25, L26, L27, L28,                        \
+                                                    \
+                  R06, R07, R08, R09, R10, R11,     \
+                  R18, R19, R20, R21, R22, R23,     \
+                       R35, R36, R37, R38, R39,     \
+  													\
+    L40, L42, L43, L44, R45, R46, R47, R48      \
+)                                               \
+{                                               \
+    { KC_NO, KC_NO, L05,   L04,   L03,   L02,   L01,   L00   }, \
+    { KC_NO, KC_NO, L17,   L16,   L15,   L14,   L13,   L12   }, \
+    { KC_NO, KC_NO, KC_NO, L28,   L27,   L26,   L25,   L24   }, \
+    { L44,   L43,   L42,   KC_NO, L40,   KC_NO, KC_NO, KC_NO }, \
+    { KC_NO, KC_NO, R06,   R07,   R08,   R09,   R10,   R11   }, \
+    { KC_NO, KC_NO, R18,   R19,   R20,   R21,   R22,   R23   }, \
+    { KC_NO, KC_NO, KC_NO, R35,   R36,   R37,   R38,   R39   }, \
+    { R45,   R46,   R47,   R48,   KC_NO, KC_NO, KC_NO, KC_NO }, \
+}
+// clang-format on

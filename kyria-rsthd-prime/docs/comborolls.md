@@ -39,7 +39,7 @@ If you have a "rolling" style of typing, you may find that combos tend to interr
 
 Recently, it's been possible in QMK to specify that the trigger keys must be pressed in order. In this case, and if the time delay is extended to 150 ms, the keys can be "rolled". The time delay is long enough that you don't have to try to press them at the same time, and the combo triggers if you press the second key before releasing the first. This is what I call a "comboroll". They could be either inward or outward.
 
-There are some issues in doing this in QMK, so for now I am using a custom implementation. In either case, it's led to a more methodical approach to placing combos in a keymap:
+There are some issues in doing this in QMK, so I am using a custom implementation. In either case, it's led to a more methodical approach to placing combos in a keymap:
 
 - All combos have two trigger keys only.
 - Combos with both triggers on one hand are an inward comboroll.
@@ -69,13 +69,13 @@ For a second set, also consider rolls that jump a row.
 
 ### Filter the candidates
 
-Now filter the initial candidates by looking at the underlying letters. The simple method is to exclude any bigrams that occur with more than a certain frequency. Using the numbers in the bigram matrix of [Norvig's analysis](http://norvig.com/mayzner.html), my threshold seems to be 0.02%.
+Now filter the initial candidates by looking at the underlying letters. The simple method is to exclude any bigrams that occur with more than a certain frequency. Using the numbers in the bigram matrix of [Norvig's analysis](http://norvig.com/mayzner.html), my threshold seems to be 0.02%, which seems to be a good place to start. However I have also removed bigrams with lower occurrence, such as YN, which just seems to be in a lot of words I type, like *dynamic* and *sync*.
 
-Here is my layout, which I'll use for the examples:
+Here is my key layout, which I'll use for the examples:
 
 ![](images/comboroll/kyria-rsthd-prime-letters.png)
 
-In my layout, any rolls involving the Shift keys are also filtered out, because my implementation of comborolls doesn't work with one-shot shift.
+In my layout, any rolls involving the Shift keys are also filtered out, because my implementation of comborolls doesn't work with shift.
 
 Here are my same-row roll candidates after filtering:
 
@@ -100,7 +100,7 @@ I'll explain how to identify combos with the examples below. For now, here are s
 
 - Place a combo so that a common following letter forms a three-roll. This only works with strong locations.
 
-- If a combo is commonly followed by particular letters, consider making it a two-hand combo, as it's typically easier to roll a key on one hand with a following key than it is to roll a pair of keys with a following key on the same hand.
+- If a combo is commonly followed by particular letters, it's sometimes better as a two-hand combo to make it easier to roll with a common subsequent key.
 
 Typically, I find that I initially place a combo using the first two criteria (consonent/vowel and mnemonic). However, after using them for a while, they get moved in order to improve typing flow (the remaining criteria). The examples below show the final locations.
 
@@ -127,13 +127,13 @@ SFUs (same-finger utilization) aka SFBs (same-finger bigrams) are generally cons
 
 "Pinballing" refers to more than one reversal of direction on the same hand. In this layout, for example, HERE has two reversals of direction on the left hand (the thumb is considered a finger for this purpose). This can be mitigated by changing the cadence of typing: rather than type as a single sequence, type as two rolls: HE - RE.
 
-However, if ER is made a comboroll on the right hand, then the pinballing is instantly converted into a simple hand swap: H (left) - ER (right) - E (left). ED and ES are also useful anti-pinballing combos. VE is a late entry that turned out to be a surprisingly common bigram that solves pinballing for words like EVER.
+However, if ER is made a comboroll on the right hand, then the pinballing is instantly converted into a simple hand swap: H (left) - ER (right) - E (left). ED and ES are also useful anti-pinballing combos. VE is a late entry that turned out to be a surprisingly common bigram that solves pinballing for words like EVER. ES has the interesting property of reducing occurrences of the common SS double letter by about half.
 
-ES  has the interesting property of reducing occurrences of the common SS double letter by about half.
+There is also some pinballing between the MNL column and the vowels to the right of it. The M comboroll on the left hand reduces this and also takes care of the awkward MY bigram.
 
 #### Awkward bigrams and trigrams
 
-Combos for awkward bigrams and trigrams move the typed keys to a more comfortable location. CR and PR are good examples: pinky and ring finger with a row jump change to a same-row roll. QU is more fluid with a combo when you consider that it's always followed by a vowel. The others I have are YOU (double row skip), MY (adjacent with double row) and GHT (reversal with a row skip).
+Combos for awkward bigrams and trigrams move the typed keys to a more comfortable location. CR and PR are good examples: pinky and ring finger with a row jump change to a same-row roll. QU is more fluid with a combo when you consider that it's always followed by a vowel. The others I have are YOU (double row skip) and GHT (reversal with a row skip).
 
 ### Word endings
 
@@ -144,7 +144,7 @@ From here on, finding combos is more optional. This group is common word endings
 
 ### Typing comfort
 
-My layout is driven by the desire to minimize use of the inner index column. This can be further reduced with combos. So there are a number of combos involving B and K. I also added some involving F. The FR, FT and BR combos change an awkward outward roll into a more comfortable inward roll.
+My layout is driven by the desire to minimize use of the inner index column. This can be further reduced with combos. So there are a number of combos involving B and K. These rolls and the two-hand combos (below) should reduce the usage of B and K by about half. The FR, FT and BR combos change an awkward outward roll into a more comfortable inward roll.
 
 ![](images/comboroll/comboroll-comfort.png)
 
@@ -152,7 +152,7 @@ Someone who doesn't have an issue with the inner index column might instead choo
 
 ### The full set of comborolls
 
-This is my full set of comborolls. Of the candidate locations, all but three have had combos assigned to them.
+This is my full set of comborolls. Of the candidate locations, most have had combos assigned to them.
 
 ![](images/comboroll/comboroll-rolls.png)
 
@@ -176,6 +176,8 @@ I've added *outward* rolls on the left hand for comma and period, to provide an 
 
 There are four vertical combos for anti-SFU. These are a little tricky to use and I'm still getting used to them.
 
+FInally, Z is a vertical combo. This is a good location, as it's most commonly followed by E, which makes for an easy roll with the left thumb.
+
 ## Discussion
 
 ### On typing with comborolls
@@ -190,7 +192,7 @@ When identifying combos, longer is not necessarily better. It might seem that sp
 
 It's tempting to keep adding combos. However, it becomes harder to remember them and train yourself to use them as the number gets higher.
 
-My ability to remember and use combos starts to hit its limits at about three dozen (on the alpha layer). There are 28 locations in my keymap for comborolls, of which 25 are currently used, plus 8 two-hand combos and a few special cases (verticals and outward rolls).
+My ability to remember and use combos starts to hit its limits at about three dozen (on the alpha layer).
 
 ### Implications for layout design
 

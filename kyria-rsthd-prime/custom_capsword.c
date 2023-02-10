@@ -85,8 +85,8 @@ bool process_record_capsword(uint16_t keycode, keyrecord_t *record) {
 #endif
 
     switch (keycode) {
-        case CU_LSFT:
-        case CU_RSFT:
+        case KC_LSFT:
+        case KC_RSFT:
             if (record->event.pressed) {
                 if ((mods | ossmods) & MOD_MASK_SHIFT) {
                     bool_capsword = true;

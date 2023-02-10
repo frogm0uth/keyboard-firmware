@@ -52,7 +52,7 @@
          			     \
 	 CE_DELETE,                  \
          CE_MORE,                    \
-         CE_X5,                      \
+         CE_X4,                      \
          CE_FAST
 
 // clang-format on
@@ -71,7 +71,7 @@
 
 #    define CE_DELETE KC_NO
 #    define CE_MORE KC_NO
-#    define CE_X5 KC_NO
+#    define CE_X4 KC_NO
 #    define CE_FAST KC_NO
 
 #endif
@@ -84,5 +84,5 @@ void custom_edit_tick(void);
 bool custom_edit_process_record(uint16_t keycode, keyrecord_t *record);
 bool custom_edit_encoder_ready(void);
 void custom_edit_encoder(bool clockwise);
-void custom_edit_status(void);
+void custom_edit_status(bool shift);
 void custom_edit_encoder_status(void);
