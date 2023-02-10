@@ -59,10 +59,10 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                 if (custom_edit_encoder_ready()) {
                     custom_edit_encoder(clockwise);
                 } else {
-                    keycode = clockwise ? SC(SC_REDO_ACTION) : SC(SC_UNDO_ACTION);
+                    keycode = clockwise ? SC(SC_REDO) : SC(SC_UNDO);
                 }
 #else
-                keycode = clockwise ? SC(SC_REDO_ACTION) : SC(SC_UNDO_ACTION);
+                keycode = clockwise ? SC(SC_REDO) : SC(SC_UNDO);
 #endif
             }
             break;

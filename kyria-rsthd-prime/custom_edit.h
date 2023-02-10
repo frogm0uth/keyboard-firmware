@@ -52,7 +52,7 @@
          			     \
 	 CE_DELETE,                  \
          CE_MORE,                    \
-         CE_X5,                      \
+         CE_X4,                      \
          CE_FAST
 
 // clang-format on
@@ -71,7 +71,7 @@
 
 #    define CE_DELETE KC_NO
 #    define CE_MORE KC_NO
-#    define CE_X5 KC_NO
+#    define CE_X4 KC_NO
 #    define CE_FAST KC_NO
 
 #endif

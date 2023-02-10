@@ -99,8 +99,6 @@ enum custom_keycodes {
 
     CU_LOCK,   // Lock the current layer
 
-    CU_TABENT, // Tab followed by enter
-
     CU_SWIN, // Screenshot a window
     CU_SRGN, // Start drag-select screenshot
 

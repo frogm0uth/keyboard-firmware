@@ -23,7 +23,7 @@
 
 // Punctuation with numbers on shift
 //
-DEFINE_SHIFT( CU_0, KC_PLUS, KC_0 )
+DEFINE_SHIFT( CU_0, KC_EQL,  KC_0 )
 DEFINE_SHIFT( CU_1, KC_RABK, KC_1 )
 DEFINE_SHIFT( CU_2, KC_SLSH, KC_2 )
 DEFINE_SHIFT( CU_3, KC_LABK, KC_3 )

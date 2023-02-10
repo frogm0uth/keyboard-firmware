@@ -56,7 +56,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |------+------+------+------+---Z--+------|                        |------+------+------+------+------+------|
  |   X  |   R  |   S  |   T  |   H  |   B  |                        | ;  : |   N  |   I  |   O  |   A  |   Q  |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
- | Enter|      |   P  |   G  |   D  |                                      |   L  |   Y  | ,  ? |      |      |
+ |      |      |   P  |   G  |   D  |                                      |   L  |   Y  | ,  ? |      |      |
  | META | Shift|      |      |      |                                      |      |      |      | Shift| META |
  `----------------------------------'                                      `----------------------------------'
 
@@ -84,49 +84,49 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* SYMS
 
- ,------------------- != ------------------.                        ,-----------------------------------------.
- | LOCK |      |   |  |   \  |      | WinR |                        |   ^  | ]  7 | #  8 | [  9 |   $  | LOCK |
+ ,-----------------------------------------.                        ,----------- ?> --- <? -------------------.
+ | LOCK |      |  Cut | Copy | Paste| WinR |                        |   ^  | ]  7 | #  8 | [  9 |   $  | LOCK |
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
- |  Tab |   -  |   (  |   *  |   )  | AppR |                        | &  @ | >  1 | /  2 | <  3 | +  0 | ~  ` |
+ |   \  |   |  |   (  |   *  |   )  | AppR |                        | &  @ | >  1 | /  2 | <  3 | =  0 | ~  ` |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
- |      |      |      |      |      |                                      | }  4 | %  5 | {  6 |   =  |      |
+ |FulScr|      |      |      |      |                                      | }  4 | %  5 | {  6 |   +  |DskTop|
  |      | Shift| Ctrl |  Alt |  Cmd |                                      |      |      |      |      |      |
  `----------------------------------'                                      `----------------------------------'
 
  .                 ,------.      ,--------------------.  ,---------------------------.
- .                 |      |      |      |      |      |  | Enter| Space|   .  |      |
+ .                 |      |      |      |   -  |  Tab |  | Enter| Space|   .  |      |
  .                 |      |      | (**) |      |      |  |      |      |      |      |
  .                 `------'      `--------------------'  `---------------------------'
  */
 
     [SYMS] = KEY_LAYOUT_stack(
         /* Left hand */
-        CU_LOCK,  ___X___,         KC_PIPE,  KC_BSLS,  ___X___,  CU_NEXT_WINDOW,
-        KC_TAB,   CU_MINUS_MINUS,  KC_LPRN,  KC_ASTR,  KC_RPRN,  CU_APPSWITCH_RIGHT,
-        ___X___,  KC_LSFT,         KC_LCTL,  KC_LALT,  KC_LGUI,
+        CU_LOCK,        ___X___,  SC_CUT,   SC_COPY,  SC_PASTE,  CU_NEXT_WINDOW,
+        KC_BSLS,        KC_PIPE,  KC_LPRN,  KC_ASTR,  KC_RPRN,   CU_APPSWITCH_RIGHT,
+        SC_FULLSCREEN,  KC_LSFT,  KC_LCTL,  KC_LALT,  KC_LGUI,
 
         /* Right hand */
-                  KC_CIRC,    CU_7,  CU_8,  CU_9,  KC_DLR,      CU_LOCK,
-                  CU_AMP_AT,  CU_1,  CU_2,  CU_3,  CU_0,        CU_TILDE_GRAVE,
-                              CU_4,  CU_5,  CU_6,  CU_EQL_EQL,  ___X___,
+                  KC_CIRC,    CU_7,  CU_8,  CU_9,  KC_DLR,   CU_LOCK,
+                  CU_AMP_AT,  CU_1,  CU_2,  CU_3,  CU_0,     CU_TILDE_GRAVE,
+                              CU_4,  CU_5,  CU_6,  KC_PLUS,  SC_REVEAL_DESKTOP,
 
         /* Encoder & Thumbs */
-        ___X___, _______, ___X___, ___X___, KC_ENT, KC_SPC, CU_DOT_DOT, ___X___
+        ___X___, _______, KC_MINS, KC_TAB, KC_ENT, KC_SPC, CU_DOT_DOT, ___X___
     ),
 
 
 /* EDIT
 
  ,-----------------------------------------.                        ,-----------------------------------------.
- | LOCK | PgUp | Home |  Up  |  End | WinL |                        | WinR | Paste| Copy |  Cut |  All | LOCK |
+ | LOCK | PgUp | Home |  Up  |  End | WinL |                        | WinR | Paste| Copy |  Cut |AppWin| LOCK |
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
  | TabL | PgDn | Left | Down | Right| AppL |                        | AppR |      |      |      |      | TabR |
  |      |      |      |      |      |      |                        |      | Fast |  x5  | More |Delete|      |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
- |TabEnt|      | Undo | Space| Redo |                                      |      |      |      |      |      |
+ | ScrL |      | Undo |  Tab | Redo |                                      |      |      |      |      | ScrR |
  |      | Shift|      |      |      |                                      |  Cmd |  Alt | Ctrl | Shift|      |
  `----------------------------------'                                      `----------------------------------'
-
+ .                                          Expose
  .                 ,------.      ,--------------------.  ,---------------------------.
  .                 |      |      |  Del | BkSp | Enter|  |      |      |      |      |
  .                 |      |      |      |      |      |  |      |      | (**) |      |
@@ -135,15 +135,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [EDIT] = KEY_LAYOUT_stack(
         /* Left hand */
-        CU_LOCK,      CE_PAGE_UP,   CE_HOME,        CE_UP,    CE_END,         CU_PREV_WINDOW,
-        CU_TAB_LEFT,  CE_PAGE_DOWN, CE_LEFT,        CE_DOWN,  CE_RIGHT,       CU_APPSWITCH_LEFT,
-        CU_TABENT,    _______,      SC_UNDO_ACTION, KC_SPC,   SC_REDO_ACTION,
+        CU_LOCK,         CE_PAGE_UP,   CE_HOME,  CE_UP,    CE_END,    CU_PREV_WINDOW,
+        CU_TAB_LEFT,     CE_PAGE_DOWN, CE_LEFT,  CE_DOWN,  CE_RIGHT,  CU_APPSWITCH_LEFT,
+        SC_PREV_SCREEN,  _______,      SC_UNDO,  KC_TAB,   SC_REDO,
 
 
         /* Right hand */
-                     CU_NEXT_WINDOW,     SC_PASTE_CLIPBOARD, SC_COPY_SELECTION, SC_CUT_SELECTION,  SC_SELECT_ALL, CU_LOCK,
-                     CU_APPSWITCH_RIGHT, CE_FAST,            CE_X5,             CE_MORE,           CE_DELETE,     CU_TAB_RIGHT,
-                                         KC_RGUI,            KC_RALT,           KC_RCTL,           KC_RSFT,       ___X___,
+                     CU_NEXT_WINDOW,     SC_PASTE,  SC_COPY,  SC_CUT,   SC_EXPOSE_WINDOWS,  CU_LOCK,
+                     CU_APPSWITCH_RIGHT, CE_FAST,   CE_X4,    CE_MORE,  CE_DELETE,          CU_TAB_RIGHT,
+                                         KC_RGUI,   KC_RALT,  KC_RCTL,  KC_RSFT,            SC_NEXT_SCREEN,
 
         /* Encoder & Thumbs */
         SC_APP_ZOOM_RESET, KC_DEL, KC_BSPC, KC_ENT, ___X___, ___X___, _______, ___X___
@@ -153,9 +153,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* META
 
  ,-----------------------------------------.                        ,-----------------------------------------.
- | LOCK |      | Close|      | Find |      |                        |      |PrvTrk| Play |NxtTrk| Mute | LOCK |
+ | LOCK |saveAs| Close|      | Find |      |                        |      |PrvTrk| Play |NxtTrk| Mute | LOCK |
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
- | eXit |Reload| Save |newTab|      |  Bin |                        |      |  New |      | Open |saveAs| Quit |
+ | eXit |Reload| Save |newTab|      |  Bin |                        |      |  New |      | Open |  All | Quit |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
  |      |      | Print| Prev | Next |                                      | Back |  Fwd |      |      |      |
  | (**) | Shift|      |      |      |                                      |      |      |      | Shift| (**) |
@@ -169,14 +169,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [META] = KEY_LAYOUT_stack(
         /* Left hand */
-        CU_LOCK, ___X___,   SC_CLOSE_TAB, ___X___,        SC_FIND,        ___X___,
-        SC_QUIT, SC_RELOAD, SC_SAVE,      SC_NEW_TAB,     ___X___,        SC_BIN,
-        _______, _______,   SC_PRINT,     SC_PREV_SEARCH, SC_NEXT_SEARCH,
+        CU_LOCK, SC_SAVE_AS,  SC_CLOSE_TAB, ___X___,        SC_FIND,        ___X___,
+        SC_QUIT, SC_RELOAD,   SC_SAVE,      SC_NEW_TAB,     ___X___,        SC_BIN,
+        _______, _______,     SC_PRINT,     SC_PREV_SEARCH, SC_NEXT_SEARCH,
 
         /* Right hand */
-                 ___X___,  KC_MPRV,         KC_MPLY,        KC_MNXT,  KC_MUTE,    CU_LOCK,
-                 ___X___,  SC_NEW,          ___X___,        SC_OPEN,  SC_SAVE_AS, SC_QUIT,
-                           SC_BROWSER_BACK, SC_BROWSER_FWD, ___X___,  _______,    _______,
+                 ___X___,  KC_MPRV,         KC_MPLY,        KC_MNXT,  KC_MUTE,       CU_LOCK,
+                 ___X___,  SC_NEW,          ___X___,        SC_OPEN,  SC_SELECT_ALL, SC_QUIT,
+                           SC_BROWSER_BACK, SC_BROWSER_FWD, ___X___,  _______,       _______,
 
         /* Encoder & Thumbs */
         KC_MUTE, CL_FUNC, CU_APPSWITCH_RIGHT, CU_NEXT_WINDOW, CU_NEXT_WINDOW, CU_APPSWITCH_RIGHT, CL_SNAP, ___X___
@@ -221,7 +221,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  ,-----------------------------------------.                        ,-----------------------------------------.
  | LOCK |      |SnapTL| SnapT|SnapTR|      |                        |      |      |      |      |      | LOCK |
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
- |      |      | SnapL| SnapV| SnapR|      |                        |      |      |      |      |      |      |
+ |      |      | SnapL| SnapV| SnapR|      |                        |      | SSRgn| SSApp| SSScr|      |      |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
  |      |      |SnapBL| SnapB|SnapBR|                                      |      |      |      |      |      |
  | (**) |      |      |      |      |                                      |  Cmd |  Alt | Ctrl | Shift| (**) |
@@ -240,9 +240,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, ___X___,  SC_SNAP_BOTTOMLEFT, SC_SNAP_BOTTOM,   SC_SNAP_BOTTOMRIGHT,
 
          /* Right hand */
-                 ___X___, ___X___, ___X___, ___X___, ___X___, CU_LOCK,
-                 ___X___, ___X___, ___X___, ___X___, ___X___, ___X___,
-                          KC_RGUI, KC_RALT, KC_RCTL, KC_RSFT, _______,
+                 ___X___,                       ___X___,           ___X___,              ___X___, ___X___, CU_LOCK,
+                 ___X___, SC_SCREENSHOT_REGION, SC_SCREENSHOT_APP, SC_SCREENSHOT_SCREEN, ___X___, ___X___,
+                          KC_RGUI,              KC_RALT,           KC_RCTL,              KC_RSFT, _______,
 
         /* Encoder & Thumbs */
         CU_WRIT, CM_BTN3, CM_BTN1, CM_BTN2, ___X___, CU_WIPE, _______, ___X___
@@ -428,14 +428,6 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
 #endif
 
     switch (keycode) {
-            // Tab followed by Enter
-        case CU_TABENT:
-            if (record->event.pressed) {
-                tap_code(KC_TAB);
-                tap_code(KC_ENTER);
-                return false;
-            }
-            break;
 
 #ifdef LAYER_TAP_TOGGLE
             // layer switching using layer-tap-toggle custom code
@@ -448,7 +440,7 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
             break;
 
         case CL_META:
-            return layer_tap_toggle(KC_ENT, META, record);
+            return layer_tap_toggle(KC_NO, META, record);
             break;
 
         case CL_FUNC:

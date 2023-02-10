@@ -36,7 +36,7 @@ static void (*ce_response_callback)(void) = NULL;
 
 #define IS_EDIT_DELETE (custom_edit_mods & CE_MOD_BIT(CE_DELETE))
 #define IS_EDIT_MORE (custom_edit_mods & CE_MOD_BIT(CE_MORE))
-#define IS_EDIT_X5 (custom_edit_mods & CE_MOD_BIT(CE_X5))
+#define IS_EDIT_X4 (custom_edit_mods & CE_MOD_BIT(CE_X4))
 #define IS_EDIT_FAST (custom_edit_mods & CE_MOD_BIT(CE_FAST))
 
 #define CE_MOD_BIT(kc) (1U << (kc - CE_DELETE))
@@ -287,8 +287,8 @@ void custom_edit_delete(void) {
 }
 
 void custom_edit_do(void) {
-    if (IS_EDIT_X5) {
-        ce_action_count = 5;
+    if (IS_EDIT_X4) {
+        ce_action_count = 4;
     } else {
         ce_action_count = 1;
     }
@@ -353,7 +353,7 @@ bool custom_edit_process_record(uint16_t keycode, keyrecord_t *record) {
 
         case CE_DELETE:
         case CE_MORE:
-        case CE_X5:
+        case CE_X4:
         case CE_FAST:
             if (record->event.pressed) {
                 custom_edit_mods |= CE_MOD_BIT(keycode);
@@ -379,7 +379,7 @@ bool custom_edit_encoder_ready() {
 }
 
 // The encoder uses the modifiers differently to normal. MORE is word left/right,
-// X5 is paragraph start/end, FAST is page up/down. DELETE is delete.
+// X4 is paragraph start/end, FAST is page up/down. DELETE is delete.
 void custom_edit_encoder(bool clockwise) {
     // Default is to emit the keycode
     ce_action_callback = ce_action_tap_key;
@@ -387,7 +387,7 @@ void custom_edit_encoder(bool clockwise) {
         if (IS_EDIT_FAST) {
             ce_output_key = clockwise ? KC_PGDN : KC_PGUP;
 
-        } else if (IS_EDIT_X5) {
+        } else if (IS_EDIT_X4) {
             if (clockwise) {
                 ce_action_callback = ce_action_move_end_of_paragraph;
             } else {
@@ -407,7 +407,7 @@ void custom_edit_encoder(bool clockwise) {
                 ce_action_callback = ce_action_shift_and_delete;
             }
 
-        } else if (IS_EDIT_X5) {
+        } else if (IS_EDIT_X4) {
             if (clockwise) {
                 ce_action_callback = ce_action_delete_end_of_paragraph;
             } else {
@@ -448,8 +448,8 @@ void custom_edit_status(bool shift) {
     } else {
         oled_write_P(str_blank5, false);
     }
-     if (IS_EDIT_X5) {
-        oled_write_P(PSTR("X5 "), false);
+     if (IS_EDIT_X4) {
+        oled_write_P(PSTR("X4 "), false);
     } else {
         oled_write_P(str_blank3, false);
     }
@@ -460,8 +460,8 @@ void custom_edit_status(bool shift) {
 
 static const char PROGMEM str_fast_left[]  = "^page  ";
 static const char PROGMEM str_fast_right[] = "  pagev";
-static const char PROGMEM str_x5_left[]    = "<para  ";
-static const char PROGMEM str_x5_right[]   = "  para>";
+static const char PROGMEM str_x4_left[]    = "<para  ";
+static const char PROGMEM str_x4_right[]   = "  para>";
 static const char PROGMEM str_more_left[]  = "<word  ";
 static const char PROGMEM str_more_right[] = "  word>";
 static const char PROGMEM str_dflt_left[]  = "<char  ";
@@ -473,9 +473,9 @@ void custom_edit_encoder_status() {
     if (IS_EDIT_FAST) {
         leftstring  = str_fast_left;
         rightstring = str_fast_right;
-    } else if (IS_EDIT_X5) {
-        leftstring  = str_x5_left;
-        rightstring = str_x5_right;
+    } else if (IS_EDIT_X4) {
+        leftstring  = str_x4_left;
+        rightstring = str_x4_right;
     } else if (IS_EDIT_MORE) {
         leftstring  = str_more_left;
         rightstring = str_more_right;
