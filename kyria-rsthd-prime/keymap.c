@@ -221,7 +221,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  ,-----------------------------------------.                        ,-----------------------------------------.
  | LOCK |      |SnapTL| SnapT|SnapTR|      |                        |      |      |      |      |      | LOCK |
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
- |      |      | SnapL| SnapV| SnapR|      |                        |      | SSRgn| SSApp| SSScr|      |      |
+ |      |      | SnapL| SnapV| SnapR|      |                        |      | SSRgn| SSWin| SSScr| SSApp|      |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
  |      |      |SnapBL| SnapB|SnapBR|                                      |      |      |      |      |      |
  | (**) |      |      |      |      |                                      |  Cmd |  Alt | Ctrl | Shift| (**) |
@@ -240,9 +240,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, ___X___,  SC_SNAP_BOTTOMLEFT, SC_SNAP_BOTTOM,   SC_SNAP_BOTTOMRIGHT,
 
          /* Right hand */
-                 ___X___,                       ___X___,           ___X___,              ___X___, ___X___, CU_LOCK,
-                 ___X___, SC_SCREENSHOT_REGION, SC_SCREENSHOT_APP, SC_SCREENSHOT_SCREEN, ___X___, ___X___,
-                          KC_RGUI,              KC_RALT,           KC_RCTL,              KC_RSFT, _______,
+                 ___X___, ___X___,         ___X___,         ___X___,              ___X___,           CU_LOCK,
+                 ___X___, CU_SCRSHOT_RGN,  CU_SCRSHOT_WIN,  SC_SCREENSHOT_SCREEN, SC_SCREENSHOT_APP, ___X___,
+                          KC_RGUI,         KC_RALT,         KC_RCTL,              KC_RSFT,           _______,
 
         /* Encoder & Thumbs */
         CU_WRIT, CM_BTN3, CM_BTN1, CM_BTN2, ___X___, CU_WIPE, _______, ___X___
@@ -475,6 +475,37 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
         case CU_APPSWITCH_RIGHT:
         case CU_APPSWITCH_LEFT:
             app_switcher_record(keycode, record);
+            break;
+
+            /* Take a screenshot of the window under the cursor. Currently works on macOS only.
+             */
+        case CU_SCRSHOT_WIN:
+            if (record->event.pressed) {
+                tap_code16(SC(SC_SCREENSHOT_REGION));
+                wait_ms(100);
+                tap_code(KC_SPC);
+#ifdef MOUSEKEY_ENABLE
+                tap_code16(CM_BTN1);
+#endif
+            }
+            break;
+
+            /* Take screenshot of a region. This does the initial mouse press,
+             * so press and hold the key, drag with the mouse keys then release the key.
+             * Currently works on macOS only.
+             */
+        case CU_SCRSHOT_RGN:
+            if (record->event.pressed) {
+                tap_code16(SC(SC_SCREENSHOT_REGION));
+#ifdef MOUSEKEY_ENABLE
+                wait_ms(100);
+                register_code16(CM_BTN1);
+#endif
+            } else {
+#ifdef MOUSEKEY_ENABLE
+                unregister_code16(CM_BTN1);
+#endif
+            }
             break;
 
             /* Wipe the EEPROM. Handy if you get stuck when you have multiple

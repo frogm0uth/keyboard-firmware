@@ -99,8 +99,8 @@ enum custom_keycodes {
 
     CU_LOCK,   // Lock the current layer
 
-    CU_SWIN, // Screenshot a window
-    CU_SRGN, // Start drag-select screenshot
+    CU_SCRSHOT_WIN, // Screenshot a window
+    CU_SCRSHOT_RGN, // Start drag-select screenshot
 
     CU_APPSWITCH_RIGHT, // Application switcher
     CU_APPSWITCH_LEFT,
