@@ -149,17 +149,18 @@ CMBO_KEY( expose, SC_EXPOSE_ALL, KC_BSPC, KC_ENT )   // Window expose, left thum
 
 
 // Syntax layer
-RtoL_LIT( quesrangle,      "?>",    CU_7, CU_8 )
-RtoL_LIT( langleques,      "<?",    CU_8, CU_9 )
-RtoL_LIT( threebacktick,   "```",   CU_9, KC_DLR )
+RtoL_LIT( quesrangle,      "?>",    CU_7, CU_8 )   ___NOSFT( quesrangle )
+RtoL_LIT( langleques,      "<?",    CU_8, CU_9 )   ___NOSFT( langleques )
+RtoL_LIT( threebacktick,   "```",   CU_9, KC_DLR ) ___NOSFT( threebacktick )
 
-RtoL_LIT( closeparensemi,  ");",    CU_3, CU_0 )
-RtoL_LIT( not_equal,       "!=",    CU_2, CU_0 )
+RtoL_LIT( closeparensemi,  ");",    CU_3, CU_0 )   ___NOSFT( closeparensemi )
+RtoL_LIT( not_equal,       "!=",    CU_2, CU_0 )   ___NOSFT( not_equal )
 
-RtoL_LIT( phpopen,         "<?php", CU_8, CU_0 )
-RtoL_LIT( phpecho,         "<?=",   CU_9, CU_0 )
+RtoL_LIT( phpopen,         "<?php", CU_8, CU_0 )   ___NOSFT( phpopen )
+RtoL_LIT( phpecho,         "<?=",   CU_9, CU_0 )   ___NOSFT( phpecho )
 
-RtoL_LIT( dirup,           "../",   CU_2, CU_6 )
+RtoL_LIT( dirup,           "../",   CU_2, CU_6 )   ___NOSFT( dirup )
 
-RtoL_LIT( lbracedbl,       "{{",    CU_1, CU_6 )
-RtoL_LIT( rbracedbl,       "}}",    CU_4, CU_3 )
+RtoL_LIT( lbracedbl,       "{{",    CU_1, CU_6 )   ___NOSFT( lbracedbl )
+RtoL_LIT( rbracedbl,       "}}",    CU_4, CU_3 )   ___NOSFT( rbracedbl )
+

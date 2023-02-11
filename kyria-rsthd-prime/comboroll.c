@@ -54,6 +54,7 @@ void process_comboroll_string(const char *str) {
 
 // This is empty until the last definition
 #define _____TRM(name, term)
+#define ___NOSFT(name)
 
 
 // Define an enum of identifiers.
@@ -129,20 +130,20 @@ enum comboroll_ids {
 #undef  CMBO_LIT
 #undef  CMBO_STR
 
-#define LtoR_KEY(name, out, k1, k2) {comboroll_t_keycode, CMB_MATCH_LEFT, COMBOROLL_TERM, {.output_keycode=out}},
-#define LtoR_ARR(name, out, k1, k2) {comboroll_t_array,   CMB_MATCH_LEFT, COMBOROLL_TERM, {.output_array=comboroll_array_##name}},
-#define LtoR_LIT(name, out, k1, k2) {comboroll_t_string,  CMB_MATCH_LEFT, COMBOROLL_TERM, {.output_string=comboroll_string_##name}},
-#define LtoR_STR(name,      k1, k2) {comboroll_t_string,  CMB_MATCH_LEFT, COMBOROLL_TERM, {.output_string=comboroll_string_##name}},
+#define LtoR_KEY(name, out, k1, k2) {comboroll_t_keycode, CMB_MATCH_LEFT, 0, COMBOROLL_TERM, {.output_keycode=out}},
+#define LtoR_ARR(name, out, k1, k2) {comboroll_t_array,   CMB_MATCH_LEFT, 0, COMBOROLL_TERM, {.output_array=comboroll_array_##name}},
+#define LtoR_LIT(name, out, k1, k2) {comboroll_t_string,  CMB_MATCH_LEFT, 0, COMBOROLL_TERM, {.output_string=comboroll_string_##name}},
+#define LtoR_STR(name,      k1, k2) {comboroll_t_string,  CMB_MATCH_LEFT, 0, COMBOROLL_TERM, {.output_string=comboroll_string_##name}},
 
-#define RtoL_KEY(name, out, k1, k2) {comboroll_t_keycode, CMB_MATCH_RIGHT, COMBOROLL_TERM, {.output_keycode=out}},
-#define RtoL_ARR(name, out, k1, k2) {comboroll_t_array,   CMB_MATCH_RIGHT, COMBOROLL_TERM, {.output_array=comboroll_array_##name}},
-#define RtoL_LIT(name, out, k1, k2) {comboroll_t_string,  CMB_MATCH_RIGHT, COMBOROLL_TERM, {.output_string=comboroll_string_##name}},
-#define RtoL_STR(name,      k1, k2) {comboroll_t_string,  CMB_MATCH_RIGHT, COMBOROLL_TERM, {.output_string=comboroll_string_##name}},
+#define RtoL_KEY(name, out, k1, k2) {comboroll_t_keycode, CMB_MATCH_RIGHT, 0, COMBOROLL_TERM, {.output_keycode=out}},
+#define RtoL_ARR(name, out, k1, k2) {comboroll_t_array,   CMB_MATCH_RIGHT, 0, COMBOROLL_TERM, {.output_array=comboroll_array_##name}},
+#define RtoL_LIT(name, out, k1, k2) {comboroll_t_string,  CMB_MATCH_RIGHT, 0, COMBOROLL_TERM, {.output_string=comboroll_string_##name}},
+#define RtoL_STR(name,      k1, k2) {comboroll_t_string,  CMB_MATCH_RIGHT, 0, COMBOROLL_TERM, {.output_string=comboroll_string_##name}},
 
-#define CMBO_KEY(name, out, k1, k2) {comboroll_t_keycode, CMB_MATCH_BOTH, COMBO_TERM, {.output_keycode=out}},
-#define CMBO_ARR(name, out, k1, k2) {comboroll_t_array,   CMB_MATCH_BOTH, COMBO_TERM, {.output_array=comboroll_array_##name}},
-#define CMBO_LIT(name, out, k1, k2) {comboroll_t_string,  CMB_MATCH_BOTH, COMBO_TERM, {.output_string=comboroll_string_##name}},
-#define CMBO_STR(name,      k1, k2) {comboroll_t_string,  CMB_MATCH_BOTH, COMBO_TERM, {.output_string=comboroll_string_##name}},
+#define CMBO_KEY(name, out, k1, k2) {comboroll_t_keycode, CMB_MATCH_BOTH, 0, COMBO_TERM, {.output_keycode=out}},
+#define CMBO_ARR(name, out, k1, k2) {comboroll_t_array,   CMB_MATCH_BOTH, 0, COMBO_TERM, {.output_array=comboroll_array_##name}},
+#define CMBO_LIT(name, out, k1, k2) {comboroll_t_string,  CMB_MATCH_BOTH, 0, COMBO_TERM, {.output_string=comboroll_string_##name}},
+#define CMBO_STR(name,      k1, k2) {comboroll_t_string,  CMB_MATCH_BOTH, 0, COMBO_TERM, {.output_string=comboroll_string_##name}},
 
 
 comboroll_t comboroll_data[] = {
@@ -219,11 +220,14 @@ const uint16_t PROGMEM comboroll_keys[][2] = {
 #define RtoL_LIT(name, ...)
 #define RtoL_STR(name, ...)
 
+void comboroll_post_init() {
 #undef  _____TRM
 #define _____TRM(name, targ) comboroll_data[COMBOROLL_ID_##name].term = targ;
+#include "combo_defs.h"
 
-void comboroll_post_init() {
-#   include "combo_defs.h"
+#undef  ___NOSFT
+#define ___NOSFT(name) comboroll_data[COMBOROLL_ID_##name].noshift = 1;
+#include "combo_defs.h"
 }
 
 // clang-format on
@@ -257,7 +261,8 @@ void process_comboroll(comboroll_t *cr) {
 }
 
 // Scan for match on first key. Return true on success, and comboroll_longest_term is set
-// to the highest term of possible matches. Shift keys never match.
+// to the highest term of possible matches. Shift keys never match. If the combo has 
+// been tagged with ___NOSFT and shift is on then it won't match.
 bool comboroll_scan_firstkey(uint16_t keycode) {
     bool found = false;
 
@@ -267,13 +272,16 @@ bool comboroll_scan_firstkey(uint16_t keycode) {
     comboroll_longest_term = 0;
     for (int i = 0; i < COMBOROLL_COUNT; i++) {
         if (
-            (CMB_IS_MATCHES_LEFT(comboroll_data[i].direction) && keycode == CMB_KEY_1(i))
-            || (CMB_IS_MATCHES_RIGHT(comboroll_data[i].direction) && keycode == CMB_KEY_2(i))) {
+            ((CMB_IS_MATCHES_LEFT(comboroll_data[i].direction) && keycode == CMB_KEY_1(i))
+            || (CMB_IS_MATCHES_RIGHT(comboroll_data[i].direction) && keycode == CMB_KEY_2(i)))
+            && !((get_mods() & MOD_MASK_SHIFT) && comboroll_data[i].noshift)
+            ) {
 
             found = true;
             if (comboroll_data[i].term > comboroll_longest_term) {
                 comboroll_longest_term = comboroll_data[i].term;
             }
+            break;
         }
     }
     return found;
@@ -293,7 +301,7 @@ comboroll_t *comboroll_scan_secondkey(uint16_t firstkey, uint16_t secondkey) {
             (CMB_IS_MATCHES_LEFT(comboroll_data[i].direction) && firstkey == CMB_KEY_1(i) && secondkey == CMB_KEY_2(i))
             || (CMB_IS_MATCHES_RIGHT(comboroll_data[i].direction) && firstkey == CMB_KEY_2(i) && secondkey == CMB_KEY_1(i))) {
 
-	    if (timer_elapsed(comboroll_timer) <= comboroll_data[i].term) { // don't match combo if it took too long
+	        if (timer_elapsed(comboroll_timer) <= comboroll_data[i].term) { // don't match combo if it took too long
                 result = &comboroll_data[i];
             }
             break;
