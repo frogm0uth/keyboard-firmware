@@ -1,4 +1,4 @@
-# Kyria RSTHD/Prime v33
+# Kyria RSTHD/Prime v35
 
 This is the keymap for my Kyria keyboard from [splitkb.com](https://splitkb.com). The alpha layout was based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/) but is now heavily modified. It's optimized for minimized usage of the inner index column. Features in the code include runtime switching between Mac/Windows/Linux shortcuts and a custom implementation of "comborolls".
 
@@ -44,6 +44,8 @@ My Kyria uses all 6 columns on each hand. However, the lower inner column keys a
 The controller is a Pro Micro with 32kB flash. Currently this might compile or work properly only on a v1 keyboard.
 
 ## Layers
+
+Note: if the images below show 4 thumb keys on the right hand, go to the [v35](https://github.com/frogm0uth/keyboard-firmware/tree/kyria-v35/kyria-rsthd-prime#layers) branch to see proper versions.l
 
 There are a total of 6 layers. The first is the main alpha layer.
 
