@@ -19,4 +19,5 @@
 
 bool is_capsword(void);
 void process_caps_cancel(uint16_t keycode, keyrecord_t *record);
-bool process_record_capsword(uint16_t keycode, keyrecord_t *record);
+bool process_record_capslock(uint16_t keycode, keyrecord_t *record);
+void toggle_caps_word(void);

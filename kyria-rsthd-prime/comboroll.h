@@ -33,7 +33,8 @@ enum comboroll_type {
 typedef struct comboroll_node {
     uint8_t  type:2;
     uint8_t  direction:2;
-    uint16_t term:12;
+    uint8_t  noshift:1;
+    uint16_t term:11;
     //uint16_t key1; // key1 and key2 are stored in a separate array to reduce RAM usage
     //uint16_t key2;
     union {

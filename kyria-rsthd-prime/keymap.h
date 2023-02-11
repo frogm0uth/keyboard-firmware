@@ -93,7 +93,8 @@ enum layers {
 enum custom_keycodes {
     CU_IGNORE = SAFE_RANGE,
 
-    CU_LOCK,   // Lock the current layer
+    CU_LOCK,        // Lock the current layer
+    CU_CAPSWORD,    // Toggle caps-word
 
     CU_SCRSHOT_WIN, // Screenshot a window
     CU_SCRSHOT_RGN, // Start drag-select screenshot
