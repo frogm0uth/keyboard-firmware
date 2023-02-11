@@ -104,6 +104,9 @@ _____TRM( period, 300 )
 // Z on left hand vertical
 CMBO_STR( z,  KC_F,  KC_H )
 
+// Caps word toggle on right hand vertical
+CMBO_KEY( capsword, CU_CAPSWORD, CU_DOT, KC_O )
+
 // Both hands, keyed off period
 CMBO_STR( for,  KC_R, CU_DOT )
 CMBO_STR( min,  KC_S, CU_DOT )

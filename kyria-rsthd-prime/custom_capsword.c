@@ -68,13 +68,24 @@ void process_caps_cancel(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
+/**
+ * Toggle caps word
+ */
+void toggle_caps_word() {
+    if (!host_keyboard_led_state().caps_lock) {
+        bool_capsword = true;
+    }
+    tap_code(KC_CAPS);
+}
 
 /**
- * Toggle caps lock and caps word
+ * Toggle caps lock if both shift keys are held
  */
-bool process_record_capsword(uint16_t keycode, keyrecord_t *record) {
+bool process_record_capslock(uint16_t keycode, keyrecord_t *record) {
 
-    // Handle caps lock switching. Pressing both shift keys turns on caps-word. If the shift keys
+    // Handle caps lock switching. Pressing both shift keys turns on caps-word.
+    //
+    // One -shift shift used to cycle options but may not work any more. It said: If shift keys
     // are one-shot shift, double-tap on one of them also turns on caps-word. Same again to turn
     // off, or type a non-word character such as space. Also turns off full caps lock.
     uint8_t mods = get_mods();
@@ -89,7 +100,7 @@ bool process_record_capsword(uint16_t keycode, keyrecord_t *record) {
         case KC_RSFT:
             if (record->event.pressed) {
                 if ((mods | ossmods) & MOD_MASK_SHIFT) {
-                    bool_capsword = true;
+                    bool_capsword = false;
                     del_mods(MOD_MASK_SHIFT);
 #ifndef NO_ACTION_ONESHOT
                     del_oneshot_mods(MOD_MASK_SHIFT);
@@ -101,19 +112,8 @@ bool process_record_capsword(uint16_t keycode, keyrecord_t *record) {
             break;
         // Toggle full caps lock
         case KC_CAPS:
-        case ALT_T(KC_CAPS):
             bool_capsword = false;
             break; // let QMK process
-
-        // Monitor mod-taps to check for cancel caps-word
-#ifndef NO_ACTION_TAPPING
-        case ALT_T(KC_TAB):
-        case GUI_T(KC_TAB):
-            if (record->event.pressed && record->tap.count) {
-                process_caps_cancel(KC_TAB, record);
-            }
-            break; // let QMK process otherwise
-#endif
     }
 	return true;
 }

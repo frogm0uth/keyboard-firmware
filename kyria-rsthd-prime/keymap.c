@@ -49,7 +49,7 @@ void keyboard_post_init_user(void) {
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-/* ALPHA v33
+/* ALPHA v35
 
  ,-----------------------------------------.                        ,-----------------------------------------.
  |  Esc |   V  |   C  |   W  |   F  |   K  |                        |   J  |   M  |   U  | .  ! | -  _ | BkSp |
@@ -121,7 +121,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  | LOCK | PgUp | Home |  Up  |  End | WinL |                        | WinR | Paste| Copy |  Cut |AppWin| LOCK |
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
  | TabL | PgDn | Left | Down | Right| AppL |                        | AppR |      |      |      |      | TabR |
- |      |      |      |      |      |      |                        |      | Fast |  x5  | More |Delete|      |
+ |      |      |      |      |      |      |                        |      | Fast |  x4  | More |Delete|      |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
  | ScrL |      | Undo |  Tab | Redo |                                      |      |      |      |      | ScrR |
  |      | Shift|      |      |      |                                      |  Cmd |  Alt | Ctrl | Shift|      |
@@ -363,6 +363,13 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
 #endif
 
     switch (keycode) {
+            // Toggle caps word
+        case CU_CAPSWORD:
+            if (record->event.pressed) {
+                toggle_caps_word();
+                return false;
+            }
+            break;
 
 #ifdef LAYER_TAP_TOGGLE
             // layer switching using layer-tap-toggle custom code
@@ -492,8 +499,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #endif
 
 #ifdef CUSTOM_CAPSWORD
-    // Toggle caps word and caps lock
-    if (!process_record_capsword(keycode, record)) {
+    // Toggle caps lock
+    if (!process_record_capslock(keycode, record)) {
         return false;
     }
 #endif
