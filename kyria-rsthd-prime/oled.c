@@ -50,8 +50,6 @@ static const char PROGMEM str_layer_edit[]  = "EDIT    ";
 static const char PROGMEM str_layer_meta[]  = "META    ";
 static const char PROGMEM str_layer_func[]  = "FUNC    ";
 static const char PROGMEM str_layer_snap[]  = "SNAP    ";
-static const char PROGMEM str_layer_curs[]  = "CURS    ";
-static const char PROGMEM str_layer_flip[]  = "FLIP    ";
 
 // clang-format off
 const static char* layer_names[] = {
@@ -60,9 +58,7 @@ const static char* layer_names[] = {
     [EDIT]  = str_layer_edit,
     [META]  = str_layer_meta,
     [FUNC]  = str_layer_func,
-    [SNAP]  = str_layer_snap,
-    [CURS]  = str_layer_curs,
-    [FLIP]  = str_layer_flip
+    [SNAP]  = str_layer_snap
 };
 //clang-format on
 
@@ -70,7 +66,7 @@ static const char PROGMEM str_encoder_alttab[]  = "<App            App>";
 static const char PROGMEM str_encoder_volume[]  = "<-     Volume     +>";
 static const char PROGMEM str_encoder_zoom[]    = "<-      Zoom      +>";
 static const char PROGMEM str_encoder_search[]  = "<Prev  Search  Next>";
-static const char PROGMEM str_encoder_browser[] = "<Back  Browser  Fwd>";
+//static const char PROGMEM str_encoder_browser[] = "<Back  Browser  Fwd>";
 static const char PROGMEM str_encoder_history[] = "<Undo          Redo>";
 static const char PROGMEM str_encoder_blank[]   = "                    ";
 
@@ -187,7 +183,7 @@ static void render_status(void) {
 
         case META:
             if (mods & MOD_MASK_SHIFT) {
-                oled_write_P(str_encoder_browser, false);
+                oled_write_P(str_encoder_search, false);
             } else {
                 oled_write_P(str_encoder_volume, false);
             }
@@ -201,12 +197,8 @@ static void render_status(void) {
             } else if (mods & MOD_MASK_SHIFT) {
                 oled_brightness_encoder_status();
             } else {
-                oled_write_P(str_encoder_search, false);
+                oled_write_P(str_encoder_zoom, false);
             }
-            break;
-
-        case CURS:
-            oled_write_P(str_encoder_zoom, false);
             break;
 
         default:

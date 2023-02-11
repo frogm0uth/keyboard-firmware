@@ -59,11 +59,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |      |      |   P  |   G  |   D  |                                      |   L  |   Y  | ,  ? |      |      |
  | META | Shift|      |      |      |                                      |      |      |      | Shift| META |
  `----------------------------------'                                      `----------------------------------'
-
- .                 ,------.      ,--------------------.  ,---------------------------.
- .                 |ScrLck|      |   "  |   E  |   '  |  | Enter| Space|  Tab |      |
- .                 |      |      | SYMS |      |      |  |      |      | EDIT | CURS |
- .                 `------'      `--------------------'  `---------------------------'
+ .                                                            Search
+ .                 ,------.      ,--------------------.  ,--------------------.
+ .                 |ScrLck|      |   "  |   E  |   '  |  | Enter| Space|  Tab |
+ .                 |      |      | SYMS |      |      |  |      |      | EDIT |
+ .                 `------'      `--------------------'  `--------------------'
  */
 
     [ALPHA] = KEY_LAYOUT_stack(
@@ -78,7 +78,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                             KC_L,  KC_Y,  CU_COMM, KC_RSFT, CL_META,
 
         /* Encoder & Thumbs */
-        SC_SCREEN_LOCK, CL_SYMS, KC_E, CU_QTQT, KC_ENT, KC_SPC, CL_EDIT, CL_CURS
+        SC_SCREEN_LOCK, CL_SYMS, KC_E, CU_QTQT, KC_ENT, KC_SPC, CL_EDIT
     ),
 
 
@@ -93,10 +93,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |      | Shift| Ctrl |  Alt |  Cmd |                                      |      |      |      |      |      |
  `----------------------------------'                                      `----------------------------------'
 
- .                 ,------.      ,--------------------.  ,---------------------------.
- .                 |      |      |      |   -  |  Tab |  | Enter| Space|   .  |      |
- .                 |      |      | (**) |      |      |  |      |      |      |      |
- .                 `------'      `--------------------'  `---------------------------'
+ .                 ,------.      ,--------------------.  ,--------------------.
+ .                 |      |      |      |   -  |  Tab |  | Enter| Space|   .  |
+ .                 |      |      | (**) |      |      |  |      |      |      |
+ .                 `------'      `--------------------'  `--------------------'
  */
 
     [SYMS] = KEY_LAYOUT_stack(
@@ -111,7 +111,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                               CU_4,  CU_5,  CU_6,  KC_PLUS,  SC_REVEAL_DESKTOP,
 
         /* Encoder & Thumbs */
-        ___X___, _______, KC_MINS, KC_TAB, KC_ENT, KC_SPC, CU_DOT_DOT, ___X___
+        ___X___, _______, KC_MINS, KC_TAB, KC_ENT, KC_SPC, CU_DOT_DOT
     ),
 
 
@@ -127,10 +127,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |      | Shift|      |      |      |                                      |  Cmd |  Alt | Ctrl | Shift|      |
  `----------------------------------'                                      `----------------------------------'
  .                                          Expose
- .                 ,------.      ,--------------------.  ,---------------------------.
- .                 |      |      |  Del | BkSp | Enter|  |      |      |      |      |
- .                 |      |      |      |      |      |  |      |      | (**) |      |
- .                 `------'      `--------------------'  `---------------------------'
+ .                 ,------.      ,--------------------.  ,--------------------.
+ .                 |      |      |  Del | BkSp | Enter|  |      |      |      |
+ .                 |      |      |      |      |      |  |      |      | (**) |
+ .                 `------'      `--------------------'  `--------------------'
  */
 
     [EDIT] = KEY_LAYOUT_stack(
@@ -146,7 +146,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                          KC_RGUI,   KC_RALT,  KC_RCTL,  KC_RSFT,            SC_NEXT_SCREEN,
 
         /* Encoder & Thumbs */
-        SC_APP_ZOOM_RESET, KC_DEL, KC_BSPC, KC_ENT, ___X___, ___X___, _______, ___X___
+        SC_APP_ZOOM_RESET, KC_DEL, KC_BSPC, KC_ENT, ___X___, ___X___, _______
     ),
 
 
@@ -161,10 +161,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  | (**) | Shift|      |      |      |                                      |      |      |      | Shift| (**) |
  `----------------------------------'                                      `----------------------------------'
 
- .                 ,------.      ,--------------------.  ,---------------------------.
- .                 | Mute |      |      | AppR | WinR |  | WinR | AppR |      |      |
- .                 |      |      | FUNC |      |      |  |      |      | SNAP |      |
- .                 `------'      `--------------------'  `---------------------------'
+ .                 ,------.      ,--------------------.  ,--------------------.
+ .                 | Mute |      |      | AppR | WinR |  | WinR | AppR |      |
+ .                 |      |      | FUNC |      |      |  |      |      | SNAP |
+ .                 `------'      `--------------------'  `--------------------'
  */
 
     [META] = KEY_LAYOUT_stack(
@@ -179,7 +179,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                            SC_BROWSER_BACK, SC_BROWSER_FWD, ___X___,  _______,       _______,
 
         /* Encoder & Thumbs */
-        KC_MUTE, CL_FUNC, CU_APPSWITCH_RIGHT, CU_NEXT_WINDOW, CU_NEXT_WINDOW, CU_APPSWITCH_RIGHT, CL_SNAP, ___X___
+        KC_MUTE, CL_FUNC, CU_APPSWITCH_RIGHT, CU_NEXT_WINDOW, CU_NEXT_WINDOW, CU_APPSWITCH_RIGHT, CL_SNAP
     ),
 
 
@@ -194,10 +194,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  | (**) | Shift| Ctrl |  Alt |  Cmd |                                      |      |      |      |      | (**) |
  `----------------------------------'                                      `----------------------------------'
 
- .                 ,------.      ,--------------------.  ,---------------------------.
- .                 |      |      |      |      |      |  | Btn3 | Btn1 | Btn2 |      |
- .                 |      |      | (**) |      |      |  |      |      |      |      |
- .                 `------'      `--------------------'  `---------------------------'
+ .                 ,------.      ,--------------------.  ,--------------------.
+ .                 |      |      |      |      |      |  | Btn3 | Btn1 | Btn2 |
+ .                 |      |      | (**) |      |      |  |      |      |      |
+ .                 `------'      `--------------------'  `--------------------'
  */
 
     [FUNC] = KEY_LAYOUT_stack(
@@ -212,7 +212,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                           KC_F4,   KC_F5,   KC_F6,   KC_F12,  _______,
 
         /* Encoder & Thumbs */
-        ___X___, _______, ___X___, ___X___, CM_BTN3, CM_BTN1, CM_BTN2, ___X___
+        ___X___, _______, ___X___, ___X___, CM_BTN3, CM_BTN1, CM_BTN2
     ),
 
 
@@ -221,16 +221,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  ,-----------------------------------------.                        ,-----------------------------------------.
  | LOCK |      |SnapTL| SnapT|SnapTR|      |                        |      |      |      |      |      | LOCK |
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
- |      |      | SnapL| SnapV| SnapR|      |                        |      | SSRgn| SSWin| SSScr| SSApp|      |
+ |      |      | SnapL| SnapV| SnapR|      |                        |      | SSRgn| SSWin| SSScr| SSApp|!WRITE|
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
  |      |      |SnapBL| SnapB|SnapBR|                                      |      |      |      |      |      |
  | (**) |      |      |      |      |                                      |  Cmd |  Alt | Ctrl | Shift| (**) |
  `----------------------------------'                                      `----------------------------------'
 
- .                 ,------.      ,--------------------.  ,---------------------------.
- .                 |!WRITE|      | Btn3 | Btn1 | Btn2 |  |      | !WIPE|      |      |
- .                 |      |      |      |      |      |  |      |      | (**) |      |
- .                 `------'      `--------------------'  `---------------------------'
+ .                 ,------.      ,--------------------.  ,--------------------.
+ .                 |  Z0  |      | Btn3 | Btn1 | Btn2 |  |      | !WIPE|      |
+ .                 |      |      |      |      |      |  |      |      | (**) |
+ .                 `------'      `--------------------'  `--------------------'
  */
 
     [SNAP] = KEY_LAYOUT_stack(
@@ -241,76 +241,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
          /* Right hand */
                  ___X___, ___X___,         ___X___,         ___X___,              ___X___,           CU_LOCK,
-                 ___X___, CU_SCRSHOT_RGN,  CU_SCRSHOT_WIN,  SC_SCREENSHOT_SCREEN, SC_SCREENSHOT_APP, ___X___,
+                 ___X___, CU_SCRSHOT_RGN,  CU_SCRSHOT_WIN,  SC_SCREENSHOT_SCREEN, SC_SCREENSHOT_APP, CU_WRITE,
                           KC_RGUI,         KC_RALT,         KC_RCTL,              KC_RSFT,           _______,
 
         /* Encoder & Thumbs */
-        CU_WRIT, CM_BTN3, CM_BTN1, CM_BTN2, ___X___, CU_WIPE, _______, ___X___
-    ),
-
-/* CURS
-
- ,-----------------------------------------.                        ,-----------------------------------------.
- | LOCK |   V  |   C  |   W  |   F  |   K  |                        |      |      |      | BkSp |  Tab | LOCK |
- |------+------+------+------+---Z--+------|                        |------+------+------+------+------+------|
- |   X  |   R  |   S  |   T  |   H  |   B  |                        |      |      | FLIP |  Up  | Right| Enter|
- |------+------+------+------+------+------'                        `------+------+------+------+------+------|
- |      |      |   P  |   G  |   D  |                                      |      | Left | Down |      |      |
- |      | Shift|      |      |      |                                      |      |      |      |      | Shift|
- `----------------------------------'                                      `----------------------------------'
-
- .                 ,------.      ,--------------------.  ,---------------------------.
- .                 | Zoom0|      |   "  |   E  |   '  |  |      |      |      |      |
- .                 |      |      |      |      |      |  |      |      |      | (**) |
- .                 `------'      `--------------------'  `---------------------------'
-
- */
-    [CURS] = KEY_LAYOUT_stack(
-        /* Left hand */
-        CU_LOCK, KC_V,    KC_C,   KC_W,    KC_F,    KC_K,
-        KC_X,    KC_R,    KC_S,   KC_T,    KC_H,    KC_B,
-        ___X___, KC_LSFT, KC_P,   KC_G,    KC_D,
-
-         /* Right hand */
-                 ___X___, ___X___, ___X___, KC_BSPC, KC_TAB,   CU_LOCK,
-                 ___X___, ___X___, CL_FLIP, KC_UP,   KC_RIGHT, KC_ENT,
-                          ___X___, KC_LEFT, KC_DOWN, ___X___,  KC_RSFT, 
-
-        /* Encoder & Thumbs */
-        SC_APP_ZOOM_RESET, KC_DQUO, KC_E, CU_QTQT, ___X___, ___X___, ___X___, _______
-    ),
-
-
-/* FLIP
-
- ,-----------------------------------------.                        ,-----------------------------------------.
- | LOCK |   -  |   .  |   U  |   M  |   J  |                        |      |      |      | BkSp |  Tab | LOCK |
- |------+------+------+------+------+------|                        |------+------+------+------+------+------|
- |   Q  |   A  |   O  |   I  |   N  |   ;  |                        |      |      | (**) |  Up  | Right| Enter|
- |------+------+------+------+------+------.                        `------+------+------+------+------+------|
- |      |      |   ,  |   Y  |   L  |                                      |      | Left | Down |      |      |
- |      | Shift|      |      |      |                                      |      |      |      |      | Shift|
- `----------------------------------'                                      `----------------------------------'
-
- .                 ,------.      ,--------------------.  ,---------------------------.
- .                 |      |      |  Tab | Space| Enter|  |      |      |      |      |
- .                 |      |      |      |      |      |  |      |      |      | (**) |
- .                 `------'      `--------------------'  `---------------------------'
- */
-
-    [FLIP] = KEY_LAYOUT_stack(
-        /* Left hand */
-        CU_LOCK, KC_MINS, CU_DOT,  KC_U,    KC_M,    KC_J,
-        KC_Q,    KC_A,    KC_O,    KC_I,    KC_N,    KC_SCLN,
-        ___X___, KC_LSFT, CU_COMM, KC_Y,    KC_L, 
-
-        /* Right hand */ 
-                 ___X___, ___X___, ___X___, KC_BSPC, KC_TAB,   CU_LOCK,
-                 ___X___, ___X___, _______, KC_UP,   KC_RIGHT, KC_ENT,
-                          ___X___, KC_LEFT, KC_DOWN, ___X___,  KC_RSFT, 
-
-        /* Encoder & Thumbs */
-        ___X___, KC_TAB,  KC_SPC,  KC_ENT, ___X___, ___X___, ___X___, _______
+        SC_APP_ZOOM_RESET, CM_BTN3, CM_BTN1, CM_BTN2, ___X___, CU_WIPE, _______
     ),
 
 };
@@ -450,15 +385,6 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
         case CL_SNAP:
             return layer_tap_toggle(KC_NO, SNAP, record);
             break;
-
-        case CL_CURS:
-            return layer_tap_toggle(KC_NO, CURS, record);
-            break;
-
-        case CL_FLIP:
-            return layer_tap_toggle(KC_NO, FLIP, record);
-            break;
-
 #else
             // layer switching using QMK layer-tap: handle cases where tap code is 16-bit or has custom shift
         case CL_SYMS:
@@ -520,7 +446,7 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
 
             /* Save RGB state to EEPROM.
              */
-        case CU_WRIT:
+        case CU_WRITE:
             if (record->event.pressed) {
 #ifdef RGBLIGHT_ENABLE
                 rgblight_sethsv(rgblight_get_hue(), rgblight_get_sat(), rgblight_get_val());

@@ -71,7 +71,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
         case META:
             if (left) {
                 if (mods & MOD_MASK_SHIFT) {
-                    keycode = clockwise ? SC(SC_BROWSER_FWD) : SC(SC_BROWSER_BACK);
+                    keycode = clockwise ? SC(SC_NEXT_SEARCH) : SC(SC_PREV_SEARCH);
                 } else {
                     keycode = clockwise ? KC_VOLU : KC_VOLD;
                 }
@@ -91,15 +91,8 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                     oled_brightness_encoder(clockwise);
 #endif
                 } else {
-                    keycode = clockwise ? SC(SC_NEXT_SEARCH) : SC(SC_PREV_SEARCH);
+                    keycode = clockwise ? SC(SC_APP_ZOOM_IN) : SC(SC_APP_ZOOM_OUT);
                 }
-            }
-            break;
-
-            // On the Cursor layer, zoom the application window.
-        case CURS:
-            if (left) {
-                keycode = clockwise ? SC(SC_APP_ZOOM_IN) : SC(SC_APP_ZOOM_OUT);
             }
             break;
       }

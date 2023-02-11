@@ -79,9 +79,7 @@ enum layers {
         CL_EDIT,       \
         CL_META,       \
         CL_FUNC,       \
-        CL_SNAP,       \
-        CL_CURS,       \
-        CL_FLIP
+        CL_SNAP
 #else
 #    define CL_BASE TO(ALPHA)
 #    define CL_SYMS LT(SYMS,   KC_DQUO)
@@ -89,8 +87,6 @@ enum layers {
 #    define CL_META LT(META,   KC_NO)
 #    define CL_FUNC LT(FUNC,   KC_NO)
 #    define CL_SNAP LT(SNAP,   KC_NO)
-#    define CL_CURS LT(CURS,   KC_NO)
-#    define CL_FLIP LT(FLIP,   KC_NO)
 #endif
 // clang-format on
 
@@ -106,7 +102,7 @@ enum custom_keycodes {
     CU_APPSWITCH_LEFT,
 
     CU_WIPE, // Wipe the EEPROM
-    CU_WRIT, // Save current state to EEPROM
+    CU_WRITE, // Save current state to EEPROM
 
 #ifdef LAYER_TAP_TOGGLE
     LAYER_KEYS, // Keys for layer-tap-toggle
@@ -179,7 +175,7 @@ enum custom_keycodes {
                   R18, R19, R20, R21, R22, R23,     \
                        R35, R36, R37, R38, R39,     \
   													\
-    L40, L42, L43, L44, R45, R46, R47, R48      \
+    L40, L42, L43, L44, R45, R46, R47           \
 )                                               \
 {                                               \
     { KC_NO, KC_NO, L05,   L04,   L03,   L02,   L01,   L00   }, \
@@ -189,6 +185,6 @@ enum custom_keycodes {
     { KC_NO, KC_NO, R06,   R07,   R08,   R09,   R10,   R11   }, \
     { KC_NO, KC_NO, R18,   R19,   R20,   R21,   R22,   R23   }, \
     { KC_NO, KC_NO, KC_NO, R35,   R36,   R37,   R38,   R39   }, \
-    { R45,   R46,   R47,   R48,   KC_NO, KC_NO, KC_NO, KC_NO }, \
+    { R45,   R46,   R47,   KC_NO, KC_NO, KC_NO, KC_NO, KC_NO }, \
 }
 // clang-format on
