@@ -1,50 +1,38 @@
-ALPHA v32 -> v33
+ALPHA v33
 
 (None)	App-switcher
-xPress	Mute
-+Press	Lock
-
+Press	Lock
 Shift	App-switcher reverse 
-xCtrl	Volume up/down
 
 
 EDIT
 
-x(None)	App zoom in/out
-xPress	App zoom reset
-
-+(None)	History fwd/back
-+Press	None
+(None)	History fwd/back
+Press	None
 EditMod	Edit fwd/back
-,
+
 
 META
 
-+(None)	Volume up/down
-+Press	Mute
-+Shift	Browser fwd/back
+(None)	Volume up/down
+Press	Mute
+Shift	Search prev/next
+
 
 SNAP
 
-(None)	Search prev/next
-Press	Write EEPROM
+(None)	App zoom in/out
+Press	App zoom reset
 Shift	OLED
 Ctrl	Hue
-Alt	Saturation
-Cmd	Value
-
-
-CURS
-
-+(None)	App zoom in/out
-+Press	App zoom reset
+Alt		Saturation
+Cmd		Value
 
 
 
 UNUSED
 
 	Brightness up/down
-x	History fwd/back
-x	Browser fwd/back
+	Browser fwd/back
 
 

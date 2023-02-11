@@ -13,7 +13,6 @@ This is the keymap for my Kyria keyboard from [splitkb.com](https://splitkb.com)
       * [META](#meta)
       * [FUNC](#func)
       * [SNAP](#snap)
-      * [CURS and FLIP](#curs-and-flip)
    * [Other](#other)
       * [How to build](#how-to-build)
       * [RSTHD variants and similar layouts](#rsthd-variants-and-similar-layouts)
@@ -36,21 +35,19 @@ Coming from a "slab" QWERTY keyboard to a programmable ergo split, I wanted to o
 - Comfort. For me, that largely means de-emphasizing the inner index columns.
 - Better support for ambidextrous use of the trackpad or mouses (I use two). For example, it should be possible to do things like cut-copy-paste from either hand alone.
 
-Typing speed and reducing the number of keys on the keyboard are not important goals to me.
+Typing speed and reducing the number of keys on the keyboard are not important goals to me. With that said, my layout has now shrunk to 40 keys.
 
 ### Keyboard configuration
 
-My Kyria uses all 6 columns on each hand. The left side has an OLED, an encoder, and three thumb keys. The right side has no OLED or encoder, and four thumb keys. The top two thumb keys on each side are not on the board.
+My Kyria uses all 6 columns on each hand. However, the lower inner column keys are absent. There are three thumb keys on each side. The left side has an OLED and an encoder, while the right side has neither.
 
-The controller is a Pro Micro and this keymap only just squeezes in.
-
-Currently this might compile or work properly only on a v1 keyboard.
+The controller is a Pro Micro with 32kB flash. Currently this might compile or work properly only on a v1 keyboard.
 
 ## Layers
 
-There are a total of 8 layers. The first is the main alpha layer.
+There are a total of 6 layers. The first is the main alpha layer.
 
-The other layers are activated with either a thumb or pinky. All are hold-to-activate. However the top corner keys are layer lock keys, which lock the layer on, or release it if it is locked. (A locked layer can also be released by pressing the layer key.)
+The other layers are activated with either a thumb or pinky. All are hold-to-activate but the layer can be locked on with the top corner keys. Press one of these or the layer key to turn the layer off.
 
 Layer switching is done with custom code, so that a. shifted and custom keys can be emitted on the tap and b. so that the layer activates immediately for faster access to the keys in the layer. See `layer_tap_toggle.c/h`.
 
@@ -66,7 +63,7 @@ The alpha layout aims to reduce lateral finger movement on the index finger. In 
 
 Some of the punctuation keys use non-standard shift mappings. See `shift_defs.h`.
 
-Except for Shift, there are no modifiers on the alpha layer. To access them, use the SYMS or EDIT layer, hold the modifiers down, then release the layer key. (This is a bit like Callum mods except it doesn't use one-shots. It's not exactly how I wanted to do it, but it was easy to implement.)
+Except for Shift, there are no modifiers on the alpha layer. To access them, use the SYMS or EDIT layer, hold the modifiers down, then release the layer key. (This is a bit like Callum mods except it doesn't use one-shots.)
 
 There are a number of combos on this layer, defined with a bunch of macros to reduce boilerplate. I have a userspace implementation called "[comboroll](docs/comborolls.md)" to avoid timing issues with QMK's overlapping combos. See `combo_defs.h` for combo definitions.
 
@@ -142,23 +139,9 @@ Activated by the right thumb from the META layer.
 
 So called because of the keys for window snapping, which snap to one of the screen halves or quadrants. The center key sets the window to the full vertical height. This works on macOS if [Rectangle](https://rectangleapp.com) is running; not really working on Windows and Linux yet.
 
-Three mouse buttons are available on the left thumb.
+Three mouse buttons are available on the left thumb. On the right are shortcuts for screenshots.
 
 The encoder is used to control the backlight LEDs and OLED brightness (depending on which modifier is held.)
-
-### CURS and FLIP
-
-Activated by the right thumb. Experimental.
-
-![kyria-rsthd-prime-curs](docs/images/kyria-rsthd-prime-curs.png)
-
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/5b6ce99346e3a8f9fffa5e4b39318664)
-
-![kyria-rsthd-prime-flip](docs/images/kyria-rsthd-prime-flip.png)
-
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/8474e615b698442e7567f966f6e6c8df)
-
-One-hand cursor diamond and flippable alpha keys. The alpha keys are for navigation in the macOS finder.
 
 
 ## Other
