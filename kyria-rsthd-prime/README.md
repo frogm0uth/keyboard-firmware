@@ -9,16 +9,17 @@ This is the keymap for my Kyria keyboard from [splitkb.com](https://splitkb.com)
       * [Features](#features)
          * [Platform-independent shortcuts](#platform-independent-shortcuts)
          * [Comborolls](#comborolls)
+         * [Custom shift keys](#custom-shift-keys)
          * [Custom edit modifiers](#custom-edit-modifiers)
          * [Custom layer switching](#custom-layer-switching)
-   * [Layers](#layers)
-      * [ALPHA](#alpha)
+   * [Alpha layer](#alpha-layer)
+   * [Other layers](#other-layers)
       * [SYMS](#syms)
       * [EDIT](#edit)
       * [META](#meta)
       * [FUNC](#func)
       * [SNAP](#snap)
-   * [Other](#other)
+   * [Backmatter](#backmatter)
       * [How to build](#how-to-build)
       * [RSTHD variants and similar layouts](#rsthd-variants-and-similar-layouts)
       * [Relevant articles and resources](#relevant-articles-and-resources)
@@ -70,13 +71,9 @@ This is platform independent shortcuts taken to the max. I can never reliably re
 
 Layer switching is done with custom code, so that a. shifted and custom keys can be emitted on the tap and b. so that the layer activates immediately for faster access to the keys in the layer. See `layer_tap_toggle.c/h`.
 
-## Layers
+## Alpha layer
 
-Note: if the images below show 4 thumb keys on the right hand, go to the [v35](https://github.com/frogm0uth/keyboard-firmware/tree/kyria-v35/kyria-rsthd-prime#layers) branch to see proper versions.
-
-There are a total of 6 layers. The first is the main alpha layer. The other layers are activated with either a thumb or pinky. All are hold-to-activate but the layer can be locked on with the top corner keys. Press one of these or the layer key to turn the layer off.
-
-### ALPHA
+*Note: if the images below show 4 thumb keys on the right hand, go to the [v35](https://github.com/frogm0uth/keyboard-firmware/tree/kyria-v35/kyria-rsthd-prime#alpha-layer) branch to see proper versions.*
 
 ![kyria-rsthd-prime-alpha](docs/images/kyria-rsthd-prime-alpha.png)
 
@@ -84,11 +81,15 @@ There are a total of 6 layers. The first is the main alpha layer. The other laye
 
 The alpha layout aims to reduce lateral finger movement on the index finger. In fact the lower key of the inner column has been completely removed in this version. A slightly older version performed very well in an [analyzer](docs/prime-on-the-analyzer.md), with low SFU (same finger utilization) stats and low travel distance. For absolute minimum SFBs, swap P and F.  For lower left pinky usage (but higher inner index), swap V and J.
 
-Some of the punctuation keys use non-standard shift mappings. See `shift_defs.h`.
-
 Except for Shift, there are no modifiers on the alpha layer. To access them, use the SYMS or EDIT layer, hold the modifiers down, then release the layer key. (This is a bit like Callum mods except it doesn't use one-shots.)
 
-This layout works best with [comborolls](docs/comborolls.md). I recommend at a minimum setting up a combo for ER on the right hand. If that works out, add SP, ES, ED, and VE, then consider the rest of the comborolls at the link.
+This layout really works best with [comborolls](docs/comborolls.md). I recommend at a minimum setting up a combo for ER on the right hand. If that works out, add SP, ES, ED, and VE, then consider the rest of the comborolls at the link.
+
+## Other layers
+
+*Note: if the images below show 4 thumb keys on the right hand, go to the [v35](https://github.com/frogm0uth/keyboard-firmware/tree/kyria-v35/kyria-rsthd-prime#other-layers) branch to see proper versions.*
+
+There are five more layers, for a total of 6. They are activated with either a thumb or pinky. All are hold-to-activate but the layer can be locked on with the top corner keys. Press one of these or the layer key to turn the layer off.
 
 ### SYMS
 
@@ -165,7 +166,7 @@ Three mouse buttons are available on the left thumb. On the right are shortcuts 
 The encoder is used to control the backlight LEDs and OLED brightness (depending on which modifier is held.)
 
 
-## Other
+## Backmatter
 
 ### How to build
 
