@@ -71,7 +71,7 @@ static const char PROGMEM str_encoder_history[] = "<Undo          Redo>";
 static const char PROGMEM str_encoder_blank[]   = "                    ";
 
 static const char PROGMEM str_oled_header[]     = "     RSTHD/Prime    ";
-static const char PROGMEM str_oled_version[]    = "         v33        ";
+static const char PROGMEM str_oled_version[]    = "         v35        ";
 static const char PROGMEM str_oled_caps[]       = "        CAPS        ";
 static const char PROGMEM str_oled_newline[]    = "\n";
 
