@@ -26,8 +26,9 @@
 #include "config.h"
 #include "keymap.h"
 
-// Emit an array of keycodes in PROGMEM
+// Emit an array of keycodes in PROGMEM. All mods are cleared first.
 void process_comboroll_array(const uint16_t *keyptr) {
+    clear_mods();
     uint16_t keycode = pgm_read_word(keyptr++);
     while (keycode != KC_NO) {
         tap_code16(keycode);
