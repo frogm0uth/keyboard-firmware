@@ -80,36 +80,37 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         SC_SCREEN_LOCK, CL_SYMS, KC_E, KC_MINS, KC_ENT, KC_SPC, CL_EDIT
     ),
 
+
 /* SYMS
 
  ,-----------------------------------------.                        ,----------- ?> --- <? -------------------.
- | LOCK |      |  Cut | Copy | Paste| WinR |                        |   ^  | ]  7 | #  8 | [  9 |   $  | LOCK |
+ | LOCK |      |  Cut | Copy | Paste|      |                        |   ^  | ]  7 | #  8 | [  9 |   $  | LOCK |
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
- |   \  |   |  |   (  |   *  |   )  | AppR |                        | &  @ | >  1 | /  2 | <  3 | =  0 | ~  ` |
+ |   \  |   |  |   (  |   *  |   )  |  Tab |                        | &  @ | >  1 | /  2 | <  3 | =  0 | ~  ` |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
- |FulScr|      |      |      |      |                                      | }  4 | %  5 | {  6 |   +  |DskTop|
+ |FulScr|      |      |      |      |                                      | }  4 | %  5 | {  6 | -  + |DskTop|
  |      | Shift| Ctrl |  Alt |  Cmd |                                      |      |      |      |      |      |
  `----------------------------------'                                      `----------------------------------'
 
  .                 ,------.      ,--------------------.  ,--------------------.
- .                 |      |      |      |   -  |  Tab |  | Enter| Space|   .  |
+ .                 |      |      |      |      |      |  | Enter| Space|   .  |
  .                 |      |      | (**) |      |      |  |      |      |      |
  .                 `------'      `--------------------'  `--------------------'
  */
 
     [SYMS] = KEY_LAYOUT_stack(
         /* Left hand */
-        CU_LOCK,        ___X___,  SC_CUT,   SC_COPY,  SC_PASTE,  CU_NEXT_WINDOW,
-        KC_BSLS,        KC_PIPE,  KC_LPRN,  KC_ASTR,  KC_RPRN,   CU_APPSWITCH_RIGHT,
+        CU_LOCK,        ___X___,  SC_CUT,   SC_COPY,  SC_PASTE,  ___X___,
+        KC_BSLS,        KC_PIPE,  KC_LPRN,  KC_ASTR,  KC_RPRN,   KC_TAB,
         SC_FULLSCREEN,  KC_LSFT,  KC_LCTL,  KC_LALT,  KC_LGUI,
 
         /* Right hand */
-                  KC_CIRC,    CU_7,  CU_8,  CU_9,  KC_DLR,   CU_LOCK,
-                  CU_AMP_AT,  CU_1,  CU_2,  CU_3,  CU_0,     CU_TILDE_GRAVE,
-                              CU_4,  CU_5,  CU_6,  KC_PLUS,  SC_REVEAL_DESKTOP,
+                  KC_CIRC,    CU_7,  CU_8,  CU_9,  KC_DLR,        CU_LOCK,
+                  CU_AMP_AT,  CU_1,  CU_2,  CU_3,  CU_0,          CU_TILDE_GRAVE,
+                              CU_4,  CU_5,  CU_6,  CU_MINS_PLUS,  SC_REVEAL_DESKTOP,
 
         /* Encoder & Thumbs */
-        ___X___, _______, KC_MINS, KC_TAB, KC_ENT, KC_SPC, CU_DOT_DOT
+        ___X___, _______, ___X___, ___X___, KC_ENT, KC_SPC, CU_DOT_DOT
     ),
 
 

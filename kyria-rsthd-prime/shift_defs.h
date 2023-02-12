@@ -41,6 +41,7 @@ DEFINE_SHIFT( CU_COMMA_QUES,   KC_COMM, KC_QUES )
 // Custom punctuation pairs on syms layer
 DEFINE_SHIFT( CU_TILDE_GRAVE,  KC_TILD, KC_GRV )
 DEFINE_SHIFT( CU_AMP_AT,       KC_AMPR, KC_AT )
+DEFINE_SHIFT( CU_MINS_PLUS,    KC_MINS, KC_PLUS )
 
 // Keys that are the same whether shifted or not
 DEFINE_SHIFT( CU_DOT_DOT,      KC_DOT,  KC_DOT )

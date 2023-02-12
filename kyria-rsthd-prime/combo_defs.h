@@ -131,20 +131,19 @@ CMBO_LIT( ifdef,  "#ifdef",  KC_F, CU_DOT )
 CMBO_LIT( define, "#define", KC_D, CU_DOT )
 
 // More rolls, which may or may not be kept
-RtoL_STR( et,     CU_DOT, CU_QTQT )
-RtoL_LIT( espace, "e ",   KC_SPC,  KC_U )  _____TRM( espace,  300 )
+RtoL_ARR( quote_ll,
+    ARRAY_PROTECT(
+        KC_QUOT,
+        KC_L,
+        KC_L
+    ), CU_DOT, CU_QTQT )
+
+RtoL_STR( et,               KC_U,   CU_QTQT )
+RtoL_LIT( espace,   "e ",   KC_SPC, KC_U )  _____TRM( espace,  300 )
 
 // Utilities
-CMBO_KEY( search, SC_SEARCH, KC_ENTER, KC_SPC )      // System search box, right thumb
+CMBO_KEY( search, SC_SEARCH,     KC_ENTER, KC_SPC )  // System search box, right thumb
 CMBO_KEY( expose, SC_EXPOSE_ALL, KC_BSPC, KC_ENT )   // Window expose, left thumb on EDIT layer
-
-//CMBO_ARR( esc_x,                                   // Escape-X for emacs. Keep as example of how to use array
-//        ARRAY_PROTECT(
-//            KC_ESC,
-//            KC_X
-//     ),
-//    KC_V, KC_C )
-
 
 // Syntax layer
 RtoL_LIT( quesrangle,      "?>",    CU_7, CU_8 )   ___NOSFT( quesrangle )
