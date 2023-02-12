@@ -281,7 +281,8 @@ bool comboroll_scan_firstkey(uint16_t keycode) {
             if (comboroll_data[i].term > comboroll_longest_term) {
                 comboroll_longest_term = comboroll_data[i].term;
             }
-            break;
+            // don't break here - need to keep going to find the longest term for
+            // any combo that starts with this letter
         }
     }
     return found;
