@@ -54,6 +54,7 @@
 // Anti-SFU - rolls
 LtoR_STR( sc, KC_C, KC_W )
 LtoR_STR( sp, KC_P, KC_G )
+
 RtoL_STR( ee, KC_Y, CU_COMM )
 
 // Anti-SFU - vertical
@@ -63,11 +64,13 @@ CMBO_STR( lm, KC_M, KC_N )
 CMBO_STR( ui, KC_U, KC_I )
 
 // Anti-pinballing
+LtoR_STR( m,  KC_S, KC_D )
+LtoR_STR( n,  KC_T, KC_D )
+
 RtoL_STR( er, KC_O, KC_A )
 RtoL_STR( ed, KC_L, KC_Y )
 RtoL_STR( es, KC_L, CU_COMM )
 RtoL_STR( ve, KC_I, CU_COMM )
-LtoR_STR( m,  KC_S, KC_D )
 
 // Awkward bigrams/trigrams
 LtoR_STR( qu,  KC_V, KC_F )
@@ -81,8 +84,7 @@ RtoL_STR( you, KC_U, CU_DOT )
 LtoR_STR( ck,  KC_C, KC_F )
 LtoR_STR( rk,  KC_R, KC_W )
 LtoR_STR( br,  KC_R, KC_H )
-LtoR_STR( bl,  KC_T, KC_D )
-LtoR_STR( bo,  KC_P, KC_D )
+LtoR_STR( b,   KC_P, KC_D )
 
 // More typing comfort
 LtoR_STR( fr,   KC_S, KC_F )
@@ -95,11 +97,8 @@ RtoL_STR( all,  KC_N, CU_DOT )
 RtoL_STR( ough, KC_N, CU_COMM )
 
 // Alternate punctuation on left hand
-RtoL_KEY( comma,  KC_COMM, KC_P, KC_G )
-_____TRM( comma,  300 )
-
-RtoL_KEY( period, KC_DOT,  KC_C, KC_W )
-_____TRM( period, 300 )
+RtoL_KEY( comma,  KC_COMM, KC_P, KC_G )  _____TRM( comma,  300 )
+RtoL_KEY( period, KC_DOT,  KC_C, KC_W )  _____TRM( period, 300 )
 
 // Z on left hand vertical
 CMBO_STR( z,  KC_F,  KC_H )
@@ -107,17 +106,18 @@ CMBO_STR( z,  KC_F,  KC_H )
 // Caps word toggle on right hand vertical
 CMBO_KEY( capsword, CU_CAPSWORD, CU_DOT, KC_O )
 
-// Both hands, keyed off period
+// Combos across both hands
 CMBO_STR( for,  KC_R, CU_DOT )
 CMBO_STR( min,  KC_S, CU_DOT )
 CMBO_STR( but,  KC_T, CU_DOT )
 CMBO_STR( his,  KC_H, CU_DOT )
 
-// Both hands, keyed off comma
 CMBO_STR( be,  KC_R, CU_COMM )
 CMBO_STR( by,  KC_S, CU_COMM )
 CMBO_STR( ke,  KC_T, CU_COMM )
 CMBO_STR( ex,  KC_H, CU_COMM )
+
+CMBO_STR( of,  KC_H, KC_N )
 
 // Shell etc.
 CMBO_LIT( cd,   "cd",     KC_C, CU_COMM )
@@ -130,14 +130,9 @@ CMBO_LIT( diff, "diff",   KC_D, CU_COMM )
 CMBO_LIT( ifdef,  "#ifdef",  KC_F, CU_DOT )
 CMBO_LIT( define, "#define", KC_D, CU_DOT )
 
-
 // More rolls, which may or may not be kept
-LtoR_LIT( heapos, "he'", KC_H, CU_QTQT )
-_____TRM( heapos,  300 )
-
-RtoL_STR( et,     CU_DOT, KC_MINS )
-RtoL_STR( any,    KC_U,   KC_MINS )
-RtoL_LIT( espace, "e ",   KC_SPC,  KC_U )
+RtoL_STR( et,     CU_DOT, CU_QTQT )
+RtoL_LIT( espace, "e ",   KC_SPC,  KC_U )  _____TRM( espace,  300 )
 
 // Utilities
 CMBO_KEY( search, SC_SEARCH, KC_ENTER, KC_SPC )      // System search box, right thumb

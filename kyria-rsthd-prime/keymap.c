@@ -50,9 +50,9 @@ void keyboard_post_init_user(void) {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* ALPHA v35
-
+ 
  ,-----------------------------------------.                        ,-----------------------------------------.
- |  Esc |   V  |   C  |   W  |   F  |   K  |                        |   J  |   M  |   U  | .  ! | -  _ | BkSp |
+ |  Esc |   V  |   C  |   W  |   F  |   K  |                        |   J  |   M  |   U  | .  ! |   '  | BkSp |
  |------+------+------+------+---Z--+------|                        |------+------+------+------+------+------|
  |   X  |   R  |   S  |   T  |   H  |   B  |                        | ;  : |   N  |   I  |   O  |   A  |   Q  |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
@@ -61,11 +61,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  `----------------------------------'                                      `----------------------------------'
  .                                                            Search
  .                 ,------.      ,--------------------.  ,--------------------.
- .                 |ScrLck|      |   "  |   E  |   '  |  | Enter| Space|  Tab |
+ .                 |ScrLck|      |   "  |   E  | -  _ |  | Enter| Space|  Tab |
  .                 |      |      | SYMS |      |      |  |      |      | EDIT |
  .                 `------'      `--------------------'  `--------------------'
- */
-
+*/
     [ALPHA] = KEY_LAYOUT_stack(
         /* Left hand */
         KC_ESC,   KC_V,     KC_C,  KC_W,  KC_F,  KC_K,
@@ -73,14 +72,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         CL_META,  KC_LSFT,  KC_P,  KC_G,  KC_D,
 
         /* Right hand */
-                  KC_J,     KC_M,  KC_U,  CU_DOT,  KC_MINS, KC_BSPC,
+                  KC_J,     KC_M,  KC_U,  CU_DOT,  CU_QTQT, KC_BSPC,
                   KC_SCLN,  KC_N,  KC_I,  KC_O,    KC_A,    KC_Q,
                             KC_L,  KC_Y,  CU_COMM, KC_RSFT, CL_META,
 
         /* Encoder & Thumbs */
-        SC_SCREEN_LOCK, CL_SYMS, KC_E, CU_QTQT, KC_ENT, KC_SPC, CL_EDIT
+        SC_SCREEN_LOCK, CL_SYMS, KC_E, KC_MINS, KC_ENT, KC_SPC, CL_EDIT
     ),
-
 
 /* SYMS
 
