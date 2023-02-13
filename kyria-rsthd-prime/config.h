@@ -23,7 +23,7 @@
 				 // overlapping, but means that holds don't work.
 
 // Tapping control
-#define TAPPING_TERM 220
+#define TAPPING_TERM 300
 //#define TAPPING_TOGGLE 2
 //#define ONESHOT_TAP_TOGGLE 2
 //#define IGNORE_MOD_TAP_INTERRUPT
