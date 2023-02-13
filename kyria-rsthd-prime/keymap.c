@@ -61,7 +61,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  `----------------------------------'                                      `----------------------------------'
  .                                                            Search
  .                 ,------.      ,--------------------.  ,--------------------.
- .                 |ScrLck|      |   "  |   E  | -  _ |  | Enter| Space|  Tab |
+ .                 |ScrLck|      | Tab "|   E  | -  _ |  | Enter| Space|  Tab |
  .                 |      |      | SYMS |      |      |  |      |      | EDIT |
  .                 `------'      `--------------------'  `--------------------'
 */
@@ -373,7 +373,7 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
 #ifdef LAYER_TAP_TOGGLE
             // layer switching using layer-tap-toggle custom code
         case CL_SYMS:
-            return layer_tap_toggle(KC_DQUO, SYMS, record);
+            return layer_tap_toggle(CU_TAB_DQUOTE, SYMS, record);
             break;
 
         case CL_EDIT:

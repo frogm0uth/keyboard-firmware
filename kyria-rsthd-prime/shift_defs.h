@@ -37,6 +37,7 @@ DEFINE_SHIFT( CU_9, KC_LBRC, KC_9 )
 // Custom punctuation pairs on alpha layer
 DEFINE_SHIFT( CU_DOT_EXLM,     KC_DOT,  KC_EXLM )
 DEFINE_SHIFT( CU_COMMA_QUES,   KC_COMM, KC_QUES )
+DEFINE_SHIFT( CU_TAB_DQUOTE,   KC_TAB,  KC_DQUO )
 
 // Custom punctuation pairs on syms layer
 DEFINE_SHIFT( CU_TILDE_GRAVE,  KC_TILD, KC_GRV )

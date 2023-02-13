@@ -136,7 +136,7 @@ RtoL_ARR( quote_ll,
         KC_QUOT,
         KC_L,
         KC_L
-    ), CU_DOT, CU_QTQT )
+    ), CU_DOT, KC_A)
 
 RtoL_STR( et,               KC_U,   CU_QTQT )
 RtoL_LIT( espace,   "e ",   KC_SPC, KC_U )  _____TRM( espace,  300 )
