@@ -44,8 +44,10 @@ static uint16_t ltt_timer[NUM_LAYERS];
 static uint8_t  ltt_state[NUM_LAYERS];
 static bool     ltt_initialized = false;
 
-// Remember whether shift was on when key is pressed
-static bool ltt_isshifted;
+// record in case needed for rolling shift
+static uint16_t    ltt_keycode;
+static keyrecord_t ltt_record;
+
 
 /**
  * Update the timer(s) for layer-tap-toggle. Must be called from
@@ -64,13 +66,21 @@ void ltt_tick(void) {
 /**
  * Check for key interrupt. Call this from process_record_user for keys
  * pressed. This prevents false hits if the layer key and another are pressed
- * within the tapping term.
+ * within the tapping term. Also handles rolling shift.
  */
 void ltt_interrupt(uint16_t keycode, keyrecord_t *record) {
     layer_state_t layer = get_highest_layer(layer_state);
     if (record->event.pressed) {
         if (ltt_state[layer] == LTT_TAPPING) {
             ltt_state[layer] = LTT_HOLDING; // Go to holding state on any keypress
+        }
+    } else {
+        if ((ltt_state[layer] == LTT_TAPPING) && (keycode == KC_LSFT || keycode == KC_RSFT)) {
+            // handle rolling shift case
+            tap_custom_key(ltt_keycode, &ltt_record);
+            ltt_state[layer] = LTT_INACTIVE;
+            layer_off(layer);
+            // let QMK handle shift release
         }
     }
 }
@@ -124,7 +134,8 @@ bool layer_tap_toggle(uint16_t keycode, uint8_t layer, keyrecord_t *record) {
         switch (ltt_state[layer]) {
             case LTT_INACTIVE:
                 ltt_state[layer] = LTT_TAPPING; // Wait and see
-                ltt_isshifted    = get_mods() & MOD_MASK_SHIFT;
+                ltt_keycode = keycode; // record in case needed for rolling shift
+                ltt_record = *record;
                 layer_on(layer);
                 break;
             case LTT_TOGGLED:
@@ -135,15 +146,8 @@ bool layer_tap_toggle(uint16_t keycode, uint8_t layer, keyrecord_t *record) {
     } else {
         switch (ltt_state[layer]) {
             case LTT_TAPPING:
-                // handle the rolling-shift case
-                if (ltt_isshifted && !(get_mods() & MOD_MASK_SHIFT)) {
-                    register_code(KC_LSFT);
-                    tap_code16(keycode); // Send the tap key
-                    unregister_code(KC_LSFT);
-                } else {
-                    // tap the key
-                    tap_custom_key(keycode, record);
-                }
+                // tap the key
+                tap_custom_key(keycode, record);
                 // fall through
             case LTT_HOLDING:
                 layer_off(layer);

@@ -351,12 +351,10 @@ bool process_record_comboroll(uint16_t keycode, keyrecord_t *record) {
 	            return false;
             } else if (keycode == KC_LSFT || keycode == KC_RSFT) {
                 // If shift was just released, then this is a rolling shift, so send the
-                // first key, shifted
-                register_code16(keycode);
+                // first key and cancel the wait for combo
                 tap_custom_key(firstkey_matched, &firstkey_record);
-                unregister_code16(keycode);
                 is_in_comboroll = false;
-                return false;
+                // let QMK handle shift release
             }
         }
     }
