@@ -73,8 +73,6 @@ Layer switching is done with custom code, so that a. shifted and custom keys can
 
 ## Alpha layer
 
-*Note: if the images below show 4 thumb keys on the right hand, go to the [v35](https://github.com/frogm0uth/keyboard-firmware/tree/kyria-v35/kyria-rsthd-prime#alpha-layer) branch to see proper versions.*
-
 ![kyria-rsthd-prime-alpha](docs/images/kyria-rsthd-prime-alpha.png)
 
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/fd8f2b651f6708b30a515ef4f236e277)
@@ -83,11 +81,9 @@ The alpha layout aims to reduce lateral finger movement on the index finger. In 
 
 Except for Shift, there are no modifiers on the alpha layer. To access them, use the SYMS or EDIT layer, hold the modifiers down, then release the layer key. (This is a bit like Callum mods except it doesn't use one-shots.)
 
-This layout really works best with [comborolls](docs/comborolls.md). I recommend at a minimum setting up a combo for ER on the right hand. If that works out, add SP, ES, ED, and VE, then consider the rest of the comborolls at the link.
+This layout works best with [comborolls](docs/comborolls.md). I recommend at a minimum setting up a combo for ER on the right hand. If that works out, add SP, ES, ED, and VE, then consider the rest of the comborolls at the link.
 
 ## Other layers
-
-*Note: if the images below show 4 thumb keys on the right hand, go to the [v35](https://github.com/frogm0uth/keyboard-firmware/tree/kyria-v35/kyria-rsthd-prime#other-layers) branch to see proper versions.*
 
 There are five more layers, for a total of 6. They are activated with either a thumb or pinky. All are hold-to-activate but the layer can be locked on with the top corner keys. Press one of these or the layer key to turn the layer off.
 
@@ -99,7 +95,7 @@ Activated by the left thumb.
 
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/1fe2cfee9a3cba7f4a122ce6527332ab)
 
-Unshifted, this layer contains the rest of the punctuation characters. I've arranged them so that many common (for me) two-letter sequences can be typed with an inward roll. For example: `{% %} <% %> </ /> => ~/`. Additional sequences such as `<?` `?>`  `!=` `);` are accessed with comborolls, to avoid flipping between the alpha and syms layers.
+Unshifted, this layer contains the rest of the punctuation characters. I've arranged them so that many common (for me) two-letter sequences can be typed with an inward roll. For example: `{% %} <% %> </ /> => -> ~/`. Additional sequences such as `<?` `?>`  `!=` `);` are accessed with comborolls, to avoid flipping between the alpha and syms layers.
 
 The ten digits are accessed with Shift, akin to [Programmer Dvorak](https://www.kaufmann.no/roland/dvorak/), but arranged in a 3x3 numpad-like grid.
 
@@ -125,7 +121,7 @@ Modifiers are on the right hand. If one of the standard modifiers (Shift, Ctrl, 
 
 All actions have auto-repeat. You can change the special modifiers while holding down a navigation key and the action changes accordingly.
 
-Cut, copy and paste are chorded on the right hand top row.
+Cut, copy and paste are chorded on the right hand top row. There are various shortcut keys for desktop navigation scattered around the edges.
 
 ### META
 Activated by either pinky.
@@ -163,7 +159,7 @@ So called because of the keys for window snapping, which snap to one of the scre
 
 Three mouse buttons are available on the left thumb. On the right are shortcuts for screenshots.
 
-The encoder is used to control the backlight LEDs and OLED brightness (depending on which modifier is held.)
+The encoder is used to control the backlight LEDs and OLED brightness, depending on which modifier is held.
 
 
 ## Backmatter

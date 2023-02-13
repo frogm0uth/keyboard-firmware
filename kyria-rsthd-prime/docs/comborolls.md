@@ -29,6 +29,7 @@ A "combo" is the QMK name for a chord - when two keys pressed simultaneously pro
       * [QMK](#qmk)
       * [Custom implementation](#custom-implementation)
       * [RAM usage](#ram-usage)
+
 <!--te-->
 
 ## Introduction
@@ -98,9 +99,7 @@ I'll explain how to identify combos with the examples below. For now, here are s
 
 - Avoid placing a combo where the first or last trigger key creates SFUs or awkward moves with preceding or following letters (respectively).
 
-- Place a combo so that a common following letter forms a three-roll. This only works with strong locations.
-
-- If a combo is commonly followed by particular letters, it's sometimes better as a two-hand combo to make it easier to roll with a common subsequent key.
+- Place a combo so that it rolls with a common following letter.
 
 Typically, I find that I initially place a combo using the first two criteria (consonent/vowel and mnemonic). However, after using them for a while, they get moved in order to improve typing flow (the remaining criteria). The examples below show the final locations.
 
@@ -129,7 +128,7 @@ SFUs (same-finger utilization) aka SFBs (same-finger bigrams) are generally cons
 
 However, if ER is made a comboroll on the right hand, then the pinballing is instantly converted into a simple hand swap: H (left) - ER (right) - E (left). ED and ES are also useful anti-pinballing combos. VE is a late entry that turned out to be a surprisingly common bigram that solves pinballing for words like EVER. ES has the interesting property of reducing occurrences of the common SS double letter by about half.
 
-There is also some pinballing between the MNL column and the vowels to the right of it. The M comboroll on the left hand reduces this and also takes care of the awkward MY bigram.
+There is also some pinballing between the MNL column and the vowels to the right of it. The M comboroll on the left hand reduces this and also takes care of the awkward MY bigram. I've also added a roll for N, which is not really essential but nice to have.
 
 #### Awkward bigrams and trigrams
 
@@ -144,7 +143,7 @@ From here on, finding combos is more optional. This group is common word endings
 
 ### Typing comfort
 
-My layout is driven by the desire to minimize use of the inner index column. This can be further reduced with combos. So there are a number of combos involving B and K. These rolls and the two-hand combos (below) should reduce the usage of B and K by about half. The FR, FT and BR combos change an awkward outward roll into a more comfortable inward roll.
+My layout is driven by the desire to minimize use of the inner index column. This can be further reduced with combos. So there are a number of combos involving B and K. (See also the two-hand combos further down.) For good measure, I added a roll just for B. The FR, FT and BR combos change an awkward outward roll into a more comfortable inward roll.
 
 ![](images/comboroll/comboroll-comfort.png)
 
@@ -164,7 +163,7 @@ I don't have such a key available, so I use period and comma on the right hand a
 
 ![](images/comboroll/comboroll-combos.png)
 
-The assigned combos come from the categories discussed for comborolls earlier, and are typically switched to two-hand combos for easy rolling with a subsequent letter on one side. (Thus, I don't use mnemonic placement.) For example, BE is often followed by T or E, MIN is often followed by U or I, and so on. Two-hand combos *after* a letter are a bit tricky with timing, so these tend to be used when they occur at the start of a word.
+The assigned combos come from the categories discussed for comborolls earlier. Many are placed so that they roll with a common following letter on at elast one side. For example, BE is often followed by T or E, MIN is often followed by U or I, and so on. Two-hand combos *after* a letter are a bit tricky with timing, so these tend to be used when they occur at the start of a word.
 
 ### Special cases
 
@@ -172,9 +171,9 @@ There are a few additional combos for special cases that don't fit into the mode
 
 ![](images/comboroll/comboroll-specials.png)
 
-I've added *outward* rolls on the left hand for comma and period, to provide an alternative to the keys on the right hand. Using outward rolls as well as inward rolls to trigger combos is usually not a good idea as it gets too confusing, but these two are OK for me.
-
 There are four vertical combos for anti-SFU. These are a little tricky to use and I'm still getting used to them.
+
+There are *outward* rolls on the left hand for comma and period, to provide an alternative to the keys on the right hand. Using outward rolls as well as inward rolls to trigger combos is usually not a good idea as it gets too confusing, but these two are OK for me.
 
 FInally, Z is a vertical combo. This is a good location, as it's most commonly followed by E, which makes for an easy roll with the left thumb.
 
@@ -234,30 +233,6 @@ _____TRM( ed, 200 )
 says that the timeout to activate the ED combo is 200 ms.
 
 
-### QMK
-
-The QMK version can be compiled in by setting:
-
-```
-COMBO_ENABLE = yes
-COMBOROLL_ENABLE = no
-```
-
-in `rules.mk`. In this case, `combos.c` is compiled in. QMK is compiled with (in effect):
-
-```
-#define COMBO_MUST_PRESS_IN_ORDER_PER_COMBO 
-#define COMBO_TERM_PER_COMBO
-```
-
-There is an issue with the QMK implementation. Specifically, if two combos are overlapping, QMK will output the second. However, when rolling, you really want the first to be output. As a workaround, specify in `config.h`:
-
-```
-#define COMBO_MUST_TAP_PER_COMBO
-```
-
-This will cause the first combo to be emitted, but also requires that the keys be released quickly. I'm still working to figure out the exact behavior provided and what would be needed to improve it. In the meantime, I use my custom implementation.
-
 ### Custom implementation
 
 The custom implementation can be compiled in by setting:
@@ -272,6 +247,35 @@ in `rules.mk`. In this case, `comboroll.c` is compiled in.
 This only supports two trigger keys and is less flexible in terms of what it can output (you can't use it to activate a modifier, for example), but the behavior with normal characters is usually better for the rolling typing described in this note.
 
 It's also more space-efficient, so I don't have to turn anything else off to fit it into a Pro Micro.
+
+
+### QMK
+
+**Currently, this probably won't work, as I haven't kept the QMK version updated. Use the custom version above.**
+
+The QMK version can be compiled in by setting:
+
+```
+COMBO_ENABLE = yes
+COMBOROLL_ENABLE = no
+```
+
+in `rules.mk`. In this case, `combos.c` is compiled in. QMK is compiled with:
+
+```
+#define COMBO_MUST_PRESS_IN_ORDER_PER_COMBO 
+#define COMBO_TERM_PER_COMBO
+```
+
+There is an issue with the QMK implementation. Specifically, if two combos are overlapping, QMK will output the second. However, when rolling, you really want the first to be output. As a workaround, specify in `config.h`:
+
+```
+#define COMBO_MUST_TAP_PER_COMBO
+```
+
+This will cause the first combo to be emitted, but also requires that the keys be released quickly.
+
+A second issue with compiling in the QMK implementation is that the firmware size might be exceeded (if using a Pro Micro). Some other features (e.g. OLED or encoder) might need to be turned off. 
 
 ### RAM usage
 
