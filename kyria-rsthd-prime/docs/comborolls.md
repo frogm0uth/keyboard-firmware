@@ -128,7 +128,7 @@ SFUs (same-finger utilization) aka SFBs (same-finger bigrams) are generally cons
 
 However, if ER is made a comboroll on the right hand, then the pinballing is instantly converted into a simple hand swap: H (left) - ER (right) - E (left). ED and ES are also useful anti-pinballing combos. VE is a late entry that turned out to be a surprisingly common bigram that solves pinballing for words like EVER. ES has the interesting property of reducing occurrences of the common SS double letter by about half.
 
-There is also some pinballing between the MNL column and the vowels to the right of it. The M comboroll on the left hand reduces this and also takes care of the awkward MY bigram. I've also added a roll for N, which is not really essential but nice to have.
+There is also some pinballing between the MNL column and the vowels to the right of it. The M comboroll on the left hand reduces this and also takes care of the awkward MY bigram.
 
 #### Awkward bigrams and trigrams
 

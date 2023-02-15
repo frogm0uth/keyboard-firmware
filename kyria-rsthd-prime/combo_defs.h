@@ -55,7 +55,7 @@
 LtoR_STR( sc, KC_C, KC_W )
 LtoR_STR( sp, KC_P, KC_G )
 
-RtoL_STR( ee, KC_Y, CU_COMM )
+RtoL_STR( ee, KC_I, CU_COMM )
 
 // Anti-SFU - vertical
 CMBO_STR( ps, KC_C, KC_S )
@@ -65,12 +65,11 @@ CMBO_STR( ui, KC_U, KC_I )
 
 // Anti-pinballing
 LtoR_STR( m,  KC_S, KC_D )
-LtoR_STR( n,  KC_T, KC_D )
 
 RtoL_STR( er, KC_O, KC_A )
 RtoL_STR( ed, KC_L, KC_Y )
 RtoL_STR( es, KC_L, CU_COMM )
-RtoL_STR( ve, KC_I, CU_COMM )
+RtoL_STR( ve, KC_Y, CU_COMM )
 
 // Awkward bigrams/trigrams
 LtoR_STR( qu,  KC_V, KC_F )
@@ -84,6 +83,7 @@ RtoL_STR( you, KC_U, CU_DOT )
 LtoR_STR( ck,  KC_C, KC_F )
 LtoR_STR( rk,  KC_R, KC_W )
 LtoR_STR( br,  KC_R, KC_H )
+LtoR_STR( bl,  KC_T, KC_D )
 LtoR_STR( b,   KC_P, KC_D )
 
 // More typing comfort
