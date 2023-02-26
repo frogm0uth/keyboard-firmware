@@ -65,8 +65,6 @@ enum layers {
     META,
     FUNC,
     SNAP,
-    CURS,
-    FLIP,
     NUM_LAYERS // <- this is needed for layer-tap-toggle
 };
 
