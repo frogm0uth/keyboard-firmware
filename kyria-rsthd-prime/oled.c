@@ -106,7 +106,7 @@ static void render_status(void) {
 
     // Display OS and layer
 #ifdef CUSTOM_CAPSWORD
-    invert = capslock && !is_capsword();
+    invert = capslock && !is_capsword_active();
 #else
     invert = capslock;
 #endif

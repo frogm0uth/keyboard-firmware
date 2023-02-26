@@ -362,14 +362,6 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
 #endif
 
     switch (keycode) {
-            // Toggle caps word
-        case CU_CAPSWORD:
-            if (record->event.pressed) {
-                toggle_caps_word();
-                return false;
-            }
-            break;
-
 #ifdef LAYER_TAP_TOGGLE
             // layer switching using layer-tap-toggle custom code
         case CL_SYMS:
@@ -490,16 +482,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     ltt_interrupt(keycode, record);
 #endif
 
-#ifdef COMBOROLL_ENABLE
-    // Check for and process comboroll keys
-    if (!process_record_comboroll(keycode, record)) {
+#ifdef CUSTOM_CAPSWORD
+    // Toggle caps lock. This MUST go before the call to process_record_comboroll()
+    if (!process_record_capslock(keycode, record)) {
         return false;
     }
 #endif
 
-#ifdef CUSTOM_CAPSWORD
-    // Toggle caps lock
-    if (!process_record_capslock(keycode, record)) {
+#ifdef COMBOROLL_ENABLE
+    // Check for and process comboroll keys
+    if (!process_record_comboroll(keycode, record)) {
         return false;
     }
 #endif
@@ -525,6 +517,11 @@ void matrix_scan_user(void) {
     // Update ltt_timer
 #ifdef LAYER_TAP_TOGGLE
     ltt_tick();
+#endif
+
+    // Caps word toggle timeout
+#ifdef CUSTOM_CAPSWORD
+    capsword_tick();
 #endif
 
     // Comboroll timing repeat

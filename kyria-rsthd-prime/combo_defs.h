@@ -104,7 +104,7 @@ RtoL_KEY( period, KC_DOT,  KC_C, KC_W )  _____TRM( period, 300 )
 CMBO_STR( z,  KC_F,  KC_H )
 
 // Caps word toggle on right hand vertical
-CMBO_KEY( capsword, CU_CAPSWORD, CU_DOT, KC_O )
+//CMBO_KEY( capsword, CU_CAPSWORD, CU_DOT, KC_O )
 
 // Combos across both hands
 CMBO_STR( for,  KC_R, CU_DOT )
@@ -131,18 +131,21 @@ CMBO_LIT( ifdef,  "#ifdef",  KC_F, CU_DOT )
 CMBO_LIT( define, "#define", KC_D, CU_DOT )
 
 // More rolls, which may or may not be kept
+#ifdef UNUSED
 RtoL_ARR( quote_ll,
     ARRAY_PROTECT(
         KC_QUOT,
         KC_L,
         KC_L
     ), CU_DOT, KC_A)
+#endif
 
 RtoL_STR( et,               KC_U,   CU_QTQT )
-RtoL_LIT( espace,   "e ",   KC_SPC, KC_U )  _____TRM( espace,  300 )
+//RtoL_LIT( espace,   "e ",   KC_SPC, KC_U )  _____TRM( espace,  300 )
 
 // Utilities
 CMBO_KEY( search, SC_SEARCH,     KC_ENTER, KC_SPC )  // System search box, right thumb
+//CMBO_KEY( search2, SC_SEARCH,    KC_E,     KC_MINS ) // System search box, left thumb
 CMBO_KEY( expose, SC_EXPOSE_ALL, KC_BSPC, KC_ENT )   // Window expose, left thumb on EDIT layer
 
 // Syntax layer
