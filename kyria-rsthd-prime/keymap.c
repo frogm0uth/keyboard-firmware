@@ -72,12 +72,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         CL_META,  KC_LSFT,  KC_P,  KC_G,  KC_D,
 
         /* Right hand */
-                  KC_J,     KC_M,  KC_U,  CU_DOT,  CU_QTQT, KC_BSPC,
+                  KC_J,     KC_M,  KC_U,  CU_DOT,  KC_MINS, KC_BSPC,
                   KC_SCLN,  KC_N,  KC_I,  KC_O,    KC_A,    KC_Q,
                             KC_L,  KC_Y,  CU_COMM, KC_RSFT, CL_META,
 
         /* Encoder & Thumbs */
-        SC_SCREEN_LOCK, CL_SYMS, KC_E, KC_MINS, KC_ENT, KC_SPC, CL_EDIT
+        SC_SCREEN_LOCK, CL_SYMS, KC_E, CU_QTQT, KC_ENT, KC_SPC, CL_EDIT
     ),
 
 
@@ -365,7 +365,7 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
 #ifdef LAYER_TAP_TOGGLE
             // layer switching using layer-tap-toggle custom code
         case CL_SYMS:
-            return layer_tap_toggle(CU_TAB_DQUOTE, SYMS, record);
+            return layer_tap_toggle(KC_DQUO, SYMS, record);
             break;
 
         case CL_EDIT:
