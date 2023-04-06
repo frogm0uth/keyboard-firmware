@@ -55,7 +55,7 @@
 LtoR_STR( sc, KC_C, KC_W )
 LtoR_STR( sp, KC_P, KC_G )
 
-RtoL_STR( ee, KC_I, CU_COMM )
+RtoL_STR( ee, KC_Y, CU_COMM )
 
 // Anti-SFU - vertical
 CMBO_STR( ps, KC_C, KC_S )
@@ -69,7 +69,7 @@ LtoR_STR( m,  KC_S, KC_D )
 RtoL_STR( er, KC_O, KC_A )
 RtoL_STR( ed, KC_L, KC_Y )
 RtoL_STR( es, KC_L, CU_COMM )
-RtoL_STR( ve, KC_Y, CU_COMM )
+RtoL_STR( ve, KC_I, CU_COMM )
 
 // Awkward bigrams/trigrams
 LtoR_STR( qu,  KC_V, KC_F )
@@ -117,8 +117,6 @@ CMBO_STR( by,  KC_S, CU_COMM )
 CMBO_STR( ke,  KC_T, CU_COMM )
 CMBO_STR( ex,  KC_H, CU_COMM )
 
-CMBO_STR( of,  KC_H, KC_N )
-
 // Shell etc.
 CMBO_LIT( cd,   "cd",     KC_C, CU_COMM )
 CMBO_LIT( pwd,  "pwd",    KC_W, CU_COMM )
@@ -139,13 +137,10 @@ RtoL_ARR( quote_ll,
         KC_L
     ), CU_DOT, KC_A)
 #endif
-
 RtoL_STR( et,               KC_U,   CU_QTQT )
-//RtoL_LIT( espace,   "e ",   KC_SPC, KC_U )  _____TRM( espace,  300 )
 
 // Utilities
 CMBO_KEY( search, SC_SEARCH,     KC_ENTER, KC_SPC )  // System search box, right thumb
-//CMBO_KEY( search2, SC_SEARCH,    KC_E,     KC_MINS ) // System search box, left thumb
 CMBO_KEY( expose, SC_EXPOSE_ALL, KC_BSPC, KC_ENT )   // Window expose, left thumb on EDIT layer
 
 // Syntax layer
