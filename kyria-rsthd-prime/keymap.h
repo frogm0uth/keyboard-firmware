@@ -89,7 +89,7 @@ enum layers {
 // clang-format on
 
 enum custom_keycodes {
-    CU_IGNORE = SAFE_RANGE,
+    CU_IGNORE = QK_USER /*SAFE_RANGE*/,
 
     CU_LOCK,        // Lock the current layer
     CU_CAPSWORD,    // Toggle caps-word
