@@ -52,14 +52,14 @@
 // clang-format off
 
 // Anti-SFU - rolls
-LtoR_STR( sc, KC_C, KC_W )
-LtoR_STR( sp, KC_P, KC_G )
+LtoR_STR( sc, KC_C, KC_G )
+LtoR_STR( sp, KC_P, KC_W )
 
 RtoL_STR( ee, KC_Y, CU_COMM )
 
 // Anti-SFU - vertical
-CMBO_STR( ps, KC_C, KC_S )
-CMBO_STR( tw, KC_T, KC_W )  
+CMBO_STR( ps, KC_P, KC_S )
+CMBO_STR( tw, KC_T, KC_W )
 CMBO_STR( lm, KC_M, KC_N )
 CMBO_STR( ui, KC_U, KC_I )
 
@@ -73,22 +73,23 @@ RtoL_STR( ve, KC_I, CU_COMM )
 
 // Awkward bigrams/trigrams
 LtoR_STR( qu,  KC_V, KC_F )
-LtoR_STR( cr,  KC_W, KC_F )
-LtoR_STR( pr,  KC_G, KC_D )
-LtoR_STR( ght, KC_S, KC_G )
+LtoR_STR( pr,  KC_W, KC_F )
+LtoR_STR( cr,  KC_G, KC_D )
+LtoR_STR( ght, KC_T, KC_F )
 
 RtoL_STR( you, KC_U, CU_DOT )
 
 // Inner column minimization
-LtoR_STR( ck,  KC_C, KC_F )
+LtoR_STR( ck,  KC_P, KC_F )
 LtoR_STR( rk,  KC_R, KC_W )
 LtoR_STR( br,  KC_R, KC_H )
-LtoR_STR( bl,  KC_T, KC_D )
-LtoR_STR( b,   KC_P, KC_D )
+LtoR_STR( b,   KC_T, KC_D )
+//LtoR_STR( bl,  KC_T, KC_D )
+//LtoR_STR( b,   KC_C, KC_D )
 
 // More typing comfort
 LtoR_STR( fr,   KC_S, KC_F )
-LtoR_STR( ft,   KC_T, KC_F )
+//LtoR_STR( ft,   KC_T, KC_F )
 
 // Common word endings, right hand
 RtoL_STR( ally, KC_M, CU_DOT )
@@ -97,8 +98,8 @@ RtoL_STR( all,  KC_N, CU_DOT )
 RtoL_STR( ough, KC_N, CU_COMM )
 
 // Alternate punctuation on left hand
-RtoL_KEY( comma,  KC_COMM, KC_P, KC_G )  _____TRM( comma,  300 )
-RtoL_KEY( period, KC_DOT,  KC_C, KC_W )  _____TRM( period, 300 )
+RtoL_KEY( comma,  KC_COMM, KC_C, KC_G )  _____TRM( comma,  300 )
+RtoL_KEY( period, KC_DOT,  KC_P, KC_W )  _____TRM( period, 300 )
 
 // Z on left hand vertical
 CMBO_STR( z,  KC_F,  KC_H )
@@ -110,12 +111,14 @@ CMBO_STR( z,  KC_F,  KC_H )
 CMBO_STR( for,  KC_R, CU_DOT )
 CMBO_STR( min,  KC_S, CU_DOT )
 CMBO_STR( but,  KC_T, CU_DOT )
-CMBO_STR( his,  KC_H, CU_DOT )
+CMBO_STR( had,  KC_H, CU_DOT )
 
 CMBO_STR( be,  KC_R, CU_COMM )
 CMBO_STR( by,  KC_S, CU_COMM )
 CMBO_STR( ke,  KC_T, CU_COMM )
 CMBO_STR( ex,  KC_H, CU_COMM )
+
+CMBO_STR( ble, KC_H, KC_N )
 
 // Shell etc.
 CMBO_LIT( cd,   "cd",     KC_C, CU_COMM )
@@ -128,16 +131,20 @@ CMBO_LIT( diff, "diff",   KC_D, CU_COMM )
 CMBO_LIT( ifdef,  "#ifdef",  KC_F, CU_DOT )
 CMBO_LIT( define, "#define", KC_D, CU_DOT )
 
-// More rolls, which may or may not be kept
-#ifdef UNUSED
+// Extras. Experiments and oddball things
+RtoL_STR( his, KC_S, KC_H )
+RtoL_STR( was, KC_P, KC_F )
+
+RtoL_STR( any,           KC_U,   KC_MINS )
+RtoL_STR( of,            CU_DOT, KC_A )
+CMBO_STR( et,            CU_DOT, KC_MINS )  _____TRM( et, 300 )
+//RtoL_LIT( aposll, "'ll", CU_DOT, KC_A )
 RtoL_ARR( quote_ll,
     ARRAY_PROTECT(
         KC_QUOT,
         KC_L,
         KC_L
-    ), CU_DOT, KC_A)
-#endif
-RtoL_STR( et,               KC_U,   CU_QTQT )
+    ), KC_SCLN, KC_A)
 
 // Utilities
 CMBO_KEY( search, SC_SEARCH,     KC_ENTER, KC_SPC )  // System search box, right thumb

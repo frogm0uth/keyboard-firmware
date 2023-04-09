@@ -52,24 +52,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* ALPHA v35
  
  ,-----------------------------------------.                        ,-----------------------------------------.
- |  Esc |   V  |   C  |   W  |   F  |   K  |                        |   J  |   M  |   U  | .  ! |   '  | BkSp |
+ |  Esc |   V  |   P  |   W  |   F  |   K  |                        |   J  |   M  |   U  | .  ! |   '  | BkSp |
  |------+------+------+------+---Z--+------|                        |------+------+------+------+------+------|
  |   X  |   R  |   S  |   T  |   H  |   B  |                        | ;  : |   N  |   I  |   O  |   A  |   Q  |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
- |      |      |   P  |   G  |   D  |                                      |   L  |   Y  | ,  ? |      |      |
+ |      |      |   C  |   G  |   D  |                                      |   L  |   Y  | ,  ? |      |      |
  | META | Shift|      |      |      |                                      |      |      |      | Shift| META |
  `----------------------------------'                                      `----------------------------------'
  .                                                            Search
  .                 ,------.      ,--------------------.  ,--------------------.
- .                 |ScrLck|      | Tab "|   E  | -  _ |  | Enter| Space|  Tab |
+ .                 |ScrLck|      |   "  |   E  | -  _ |  | Enter| Space|  Tab |
  .                 |      |      | SYMS |      |      |  |      |      | EDIT |
  .                 `------'      `--------------------'  `--------------------'
 */
     [ALPHA] = KEY_LAYOUT_stack(
         /* Left hand */
-        KC_ESC,   KC_V,     KC_C,  KC_W,  KC_F,  KC_K,
+        KC_ESC,   KC_V,     KC_P,  KC_W,  KC_F,  KC_K,
         KC_X,     KC_R,     KC_S,  KC_T,  KC_H,  KC_B,
-        CL_META,  KC_LSFT,  KC_P,  KC_G,  KC_D,
+        CL_META,  KC_LSFT,  KC_C,  KC_G,  KC_D,
 
         /* Right hand */
                   KC_J,     KC_M,  KC_U,  CU_DOT,  KC_MINS, KC_BSPC,
