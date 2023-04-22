@@ -61,6 +61,7 @@ void process_combo_string(const char *str) {
 
 // _____TRM is empty until the last set
 #define _____TRM(name, ms)
+#define ___NOSFT(name)
 
 // Enum for combo codes
 #define CMBO_KEY(name, out, ...)  COMBO_ID_##name,
