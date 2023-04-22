@@ -51,42 +51,40 @@
  */
 // clang-format off
 
-// Anti-SFU - rolls
+// Anti-SFU and anti-pinballing
+LtoR_STR( m,  KC_S, KC_D )
 LtoR_STR( sc, KC_C, KC_W )
 LtoR_STR( sp, KC_P, KC_G )
-RtoL_STR( ee, KC_Y, CU_COMM )
 
-// Anti-SFU - vertical
-CMBO_STR( ps, KC_C, KC_S )
-CMBO_STR( tw, KC_T, KC_W )  
-CMBO_STR( lm, KC_M, KC_N )
-CMBO_STR( ui, KC_U, KC_I )
-
-// Anti-pinballing
 RtoL_STR( er, KC_O, KC_A )
 RtoL_STR( ed, KC_L, KC_Y )
 RtoL_STR( es, KC_L, CU_COMM )
 RtoL_STR( ve, KC_I, CU_COMM )
-LtoR_STR( m,  KC_S, KC_D )
+RtoL_STR( ee, KC_Y, CU_COMM )
+
+// Verticals
+CMBO_STR( tw, KC_T, KC_W )
+CMBO_STR( ps, KC_S, KC_C )
+CMBO_STR( z,  KC_H, KC_F )
+CMBO_STR( lm, KC_N, KC_M )
+CMBO_STR( ui, KC_I, KC_U )
 
 // Awkward bigrams/trigrams
 LtoR_STR( qu,  KC_V, KC_F )
 LtoR_STR( cr,  KC_W, KC_F )
+LtoR_STR( fr,  KC_S, KC_F )
+LtoR_STR( ght, KC_P, KC_D )
 LtoR_STR( pr,  KC_G, KC_D )
-LtoR_STR( ght, KC_S, KC_G )
 
 RtoL_STR( you, KC_U, CU_DOT )
 
 // Inner column minimization
 LtoR_STR( ck,  KC_C, KC_F )
+LtoR_STR( k,   KC_T, KC_F )
+
 LtoR_STR( rk,  KC_R, KC_W )
 LtoR_STR( br,  KC_R, KC_H )
-LtoR_STR( bl,  KC_T, KC_D )
-LtoR_STR( bo,  KC_P, KC_D )
-
-// More typing comfort
-LtoR_STR( fr,   KC_S, KC_F )
-LtoR_STR( ft,   KC_T, KC_F )
+LtoR_STR( b,   KC_T, KC_D )
 
 // Common word endings, right hand
 RtoL_STR( ally, KC_M, CU_DOT )
@@ -94,62 +92,46 @@ RtoL_STR( ould, KC_I, CU_DOT )
 RtoL_STR( all,  KC_N, CU_DOT )
 RtoL_STR( ough, KC_N, CU_COMM )
 
-// Alternate punctuation on left hand
-RtoL_KEY( comma,  KC_COMM, KC_P, KC_G )
-_____TRM( comma,  300 )
+// Right-to-left rolls on left hand
+RtoL_KEY( comma,  KC_COMM, KC_P, KC_G )  _____TRM( comma,  300 )
+RtoL_KEY( period, KC_DOT,  KC_C, KC_W )  _____TRM( period, 300 )
 
-RtoL_KEY( period, KC_DOT,  KC_C, KC_W )
-_____TRM( period, 300 )
+RtoL_STR( has,   KC_C, KC_F )
+RtoL_STR( his,   KC_S, KC_H )
+RtoL_KEY( enter, KC_ENTER, KC_P, KC_D )
 
-// Z on left hand vertical
-CMBO_STR( z,  KC_F,  KC_H )
+// Combos across both hands
+CMBO_STR( fac,  KC_C, CU_COMM )
+CMBO_STR( was,  KC_W, CU_COMM )
+CMBO_STR( pwd,  KC_P, CU_COMM )
+    
+CMBO_STR( be,   KC_R, CU_COMM )
+CMBO_STR( min,  KC_S, CU_COMM )
+CMBO_STR( but,  KC_T, CU_COMM )
+CMBO_STR( had,  KC_H, CU_COMM )
 
-// Caps word toggle on right hand vertical
-CMBO_KEY( capsword, CU_CAPSWORD, CU_DOT, KC_O )
+CMBO_STR( for,  KC_F, CU_COMM )
+CMBO_STR( grep, KC_G, CU_COMM )
+CMBO_STR( diff, KC_D, CU_COMM )
 
-// Both hands, keyed off period
-CMBO_STR( for,  KC_R, CU_DOT )
-CMBO_STR( min,  KC_S, CU_DOT )
-CMBO_STR( but,  KC_T, CU_DOT )
-CMBO_STR( his,  KC_H, CU_DOT )
+CMBO_LIT( ifdef,  "#ifdef",  KC_F, KC_Q )
+CMBO_LIT( endif,  "#endif",  KC_H, KC_Q )
+CMBO_LIT( define, "#define", KC_D, KC_Q )
 
-// Both hands, keyed off comma
-CMBO_STR( be,  KC_R, CU_COMM )
-CMBO_STR( by,  KC_S, CU_COMM )
-CMBO_STR( ke,  KC_T, CU_COMM )
-CMBO_STR( ex,  KC_H, CU_COMM )
-
-// Shell etc.
-CMBO_LIT( cd,   "cd",     KC_C, CU_COMM )
-CMBO_LIT( pwd,  "pwd",    KC_W, CU_COMM )
-CMBO_LIT( ls,   "ls -al", KC_F, CU_COMM )
-CMBO_LIT( cp,   "cp",     KC_P, CU_COMM )
-CMBO_LIT( grep, "grep",   KC_G, CU_COMM )
-CMBO_LIT( diff, "diff",   KC_D, CU_COMM )
-
-CMBO_LIT( ifdef,  "#ifdef",  KC_F, CU_DOT )
-CMBO_LIT( define, "#define", KC_D, CU_DOT )
-
-
-// More rolls, which may or may not be kept
-LtoR_LIT( heapos, "he'", KC_H, CU_QTQT )
-_____TRM( heapos,  300 )
-
-RtoL_STR( et,     CU_DOT, KC_MINS )
-RtoL_STR( any,    KC_U,   KC_MINS )
-RtoL_LIT( espace, "e ",   KC_SPC,  KC_U )
+// Extras and oddballs
+RtoL_STR( any,  KC_U,   KC_MINS )
+RtoL_STR( of,   CU_DOT, KC_A )
+CMBO_STR( et,   CU_DOT, KC_MINS )  _____TRM( et, 300 )
+RtoL_ARR( quote_ll,        // use ARR so that still get single quote even if shift pressed
+    ARRAY_PROTECT(
+        KC_QUOT,
+        KC_L,
+        KC_L
+    ), KC_SCLN, KC_A)
 
 // Utilities
-CMBO_KEY( search, SC_SEARCH, KC_ENTER, KC_SPC )      // System search box, right thumb
+CMBO_KEY( search, SC_SEARCH,     KC_ENTER, KC_SPC )  // System search box, right thumb
 CMBO_KEY( expose, SC_EXPOSE_ALL, KC_BSPC, KC_ENT )   // Window expose, left thumb on EDIT layer
-
-//CMBO_ARR( esc_x,                                   // Escape-X for emacs. Keep as example of how to use array
-//        ARRAY_PROTECT(
-//            KC_ESC,
-//            KC_X
-//     ),
-//    KC_V, KC_C )
-
 
 // Syntax layer
 RtoL_LIT( quesrangle,      "?>",    CU_7, CU_8 )   ___NOSFT( quesrangle )

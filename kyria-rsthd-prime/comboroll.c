@@ -26,8 +26,9 @@
 #include "config.h"
 #include "keymap.h"
 
-// Emit an array of keycodes in PROGMEM
+// Emit an array of keycodes in PROGMEM. All mods are cleared first.
 void process_comboroll_array(const uint16_t *keyptr) {
+    clear_mods();
     uint16_t keycode = pgm_read_word(keyptr++);
     while (keycode != KC_NO) {
         tap_code16(keycode);
@@ -281,7 +282,8 @@ bool comboroll_scan_firstkey(uint16_t keycode) {
             if (comboroll_data[i].term > comboroll_longest_term) {
                 comboroll_longest_term = comboroll_data[i].term;
             }
-            break;
+            // don't break here - need to keep going to find the longest term for
+            // any combo that starts with this letter
         }
     }
     return found;
@@ -349,12 +351,10 @@ bool process_record_comboroll(uint16_t keycode, keyrecord_t *record) {
 	            return false;
             } else if (keycode == KC_LSFT || keycode == KC_RSFT) {
                 // If shift was just released, then this is a rolling shift, so send the
-                // first key, shifted
-                register_code16(keycode);
+                // first key and cancel the wait for combo
                 tap_custom_key(firstkey_matched, &firstkey_record);
-                unregister_code16(keycode);
                 is_in_comboroll = false;
-                return false;
+                // let QMK handle shift release
             }
         }
     }

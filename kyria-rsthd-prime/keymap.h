@@ -65,8 +65,6 @@ enum layers {
     META,
     FUNC,
     SNAP,
-    CURS,
-    FLIP,
     NUM_LAYERS // <- this is needed for layer-tap-toggle
 };
 
@@ -91,7 +89,7 @@ enum layers {
 // clang-format on
 
 enum custom_keycodes {
-    CU_IGNORE = SAFE_RANGE,
+    CU_IGNORE = QK_USER /*SAFE_RANGE*/,
 
     CU_LOCK,        // Lock the current layer
     CU_CAPSWORD,    // Toggle caps-word
@@ -175,10 +173,11 @@ enum custom_keycodes {
                   R06, R07, R08, R09, R10, R11,     \
                   R18, R19, R20, R21, R22, R23,     \
                        R35, R36, R37, R38, R39,     \
-  													\
-    L40, L42, L43, L44, R45, R46, R47           \
-)                                               \
-{                                               \
+                                                    \
+    L42, L43, L44, R45, R46, R47,          \
+    L40                                    \
+)                                          \
+{                                          \
     { KC_NO, KC_NO, L05,   L04,   L03,   L02,   L01,   L00   }, \
     { KC_NO, KC_NO, L17,   L16,   L15,   L14,   L13,   L12   }, \
     { KC_NO, KC_NO, KC_NO, L28,   L27,   L26,   L25,   L24   }, \

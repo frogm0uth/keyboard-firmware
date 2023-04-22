@@ -6,14 +6,20 @@ This is the keymap for my Kyria keyboard from [splitkb.com](https://splitkb.com)
    * [Overview](#overview)
       * [Goals](#goals)
       * [Keyboard configuration](#keyboard-configuration)
-   * [Layers](#layers)
-      * [ALPHA](#alpha)
+      * [Features](#features)
+         * [Platform-independent shortcuts](#platform-independent-shortcuts)
+         * [Comborolls](#comborolls)
+         * [Custom shift keys](#custom-shift-keys)
+         * [Custom edit modifiers](#custom-edit-modifiers)
+         * [Custom layer switching](#custom-layer-switching)
+   * [Alpha layer](#alpha-layer)
+   * [Other layers](#other-layers)
       * [SYMS](#syms)
       * [EDIT](#edit)
       * [META](#meta)
       * [FUNC](#func)
       * [SNAP](#snap)
-   * [Other](#other)
+   * [Backmatter](#backmatter)
       * [How to build](#how-to-build)
       * [RSTHD variants and similar layouts](#rsthd-variants-and-similar-layouts)
       * [Relevant articles and resources](#relevant-articles-and-resources)
@@ -41,21 +47,31 @@ Typing speed and reducing the number of keys on the keyboard are not important g
 
 My Kyria uses all 6 columns on each hand. However, the lower inner column keys are absent. There are three thumb keys on each side. The left side has an OLED and an encoder, while the right side has neither.
 
-The controller is a Pro Micro with 32kB flash. Currently this might compile or work properly only on a v1 keyboard.
+The controller is a Pro Micro with 32kB flash. Currently this keymap might compile or work properly only on a v1 keyboard.
 
-## Layers
+### Features
 
-Note: if the images below show 4 thumb keys on the right hand, go to the [v35](https://github.com/frogm0uth/keyboard-firmware/tree/kyria-v35/kyria-rsthd-prime#layers) branch to see proper versions.l
+#### Platform-independent shortcuts
 
-There are a total of 6 layers. The first is the main alpha layer.
+A set of shortcuts which can be switched at run-time for macOS, Windows, or Linux. macOS shortcuts are pretty stable, Windows and Linux still need work. For more info, see `os_shortcuts.h/c` and `os_shortcut_defs.h`.
 
-The other layers are activated with either a thumb or pinky. All are hold-to-activate but the layer can be locked on with the top corner keys. Press one of these or the layer key to turn the layer off.
+#### Comborolls
+
+I have a userspace implementation of combos called "[comboroll](docs/comborolls.md)" to avoid timing issues with QMK's overlapping combos. See `combo_defs.h` for combo definitions and `comboroll.h/c` for the implementation.
+
+#### Custom shift keys
+
+I generalized the notion of having a non-standard character output on shift so that any unshifted/shifted pair can be defined with a macro. See `shift_defs.h` for definitions and `keymap.c` for the implementation.
+
+#### Custom edit modifiers
+
+This is platform independent shortcuts taken to the max. I can never reliably remember which modifiers do what to the arrow keys on which platform so I've defined a set of custom modifiers. See the EDIT layer below and `custom_edit.h/c` for the implementation.
+
+#### Custom layer switching
 
 Layer switching is done with custom code, so that a. shifted and custom keys can be emitted on the tap and b. so that the layer activates immediately for faster access to the keys in the layer. See `layer_tap_toggle.c/h`.
 
-The layers have OS-specific shortcuts in various places. The platform (macOS, Windows, Linux) can be selected at run-time. For more info, see `os_shortcuts.h/c` and `os_shortcut_defs.h`. macOS shortcuts are pretty stable, Windows and Linux still need work.
-
-### ALPHA
+## Alpha layer
 
 ![kyria-rsthd-prime-alpha](docs/images/kyria-rsthd-prime-alpha.png)
 
@@ -63,13 +79,13 @@ The layers have OS-specific shortcuts in various places. The platform (macOS, Wi
 
 The alpha layout aims to reduce lateral finger movement on the index finger. In fact the lower key of the inner column has been completely removed in this version. A slightly older version performed very well in an [analyzer](docs/prime-on-the-analyzer.md), with low SFU (same finger utilization) stats and low travel distance. For absolute minimum SFBs, swap P and F.  For lower left pinky usage (but higher inner index), swap V and J.
 
-Some of the punctuation keys use non-standard shift mappings. See `shift_defs.h`.
-
 Except for Shift, there are no modifiers on the alpha layer. To access them, use the SYMS or EDIT layer, hold the modifiers down, then release the layer key. (This is a bit like Callum mods except it doesn't use one-shots.)
 
-There are a number of combos on this layer, defined with a bunch of macros to reduce boilerplate. I have a userspace implementation called "[comboroll](docs/comborolls.md)" to avoid timing issues with QMK's overlapping combos. See `combo_defs.h` for combo definitions.
+This layout works best with [comborolls](docs/comborolls.md). I recommend at a minimum setting up a combo for ER on the right hand. If that works out, add SP, ES, ED, and VE, then consider the rest of the comborolls at the link.
 
-This layout works best with comborolls as described at the link above. I recommend at a minimum setting up a combo for ER on the right hand. If that works out, add SP, ES, ED, and VE, then consider the rest of the combos in the [comborolls](docs/comborolls.md) note.
+## Other layers
+
+There are five more layers, for a total of 6. They are activated with either a thumb or pinky. All are hold-to-activate but the layer can be locked on with the top corner keys. Press one of these or the layer key to turn the layer off.
 
 ### SYMS
 
@@ -79,7 +95,7 @@ Activated by the left thumb.
 
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/1fe2cfee9a3cba7f4a122ce6527332ab)
 
-Unshifted, this layer contains the rest of the punctuation characters. I've arranged them so that many common (for me) two-letter sequences can be typed with an inward roll. For example: `{% %} <% %> </ /> => ~/`. Additional sequences such as `<?` `?>`  `!=` `);` are accessed with comborolls, to avoid flipping between the alpha and syms layers.
+Unshifted, this layer contains the rest of the punctuation characters. I've arranged them so that many common (for me) two-letter sequences can be typed with an inward roll. For example: `{% %} <% %> </ /> => -> ~/`. Additional sequences such as `<?` `?>`  `!=` `);` are accessed with comborolls, to avoid flipping between the alpha and syms layers.
 
 The ten digits are accessed with Shift, akin to [Programmer Dvorak](https://www.kaufmann.no/roland/dvorak/), but arranged in a 3x3 numpad-like grid.
 
@@ -105,7 +121,7 @@ Modifiers are on the right hand. If one of the standard modifiers (Shift, Ctrl, 
 
 All actions have auto-repeat. You can change the special modifiers while holding down a navigation key and the action changes accordingly.
 
-Cut, copy and paste are chorded on the right hand top row.
+Cut, copy and paste are chorded on the right hand top row. There are various shortcut keys for desktop navigation scattered around the edges.
 
 ### META
 Activated by either pinky.
@@ -143,10 +159,10 @@ So called because of the keys for window snapping, which snap to one of the scre
 
 Three mouse buttons are available on the left thumb. On the right are shortcuts for screenshots.
 
-The encoder is used to control the backlight LEDs and OLED brightness (depending on which modifier is held.)
+The encoder is used to control the backlight LEDs and OLED brightness, depending on which modifier is held.
 
 
-## Other
+## Backmatter
 
 ### How to build
 

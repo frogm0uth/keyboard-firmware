@@ -17,13 +17,13 @@
 #pragma once
 
 // Configuration for combos
-#define COMBO_TERM 70
+#define COMBO_TERM 90
 #define COMBOROLL_TERM 200
 #define COMBO_MUST_TAP_PER_COMBO // With QMK combos, avoids having the second combo trigger when
 				 // overlapping, but means that holds don't work.
 
 // Tapping control
-#define TAPPING_TERM 220
+#define TAPPING_TERM 300
 //#define TAPPING_TOGGLE 2
 //#define ONESHOT_TAP_TOGGLE 2
 //#define IGNORE_MOD_TAP_INTERRUPT
