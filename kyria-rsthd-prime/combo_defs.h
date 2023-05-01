@@ -68,21 +68,23 @@ CMBO_STR( ps, KC_S, KC_C )
 CMBO_STR( z,  KC_H, KC_F )
 CMBO_STR( lm, KC_N, KC_M )
 CMBO_STR( ui, KC_I, KC_U )
+CMBO_STR( uy, CU_DOT, KC_O )
 
 // Awkward bigrams/trigrams
-LtoR_STR( qu,  KC_V, KC_F )
+LtoR_STR( qu,  KC_X, KC_H )
 LtoR_STR( cr,  KC_W, KC_F )
 LtoR_STR( fr,  KC_S, KC_F )
-LtoR_STR( ght, KC_P, KC_D )
+LtoR_STR( ght, KC_R, KC_W )
 LtoR_STR( pr,  KC_G, KC_D )
 
-RtoL_STR( you, KC_U, CU_DOT )
+RtoL_STR( ou,  KC_U, CU_DOT )
+RtoL_STR( you, KC_U, KC_MINS )
 
 // Inner column minimization
 LtoR_STR( ck,  KC_C, KC_F )
 LtoR_STR( k,   KC_T, KC_F )
 
-LtoR_STR( rk,  KC_R, KC_W )
+LtoR_STR( rk,  KC_V, KC_F )
 LtoR_STR( br,  KC_R, KC_H )
 LtoR_STR( b,   KC_T, KC_D )
 
@@ -95,10 +97,6 @@ RtoL_STR( ough, KC_N, CU_COMM )
 // Right-to-left rolls on left hand
 RtoL_KEY( comma,  KC_COMM, KC_P, KC_G )  _____TRM( comma,  300 )
 RtoL_KEY( period, KC_DOT,  KC_C, KC_W )  _____TRM( period, 300 )
-
-RtoL_STR( has,   KC_C, KC_F )
-RtoL_STR( his,   KC_S, KC_H )
-RtoL_KEY( enter, KC_ENTER, KC_P, KC_D )
 
 // Combos across both hands
 CMBO_STR( fac,  KC_C, CU_COMM )
@@ -119,9 +117,8 @@ CMBO_LIT( endif,  "#endif",  KC_H, KC_Q )
 CMBO_LIT( define, "#define", KC_D, KC_Q )
 
 // Extras and oddballs
-RtoL_STR( any,  KC_U,   KC_MINS )
-RtoL_STR( of,   CU_DOT, KC_A )
-CMBO_STR( et,   CU_DOT, KC_MINS )  _____TRM( et, 300 )
+CMBO_STR( any, CU_DOT, KC_MINS )
+CMBO_STR( of,  KC_H, KC_N )
 RtoL_ARR( quote_ll,        // use ARR so that still get single quote even if shift pressed
     ARRAY_PROTECT(
         KC_QUOT,
