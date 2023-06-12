@@ -56,6 +56,7 @@ LtoR_STR( m,  KC_S, KC_D )
 LtoR_STR( sc, KC_C, KC_W )
 LtoR_STR( sp, KC_P, KC_G )
 
+CMBO_STR( et, CU_DOT, KC_MINS ) _____TRM( et,  300 )
 RtoL_STR( er, KC_O, KC_A )
 RtoL_STR( ed, KC_L, KC_Y )
 RtoL_STR( es, KC_L, CU_COMM )
@@ -66,25 +67,24 @@ RtoL_STR( ee, KC_Y, CU_COMM )
 CMBO_STR( tw, KC_T, KC_W )
 CMBO_STR( ps, KC_S, KC_C )
 CMBO_STR( z,  KC_H, KC_F )
-CMBO_STR( lm, KC_N, KC_M )
+CMBO_STR( ou, KC_N, KC_M )
 CMBO_STR( ui, KC_I, KC_U )
-CMBO_STR( uy, CU_DOT, KC_O )
+CMBO_LIT( dollar, "$", KC_O, CU_DOT )
 
 // Awkward bigrams/trigrams
-LtoR_STR( qu,  KC_X, KC_H )
+LtoR_STR( ght, KC_X, KC_H )
 LtoR_STR( cr,  KC_W, KC_F )
 LtoR_STR( fr,  KC_S, KC_F )
-LtoR_STR( ght, KC_R, KC_W )
+LtoR_STR( qu,  KC_V, KC_F )
 LtoR_STR( pr,  KC_G, KC_D )
 
-RtoL_STR( ou,  KC_U, CU_DOT )
-RtoL_STR( you, KC_U, KC_MINS )
+RtoL_STR( you, KC_U, CU_DOT )
 
 // Inner column minimization
 LtoR_STR( ck,  KC_C, KC_F )
 LtoR_STR( k,   KC_T, KC_F )
 
-LtoR_STR( rk,  KC_V, KC_F )
+LtoR_STR( rk,  KC_R, KC_W )
 LtoR_STR( br,  KC_R, KC_H )
 LtoR_STR( b,   KC_T, KC_D )
 
@@ -98,45 +98,59 @@ RtoL_STR( ough, KC_N, CU_COMM )
 RtoL_KEY( comma,  KC_COMM, KC_P, KC_G )  _____TRM( comma,  300 )
 RtoL_KEY( period, KC_DOT,  KC_C, KC_W )  _____TRM( period, 300 )
 
-// Combos across both hands
-CMBO_STR( fac,  KC_C, CU_COMM )
-CMBO_STR( was,  KC_W, CU_COMM )
-CMBO_STR( pwd,  KC_P, CU_COMM )
+// Comborolls across both hands
+RtoL_STR( fac,  KC_C, CU_COMM )
+RtoL_STR( was,  KC_W, CU_COMM )
+RtoL_STR( pwd,  KC_P, CU_COMM )
     
-CMBO_STR( be,   KC_R, CU_COMM )
-CMBO_STR( min,  KC_S, CU_COMM )
-CMBO_STR( but,  KC_T, CU_COMM )
-CMBO_STR( had,  KC_H, CU_COMM )
+RtoL_STR( be,   KC_R, CU_COMM )
+RtoL_STR( his,  KC_S, CU_COMM )
+RtoL_STR( but,  KC_T, CU_COMM )
+RtoL_STR( had,  KC_H, CU_COMM )
 
-CMBO_STR( for,  KC_F, CU_COMM )
-CMBO_STR( grep, KC_G, CU_COMM )
-CMBO_STR( diff, KC_D, CU_COMM )
+RtoL_STR( for,  KC_F, CU_COMM )
+RtoL_STR( grep, KC_G, CU_COMM )
+RtoL_STR( diff, KC_D, CU_COMM )
 
-CMBO_LIT( ifdef,  "#ifdef",  KC_F, KC_Q )
-CMBO_LIT( endif,  "#endif",  KC_H, KC_Q )
-CMBO_LIT( define, "#define", KC_D, KC_Q )
+RtoL_LIT( ifdef,  "#ifdef",  KC_F, KC_Q )
+RtoL_LIT( endif,  "#endif",  KC_H, KC_Q )
+RtoL_LIT( define, "#define", KC_D, KC_Q )
 
 // Extras and oddballs
-CMBO_STR( any, CU_DOT, KC_MINS )
-CMBO_STR( of,  KC_H, KC_N )
-RtoL_ARR( quote_ll,        // use ARR so that still get single quote even if shift pressed
+LtoR_STR( ion, KC_H, CU_QUOTE_QUOTE )
+LtoR_STR( any, KC_X, KC_D )
+
+// Contractions. Use ARR so that still get single quote even if shift pressed
+RtoL_ARR( quote_s,
+    ARRAY_PROTECT(
+        KC_QUOT,
+        KC_S
+    ), KC_I, KC_Q)
+RtoL_ARR( quote_ll,
     ARRAY_PROTECT(
         KC_QUOT,
         KC_L,
         KC_L
-    ), KC_SCLN, KC_A)
+    ), KC_L, KC_Q)
+RtoL_ARR( quote_re,
+    ARRAY_PROTECT(
+        KC_QUOT,
+        KC_R,
+        KC_E
+    ), KC_N, KC_Q)
 
 // Utilities
-CMBO_KEY( search, SC_SEARCH,     KC_ENTER, KC_SPC )  // System search box, right thumb
-CMBO_KEY( expose, SC_EXPOSE_ALL, KC_BSPC, KC_ENT )   // Window expose, left thumb on EDIT layer
+CMBO_KEY( search, SC_SEARCH,         KC_ENTER, KC_SPC )  // System search box, right thumb
+CMBO_KEY( expose, SC_EXPOSE_WINDOWS, KC_BSPC,  KC_ENT )  // Window expose, left thumb on EDIT layer
 
 // Syntax layer
 RtoL_LIT( quesrangle,      "?>",    CU_7, CU_8 )   ___NOSFT( quesrangle )
 RtoL_LIT( langleques,      "<?",    CU_8, CU_9 )   ___NOSFT( langleques )
-RtoL_LIT( threebacktick,   "```",   CU_9, KC_DLR ) ___NOSFT( threebacktick )
 
 RtoL_LIT( closeparensemi,  ");",    CU_3, CU_0 )   ___NOSFT( closeparensemi )
 RtoL_LIT( not_equal,       "!=",    CU_2, CU_0 )   ___NOSFT( not_equal )
+
+RtoL_LIT( threebacktick,   "```",   CU_1, CU_TILDE_DOLLAR ) ___NOSFT( threebacktick )
 
 RtoL_LIT( phpopen,         "<?php", CU_8, CU_0 )   ___NOSFT( phpopen )
 RtoL_LIT( phpecho,         "<?=",   CU_9, CU_0 )   ___NOSFT( phpecho )
