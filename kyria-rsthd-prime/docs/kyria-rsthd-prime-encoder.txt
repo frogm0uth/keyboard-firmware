@@ -1,4 +1,6 @@
-ALPHA v35
+
+
+ALPHA v35 single encoder
 
 (None)	App-switcher
 Press	Lock
@@ -34,5 +36,61 @@ UNUSED
 
 	Brightness up/down
 	Browser fwd/back
+
+
+
+ALPHA v35 dual encoder
+
+Left:
+
+(None)	App-switcher
+Press	Lock
+Shift	App-switcher reverse  [?]
+
+Right:
+
+(None)	Volume
+Press	Mute
+
+
+EDIT
+
+Left:
+
+(None)	Left/right
+Press	None
+EditMod	Edit fwd/back
+
+
+META
+
+Left:
+
+(None)	History fwd/back
+Press	
+
+Right:
+
+(None)	Search prev/next
+Press	
+
+
+SNAP
+
+Left:
+
+(None)	OLED
+Press	Write
+Ctrl	Hue
+Alt		Saturation
+Cmd		Value
+
+FUNC
+
+Right:
+
+(None)	App zoom in/out
+Press	App zoom reset
+
 
 
