@@ -62,11 +62,9 @@ const static char* layer_names[] = {
 };
 //clang-format on
 
-static const char PROGMEM str_encoder_alttab[]  = "<App            App>";
 static const char PROGMEM str_encoder_volume[]  = "<-     Volume     +>";
 static const char PROGMEM str_encoder_zoom[]    = "<-      Zoom      +>";
 static const char PROGMEM str_encoder_search[]  = "<Prev  Search  Next>";
-//static const char PROGMEM str_encoder_browser[] = "<Back  Browser  Fwd>";
 static const char PROGMEM str_encoder_history[] = "<Undo          Redo>";
 static const char PROGMEM str_encoder_blank[]   = "                    ";
 
@@ -166,7 +164,7 @@ static void render_status(void) {
     // encoder help
     switch (layer) {
         case ALPHA:
-            oled_write_P(str_encoder_alttab, false);
+            oled_write_P(str_encoder_volume, false);
             break;
 
         case EDIT:
@@ -182,11 +180,7 @@ static void render_status(void) {
             break;
 
         case META:
-            if (mods & MOD_MASK_SHIFT) {
-                oled_write_P(str_encoder_search, false);
-            } else {
-                oled_write_P(str_encoder_volume, false);
-            }
+            oled_write_P(str_encoder_search, false);
             break;
 
         case SNAP:

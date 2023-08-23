@@ -29,8 +29,9 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     uint16_t      keycode = KC_NO;
 
     /* This goes in two phases. First, handle anything that needs to preserve mods
-     * between clicks. Left encoder by default is alt-tab.
+     * between clicks.
      */
+#ifdef UNDEF
 #ifdef OS_SHORTCUTS
     switch (layer) {
         case ALPHA:
@@ -42,13 +43,17 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             }
     }
 #endif
+#endif
 
     /* Now clear all modifiers and do the rest.
      */
     clear_mods();
     switch (layer) {
-            // Alpha already done
+            // On Alpha layer, control volume
         case ALPHA:
+            if (left) {
+                keycode = clockwise ? KC_VOLU : KC_VOLD;
+            }
             break;
 
             // On the Edit layer, scrub history, unless an edit modifier is held.
@@ -67,14 +72,10 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             }
             break;
 
-            // On the Meta layer, control volume. If Shift is down, browser back and forward.
+            // On the Meta layer, search forward and back.
         case META:
             if (left) {
-                if (mods & MOD_MASK_SHIFT) {
-                    keycode = clockwise ? SC(SC_NEXT_SEARCH) : SC(SC_PREV_SEARCH);
-                } else {
-                    keycode = clockwise ? KC_VOLU : KC_VOLD;
-                }
+                keycode = clockwise ? SC(SC_NEXT_SEARCH) : SC(SC_PREV_SEARCH);
             }
             break;
 
