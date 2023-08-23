@@ -2,6 +2,44 @@
 
 ALPHA v35 single encoder
 
+(None)	Volume up/down
+Press	Mute
+
+
+EDIT
+
+(None)	History fwd/back
+Press	None
+EditMod	Edit fwd/back
+
+
+META
+
+(None)	Search prev/next
+Press	Lock
+
+
+SNAP
+
+(None)	App zoom in/out
+Press	App zoom reset
+Shift	OLED
+Ctrl	Hue
+Alt		Saturation
+Cmd		Value
+
+
+
+UNUSED
+
+	App-switcher
+	Brightness up/down
+	Browser fwd/back
+
+
+
+OLD ALPHA v35 single encoder
+
 (None)	App-switcher
 Press	Lock
 Shift	App-switcher reverse 
