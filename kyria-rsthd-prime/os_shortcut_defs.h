@@ -73,7 +73,7 @@ DEFINE_SHORTCUT( REVEAL_DESKTOP,  KC_F11,      G(KC_D),         G(KC_D)  )      
 
 
 /**
- * Window snapping. On macOS this needs Rectangle installed
+ * Window snapping. On macOS this needs Rectangle Pro installed
  * FIXME for Linux (KDE)
  */
 DEFINE_SHORTCUT( SNAP_LEFT,       C(A(KC_LEFT)),   G(KC_LEFT),      KC_NO )       // Snap to left half of screen
@@ -88,6 +88,15 @@ DEFINE_SHORTCUT( SNAP_BOTTOMRIGHT, C(A(KC_K)),      KC_NO,        KC_NO )       
 
 DEFINE_SHORTCUT( SNAP_VERTICAL,    S(C(A(KC_UP))),  S(G(KC_UP)),  KC_NO )       // Snap vertical i.e. maximize height
 
+DEFINE_SHORTCUT( SNAP_LEFTTHIRD,   C(A(KC_D)),  KC_NO,     KC_NO )       // Snap to left third of screen
+DEFINE_SHORTCUT( SNAP_RIGHTTHIRD,  C(A(KC_G)),  KC_NO,     KC_NO )       // Snap to right third of screen
+
+DEFINE_SHORTCUT( SNAP_LEFTQUARTER,   C(A(KC_Q)),    KC_NO,     KC_NO )       // Snap to left quarter of screen
+DEFINE_SHORTCUT( SNAP_RIGHTQUARTER,  S(C(A(KC_Q))), KC_NO,     KC_NO )       // Snap to right quarter of screen
+
+DEFINE_SHORTCUT( SNAP_LEFTTWOTHIRDS,   C(A(KC_E)),  KC_NO,     KC_NO )       // Snap to left two-thirds of screen
+DEFINE_SHORTCUT( SNAP_MIDTWOTHIRDS,    C(A(KC_X)),  KC_NO,     KC_NO )       // Snap to middle two-thirds of screen
+DEFINE_SHORTCUT( SNAP_RIGHTTWOTHIRDS,  C(A(KC_T)),  KC_NO,     KC_NO )       // Snap to right two-thirds of screen
 
 /**
  * Window/tab navigation

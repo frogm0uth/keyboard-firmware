@@ -249,9 +249,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [SNAP] = KEY_LAYOUT_stack(
         /* Left hand */
-        ___X___, ___X___,  SC_SNAP_TOPLEFT,    SC_SNAP_TOP,      SC_SNAP_TOPRIGHT,    ___X___,
-        ___X___, ___X___,  SC_SNAP_LEFT,       SC_SNAP_VERTICAL, SC_SNAP_RIGHT,       ___X___,
-        _______, ___X___,  SC_SNAP_BOTTOMLEFT, SC_SNAP_BOTTOM,   SC_SNAP_BOTTOMRIGHT,
+        ___X___, ___X___,  SC_SNAP_LEFTTWOTHIRDS, SC_SNAP_TOP,          SC_SNAP_RIGHTTWOTHIRDS,  ___X___,
+        ___X___, ___X___,  SC_SNAP_LEFT,          SC_SNAP_MIDTWOTHIRDS, SC_SNAP_RIGHT,           ___X___,
+        _______, ___X___,  SC_SNAP_LEFTQUARTER,   SC_SNAP_BOTTOM,       SC_SNAP_RIGHTQUARTER,
 
          /* Right hand */
                  ___X___, ___X___,         ___X___,         ___X___,              ___X___,           ___X___,
