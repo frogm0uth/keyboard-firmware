@@ -61,7 +61,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  `----------------------------------'                                      `----------------------------------'
  .                                                            Search
  .                 ,------.      ,--------------------.  ,--------------------.
- .                 |ScrLck|      |   "  |   E  |   '  |  | Enter| Space|  Tab |
+ .                 | Mute |      |   "  |   E  |   '  |  | Enter| Space|  Tab |
  .                 |      |      | SYMS |      |      |  |      |      | EDIT |
  .                 `------'      `--------------------'  `--------------------'
 */
@@ -80,7 +80,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         CL_SYMS, KC_E, CU_QTQT,   KC_ENT, KC_SPC, CL_EDIT,
 
         /* Encoder button */
-        SC_SCREEN_LOCK
+        KC_MUTE
     ),
 
 
@@ -91,7 +91,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
  |   \  |   |  |   (  |   *  |   )  |  Tab |                        | &  @ | >  1 | /  2 | <  3 | =  0 | ~  $ |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
- |      |      |      |      |      |                                      | }  4 | %  5 | {  6 |   -  |      |
+ |CapLck|      |      |      |      |                                      | }  4 | %  5 | {  6 |   -  |CapWrd|
  |      | Shift| Ctrl |  Alt |  Cmd |                                      |      |      |      |      |      |
  `----------------------------------'                                      `----------------------------------'
 
@@ -105,12 +105,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         /* Left hand */
         ___X___,  SC_SELECT_ALL,  SC_CUT,   SC_COPY,  SC_PASTE,  ___X___,
         KC_BSLS,  KC_PIPE,        KC_LPRN,  KC_ASTR,  KC_RPRN,   CU_TAB_TAB,
-        ___X___,  KC_LSFT,        KC_LCTL,  KC_LALT,  KC_LGUI,
+        KC_CAPS,  KC_LSFT,        KC_LCTL,  KC_LALT,  KC_LGUI,
 
         /* Right hand */
                   CU_CIRC_GRAVE,  CU_7,  CU_8,  CU_9,  KC_PLUS,        KC_BSPC,
                   CU_AMP_AT,      CU_1,  CU_2,  CU_3,  CU_0,           CU_TILDE_DOLLAR,
-                                  CU_4,  CU_5,  CU_6,  CU_MINUS_MINUS, ___X___,
+                                  CU_4,  CU_5,  CU_6,  CU_MINUS_MINUS, CU_CAPSWORD,
 
         /* Thumbs */
         _______, ___X___, ___X___,   KC_ENT, KC_SPC, CU_DOT_DOT,
@@ -154,7 +154,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_DEL, KC_BSPC, KC_ENT,   ___X___, ___X___, _______,
 
         /* Encoder button */
-        SC_APP_ZOOM_RESET
+        ___X___
     ),
 
 
@@ -170,7 +170,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  `----------------------------------'                                      `----------------------------------'
 
  .                 ,------.      ,--------------------.  ,--------------------.
- .                 | Mute |      |      | AppR | WinR |  | WinR | AppR |      |
+ .                 |ScrLck|      |      | AppR | WinR |  | WinR | AppR |      |
  .                 |      |      | FUNC |      |      |  |      |      | SNAP |
  .                 `------'      `--------------------'  `--------------------'
  */
@@ -190,7 +190,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         CL_FUNC, CU_APPSWITCH_RIGHT, CU_NEXT_WINDOW,   CU_NEXT_WINDOW, CU_APPSWITCH_RIGHT, CL_SNAP,
 
         /* Encoder button */
-        KC_MUTE
+        SC_SCREEN_LOCK
     ),
 
 
@@ -268,6 +268,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 // clang-format on
 
+/**
+ * Cancel shift to avoid accidental double upper-case. This effectively replaces one-shot
+ * shift. It is always active but should probably be a compile option.
+ */
+bool process_shift_cancel(uint16_t keycode, keyrecord_t *record) {
+    if (record->event.pressed && (get_mods() & MOD_MASK_SHIFT)) {
+        switch (keycode) {
+            case KC_A ... KC_Z:
+                register_code16(keycode);
+                del_mods(MOD_MASK_SHIFT);
+                return false;
+                break;
+        }
+    }
+    return true;
+}
+
 // Register a single key. Handles custom keycodes.
 void register_custom_key(uint16_t keycode, keyrecord_t *record) {
     record->event.pressed = true; // force it on
@@ -281,8 +298,11 @@ void register_custom_key(uint16_t keycode, keyrecord_t *record) {
             // Check for capsword cancel
             process_caps_cancel(keycode, record);
 #endif
-            register_code16(keycode);
-        }
+            if (process_shift_cancel(keycode, record)) {
+                register_code16(keycode);   // we did NOT send the code in process_shift_cancel(),
+                                            // so send it now
+            }
+         }
     }
 }
 
@@ -488,7 +508,7 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
             break;
 #endif
     }
-    return true;
+    return process_shift_cancel(keycode, record);
 }
 
 /**

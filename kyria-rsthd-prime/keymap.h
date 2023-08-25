@@ -39,6 +39,7 @@ void oled_print_hex(uint8_t n);
 void oled_brightness_encoder(bool clockwise);
 void oled_brightness_encoder_status(void);
 
+bool process_shift_cancel(uint16_t keycode, keyrecord_t *record);
 void tap_custom_key(uint16_t keycode, keyrecord_t *record);
 void register_custom_key(uint16_t keycode, keyrecord_t *record);
 void unregister_custom_key(uint16_t keycode, keyrecord_t *record);

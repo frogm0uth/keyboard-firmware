@@ -18,7 +18,9 @@
 
 
 /**
- * Caps word implementation using caps lock
+ * Caps word implementation using caps lock. Both shift keys turn on caps word, tap on either
+ * turns it off. Can also use dedicated keys for caps word and caps lock. Won't work with one-shot
+ * shift.
  */
 
 #if !defined (CAPSWORD_TIMEOUT)
@@ -44,43 +46,53 @@ void capsword_tick() {
     }
 }
 
-
 /**
  * Cancel caps-lock automatically if one of the specified keys matches
  */
 void process_caps_cancel(uint16_t keycode, keyrecord_t *record) {
     uint8_t mods = get_mods();
-#ifndef NO_ACTION_ONESHOT
-    uint8_t ossmods = get_oneshot_mods();
-#else
-    uint8_t ossmods = mods;
-#endif
+    bool cancel = false;
 
     if (record->event.pressed && is_capsword_active()) {
-        if ((mods | ossmods) & MOD_MASK_SHIFT) {
+        if (mods & MOD_MASK_SHIFT) {
             switch (keycode) { // Keys that cancel caps lock only on shifted version
                 case KC_1 ... KC_0:
-                    tap_code(KC_CAPS);
+                    cancel = true;
             }
         }
-        if (!((mods | ossmods) & MOD_MASK_SHIFT)) {
+        if (!(mods & MOD_MASK_SHIFT)) {
             switch (keycode) { // Keys that cancel caps lock only on UNshifted version
                 case CU_0 ... CU_9:
-                    tap_code(KC_CAPS);
-            }
+                     cancel = true;
+           }
         }
-        switch (keycode) {     // Keycodes that cancel caps lock regardless of shift
+        switch (keycode) {     // Keycodes that cancel caps word regardless of shift
             case KC_ENTER:
             case KC_ESCAPE:
             case KC_TAB:
-            case KC_SPACE:
+            case KC_SPACE: // exclude KC_BACKSPACE
 
             case KC_EXCLAIM ... KC_RIGHT_PAREN:
-            case KC_EQUAL ... KC_SLASH:
+            case KC_EQUAL ... KC_SEMICOLON: // exclude KC_QUOT
+            case KC_GRAVE ... KC_SLASH:
             case KC_PLUS ... KC_QUESTION:
 
 	        // add custom keycodes if needed here
-                tap_code(KC_CAPS);
+                cancel = true;
+        }
+    }
+    // cancel if a key was pressed that ... uh cancels it. If not, make sure that
+    // the shift release doesn't accidentally cancel
+    if (cancel) {
+        tap_code(KC_CAPS);
+    } else {
+        switch (keycode) {
+        case KC_LSFT:
+        case KC_RSFT:
+            break;
+        default:
+            capsword_waiting = false;
+            break;
         }
     }
 }
@@ -90,43 +102,33 @@ void process_caps_cancel(uint16_t keycode, keyrecord_t *record) {
  */
 bool process_record_capslock(uint16_t keycode, keyrecord_t *record) {
 
-    // Handle caps lock switching. Pressing both shift keys toggles capslock. Tapping either
-    // shift key toggles caps word.
+    // Handle caps lock switching. Pressing both shift keys toggles caps-word. Tapping either
+    // shift key cancels caps word.
     //
-    // One-shot shift used to cycle options but may not work right any more. It said: If shift keys
-    // are one-shot shift, double-tap on one of them also turns on caps-word. Same again to turn
-    // off, or type a non-word character such as space. Also turns off full caps lock.
     uint8_t mods = get_mods();
-#ifndef NO_ACTION_ONESHOT
-    uint8_t ossmods = get_oneshot_mods();
-#else
-    uint8_t ossmods = mods;
-#endif
 
     switch (keycode) {
         case KC_LSFT:
         case KC_RSFT:
             if (record->event.pressed) {
                 // Toggle caps lock if a shift key is pressed while shift already active
-                if ((mods | ossmods) & MOD_MASK_SHIFT) {
-                    is_capsword = false;
+                if (mods & MOD_MASK_SHIFT) {
+                    is_capsword = true;
                     capsword_waiting = false;
                     del_mods(MOD_MASK_SHIFT);
-#ifndef NO_ACTION_ONESHOT
-                    del_oneshot_mods(MOD_MASK_SHIFT);
-#endif
                     tap_code(KC_CAPS);
                     return false;
-                } else {
-                    // Wait to see if this will toggle caps word
+
+                } else if (host_keyboard_led_state().caps_lock) {
+                    // Wait to see if this will cancel caps word
                     capsword_waiting = true;
                     capsword_timer = timer_read();
                     // Let QMK handle shift key down normally
                 }
             } else {
-                if (capsword_waiting) { // Toggle caps word
+                // cancel caps-word if shift is released quickly
+                if (capsword_waiting && host_keyboard_led_state().caps_lock) {
                     capsword_waiting = false;
-                    is_capsword = true;
                     tap_code(KC_CAPS);
                     // Let QMK handle shift key release normally
                 }
@@ -138,14 +140,34 @@ bool process_record_capslock(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 if (!host_keyboard_led_state().caps_lock) {
                     is_capsword = true;
+                    tap_code(KC_CAPS);
+                } else {
+                    if (is_capsword) {
+                        tap_code(KC_CAPS);
+                    } else {
+                        is_capsword = true;
+                    }
                 }
             }
-            break; // let QMK process
+            return false;
+            break;
 
         // Toggle full caps lock with dedicated key
         case KC_CAPS:
-            is_capsword = false;
-            break; // let QMK process
+             if (record->event.pressed) {
+                if (!host_keyboard_led_state().caps_lock) {
+                    is_capsword = false;
+                    tap_code(KC_CAPS);
+                } else {
+                    if (!is_capsword) {
+                        tap_code(KC_CAPS);
+                    } else {
+                        is_capsword = false;
+                    }
+                }
+            }
+            return false;
+            break;
 
         default:
             if (capsword_waiting) {
