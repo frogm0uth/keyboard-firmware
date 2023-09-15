@@ -62,11 +62,13 @@ const static char* layer_names[] = {
 };
 //clang-format on
 
+#ifdef ENCODER_ENABLE
 static const char PROGMEM str_encoder_volume[]  = "<-     Volume     +>";
 static const char PROGMEM str_encoder_zoom[]    = "<-      Zoom      +>";
 static const char PROGMEM str_encoder_search[]  = "<Prev  Search  Next>";
 static const char PROGMEM str_encoder_history[] = "<Undo          Redo>";
 static const char PROGMEM str_encoder_blank[]   = "                    ";
+#endif
 
 static const char PROGMEM str_oled_header[]     = "     RSTHD/Prime    ";
 static const char PROGMEM str_oled_version[]    = "         v35        ";
