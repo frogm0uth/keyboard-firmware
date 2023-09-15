@@ -67,9 +67,9 @@ RtoL_STR( ee, KC_Y, CU_COMM )
 CMBO_STR( tw, KC_T, KC_W )
 CMBO_STR( ps, KC_S, KC_C )
 CMBO_STR( z,  KC_H, KC_F )
-CMBO_STR( ou, KC_N, KC_M )
+CMBO_STR( j,  KC_N, KC_M )
 CMBO_STR( ui, KC_I, KC_U )
-CMBO_LIT( dollar, "$", KC_O, CU_DOT )
+CMBO_KEY( enter, KC_ENT, KC_O, CU_DOT )
 
 // Awkward bigrams/trigrams
 LtoR_STR( ght, KC_X, KC_H )
@@ -99,6 +99,7 @@ RtoL_KEY( comma,  KC_COMM, KC_P, KC_G )  _____TRM( comma,  300 )
 RtoL_KEY( period, KC_DOT,  KC_C, KC_W )  _____TRM( period, 300 )
 
 // Comborolls across both hands
+RtoL_STR( vs,   KC_V, CU_COMM )
 RtoL_STR( fac,  KC_C, CU_COMM )
 RtoL_STR( was,  KC_W, CU_COMM )
 RtoL_STR( pwd,  KC_P, CU_COMM )
@@ -117,7 +118,7 @@ RtoL_LIT( endif,  "#endif",  KC_H, KC_Q )
 RtoL_LIT( define, "#define", KC_D, KC_Q )
 
 // Extras and oddballs
-LtoR_STR( ion, KC_H, CU_QUOTE_QUOTE )
+LtoR_STR( ion, KC_H, KC_QUOT )
 LtoR_STR( any, KC_X, KC_D )
 
 // Contractions. Use ARR so that still get single quote even if shift pressed
@@ -140,8 +141,7 @@ RtoL_ARR( quote_re,
     ), KC_N, KC_Q)
 
 // Utilities
-CMBO_KEY( search, SC_SEARCH,         KC_ENTER, KC_SPC )  // System search box, right thumb
-CMBO_KEY( expose, SC_EXPOSE_WINDOWS, KC_BSPC,  KC_ENT )  // Window expose, left thumb on EDIT layer
+CMBO_KEY( expose, SC_EXPOSE_WINDOWS, KC_BSPC,  KC_DEL )  // Window expose, left thumb on EDIT layer
 
 // Syntax layer
 RtoL_LIT( quesrangle,      "?>",    CU_7, CU_8 )   ___NOSFT( quesrangle )

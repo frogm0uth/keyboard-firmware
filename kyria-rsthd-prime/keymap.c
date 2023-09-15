@@ -52,17 +52,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* ALPHA v35
  
  ,-----------------------------------------.                        ,-----------------------------------------.
- |  Esc |   V  |   C  |   W  |   F  |   K  |                        |   J  |   M  |   U  | .  ! | -  _ | BkSp |
- |------+------+------+------+---Z--+------|                        |------+------+------+------+------+------|
+ |  Esc |   V  |   C  |   W  |   F  |   K  |                        |Search|   M  |   U  | .  ! | -  _ |CapLck|
+ |------+------+------+------+---Z--+------|                        |------+---J--+------+------+------+------|
  |   X  |   R  |   S  |   T  |   H  |   B  |                        | ;  : |   N  |   I  |   O  |   A  |   Q  |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
  |      |      |   P  |   G  |   D  |                                      |   L  |   Y  | ,  ? |      |      |
  | META | Shift|      |      |      |                                      |      |      |      | Shift| META |
  `----------------------------------'                                      `----------------------------------'
- .                                                            Search
+ .
  .                 ,------.      ,--------------------.  ,--------------------.
- .                 | Mute |      |   "  |   E  |   '  |  | Enter| Space|  Tab |
- .                 |      |      | SYMS |      |      |  |      |      | EDIT |
+ .                 | Mute |      | Enter|   E  | '  " |  |CapWrd| Space|  Tab |
+ .                 |      |      | SYMS |      |      |  | Shift|      | EDIT |
  .                 `------'      `--------------------'  `--------------------'
 */
     [ALPHA] = KEY_LAYOUT_stack(
@@ -72,12 +72,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         CL_META,  KC_LSFT,  KC_P,  KC_G,  KC_D,
 
         /* Right hand */
-                  KC_J,     KC_M,  KC_U,  CU_DOT,  KC_MINS, KC_BSPC,
+                  SC_SEARCH,  KC_M,  KC_U,  CU_DOT,  KC_MINS, KC_CAPS,
                   KC_SCLN,  KC_N,  KC_I,  KC_O,    KC_A,    KC_Q,
                             KC_L,  KC_Y,  CU_COMM, KC_RSFT, CL_META,
 
         /* Thumbs */
-        CL_SYMS, KC_E, CU_QTQT,   KC_ENT, KC_SPC, CL_EDIT,
+        CL_SYMS, KC_E, KC_QUOT,   CU_SHIFT, KC_SPC, CL_EDIT,
 
         /* Encoder button */
         KC_MUTE
@@ -87,16 +87,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* SYMS
 
  ,-----------------------------------------.                        ,----------- ?> --- <? -------------------.
- |      |  All |  Cut | Copy | Paste|      |                        | ^  ` | ]  7 | #  8 | [  9 |   +  | BkSp |
+ |      |  All |  Cut | Copy | Paste|      |                        | ^  ` | ]  7 | #  8 | [  9 |   +  |      |
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
  |   \  |   |  |   (  |   *  |   )  |  Tab |                        | &  @ | >  1 | /  2 | <  3 | =  0 | ~  $ |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
- |CapLck|      |      |      |      |                                      | }  4 | %  5 | {  6 |   -  |CapWrd|
+ |      |      |      |      |      |                                      | }  4 | %  5 | {  6 |   -  |      |
  |      | Shift| Ctrl |  Alt |  Cmd |                                      |      |      |      |      |      |
  `----------------------------------'                                      `----------------------------------'
 
  .                 ,------.      ,--------------------.  ,--------------------.
- .                 |      |      |      |      |      |  | Enter| Space|   .  |
+ .                 |      |      |      |      |      |  |   .  | Space| Enter|
  .                 |      |      | (**) |      |      |  |      |      |      |
  .                 `------'      `--------------------'  `--------------------'
  */
@@ -105,15 +105,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         /* Left hand */
         ___X___,  SC_SELECT_ALL,  SC_CUT,   SC_COPY,  SC_PASTE,  ___X___,
         KC_BSLS,  KC_PIPE,        KC_LPRN,  KC_ASTR,  KC_RPRN,   CU_TAB_TAB,
-        KC_CAPS,  KC_LSFT,        KC_LCTL,  KC_LALT,  KC_LGUI,
+        ___X___,  KC_LSFT,        KC_LCTL,  KC_LALT,  KC_LGUI,
 
         /* Right hand */
-                  CU_CIRC_GRAVE,  CU_7,  CU_8,  CU_9,  KC_PLUS,        KC_BSPC,
+                  CU_CIRC_GRAVE,  CU_7,  CU_8,  CU_9,  KC_PLUS,        ___X___,
                   CU_AMP_AT,      CU_1,  CU_2,  CU_3,  CU_0,           CU_TILDE_DOLLAR,
-                                  CU_4,  CU_5,  CU_6,  CU_MINUS_MINUS, CU_CAPSWORD,
+                                  CU_4,  CU_5,  CU_6,  CU_MINUS_MINUS, ___X___,
 
         /* Thumbs */
-        _______, ___X___, ___X___,   KC_ENT, KC_SPC, CU_DOT_DOT,
+        _______, ___X___, ___X___,   CU_DOT_DOT, KC_SPC, KC_ENT,
 
         /* Encoder button */
         ___X___
@@ -128,12 +128,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  | TabL | PgDn | Left | Down | Right| AppL |                        | AppR |      |      |      |      | TabR |
  |      |      |      |      |      |      |                        |      | Fast |  x4  | More |Delete|      |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
- | ScrL |      | Undo |  Tab | Redo |                                      |      |      |      |      | ScrR |
+ | ScrL |      | Undo | Enter| Redo |                                      |      |      |      |      | ScrR |
  |      | Shift|      |      |      |                                      |  Cmd |  Alt | Ctrl | Shift|      |
  `----------------------------------'                                      `----------------------------------'
  .                                          Expose
  .                 ,------.      ,--------------------.  ,--------------------.
- .                 |      |      |  Del | BkSp | Enter|  |      |      |      |
+ .                 |      |      | Enter| BkSp |  Del |  |      |      |      |
  .                 |      |      |      |      |      |  |      |      | (**) |
  .                 `------'      `--------------------'  `--------------------'
  */
@@ -142,7 +142,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         /* Left hand */
         SC_FULLSCREEN,   CE_PAGE_UP,   CE_HOME,  CE_UP,    CE_END,    CU_PREV_WINDOW,
         CU_TAB_LEFT,     CE_PAGE_DOWN, CE_LEFT,  CE_DOWN,  CE_RIGHT,  CU_APPSWITCH_LEFT,
-        SC_PREV_SCREEN,  _______,      SC_UNDO,  KC_TAB,   SC_REDO,
+        SC_PREV_SCREEN,  _______,      SC_UNDO,  KC_ENT,   SC_REDO,
 
 
         /* Right hand */
@@ -151,7 +151,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                          KC_RGUI,   KC_RALT,  KC_RCTL,  KC_RSFT,       SC_NEXT_SCREEN,
 
         /* Encoder & Thumbs */
-        KC_DEL, KC_BSPC, KC_ENT,   ___X___, ___X___, _______,
+        KC_ENT, KC_BSPC, KC_DEL,   ___X___, ___X___, _______,
 
         /* Encoder button */
         ___X___
@@ -161,7 +161,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* META
 
  ,-----------------------------------------.                        ,-----------------------------------------.
- |      |      | Close|      | Find |      |                        |      |PrvTrk| Play |NxtTrk| Mute |      |
+ |ScrLck|      | Close|      | Find |      |                        |      |PrvTrk| Play |NxtTrk| Mute |ScrLck|
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
  | eXit |Reload| Save |newTab|      |  Bin |                        |      |  New |      | Open |saveAs| Quit |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
@@ -177,12 +177,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [META] = KEY_LAYOUT_stack(
         /* Left hand */
-        ___X___, ___X___,     SC_CLOSE_TAB, ___X___,        SC_FIND,        ___X___,
+        CU_SLCK, ___X___,     SC_CLOSE_TAB, ___X___,        SC_FIND,        ___X___,
         SC_QUIT, SC_RELOAD,   SC_SAVE,      SC_NEW_TAB,     ___X___,        SC_BIN,
         _______, _______,     SC_PRINT,     SC_PREV_SEARCH, SC_NEXT_SEARCH,
 
         /* Right hand */
-                 ___X___,  KC_MPRV,         KC_MPLY,        KC_MNXT,  KC_MUTE,     ___X___,
+                 ___X___,  KC_MPRV,         KC_MPLY,        KC_MNXT,  KC_MUTE,     CU_SLCK,
                  ___X___,  SC_NEW,          ___X___,        SC_OPEN,  SC_SAVE_AS,  SC_QUIT,
                            SC_BROWSER_BACK, SC_BROWSER_FWD, ___X___,  _______,     _______,
 
@@ -190,7 +190,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         CL_FUNC, CU_APPSWITCH_RIGHT, CU_NEXT_WINDOW,   CU_NEXT_WINDOW, CU_APPSWITCH_RIGHT, CL_SNAP,
 
         /* Encoder button */
-        SC_SCREEN_LOCK
+        ___X___
     ),
 
 
@@ -268,22 +268,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 // clang-format on
 
-/**
- * Cancel shift to avoid accidental double upper-case. This effectively replaces one-shot
- * shift. It is always active but should probably be a compile option.
- */
-bool process_shift_cancel(uint16_t keycode, keyrecord_t *record) {
-    if (record->event.pressed && (get_mods() & MOD_MASK_SHIFT)) {
-        switch (keycode) {
-            case KC_A ... KC_Z:
-                register_code16(keycode);
-                del_mods(MOD_MASK_SHIFT);
-                return false;
-                break;
-        }
-    }
-    return true;
-}
 
 // Register a single key. Handles custom keycodes.
 void register_custom_key(uint16_t keycode, keyrecord_t *record) {
@@ -297,11 +281,13 @@ void register_custom_key(uint16_t keycode, keyrecord_t *record) {
 #ifdef CUSTOM_CAPSWORD
             // Check for capsword cancel
             process_caps_cancel(keycode, record);
-#endif
-            if (process_shift_cancel(keycode, record)) {
+            if (process_auto_unshift(keycode, record)) {
                 register_code16(keycode);   // we did NOT send the code in process_shift_cancel(),
                                             // so send it now
             }
+#else
+            register_code16(keycode);
+#endif
          }
     }
 }
@@ -403,7 +389,7 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
 #ifdef LAYER_TAP_TOGGLE
             // layer switching using layer-tap-toggle custom code
         case CL_SYMS:
-            return layer_tap_toggle(KC_DQUO, SYMS, record);
+            return layer_tap_toggle(KC_ENTER, SYMS, record);
             break;
 
         case CL_EDIT:
@@ -480,6 +466,16 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
             }
             break;
 
+            /* Lock the screen.
+             */
+        case CU_SLCK:
+            if (record->event.pressed) {
+                tap_code16(SC(SC_SCREEN_LOCK));
+                wait_ms(500);
+                tap_code16(KC_ESC);
+            }
+            break;
+
             /* Save RGB state to EEPROM.
              */
         case CU_WRITE:
@@ -508,7 +504,11 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
             break;
 #endif
     }
-    return process_shift_cancel(keycode, record);
+#ifdef CUSTOM_CAPSWORD
+    return process_auto_unshift(keycode, record);
+#else
+    return true;
+#endif
 }
 
 /**
@@ -521,7 +521,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #endif
 
 #ifdef CUSTOM_CAPSWORD
-    // Toggle caps lock. This MUST go before the call to process_record_comboroll()
+    // Toggle caps lock.
     if (!process_record_capslock(keycode, record)) {
         return false;
     }
@@ -533,7 +533,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
     }
 #endif
-
+/*
     switch (keycode) {
         // Lock/unlock current layer 
         case CU_LOCK:
@@ -541,6 +541,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return false;
             break;
     }
+    */
     // Process custom keycodes that output characters
     return process_record_user_emit(keycode, record);
 }

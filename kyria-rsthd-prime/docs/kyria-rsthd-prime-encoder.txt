@@ -16,7 +16,7 @@ EditMod	Edit fwd/back
 META
 
 (None)	Search prev/next
-Press	Lock
+Press	None
 
 
 SNAP

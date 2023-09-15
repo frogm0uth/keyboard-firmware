@@ -27,15 +27,32 @@
 #   define CAPSWORD_TIMEOUT 300
 #endif
 
-// Caps word flag
-static bool is_capsword = false;
+// local vars
+static bool     is_capsword      = false; // caps word is active if caps lock on
+static bool     is_auto_unshift  = false; // next character cancels shift
+static bool     capsword_waiting = false; // waiting to see if shift will be released
+static uint16_t capsword_timer   = 0;
+
 bool is_capsword_active() {
     return is_capsword && host_keyboard_led_state().caps_lock;
 }
 
-// local vars
-static bool     capsword_waiting = false; // waiting to see if shift will be released
-static uint16_t capsword_timer   = 0;
+/**
+ * Cancel shift to avoid accidental double upper-case. This effectively replaces one-shot
+ * shift. It is always active but should probably be a compile option.
+ */
+bool process_auto_unshift(uint16_t keycode, keyrecord_t *record) {
+    if (record->event.pressed && is_auto_unshift && (get_mods() & MOD_MASK_SHIFT)) {
+        switch (keycode) {
+            case KC_A ... KC_Z:
+                register_code16(keycode);
+                del_mods(MOD_MASK_SHIFT);
+                return false;
+                break;
+        }
+    }
+    return true;
+}
 
 // Time out caps word toggle
 void capsword_tick() {
@@ -44,6 +61,36 @@ void capsword_tick() {
             capsword_waiting = false;
         }
     }
+}
+
+// Toggle caps-word
+void toggle_capsword(void) {
+    if (!host_keyboard_led_state().caps_lock) {
+        is_capsword = true;
+        tap_code(KC_CAPS);
+    } else {
+        if (is_capsword) {
+            tap_code(KC_CAPS);
+        } else {
+            is_capsword = true;
+        }
+    }
+    capsword_waiting = false;
+}
+
+// Toggle caps-lock
+void toggle_capslock(void) {
+    if (!host_keyboard_led_state().caps_lock) {
+        is_capsword = false;
+        tap_code(KC_CAPS);
+    } else {
+        if (!is_capsword) {
+            tap_code(KC_CAPS);
+        } else {
+            is_capsword = false;
+        }
+    }
+    capsword_waiting = false;
 }
 
 /**
@@ -111,22 +158,22 @@ bool process_record_capslock(uint16_t keycode, keyrecord_t *record) {
         case KC_LSFT:
         case KC_RSFT:
             if (record->event.pressed) {
-                // Toggle caps lock if a shift key is pressed while shift already active
+                // Toggle caps word if a shift key is pressed while shift already active
                 if (mods & MOD_MASK_SHIFT) {
-                    is_capsword = true;
-                    capsword_waiting = false;
-                    del_mods(MOD_MASK_SHIFT);
-                    tap_code(KC_CAPS);
+                    toggle_capsword();
                     return false;
 
-                } else if (host_keyboard_led_state().caps_lock) {
-                    // Wait to see if this will cancel caps word
-                    capsword_waiting = true;
-                    capsword_timer = timer_read();
+                } else {
+                    if (host_keyboard_led_state().caps_lock) {
+                        // Wait to see if this will cancel caps word
+                        capsword_waiting = true;
+                        capsword_timer = timer_read();
+                    }
+                    is_auto_unshift = true;
                     // Let QMK handle shift key down normally
                 }
             } else {
-                // cancel caps-word if shift is released quickly
+                // cancel caps-word or caps lock if shift is released quickly
                 if (capsword_waiting && host_keyboard_led_state().caps_lock) {
                     capsword_waiting = false;
                     tap_code(KC_CAPS);
@@ -135,36 +182,39 @@ bool process_record_capslock(uint16_t keycode, keyrecord_t *record) {
             }
             break;
 
+        case CU_SHIFT:
+            if (record->event.pressed) {
+                register_code16(KC_LSFT);
+                is_auto_unshift = false;
+
+                // Wait to see if this will toggle caps word
+                capsword_waiting = true;
+                capsword_timer = timer_read();
+
+            } else {
+                unregister_code16(KC_LSFT);
+
+                // toggle caps-word if key is released quickly
+                if (capsword_waiting) {
+                    capsword_waiting = false;
+                    toggle_capsword();
+                }
+            }
+            return false;
+            break;
+
         // Toggle caps word with dedicated key
         case CU_CAPSWORD:
             if (record->event.pressed) {
-                if (!host_keyboard_led_state().caps_lock) {
-                    is_capsword = true;
-                    tap_code(KC_CAPS);
-                } else {
-                    if (is_capsword) {
-                        tap_code(KC_CAPS);
-                    } else {
-                        is_capsword = true;
-                    }
-                }
+                toggle_capsword();
             }
             return false;
             break;
 
         // Toggle full caps lock with dedicated key
         case KC_CAPS:
-             if (record->event.pressed) {
-                if (!host_keyboard_led_state().caps_lock) {
-                    is_capsword = false;
-                    tap_code(KC_CAPS);
-                } else {
-                    if (!is_capsword) {
-                        tap_code(KC_CAPS);
-                    } else {
-                        is_capsword = false;
-                    }
-                }
+            if (record->event.pressed) {
+                toggle_capslock();
             }
             return false;
             break;
