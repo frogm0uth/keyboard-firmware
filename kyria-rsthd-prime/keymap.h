@@ -17,150 +17,28 @@
 
 #include QMK_KEYBOARD_H
 
-#include "os_shortcuts.h"
-#include "custom_capsword.h"
-#include "custom_edit.h"
-#include "layer_tap_toggle.h"
-#include "comboroll.h"
+#include "../common/appswitcher.h"
+#include "../common/comboroll.h"
+#include "../common/custom_capsword.h"
+#include "../common/custom_edit.h"
+#include "../common/layer_tap_toggle.h"
+#include "../common/os_shortcuts.h"
+#include "../common/process.h"
+#include "../common/util.h"
+
+// Must come last
+#include "../common/keycodes.h"
+
 
 /**
- * Extern functions for core files
+ * Extern functions for keyboard-specific files
  */
-bool app_switcher_isactive(void);
-void app_switcher_tick(void);
-void app_switcher_record(uint16_t keycode, keyrecord_t *record);
-void app_switcher_trigger(bool forward);
-void app_switcher_release(void);
 void rgblight_encoder(bool clockwise, uint8_t mods);
 void rgblight_oled_encoder_status(void);
-bool process_record_user_emit(uint16_t keycode, keyrecord_t *record);
-void oled_print_hex(uint8_t n);
 
 void oled_brightness_encoder(bool clockwise);
 void oled_brightness_encoder_status(void);
 
-void tap_custom_key(uint16_t keycode, keyrecord_t *record);
-void register_custom_key(uint16_t keycode, keyrecord_t *record);
-void unregister_custom_key(uint16_t keycode, keyrecord_t *record);
-
-/**
- * User config structure. Defined here instead of keymap.c in case other files
- * need to use it.
- */
-typedef union {
-    uint32_t raw;
-    struct {
-        uint8_t os_selection : 2;
-        uint8_t oled_brightness : 8;
-    };
-} user_config_t;
-
-extern user_config_t user_config;
-
-// Define the layers
-enum layers {
-    ALPHA,
-    SYMS,
-    EDIT,
-    META,
-    FUNC,
-    SNAP,
-    NUM_LAYERS // <- this is needed for layer-tap-toggle
-};
-
-// Define layer-tap-toggle keys. If not using LTT, define macros for standard layer switching of a subset
-// clang-format off
-#ifdef LAYER_TAP_TOGGLE
-#    define LAYER_KEYS \
-        CL_BASE,       \
-        CL_SYMS,       \
-        CL_EDIT,       \
-        CL_META,       \
-        CL_FUNC,       \
-        CL_SNAP
-#else
-#    define CL_BASE TO(ALPHA)
-#    define CL_SYMS LT(SYMS,   KC_DQUO)
-#    define CL_EDIT LT(EDIT,   KC_TAB)
-#    define CL_META LT(META,   KC_NO)
-#    define CL_FUNC LT(FUNC,   KC_NO)
-#    define CL_SNAP LT(SNAP,   KC_NO)
-#endif
-// clang-format on
-
-enum custom_keycodes {
-    CU_IGNORE = QK_USER /*SAFE_RANGE*/,
-
-    CU_SLCK,        // Lock the screen
-    CU_CAPSWORD,    // Toggle caps-word
-    CU_SHIFT,       // Custom shift (not auto-unshift)
-
-    CU_SCRSHOT_WIN, // Screenshot a window
-    CU_SCRSHOT_RGN, // Start drag-select screenshot
-
-    CU_APPSWITCH_RIGHT, // Application switcher
-    CU_APPSWITCH_LEFT,
-
-    CU_WIPE, // Wipe the EEPROM
-    CU_WRITE, // Save current state to EEPROM
-
-#ifdef LAYER_TAP_TOGGLE
-    LAYER_KEYS, // Keys for layer-tap-toggle
-#endif
-
-#ifdef CUSTOM_EDIT
-    CUSTOM_EDIT_KEYS, // Custom editing and navigation
-#endif
-
-// Custom shift keys. Unfortunately we can't do this simply
-// by invoking a macro defined elsewhere.
-//
-// clang-format off
-#   undef  DEFINE_SHIFT
-#   define DEFINE_SHIFT(name,normal,shifted) name,
-    SHIFT_ID_START,
-#   include "shift_defs.h"
-    SHIFT_ID_END,
-// clang-format on
-
-// OS-independent shortcuts. Unfortunately we can't do this simply
-// by invoking a macro defined elsewhere.
-//
-// clang-format off
-#if defined(OS_SHORTCUTS) && !defined(OS_SHORTCUTS_STATIC)        
-    OS_SELECT_KEYCODES,
-
-#   undef  DEFINE_SHORTCUT
-#   define DEFINE_SHORTCUT( SC_name, ...) SC_ ## SC_name,
-    SC_ID_START,
-#   include "os_shortcut_defs.h"
-    SC_ID_END,
-#endif
-    // clang-format on
-};
-
-
-/**
- * Cope with not compiling in mouse keys
- */
-#ifdef MOUSEKEY_ENABLE
-#    define CM_BTN1 KC_BTN1
-#    define CM_BTN2 KC_BTN2
-#    define CM_BTN3 KC_BTN3
-#else
-#    define CM_BTN1 KC_TRNS
-#    define CM_BTN2 KC_TRNS
-#    define CM_BTN3 KC_TRNS
-#endif
-
-
-/**
- * Shorter keycodes to put in keymap matrix. These are those with
- * custom processing, for direct shortcuts, see os_shortcut_defs.h
- */
-#define CU_COMM CU_COMMA_QUES
-#define CU_DOT  CU_DOT_EXLM
-#define CU_QTQT CU_QUOTE_QUOTE
 
 /**
  * Define custom version of the layout stack

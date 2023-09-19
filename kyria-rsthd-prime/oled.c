@@ -24,15 +24,6 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     return OLED_ROTATION_180;
 }
 
-// Print byte as hex
-static char hexchars[16] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
-
-void oled_print_hex(uint8_t n) {
-    oled_write_P(PSTR("0x"), false);
-    oled_write_char(hexchars[(n >> 4) & 0x0F], false);
-    oled_write_char(hexchars[n & 0x0F], false);
-}
-
 // clang-format off
 static void render_qmk_logo(bool invert) {
     static const char PROGMEM qmk_logo[] = {
