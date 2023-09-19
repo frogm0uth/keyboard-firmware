@@ -80,7 +80,7 @@ void process_combo_string(const char *str) {
 #define RtoL_STR CMBO_STR
 
 enum combo_events {
-#   include "../common/combo_defs.h"
+#   include "combo_defs.h"
     COMBO_LENGTH
 };
 uint16_t COMBO_LEN = COMBO_LENGTH;
@@ -119,7 +119,7 @@ uint16_t COMBO_LEN = COMBO_LENGTH;
 #define RtoL_LIT(name, out, k1, k2)  const uint16_t PROGMEM COMBO_SEQ_##name[] = {k2, k1, COMBO_END};
 #define RtoL_STR(name, k1, k2)       const uint16_t PROGMEM COMBO_SEQ_##name[] = {k2, k1, COMBO_END};
 
-#include "../common/combo_defs.h"
+#include "combo_defs.h"
 
 
 // Define mapping from key sequences to combo codes or actions
@@ -154,7 +154,7 @@ uint16_t COMBO_LEN = COMBO_LENGTH;
 #define RtoL_STR CMBO_STR
 
 combo_t key_combos[] = {
-#   include "../common/combo_defs.h"
+#   include "combo_defs.h"
 };
 
 
@@ -194,7 +194,7 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
 
     if (pressed) {
         switch(combo_index) {
-#           include "../common/combo_defs.h"
+#           include "combo_defs.h"
         }
     }
     set_mods(mods);
@@ -233,7 +233,7 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
 
 bool get_combo_must_press_in_order(uint16_t combo_index, combo_t *combo) {
     switch (combo_index) {
-#       include "../common/combo_defs.h"
+#       include "combo_defs.h"
         default:
           return false;
     }
@@ -274,7 +274,7 @@ bool get_combo_must_press_in_order(uint16_t combo_index, combo_t *combo) {
 uint16_t get_combo_term(uint16_t index, combo_t *combo) {
     uint16_t combo_term = COMBO_TERM;
     switch (index) {
-#       include "../common/combo_defs.h"
+#       include "combo_defs.h"
     }
 
 #undef  _____TRM
@@ -301,7 +301,7 @@ uint16_t get_combo_term(uint16_t index, combo_t *combo) {
 #define RtoL_STR LtoR_KEY
 
     switch (index) {
-#       include "../common/combo_defs.h"
+#       include "combo_defs.h"
     }
     
     return combo_term;

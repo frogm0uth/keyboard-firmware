@@ -75,7 +75,7 @@ void process_comboroll_string(const char *str) {
 #define CMBO_STR LtoR_KEY
 
 enum comboroll_ids {
-#   include "../common/combo_defs.h"
+#   include "combo_defs.h"
     COMBOROLL_COUNT
 };
 
@@ -111,7 +111,7 @@ enum comboroll_ids {
 #define CMBO_LIT LtoR_LIT
 #define CMBO_STR LtoR_STR
 
-#include "../common/combo_defs.h"
+#include "combo_defs.h"
 
 
 
@@ -148,7 +148,7 @@ enum comboroll_ids {
 
 
 comboroll_t comboroll_data[] = {
-#   include "../common/combo_defs.h"
+#   include "combo_defs.h"
 };
 
 // Define the array of trigger keys
@@ -184,7 +184,7 @@ comboroll_t comboroll_data[] = {
 
 
 const uint16_t PROGMEM comboroll_keys[][2] = {
-#   include "../common/combo_defs.h"
+#   include "combo_defs.h"
 };
 
 #define CMB_KEY_1(id) (pgm_read_word(&comboroll_keys[id][0]))
@@ -224,11 +224,11 @@ const uint16_t PROGMEM comboroll_keys[][2] = {
 void comboroll_post_init() {
 #undef  _____TRM
 #define _____TRM(name, targ) comboroll_data[COMBOROLL_ID_##name].term = targ;
-#include "../common/combo_defs.h"
+#include "combo_defs.h"
 
 #undef  ___NOSFT
 #define ___NOSFT(name) comboroll_data[COMBOROLL_ID_##name].noshift = 1;
-#include "../common/combo_defs.h"
+#include "combo_defs.h"
 }
 
 // clang-format on
