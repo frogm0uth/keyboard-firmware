@@ -16,37 +16,6 @@
 #pragma once
 
 
-// Define the layers
-enum layers {
-    ALPHA,
-    SYMS,
-    EDIT,
-    META,
-    FUNC,
-    SNAP,
-    NUM_LAYERS // <- this is needed for layer-tap-toggle
-};
-
-// Define layer-tap-toggle keys. If not using LTT, define macros for standard layer switching of a subset
-// clang-format off
-#ifdef LAYER_TAP_TOGGLE
-#    define LAYER_KEYS \
-        CL_BASE,       \
-        CL_SYMS,       \
-        CL_EDIT,       \
-        CL_META,       \
-        CL_FUNC,       \
-        CL_SNAP
-#else
-#    define CL_BASE TO(ALPHA)
-#    define CL_SYMS LT(SYMS,   KC_DQUO)
-#    define CL_EDIT LT(EDIT,   KC_TAB)
-#    define CL_META LT(META,   KC_NO)
-#    define CL_FUNC LT(FUNC,   KC_NO)
-#    define CL_SNAP LT(SNAP,   KC_NO)
-#endif
-// clang-format on
-
 enum custom_keycodes {
     CU_IGNORE = QK_USER /*SAFE_RANGE*/,
 
