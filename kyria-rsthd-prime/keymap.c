@@ -70,7 +70,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  `----------------------------------'                                      `----------------------------------'
 
  .                 ,------.      ,--------------------.  ,--------------------.
- .                 |      |      |      |      |      |  |   .  | Space| Enter|
+ .                 |      |      |      | BkSp |      |  |   .  | Space| Enter|
  .                 |      |      | (**) |      |      |  |      |      |      |
  .                 `------'      `--------------------'  `--------------------'
  */
@@ -87,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                   CU_4,  CU_5,  CU_6,  CU_MINUS_MINUS, ___X___,
 
         /* Thumbs */
-        _______, ___X___, ___X___,   CU_DOT_DOT, KC_SPC, KC_ENT,
+        _______, KC_BSPC, ___X___,   CU_DOT_DOT, KC_SPC, KC_ENT,
 
         /* Encoder button */
         ___X___
@@ -107,7 +107,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  `----------------------------------'                                      `----------------------------------'
  .                                          Expose
  .                 ,------.      ,--------------------.  ,--------------------.
- .                 |      |      | Enter| BkSp |  Del |  |      |      |      |
+ .                 |      |      | Enter| BkSp |  Del |  |      | BkSp |      |
  .                 |      |      |      |      |      |  |      |      | (**) |
  .                 `------'      `--------------------'  `--------------------'
  */
@@ -125,7 +125,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                          KC_RGUI,   KC_RALT,  KC_RCTL,  KC_RSFT,       SC_NEXT_SCREEN,
 
         /* Thumbs */
-        KC_ENT, KC_BSPC, KC_DEL,   ___X___, ___X___, _______,
+        KC_ENT, KC_BSPC, KC_DEL,   ___X___, KC_BSPC, _______,
 
         /* Encoder button */
         ___X___
