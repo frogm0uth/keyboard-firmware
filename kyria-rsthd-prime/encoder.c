@@ -83,14 +83,8 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             // change backlight color or OLED brightness
         case SNAP:
             if (left) {
-                if (mods & MOD_MASK_CAG) {
-#ifdef RGBLIGHT_ENABLE
-                    rgblight_encoder(clockwise, mods);
-#endif
-                } else if (mods & MOD_MASK_SHIFT) {
-#ifdef OLED_ENABLE
-                    oled_brightness_encoder(clockwise);
-#endif
+                if (mods & MOD_MASK_CSAG) {
+                    kb_adjust(clockwise, mods);
                 } else {
                     keycode = clockwise ? SC(SC_APP_ZOOM_IN) : SC(SC_APP_ZOOM_OUT);
                 }

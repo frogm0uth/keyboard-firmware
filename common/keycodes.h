@@ -29,6 +29,9 @@ enum custom_keycodes {
     CU_APPSWITCH_RIGHT, // Application switcher
     CU_APPSWITCH_LEFT,
 
+    CU_KBUP,    // Modify keyboard parameters
+    CU_KBDN,
+
     CU_WIPE, // Wipe the EEPROM
     CU_WRITE, // Save current state to EEPROM
 

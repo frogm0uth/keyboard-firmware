@@ -18,6 +18,7 @@
 #include QMK_KEYBOARD_H
 
 void oled_print_hex(uint8_t n);
+void kb_adjust(bool up, uint8_t mods);
 
 
 /**

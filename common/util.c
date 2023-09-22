@@ -32,9 +32,8 @@ void oled_print_hex(uint8_t n) {
 }
 #endif
 
-/**
- * User space in EEPROM. Variable and function to read at initialization.
- */
+// User space in EEPROM. Variable and function to read at initialization.
+
 user_config_t user_config;
 
 void keyboard_post_init_user(void) {
@@ -52,5 +51,47 @@ void keyboard_post_init_user(void) {
     // Other functions init
 #if defined(COMBOROLL_ENABLE)
     comboroll_post_init();
+#endif
+}
+
+
+// Adjust things based on modifier state
+#ifndef OLED_BRIGHTNESS_INCREMENT
+#    define OLED_BRIGHTNESS_INCREMENT 0x10
+#endif
+
+void kb_adjust(bool up, uint8_t mods) {
+#ifdef OLED_ENABLE
+    int16_t brightness = oled_get_brightness();
+    if (!(mods & MOD_MASK_CAG)) {
+        if (up) {
+            brightness = MIN(brightness + OLED_BRIGHTNESS_INCREMENT, 0xff);
+        } else {
+            brightness = MAX(brightness - OLED_BRIGHTNESS_INCREMENT, 0x01);
+        }
+        oled_set_brightness(brightness);
+    }
+#endif
+
+#ifdef RGBLIGHT_ENABLE
+    if (mods & MOD_MASK_CTRL) {
+        if (up) {
+            rgblight_increase_hue_noeeprom();
+        } else {
+            rgblight_decrease_hue_noeeprom();
+        }
+    } else if (mods & MOD_MASK_ALT) {
+        if (up) {
+            rgblight_increase_sat_noeeprom();
+        } else {
+            rgblight_decrease_sat_noeeprom();
+        }
+    } else if (mods & MOD_MASK_GUI) {
+        if (up) {
+            rgblight_increase_val_noeeprom();
+        } else {
+            rgblight_decrease_val_noeeprom();
+        }
+    }
 #endif
 }

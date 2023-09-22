@@ -17,27 +17,6 @@
 
 #include "keymap.h"
 
-void rgblight_encoder(bool clockwise, uint8_t mods) {
-    if (mods & MOD_MASK_CTRL) {
-        if (clockwise) {
-            rgblight_increase_hue_noeeprom();
-        } else {
-            rgblight_decrease_hue_noeeprom();
-        }
-    } else if (mods & MOD_MASK_ALT) {
-        if (clockwise) {
-            rgblight_increase_sat_noeeprom();
-        } else {
-            rgblight_decrease_sat_noeeprom();
-        }
-    } else if (mods & MOD_MASK_GUI) {
-        if (clockwise) {
-            rgblight_increase_val_noeeprom();
-        } else {
-            rgblight_decrease_val_noeeprom();
-        }
-    }
-}
 
 #ifdef OLED_ENABLE
 void rgblight_oled_encoder_status() {

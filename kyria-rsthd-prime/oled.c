@@ -216,16 +216,6 @@ bool oled_task_user(void) {
 }
 
 #ifdef ENCODER_ENABLE
-void oled_brightness_encoder(bool clockwise) {
-    int16_t brightness = oled_get_brightness();
-    if (clockwise) {
-        brightness = MIN(brightness + OLED_BRIGHTNESS_INCREMENT, 0xff);
-    } else {
-        brightness = MAX(brightness - OLED_BRIGHTNESS_INCREMENT, 0x01);
-    }
-    oled_set_brightness(brightness);
-}
-
 void oled_brightness_encoder_status() {
     oled_write_P(PSTR("<-   OLED="), false);
     oled_print_hex(oled_get_brightness());

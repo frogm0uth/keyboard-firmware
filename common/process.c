@@ -118,6 +118,8 @@ void process_custom_shift(uint16_t key, keyrecord_t *record) {
  * places (via tap_custom_key()).
  */
 bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
+    uint8_t mods = get_mods();
+
 #ifdef CUSTOM_CAPSWORD
     // Check for capsword cancel
     process_caps_cancel(keycode, record);
@@ -176,6 +178,15 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
         case CU_APPSWITCH_RIGHT:
         case CU_APPSWITCH_LEFT:
             app_switcher_record(keycode, record);
+            break;
+
+            /* Modify keyboard parameters.
+             */
+        case CU_KBUP:
+            kb_adjust(true, mods);
+            break;
+        case CU_KBDN:
+            kb_adjust(false, mods);
             break;
 
             /* Take a screenshot of the window under the cursor. Currently works on macOS only.
