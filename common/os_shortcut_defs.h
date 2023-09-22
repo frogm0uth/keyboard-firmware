@@ -1,4 +1,4 @@
-/* Copyright 2020 @frogm0uth
+/* Copyright 2020-2023 @frogm0uth
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -171,3 +171,5 @@ DEFINE_SHORTCUT( SEARCH,        G(KC_SPC),      KC_LGUI,    KC_LGUI )    // Run 
 DEFINE_SHORTCUT( SCREEN_LOCK,   C(G(KC_Q)),     G(KC_L),    G(KC_L)   )  // Lock screen
 DEFINE_SHORTCUT( SYSTEM_SLEEP,  A(G(KC_EJCT)),  KC_SLEP,    KC_SLEP   )  // System sleep
 
+DEFINE_SHORTCUT( BRIGHTNESS_UP,   KC_BRMU, KC_BRIU, KC_BRIU )    // Brightness
+DEFINE_SHORTCUT( BRIGHTNESS_DOWN, KC_BRMD, KC_BRID, KC_BRID )

@@ -33,12 +33,14 @@ The alphabetic layout in this keymap was originally based on [RSTHD](https://xsz
 
 When I originally started making changes to RSTHD, I called it RSTHD'. The `'`, pronounced "prime", is [used in maths](https://en.wikipedia.org/wiki/Prime_(symbol)#Use_in_mathematics,_statistics,_and_science) to indicate a derivative of the named thing. The layout still very much retains its RSTHD DNA despite all the changes. I figure calling it *RSTHD/Prime* acknowledges its origin while still indicating that it's different.
 
+**As of late 2023, I'm not maintaining this documentation any more. It's too much work to be frank. It serves as a general guide, but for actual info please refer to the source. The best starting point is a level up: [frogmouth keyboard firmware](../README.md). For example, the keymap.c file for each keyboard's layout.**
+
 ### Goals
 
 Coming from a "slab" QWERTY keyboard to a programmable ergo split, I wanted to optimize:
 
+- Comfort. For me, that largely means de-emphasizing the inner index column. I've gone as far as to remove the lower key on that column (qwerty B/N). It also means balancing hand usage better.
 - Cross-platform portability. I need to switch between macOS and Windows frequently. The differences in shortcuts and location of Ctrl/Cmd keys was frustrating and programmable keyboards seemed to be the answer.
-- Comfort. For me, that largely means de-emphasizing the inner index columns.
 - Better support for ambidextrous use of the trackpad or mouses (I use two). For example, it should be possible to do things like cut-copy-paste from either hand alone.
 
 Typing speed and reducing the number of keys on the keyboard are not important goals to me. With that said, my layout has now shrunk to 40 keys.
@@ -50,6 +52,8 @@ My Kyria uses all 6 columns on each hand. However, the lower inner column keys a
 The controller is a Pro Micro with 32kB flash. Currently this keymap might compile or work properly only on a v1 keyboard.
 
 ### Features
+
+See [common code](../common/README.md).
 
 #### Platform-independent shortcuts
 

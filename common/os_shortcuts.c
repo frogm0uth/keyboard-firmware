@@ -1,4 +1,4 @@
-/* Copyright 2020 @frogm0uth
+/* Copyright 2020-2023 @frogm0uth
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -49,7 +49,7 @@ uint8_t os_get_raw() {
 
 const uint16_t PROGMEM os_shortcut_codes[][3] = {
     DEFINE_SHORTCUT( ID_START, KC_NO, KC_NO, KC_NO )
-#   include "os_shortcut_defs.h"
+#   include "../common/os_shortcut_defs.h"
     DEFINE_SHORTCUT( ID_END, KC_NO, KC_NO, KC_NO )
 };
 #endif

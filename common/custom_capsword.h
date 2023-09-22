@@ -1,4 +1,4 @@
-/* Copyright 2019 Thomas Baart <thomas@splitkb.com>
+/* Copyright 2020-2023 @frogm0uth
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,23 +13,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+#pragma once
+
 #include QMK_KEYBOARD_H
 
-#include "keymap.h"
-
-// Array of shortcut codes. First entry on each row is for macOS, second is for Windows.
-//
-const uint16_t PROGMEM shortcut_codes[][2] = {
-    // App-switcher
-    [SC_AS_START] = {KC_LGUI,   KC_LALT},
-    [SC_AS_RIGHT] = {KC_TAB,    KC_TAB},
-    [SC_AS_LEFT]  = {S(KC_TAB), S(KC_TAB)},
-
-    // Copy-paste
-    [SC_COPY]  = {G(KC_C), C(KC_C)},
-    [SC_PASTE] = {G(KC_V), C(KC_V)},
-
-    // Undo-redo
-    [SC_UNDO]  = {G(KC_Z),    C(KC_Z)},
-    [SC_REDO]  = {S(G(KC_Z)), C(KC_Y)}
-};
+bool is_capsword_active(void);
+bool process_auto_unshift(uint16_t keycode, keyrecord_t *record);
+void process_caps_cancel(uint16_t keycode, keyrecord_t *record);
+bool process_record_capslock(uint16_t keycode, keyrecord_t *record);
+void toggle_caps_word(void);
+void capsword_tick(void);

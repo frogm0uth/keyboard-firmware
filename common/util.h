@@ -1,4 +1,4 @@
-/* Copyright 2020 @frogm0uth
+/* Copyright 2020-2023 @frogm0uth
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,9 +17,19 @@
 
 #include QMK_KEYBOARD_H
 
-bool is_capsword_active(void);
-bool process_auto_unshift(uint16_t keycode, keyrecord_t *record);
-void process_caps_cancel(uint16_t keycode, keyrecord_t *record);
-bool process_record_capslock(uint16_t keycode, keyrecord_t *record);
-void toggle_caps_word(void);
-void capsword_tick(void);
+void oled_print_hex(uint8_t n);
+void kb_adjust(bool up, uint8_t mods);
+
+
+/**
+ * User config structure
+ */
+typedef union {
+    uint32_t raw;
+    struct {
+        uint8_t os_selection : 2;
+        uint8_t oled_brightness : 8;
+    };
+} user_config_t;
+
+extern user_config_t user_config;

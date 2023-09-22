@@ -1,6 +1,8 @@
 # Comborolls
 *Or: a more methodical way of designing a combo layout for a split keyboard.*
 
+**The keymap and comborolls are now out of date. I've learned some things and refined my approach as I've use comborolls. The general principles still apply.**
+
 A "combo" is the QMK name for a chord - when two keys pressed simultaneously produce an output that is not the same as the characters assigned to those keys. Combos can be used to produce individual characters - for example, to produce braces without leaving the alpha layer. Or they could be used for things like activating a layer. In this note I'll describe using them to emit a short sequence of characters to make typing flow better.
 
 <!--ts-->

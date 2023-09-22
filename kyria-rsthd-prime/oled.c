@@ -16,21 +16,40 @@
 
 #include "keymap.h"
 
+
+#ifdef ENCODER_ENABLE
+void oled_brightness_encoder_status(void) {
+    oled_write_P(PSTR("<-   OLED="), false);
+    oled_print_hex(oled_get_brightness());
+    oled_write_P(PSTR("    +>"), false);
+}
+#endif
+
+#ifdef RGBLIGHT_ENABLE
+void rgblight_oled_encoder_status(void) {
+    uint8_t mods = get_mods();
+    oled_write_P(PSTR("<-    "), false);
+
+    if (mods & (MOD_MASK_CTRL)) {
+        oled_write_P(PSTR("HUE="), false);
+        oled_print_hex(rgblight_get_hue());
+    } else if (mods & MOD_MASK_ALT) {
+        oled_write_P(PSTR("SAT="), false);
+        oled_print_hex(rgblight_get_sat());
+    } else if (mods & MOD_MASK_GUI) {
+        oled_write_P(PSTR("VAL="), false);
+        oled_print_hex(rgblight_get_val());
+    }
+    oled_write_P(PSTR("    +>"), false);
+}
+#endif
+
 #ifndef OLED_BRIGHTNESS_INCREMENT
 #    define OLED_BRIGHTNESS_INCREMENT 0x10
 #endif
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     return OLED_ROTATION_180;
-}
-
-// Print byte as hex
-static char hexchars[16] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
-
-void oled_print_hex(uint8_t n) {
-    oled_write_P(PSTR("0x"), false);
-    oled_write_char(hexchars[(n >> 4) & 0x0F], false);
-    oled_write_char(hexchars[n & 0x0F], false);
 }
 
 // clang-format off
@@ -223,21 +242,3 @@ bool oled_task_user(void) {
     }
     return false;
 }
-
-#ifdef ENCODER_ENABLE
-void oled_brightness_encoder(bool clockwise) {
-    int16_t brightness = oled_get_brightness();
-    if (clockwise) {
-        brightness = MIN(brightness + OLED_BRIGHTNESS_INCREMENT, 0xff);
-    } else {
-        brightness = MAX(brightness - OLED_BRIGHTNESS_INCREMENT, 0x01);
-    }
-    oled_set_brightness(brightness);
-}
-
-void oled_brightness_encoder_status() {
-    oled_write_P(PSTR("<-   OLED="), false);
-    oled_print_hex(oled_get_brightness());
-    oled_write_P(PSTR("    +>"), false);
-}
-#endif

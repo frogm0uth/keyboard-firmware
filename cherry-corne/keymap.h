@@ -1,4 +1,5 @@
-/* Copyright 2020-2023 @frogm0uth
+/*
+ * Copyright 2020-2023 @frogm0uth
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -61,31 +62,37 @@ enum layers {
 #include "../common/keycodes.h"
 
 
+/**
+ * Extern functions for keyboard-specific files
+ */
+void set_keylog(uint16_t keycode, keyrecord_t *record);
+
 
 /**
  * Define custom version of the layout stack
  */
 // clang-format off
-#define KEY_LAYOUT_stack(                           \
-    L00, L01, L02, L03, L04, L05,                   \
-    L12, L13, L14, L15, L16, L17,                   \
-    L24, L25, L26, L27, L28,                        \
-                                                    \
-                  R06, R07, R08, R09, R10, R11,     \
-                  R18, R19, R20, R21, R22, R23,     \
-                       R35, R36, R37, R38, R39,     \
-                                                    \
-    L42, L43, L44, R45, R46, R47,          \
-    L40                                    \
-)                                          \
-{                                          \
-    { KC_NO, KC_NO, L05,   L04,   L03,   L02,   L01,   L00   }, \
-    { KC_NO, KC_NO, L17,   L16,   L15,   L14,   L13,   L12   }, \
-    { KC_NO, KC_NO, KC_NO, L28,   L27,   L26,   L25,   L24   }, \
-    { L44,   L43,   L42,   KC_NO, L40,   KC_NO, KC_NO, KC_NO }, \
-    { KC_NO, KC_NO, R06,   R07,   R08,   R09,   R10,   R11   }, \
-    { KC_NO, KC_NO, R18,   R19,   R20,   R21,   R22,   R23   }, \
-    { KC_NO, KC_NO, KC_NO, R35,   R36,   R37,   R38,   R39   }, \
-    { R45,   R46,   R47,   KC_NO, KC_NO, KC_NO, KC_NO, KC_NO }, \
-}
+#define KEY_LAYOUT_stack( \
+    L00, L01, L02, L03, L04, L05, \
+    L10, L11, L12, L13, L14, L15, \
+    L20, L21, L22, L23, L24,      \
+                                  \
+                    R00, R01, R02, R03, R04, R05, \
+                    R10, R11, R12, R13, R14, R15, \
+                         R21, R22, R23, R24, R25, \
+                                 \
+    L30, L31, L32, R30, R31, R32 \
+  ) \
+  { \
+    { L00, L01, L02, L03, L04, L05 }, \
+    { L10, L11, L12, L13, L14, L15 }, \
+    { L20, L21, L22, L23, L24, KC_NO }, \
+    { KC_NO, KC_NO, KC_NO, L30, L31, L32 }, \
+    { R05, R04, R03, R02, R01, R00 }, \
+    { R15, R14, R13, R12, R11, R10 }, \
+    { R25, R24, R23, R22, R21, KC_NO }, \
+    { KC_NO, KC_NO, KC_NO, R32, R31, R30 } \
+  }
 // clang-format on
+
+

@@ -1,7 +1,13 @@
-OLED_ENABLE = yes           # Enables the use of OLED displays
-ENCODER_ENABLE = yes        # Enables the use of one or more encoders
-RGB_MATRIX_ENABLE = no      # Disable keyboard RGB matrix, as it is enabled by default on rev3
-RGBLIGHT_ENABLE = yes       # Enable keyboard RGB underglow
+RGBLIGHT_ENABLE = yes    # Enable WS2812 RGB underlight.
+OLED_ENABLE     = yes
+OLED_DRIVER     = SSD1306
+LTO_ENABLE      = yes
+
+
+//OLED_ENABLE = yes           # Enables the use of OLED displays
+ENCODER_ENABLE = no        # Enables the use of one or more encoders
+//RGB_MATRIX_ENABLE = no      # Disable keyboard RGB matrix, as it is enabled by default on rev3
+//RGBLIGHT_ENABLE = yes       # Enable keyboard RGB underglow
 LEADER_ENABLE = no          # Enable the Leader Key feature
 MOUSEKEY_ENABLE = yes       # Enable the inbuilt mouse key feature
 TAP_DANCE_ENABLE = no       # Enable tap-dance (NB also uncomment #define NO_ACTION_TAPPING in config.h)
@@ -42,11 +48,6 @@ SRC += ../common/process.c ../common/appswitcher.c ../common/util.c
 ifeq ($(strip $(OLED_ENABLE)), yes)
         SRC += oled.c
         OPT_DEFS += -DOLED_ENABLE
-endif
-
-ifeq ($(strip $(ENCODER_ENABLE)), yes)
-        SRC += encoder.c
-        OPT_DEFS += -DENCODER_ENABLE
 endif
 
 ifeq ($(strip $(CUSTOM_CAPSWORD)), yes)
