@@ -61,15 +61,6 @@ enum layers {
 #include "../common/keycodes.h"
 
 
-/**
- * Extern functions for keyboard-specific files
- */
-void rgblight_encoder(bool clockwise, uint8_t mods);
-void rgblight_oled_encoder_status(void);
-
-void oled_brightness_encoder(bool clockwise);
-void oled_brightness_encoder_status(void);
-
 
 /**
  * Define custom version of the layout stack

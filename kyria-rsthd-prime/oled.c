@@ -16,6 +16,34 @@
 
 #include "keymap.h"
 
+
+#ifdef ENCODER_ENABLE
+void oled_brightness_encoder_status(void) {
+    oled_write_P(PSTR("<-   OLED="), false);
+    oled_print_hex(oled_get_brightness());
+    oled_write_P(PSTR("    +>"), false);
+}
+#endif
+
+#ifdef RGBLIGHT_ENABLE
+void rgblight_oled_encoder_status(void) {
+    uint8_t mods = get_mods();
+    oled_write_P(PSTR("<-    "), false);
+
+    if (mods & (MOD_MASK_CTRL)) {
+        oled_write_P(PSTR("HUE="), false);
+        oled_print_hex(rgblight_get_hue());
+    } else if (mods & MOD_MASK_ALT) {
+        oled_write_P(PSTR("SAT="), false);
+        oled_print_hex(rgblight_get_sat());
+    } else if (mods & MOD_MASK_GUI) {
+        oled_write_P(PSTR("VAL="), false);
+        oled_print_hex(rgblight_get_val());
+    }
+    oled_write_P(PSTR("    +>"), false);
+}
+#endif
+
 #ifndef OLED_BRIGHTNESS_INCREMENT
 #    define OLED_BRIGHTNESS_INCREMENT 0x10
 #endif
@@ -214,11 +242,3 @@ bool oled_task_user(void) {
     }
     return false;
 }
-
-#ifdef ENCODER_ENABLE
-void oled_brightness_encoder_status() {
-    oled_write_P(PSTR("<-   OLED="), false);
-    oled_print_hex(oled_get_brightness());
-    oled_write_P(PSTR("    +>"), false);
-}
-#endif

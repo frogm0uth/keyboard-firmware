@@ -40,14 +40,6 @@ COMBOROLL_ENABLE = yes      # Enable comborolls. Either this or COMBO_ENABLE, no
 CUSTOM_CAPSWORD = yes       # Enable custom capsword
 
 
-# Uncomment one of the next lines to prevent unused variable/function errors
-# from halting the compile
-#
-## NLR??
-#
-//EXTRAFLAGS += -Wno-unused-function -Wno-unused-variable
-//EXTRAFLAGS += -Wno-error=unused-variable -Wno-error=unused-function
-
 
 # Don't edit from here down
 
@@ -56,11 +48,6 @@ SRC += ../common/process.c ../common/appswitcher.c ../common/util.c
 ifeq ($(strip $(OLED_ENABLE)), yes)
         SRC += oled.c
         OPT_DEFS += -DOLED_ENABLE
-endif
-
-ifeq ($(strip $(RGBLIGHT_ENABLE)), yes)
-        SRC += rgblight.c
-        OPT_DEFS += -DRGBLIGHT_ENABLE
 endif
 
 ifeq ($(strip $(CUSTOM_CAPSWORD)), yes)

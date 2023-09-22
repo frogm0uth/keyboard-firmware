@@ -67,8 +67,6 @@ enum layers {
  */
 void set_keylog(uint16_t keycode, keyrecord_t *record);
 
-void rgblight_control(bool up, uint8_t mods);
-
 
 /**
  * Define custom version of the layout stack
