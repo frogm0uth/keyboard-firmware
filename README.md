@@ -19,7 +19,7 @@ Arguably, QMK now includes some of the things I've added. Still, you may find so
 I started with a Kyria, which is a brilliant design, and almost perfect (for a flat board). More recently I've started using some other boards for various reasons. The Kyria directory still has most of the documentation. Each board has its own key layout and layers, although they are all very similar.
 
 - [Kyria v1](kyria-rsthd-prime/README.md)
-- [Cherry Corne](kyria-rsthd-prime/README.md)
+- [Cherry Corne](cherry-corne/README.md)
 
 Coming soon&trade;:
 
