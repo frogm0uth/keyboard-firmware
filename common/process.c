@@ -183,10 +183,10 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
             /* Modify keyboard parameters.
              */
         case CU_KBUP:
-            kb_adjust(true, mods);
+            kb_lighting_adjust(true, mods);
             break;
         case CU_KBDN:
-            kb_adjust(false, mods);
+            kb_lighting_adjust(false, mods);
             break;
 
             /* Take a screenshot of the window under the cursor. Currently works on macOS only.

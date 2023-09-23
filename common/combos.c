@@ -34,26 +34,6 @@
 #    define COMBOROLL_TERM 120
 #endif
 
-// Emit an array of keycodes in PROGMEM
-void process_combo_array(const uint16_t *keyptr) {
-    uint16_t keycode = pgm_read_word(keyptr++);
-    while (keycode != KC_NO) {
-        tap_code16(keycode);
-        keycode = pgm_read_word(keyptr++);
-    }
-}
-
-// Emit a PROGMEM string, clear all mods after first character
-void process_combo_string(const char *str) {
-    char ch = pgm_read_byte(str++);
-    send_char(ch);
-    clear_mods();
-    ch = pgm_read_byte(str++);
-    while (ch) {
-        send_char(ch);
-        ch = pgm_read_byte(str++);
-    }
-}
 
 // clang-format off
 #undef  ARRAY_PROTECT
@@ -175,9 +155,9 @@ combo_t key_combos[] = {
 #undef  RtoL_STR
 
 #define CMBO_KEY(name, out, ...)
-#define CMBO_ARR(name, out, ...)  case COMBO_ID_##name: process_combo_array(combo_array_##name); break;
-#define CMBO_LIT(name, out, ...)  case COMBO_ID_##name: process_combo_string(PSTR(out)); break;
-#define CMBO_STR(name, ...)       case COMBO_ID_##name: process_combo_string(PSTR(#name)); break;
+#define CMBO_ARR(name, out, ...)  case COMBO_ID_##name: emit_progmem_array(combo_array_##name); break;
+#define CMBO_LIT(name, out, ...)  case COMBO_ID_##name: emit_progmem_string(PSTR(out)); break;
+#define CMBO_STR(name, ...)       case COMBO_ID_##name: emit_progmem_string(PSTR(#name)); break;
 
 #define LtoR_KEY CMBO_KEY
 #define LtoR_ARR CMBO_ARR

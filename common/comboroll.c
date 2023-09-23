@@ -26,28 +26,6 @@
 #include "config.h"
 #include "keymap.h"
 
-// Emit an array of keycodes in PROGMEM. All mods are cleared first.
-void process_comboroll_array(const uint16_t *keyptr) {
-    clear_mods();
-    uint16_t keycode = pgm_read_word(keyptr++);
-    while (keycode != KC_NO) {
-        tap_code16(keycode);
-        keycode = pgm_read_word(keyptr++);
-    }
-}
-
-// Emit a PROGMEM string, clear all mods after first character
-void process_comboroll_string(const char *str) {
-    char ch = pgm_read_byte(str++);
-    send_char(ch);
-    clear_mods();
-    ch = pgm_read_byte(str++);
-    while (ch) {
-        send_char(ch);
-        ch = pgm_read_byte(str++);
-    }
-}
-
 // clang-format off
 #undef  ARRAY_PROTECT
 #define ARRAY_PROTECT(...) __VA_ARGS__ 
@@ -252,11 +230,11 @@ void process_comboroll(comboroll_t *cr) {
             break;
 
         case comboroll_t_array:
-            process_comboroll_array(cr->output_array);
+            emit_progmem_array(cr->output_array);
             break;
 
         case comboroll_t_string:
-            process_comboroll_string(cr->output_string);
+            emit_progmem_string(cr->output_string);
             break;
     }
 }

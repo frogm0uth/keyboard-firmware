@@ -84,7 +84,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
         case SNAP:
             if (left) {
                 if (mods & MOD_MASK_CSAG) {
-                    kb_adjust(clockwise, mods);
+                    kb_lighting_adjust(clockwise, mods);
                 } else {
                     keycode = clockwise ? SC(SC_APP_ZOOM_IN) : SC(SC_APP_ZOOM_OUT);
                 }

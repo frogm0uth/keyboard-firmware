@@ -32,8 +32,9 @@ void oled_print_hex(uint8_t n) {
 }
 #endif
 
-// User space in EEPROM. Variable and function to read at initialization.
-
+/**
+ * User space in EEPROM. Variable and function to read at initialization.
+*/
 user_config_t user_config;
 
 void keyboard_post_init_user(void) {
@@ -55,12 +56,14 @@ void keyboard_post_init_user(void) {
 }
 
 
-// Adjust things based on modifier state
+/**
+ *  Adjust keyboard lighting based on modifier state
+ */
 #ifndef OLED_BRIGHTNESS_INCREMENT
 #    define OLED_BRIGHTNESS_INCREMENT 0x10
 #endif
 
-void kb_adjust(bool up, uint8_t mods) {
+void kb_lighting_adjust(bool up, uint8_t mods) {
 #ifdef OLED_ENABLE
     int16_t brightness = oled_get_brightness();
     if (!(mods & MOD_MASK_CAG)) {
@@ -94,4 +97,29 @@ void kb_adjust(bool up, uint8_t mods) {
         }
     }
 #endif
+}
+
+/**
+ * Functions for outputting characters. Useful for combos and things like that.
+ */
+// Emit an array of keycodes in PROGMEM. All mods are cleared first.
+void emit_progmem_array(const uint16_t *keyptr) {
+    clear_mods();
+    uint16_t keycode = pgm_read_word(keyptr++);
+    while (keycode != KC_NO) {
+        tap_code16(keycode);
+        keycode = pgm_read_word(keyptr++);
+    }
+}
+
+// Emit a PROGMEM string, clear all mods after first character
+void emit_progmem_string(const char *str) {
+    char ch = pgm_read_byte(str++);
+    send_char(ch);
+    clear_mods();
+    ch = pgm_read_byte(str++);
+    while (ch) {
+        send_char(ch);
+        ch = pgm_read_byte(str++);
+    }
 }

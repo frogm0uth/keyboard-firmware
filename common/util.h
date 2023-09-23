@@ -18,8 +18,9 @@
 #include QMK_KEYBOARD_H
 
 void oled_print_hex(uint8_t n);
-void kb_adjust(bool up, uint8_t mods);
-
+void kb_lighting_adjust(bool up, uint8_t mods);
+void emit_progmem_array(const uint16_t *keyptr);
+void emit_progmem_string(const char *str);
 
 /**
  * User config structure
