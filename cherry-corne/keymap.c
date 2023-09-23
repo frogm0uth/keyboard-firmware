@@ -58,7 +58,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                   CU_4,  CU_5,  CU_6,  CU_MINUS_MINUS, ___X___,
 
         /* Thumbs */
-        ___X___, _______, ___X___,   KC_SPC, KC_ENT, CU_DOT_DOT
+        ___X___, _______, KC_BSPC,   KC_SPC, KC_ENT, CU_DOT_DOT
     ),
 
 
@@ -75,7 +75,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                          KC_RGUI,   KC_RALT,  KC_RCTL,  KC_RSFT,       SC_NEXT_SCREEN,
 
         /* Thumbs */
-        KC_DEL, KC_ENT, KC_BSPC,   ___X___, _______, ___X___
+        KC_DEL, KC_ENT, KC_BSPC,   KC_BSPC, _______, ___X___
     ),
 
 
