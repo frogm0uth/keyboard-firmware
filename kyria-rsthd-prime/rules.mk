@@ -1,12 +1,12 @@
 OLED_ENABLE = yes           # Enables the use of OLED displays
-ENCODER_ENABLE = yes        # Enables the use of one or more encoders
+ENCODER_ENABLE = no         # Enables the use of one or more encoders
 RGB_MATRIX_ENABLE = no      # Disable keyboard RGB matrix, as it is enabled by default on rev3
 RGBLIGHT_ENABLE = yes       # Enable keyboard RGB underglow
 LEADER_ENABLE = no          # Enable the Leader Key feature
 MOUSEKEY_ENABLE = yes       # Enable the inbuilt mouse key feature
 TAP_DANCE_ENABLE = no       # Enable tap-dance (NB also uncomment #define NO_ACTION_TAPPING in config.h)
 WPM_ENABLE = no             # Enable simple WPM display
-COMBO_ENABLE = no           # Enable combo (chording) functionality
+COMBO_ENABLE = yes          # Enable combo (chording) functionality
 CAPS_WORD_ENABLE = no       # Enable the caps-word feature. Doesn't work properly.
 
 LTO_ENABLE = yes            # Firmware size reduction - https://docs.qmk.fm/#/squeezing_avr

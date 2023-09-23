@@ -56,7 +56,7 @@ LtoR_STR( m,  KC_S, KC_D )
 LtoR_STR( sc, KC_C, KC_W )
 LtoR_STR( sp, KC_P, KC_G )
 
-CMBO_STR( et, CU_DOT, KC_MINS ) _____TRM( et,  300 )
+CMBO_STR( et, CU_DOT, KC_MINS ) CMBO_TRM( et,  300 )
 RtoL_STR( er, KC_O, KC_A )
 RtoL_STR( ed, KC_L, KC_Y )
 RtoL_STR( es, KC_L, CU_COMM )
@@ -95,8 +95,8 @@ RtoL_STR( all,  KC_N, CU_DOT )
 RtoL_STR( ough, KC_N, CU_COMM )
 
 // Right-to-left rolls on left hand
-RtoL_KEY( comma,  KC_COMM, KC_P, KC_G )  _____TRM( comma,  300 )
-RtoL_KEY( period, KC_DOT,  KC_C, KC_W )  _____TRM( period, 300 )
+RtoL_KEY( comma,  KC_COMM, KC_P, KC_G )  RtoL_TRM( comma,  300 )
+RtoL_KEY( period, KC_DOT,  KC_C, KC_W )  RtoL_TRM( period, 300 )
 
 // Comborolls across both hands
 RtoL_STR( vs,   KC_V, CU_COMM )
@@ -159,4 +159,3 @@ RtoL_LIT( dirup,           "../",   CU_2, CU_6 )   ___NOSFT( dirup )
 
 RtoL_LIT( lbracedbl,       "{{",    CU_1, CU_6 )   ___NOSFT( lbracedbl )
 RtoL_LIT( rbracedbl,       "}}",    CU_4, CU_3 )   ___NOSFT( rbracedbl )
-

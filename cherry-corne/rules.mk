@@ -12,7 +12,7 @@ LEADER_ENABLE = no          # Enable the Leader Key feature
 MOUSEKEY_ENABLE = yes       # Enable the inbuilt mouse key feature
 TAP_DANCE_ENABLE = no       # Enable tap-dance (NB also uncomment #define NO_ACTION_TAPPING in config.h)
 WPM_ENABLE = no             # Enable simple WPM display
-COMBO_ENABLE = no           # Enable combo (chording) functionality
+COMBO_ENABLE = yes          # Enable combo (chording) functionality
 CAPS_WORD_ENABLE = no       # Enable the caps-word feature. Doesn't work properly.
 
 LTO_ENABLE = yes            # Firmware size reduction - https://docs.qmk.fm/#/squeezing_avr
