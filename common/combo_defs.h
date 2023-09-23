@@ -16,27 +16,24 @@
  */
 
 /**
- * This file contains the definitions of combos. This works with either QMK combos or my userspace
- * comboroll implementation. QMK combos are more powerful eg. can be almost any key as trigger or
- * output. However it takes more space (about 2k in this keymap) and there are other issues when
- * typing with a rolling style.
+ * This file contains the definitions of combos. This works with QMK combos and/or my userspace
+ * comboroll implementation. In rules.mk, turn on COMBO_ENABLE, COMBOROLL_ENABLE, or both.
+ * QMK combos work with modifier keys as they are "early" in the processing chain. However
+ * they don't work as well when you have overlapping rolls.
  *
- * See docs/comborolls.md for more information.
- *
- * The definition macros are named (LtoR|RtoL|CMBO)_(KEY|ARR|LIT|STR):
+ * The definition macros are named (LtoR|RtoL|CMBO)_(KEY|ARR|LIT|STR|TRM):
  *
  * LtoR: comboroll, triggers pressed from left to right
  * RtoL: comboroll, triggers pressed from right to left
  * CMBO: triggers nominally pressed as the same time (in either direction)
  *
+ * STR: arguments are name, triggers. The name is output as a string.
+ * LIT: arguments are name, literal string, triggers
  * KEY: arguments are name, keycode, triggers
  * ARR: arguments are name, array of keycodes, triggers
- * LIT: arguments are name, literal string, triggers
- * STR: arguments are name, triggers. The name is output as a string.
+ * TRM: arguments are name, term. This changes the timeout, and must follow the combo definition.
  *
- * By default, RtoL and LtoR have a longer timeout, on the assumption they will be typed as a "roll"
- * instead of deliberately both pressed at the same time.  To define a custom term for a combo, use
- * the _____TRM(name,ms) macro. It must be *after* the macro that defines that combo.
+ * By default, rolls have a longer timeout.
  * 
  * Notes:
  * 
