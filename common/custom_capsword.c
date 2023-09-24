@@ -54,6 +54,12 @@ bool process_auto_unshift(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
+// Utility function to check if shift should be cancelled
+bool check_auto_unshift() {
+    return is_auto_unshift
+        && (get_mods() & MOD_MASK_SHIFT);
+}
+
 // Time out caps word toggle
 void capsword_tick() {
     if (capsword_waiting) {

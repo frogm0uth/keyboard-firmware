@@ -102,21 +102,42 @@ void kb_lighting_adjust(bool up, uint8_t mods) {
 /**
  * Functions for outputting characters. Useful for combos and things like that.
  */
-// Emit an array of keycodes in PROGMEM. All mods are cleared first.
+
+// Emit an array of keycodes in PROGMEM. Check auto-unshift after first keycode.
 void emit_progmem_array(const uint16_t *keyptr) {
-    clear_mods();
     uint16_t keycode = pgm_read_word(keyptr++);
+    tap_code16(keycode);
+    if (check_auto_unshift()) {
+        del_mods(MOD_MASK_SHIFT);
+    }
+    keycode = pgm_read_word(keyptr++);
     while (keycode != KC_NO) {
         tap_code16(keycode);
         keycode = pgm_read_word(keyptr++);
     }
 }
 
-// Emit a PROGMEM string, clear all mods after first character
+// Emit an array of keycodes in PROGMEM but allow custom keycodes. Check auto-unshift after first keycode.
+void emit_progmem_array_record(const uint16_t *keyptr, keyrecord_t *record) {
+    uint16_t keycode = pgm_read_word(keyptr++);
+    tap_custom_key(keycode, record);
+    if (check_auto_unshift()) {
+        del_mods(MOD_MASK_SHIFT);
+    }
+    keycode = pgm_read_word(keyptr++);
+    while (keycode != KC_NO) {
+        tap_custom_key(keycode, record);
+        keycode = pgm_read_word(keyptr++);
+    }
+}
+
+// Emit a PROGMEM string. Check auto-unshift after first character.
 void emit_progmem_string(const char *str) {
     char ch = pgm_read_byte(str++);
     send_char(ch);
-    clear_mods();
+    if (check_auto_unshift()) {
+        del_mods(MOD_MASK_SHIFT);
+    }
     ch = pgm_read_byte(str++);
     while (ch) {
         send_char(ch);

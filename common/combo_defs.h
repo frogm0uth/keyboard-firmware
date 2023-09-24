@@ -118,21 +118,21 @@ RtoL_LIT( define, "#define", KC_D, KC_Q )
 LtoR_STR( ion, KC_H, KC_QUOT )
 LtoR_STR( any, KC_X, KC_D )
 
-// Contractions. Use ARR so that still get single quote even if shift pressed
+// Contractions. Use ARR so that shift doesn't change the quote into double quote
 RtoL_ARR( quote_s,
     ARRAY_PROTECT(
-        KC_QUOT,
+        CU_QUOTE_QUOTE,
         KC_S
     ), KC_I, KC_Q)
 RtoL_ARR( quote_ll,
     ARRAY_PROTECT(
-        KC_QUOT,
+        CU_QUOTE_QUOTE,
         KC_L,
         KC_L
     ), KC_L, KC_Q)
 RtoL_ARR( quote_re,
     ARRAY_PROTECT(
-        KC_QUOT,
+        CU_QUOTE_QUOTE,
         KC_R,
         KC_E
     ), KC_N, KC_Q)

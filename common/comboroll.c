@@ -254,7 +254,7 @@ void process_comboroll(comboroll_t *cr) {
             break;
 
         case comboroll_t_array:
-            emit_progmem_array(cr->output_array);
+            emit_progmem_array_record(cr->output_array, &firstkey_record);
             break;
 
         case comboroll_t_string:

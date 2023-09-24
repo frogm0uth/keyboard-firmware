@@ -23,3 +23,4 @@ void process_caps_cancel(uint16_t keycode, keyrecord_t *record);
 bool process_record_capslock(uint16_t keycode, keyrecord_t *record);
 void toggle_caps_word(void);
 void capsword_tick(void);
+bool check_auto_unshift(void);
