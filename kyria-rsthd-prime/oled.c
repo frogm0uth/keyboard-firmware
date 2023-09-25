@@ -16,6 +16,16 @@
 
 #include "keymap.h"
 
+// Print byte as hex to OLED
+#ifdef OLED_ENABLE
+static char hexchars[16] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+
+void oled_print_hex(uint8_t n) {
+    oled_write_P(PSTR("0x"), false);
+    oled_write_char(hexchars[(n >> 4) & 0x0F], false);
+    oled_write_char(hexchars[n & 0x0F], false);
+}
+#endif
 
 #ifdef ENCODER_ENABLE
 void oled_brightness_encoder_status(void) {
