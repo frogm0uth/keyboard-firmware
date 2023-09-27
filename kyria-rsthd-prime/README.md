@@ -33,7 +33,7 @@ The alphabetic layout in this keymap was originally based on [RSTHD](https://xsz
 
 When I originally started making changes to RSTHD, I called it RSTHD'. The `'`, pronounced "prime", is [used in maths](https://en.wikipedia.org/wiki/Prime_(symbol)#Use_in_mathematics,_statistics,_and_science) to indicate a derivative of the named thing. The layout still very much retains its RSTHD DNA despite all the changes. I figure calling it *RSTHD/Prime* acknowledges its origin while still indicating that it's different.
 
-**As of late 2023, I'm not maintaining this documentation any more. It's too much work to be frank. It serves as a general guide, but for actual info please refer to the source. The best starting point is a level up: [frogmouth keyboard firmware](../README.md). For example, the keymap.c file for each keyboard's layout.**
+**As of late 2023, I'm not maintaining this documentation any more. It's too much work to be frank. It serves as a general guide, but for actual info please refer to the source. The best starting point is a level up: [frogmouth keyboard firmware](../). For example, the keymap.c file for each keyboard's layout.**
 
 ### Goals
 

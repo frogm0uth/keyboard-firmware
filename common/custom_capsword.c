@@ -42,7 +42,7 @@ bool is_capsword_active() {
  * shift. It is always active but should probably be a compile option.
  */
 bool process_auto_unshift(uint16_t keycode, keyrecord_t *record) {
-    if (record->event.pressed && check_auto_unshift() /* is_auto_unshift && (get_mods() & MOD_MASK_SHIFT) */ ) {
+    if (record->event.pressed && check_auto_unshift()) {
         switch (keycode) {
             case KC_A ... KC_Z:
                 register_code16(keycode);
