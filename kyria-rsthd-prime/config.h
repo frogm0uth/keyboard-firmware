@@ -16,9 +16,25 @@
 
 #pragma once
 
-// Configuration for combos
-#define COMBO_TERM 90
-#define COMBOROLL_TERM 200
+#ifdef KEYBOARD_splitkb_kyria_rev1
+     // rev1 Kyria seems to have the encoders connected backwards
+     #define ENCODER_DIRECTION_FLIP
+
+     // Configuration for combos
+     #define COMBO_TERM 90
+     #define COMBOROLL_TERM 200
+#endif
+
+#ifdef KEYBOARD_splitkb_kyria_rev3
+     // use Liatris LED as capslock indicator
+     #define LED_CAPS_LOCK_PIN 24
+     #define LED_PIN_ON_STATE 0
+
+     // Configuration for combos - timing seems to be different with different controller
+     #define COMBO_TERM 120
+     #define COMBOROLL_TERM 300
+#endif
+
 
 // Tapping control
 #define TAPPING_TERM 500
@@ -55,9 +71,6 @@
 // When using the default resolution of 4, if you notice your encoder skipping
 // every other tick, lower the resolution to 2.
 #define ENCODER_RESOLUTION 2
-
-// The Kyria seems to have the encoders connected backwards
-#define ENCODER_DIRECTION_FLIP
 
 // Allows to use either side as the master. Look at the documentation for info:
 // https://docs.qmk.fm/#/config_options?id=setting-handedness

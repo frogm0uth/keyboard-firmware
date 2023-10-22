@@ -21,6 +21,7 @@ bool is_capsword_active(void);
 bool process_auto_unshift(uint16_t keycode, keyrecord_t *record);
 void process_caps_cancel(uint16_t keycode, keyrecord_t *record);
 bool process_record_capslock(uint16_t keycode, keyrecord_t *record);
-void toggle_caps_word(void);
+void toggle_capsword(void);
+void toggle_capslock(void);
 void capsword_tick(void);
 bool check_auto_unshift(void);

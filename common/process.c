@@ -25,33 +25,21 @@
 // Register a single key. Handles custom keycodes.
 void register_custom_key(uint16_t keycode, keyrecord_t *record) {
     record->event.pressed = true; // force it on
-    if (keycode > SAFE_RANGE) {   // handle custom keycodes, a bit iffy but seems to work...
-        process_record_user_emit(keycode, record);
-    } else {
-        if (keycode == KC_CAPS) { // needs special treatment
-            tap_code(KC_CAPS);
-        } else {
-#ifdef CUSTOM_CAPSWORD
-            // Check for capsword cancel
-            process_caps_cancel(keycode, record);
-            if (process_auto_unshift(keycode, record)) {
-                register_code16(keycode);   // we did NOT send the code in process_shift_cancel(),
-                                            // so send it now
-            }
-#else
+    // Process the keycode so that custom codes work
+    if (process_record_user_emit(keycode, record)) {
+        if (keycode < SAFE_RANGE) { // in case of lax return values from previous call
             register_code16(keycode);
-#endif
-         }
+        }
     }
 }
 
 // Unregister a single key. Handles custom keycodes.
 void unregister_custom_key(uint16_t keycode, keyrecord_t *record) {
     record->event.pressed = false; // force it off
-    if (keycode > SAFE_RANGE) {    // handle custom keycodes, a bit iffy but seems to work...
-        process_record_user_emit(keycode, record);
-    } else {
-        unregister_code16(keycode);
+    if (process_record_user_emit(keycode, record)) {
+        if (keycode < SAFE_RANGE) {
+            unregister_code16(keycode);
+        }
     }
 }
 
@@ -121,6 +109,13 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
     uint8_t mods = get_mods();
 
 #ifdef CUSTOM_CAPSWORD
+    // Toggle caps lock.
+    if (!process_record_capslock(keycode, record)) {
+        return false;
+    }
+#endif
+
+#ifdef CUSTOM_CAPSWORD
     // Check for capsword cancel
     process_caps_cancel(keycode, record);
 #endif
@@ -177,7 +172,9 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
              */
         case CU_APPSWITCH_RIGHT:
         case CU_APPSWITCH_LEFT:
+            #if APP_SWITCHER_ENABLE
             app_switcher_record(keycode, record);
+            #endif
             break;
 
             /* Modify keyboard parameters.
@@ -247,6 +244,9 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
 #ifdef RGBLIGHT_ENABLE
                 rgblight_sethsv(rgblight_get_hue(), rgblight_get_sat(), rgblight_get_val());
 #endif
+#ifdef RGB_MATRIX_ENABLE
+                rgb_matrix_sethsv(rgb_matrix_get_hue(), rgb_matrix_get_sat(), rgb_matrix_get_val());
+#endif
 #ifdef OLED_ENABLE
                 user_config.oled_brightness = oled_get_brightness();
                 eeconfig_update_user(user_config.raw);
@@ -284,13 +284,6 @@ bool process_record_user_common(uint16_t keycode, keyrecord_t *record) {
     ltt_interrupt(keycode, record);
 #endif
 
-#ifdef CUSTOM_CAPSWORD
-    // Toggle caps lock.
-    if (!process_record_capslock(keycode, record)) {
-        return false;
-    }
-#endif
-
 #ifdef COMBOROLL_ENABLE
     // Check for and process comboroll keys
     if (!process_record_comboroll(keycode, record)) {
@@ -315,7 +308,9 @@ bool process_record_user_common(uint16_t keycode, keyrecord_t *record) {
  */
 void matrix_scan_user(void) {
     // App-switcher timeout
+#ifdef APP_SWITCHER_ENABLE
     app_switcher_tick();
+#endif
 
     // Update ltt_timer
 #ifdef LAYER_TAP_TOGGLE
@@ -344,6 +339,8 @@ void matrix_scan_user(void) {
 layer_state_t layer_state_set_user(layer_state_t state) {
     /* Release the appswitcher on every layer change.
      */
+#ifdef APP_SWITCHER_ENABLE
     app_switcher_release();
-    return state;
+ #endif
+   return state;
 }

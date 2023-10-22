@@ -1,7 +1,15 @@
+# Uncomment the following for rev1 with Pro Micro
+#RGB_MATRIX_ENABLE = no      # Disable keyboard RGB matrix
+#RGBLIGHT_ENABLE = yes       # Enable keyboard RGB underglow
+
+# Uncomment the following for rev3 with Liatris (RP2040)
+CONVERT_TO=liatris
+RGB_MATRIX_ENABLE = yes     # Enable keyboard RGB matrix
+RGBLIGHT_ENABLE = no        # Disable keyboard RGB underglow
+
+# Set the next set as you like (subject to firmware space!)
 OLED_ENABLE = yes           # Enables the use of OLED displays
 ENCODER_ENABLE = no         # Enables the use of one or more encoders
-RGB_MATRIX_ENABLE = no      # Disable keyboard RGB matrix, as it is enabled by default on rev3
-RGBLIGHT_ENABLE = yes       # Enable keyboard RGB underglow
 LEADER_ENABLE = no          # Enable the Leader Key feature
 MOUSEKEY_ENABLE = yes       # Enable the inbuilt mouse key feature
 TAP_DANCE_ENABLE = no       # Enable tap-dance (NB also uncomment #define NO_ACTION_TAPPING in config.h)
@@ -32,12 +40,12 @@ CUSTOM_EDIT = yes           # Enable custom editing keys. Turns on OS_SHORTCUTS.
 LAYER_TAP_TOGGLE = yes      # Enable the layer-tap-toggle feature
 COMBOROLL_ENABLE = yes      # Enable comborolls. Either this or COMBO_ENABLE, not both
 CUSTOM_CAPSWORD = yes       # Enable custom capsword
-
+APP_SWITCHER = yes           # Enable timed app-switcher, such as triggered by an encoder or layer
 
 
 # Don't edit from here down
 
-SRC += ../common/process.c ../common/appswitcher.c ../common/util.c
+SRC += ../common/process.c ../common/util.c
 
 ifeq ($(strip $(OLED_ENABLE)), yes)
         SRC += oled.c
@@ -49,13 +57,19 @@ ifeq ($(strip $(ENCODER_ENABLE)), yes)
         OPT_DEFS += -DENCODER_ENABLE
 endif
 
+ifeq ($(strip $(APP_SWITCHER)), yes)
+        SRC += ../common/appswitcher.c
+        OPT_DEFS += -DAPP_SWITCHER_ENABLE
+endif
+
 ifeq ($(strip $(CUSTOM_CAPSWORD)), yes)
         SRC += ../common/custom_capsword.c
         OPT_DEFS += -DCUSTOM_CAPSWORD
 endif
 
 ifeq ($(strip $(COMBO_ENABLE)), yes)
-        SRC += ../common/combos.c
+        INTROSPECTION_KEYMAP_C = ../common/combos.c # See https://github.com/qmk/qmk_firmware/issues/21137#issuecomment-1577898767
+        # SRC += ../common/combos.c
         OPT_DEFS += -DCOMBO_ENABLE -DCOMBO_MUST_PRESS_IN_ORDER_PER_COMBO -DCOMBO_TERM_PER_COMBO
 endif
 

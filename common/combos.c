@@ -34,56 +34,50 @@
 #    define COMBOROLL_TERM 120
 #endif
 
-// Define as empty if COMBOROLL_ENABLE is not defined
-#ifdef COMBOROLL_ENABLE
-    #define LtoR_KEY(name, ...)
-    #define LtoR_ARR(name, ...)
-    #define LtoR_LIT(name, ...)
-    #define LtoR_STR(name, ...)
+// Define comboroll macros as empty
+#define LtoR_KEY(name, ...)
+#define LtoR_ARR(name, ...)
+#define LtoR_LIT(name, ...)
+#define LtoR_STR(name, ...)
+#define LtoR_TRM(name, ...)
 
-    #define RtoL_KEY(name, ...)
-    #define RtoL_ARR(name, ...)
-    #define RtoL_LIT(name, ...)
-    #define RtoL_STR(name, ...)
-#endif
+#define RtoL_KEY(name, ...)
+#define RtoL_ARR(name, ...)
+#define RtoL_LIT(name, ...)
+#define RtoL_STR(name, ...)
+#define RtoL_TRM(name, ...)
+
+#define CMBO_KEY(name, ...)
+#define CMBO_ARR(name, ...)
+#define CMBO_LIT(name, ...)
+#define CMBO_STR(name, ...)
+#define CMBO_TRM(name, ...)
 
 // clang-format off
 #undef  ARRAY_PROTECT
 #define ARRAY_PROTECT(...) __VA_ARGS__ 
 
 // Empty until the last definition
-#define CMBO_TRM(name, ms)
-#define RtoL_TRM(name, ms)
-#define LtoR_TRM(name, ms)
+#define Q_CMBO_TRM(name, ms)
+#define Q_RtoL_TRM(name, ms)
+#define Q_LtoR_TRM(name, ms)
 #define ___NOSFT(name)
 
 // Enum for combo codes
-#define CMBO_KEY(name, out, ...)  COMBO_ID_##name,
-#define CMBO_ARR(name, out, ...)  COMBO_ID_##name,
-#define CMBO_LIT(name, out, ...)  COMBO_ID_##name,
-#define CMBO_STR(name, ...)       COMBO_ID_##name,
+#define Q_CMBO_KEY(name, out, ...)  COMBO_ID_##name,
+#define Q_CMBO_ARR(name, out, ...)  COMBO_ID_##name,
+#define Q_CMBO_LIT(name, out, ...)  COMBO_ID_##name,
+#define Q_CMBO_STR(name, ...)       COMBO_ID_##name,
 
-#ifndef COMBOROLL_ENABLE
-    #undef  LtoR_KEY
-    #undef  LtoR_ARR
-    #undef  LtoR_LIT
-    #undef  LtoR_STR
+#define Q_LtoR_KEY Q_CMBO_KEY
+#define Q_LtoR_ARR Q_CMBO_ARR
+#define Q_LtoR_LIT Q_CMBO_LIT
+#define Q_LtoR_STR Q_CMBO_STR
 
-    #undef  RtoL_KEY
-    #undef  RtoL_ARR
-    #undef  RtoL_LIT
-    #undef  RtoL_STR
-
-    #define LtoR_KEY CMBO_KEY
-    #define LtoR_ARR CMBO_ARR
-    #define LtoR_LIT CMBO_LIT
-    #define LtoR_STR CMBO_STR
-
-    #define RtoL_KEY CMBO_KEY
-    #define RtoL_ARR CMBO_ARR
-    #define RtoL_LIT CMBO_LIT
-    #define RtoL_STR CMBO_STR
-#endif
+#define Q_RtoL_KEY Q_CMBO_KEY
+#define Q_RtoL_ARR Q_CMBO_ARR
+#define Q_RtoL_LIT Q_CMBO_LIT
+#define Q_RtoL_STR Q_CMBO_STR
 
 enum combo_events {
 #   include "combo_defs.h"
@@ -93,75 +87,71 @@ uint16_t COMBO_LEN = COMBO_LENGTH;
 
 
 // Define combo key sequences in memory
-#undef  CMBO_KEY
-#undef  CMBO_ARR
-#undef  CMBO_STR
-#undef  CMBO_LIT
+#undef  Q_CMBO_KEY
+#undef  Q_CMBO_ARR
+#undef  Q_CMBO_STR
+#undef  Q_CMBO_LIT
 
-#define CMBO_KEY(name, out, ...)  const uint16_t PROGMEM COMBO_SEQ_##name[] = {__VA_ARGS__, COMBO_END};
-#define CMBO_ARR(name, out, ...)  const uint16_t PROGMEM COMBO_SEQ_##name[] = {__VA_ARGS__, COMBO_END}; \
+#undef  Q_LtoR_KEY
+#undef  Q_LtoR_ARR
+#undef  Q_LtoR_LIT
+#undef  Q_LtoR_STR
+
+#undef  Q_RtoL_KEY
+#undef  Q_RtoL_ARR
+#undef  Q_RtoL_LIT
+#undef  Q_RtoL_STR
+
+#define Q_CMBO_KEY(name, out, ...)  const uint16_t PROGMEM COMBO_SEQ_##name[] = {__VA_ARGS__, COMBO_END};
+#define Q_CMBO_ARR(name, out, ...)  const uint16_t PROGMEM COMBO_SEQ_##name[] = {__VA_ARGS__, COMBO_END}; \
                                   const uint16_t PROGMEM combo_array_##name[] = { out, KC_NO };
-#define CMBO_LIT(name, out, ...)  const uint16_t PROGMEM COMBO_SEQ_##name[] = {__VA_ARGS__, COMBO_END};
-#define CMBO_STR(name, ...)       const uint16_t PROGMEM COMBO_SEQ_##name[] = {__VA_ARGS__, COMBO_END};
+#define Q_CMBO_LIT(name, out, ...)  const uint16_t PROGMEM COMBO_SEQ_##name[] = {__VA_ARGS__, COMBO_END};
+#define Q_CMBO_STR(name, ...)       const uint16_t PROGMEM COMBO_SEQ_##name[] = {__VA_ARGS__, COMBO_END};
 
-#ifndef COMBOROLL_ENABLE
-    #undef  LtoR_KEY
-    #undef  LtoR_ARR
-    #undef  LtoR_LIT
-    #undef  LtoR_STR
+#define Q_LtoR_KEY Q_CMBO_KEY
+#define Q_LtoR_ARR Q_CMBO_ARR
+#define Q_LtoR_LIT Q_CMBO_LIT
+#define Q_LtoR_STR Q_CMBO_STR
 
-    #undef  RtoL_KEY
-    #undef  RtoL_ARR
-    #undef  RtoL_LIT
-    #undef  RtoL_STR
-
-    #define LtoR_KEY CMBO_KEY
-    #define LtoR_ARR CMBO_ARR
-    #define LtoR_LIT CMBO_LIT
-    #define LtoR_STR CMBO_STR
-
-    #define RtoL_KEY(name, out, k1, k2)  const uint16_t PROGMEM COMBO_SEQ_##name[] = {k2, k1, COMBO_END};
-    #define RtoL_ARR(name, out, k1, k2)  const uint16_t PROGMEM COMBO_SEQ_##name[] = {k2, k1, COMBO_END}; \
-                                         const uint16_t PROGMEM combo_array_##name[] = { out, KC_NO };
-    #define RtoL_LIT(name, out, k1, k2)  const uint16_t PROGMEM COMBO_SEQ_##name[] = {k2, k1, COMBO_END};
-    #define RtoL_STR(name, k1, k2)       const uint16_t PROGMEM COMBO_SEQ_##name[] = {k2, k1, COMBO_END};
-#endif
+#define Q_RtoL_KEY(name, out, k1, k2)  const uint16_t PROGMEM COMBO_SEQ_##name[] = {k2, k1, COMBO_END};
+#define Q_RtoL_ARR(name, out, k1, k2)  const uint16_t PROGMEM COMBO_SEQ_##name[] = {k2, k1, COMBO_END}; \
+                                     const uint16_t PROGMEM combo_array_##name[] = { out, KC_NO };
+#define Q_RtoL_LIT(name, out, k1, k2)  const uint16_t PROGMEM COMBO_SEQ_##name[] = {k2, k1, COMBO_END};
+#define Q_RtoL_STR(name, k1, k2)       const uint16_t PROGMEM COMBO_SEQ_##name[] = {k2, k1, COMBO_END};
 
 #include "combo_defs.h"
 
 
 // Define mapping from key sequences to combo codes or actions
-#undef  CMBO_KEY
-#undef  CMBO_ARR
-#undef  CMBO_STR
-#undef  CMBO_LIT
+#undef  Q_CMBO_KEY
+#undef  Q_CMBO_ARR
+#undef  Q_CMBO_STR
+#undef  Q_CMBO_LIT
 
-#define CMBO_KEY(name, out, ...)  [COMBO_ID_##name] = COMBO(COMBO_SEQ_##name, out),
-#define CMBO_ARR(name, out, ...)  [COMBO_ID_##name] = COMBO_ACTION(COMBO_SEQ_##name),
-#define CMBO_STR(name, out, ...)  [COMBO_ID_##name] = COMBO_ACTION(COMBO_SEQ_##name),
-#define CMBO_LIT(name, ...)       [COMBO_ID_##name] = COMBO_ACTION(COMBO_SEQ_##name),
+#undef  Q_LtoR_KEY
+#undef  Q_LtoR_ARR
+#undef  Q_LtoR_LIT
+#undef  Q_LtoR_STR
 
-#ifndef COMBOROLL_ENABLE
-    #undef  LtoR_KEY
-    #undef  LtoR_ARR
-    #undef  LtoR_LIT
-    #undef  LtoR_STR
+#undef  Q_RtoL_KEY
+#undef  Q_RtoL_ARR
+#undef  Q_RtoL_LIT
+#undef  Q_RtoL_STR
 
-    #undef  RtoL_KEY
-    #undef  RtoL_ARR
-    #undef  RtoL_LIT
-    #undef  RtoL_STR
+#define Q_CMBO_KEY(name, out, ...)  [COMBO_ID_##name] = COMBO(COMBO_SEQ_##name, out),
+#define Q_CMBO_ARR(name, out, ...)  [COMBO_ID_##name] = COMBO_ACTION(COMBO_SEQ_##name),
+#define Q_CMBO_STR(name, out, ...)  [COMBO_ID_##name] = COMBO_ACTION(COMBO_SEQ_##name),
+#define Q_CMBO_LIT(name, ...)       [COMBO_ID_##name] = COMBO_ACTION(COMBO_SEQ_##name),
 
-    #define LtoR_KEY CMBO_KEY
-    #define LtoR_ARR CMBO_ARR
-    #define LtoR_LIT CMBO_LIT
-    #define LtoR_STR CMBO_STR
+#define Q_LtoR_KEY Q_CMBO_KEY
+#define Q_LtoR_ARR Q_CMBO_ARR
+#define Q_LtoR_LIT Q_CMBO_LIT
+#define Q_LtoR_STR Q_CMBO_STR
 
-    #define RtoL_KEY CMBO_KEY
-    #define RtoL_ARR CMBO_ARR
-    #define RtoL_LIT CMBO_LIT
-    #define RtoL_STR CMBO_STR
-#endif
+#define Q_RtoL_KEY Q_CMBO_KEY
+#define Q_RtoL_ARR Q_CMBO_ARR
+#define Q_RtoL_LIT Q_CMBO_LIT
+#define Q_RtoL_STR Q_CMBO_STR
 
 combo_t key_combos[] = {
 #   include "combo_defs.h"
@@ -169,37 +159,35 @@ combo_t key_combos[] = {
 
 
 // Execute code for action combos
-#undef  CMBO_KEY
-#undef  CMBO_ARR
-#undef  CMBO_STR
-#undef  CMBO_LIT
+#undef  Q_CMBO_KEY
+#undef  Q_CMBO_ARR
+#undef  Q_CMBO_STR
+#undef  Q_CMBO_LIT
 
-#define CMBO_KEY(name, out, ...)
-#define CMBO_ARR(name, out, ...)  case COMBO_ID_##name: emit_progmem_array(combo_array_##name); break;
-#define CMBO_LIT(name, out, ...)  case COMBO_ID_##name: emit_progmem_string(PSTR(out)); break;
-#define CMBO_STR(name, ...)       case COMBO_ID_##name: emit_progmem_string(PSTR(#name)); break;
+#undef  Q_LtoR_KEY
+#undef  Q_LtoR_ARR
+#undef  Q_LtoR_LIT
+#undef  Q_LtoR_STR
 
-#ifndef COMBOROLL_ENABLE
-    #undef  LtoR_KEY
-    #undef  LtoR_ARR
-    #undef  LtoR_LIT
-    #undef  LtoR_STR
+#undef  Q_RtoL_KEY
+#undef  Q_RtoL_ARR
+#undef  Q_RtoL_LIT
+#undef  Q_RtoL_STR
 
-    #undef  RtoL_KEY
-    #undef  RtoL_ARR
-    #undef  RtoL_LIT
-    #undef  RtoL_STR
+#define Q_CMBO_KEY(name, out, ...)
+#define Q_CMBO_ARR(name, out, ...)  case COMBO_ID_##name: emit_progmem_array(combo_array_##name); break;
+#define Q_CMBO_LIT(name, out, ...)  case COMBO_ID_##name: emit_progmem_string(PSTR(out)); break;
+#define Q_CMBO_STR(name, ...)       case COMBO_ID_##name: emit_progmem_string(PSTR(#name)); break;
 
-    #define LtoR_KEY CMBO_KEY
-    #define LtoR_ARR CMBO_ARR
-    #define LtoR_LIT CMBO_LIT
-    #define LtoR_STR CMBO_STR
+#define Q_LtoR_KEY Q_CMBO_KEY
+#define Q_LtoR_ARR Q_CMBO_ARR
+#define Q_LtoR_LIT Q_CMBO_LIT
+#define Q_LtoR_STR Q_CMBO_STR
 
-    #define RtoL_KEY CMBO_KEY
-    #define RtoL_ARR CMBO_ARR
-    #define RtoL_LIT CMBO_LIT
-    #define RtoL_STR CMBO_STR
-#endif
+#define Q_RtoL_KEY Q_CMBO_KEY
+#define Q_RtoL_ARR Q_CMBO_ARR
+#define Q_RtoL_LIT Q_CMBO_LIT
+#define Q_RtoL_STR Q_CMBO_STR
 
 void process_combo_event(uint16_t combo_index, bool pressed) {
     uint8_t mods = get_mods();
@@ -213,37 +201,35 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
 }
 
 // Whether keys must be pressed in order
-#undef  CMBO_KEY
-#undef  CMBO_ARR
-#undef  CMBO_STR
-#undef  CMBO_LIT
+#undef  Q_CMBO_KEY
+#undef  Q_CMBO_ARR
+#undef  Q_CMBO_STR
+#undef  Q_CMBO_LIT
 
-#define CMBO_KEY(name, out, ...)
-#define CMBO_ARR(name, out, ...)
-#define CMBO_LIT(name, out, ...)
-#define CMBO_STR(name, ...)
+#undef  Q_LtoR_KEY
+#undef  Q_LtoR_ARR
+#undef  Q_LtoR_LIT
+#undef  Q_LtoR_STR
 
-#ifndef COMBOROLL_ENABLE
-    #undef  LtoR_KEY
-    #undef  LtoR_ARR
-    #undef  LtoR_LIT
-    #undef  LtoR_STR
+#undef  Q_RtoL_KEY
+#undef  Q_RtoL_ARR
+#undef  Q_RtoL_LIT
+#undef  Q_RtoL_STR
 
-    #undef  RtoL_KEY
-    #undef  RtoL_ARR
-    #undef  RtoL_LIT
-    #undef  RtoL_STR
+#define Q_CMBO_KEY(name, out, ...)
+#define Q_CMBO_ARR(name, out, ...)
+#define Q_CMBO_LIT(name, out, ...)
+#define Q_CMBO_STR(name, ...)
 
-    #define LtoR_KEY(name, out, ...) case COMBO_ID_##name: return true; break;
-    #define LtoR_ARR LtoR_KEY
-    #define LtoR_LIT LtoR_KEY
-    #define LtoR_STR LtoR_KEY
+#define Q_LtoR_KEY(name, out, ...) case COMBO_ID_##name: return true; break;
+#define Q_LtoR_ARR Q_LtoR_KEY
+#define Q_LtoR_LIT Q_LtoR_KEY
+#define Q_LtoR_STR Q_LtoR_KEY
 
-    #define RtoL_KEY LtoR_KEY
-    #define RtoL_ARR LtoR_KEY
-    #define RtoL_LIT LtoR_KEY
-    #define RtoL_STR LtoR_KEY
-#endif
+#define Q_RtoL_KEY Q_LtoR_KEY
+#define Q_RtoL_ARR Q_LtoR_KEY
+#define Q_RtoL_LIT Q_LtoR_KEY
+#define Q_RtoL_STR Q_LtoR_KEY
 
 bool get_combo_must_press_in_order(uint16_t combo_index, combo_t *combo) {
     switch (combo_index) {
@@ -255,37 +241,35 @@ bool get_combo_must_press_in_order(uint16_t combo_index, combo_t *combo) {
 
 
 // Provide the timing data
-#undef  CMBO_KEY
-#undef  CMBO_ARR
-#undef  CMBO_STR
-#undef  CMBO_LIT
+#undef  Q_CMBO_KEY
+#undef  Q_CMBO_ARR
+#undef  Q_CMBO_STR
+#undef  Q_CMBO_LIT
 
-#define CMBO_KEY(name, out, ...)
-#define CMBO_ARR(name, out, ...)
-#define CMBO_LIT(name, out, ...)
-#define CMBO_STR(name, ...)
+#undef  Q_LtoR_KEY
+#undef  Q_LtoR_ARR
+#undef  Q_LtoR_LIT
+#undef  Q_LtoR_STR
 
-#ifndef COMBOROLL_ENABLE
-    #undef  LtoR_KEY
-    #undef  LtoR_ARR
-    #undef  LtoR_LIT
-    #undef  LtoR_STR
+#undef  Q_RtoL_KEY
+#undef  Q_RtoL_ARR
+#undef  Q_RtoL_LIT
+#undef  Q_RtoL_STR
 
-    #undef  RtoL_KEY
-    #undef  RtoL_ARR
-    #undef  RtoL_LIT
-    #undef  RtoL_STR
+#define Q_CMBO_KEY(name, out, ...)
+#define Q_CMBO_ARR(name, out, ...)
+#define Q_CMBO_LIT(name, out, ...)
+#define Q_CMBO_STR(name, ...)
 
-    #define LtoR_KEY(name, out, ...) case COMBO_ID_##name: combo_term = COMBOROLL_TERM; break;
-    #define LtoR_ARR LtoR_KEY
-    #define LtoR_LIT LtoR_KEY
-    #define LtoR_STR LtoR_KEY
+#define Q_LtoR_KEY(name, out, ...) case COMBO_ID_##name: combo_term = COMBOROLL_TERM; break;
+#define Q_LtoR_ARR Q_LtoR_KEY
+#define Q_LtoR_LIT Q_LtoR_KEY
+#define Q_LtoR_STR Q_LtoR_KEY
 
-    #define RtoL_KEY LtoR_KEY
-    #define RtoL_ARR LtoR_KEY
-    #define RtoL_LIT LtoR_KEY
-    #define RtoL_STR LtoR_KEY
-#endif
+#define Q_RtoL_KEY Q_LtoR_KEY
+#define Q_RtoL_ARR Q_LtoR_KEY
+#define Q_RtoL_LIT Q_LtoR_KEY
+#define Q_RtoL_STR Q_LtoR_KEY
 
 uint16_t get_combo_term(uint16_t index, combo_t *combo) {
     uint16_t combo_term = COMBO_TERM;
@@ -293,34 +277,32 @@ uint16_t get_combo_term(uint16_t index, combo_t *combo) {
 #       include "combo_defs.h"
     }
 
-#undef  CMBO_TRM
-#define CMBO_TRM(name, ms) case COMBO_ID_##name: combo_term = ms; break;
+#undef  Q_CMBO_TRM
+#define Q_CMBO_TRM(name, ms) case COMBO_ID_##name: combo_term = ms; break;
 
-#ifndef COMBOROLL_ENABLE
-    #undef  LtoR_KEY
-    #undef  LtoR_ARR
-    #undef  LtoR_LIT
-    #undef  LtoR_STR
-    #undef  LtoR_TRM
+#undef  Q_LtoR_KEY
+#undef  Q_LtoR_ARR
+#undef  Q_LtoR_LIT
+#undef  Q_LtoR_STR
+#undef  Q_LtoR_TRM
 
-    #undef  RtoL_KEY
-    #undef  RtoL_ARR
-    #undef  RtoL_LIT
-    #undef  RtoL_STR
-    #undef  RtoL_TRM
+#undef  Q_RtoL_KEY
+#undef  Q_RtoL_ARR
+#undef  Q_RtoL_LIT
+#undef  Q_RtoL_STR
+#undef  Q_RtoL_TRM
 
-    #define LtoR_KEY(name, out, ...)
-    #define LtoR_ARR LtoR_KEY
-    #define LtoR_LIT LtoR_KEY
-    #define LtoR_STR LtoR_KEY
-    #define LtoR_TRM CMBO_TRM
+#define Q_LtoR_KEY(name, out, ...)
+#define Q_LtoR_ARR Q_LtoR_KEY
+#define Q_LtoR_LIT Q_LtoR_KEY
+#define Q_LtoR_STR Q_LtoR_KEY
+#define Q_LtoR_TRM Q_CMBO_TRM
 
-    #define RtoL_KEY LtoR_KEY
-    #define RtoL_ARR LtoR_KEY
-    #define RtoL_LIT LtoR_KEY
-    #define RtoL_STR LtoR_KEY
-    #define RtoL_TRM CMBO_TRM
-#endif
+#define Q_RtoL_KEY Q_LtoR_KEY
+#define Q_RtoL_ARR Q_LtoR_KEY
+#define Q_RtoL_LIT Q_LtoR_KEY
+#define Q_RtoL_STR Q_LtoR_KEY
+#define Q_RtoL_TRM Q_CMBO_TRM
 
     switch (index) {
 #       include "combo_defs.h"

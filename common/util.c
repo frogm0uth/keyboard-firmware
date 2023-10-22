@@ -66,7 +66,7 @@ void kb_lighting_adjust(bool up, uint8_t mods) {
     }
 #endif
 
-#ifdef RGBLIGHT_ENABLE
+#if defined(RGBLIGHT_ENABLE)
     if (mods & MOD_MASK_CTRL) {
         if (up) {
             rgblight_increase_hue_noeeprom();
@@ -87,6 +87,27 @@ void kb_lighting_adjust(bool up, uint8_t mods) {
         }
     }
 #endif
+#if defined(RGB_MATRIX_ENABLE)
+    if (mods & MOD_MASK_CTRL) {
+        if (up) {
+            rgb_matrix_increase_hue_noeeprom();
+        } else {
+            rgb_matrix_decrease_hue_noeeprom();
+        }
+    } else if (mods & MOD_MASK_ALT) {
+        if (up) {
+            rgb_matrix_increase_sat_noeeprom();
+        } else {
+            rgb_matrix_decrease_sat_noeeprom();
+        }
+    } else if (mods & MOD_MASK_GUI) {
+        if (up) {
+            rgb_matrix_increase_val_noeeprom();
+        } else {
+            rgb_matrix_decrease_val_noeeprom();
+        }
+    }
+#endif
 }
 
 /**
@@ -95,19 +116,11 @@ void kb_lighting_adjust(bool up, uint8_t mods) {
 
 // Emit an array of keycodes in PROGMEM. Check auto-unshift after first keycode.
 void emit_progmem_array(const uint16_t *keyptr) {
-    uint16_t keycode = pgm_read_word(keyptr++);
-    tap_code16(keycode);
-    if (check_auto_unshift()) {
-        del_mods(MOD_MASK_SHIFT);
-    }
-    keycode = pgm_read_word(keyptr++);
-    while (keycode != KC_NO) {
-        tap_code16(keycode);
-        keycode = pgm_read_word(keyptr++);
-    }
+    keyrecord_t record;
+    emit_progmem_array_record(keyptr, &record);
 }
 
-// Emit an array of keycodes in PROGMEM but allow custom keycodes. Check auto-unshift after first keycode.
+// Emit an array of keycodes in PROGMEM, allowing custom keycodes. Check auto-unshift after first keycode.
 void emit_progmem_array_record(const uint16_t *keyptr, keyrecord_t *record) {
     uint16_t keycode = pgm_read_word(keyptr++);
     tap_custom_key(keycode, record);

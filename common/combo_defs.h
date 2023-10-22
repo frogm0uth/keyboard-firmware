@@ -16,12 +16,12 @@
  */
 
 /**
- * This file contains the definitions of combos. This works with QMK combos and/or my userspace
- * comboroll implementation. In rules.mk, turn on COMBO_ENABLE, COMBOROLL_ENABLE, or both.
- * QMK combos work with modifier keys as they are "early" in the processing chain. However
- * they don't work as well when you have overlapping rolls.
+ * This file contains the definitions of combos and comborolls. This works with QMK combos and/or my userspace
+ * comboroll implementation. In rules.mk, turn on COMBO_ENABLE for QMK combos and COMBOROLL_ENABLE for comborolls.
+ * QMK combos work with modifier keys as they are "early" in the processing chain but comborolls don't. However
+ * QMK combos don't work as well when you have overlapping rolls.
  *
- * The definition macros are named (LtoR|RtoL|CMBO)_(KEY|ARR|LIT|STR|TRM):
+ * The definition macros for comborolls are named (LtoR|RtoL|CMBO)_(KEY|ARR|LIT|STR|TRM):
  *
  * LtoR: comboroll, triggers pressed from left to right
  * RtoL: comboroll, triggers pressed from right to left
@@ -35,16 +35,11 @@
  *
  * By default, rolls have a longer timeout.
  * 
- * Notes:
+ * For QMK combos, the macro names are the same but prefixed by "Q_". More than one trigger
+ * can be given for the Q_LtoR_ and Q_CMBO_ macros, but not for the Q_RtoL_ macros.
  * 
- * 1. By convention, the trigger keys should be listed from left to right location in the keymap.
- *
- * 2. If COMBOROLL_ENABLED is defined, none of the macros work with more than two trigger keys. For
- * defs with > 2 trigger keys, wrap them in a #ifdef COMBO_ENABLED.
- *
- * 3. The RtoL version works only for two trigger keys even for QMK combos.
- *
- * 4. If COMBOROLL_ENABLED is defined, don't use modifiers or layer switch keys as triggers or output.
+ * My "best practice" is to use comborolls for everything, and QMK combos only for things
+ * that use modifiers and are not typed overlapping with any comborolls.
  */
 // clang-format off
 
@@ -60,13 +55,15 @@ RtoL_STR( es, KC_L, CU_COMM )
 RtoL_STR( ve, KC_I, CU_COMM )
 RtoL_STR( ee, KC_Y, CU_COMM )
 
+LtoR_LIT( ve2, "ve", KC_P, KC_D )
+
 // Verticals
 CMBO_STR( tw, KC_T, KC_W )
 CMBO_STR( ps, KC_S, KC_C )
 CMBO_STR( z,  KC_H, KC_F )
 CMBO_STR( j,  KC_N, KC_M )
 CMBO_STR( ui, KC_I, KC_U )
-CMBO_KEY( enter, KC_ENT, KC_O, CU_DOT )
+CMBO_KEY( capslock, KC_CAPS, KC_O, CU_DOT )
 
 // Awkward bigrams/trigrams
 LtoR_STR( ght, KC_X, KC_H )
@@ -119,26 +116,22 @@ LtoR_STR( ion, KC_H, KC_QUOT )
 LtoR_STR( any, KC_X, KC_D )
 
 // Contractions. Use ARR so that shift doesn't change the quote into double quote
-RtoL_ARR( quote_s,
-    ARRAY_PROTECT(
-        CU_QUOTE_QUOTE,
-        KC_S
-    ), KC_I, KC_Q)
-RtoL_ARR( quote_ll,
+Q_RtoL_ARR( quote_ll,
     ARRAY_PROTECT(
         CU_QUOTE_QUOTE,
         KC_L,
         KC_L
-    ), KC_L, KC_Q)
-RtoL_ARR( quote_re,
+    ), KC_L, KC_RSFT)
+Q_RtoL_ARR( quote_re,
     ARRAY_PROTECT(
         CU_QUOTE_QUOTE,
         KC_R,
         KC_E
-    ), KC_N, KC_Q)
+    ), KC_Y, KC_RSFT)
 
 // Utilities
-CMBO_KEY( expose, SC_EXPOSE_WINDOWS, KC_BSPC,  KC_DEL )  // Window expose, left thumb on EDIT layer
+Q_CMBO_KEY( search, SC_SEARCH,         CU_SHIFT, KC_SPC )  // Search key, on right thumb
+Q_CMBO_KEY( expose, SC_EXPOSE_WINDOWS, KC_BSPC,  KC_DEL )  // Window expose, left thumb on EDIT layer
 
 // Syntax layer
 RtoL_LIT( quesrangle,      "?>",    CU_7, CU_8 )   ___NOSFT( quesrangle )

@@ -30,6 +30,25 @@
 #undef  ARRAY_PROTECT
 #define ARRAY_PROTECT(...) __VA_ARGS__ 
 
+// Define QMK combo macros as empty
+#define Q_LtoR_KEY(name, ...)
+#define Q_LtoR_ARR(name, ...)
+#define Q_LtoR_LIT(name, ...)
+#define Q_LtoR_STR(name, ...)
+#define Q_LtoR_TRM(name, ...)
+
+#define Q_RtoL_KEY(name, ...)
+#define Q_RtoL_ARR(name, ...)
+#define Q_RtoL_LIT(name, ...)
+#define Q_RtoL_STR(name, ...)
+#define Q_RtoL_TRM(name, ...)
+
+#define Q_CMBO_KEY(name, ...)
+#define Q_CMBO_ARR(name, ...)
+#define Q_CMBO_LIT(name, ...)
+#define Q_CMBO_STR(name, ...)
+#define Q_CMBO_TRM(name, ...)
+
 
 // Empty until the last definition
 #define CMBO_TRM(name, ms)
@@ -37,13 +56,6 @@
 #define LtoR_TRM(name, ms)
 #define ___NOSFT(name)
 
-// Define as empty if COMBO_ENABLE is not defined
-#ifdef COMBO_ENABLE
-    #define CMBO_KEY(name, ...)
-    #define CMBO_ARR(name, ...)
-    #define CMBO_LIT(name, ...)
-    #define CMBO_STR(name, ...)
-#endif
 
 // Define an enum of identifiers.
 #define LtoR_KEY(name, ...) COMBOROLL_ID_##name,
@@ -56,12 +68,10 @@
 #define RtoL_LIT LtoR_KEY
 #define RtoL_STR LtoR_KEY
 
-#ifndef COMBO_ENABLE
-    #define CMBO_KEY LtoR_KEY
-    #define CMBO_ARR LtoR_KEY
-    #define CMBO_LIT LtoR_KEY
-    #define CMBO_STR LtoR_KEY
-#endif
+#define CMBO_KEY LtoR_KEY
+#define CMBO_ARR LtoR_KEY
+#define CMBO_LIT LtoR_KEY
+#define CMBO_STR LtoR_KEY
 
 enum comboroll_ids {
 #   include "combo_defs.h"
@@ -80,6 +90,11 @@ enum comboroll_ids {
 #undef  RtoL_LIT
 #undef  RtoL_STR
 
+#undef  CMBO_KEY
+#undef  CMBO_ARR
+#undef  CMBO_LIT
+#undef  CMBO_STR
+
 #define LtoR_KEY(name, out, k1, k2)
 #define LtoR_ARR(name, out, k1, k2)  const uint16_t PROGMEM comboroll_array_##name[] = { out, KC_NO };
 #define LtoR_LIT(name, out, k1, k2)  const char PROGMEM comboroll_string_##name[] = out;
@@ -90,20 +105,12 @@ enum comboroll_ids {
 #define RtoL_LIT LtoR_LIT
 #define RtoL_STR LtoR_STR
 
-#ifndef COMBO_ENABLE
-    #undef  CMBO_KEY
-    #undef  CMBO_ARR
-    #undef  CMBO_LIT
-    #undef  CMBO_STR
-
-    #define CMBO_KEY LtoR_KEY
-    #define CMBO_ARR LtoR_ARR
-    #define CMBO_LIT LtoR_LIT
-    #define CMBO_STR LtoR_STR
-#endif
+#define CMBO_KEY LtoR_KEY
+#define CMBO_ARR LtoR_ARR
+#define CMBO_LIT LtoR_LIT
+#define CMBO_STR LtoR_STR
 
 #include "combo_defs.h"
-
 
 
 // Define the array of comboroll nodes
@@ -117,6 +124,11 @@ enum comboroll_ids {
 #undef  RtoL_LIT
 #undef  RtoL_STR
 
+#undef  CMBO_KEY
+#undef  CMBO_ARR
+#undef  CMBO_LIT
+#undef  CMBO_STR
+
 #define LtoR_KEY(name, out, k1, k2) {comboroll_t_keycode, CMB_MATCH_LEFT, 0, COMBOROLL_TERM, {.output_keycode=out}},
 #define LtoR_ARR(name, out, k1, k2) {comboroll_t_array,   CMB_MATCH_LEFT, 0, COMBOROLL_TERM, {.output_array=comboroll_array_##name}},
 #define LtoR_LIT(name, out, k1, k2) {comboroll_t_string,  CMB_MATCH_LEFT, 0, COMBOROLL_TERM, {.output_string=comboroll_string_##name}},
@@ -127,17 +139,10 @@ enum comboroll_ids {
 #define RtoL_LIT(name, out, k1, k2) {comboroll_t_string,  CMB_MATCH_RIGHT, 0, COMBOROLL_TERM, {.output_string=comboroll_string_##name}},
 #define RtoL_STR(name,      k1, k2) {comboroll_t_string,  CMB_MATCH_RIGHT, 0, COMBOROLL_TERM, {.output_string=comboroll_string_##name}},
 
-#ifndef COMBO_ENABLE
-    #undef  CMBO_KEY
-    #undef  CMBO_ARR
-    #undef  CMBO_LIT
-    #undef  CMBO_STR
-
-    #define CMBO_KEY(name, out, k1, k2) {comboroll_t_keycode, CMB_MATCH_BOTH, 0, COMBO_TERM, {.output_keycode=out}},
-    #define CMBO_ARR(name, out, k1, k2) {comboroll_t_array,   CMB_MATCH_BOTH, 0, COMBO_TERM, {.output_array=comboroll_array_##name}},
-    #define CMBO_LIT(name, out, k1, k2) {comboroll_t_string,  CMB_MATCH_BOTH, 0, COMBO_TERM, {.output_string=comboroll_string_##name}},
-    #define CMBO_STR(name,      k1, k2) {comboroll_t_string,  CMB_MATCH_BOTH, 0, COMBO_TERM, {.output_string=comboroll_string_##name}},
-#endif
+#define CMBO_KEY(name, out, k1, k2) {comboroll_t_keycode, CMB_MATCH_BOTH, 0, COMBO_TERM, {.output_keycode=out}},
+#define CMBO_ARR(name, out, k1, k2) {comboroll_t_array,   CMB_MATCH_BOTH, 0, COMBO_TERM, {.output_array=comboroll_array_##name}},
+#define CMBO_LIT(name, out, k1, k2) {comboroll_t_string,  CMB_MATCH_BOTH, 0, COMBO_TERM, {.output_string=comboroll_string_##name}},
+#define CMBO_STR(name,      k1, k2) {comboroll_t_string,  CMB_MATCH_BOTH, 0, COMBO_TERM, {.output_string=comboroll_string_##name}},
 
 comboroll_t comboroll_data[] = {
 #   include "combo_defs.h"
@@ -154,6 +159,11 @@ comboroll_t comboroll_data[] = {
 #undef  RtoL_LIT
 #undef  RtoL_STR
 
+#undef  CMBO_KEY
+#undef  CMBO_ARR
+#undef  CMBO_LIT
+#undef  CMBO_STR
+
 #define LtoR_KEY(name, out, k1, k2) {k1, k2},
 #define LtoR_ARR(name, out, k1, k2) {k1, k2},
 #define LtoR_LIT(name, out, k1, k2) {k1, k2},
@@ -164,17 +174,10 @@ comboroll_t comboroll_data[] = {
 #define RtoL_LIT(name, out, k1, k2) {k1, k2},
 #define RtoL_STR(name,      k1, k2) {k1, k2},
 
-#ifndef COMBO_ENABLE
-    #undef  CMBO_KEY
-    #undef  CMBO_ARR
-    #undef  CMBO_LIT
-    #undef  CMBO_STR
-
-    #define CMBO_KEY(name, out, k1, k2) {k1, k2},
-    #define CMBO_ARR(name, out, k1, k2) {k1, k2},
-    #define CMBO_LIT(name, out, k1, k2) {k1, k2},
-    #define CMBO_STR(name,      k1, k2) {k1, k2},
-#endif
+#define CMBO_KEY(name, out, k1, k2) {k1, k2},
+#define CMBO_ARR(name, out, k1, k2) {k1, k2},
+#define CMBO_LIT(name, out, k1, k2) {k1, k2},
+#define CMBO_STR(name,      k1, k2) {k1, k2},
 
 const uint16_t PROGMEM comboroll_keys[][2] = {
 #   include "combo_defs.h"
@@ -194,6 +197,11 @@ const uint16_t PROGMEM comboroll_keys[][2] = {
 #undef  RtoL_LIT
 #undef  RtoL_STR
 
+#undef  CMBO_KEY
+#undef  CMBO_ARR
+#undef  CMBO_LIT
+#undef  CMBO_STR
+
 #define LtoR_KEY(name, ...)
 #define LtoR_ARR(name, ...)
 #define LtoR_LIT(name, ...)
@@ -204,17 +212,10 @@ const uint16_t PROGMEM comboroll_keys[][2] = {
 #define RtoL_LIT(name, ...)
 #define RtoL_STR(name, ...)
 
-#ifndef COMBO_ENABLE
-    #undef  CMBO_KEY
-    #undef  CMBO_ARR
-    #undef  CMBO_LIT
-    #undef  CMBO_STR
-
-    #define CMBO_KEY(name, ...)
-    #define CMBO_ARR(name, ...)
-    #define CMBO_LIT(name, ...)
-    #define CMBO_STR(name, ...)
-#endif
+#define CMBO_KEY(name, ...)
+#define CMBO_ARR(name, ...)
+#define CMBO_LIT(name, ...)
+#define CMBO_STR(name, ...)
 
 void comboroll_post_init() {
 #undef  RtoL_TRM

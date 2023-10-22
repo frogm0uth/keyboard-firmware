@@ -35,7 +35,7 @@ void oled_brightness_encoder_status(void) {
 }
 #endif
 
-#ifdef RGBLIGHT_ENABLE
+#if defined(RGBLIGHT_ENABLE) || defined(RGB_MATRIX_ENABLE)
 void rgblight_oled_encoder_status(void) {
     uint8_t mods = get_mods();
     oled_write_P(PSTR("<-    "), false);
@@ -216,7 +216,7 @@ static void render_status(void) {
 
         case SNAP:
             if (mods & MOD_MASK_CAG) {
-#    ifdef RGBLIGHT_ENABLE
+#    if defined(RGBLIGHT_ENABLE) || defined(RGB_MATRIX_ENABLE)
                 rgblight_oled_encoder_status();
 #    endif
             } else if (mods & MOD_MASK_SHIFT) {
