@@ -203,7 +203,7 @@ bool process_record_capslock(uint16_t keycode, keyrecord_t *record) {
 
                 // toggle caps-word if key is released quickly
                 if (capsword_waiting) {
-                    capsword_waiting = false;
+                    //capsword_waiting = false;
                     toggle_capsword();
                 }
             }

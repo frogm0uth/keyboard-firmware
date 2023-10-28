@@ -9,7 +9,7 @@ RGBLIGHT_ENABLE = no        # Disable keyboard RGB underglow
 
 # Set the next set as you like (subject to firmware space!)
 OLED_ENABLE = yes           # Enables the use of OLED displays
-ENCODER_ENABLE = no         # Enables the use of one or more encoders
+ENCODER_ENABLE = yes        # Enables the use of one or more encoders
 LEADER_ENABLE = no          # Enable the Leader Key feature
 MOUSEKEY_ENABLE = yes       # Enable the inbuilt mouse key feature
 TAP_DANCE_ENABLE = no       # Enable tap-dance (NB also uncomment #define NO_ACTION_TAPPING in config.h)

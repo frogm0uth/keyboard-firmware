@@ -59,7 +59,7 @@ const uint16_t PROGMEM os_shortcut_codes[][3] = {
  * Implement default processing for custom keycodes for each shortcut.
  */
 #ifndef OS_SHORTCUTS_STATIC
-void process_record_shortcut(uint16_t keycode, keyrecord_t *record) {
+bool process_record_shortcut(uint16_t keycode, keyrecord_t *record) {
     if (keycode > SC_ID_START && keycode < SC_ID_END) {
         uint16_t shortcut = SC(keycode);
         if (record->event.pressed) {
@@ -67,7 +67,9 @@ void process_record_shortcut(uint16_t keycode, keyrecord_t *record) {
         } else {
             unregister_code16(shortcut);
         }
+        return false;
     }
+    return true;
 }
 #endif
 

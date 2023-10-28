@@ -94,10 +94,12 @@ void process_shift_key(uint16_t key, uint16_t shiftedkey, keyrecord_t *record) {
 }
 
 // Process a single custom shift key based on the keycode
-void process_custom_shift(uint16_t key, keyrecord_t *record) {
+bool process_custom_shift(uint16_t key, keyrecord_t *record) {
     if (key > SHIFT_ID_START && key < SHIFT_ID_END) {
         process_shift_key(READ_SHIFT_KEY(key, 0), READ_SHIFT_KEY(key, 1), record);
+        return false;
     }
+    return true;
 }
 
 /**
@@ -121,11 +123,15 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
 #endif
 
     // Process custom shift keys
-    process_custom_shift(keycode, record);
+    if (!process_custom_shift(keycode, record)) {
+        return false;
+    }
 
     // Process OS shortcut keycodes
 #if defined(OS_SHORTCUTS) && !defined(OS_SHORTCUTS_STATIC)
-    process_record_shortcut(keycode, record);
+    if (!process_record_shortcut(keycode, record)) {
+        return false;
+    }
 #endif
 
     // Process custom editing keycodes
@@ -175,15 +181,18 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
             #if APP_SWITCHER_ENABLE
             app_switcher_record(keycode, record);
             #endif
+            return false;
             break;
 
             /* Modify keyboard parameters.
              */
         case CU_KBUP:
             kb_lighting_adjust(true, mods);
+            return false;
             break;
         case CU_KBDN:
             kb_lighting_adjust(false, mods);
+            return false;
             break;
 
             /* Take a screenshot of the window under the cursor. Currently works on macOS only.
@@ -197,6 +206,7 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
                 tap_code16(CM_BTN1);
 #endif
             }
+            return false;
             break;
 
             /* Take screenshot of a region. This does the initial mouse press,
@@ -215,6 +225,7 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
                 unregister_code16(CM_BTN1);
 #endif
             }
+            return false;
             break;
 
             /* Wipe the EEPROM. Handy if you get stuck when you have multiple
@@ -225,6 +236,7 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 eeconfig_init();
             }
+            return false;
             break;
 
             /* Lock the screen.
@@ -235,23 +247,16 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
                 wait_ms(500);
                 tap_code16(KC_ESC);
             }
+            return false;
             break;
 
             /* Save RGB state to EEPROM.
              */
         case CU_WRITE:
             if (record->event.pressed) {
-#ifdef RGBLIGHT_ENABLE
-                rgblight_sethsv(rgblight_get_hue(), rgblight_get_sat(), rgblight_get_val());
-#endif
-#ifdef RGB_MATRIX_ENABLE
-                rgb_matrix_sethsv(rgb_matrix_get_hue(), rgb_matrix_get_sat(), rgb_matrix_get_val());
-#endif
-#ifdef OLED_ENABLE
-                user_config.oled_brightness = oled_get_brightness();
-                eeconfig_update_user(user_config.raw);
-#endif
+                write_lighting_to_eeprom();
             }
+            return false;
             break;
 
             /* Select the OS used for shortcuts and write to EEPROM.
@@ -261,10 +266,9 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
         case CU_SELECT_WINDOWS:
         case CU_SELECT_LINUX:
             if (record->event.pressed) {
-                os_set_from_keycode(keycode);
-                user_config.os_selection = os_get_raw();
-                eeconfig_update_user(user_config.raw);
+                process_os_change(keycode);
             }
+            return false;
             break;
 #endif
     }

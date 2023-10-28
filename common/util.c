@@ -45,6 +45,26 @@ void keyboard_post_init_user(void) {
 #endif
 }
 
+// Set the OS and store in EEPROM
+void process_os_change(uint16_t keycode) {
+    os_set_from_keycode(keycode);
+    user_config.os_selection = os_get_raw();
+    eeconfig_update_user(user_config.raw);
+}
+
+// Write current lighting values to EEPROM
+void write_lighting_to_eeprom() {
+#ifdef RGBLIGHT_ENABLE
+    rgblight_sethsv(rgblight_get_hue(), rgblight_get_sat(), rgblight_get_val());
+#endif
+#ifdef RGB_MATRIX_ENABLE
+    rgb_matrix_sethsv(rgb_matrix_get_hue(), rgb_matrix_get_sat(), rgb_matrix_get_val());
+#endif
+#ifdef OLED_ENABLE
+    user_config.oled_brightness = oled_get_brightness();
+    eeconfig_update_user(user_config.raw);
+#endif
+}
 
 /**
  *  Adjust keyboard lighting based on modifier state
