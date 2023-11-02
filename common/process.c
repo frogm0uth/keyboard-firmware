@@ -27,7 +27,7 @@ void register_custom_key(uint16_t keycode, keyrecord_t *record) {
     record->event.pressed = true; // force it on
     // Process the keycode so that custom codes work
     if (process_record_user_emit(keycode, record)) {
-        if (keycode < SAFE_RANGE) { // in case of lax return values from previous call
+        if (keycode < QK_USER) { // in case of lax return values from previous call
             register_code16(keycode);
         }
     }
@@ -37,7 +37,7 @@ void register_custom_key(uint16_t keycode, keyrecord_t *record) {
 void unregister_custom_key(uint16_t keycode, keyrecord_t *record) {
     record->event.pressed = false; // force it off
     if (process_record_user_emit(keycode, record)) {
-        if (keycode < SAFE_RANGE) {
+        if (keycode < QK_USER) {
             unregister_code16(keycode);
         }
     }
@@ -165,33 +165,37 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
             break;
 #else
             // layer switching using QMK layer-tap: handle cases where tap code is 16-bit or has custom shift
-        case CL_SYMS:
-            if (record->tap.count) {
-                process_shift_key(KC_DQUO, KC_DQUO, record);
-                return false;
-            }
-            break;
+        //case CL_SYMS:
+        //    if (record->tap.count) {
+        //        process_shift_key(KC_DQUO, KC_DQUO, record);
+        //        return false;
+        //    }
+        //    break;
 #endif
 
             /* Switch between applications (like Alt-Tab on Windows or Cmd-Tab on macOS) This must be triggered from
              * a layer so the release event is called from layer_state_set_user() when the layer is released.
              */
+#ifdef APP_SWITCHER_ENABLE
         case CU_APPSWITCH_RIGHT:
         case CU_APPSWITCH_LEFT:
-            #if APP_SWITCHER_ENABLE
             app_switcher_record(keycode, record);
-            #endif
             return false;
             break;
+#endif
 
             /* Modify keyboard parameters.
              */
         case CU_KBUP:
-            kb_lighting_adjust(true, mods);
+            if (record->event.pressed) {
+                kb_lighting_adjust(true, mods);
+            }
             return false;
             break;
         case CU_KBDN:
-            kb_lighting_adjust(false, mods);
+            if (record->event.pressed) {
+                kb_lighting_adjust(false, mods);
+            }
             return false;
             break;
 

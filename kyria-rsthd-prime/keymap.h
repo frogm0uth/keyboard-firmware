@@ -49,7 +49,7 @@ enum layers {
         CL_SNAP
 #else
 #    define CL_BASE TO(ALPHA)
-#    define CL_SYMS LT(SYMS,   KC_DQUO)
+#    define CL_SYMS LT(SYMS,   KC_ENT)
 #    define CL_EDIT LT(EDIT,   KC_TAB)
 #    define CL_META LT(META,   KC_NO)
 #    define CL_FUNC LT(FUNC,   KC_NO)
