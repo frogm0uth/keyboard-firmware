@@ -72,7 +72,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define NO_ACTION_MACRO
 #define NO_ACTION_FUNCTION
 #define NO_ACTION_ONESHOT   // One-shot shifts are not used
-#define NO_ACTION_TAPPING   // Mod-taps are not used
+//#define NO_ACTION_TAPPING   // Don't uncomment for Corne, otherwise complile error (Was: Mod-taps are not used)
 #define LAYER_STATE_8BIT
 #define EXTRA_SHORT_COMBOS
 

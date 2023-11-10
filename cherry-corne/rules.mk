@@ -1,6 +1,6 @@
 RGBLIGHT_ENABLE = yes    # Enable WS2812 RGB underlight.
 OLED_ENABLE     = yes
-OLED_DRIVER     = SSD1306
+OLED_DRIVER     = ssd1306
 LTO_ENABLE      = yes
 
 
@@ -12,7 +12,7 @@ LEADER_ENABLE = no          # Enable the Leader Key feature
 MOUSEKEY_ENABLE = yes       # Enable the inbuilt mouse key feature
 TAP_DANCE_ENABLE = no       # Enable tap-dance (NB also uncomment #define NO_ACTION_TAPPING in config.h)
 WPM_ENABLE = no             # Enable simple WPM display
-COMBO_ENABLE = yes          # Enable combo (chording) functionality
+COMBO_ENABLE = no          # Enable combo (chording) functionality
 CAPS_WORD_ENABLE = no       # Enable the caps-word feature. Doesn't work properly.
 
 LTO_ENABLE = yes            # Firmware size reduction - https://docs.qmk.fm/#/squeezing_avr
@@ -56,7 +56,8 @@ ifeq ($(strip $(CUSTOM_CAPSWORD)), yes)
 endif
 
 ifeq ($(strip $(COMBO_ENABLE)), yes)
-        SRC += ../common/combos.c
+        INTROSPECTION_KEYMAP_C = ../common/combos.c # See https://github.com/qmk/qmk_firmware/issues/21137#issuecomment-1577898767
+        # SRC += ../common/combos.c
         OPT_DEFS += -DCOMBO_ENABLE -DCOMBO_MUST_PRESS_IN_ORDER_PER_COMBO -DCOMBO_TERM_PER_COMBO
 endif
 
