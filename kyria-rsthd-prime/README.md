@@ -35,7 +35,7 @@ When I originally started making changes to RSTHD, I called it RSTHD'. The `'`, 
 
 Currently, this compiles for and works on the rev1 and rev3 versions of the Kyria. There are some lines at the top of rules.mk that will need to be un/commented accordingly.
 
-**As of late 2023, I'm not maintaining this documentation any more. It's too much work to be frank. It serves as a general guide, but for actual info please refer to the source. The best starting point is a level up: [frogmouth keyboard firmware](../). For example, the keymap.c file for each keyboard's layout.**
+**As of late 2023, I'm not maintaining this documentation any more. It's too much work to be frank. It serves as a general guide, but for actual info please refer to the source. See also the [common](../common/) folder.
 
 ### Goals
 
@@ -81,7 +81,7 @@ Layer switching is done with custom code, so that a. shifted and custom keys can
 
 ![kyria-rsthd-prime-alpha](docs/images/kyria-rsthd-prime-alpha.png)
 
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/a48554fccaea2a2266e58876b8b8f142)
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/d7003ec84a3b856fa9d2530fe4c3c5d7)
 
 The alpha layout aims to reduce lateral finger movement on the index finger. In fact the lower key of the inner column has been completely removed in this version. A slightly older version performed very well in an [analyzer](docs/prime-on-the-analyzer.md), with low SFU (same finger utilization) stats and low travel distance. For absolute minimum SFBs, swap P and F.  For lower left pinky usage (but higher inner index), swap V and J.
 
@@ -99,7 +99,7 @@ Activated by the left thumb.
 
 ![kyria-rsthd-prime-syms](docs/images/kyria-rsthd-prime-syms.png)
 
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/0cda56d56e7e269cce643fd397d6f518)
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/dc3b38be4f52be86bf6b95b7e53d5c14)
 
 Unshifted, this layer contains the rest of the punctuation characters. I've arranged them so that many common (for me) two-letter sequences can be typed with an inward roll. For example: `{% %} <% %> </ /> => -> ~/`. Additional sequences such as `<?` `?>`  `!=` `);` are accessed with comborolls, to avoid flipping between the alpha and syms layers.
 
@@ -114,7 +114,7 @@ Activated by the right thumb.
 
 ![kyria-rsthd-prime-edit](docs/images/kyria-rsthd-prime-edit.png)
 
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/da3a42f92f10874a56e664c1ea154b02)
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/6230f2d0797ecb43440c52d75b66d17e)
 
 This layer extends the idea of platform-independent shortcuts to a complete layer. The navigation keys on the left have the standard cursor keys, home, end and page up/down.
 
@@ -134,7 +134,7 @@ Activated by either pinky.
 
 ![kyria-rsthd-prime-meta](docs/images/kyria-rsthd-prime-meta.png)
 
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/215ec7e4fabd3d619b2a7937bb030b63)
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/c14a96b4c943087403409185a0aecb43)
 
 This layer contains common shortcut keys. They are mostly arranged according to the letter used in the Mac/Windows shortcut. For example, the S key invokes Save (Cmd-S on Mac, Ctrl-S on Windows). However, the mapping is not always that straightforward (e.g. Cmd-Q on Mac and Alt-F4 on Windows), hence the need for a dedicated layer.
 
@@ -147,7 +147,7 @@ Activated by the left thumb from the META layer.
 
 ![kyria-rsthd-prime-func](docs/images/kyria-rsthd-prime-func.png)
 
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/53ebdf360cfd77b3e7bcdceae14dc78d)
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/90b7e6befd71b9dd87630e490c9719fc)
 
 This layer contains function keys on the right hand, arranged roughly the same as the numpad. It also contains the keys that switch between macOS, Windows and Linux shortcuts.
 
@@ -159,7 +159,7 @@ Activated by the right thumb from the META layer.
 
 ![kyria-rsthd-prime-snap](docs/images/kyria-rsthd-prime-snap.png)
 
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/fbecdc0202bbec91e8943985a22800ce)
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/4640c20527f54ef55006fb796960efb5)
 
 So called because of the keys for window snapping, which snap to one of the screen halves or quadrants. The center key sets the window to the full vertical height. This works on macOS if [Rectangle](https://rectangleapp.com) is running; not really working on Windows and Linux yet.
 

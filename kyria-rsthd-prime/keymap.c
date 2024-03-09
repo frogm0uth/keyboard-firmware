@@ -207,11 +207,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* SNAP
 
  ,-----------------------------------------.                        ,-----------------------------------------.
- | KbUp | ZmIn |SnapTL| SnapT|SnapTR|      |                        |      |      |      |      |      |      |
+ | KbUp | ZmIn | SL23 | SnapT| SR23 |      |                        |      |      |      |      |      |      |
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
- | KbDn | ZmOut| SnapL| SnapV| SnapR|      |                        |      | SSRgn| SSWin| SSScr| SSApp|!WRITE|
+ | KbDn | ZmOut| SnapL| SnapC| SnapR|      |                        |      | SSRgn| SSWin| SSScr| SSApp|!WRITE|
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
- |      |  Zm0 |SnapBL| SnapB|SnapBR|                                      |      |      |      |      |      |
+ |      |  Zm0 | SL14 | SnapB| SR14 |                                      |      |      |      |      |      |
  | (**) |      |      |      |      |                                      |  Cmd |  Alt | Ctrl | Shift| (**) |
  `----------------------------------'                                      `----------------------------------'
 
