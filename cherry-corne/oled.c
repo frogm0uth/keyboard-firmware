@@ -30,13 +30,36 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
   return rotation;
 }
 
+static const char PROGMEM str_layer_alpha[] = "ALPHA   ";
+static const char PROGMEM str_layer_syms[]  = "SYMS    ";
+static const char PROGMEM str_layer_edit[]  = "EDIT    ";
+static const char PROGMEM str_layer_meta[]  = "META    ";
+static const char PROGMEM str_layer_func[]  = "FUNC    ";
+static const char PROGMEM str_layer_snap[]  = "SNAP    ";
+
+// clang-format off
+const static char* layer_names[] = {
+    [ALPHA] = str_layer_alpha,
+    [SYMS]  = str_layer_syms,
+    [EDIT]  = str_layer_edit,
+    [META]  = str_layer_meta,
+    [FUNC]  = str_layer_func,
+    [SNAP]  = str_layer_snap
+};
+
+/*
 #define L_BASE 0
 #define L_LOWER 2
 #define L_RAISE 4
 #define L_ADJUST 8
+*/
 
 void oled_render_layer_state(void) {
+    uint8_t layer = get_highest_layer(layer_state);
     oled_write_P(PSTR("Layer: "), false);
+    oled_write_P(layer_names[layer], false);
+    oled_write_P(PSTR("\n"), false);
+/*
     switch (layer_state) {
         case L_BASE:
             oled_write_ln_P(PSTR("Default"), false);
@@ -54,6 +77,7 @@ void oled_render_layer_state(void) {
             oled_write_ln_P(PSTR("Adjust"), false);
             break;
     }
+    */
 }
 
 
@@ -112,7 +136,7 @@ void oled_render_logo(void) {
 bool oled_task_user(void) {
     if (is_keyboard_master()) {
         oled_render_layer_state();
-        //oled_render_keylog();
+        oled_render_keylog();
     } else {
         oled_render_logo();
     }

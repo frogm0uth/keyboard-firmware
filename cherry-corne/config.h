@@ -34,7 +34,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define COMBOROLL_TERM 200
 
 // Tapping control
-#define TAPPING_TERM 500
+#define TAPPING_TERM 200
 
 // uncomment to make OS-dependent shortcuts be statically compiled.
 //#define OS_SHORTCUTS_STATIC
@@ -72,7 +72,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define NO_ACTION_MACRO
 #define NO_ACTION_FUNCTION
 #define NO_ACTION_ONESHOT   // One-shot shifts are not used
-//#define NO_ACTION_TAPPING   // Don't uncomment for Corne, otherwise complile error (Was: Mod-taps are not used)
+#define NO_ACTION_TAPPING   // Note: must modify crkbd.c to comment out lines involving mod-tap
 #define LAYER_STATE_8BIT
 #define EXTRA_SHORT_COMBOS
 

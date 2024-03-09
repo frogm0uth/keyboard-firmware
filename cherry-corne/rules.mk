@@ -38,16 +38,22 @@ CUSTOM_EDIT = yes           # Enable custom editing keys. Turns on OS_SHORTCUTS.
 LAYER_TAP_TOGGLE = yes      # Enable the layer-tap-toggle feature
 COMBOROLL_ENABLE = yes      # Enable comborolls. Either this or COMBO_ENABLE, not both
 CUSTOM_CAPSWORD = yes       # Enable custom capsword
+APP_SWITCHER = yes           # Enable timed app-switcher, such as triggered by an encoder or layer
 
 
 
 # Don't edit from here down
 
-SRC += ../common/process.c ../common/appswitcher.c ../common/util.c
+SRC += ../common/process.c ../common/util.c
 
 ifeq ($(strip $(OLED_ENABLE)), yes)
         SRC += oled.c
         OPT_DEFS += -DOLED_ENABLE
+endif
+
+ifeq ($(strip $(APP_SWITCHER)), yes)
+        SRC += ../common/appswitcher.c
+        OPT_DEFS += -DAPP_SWITCHER_ENABLE
 endif
 
 ifeq ($(strip $(CUSTOM_CAPSWORD)), yes)

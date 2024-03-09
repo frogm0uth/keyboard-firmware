@@ -37,9 +37,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         CL_META,  KC_LSFT,  KC_P,  KC_G,  KC_D,
 
         /* Right hand */
-                  SC_SEARCH,  KC_M,  KC_U,  CU_DOT,  KC_MINS, KC_CAPS,
-                  KC_SCLN,  KC_N,  KC_I,  KC_O,    KC_A,    KC_Q,
-                            KC_L,  KC_Y,  CU_COMM, KC_RSFT, CL_META,
+                  SC_SEARCH, KC_M,  KC_U,  CU_DOT,  KC_MINS, KC_Q,
+                  KC_SCLN,   KC_N,  KC_I,  KC_O,    KC_A,    KC_ENT,
+                             KC_L,  KC_Y,  CU_COMM, KC_RSFT, CL_META,
 
         /* Thumbs */
         KC_QUOT, CL_SYMS, KC_E,   KC_SPC, CL_EDIT, CU_SHIFT
