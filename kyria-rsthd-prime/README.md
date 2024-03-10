@@ -83,7 +83,9 @@ Layer switching is done with custom code, so that a. shifted and custom keys can
 
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/d7003ec84a3b856fa9d2530fe4c3c5d7)
 
-The alpha layout aims to reduce lateral finger movement on the index finger. In fact the lower key of the inner column has been completely removed in this version. A slightly older version performed very well in an [analyzer](docs/prime-on-the-analyzer.md), with low SFU (same finger utilization) stats and low travel distance. For absolute minimum SFBs, swap P and F.  For lower left pinky usage (but higher inner index), swap V and J.
+The alpha layout aims to reduce lateral finger movement on the index finger. In fact the lower key of the inner column has been completely removed in this version. A slightly older version performed very well in an [analyzer](docs/prime-on-the-analyzer.md), with low SFU (same finger utilization) stats and low travel distance. For absolute minimum SFBs, swap P and F.
+
+Z and J are access as vertical combos.
 
 Except for Shift, there are no modifiers on the alpha layer. To access them, use the SYMS or EDIT layer, hold the modifiers down, then release the layer key. (This is a bit like Callum mods except it doesn't use one-shots.)
 
@@ -91,7 +93,7 @@ This layout works best with [comborolls](docs/comborolls.md). I recommend at a m
 
 ## Other layers
 
-There are five more layers, for a total of 6. They are activated with either a thumb or pinky. All are hold-to-activate but the layer can be locked on with the top corner keys. Press one of these or the layer key to turn the layer off.
+There are five more layers, for a total of 6. They are activated with either a thumb or pinky. All are hold-to-activate.
 
 ### SYMS
 
@@ -151,8 +153,6 @@ Activated by the left thumb from the META layer.
 
 This layer contains function keys on the right hand, arranged roughly the same as the numpad. It also contains the keys that switch between macOS, Windows and Linux shortcuts.
 
-Three mouse buttons are available on the right thumb.
-
 ### SNAP
 
 Activated by the right thumb from the META layer.
@@ -161,9 +161,7 @@ Activated by the right thumb from the META layer.
 
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/4640c20527f54ef55006fb796960efb5)
 
-So called because of the keys for window snapping, which snap to one of the screen halves or quadrants. The center key sets the window to the full vertical height. This works on macOS if [Rectangle](https://rectangleapp.com) is running; not really working on Windows and Linux yet.
-
-Three mouse buttons are available on the left thumb. On the right are shortcuts for screenshots.
+So called because of the keys for window snapping, which snap the active window to various locations on the screen. This works on macOS if [Rectangle Pro](https://rectangleapp.com) is running; not working at all on Windows and Linux yet.
 
 The encoder is used to control the backlight LEDs and OLED brightness, depending on which modifier is held.
 
