@@ -85,9 +85,11 @@ Layer switching is done with custom code, so that a. shifted and custom keys can
 
 The alpha layout aims to reduce lateral finger movement on the index finger. In fact the lower key of the inner column has been completely removed in this version. A slightly older version performed very well in an [analyzer](docs/prime-on-the-analyzer.md), with low SFU (same finger utilization) stats and low travel distance. For absolute minimum SFBs, swap P and F.
 
-Z and J are access as vertical combos.
+Z and J are accessed as vertical combos.
 
-Except for Shift, there are no modifiers on the alpha layer. To access them, use the SYMS or EDIT layer, hold the modifiers down, then release the layer key. (This is a bit like Callum mods except it doesn't use one-shots.)
+The two pinky shift keys are "auto-off", meaning that if you hold one down then press a key, you get the shifted version of the key, then the shift is turned off. This completely eliminates typos like "THe". The thumb shift key is like a regular shift key, but if tapped it turns on caps-word.
+
+Except for Shift, there are no modifiers on the alpha layer. To access them, use the SYMS or EDIT layer, hold the modifier(s) down, then release the layer key. This is a bit like Callum mods except it doesn't use one-shots.
 
 This layout works best with [comborolls](docs/comborolls.md). I recommend at a minimum setting up a combo for ER on the right hand. If that works out, add SP, ES, ED, and VE, then consider the rest of the comborolls at the link.
 
