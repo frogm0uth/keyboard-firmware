@@ -30,12 +30,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |------+------+------+------+---Z--+------|                        |------+---J--+------+------+------+------|
  |   X  |   R  |   S  |   T  |   H  |   B  |                        | ;  : |   N  |   I  |   O  |   A  | Enter|
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
- |      |      |   P  |   G  |   D  |                                      |   L  |   Y  | ,  ? |      |      |
+ |  Tab |      |   P  |   G  |   D  |                                      |   L  |   Y  | ,  ? |      |BkSp/D|
  | META | Shift|      |      |      |                                      |      |      |      | Shift| META |
  `----------------------------------'                                      `----------------------------------'
  .
  .                 ,------.      ,--------------------.  ,--------------------.
- .                 | Mute |      | Enter|   E  | '  " |  |CapWrd| Space|  Tab |
+ .                 | Mute |      | Enter|   E  | '  " |  |CapWrd| Space|      |
  .                 |      |      | SYMS |      |      |  | Shift|      | EDIT |
  .                 `------'      `--------------------'  `--------------------'
 */
@@ -48,7 +48,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         /* Right hand */
                   SC_SEARCH, KC_M,  KC_U,  CU_DOT,  KC_MINS, KC_Q,
                   KC_SCLN,   KC_N,  KC_I,  KC_O,    KC_A,    KC_ENT,
-                             KC_L,  KC_Y,  CU_COMM, KC_RSFT, CL_META,
+                             KC_L,  KC_Y,  CU_COMM, KC_RSFT, CL_META_R,
 
         /* Thumbs */
         CL_SYMS, KC_E, KC_QUOT,   CU_SHIFT, KC_SPC, CL_EDIT,
@@ -135,7 +135,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* META
 
  ,-----------------------------------------.                        ,-----------------------------------------.
- |ScrLck|      | Close|      | Find |      |                        | VolU |PrvTrk| Play |NxtTrk| Mute |ScrLck|
+ |      |      | Close|      | Find |      |                        | VolU |PrvTrk| Play |NxtTrk| Mute |      |
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
  | eXit |Reload| Save |newTab|      |  Bin |                        | VolD |  New |      | Open |saveAs| Quit |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
@@ -151,12 +151,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [META] = KEY_LAYOUT_stack(
         /* Left hand */
-        CU_SLCK, ___X___,     SC_CLOSE_TAB, ___X___,        SC_FIND,        ___X___,
+        ___X___, ___X___,     SC_CLOSE_TAB, ___X___,        SC_FIND,        ___X___,
         SC_QUIT, SC_RELOAD,   SC_SAVE,      SC_NEW_TAB,     ___X___,        SC_BIN,
         _______, _______,     SC_PRINT,     SC_PREV_SEARCH, SC_NEXT_SEARCH,
 
         /* Right hand */
-                 KC_VOLU,  KC_MPRV,         KC_MPLY,        KC_MNXT,  KC_MUTE,     CU_SLCK,
+                 KC_VOLU,  KC_MPRV,         KC_MPLY,        KC_MNXT,  KC_MUTE,     ___X___,
                  KC_VOLD,  SC_NEW,          ___X___,        SC_OPEN,  SC_SAVE_AS,  SC_QUIT,
                            SC_BROWSER_BACK, SC_BROWSER_FWD, ___X___,  _______,     _______,
 

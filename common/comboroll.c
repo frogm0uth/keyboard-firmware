@@ -355,6 +355,8 @@ bool process_record_comboroll(uint16_t keycode, keyrecord_t *record) {
             } else if (keycode == KC_LSFT || keycode == KC_RSFT) {
                 // If shift was just released, then this is a rolling shift, so send the
                 // first key and cancel the wait for combo
+                // FIXME: this means that shift must be held until the second key is pressed.
+                // otherwise the comboroll will not activate
                 tap_custom_key(firstkey_matched, &firstkey_record);
                 is_in_comboroll = false;
                 // let QMK handle shift release

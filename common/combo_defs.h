@@ -55,7 +55,7 @@ RtoL_STR( es, KC_L, CU_COMM )
 RtoL_STR( ve, KC_I, CU_COMM )
 RtoL_STR( ee, KC_Y, CU_COMM )
 
-LtoR_LIT( ve2, "ve", KC_P, KC_D )
+LtoR_STR( v, KC_P, KC_D )
 
 // Verticals
 CMBO_STR( tw, KC_T, KC_W )
@@ -63,7 +63,6 @@ CMBO_STR( ps, KC_S, KC_C )
 CMBO_STR( z,  KC_H, KC_F )
 CMBO_STR( j,  KC_N, KC_M )
 CMBO_STR( ui, KC_I, KC_U )
-CMBO_KEY( capslock, KC_CAPS, KC_O, CU_DOT )
 
 // Awkward bigrams/trigrams
 LtoR_STR( ght, KC_X, KC_H )
@@ -112,10 +111,11 @@ RtoL_LIT( endif,  "#endif",  KC_H, KC_Q )
 RtoL_LIT( define, "#define", KC_D, KC_Q )
 
 // Extras and oddballs
-LtoR_STR( ion, KC_H, KC_QUOT )
-LtoR_STR( any, KC_X, KC_D )
+RtoL_LIT( apos_s, "'s", KC_S, KC_SCLN )
+RtoL_LIT( apos_t, "'t", KC_T, KC_SCLN )
 
 // Contractions. Use ARR so that shift doesn't change the quote into double quote
+/*
 Q_RtoL_ARR( quote_ll,
     ARRAY_PROTECT(
         CU_QUOTE_QUOTE,
@@ -128,10 +128,18 @@ Q_RtoL_ARR( quote_re,
         KC_R,
         KC_E
     ), KC_Y, KC_RSFT)
+*/
 
 // Utilities
 Q_CMBO_KEY( search, SC_SEARCH,         CU_SHIFT, KC_SPC )  // Search key, on right thumb
 Q_CMBO_KEY( expose, SC_EXPOSE_WINDOWS, KC_BSPC,  KC_DEL )  // Window expose, left thumb on EDIT layer
+
+CMBO_KEY( capslock, KC_CAPS,     KC_X, KC_ENTER )
+CMBO_KEY( capsword, CU_CAPSWORD, KC_F, KC_M )
+
+CMBO_KEY( screenlock, CU_SLCK,   KC_ESC, KC_Q )
+
+
 
 // Syntax layer
 RtoL_LIT( quesrangle,      "?>",    CU_7, CU_8 )   ___NOSFT( quesrangle )

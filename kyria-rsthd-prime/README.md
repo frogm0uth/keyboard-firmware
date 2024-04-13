@@ -1,4 +1,4 @@
-# Kyria RSTHD/Prime v35
+# Kyria RSTHD/Prime v36
 
 This is the keymap for my Kyria keyboard from [splitkb.com](https://splitkb.com). The alpha layout was based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/) but is now heavily modified. It's optimized for minimized usage of the inner index column. Features in the code include runtime switching between Mac/Windows/Linux shortcuts and a custom implementation of "comborolls".
 
@@ -31,11 +31,13 @@ This is the keymap for my Kyria keyboard from [splitkb.com](https://splitkb.com)
 
 The alphabetic layout in this keymap was originally based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/). I tried it, liked it, tweaked it, and tweaked some more...
 
-When I originally started making changes to RSTHD, I called it RSTHD'. The `'`, pronounced "prime", is [used in maths](https://en.wikipedia.org/wiki/Prime_(symbol)#Use_in_mathematics,_statistics,_and_science) to indicate a derivative of the named thing. The layout still very much retains its RSTHD DNA despite all the changes. I figure calling it *RSTHD/Prime* acknowledges its origin while still indicating that it's different.
+When I originally started making changes to RSTHD, I called it RSTHD'. The `'`, pronounced "prime", is [used in maths](https://en.wikipedia.org/wiki/Prime_(symbol)#Use_in_mathematics,_statistics,_and_science) to indicate a derivative of the named thing. I think the layout still retains its RSTHD DNA despite all the changes. I figure calling it *RSTHD/Prime* acknowledges its origin while still indicating that it's different.
 
-Currently, this compiles for and works on the rev1 and rev3 versions of the Kyria. There are some lines at the top of rules.mk that will need to be un/commented accordingly.
+The code is known to compile for and work on a v1 Kyria with a 32kB Pro Micro controller, and a v3 Kyria with a Liatris controller. There are some lines at the top of rules.mk that will need to be un/commented accordingly.
 
-**As of late 2023, I'm not maintaining this documentation any more. It's too much work to be frank. It serves as a general guide, but for actual info please refer to the source. See also the [common](../common/) folder.
+See also [Kyria Build Notes](docs/kyria-build-notes.md).
+
+**As of late 2023, I'm not maintaining this documentation any more. It's too much work to be frank. It serves as a general guide, but for actual info please refer to the source. See also the [common](../common/) folder.**
 
 ### Goals
 
@@ -49,9 +51,7 @@ Typing speed and reducing the number of keys on the keyboard are not important g
 
 ### Keyboard configuration
 
-My Kyria uses all 6 columns on each hand. However, the lower inner column keys are absent. There are three thumb keys on each side. The left side has an OLED and an encoder, while the right side has neither.
-
-The controller is a Pro Micro with 32kB flash. Currently this keymap might compile or work properly only on a v1 keyboard.
+My Kyria uses all 6 columns on each hand. However, the lower inner column keys are absent. There are three thumb keys on each side. The left side has an OLED and an encoder, while the right side has neither. The encoder seems like a great idea but in practice I find that I only use it for adjusting the lighting, as for all other functions it's quicker to just use keys; I could certainly live without it. The OLED, on the other hand (heh), is awesome to have.
 
 ### Features
 
@@ -67,7 +67,7 @@ I have a userspace implementation of combos called "[comboroll](docs/comborolls.
 
 #### Custom shift keys
 
-I generalized the notion of having a non-standard character output on shift so that any unshifted/shifted pair can be defined with a macro. See `shift_defs.h` for definitions and `keymap.c` for the implementation.
+I generalized the notion of having a non-standard character output on shift so that any unshifted/shifted pair can be defined with a macro. See `shift_defs.h` for definitions and `process.c` for the implementation.
 
 #### Custom edit modifiers
 
@@ -83,7 +83,9 @@ Layer switching is done with custom code, so that a. shifted and custom keys can
 
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/d7003ec84a3b856fa9d2530fe4c3c5d7)
 
-The alpha layout aims to reduce lateral finger movement on the index finger. In fact the lower key of the inner column has been completely removed in this version. A slightly older version performed very well in an [analyzer](docs/prime-on-the-analyzer.md), with low SFU (same finger utilization) stats and low travel distance. For absolute minimum SFBs, swap P and F.
+The alpha layout aims to reduce lateral finger movement on the index finger. In fact the lower key of the inner column has been completely removed in this version. An older version performed very well in an [analyzer](docs/prime-on-the-analyzer.md), with low SFU (same finger utilization) stats and low travel distance. For minimum SFBs, swap P and F.
+
+Some changes have been made to the layout that nominally give it worse performance, because of the use of [comborolls](docs/comborolls.md). I recommend at a minimum setting up comborolls for ER and YOU on the right hand. If that works out, consider the rest of the comborolls at the link.
 
 Z and J are accessed as vertical combos.
 
@@ -91,7 +93,6 @@ The two pinky shift keys are "auto-off", meaning that if you hold one down then 
 
 Except for Shift, there are no modifiers on the alpha layer. To access them, use the SYMS or EDIT layer, hold the modifier(s) down, then release the layer key. This is a bit like Callum mods except it doesn't use one-shots.
 
-This layout works best with [comborolls](docs/comborolls.md). I recommend at a minimum setting up a combo for ER on the right hand. If that works out, add SP, ES, ED, and VE, then consider the rest of the comborolls at the link.
 
 ## Other layers
 
@@ -186,9 +187,10 @@ cd ~qmk_firmware/keyboards/splitkb/kyria/keymaps
 ln -s /path/to/workingdir/keyboard-firmware/kyria-rsthd-prime .
 qmk compile -kb splitkb/kyria/rev1 -km kyria-rsthd-prime
 ```
- or for rev3, change the last line to:
+or for rev3 with a Liatris controller, change the last line to:
+
 ```
-qmk compile -kb splitkb/kyria/rev3 -km kyria-rsthd-prime
+qmk compile -e CONVERT_TO=liatris -kb splitkb/kyria/rev3 -km kyria-rsthd-prime
 ```
 
 ### RSTHD variants and similar layouts

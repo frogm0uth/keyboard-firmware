@@ -45,13 +45,15 @@ enum layers {
         CL_SYMS,       \
         CL_EDIT,       \
         CL_META,       \
+        CL_META_R,     \
         CL_FUNC,       \
         CL_SNAP
 #else
 #    define CL_BASE TO(ALPHA)
 #    define CL_SYMS LT(SYMS,   KC_ENT)
 #    define CL_EDIT LT(EDIT,   KC_TAB)
-#    define CL_META LT(META,   KC_NO)
+#    define CL_META LT(META,   KC_TAB)
+#    define CL_META_R LT(META, KC_BSPC)
 #    define CL_FUNC LT(FUNC,   KC_NO)
 #    define CL_SNAP LT(SNAP,   KC_NO)
 #endif

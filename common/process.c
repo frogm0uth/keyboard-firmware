@@ -149,11 +149,15 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
             break;
 
         case CL_EDIT:
-            return layer_tap_toggle(KC_TAB, EDIT, record);
+            return layer_tap_toggle(KC_NO, EDIT, record);
             break;
 
         case CL_META:
-            return layer_tap_toggle(KC_NO, META, record);
+            return layer_tap_toggle(KC_TAB, META, record);
+            break;
+
+        case CL_META_R:
+            return layer_tap_toggle(CU_BSPC_DEL, META, record);
             break;
 
         case CL_FUNC:
