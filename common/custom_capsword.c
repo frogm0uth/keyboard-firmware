@@ -18,8 +18,8 @@
 
 
 /**
- * Caps word implementation using caps lock. Both shift keys turn on caps word, tap on either
- * turns it off. Can also use dedicated keys for caps word and caps lock. Won't work with one-shot
+ * Caps word implementation using caps lock. Both shift keys toggle caps lock, tap on either
+ * toggles caps word. Can also use dedicated keys for caps word and caps lock. Won't work with one-shot
  * shift.
  */
 
@@ -156,8 +156,8 @@ void process_caps_cancel(uint16_t keycode, keyrecord_t *record) {
  */
 bool process_record_capslock(uint16_t keycode, keyrecord_t *record) {
 
-    // Handle caps lock switching. Pressing both shift keys toggles caps-word. Tapping either
-    // shift key cancels caps word.
+    // Handle caps lock switching. Pressing both shift keys toggles caps-lock. Tapping either
+    // shift key toggles caps word.
     //
     uint8_t mods = get_mods();
 
@@ -165,27 +165,24 @@ bool process_record_capslock(uint16_t keycode, keyrecord_t *record) {
         case KC_LSFT:
         case KC_RSFT:
             if (record->event.pressed) {
-                // Toggle caps word if a shift key is pressed while shift already active
+                // Toggle caps lock if a shift key is pressed while shift already active
                 if (mods & MOD_MASK_SHIFT) {
-                    toggle_capsword();
+                    toggle_capslock();
                     return false;
 
                 } else {
-                    if (host_keyboard_led_state().caps_lock) {
-                        // Wait to see if this will cancel caps word
-                        capsword_waiting = true;
-                        capsword_timer = timer_read();
-                    }
+                    // Wait to see if this will toggle caps word
+                    capsword_waiting = true;
+                    capsword_timer = timer_read();
                     is_auto_unshift = true;
                     // Let QMK handle shift key down normally
                 }
             } else {
-                // cancel caps-word or caps lock if shift is released quickly
-                if (capsword_waiting && host_keyboard_led_state().caps_lock) {
-                    capsword_waiting = false;
-                    tap_code(KC_CAPS);
-                    // Let QMK handle shift key release normally
+                // toggle caps-word if shift is tapped
+                if (capsword_waiting) {
+                    toggle_capsword();
                 }
+                // Let QMK handle shift key release normally
             }
             break;
 
@@ -203,7 +200,6 @@ bool process_record_capslock(uint16_t keycode, keyrecord_t *record) {
 
                 // toggle caps-word if key is released quickly
                 if (capsword_waiting) {
-                    //capsword_waiting = false;
                     toggle_capsword();
                 }
             }

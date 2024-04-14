@@ -47,18 +47,18 @@
 LtoR_STR( sc, KC_C, KC_W )
 LtoR_STR( sp, KC_P, KC_G )
 
+RtoL_STR( lf, KC_F, KC_U )
 RtoL_STR( er, KC_O, KC_A )
-RtoL_STR( the, KC_L, CU_COMM )
 RtoL_STR( ve, KC_I, CU_COMM )
 RtoL_STR( ee, KC_Y, CU_COMM )
 
-//LtoR_STR( v, KC_P, KC_D )
+RtoL_LIT( quotll, "'ll", KC_L, CU_COMM )
 
 // Verticals
 CMBO_STR( tw, KC_T, KC_W )
 CMBO_STR( ps, KC_S, KC_C )
 CMBO_STR( z,  KC_H, KC_M )
-CMBO_STR( j,  KC_N, KC_F )
+CMBO_STR( fl, KC_N, KC_F )
 CMBO_STR( ui, KC_I, KC_U )
 
 // Awkward bigrams/trigrams
@@ -126,7 +126,7 @@ Q_RtoL_ARR( quote_re,
 */
 
 // Utilities
-Q_CMBO_KEY( search, SC_SEARCH,         CU_SHIFT, KC_E )    // Search key, on right thumb
+Q_CMBO_KEY( search, SC_SEARCH,         KC_QUOT,  KC_E )    // Search key, on right thumb
 Q_CMBO_KEY( expose, SC_EXPOSE_WINDOWS, KC_BSPC,  KC_DEL )  // Window expose, left thumb on EDIT layer
 
 CMBO_KEY( capslock, KC_CAPS,     KC_X, KC_ENTER )
