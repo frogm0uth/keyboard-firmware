@@ -1,4 +1,4 @@
-# Kyria RSTHD/Prime v36
+# Kyria RSTHD/Prime v37
 
 This is the keymap for my Kyria keyboard from [splitkb.com](https://splitkb.com). The alpha layout was based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/) but is now heavily modified. It's optimized for minimized usage of the inner index column. Features in the code include runtime switching between Mac/Windows/Linux shortcuts and a custom implementation of "comborolls".
 
@@ -83,9 +83,11 @@ Layer switching is done with custom code, so that a. shifted and custom keys can
 
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/d7003ec84a3b856fa9d2530fe4c3c5d7)
 
-The alpha layout aims to reduce lateral finger movement on the index finger. In fact the lower key of the inner column has been completely removed in this version. An older version performed very well in an [analyzer](docs/prime-on-the-analyzer.md), with low SFU (same finger utilization) stats and low travel distance. For minimum SFBs, swap P and F.
+The alpha layout aims to reduce lateral finger movement on the index finger. In fact the lower key of the inner column has been completely removed in this version. An older version performed very well in an [analyzer](docs/prime-on-the-analyzer.md), with low SFU (same finger utilization) stats and low travel distance.
 
-Some changes have been made to the layout that nominally give it worse performance, because of the use of [comborolls](docs/comborolls.md). I recommend at a minimum setting up comborolls for ER and YOU on the right hand. If that works out, consider the rest of the comborolls at the link.
+Since then, changes have been made to the layout that nominally give it worse performance, because of the use of [comborolls](docs/comborolls.md). The linked doc is out of date for the current layout, see [``combo_defs.h``](combo_defs.h) for the actual comborolls in use.
+
+From v37 on, E and Space have been swapped relative to their RSTHD positions. This is a common change made - see [RSTHD variants and similar layouts](#rsthd-variants-and-similar-layouts).
 
 Z and J are accessed as vertical combos.
 
@@ -185,9 +187,14 @@ Assuming you already have QMK set up using the documented method:
 ```
 cd ~qmk_firmware/keyboards/splitkb/kyria/keymaps
 ln -s /path/to/workingdir/keyboard-firmware/kyria-rsthd-prime .
+```
+
+To compile for a rev1 board with a Pro Micro controller:
+
+```
 qmk compile -kb splitkb/kyria/rev1 -km kyria-rsthd-prime
 ```
-or for rev3 with a Liatris controller, change the last line to:
+To compile for a rev3 board with a Liatris controller:
 
 ```
 qmk compile -e CONVERT_TO=liatris -kb splitkb/kyria/rev3 -km kyria-rsthd-prime

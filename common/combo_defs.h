@@ -44,45 +44,41 @@
 // clang-format off
 
 // Anti-SFU and anti-pinballing
-LtoR_STR( m,  KC_S, KC_D )
 LtoR_STR( sc, KC_C, KC_W )
 LtoR_STR( sp, KC_P, KC_G )
 
-CMBO_STR( et, CU_DOT, KC_MINS ) CMBO_TRM( et,  300 )
 RtoL_STR( er, KC_O, KC_A )
-RtoL_STR( ed, KC_L, KC_Y )
-RtoL_STR( es, KC_L, CU_COMM )
+RtoL_STR( the, KC_L, CU_COMM )
 RtoL_STR( ve, KC_I, CU_COMM )
 RtoL_STR( ee, KC_Y, CU_COMM )
 
-LtoR_STR( v, KC_P, KC_D )
+//LtoR_STR( v, KC_P, KC_D )
 
 // Verticals
 CMBO_STR( tw, KC_T, KC_W )
 CMBO_STR( ps, KC_S, KC_C )
-CMBO_STR( z,  KC_H, KC_F )
-CMBO_STR( j,  KC_N, KC_M )
+CMBO_STR( z,  KC_H, KC_M )
+CMBO_STR( j,  KC_N, KC_F )
 CMBO_STR( ui, KC_I, KC_U )
 
 // Awkward bigrams/trigrams
-LtoR_STR( ght, KC_X, KC_H )
-LtoR_STR( cr,  KC_W, KC_F )
-LtoR_STR( fr,  KC_S, KC_F )
-LtoR_STR( qu,  KC_V, KC_F )
+LtoR_STR( ght, KC_T, KC_D )
+LtoR_STR( cr,  KC_W, KC_M )
+LtoR_STR( qu,  KC_B, KC_M )
 LtoR_STR( pr,  KC_G, KC_D )
 
 RtoL_STR( you, KC_U, CU_DOT )
 
 // Inner column minimization
-LtoR_STR( ck,  KC_C, KC_F )
-LtoR_STR( k,   KC_T, KC_F )
+LtoR_STR( ck,  KC_C, KC_M )
+LtoR_STR( k,   KC_T, KC_M )
 
 LtoR_STR( rk,  KC_R, KC_W )
 LtoR_STR( br,  KC_R, KC_H )
-LtoR_STR( b,   KC_T, KC_D )
+LtoR_STR( b,   KC_S, KC_D )
 
 // Common word endings, right hand
-RtoL_STR( ally, KC_M, CU_DOT )
+RtoL_STR( ally, KC_F, CU_DOT )
 RtoL_STR( ould, KC_I, CU_DOT )
 RtoL_STR( all,  KC_N, CU_DOT )
 RtoL_STR( ough, KC_N, CU_COMM )
@@ -102,13 +98,12 @@ RtoL_STR( his,  KC_S, CU_COMM )
 RtoL_STR( but,  KC_T, CU_COMM )
 RtoL_STR( had,  KC_H, CU_COMM )
 
-RtoL_STR( for,  KC_F, CU_COMM )
 RtoL_STR( grep, KC_G, CU_COMM )
 RtoL_STR( diff, KC_D, CU_COMM )
 
-RtoL_LIT( ifdef,  "#ifdef",  KC_F, KC_Q )
-RtoL_LIT( endif,  "#endif",  KC_H, KC_Q )
-RtoL_LIT( define, "#define", KC_D, KC_Q )
+//RtoL_LIT( ifdef,  "#ifdef",  KC_F, KC_Q )
+//RtoL_LIT( endif,  "#endif",  KC_H, KC_Q )
+//RtoL_LIT( define, "#define", KC_D, KC_Q )
 
 // Extras and oddballs
 RtoL_LIT( apos_s, "'s", KC_S, KC_SCLN )
@@ -131,14 +126,13 @@ Q_RtoL_ARR( quote_re,
 */
 
 // Utilities
-Q_CMBO_KEY( search, SC_SEARCH,         CU_SHIFT, KC_SPC )  // Search key, on right thumb
+Q_CMBO_KEY( search, SC_SEARCH,         CU_SHIFT, KC_E )    // Search key, on right thumb
 Q_CMBO_KEY( expose, SC_EXPOSE_WINDOWS, KC_BSPC,  KC_DEL )  // Window expose, left thumb on EDIT layer
 
 CMBO_KEY( capslock, KC_CAPS,     KC_X, KC_ENTER )
 CMBO_KEY( capsword, CU_CAPSWORD, KC_F, KC_M )
 
 CMBO_KEY( screenlock, CU_SLCK,   KC_ESC, KC_Q )
-
 
 
 // Syntax layer

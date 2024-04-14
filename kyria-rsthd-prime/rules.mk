@@ -1,11 +1,12 @@
-# Uncomment the following for rev1 with Pro Micro
-#RGB_MATRIX_ENABLE = no      # Disable keyboard RGB matrix
-#RGBLIGHT_ENABLE = yes       # Enable keyboard RGB underglow
+# Uncomment the following to always use Liatris (without specifying -e on the command line)
+#CONVERT_TO=liatris
 
-# Uncomment the following for rev3 with Liatris (RP2040)
-CONVERT_TO=liatris
-RGB_MATRIX_ENABLE = yes     # Enable keyboard RGB matrix
-RGBLIGHT_ENABLE = no        # Disable keyboard RGB underglow
+# Uncomment the following to DISABLE backlighting for rev1
+#RGBLIGHT_ENABLE = no        # Disable keyboard RGB underglow
+
+# Uncomment the following to DISABLE backlighting/rgb for rev3
+#RGB_MATRIX_ENABLE = no      # Disable keyboard RGB matrix
+
 
 # Set the next set as you like (subject to firmware space!)
 OLED_ENABLE = yes           # Enables the use of OLED displays

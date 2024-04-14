@@ -23,35 +23,35 @@
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-/* ALPHA v36
+/* ALPHA v37
  
  ,-----------------------------------------.                        ,-----------------------------------------.
- |  Esc |   V  |   C  |   W  |   F  |   K  |                        |Search|   M  |   U  | .  ! | -  _ |   Q  |
+ |  Esc |   B  |   C  |   W  |   M  |   K  |                        |Search|   F  |   U  | .  ! | -  _ |   Q  |
  |------+------+------+------+---Z--+------|                        |------+---J--+------+------+------+------|
- |   X  |   R  |   S  |   T  |   H  |   B  |                        | ;  : |   N  |   I  |   O  |   A  | Enter|
+ |   X  |   R  |   S  |   T  |   H  |   V  |                        | ;  : |   N  |   I  |   O  |   A  | Enter|
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
  |  Tab |      |   P  |   G  |   D  |                                      |   L  |   Y  | ,  ? |      |BkSp/D|
  | META | Shift|      |      |      |                                      |      |      |      | Shift| META |
  `----------------------------------'                                      `----------------------------------'
  .
  .                 ,------.      ,--------------------.  ,--------------------.
- .                 | Mute |      | Enter|   E  | '  " |  |CapWrd| Space|      |
+ .                 | Mute |      | Enter| Space| '  " |  |CapWrd|   E  |      |
  .                 |      |      | SYMS |      |      |  | Shift|      | EDIT |
  .                 `------'      `--------------------'  `--------------------'
 */
     [ALPHA] = KEY_LAYOUT_stack(
         /* Left hand */
-        KC_ESC,   KC_V,     KC_C,  KC_W,  KC_F,  KC_K,
-        KC_X,     KC_R,     KC_S,  KC_T,  KC_H,  KC_B,
+        KC_ESC,   KC_B,     KC_C,  KC_W,  KC_M,  KC_K,
+        KC_X,     KC_R,     KC_S,  KC_T,  KC_H,  KC_V,
         CL_META,  KC_LSFT,  KC_P,  KC_G,  KC_D,
 
         /* Right hand */
-                  SC_SEARCH, KC_M,  KC_U,  CU_DOT,  KC_MINS, KC_Q,
+                  SC_SEARCH, KC_F,  KC_U,  CU_DOT,  KC_MINS, KC_Q,
                   KC_SCLN,   KC_N,  KC_I,  KC_O,    KC_A,    KC_ENT,
                              KC_L,  KC_Y,  CU_COMM, KC_RSFT, CL_META_R,
 
         /* Thumbs */
-        CL_SYMS, KC_E, KC_QUOT,   CU_SHIFT, KC_SPC, CL_EDIT,
+        CL_SYMS, KC_SPC, KC_QUOT,   CU_SHIFT, KC_E, CL_EDIT,
 
         /* Encoder button */
         KC_MUTE
@@ -102,7 +102,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  | TabL | PgDn | Left | Down | Right| AppL |                        | AppR |      |      |      |      | TabR |
  |      |      |      |      |      |      |                        |      | Fast |  x4  | More |Delete|      |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
- | ScrL |      | Undo | Enter| Redo |                                      |      |      |      |      | ScrR |
+ | ScrL |      | Undo |  Tab | Redo |                                      |      |      |      |      | ScrR |
  |      | Shift|      |      |      |                                      |  Cmd |  Alt | Ctrl | Shift|      |
  `----------------------------------'                                      `----------------------------------'
  .                                          Expose
@@ -116,7 +116,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         /* Left hand */
         SC_FULLSCREEN,   CE_PAGE_UP,   CE_HOME,  CE_UP,    CE_END,    CU_PREV_WINDOW,
         CU_TAB_LEFT,     CE_PAGE_DOWN, CE_LEFT,  CE_DOWN,  CE_RIGHT,  CU_APPSWITCH_LEFT,
-        SC_PREV_SCREEN,  _______,      SC_UNDO,  KC_ENT,   SC_REDO,
+        SC_PREV_SCREEN,  _______,      SC_UNDO,  KC_TAB,   SC_REDO,
 
 
         /* Right hand */
