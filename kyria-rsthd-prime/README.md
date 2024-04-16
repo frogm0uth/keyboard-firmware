@@ -85,7 +85,7 @@ Layer switching is done with custom code, so that a. shifted and custom keys can
 
 The alpha layout aims to reduce lateral finger movement on the index finger. In fact the lower key of the inner column has been completely removed in this version. An older version performed very well in an [analyzer](docs/prime-on-the-analyzer.md), with low SFU (same finger utilization) stats and low travel distance.
 
-Since then, changes have been made to the layout that nominally give it worse performance, because of the use of [comborolls](docs/comborolls.md). (See [``../common/combo_defs.h``](combo_defs.h) for current comborolls).
+Since then, changes have been made to the layout that nominally give it worse performance, because of the use of [comborolls](docs/comborolls.md). (See [``common/combo_defs.h``](combo_defs.h) for current comborolls).
 
 From v37 on, E and Space have been swapped relative to their RSTHD positions. This is a common change made - see [RSTHD variants and similar layouts](#rsthd-variants-and-similar-layouts).
 
@@ -93,13 +93,13 @@ Z is accessed as a vertical combo.
 
 Except for Shift, there are no modifiers on the alpha layer. To access them, use the SYMS or EDIT layer, hold the modifier(s) down, then release the layer key. This is a bit like Callum mods except it doesn't use one-shots.
 
-The shift keys operate as follows:
+The shift keys are "auto-off":
 - If one is held and another key is pressed, you get the shifted version of the key then shift is turned off. This completely eliminates typos like "THe".
 - If one is tapped, it toggles caps-word.
-- If both are pressed at the same, they toggle caps-lock.
+- If both are tapped at the same, they toggle caps-lock.
 ## Other layers
 
-There are five more layers, for a total of 6. All are hold-to-activate.
+There are five more layers, for a total of 6. All are hold-to-activate. The shift keys in these layers are *not* auto-off.
 
 ### SYMS
 

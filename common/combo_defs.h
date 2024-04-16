@@ -74,6 +74,7 @@ LtoR_STR( ck,  KC_C, KC_M )
 LtoR_STR( k,   KC_T, KC_M )
 
 LtoR_STR( rk,  KC_R, KC_W )
+LtoR_STR( bl,  KC_B, KC_W )
 LtoR_STR( br,  KC_R, KC_H )
 LtoR_STR( b,   KC_S, KC_D )
 
@@ -88,8 +89,8 @@ RtoL_KEY( comma,  KC_COMM, KC_P, KC_G )  RtoL_TRM( comma,  300 )
 RtoL_KEY( period, KC_DOT,  KC_C, KC_W )  RtoL_TRM( period, 300 )
 
 // Comborolls across both hands
-RtoL_STR( vs,   KC_V, CU_COMM )
-RtoL_STR( fac,  KC_C, CU_COMM )
+RtoL_STR( ble,  KC_B, CU_COMM )
+RtoL_STR( cd,   KC_C, CU_COMM )
 RtoL_STR( was,  KC_W, CU_COMM )
 RtoL_STR( pwd,  KC_P, CU_COMM )
     
@@ -97,6 +98,7 @@ RtoL_STR( be,   KC_R, CU_COMM )
 RtoL_STR( his,  KC_S, CU_COMM )
 RtoL_STR( but,  KC_T, CU_COMM )
 RtoL_STR( had,  KC_H, CU_COMM )
+RtoL_STR( vs,   KC_V, CU_COMM )
 
 RtoL_STR( grep, KC_G, CU_COMM )
 RtoL_STR( diff, KC_D, CU_COMM )
@@ -108,6 +110,8 @@ RtoL_STR( diff, KC_D, CU_COMM )
 // Extras and oddballs
 RtoL_LIT( apos_s, "'s", KC_S, KC_SCLN )
 RtoL_LIT( apos_t, "'t", KC_T, KC_SCLN )
+
+RtoL_LIT( espace, "e ", KC_E, CU_COMM )
 
 // Contractions. Use ARR so that shift doesn't change the quote into double quote
 /*
@@ -126,11 +130,10 @@ Q_RtoL_ARR( quote_re,
 */
 
 // Utilities
-Q_CMBO_KEY( search, SC_SEARCH,         KC_QUOT,  KC_E )    // Search key, on right thumb
+//Q_CMBO_KEY( search, SC_SEARCH,         KC_QUOT,  KC_E )    // Search key, on right thumb
 Q_CMBO_KEY( expose, SC_EXPOSE_WINDOWS, KC_BSPC,  KC_DEL )  // Window expose, left thumb on EDIT layer
 
-CMBO_KEY( capslock, KC_CAPS,     KC_X, KC_ENTER )
-CMBO_KEY( capsword, CU_CAPSWORD, KC_F, KC_M )
+CMBO_KEY( search, SC_SEARCH,     KC_M, KC_F )
 
 CMBO_KEY( screenlock, CU_SLCK,   KC_ESC, KC_Q )
 

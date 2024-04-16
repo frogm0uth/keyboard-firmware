@@ -70,22 +70,14 @@ void capsword_tick() {
     }
 }
 
-// Toggle caps-word
+// Toggle caps-word. If caps-lock is on, toggle it off.
 void toggle_capsword(void) {
-    if (!host_keyboard_led_state().caps_lock) {
-        is_capsword = true;
-        tap_code(KC_CAPS);
-    } else {
-        if (is_capsword) {
-            tap_code(KC_CAPS);
-        } else {
-            is_capsword = true;
-        }
-    }
+    is_capsword = !host_keyboard_led_state().caps_lock;
+    tap_code(KC_CAPS);
     capsword_waiting = false;
 }
 
-// Toggle caps-lock
+// Toggle caps-lock. If caps-word is on, go to caps-lock state.
 void toggle_capslock(void) {
     if (!host_keyboard_led_state().caps_lock) {
         is_capsword = false;
@@ -166,10 +158,12 @@ bool process_record_capslock(uint16_t keycode, keyrecord_t *record) {
         case KC_RSFT:
             if (record->event.pressed) {
                 // Toggle caps lock if a shift key is pressed while shift already active
+                // and within the tapping term
                 if (mods & MOD_MASK_SHIFT) {
-                    toggle_capslock();
-                    return false;
-
+                    if (capsword_waiting) {
+                        toggle_capslock();
+                        return false;
+                    }
                 } else {
                     // Wait to see if this will toggle caps word
                     capsword_waiting = true;
