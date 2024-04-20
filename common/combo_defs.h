@@ -74,9 +74,9 @@ LtoR_STR( ck,  KC_C, KC_M )
 LtoR_STR( k,   KC_T, KC_M )
 
 LtoR_STR( rk,  KC_R, KC_W )
-LtoR_STR( bl,  KC_B, KC_W )
 LtoR_STR( br,  KC_R, KC_H )
 LtoR_STR( b,   KC_S, KC_D )
+LtoR_STR( j,   KC_P, KC_D )
 
 // Common word endings, right hand
 RtoL_STR( ally, KC_F, CU_DOT )
@@ -89,7 +89,6 @@ RtoL_KEY( comma,  KC_COMM, KC_P, KC_G )  RtoL_TRM( comma,  300 )
 RtoL_KEY( period, KC_DOT,  KC_C, KC_W )  RtoL_TRM( period, 300 )
 
 // Comborolls across both hands
-RtoL_STR( ble,  KC_B, CU_COMM )
 RtoL_STR( cd,   KC_C, CU_COMM )
 RtoL_STR( was,  KC_W, CU_COMM )
 RtoL_STR( pwd,  KC_P, CU_COMM )
@@ -130,11 +129,7 @@ Q_RtoL_ARR( quote_re,
 */
 
 // Utilities
-//Q_CMBO_KEY( search, SC_SEARCH,         KC_QUOT,  KC_E )    // Search key, on right thumb
 Q_CMBO_KEY( expose, SC_EXPOSE_WINDOWS, KC_BSPC,  KC_DEL )  // Window expose, left thumb on EDIT layer
-
-CMBO_KEY( search, SC_SEARCH,     KC_M, KC_F )
-
 CMBO_KEY( screenlock, CU_SLCK,   KC_ESC, KC_Q )
 
 
