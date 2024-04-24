@@ -80,15 +80,15 @@ bool process_record_shortcut(uint16_t keycode, keyrecord_t *record) {
 #ifndef OS_SHORTCUTS_STATIC
 void os_set_from_keycode(uint16_t keycode) {
     switch (keycode) {
-        case CU_SELECT_MACOS:
+        case CU_MACOS:
             os_index = os_platform_macos;
             break;
 
-        case CU_SELECT_WINDOWS:
+        case CU_WINDOWS:
             os_index = os_platform_windows;
             break;
 
-        case CU_SELECT_LINUX:
+        case CU_LINUX:
             os_index = os_platform_linux;
             break;
     }

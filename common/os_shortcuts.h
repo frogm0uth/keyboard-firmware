@@ -78,13 +78,13 @@ enum os_shortcut_platform {
 // clang-format off
 #if defined(OS_SHORTCUTS) && !defined(OS_SHORTCUTS_STATIC)
 #   define OS_SELECT_KEYCODES                       \
-        CU_SELECT_MACOS,                            \
-        CU_SELECT_WINDOWS,                          \
-        CU_SELECT_LINUX
+        CU_MACOS,                            \
+        CU_WINDOWS,                          \
+        CU_LINUX
 #else
-#   define CU_SELECT_MACOS KC_NO
-#   define CU_SELECT_WINDOWS KC_NO
-#   define CU_SELECT_LINUX KC_NO
+#   define CU_MACOS KC_NO
+#   define CU_WINDOWS KC_NO
+#   define CU_LINUX KC_NO
 #endif
 // clang-format on
 
