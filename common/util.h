@@ -21,6 +21,7 @@ void kb_lighting_adjust(bool up, uint8_t mods);
 void emit_progmem_array(const uint16_t *keyptr);
 void emit_progmem_array_record(const uint16_t *keyptr, keyrecord_t *record);
 void emit_progmem_string(const char *str);
+void emit_progmem_string_autounshift(const char *str);
 
 void process_os_change(uint16_t keycode);
 void write_lighting_to_eeprom(void);

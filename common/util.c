@@ -134,20 +134,15 @@ void kb_lighting_adjust(bool up, uint8_t mods) {
  * Functions for outputting characters. Useful for combos and things like that.
  */
 
-// Emit an array of keycodes in PROGMEM. Check auto-unshift after first keycode.
+// Emit an array of keycodes in PROGMEM.
 void emit_progmem_array(const uint16_t *keyptr) {
     keyrecord_t record;
     emit_progmem_array_record(keyptr, &record);
 }
 
-// Emit an array of keycodes in PROGMEM, allowing custom keycodes. Check auto-unshift after first keycode.
+// Emit an array of keycodes in PROGMEM, allowing custom keycodes.
 void emit_progmem_array_record(const uint16_t *keyptr, keyrecord_t *record) {
     uint16_t keycode = pgm_read_word(keyptr++);
-    tap_custom_key(keycode, record);
-    if (check_auto_unshift()) {
-        del_mods(MOD_MASK_SHIFT);
-    }
-    keycode = pgm_read_word(keyptr++);
     while (keycode != KC_NO) {
         tap_custom_key(keycode, record);
         keycode = pgm_read_word(keyptr++);
@@ -156,6 +151,14 @@ void emit_progmem_array_record(const uint16_t *keyptr, keyrecord_t *record) {
 
 // Emit a PROGMEM string. Check auto-unshift after first character.
 void emit_progmem_string(const char *str) {
+    char ch = pgm_read_byte(str++);
+    while (ch) {
+        send_char(ch);
+        ch = pgm_read_byte(str++);
+    }
+}
+// Emit a PROGMEM string and check auto-unshift after first character.
+void emit_progmem_string_autounshift(const char *str) {
     char ch = pgm_read_byte(str++);
     send_char(ch);
     if (check_auto_unshift()) {
