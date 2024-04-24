@@ -27,11 +27,22 @@
  * RtoL: comboroll, triggers pressed from right to left
  * CMBO: triggers nominally pressed as the same time (in either direction)
  *
- * STR: arguments are name, triggers. The name is output as a string.
- * LIT: arguments are name, literal string, triggers
- * KEY: arguments are name, keycode, triggers
- * ARR: arguments are name, array of keycodes, triggers
- * TRM: arguments are name, term. This changes the timeout, and must follow the combo definition.
+ * ...._STR: arguments are name, triggers. The name is output as a string. Auto-shift works.
+ * ...._LIT: arguments are name, literal string, triggers. Shift is ignored.
+ * ...._KEY: arguments are name, keycode, triggers. Shift is ignored.
+ * ...._ARR: arguments are name, array of keycodes, triggers. Shift is ignored.
+ * 
+ * ...._TRM: arguments are name, term. This changes the timeout, and must follow the combo definition.
+ * _ONSHIFT: argument is the name. Makes the combo trigger only on shift, and must follow the combo definition.
+ *
+ * This is an example of the ARR macro:
+ *
+ * RtoL_ARR( quote_ll,
+ *   ARRAY_PROTECT(
+ *       CU_QUOTE_QUOTE,
+ *       KC_L,
+ *       KC_L
+ *   ), KC_L, KC_RSFT)
  *
  * By default, rolls have a longer timeout.
  * 
@@ -46,23 +57,22 @@
 // Anti-SFU and anti-pinballing
 LtoR_STR( sc, KC_C, KC_W )
 LtoR_STR( sp, KC_P, KC_G )
+LtoR_STR( f,  KC_B, KC_C ) LtoR_TRM( f, 300 )
 
-RtoL_STR( lf, KC_F, KC_U )
+RtoL_STR( fl, KC_F, KC_QUOT )
 RtoL_STR( er, KC_O, KC_A )
 RtoL_STR( ve, KC_I, CU_COMM )
 RtoL_STR( ee, KC_Y, CU_COMM )
-
-RtoL_LIT( quotll, "'ll", KC_L, CU_COMM )
+RtoL_STR( es, KC_L, CU_COMM )
 
 // Verticals
 CMBO_STR( tw, KC_T, KC_W )
 CMBO_STR( ps, KC_S, KC_C )
 CMBO_STR( z,  KC_H, KC_M )
-CMBO_STR( fl, KC_N, KC_F )
+CMBO_STR( lf, KC_N, KC_F )
 CMBO_STR( ui, KC_I, KC_U )
 
 // Awkward bigrams/trigrams
-LtoR_STR( ght, KC_T, KC_D )
 LtoR_STR( cr,  KC_W, KC_M )
 LtoR_STR( qu,  KC_B, KC_M )
 LtoR_STR( pr,  KC_G, KC_D )
@@ -70,8 +80,8 @@ LtoR_STR( pr,  KC_G, KC_D )
 RtoL_STR( you, KC_U, CU_DOT )
 
 // Inner column minimization
+LtoR_STR( k,   KC_T, KC_D )
 LtoR_STR( ck,  KC_C, KC_M )
-LtoR_STR( k,   KC_T, KC_M )
 
 LtoR_STR( rk,  KC_R, KC_W )
 LtoR_STR( br,  KC_R, KC_H )
@@ -84,6 +94,9 @@ RtoL_STR( ould, KC_I, CU_DOT )
 RtoL_STR( all,  KC_N, CU_DOT )
 RtoL_STR( ough, KC_N, CU_COMM )
 
+// More punctuation on alpha layer
+RtoL_LIT( backslash, "\\", KC_U, KC_QUOT )
+
 // Right-to-left rolls on left hand
 RtoL_KEY( comma,  KC_COMM, KC_P, KC_G )  RtoL_TRM( comma,  300 )
 RtoL_KEY( period, KC_DOT,  KC_C, KC_W )  RtoL_TRM( period, 300 )
@@ -91,61 +104,40 @@ RtoL_KEY( period, KC_DOT,  KC_C, KC_W )  RtoL_TRM( period, 300 )
 // Comborolls across both hands
 RtoL_STR( cd,   KC_C, CU_COMM )
 RtoL_STR( was,  KC_W, CU_COMM )
-RtoL_STR( pwd,  KC_P, CU_COMM )
-    
+RtoL_STR( ght,  KC_M, CU_COMM )
+ 
 RtoL_STR( be,   KC_R, CU_COMM )
-RtoL_STR( his,  KC_S, CU_COMM )
+//RtoL_STR( his,  KC_S, CU_COMM )
 RtoL_STR( but,  KC_T, CU_COMM )
-RtoL_STR( had,  KC_H, CU_COMM )
+//RtoL_STR( had,  KC_H, CU_COMM )
 RtoL_STR( vs,   KC_V, CU_COMM )
 
+RtoL_STR( pwd,  KC_P, CU_COMM )
 RtoL_STR( grep, KC_G, CU_COMM )
 RtoL_STR( diff, KC_D, CU_COMM )
 
-//RtoL_LIT( ifdef,  "#ifdef",  KC_F, KC_Q )
-//RtoL_LIT( endif,  "#endif",  KC_H, KC_Q )
-//RtoL_LIT( define, "#define", KC_D, KC_Q )
+RtoL_STR( from, KC_M, KC_F )
 
 // Extras and oddballs
-RtoL_LIT( apos_s, "'s", KC_S, KC_SCLN )
-RtoL_LIT( apos_t, "'t", KC_T, KC_SCLN )
+//RtoL_LIT( apos_s, "'s", KC_S, KC_SCLN )
+//RtoL_LIT( apos_t, "'t", KC_T, KC_SCLN )
 
 RtoL_LIT( espace, "e ", KC_E, CU_COMM )
 
-// Contractions. Use ARR so that shift doesn't change the quote into double quote
-/*
-Q_RtoL_ARR( quote_ll,
-    ARRAY_PROTECT(
-        CU_QUOTE_QUOTE,
-        KC_L,
-        KC_L
-    ), KC_L, KC_RSFT)
-Q_RtoL_ARR( quote_re,
-    ARRAY_PROTECT(
-        CU_QUOTE_QUOTE,
-        KC_R,
-        KC_E
-    ), KC_Y, KC_RSFT)
-*/
-
 // Utilities
-Q_CMBO_KEY( expose, SC_EXPOSE_WINDOWS, KC_BSPC,  KC_DEL )  // Window expose, left thumb on EDIT layer
 CMBO_KEY( screenlock, CU_SLCK,   KC_ESC, KC_Q )
 
-
 // Syntax layer
-RtoL_LIT( quesrangle,      "?>",    CU_7, CU_8 )   ___NOSFT( quesrangle )
-RtoL_LIT( langleques,      "<?",    CU_8, CU_9 )   ___NOSFT( langleques )
+LtoR_LIT( l_c_comment, "/*", CU_LPRN, KC_ASTR )
+LtoR_LIT( r_c_comment, "*/", KC_ASTR, CU_RPRN )
+_ONSHIFT( l_c_comment )  // only trigger if shift is down
+_ONSHIFT( r_c_comment )
 
-RtoL_LIT( closeparensemi,  ");",    CU_3, CU_0 )   ___NOSFT( closeparensemi )
-RtoL_LIT( not_equal,       "!=",    CU_2, CU_0 )   ___NOSFT( not_equal )
+LtoR_LIT( l_php, "<?php", CU_LT, CU_SLSH_SLSH)
+LtoR_LIT( r_php, "?>",    CU_SLSH_SLSH, CU_GT)
+_ONSHIFT( l_php )  // only trigger if shift is down
+_ONSHIFT( r_php )
 
-RtoL_LIT( threebacktick,   "```",   CU_1, CU_TILDE_DOLLAR ) ___NOSFT( threebacktick )
-
-RtoL_LIT( phpopen,         "<?php", CU_8, CU_0 )   ___NOSFT( phpopen )
-RtoL_LIT( phpecho,         "<?=",   CU_9, CU_0 )   ___NOSFT( phpecho )
-
-RtoL_LIT( dirup,           "../",   CU_2, CU_6 )   ___NOSFT( dirup )
-
-RtoL_LIT( lbracedbl,       "{{",    CU_1, CU_6 )   ___NOSFT( lbracedbl )
-RtoL_LIT( rbracedbl,       "}}",    CU_4, CU_3 )   ___NOSFT( rbracedbl )
+LtoR_LIT( parensemi, ");",    CU_LT, CU_GT )
+_ONSHIFT( parensemi )
+LtoR_LIT( tild_slsh, "~/",    CU_MINS_MINS, CU_SLSH_SLSH)
