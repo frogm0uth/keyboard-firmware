@@ -29,11 +29,13 @@ enum custom_keycodes {
     CU_APPSWITCH_RIGHT, // Application switcher
     CU_APPSWITCH_LEFT,
 
-    CU_KBUP,    // Modify keyboard parameters
-    CU_KBDN,
+    CU_LGHTUP,    // Increase/decrease keyboard lighting
+    CU_LGHTDN,
 
     CU_WIPE, // Wipe the EEPROM
     CU_WRITE, // Save current state to EEPROM
+
+    CU_DIRUP, // Move up a directory
 
 #ifdef LAYER_TAP_TOGGLE
     LAYER_KEYS, // Keys for layer-tap-toggle
@@ -91,7 +93,6 @@ enum custom_keycodes {
  */
 #define CU_COMM CU_COMMA_QUES
 #define CU_DOT  CU_DOT_EXLM
-#define CU_QTQT CU_QUOTE_QUOTE
 
 // Make it easier to read null key (instead of XXXXXXX)
 #define ___X___ KC_NO

@@ -103,13 +103,14 @@ void process_caps_cancel(uint16_t keycode, keyrecord_t *record) {
         if (mods & MOD_MASK_SHIFT) {
             switch (keycode) { // Keys that cancel caps lock only on shifted version
                 case KC_1 ... KC_0:
+                case CU_0 ... CU_9:
                     cancel = true;
             }
         }
         if (!(mods & MOD_MASK_SHIFT)) {
             switch (keycode) { // Keys that cancel caps lock only on UNshifted version
-                case CU_0 ... CU_9:
-                     cancel = true;
+                //case CU_0 ... CU_9:
+                //     cancel = true;
            }
         }
         switch (keycode) {     // Keycodes that cancel caps word regardless of shift
