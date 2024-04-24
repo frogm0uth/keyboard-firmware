@@ -22,7 +22,7 @@
  * encoder. Some features may be disabled, depending on the variables in rules.mk.
  */
 bool encoder_update_user(uint8_t index, bool clockwise) {
-    bool left = (index == 0); // Just for readibility
+    //bool left = (index == 0); // Just for readibility
 
     uint8_t       mods    = get_mods();
     layer_state_t layer   = get_highest_layer(layer_state);
@@ -45,13 +45,17 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 #endif
 #endif
 
-    /* Now clear all modifiers and do the rest.
+    /* Now clear all modifiers and do the rest. Due to the change of layer 
+     * "handedness" from swapping E and space, two layers can trigger the
+     * the encoder code in some cases. Also, either encoder can be used.
      */
     clear_mods();
     switch (layer) {
             // On Alpha layer, control volume
         case ALPHA:
-            if (left) {
+            if (mods & MOD_MASK_SHIFT) {
+                keycode = clockwise ? KC_BRIU : KC_BRID;
+            } else {
                 keycode = clockwise ? KC_VOLU : KC_VOLD;
             }
             break;
@@ -59,35 +63,31 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             // On the Edit layer, scrub history, unless an edit modifier is held.
             // If one is, move within or delete text.
         case EDIT:
-            if (left) {
+        case SYMS:
 #ifdef CUSTOM_EDIT
-                if (custom_edit_encoder_ready()) {
-                    custom_edit_encoder(clockwise);
-                } else {
-                    keycode = clockwise ? SC(SC_REDO) : SC(SC_UNDO);
-                }
-#else
+            if (custom_edit_encoder_ready()) {
+                custom_edit_encoder(clockwise);
+            } else {
                 keycode = clockwise ? SC(SC_REDO) : SC(SC_UNDO);
-#endif
             }
+#else
+            keycode = clockwise ? SC(SC_REDO) : SC(SC_UNDO);
+#endif
             break;
 
             // On the Meta layer, search forward and back.
         case META:
-            if (left) {
-                keycode = clockwise ? SC(SC_NEXT_SEARCH) : SC(SC_PREV_SEARCH);
-            }
+            keycode = clockwise ? SC(SC_NEXT_SEARCH) : SC(SC_PREV_SEARCH);
             break;
 
             // On the Snap layer, scroll through search results, unless a modifier is held. If one is,
             // change backlight color or OLED brightness
         case SNAP:
-            if (left) {
-                if (mods & MOD_MASK_CSAG) {
-                    kb_lighting_adjust(clockwise, mods);
-                } else {
-                    keycode = clockwise ? SC(SC_APP_ZOOM_IN) : SC(SC_APP_ZOOM_OUT);
-                }
+        case FUNC:
+            if (mods & MOD_MASK_CSAG) {
+                kb_lighting_adjust(clockwise, mods);
+            } else {
+                keycode = clockwise ? SC(SC_APP_ZOOM_IN) : SC(SC_APP_ZOOM_OUT);
             }
             break;
       }
