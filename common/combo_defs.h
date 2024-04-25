@@ -55,9 +55,9 @@
 // clang-format off
 
 // Anti-SFU and anti-pinballing
-LtoR_STR( sc, KC_C, KC_W )
+LtoR_STR( sc, KC_S, KC_G )
 LtoR_STR( sp, KC_P, KC_G )
-LtoR_STR( f,  KC_B, KC_C ) LtoR_TRM( f, 300 )
+LtoR_STR( f,  KC_P, KC_D )
 
 RtoL_STR( fl, KC_F, KC_QUOT )
 RtoL_STR( er, KC_O, KC_A )
@@ -73,20 +73,18 @@ CMBO_STR( lf, KC_N, KC_F )
 CMBO_STR( ui, KC_I, KC_U )
 
 // Awkward bigrams/trigrams
-LtoR_STR( cr,  KC_W, KC_M )
+LtoR_STR( cr,  KC_C, KC_M )
 LtoR_STR( qu,  KC_B, KC_M )
-LtoR_STR( pr,  KC_G, KC_D )
+LtoR_STR( pr,  KC_T, KC_D )
 
 RtoL_STR( you, KC_U, CU_DOT )
 
 // Inner column minimization
-LtoR_STR( k,   KC_T, KC_D )
-LtoR_STR( ck,  KC_C, KC_M )
+LtoR_STR( k,   KC_W, KC_M )
 
-LtoR_STR( rk,  KC_R, KC_W )
 LtoR_STR( br,  KC_R, KC_H )
 LtoR_STR( b,   KC_S, KC_D )
-LtoR_STR( j,   KC_P, KC_D )
+LtoR_STR( j,   KC_G, KC_D )
 
 // Common word endings, right hand
 RtoL_STR( ally, KC_F, CU_DOT )
