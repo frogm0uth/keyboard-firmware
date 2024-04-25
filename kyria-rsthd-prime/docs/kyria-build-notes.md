@@ -4,20 +4,20 @@ The Kyria is a great kit. Here are some things I thought worth writing down.
 
 ## v1 vs v3
 
-The most obvious difference between v1 and v3 is that the latter has per-key RGB. This turned out to be much less interesting that I expected, as I was never able to find interesting keycaps with shine-through legends. (By "interesting", I mean non-QWERTY.)
+The most obvious difference between v1 and v3 is that the latter has per-key RGB. This turned out to be less interesting than I expected, as I wasn't able to find interesting keycaps with shine-through legends. (By "interesting", I mean non-QWERTY.)
 
-If only keyboardio made their [Model 100 Linear A keycaps](https://shop.keyboard.io/products/linear-a-keycaps-m100) in a version with standard MX size. (Yes they do have an XDA set, but 1. they're XDA and 2. they aren't shinethrough.)
+If only keyboardio made their [Model 100 Linear A keycaps](https://shop.keyboard.io/products/linear-a-keycaps-m100) in a version with standard MX size. (Yes they do have an XDA set, but they aren't shinethrough.)
 
 However, there are a lot of other differences.
 
 ### v1 has that v3 doesn't
 
-- breakout pins for all rows and columns
+- Breakout pins for all rows and columns
 - 8 columns in the key matrix (vs 7)
 - 2U thumb keys as an option
-- more backlight LEDs (10 vs 6)
-- flippable PCB
-- break-off outer pinky column 
+- More backlight LEDs (10 vs 6)
+- Flippable PCB
+- Break-off outer pinky column 
 
 ### v3 has that v1 doesn't
 
@@ -27,7 +27,7 @@ However, there are a lot of other differences.
 
 ## Case hardware
 
-If you order a case using the Composer, you will have the [Aurora Low Profile Case Hardware Kit](https://splitkb.com/collections/keyboard-parts/products/aurora-low-profile-case-hardware-kit) added to your order. This is kinda wasteful as it has the parts for any keyboard in the Aurora series, so you get a lot of parts that you don't actually need. Also, the standoffs for the OLED covers are not long enough if you socket the controllers.
+If you order a case using the Composer, you will have the [Aurora Low Profile Case Hardware Kit](https://splitkb.com/collections/keyboard-parts/products/aurora-low-profile-case-hardware-kit) added to your order. This feels kinda wasteful as it has the parts for any keyboard in the Aurora series, so you get a lot of parts that you don't actually need. Also, the standoffs for the OLED covers are not long enough if you socket the controllers.
 
 This is what you actually need for a Kyria with acrylic base, FR4 plate, and MX switches:
 
@@ -37,9 +37,9 @@ This is what you actually need for a Kyria with acrylic base, FR4 plate, and MX 
 
 (\*) this is what I measured as necessary with an OLED installed with the sockets and headers I use on the controller. YMMV.
 
-I priced out an order on ebay: the parts for 1 keyboard worked out at about EUR8 shipped from China. On the plus side, you also get usable standoffs for the OLED covers and you won't have to use pan-head screws. On the down side, shipping takes a month.
+I priced out an order on ebay: the parts for 1 keyboard worked out at about EUR8 shipped from China, about the same as from splitkb. On the plus side, you also get usable standoffs for the OLED covers and you won't have to use pan-head screws. On the down side, shipping takes a month.
 
-For 5 keyboards it works out at about EUR12, so definitely an advantage if building two or more.
+For 5 keyboards it works out at about EUR12, so only really an advantage if building two or more.
 
 ## Soldering LEDs
 
@@ -47,7 +47,7 @@ The first time I soldered SMD LEDs, I really stuffed up one side (it was a Corne
 
 Here's the secret: flux.
 
-Just get a little tub of rosin flux paste and a small brush to apply it. To clean it off, use 100% IPA and a small paintbrush cropped short (so the bristles are stiff). Then rinse with enough IPA to actually remove the dissolved flux residues off the board.
+Just get a little tub of rosin flux paste and a small brush to apply it. To clean it off, use 100% IPA and a small paintbrush cropped short (so the bristles are stiff). Then rinse with enough IPA to remove the dissolved flux residues off the board.
 
 Even though solder has flux in it, using rosin flux paste makes the solder wet onto the parts much more quickly.
 

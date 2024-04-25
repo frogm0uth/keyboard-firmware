@@ -1,6 +1,6 @@
-# Kyria RSTHD/Prime v37
+# Kyria RSTHD/Prime v38
 
-This is the keymap for my Kyria keyboard from [splitkb.com](https://splitkb.com). The alpha layout was based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/) but is now heavily modified. It's optimized for minimized usage of the inner index column. Features in the code include runtime switching between Mac/Windows/Linux shortcuts and a custom implementation of "comborolls".
+This is the keymap for my Kyria keyboard from [splitkb.com](https://splitkb.com). The alpha layout was based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/) but is now heavily modified. The layout is optimized for minimum usage of the inner index column. Features in the code include runtime switching between Mac/Windows/Linux shortcuts and a custom implementation of "comborolls".
 
 <!--ts-->
    * [Overview](#overview)
@@ -33,11 +33,11 @@ The alphabetic layout in this keymap was originally based on [RSTHD](https://xsz
 
 When I originally started making changes to RSTHD, I called it RSTHD'. The `'`, pronounced "prime", is [used in maths](https://en.wikipedia.org/wiki/Prime_(symbol)#Use_in_mathematics,_statistics,_and_science) to indicate a derivative of the named thing. I think the layout still retains its RSTHD DNA despite all the changes. I figure calling it *RSTHD/Prime* acknowledges its origin while still indicating that it's different.
 
-The code is known to compile for and work on a v1 Kyria with a 32kB Pro Micro controller, and a v3 Kyria with a Liatris controller. There are some lines at the top of rules.mk that will need to be un/commented accordingly.
+The code is known to compile for and work on a rev1 Kyria with a 32kB Pro Micro controller and a rev3 Kyria with a Liatris controller. There are some lines at the top of rules.mk that will need to be un/commented accordingly.
 
 See also [Kyria Build Notes](docs/kyria-build-notes.md).
 
-**As of late 2023, I'm not maintaining this documentation any more. It's too much work to be frank. It serves as a general guide, but for actual info please refer to the source. See also the [common](../common/) folder.**
+**As of late 2023, I'm not maintaining this documentation very often. It's too much work to be frank. It serves as a general guide, but for actual info please refer to the source. See also the [common](../common/) folder.**
 
 ### Goals
 
@@ -51,7 +51,7 @@ Typing speed and reducing the number of keys on the keyboard are not important g
 
 ### Keyboard configuration
 
-My Kyria uses all 6 columns on each hand. However, the lower inner column keys are absent. There are three thumb keys on each side. The left side has an OLED and an encoder, while the right side has neither. The encoder seems like a great idea but in practice I find that I only use it for adjusting the lighting, as for all other functions it's quicker to just use keys; I could certainly live without it. The OLED, on the other hand (heh), is awesome to have.
+My Kyria uses all 6 columns on each hand. However, the lower inner column keys are absent. There are three thumb keys on each side. The left side has an OLED. Either side can take an encoder, but the right side is slightly more functional. (The encoder seems like a great idea but in practice I find that I mostly use it for adjusting the lighting, as for other functions it's usually quicker to just use keys; I could certainly live without it.)
 
 ### Features
 
@@ -63,7 +63,7 @@ A set of shortcuts which can be switched at run-time for macOS, Windows, or Linu
 
 #### Comborolls
 
-I have a userspace implementation of combos called "[comboroll](docs/comborolls.md)" to avoid timing issues with QMK's overlapping combos. See `combo_defs.h` for combo definitions and `comboroll.h/c` for the implementation.
+I have a userspace implementation of combos called "[comboroll](docs/comborolls.md)" to avoid timing issues with QMK's overlapping combos. The doc is out of date for the current key layout, but see `combo_defs.h` for combo definitions and `comboroll.h/c` for the implementation.
 
 #### Custom shift keys
 
@@ -83,49 +83,52 @@ Layer switching is done with custom code, so that a. shifted and custom keys can
 
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/a3c533814afd6550258f456b85d1d678)
 
-The alpha layout aims to reduce lateral finger movement on the index finger. In fact the lower key of the inner column has been completely removed in this version. An older version performed very well in an [analyzer](docs/prime-on-the-analyzer.md), with low SFU (same finger utilization) stats and low travel distance.
+The alpha layout aims to reduce lateral finger movement on the index finger. In fact, the lower keys of the inner columns have been removed entirely.
 
-Since then, changes have been made to the layout that nominally give it worse performance, because of the use of [comborolls](docs/comborolls.md). (See [``common/combo_defs.h``](combo_defs.h) for current comborolls).
+An older version of the layout performed very well in an [analyzer](docs/prime-on-the-analyzer.md), with low SFU (same finger utilization) stats and low travel distance. Since then, changes have been made to the layout that nominally give it worse performance, because of the use of [comborolls](docs/comborolls.md). (See [``common/combo_defs.h``](combo_defs.h) for current comborolls). 
 
-From v37 on, E and Space have been swapped relative to their RSTHD positions. This is a common change made - see [RSTHD variants and similar layouts](#rsthd-variants-and-similar-layouts).
-
-Z is accessed as a vertical combo.
-
-Except for Shift, there are no modifiers on the alpha layer. To access them, use the SYMS or EDIT layer, hold the modifier(s) down, then release the layer key. This is a bit like Callum mods except it doesn't use one-shots.
+Some characters can only be accessed with combos or comborolls: Z, J and backslash.
 
 The shift keys are "auto-off":
-- If one is held and another key is pressed, you get the shifted version of the key then shift is turned off. This completely eliminates typos like "THe".
-- If one is tapped, it toggles caps-word.
-- If both are tapped at the same, they toggle caps-lock.
+- If a shift key is held and another key is pressed, you get the shifted version of the key then shift is turned off. This completely eliminates typos like "THe".
+- If a shift key is tapped, it toggles caps-word.
+- If both shift keys are tapped at the same, they toggle caps-lock.
+
+Except for Shift, there are no modifiers on the alpha layer. To access them, hold the SYMS or EDIT layer key, hold the modifier(s) down, then release the layer key. This is a bit like Callum mods except it doesn't use one-shots. This is less inconvenient than it sounds: you can usually roll the layer key with the modifier, and common shortcuts have dedicated keys on other layers anyway.
+
+Since v37, E and Space have swapped hands relative to their RSTHD positions. This seems to be common amongst adopters - see [RSTHD variants and similar layouts](#rsthd-variants-and-similar-layouts). F and M also swapped hands to reduce pinballing off the right index column; while partially effective, I still find it helpful to have F as a comboroll on the left hand to break up words like LIFE.
+
 ## Other layers
 
-There are five more layers, for a total of 6. All are hold-to-activate. The shift keys in these layers are *not* auto-off.
+There are five more layers, for a total of 6. All are hold-to-activate. The shift keys in these layers are *not* auto-off. In v38, the "handedness" of most of these layers was reversed i.e. they were mostly mirror-imaged. 
 
 ### SYMS
 
-Activated by the left thumb.
+Activated by the right thumb.
 
 ![kyria-rsthd-prime-syms](docs/images/kyria-rsthd-prime-syms.png)
 
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/dc3b38be4f52be86bf6b95b7e53d5c14)
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/1320c291327964f5a62b71087b0907d4)
 
-Unshifted, this layer contains the rest of the punctuation characters. I've arranged them so that many common (for me) two-letter sequences can be typed with an inward roll. For example: `{% %} <% %> </ /> => -> ~/`. Additional sequences such as `<?` `?>`  `!=` `);` are accessed with comborolls, to avoid flipping between the alpha and syms layers.
+Numbers and punctuation are combined on one layer. Numbers are along the home row and punctuation is mostly arranged on the left hand. If only one character shown, it is output regardless of Shift.
 
-The ten digits are accessed with Shift, akin to [Programmer Dvorak](https://www.kaufmann.no/roland/dvorak/), but arranged in a 3x3 numpad-like grid.
+The punctuation is arranged so that common (for me) two-letter sequences are an inward roll: `{% %} </ /> => -> ()`. Outward rolls include `/= !=`. The characters `-` and `!` are duplicated from the base layer for this reason. Additional sequences such as `/* */ ); ~/` are accessed with comborolls that activate if shift is held.
 
-Cut, copy and paste are chorded on the left hand top row.
+Cut, copy and paste shortcuts are along the right hand top row.
+
+This layer works much better than pre-v38 versions that used a numpad layout in "Programmer Dvorak" style (numbers accessed with shift).
 
 ### EDIT
 
-Activated by the right thumb.
+Activated by the left thumb.
 
 ![kyria-rsthd-prime-edit](docs/images/kyria-rsthd-prime-edit.png)
 
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/6230f2d0797ecb43440c52d75b66d17e)
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/34224a80a381a5350f2e8841d8d23ab5)
 
-This layer extends the idea of platform-independent shortcuts to a complete layer. The navigation keys on the left have the standard cursor keys, home, end and page up/down.
+This layer extends the idea of platform-independent shortcuts to a complete layer. The right hand has the standard cursor keys, home/end and page up/down.
 
-Modifiers are on the right hand. If one of the standard modifiers (Shift, Ctrl, Alt, Gui) is held, the emitted code is just the normal modifier + keycode. The special modifiers on the home row act as follows:
+Modifiers are on the left hand. If one of the standard modifiers (Shift, Ctrl, Alt, Gui) is held, the emitted code is that modifier + keycode. The special modifiers on the home row act as follows:
 
 - **Delete** makes the action delete instead of moving.
 - **More** makes the key do "more" : left and right move a word left or right; home and end move to the start and end of a paragraph; page up/down move to the start and end of the document. Up and down are an exception: these activate mouse wheel scrolling.
@@ -134,78 +137,72 @@ Modifiers are on the right hand. If one of the standard modifiers (Shift, Ctrl, 
 
 All actions have auto-repeat. You can change the special modifiers while holding down a navigation key and the action changes accordingly.
 
-Cut, copy and paste are chorded on the right hand top row. There are various shortcut keys for desktop navigation scattered around the edges.
+Cut, copy and paste shortcuts are along the left hand top row. Shortcuts for window and desktop navigation are scattered around the edges.
 
 ### META
 Activated by either pinky.
 
 ![kyria-rsthd-prime-meta](docs/images/kyria-rsthd-prime-meta.png)
 
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/c14a96b4c943087403409185a0aecb43)
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/6df4436f4d7d0af194867ecd1bb84b75)
 
-This layer contains common shortcut keys. They are mostly arranged according to the letter used in the Mac/Windows shortcut. For example, the S key invokes Save (Cmd-S on Mac, Ctrl-S on Windows). However, the mapping is not always that straightforward (e.g. Cmd-Q on Mac and Alt-F4 on Windows), hence the need for a dedicated layer.
+This layer contains common shortcuts, mostly arranged according to the letter used in the Mac/Windows shortcut. For example, the S key invokes Save (Cmd-S on Mac, Ctrl-S on Windows). However, the mapping is not always that straightforward (e.g. Cmd-Q on Mac and Alt-F4 on Windows), hence the use of a dedicated layer.
 
-This layer is also how the FUNC and SNAP layers are accessed.
-
+This layer also contains media control keys and the keys to access the FUNC and SNAP layers.
 
 ### FUNC
 
-Activated by the left thumb from the META layer.
+Activated by the right thumb from the META layer.
 
 ![kyria-rsthd-prime-func](docs/images/kyria-rsthd-prime-func.png)
 
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/90b7e6befd71b9dd87630e490c9719fc)
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/73bd011d1e75479761ce9c6aa4777ea4)
 
-This layer contains function keys on the right hand, arranged roughly the same as the numpad. It also contains the keys that switch between macOS, Windows and Linux shortcuts.
+This layer contains function keys arranged roughly the same as the numbers on the SYMS layer. It also contains the keys that switch between macOS, Windows and Linux shortcuts.
+
+The encoder is used to adjust the OLED brightness and the backlight/per-key LEDs, depending on which modifier is held.
 
 ### SNAP
 
-Activated by the right thumb from the META layer.
+Activated by the left thumb from the META layer.
 
 ![kyria-rsthd-prime-snap](docs/images/kyria-rsthd-prime-snap.png)
 
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/4640c20527f54ef55006fb796960efb5)
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/815a6d29c23fbe01ef7c1ce0e7f0e00b)
 
-So called because of the keys for window snapping, which snap the active window to various locations on the screen. This works on macOS if [Rectangle Pro](https://rectangleapp.com) is running; not working at all on Windows and Linux yet.
+So called because of the keys for window snapping, which snap the active window to various locations on the screen. This works on macOS if [Rectangle Pro](https://rectangleapp.com) is running; it is not working at all on Windows and Linux yet.
 
-The encoder is used to control the backlight LEDs and OLED brightness, depending on which modifier is held.
-
+It also contains shortcuts for screenshots and for window zooming.
 
 ## Backmatter
 
 ### How to build
 
 If you'd like to try the keymap out, here's one way:
-
 ```
 cd /path/to/workingdir
 git clone https://github.com/frogm0uth/keyboard-firmware.git
 ```
-
 Assuming you already have QMK set up using the documented method:
-
 ```
 cd ~qmk_firmware/keyboards/splitkb/kyria/keymaps
 ln -s /path/to/workingdir/keyboard-firmware/kyria-rsthd-prime .
 ```
-
 To compile for a rev1 board with a Pro Micro controller:
-
 ```
 qmk compile -kb splitkb/kyria/rev1 -km kyria-rsthd-prime
 ```
 To compile for a rev3 board with a Liatris controller:
-
 ```
 qmk compile -e CONVERT_TO=liatris -kb splitkb/kyria/rev3 -km kyria-rsthd-prime
 ```
 
 ### RSTHD variants and similar layouts
-- [T-34](https://www.jonashietala.se/blog/2021/06/03/the-t-34-keyboard-layout/) (swaps E and space)
-- [New layout for lateral movement haters](https://www.reddit.com/r/KeyboardLayouts/comments/mnumbs/new_layout_for_lateral_movement_haters/) (Some similarities to this layout)
 - [RSTHD today](https://xsznix.wordpress.com/2021/01/13/rsthd-today/) (Latest layout generated by keygen with revised scoring and different corpus)
-- [andrewjrae/kyria-keymap](https://github.com/andrewjrae/kyria-keymap) (Swaps E and Space)
-- [johnm/keymap.c](https://gist.github.com/johnm/e3c129b20bbcae97601e547a7dd9fa0a) (Mirrors the complete alpha block, and some other tweaks)
+- [New layout for lateral movement haters](https://www.reddit.com/r/KeyboardLayouts/comments/mnumbs/new_layout_for_lateral_movement_haters/) (Some similarities to this layout)
+- [T-34](https://www.jonashietala.se/blog/2021/06/03/the-t-34-keyboard-layout/) (Based on RSTHD, swaps E and space)
+- [andrewjrae/kyria-keymap](https://github.com/andrewjrae/kyria-keymap) (Based on RSTHD, swaps E and space)
+- [johnm/keymap.c](https://gist.github.com/johnm/e3c129b20bbcae97601e547a7dd9fa0a) (Based on RSTHD, mirrors the complete alpha block but not the thumbs)
 
 ### Relevant articles and resources
 
@@ -215,11 +212,9 @@ qmk compile -e CONVERT_TO=liatris -kb splitkb/kyria/rev3 -km kyria-rsthd-prime
 ### Acknowledgments
 
 Table of contents created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc). To update, run
-
 ```
 /path/to/gh-md-toc --insert README.md
 ```
-
 Much inspiration came from the residents of the [splitkb discord server](https://splitkb.com/discord).
 
 Thanks to the author of [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/) for the great layout.
