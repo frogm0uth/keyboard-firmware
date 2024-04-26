@@ -16,23 +16,27 @@
 
 #pragma once
 
-#ifdef KEYBOARD_splitkb_kyria_rev1
-     // rev1 Kyria seems to have the encoders connected backwards
-     #define ENCODER_DIRECTION_FLIP
-
-     // Configuration for combos
-     #define COMBO_TERM 90
-     #define COMBOROLL_TERM 200
-#endif
-
-#ifdef KEYBOARD_splitkb_kyria_rev3
-     // use Liatris LED as capslock indicator
+#if (CONVERT_TO==liatris)
+     //use Liatris LED as capslock indicator
      #define LED_CAPS_LOCK_PIN 24
      #define LED_PIN_ON_STATE 0
 
      // Configuration for combos - timing seems to be different with different controller
      #define COMBO_TERM 120
      #define COMBOROLL_TERM 300
+#else
+     // Configuration for combos
+     #define COMBO_TERM 90
+     #define COMBOROLL_TERM 200
+#endif
+
+#ifdef KEYBOARD_splitkb_kyria_rev1
+     // rev1 Kyria seems to have the encoders connected backwards
+     #define ENCODER_DIRECTION_FLIP
+#endif
+
+#ifdef KEYBOARD_splitkb_kyria_rev3
+
 #endif
 
 

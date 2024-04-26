@@ -149,7 +149,7 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
             break;
 
         case CL_EDIT:
-            return layer_tap_toggle(KC_NO, EDIT, record);
+            return layer_tap_toggle(KC_TAB, EDIT, record);
             break;
 
         case CL_META:
