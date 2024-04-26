@@ -87,7 +87,9 @@ The alpha layout aims to reduce lateral finger movement on the index finger. In 
 
 An older version of the layout performed very well in an [analyzer](docs/prime-on-the-analyzer.md), with low SFU (same finger utilization) stats and low travel distance. Since then, changes have been made to the layout that nominally give it worse performance, because of the use of [comborolls](docs/comborolls.md).
 
-Some characters can only be accessed with comborolls: J, K and backslash.
+*Effective use of this layout **requires** comborolls.* For a layout that doesn't, see [Kyria v38](https://github.com/frogm0uth/keyboard-firmware/tree/kyria-v38/kyria-rsthd-prime). 
+
+These characters can only be accessed with comborolls: J, K and backslash.
 
 The shift keys are "auto-off":
 - If a shift key is held and another key is pressed, you get the shifted version of the key then shift is turned off. This completely eliminates typos like "THe".
@@ -98,7 +100,7 @@ Except for Shift, there are no modifiers on the alpha layer. To access them, hol
 
 Since v37, E and Space have swapped hands relative to their RSTHD positions. This seems to be common amongst adopters - see [RSTHD variants and similar layouts](#rsthd-variants-and-similar-layouts). F and M also swapped hands to reduce pinballing off the right index column; while partially effective, I still find it helpful to have F as a comboroll on the left hand to break up words like LIFE.
 
-Since v39, R and D have swapped locations compared to RSTHD. Having R on the index finger gives a lot of inward rolls, but also creates a lot of SFBs on that finger. I've addressed this with comborolls; overall, there are about the same number as the previous version.
+Since v39, R and D have swapped locations compared to RSTHD. Having R on the index finger gives a lot of inward rolls, but also creates a lot of SFBs on that finger. I've addressed this with comborolls; even so, there are about the same number as the previous version.
 
 ## Other layers
 
