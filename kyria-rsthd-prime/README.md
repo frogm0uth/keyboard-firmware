@@ -51,7 +51,9 @@ Typing speed and reducing the number of keys on the keyboard are not important g
 
 ### Keyboard configuration
 
-My Kyria uses all 6 columns on each hand. However, the lower inner column keys are absent. There are three thumb keys on each side. The left side has an OLED. Either side can take an encoder, but the right side is slightly more functional. (The encoder seems like a great idea but in practice I find that I mostly use it for adjusting the lighting, as for other functions it's usually quicker to just use keys; I could certainly live without it.)
+My Kyria uses all 6 columns on each hand. However, the lower inner column keys are absent. There are three thumb keys on each side. The left side has an OLED.
+
+Either side can take an encoder. The screenshots and description below mostly assume it is on the left, but a right-side encoder works, and would usually be used with the "opposite" layer (EDIT instead of SYMS, SNAP instead of FUNC). In practice, I find that I mostly use the encoder for adjusting keyboard lighting; for most other functions it's quicker to just use keys and I could certainly live without it.
 
 ### Features
 
@@ -102,6 +104,8 @@ Since v37, E and Space have swapped hands relative to their RSTHD positions. Thi
 
 Since v39, R and D have swapped locations compared to RSTHD. Having R on the index finger gives a lot of inward rolls, but also creates a lot of SFBs on that finger. I've addressed this with comborolls; even so, there are about the same number as the previous version.
 
+The encoder is used to adjust volume and screen brightness.
+
 ## Other layers
 
 There are five more layers, for a total of 6. All are hold-to-activate. The shift keys in these layers are *not* auto-off. In v38, the "handedness" of most of these layers was reversed i.e. they were mostly mirror-imaged. 
@@ -112,7 +116,7 @@ Activated by the right thumb.
 
 ![kyria-rsthd-prime-syms](docs/images/kyria-rsthd-prime-syms.png)
 
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/1320c291327964f5a62b71087b0907d4)
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/79cdc8e9c4547b0f7eda47791328a3a8)
 
 Numbers and punctuation are combined on one layer. Numbers are along the home row and punctuation is mostly arranged on the left hand. If only one character shown, it is output regardless of Shift.
 
@@ -121,6 +125,8 @@ The punctuation is arranged so that common (for me) two-letter sequences are an 
 Cut, copy and paste shortcuts are along the right hand top row.
 
 This layer works much better than pre-v38 versions that used a numpad layout in "Programmer Dvorak" style (numbers accessed with shift).
+
+The encoder is used for history scrubbing.
 
 ### EDIT
 
@@ -143,6 +149,8 @@ All actions have auto-repeat. You can change the special modifiers while holding
 
 Cut, copy and paste shortcuts are along the left hand top row. Shortcuts for window and desktop navigation are scattered around the edges.
 
+If there is an encoder on the right side, holding one of the custom modifiers and rotating the encoder does "fast editing". (In practice though, I never use this.)
+
 ### META
 Activated by either pinky.
 
@@ -154,17 +162,19 @@ This layer contains common shortcuts, mostly arranged according to the letter us
 
 This layer also contains media control keys and the keys to access the FUNC and SNAP layers.
 
+The encoder is used for forward and backward search.
+
 ### FUNC
 
 Activated by the right thumb from the META layer.
 
 ![kyria-rsthd-prime-func](docs/images/kyria-rsthd-prime-func.png)
 
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/73bd011d1e75479761ce9c6aa4777ea4)
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/d92e0106ea3488121c06071fa5cf543a)
 
-This layer contains function keys arranged roughly the same as the numbers on the SYMS layer. It also contains the keys that switch between macOS, Windows and Linux shortcuts.
+This layer contains function keys on the left hand and mouse buttons on the left thumb. It also contains the keys that switch between macOS, Windows and Linux shortcuts.
 
-The encoder is used to adjust the OLED brightness and the backlight/per-key LEDs, depending on which modifier is held.
+The encoder is used to adjust the OLED brightness and the backlight/per-key LEDs, depending on which modifier is held. There are also two keys on the left hand for this, in case there is no encoder.
 
 ### SNAP
 
@@ -172,11 +182,11 @@ Activated by the left thumb from the META layer.
 
 ![kyria-rsthd-prime-snap](docs/images/kyria-rsthd-prime-snap.png)
 
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/815a6d29c23fbe01ef7c1ce0e7f0e00b)
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/9384b760732a7f55a02fbe9f45dd58e4)
 
 So called because of the keys for window snapping, which snap the active window to various locations on the screen. This works on macOS if [Rectangle Pro](https://rectangleapp.com) is running; it is not working at all on Windows and Linux yet.
 
-It also contains shortcuts for screenshots and for window zooming.
+It also contains shortcuts for screenshots and for window zooming, as well as mouse buttons.
 
 ## Backmatter
 

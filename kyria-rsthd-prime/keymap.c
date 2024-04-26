@@ -63,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  ,-----------------------------------------.                        ,-----------------------------------------.
  | `  ~ |   +  | (  [ |   *  | )  ] |   $  |                        |      | Paste| Copy |  Cut |  All |   #  |
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
- | 8    | 7  ^ | 6  { | 5  % | 0  } | @  & |                        |  Tab | 1    | 2    | 3    | 4    | 9    |
+ | 9    | 4  ^ | 3  { | 2  % | 1  } | @  & |                        |  Tab | 0    | 5    | 6    | 7    | 8    |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
  |   =  |   -  | <  | |   /  | >  ! |                                      |      |      |      |      |  ../ |
  |      |      |      |      |      |                                      |  Cmd |  Alt | Ctrl | Shift|      |
@@ -78,12 +78,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [SYMS] = KEY_LAYOUT_stack(
         /* Left hand */
         KC_GRV,      KC_PLUS,       CU_LPRN,  KC_ASTR,       CU_RPRN,  KC_DLR,
-        CU_8,        CU_7,          CU_6,     CU_5,          CU_0,     CU_AT_AMP,
+        CU_9,        CU_4,          CU_3,     CU_2,          CU_1,     CU_AT_AMP,
         CU_EQL_EQL,  CU_MINS_MINS,  CU_LT,    CU_SLSH_SLSH,  CU_GT,
 
         /* Right hand */
                   ___X___,  SC_PASTE,  SC_COPY,  SC_CUT,   SC_SELECT_ALL,  KC_HASH,
-                  KC_TAB,   CU_1,      CU_2,     CU_3,     CU_4,           CU_9,
+                  KC_TAB,   CU_0,      CU_5,     CU_6,     CU_7,           CU_8,
                             KC_RGUI,   KC_RALT,  KC_RCTL,  CU_SHIFT,       CU_DIRUP,
 
         /* Thumbs */
@@ -92,7 +92,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         /* Encoder button */
         ___X___
     ),
-
 
 /* EDIT
  
@@ -171,33 +170,33 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* FUNC
 
  ,-----------------------------------------.                        ,-----------------------------------------.
- |      |      |      |  F12 |  F11 |LghtUp|                        |      | !Mac | !Win |!Linux|      |
+ |      |  F8  |  F7  |  F6  |  F5  |LghtUp|                        |      |      |      |      |      |      |
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
- |  F8  |  F7  |  F6  |  F5  |  F10 |LghtDn|                        |!WRITE|  F1  |  F2  |  F3  |  F4  |  F9  |
+ |      |  F4  |  F3  |  F2  |  F1  |LghtDn|                        |      | !Mac | !Win |!Linux|      |!WRITE|
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
- |      |      |      |      |      |                                      |      |      |      |      |      |
- | (**) | Shift| Ctrl |  Alt |  Cmd |                                      |  Cmd |  Alt | Ctrl | Shift| (**) |
+ |      |  F12 |  F11 |  F10 |  F9  |                                      |      |      |      |      |      |
+ | (**) |      |      |      |      |                                      |  Cmd |  Alt | Ctrl | Shift| (**) |
  `----------------------------------'                                      `----------------------------------'
 
  .                 ,------.      ,--------------------.  ,--------------------.
- .                 |  Z0  |      |      | Btn1 | Btn2 |  |      | !WIPE|      |
+ .                 |  Z0  |      |      | Btn1 | Btn2 |  | !WIPE|      |      |
  .                 |      |      |      |      |      |  |      |      | (**) |
  .                 `------'      `--------------------'  `--------------------'
  */
 
     [FUNC] = KEY_LAYOUT_stack(
         /* Left hand */
-        ___X___,  ___X___,   ___X___,  KC_F12,   KC_F11,  CU_LGHTUP,
-        KC_F8,    KC_F7,     KC_F6,    KC_F5,    KC_F10,  CU_LGHTDN,
-        _______,  CU_SHIFT,  KC_LCTL,  KC_LALT,  KC_LGUI,
+        ___X___,  KC_F8,     KC_F7,    KC_F6,    KC_F5,  CU_LGHTUP,
+        ___X___,  KC_F4,     KC_F3,    KC_F2,    KC_F1,  CU_LGHTDN,
+        _______,  KC_F12,    KC_F11,   KC_F10,   KC_F9,
 
         /* Right hand */
-                 ___X___,   CU_MACOS,  CU_WINDOWS,  CU_LINUX,  ___X___,   ___X___,
-                 CU_WRITE,  KC_F1,     KC_F2,       KC_F3,     KC_F4,     KC_F9,
+                 ___X___,   ___X___,    ___X___,    ___X___,   ___X___,   ___X___,
+                 ___X___,   CU_MACOS,  CU_WINDOWS,  CU_LINUX,  ___X___,   CU_WRITE,
                             KC_RGUI,   KC_RALT,     KC_RCTL,   CU_SHIFT,  _______,
 
         /* Thumbs */
-        _______, CM_BTN1, CM_BTN2,   ___X___, CU_WIPE, _______,
+        _______, CM_BTN1, CM_BTN2,   CU_WIPE, ___X___, _______,
 
         /* Encoder button */
         SC_APP_ZOOM_RESET
@@ -209,23 +208,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  ,-----------------------------------------.                        ,-----------------------------------------.
  |      |      |      |      |      |      |                        |      | SL23 | SnapT| SR23 | ZmIn |      |
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
- |      | SSApp| SSScr| SSWin| SSRgn|      |                        |      | SnapL| SnapC| SnapR| ZmOut|      |
+ |!WRITE| SSApp| SSScr| SSWin| SSRgn|      |                        |      | SnapL| SnapC| SnapR| ZmOut|      |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
  |      |      |      |      |      |                                      | SL14 | SnapB| SR14 |  Zm0 |      |
  | (**) | Shift| Ctrl |  Alt |  Cmd |                                      |      |      |      |      | (**) |
- `----------------------------------'                                       `----------------------------------'
+ `----------------------------------'                                      `----------------------------------'
 
  .                 ,------.      ,--------------------.  ,--------------------.
- .                 |      |      |      |      |      |  |      | Btn1 | Btn2 |
+ .                 |      |      |      |      | !WIPE|  |      | Btn1 | Btn2 |
  .                 |      |      | (**) |      |      |  |      |      |      |
  .                 `------'      `--------------------'  `--------------------'
  */
 
     [SNAP] = KEY_LAYOUT_stack(
         /* Left hand */
-        ___X___, ___X___,           ___X___,              ___X___,        ___X___,        ___X___,
-        ___X___, SC_SCREENSHOT_APP, SC_SCREENSHOT_SCREEN, CU_SCRSHOT_WIN, CU_SCRSHOT_RGN, ___X___,
-        _______, CU_SHIFT,          KC_LCTL,              KC_LALT,        KC_LGUI,
+        ___X___,  ___X___,           ___X___,              ___X___,        ___X___,        ___X___,
+        CU_WRITE, SC_SCREENSHOT_APP, SC_SCREENSHOT_SCREEN, CU_SCRSHOT_WIN, CU_SCRSHOT_RGN, ___X___,
+        _______,  CU_SHIFT,          KC_LCTL,              KC_LALT,        KC_LGUI,
 
          /* Right hand */
                  ___X___,  SC_SNAP_LEFTTWOTHIRDS, SC_SNAP_TOP,          SC_SNAP_RIGHTTWOTHIRDS, SC_APP_ZOOM_IN,    ___X___,
@@ -233,7 +232,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                            SC_SNAP_LEFTQUARTER,   SC_SNAP_BOTTOM,       SC_SNAP_RIGHTQUARTER,   SC_APP_ZOOM_RESET, _______,
 
         /* Thumbs */
-        _______, ___X___, ___X___,   ___X___, CM_BTN1, CM_BTN2,
+        _______, ___X___, CU_WIPE,   ___X___, CM_BTN1, CM_BTN2,
 
         /* Encoder button */
         ___X___
