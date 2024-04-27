@@ -61,30 +61,31 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* SYMS
 
  ,-----------------------------------------.                        ,-----------------------------------------.
- | `  ~ |   +  | (  [ |   *  | )  ] |   $  |                        |      | Paste| Copy |  Cut |  All |   #  |
+ |   ^  |   +  | (  [ |   *  | )  ] |  ../ |                        |      | Paste| Copy |  Cut |  All |   #  |
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
- | 9    | 4  ^ | 3  { | 2  % | 1  } | @  & |                        |  Tab | 0    | 5    | 6    | 7    | 8    |
+ |  Tab | 4  @ | 3  { | 2  % | 1  } |   9  |                        |   8  | 0  = | 5  ` | 6 Tab|   7  |   =  |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
- |   =  |   -  | <  | |   /  | >  ! |                                      |      |      |      |      |  ../ |
+ |   ~  |   -  | <  & |   /  | >  | |                                      |      |      |      |      |   $  |
  |      |      |      |      |      |                                      |  Cmd |  Alt | Ctrl | Shift|      |
  `----------------------------------'                                      `----------------------------------'
- .
+
  .                 ,------.      ,--------------------.  ,--------------------.
  .                 |      |      | Enter| Space|   .  |  |      |      |      |
  .                 |      |      |      |      |      |  |      |      | (**) |
  .                 `------'      `--------------------'  `--------------------'
+
 */
 
     [SYMS] = KEY_LAYOUT_stack(
         /* Left hand */
-        KC_GRV,      KC_PLUS,       CU_LPRN,  KC_ASTR,       CU_RPRN,  KC_DLR,
-        CU_9,        CU_4,          CU_3,     CU_2,          CU_1,     CU_AT_AMP,
-        CU_EQL_EQL,  CU_MINS_MINS,  CU_LT,    CU_SLSH_SLSH,  CU_GT,
+        KC_CIRC,  KC_PLUS,       CU_LPRN,  KC_ASTR,       CU_RPRN,  CU_DIRUP,
+        KC_TAB,   CU_4,          CU_3,     CU_2,          CU_1,     CU_9,
+        KC_TILD,  CU_MINS_MINS,  CU_LT,    CU_SLSH_SLSH,  CU_GT,
 
         /* Right hand */
                   ___X___,  SC_PASTE,  SC_COPY,  SC_CUT,   SC_SELECT_ALL,  KC_HASH,
-                  KC_TAB,   CU_0,      CU_5,     CU_6,     CU_7,           CU_8,
-                            KC_RGUI,   KC_RALT,  KC_RCTL,  CU_SHIFT,       CU_DIRUP,
+                  CU_8,     CU_0,      CU_5,     CU_6,     CU_7,           CU_EQL_EQL,
+                            KC_RGUI,   KC_RALT,  KC_RCTL,  CU_SHIFT,       KC_DLR,
 
         /* Thumbs */
         CU_ENT_ENT, CU_SPC_SPC, CU_DOT_DOT,   ___X___, ___X___, _______,
@@ -92,6 +93,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         /* Encoder button */
         ___X___
     ),
+
 
 /* EDIT
  

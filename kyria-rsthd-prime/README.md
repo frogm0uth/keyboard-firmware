@@ -29,15 +29,15 @@ This is the keymap for my Kyria keyboard from [splitkb.com](https://splitkb.com)
 
 ## Overview
 
-The alphabetic layout in this keymap was originally based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/). I tried it, liked it, tweaked it, and tweaked some more...
+The alphabetic layout in this keymap was *originally* based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/). I tried it, liked it, tweaked it, and tweaked some more...
 
-When I originally started making changes to RSTHD, I called it RSTHD'. The `'`, pronounced "prime", is [used in maths](https://en.wikipedia.org/wiki/Prime_(symbol)#Use_in_mathematics,_statistics,_and_science) to indicate a derivative of the named thing. I think the layout still retains its RSTHD DNA despite all the changes. I figure calling it *RSTHD/Prime* acknowledges its origin while still indicating that it's different.
+When I originally started making changes to RSTHD, I called it RSTHD'. The `'`, pronounced "prime", is [used in maths](https://en.wikipedia.org/wiki/Prime_(symbol)#Use_in_mathematics,_statistics,_and_science) to indicate a derivative of the named thing. While the layout is hardly  recognizable as RSTHD any more, I still call it *RSTHD/Prime* to acknowledge its origin.
 
 The code is known to compile for and work on a rev1 Kyria with a 32kB Pro Micro controller and a rev3 Kyria with a Liatris controller. There are some lines at the top of rules.mk that will need to be un/commented accordingly.
 
 See also [Kyria Build Notes](docs/kyria-build-notes.md).
 
-**As of late 2023, I'm not maintaining this documentation very often. It's too much work to be frank. It serves as a general guide, but for actual info please refer to the source. See also the [common](../common/) folder.**
+**As of late 2023, I'm not maintaining this documentation regularly. It's too much work to be frank. It serves as a general guide, but for actual info please refer to the source. See also the [common](../common/) folder.**
 
 ### Goals
 
@@ -53,7 +53,7 @@ Typing speed and reducing the number of keys on the keyboard are not important g
 
 My Kyria uses all 6 columns on each hand. However, the lower inner column keys are absent. There are three thumb keys on each side. The left side has an OLED.
 
-Either side can take an encoder. The screenshots and description below mostly assume it is on the left, but a right-side encoder works, and would usually be used with the "opposite" layer (EDIT instead of SYMS, SNAP instead of FUNC). In practice, I find that I mostly use the encoder for adjusting keyboard lighting; for most other functions it's quicker to just use keys and I could certainly live without it.
+Either side can take an encoder. The screenshots and description below mostly assume it is on the left, but a right-side encoder works, and would usually be used with the "opposite" layer (EDIT instead of SYMS, SNAP instead of FUNC). In practice, I find that I mostly use the encoder for adjusting keyboard lighting, as for most functions it's quicker to just use keys; I could certainly live without it.
 
 ### Features
 
@@ -85,11 +85,11 @@ Layer switching is done with custom code, so that a. shifted and custom keys can
 
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/35bf08ea0f5aec96e33b1234b7dc3d5a)
 
-The alpha layout aims to reduce lateral finger movement on the index finger. In fact, the lower keys of the inner columns have been removed entirely.
+The alpha layout aims to reduce lateral finger movement on the index finger. In fact, the lower keys of the inner columns have now been removed entirely.
 
 An older version of the layout performed very well in an [analyzer](docs/prime-on-the-analyzer.md), with low SFU (same finger utilization) stats and low travel distance. Since then, changes have been made to the layout that nominally give it worse performance, because of the use of [comborolls](docs/comborolls.md).
 
-*Effective use of this layout **requires** comborolls.* For a layout that doesn't, see [Kyria v38](https://github.com/frogm0uth/keyboard-firmware/tree/kyria-v38/kyria-rsthd-prime). 
+*Effective use of this layout **requires** comborolls.* For a layout that doesn't (so much), see [Kyria v38](https://github.com/frogm0uth/keyboard-firmware/tree/kyria-v38/kyria-rsthd-prime). 
 
 These characters can only be accessed with comborolls: J, K and backslash.
 
@@ -116,15 +116,13 @@ Activated by the right thumb.
 
 ![kyria-rsthd-prime-syms](docs/images/kyria-rsthd-prime-syms.png)
 
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/79cdc8e9c4547b0f7eda47791328a3a8)
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/28a80ba78a02f052b21f8f9e520dcbb2)
 
-Numbers and punctuation are combined on one layer. Numbers are along the home row and punctuation is mostly arranged on the left hand. If only one character shown, it is output regardless of Shift.
+Numbers and punctuation are combined on one layer. Numbers are along the home row and punctuation is mostly arranged on the left hand. (If only one character shown, it is output regardless of Shift.)
 
-The punctuation is arranged so that common (for me) two-letter sequences are an inward roll: `{% %} </ /> => -> ()`. Outward rolls include `/= !=`. The characters `-` and `!` are duplicated from the base layer for this reason. Additional sequences such as `/* */ ); ~/` are accessed with comborolls that activate if shift is held.
+The punctuation is arranged so that common (for me) symbol bigrams are an inward roll: `{% %} </ /> ~/ -> ()`. The `=` symbol is on the right hand because it combines with so many other symbols. Additional bigrams such as `/* */ => );` are on comborolls that activate if shift is held. Overall, this layer works much better for me than pre-v38 versions that used a numpad layout.
 
 Cut, copy and paste shortcuts are along the right hand top row.
-
-This layer works much better than pre-v38 versions that used a numpad layout in "Programmer Dvorak" style (numbers accessed with shift).
 
 The encoder is used for history scrubbing.
 
