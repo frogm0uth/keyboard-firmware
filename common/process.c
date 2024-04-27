@@ -181,7 +181,6 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
              */
         case CU_DIRUP:
             if (record->event.pressed) {
-                clear_mods();
                 tap_code(KC_DOT);
                 tap_code(KC_DOT);
                 tap_code(KC_SLSH);

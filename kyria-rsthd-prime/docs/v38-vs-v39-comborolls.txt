@@ -101,8 +101,8 @@ F-
 Rolls:
 
 BC BW BM=QU CW CM=RM WM=K
-DT=B DH=F
-PG=SP
+DT DH=F
+PG=B
 
 DW=V DM=RK
 
@@ -110,4 +110,4 @@ BH DP SG=SC SR=J
 
 HD=HR
 
-
+,S=SP

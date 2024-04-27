@@ -1,3 +1,4 @@
+
 /* Copyright 2020-2023 @frogm0uth
  *
  * This program is free software: you can redistribute it and/or modify
@@ -57,7 +58,7 @@
 LtoR_STR( rm,  KC_C, KC_M )
 
 LtoR_STR( sc, KC_S, KC_G )
-LtoR_STR( sp, KC_D, KC_T )
+LtoR_STR( sp, KC_P, KC_G )
 LtoR_STR( f,  KC_D, KC_H )
 
 RtoL_STR( hr, KC_D, KC_H )
@@ -83,7 +84,7 @@ RtoL_STR( you, KC_U, CU_DOT )
 LtoR_STR( k,   KC_W, KC_M )
 LtoR_STR( v,   KC_D, KC_W )
 LtoR_STR( rk,  KC_D, KC_M )
-LtoR_STR( b,   KC_P, KC_G )
+LtoR_STR( b,   KC_D, KC_T )
 LtoR_STR( j,   KC_S, KC_R )
 
 // Common word endings, right hand
@@ -133,5 +134,6 @@ LtoR_LIT( r_php, "?>",    CU_SLSH_SLSH, CU_GT)
 _ONSHIFT( l_php )  // only trigger if shift is down
 _ONSHIFT( r_php )
 
-LtoR_LIT( parensemi, ");", CU_LT,        CU_GT )   _ONSHIFT( parensemi )
-LtoR_LIT( eql_gt,    "=>", CU_MINS_MINS, CU_GT)    _ONSHIFT( eql_gt )
+LtoR_LIT( parensemi, ");",    CU_LT, CU_GT )
+_ONSHIFT( parensemi )
+LtoR_LIT( tild_slsh, "~/",    CU_MINS_MINS, CU_SLSH_SLSH)
