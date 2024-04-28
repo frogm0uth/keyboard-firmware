@@ -1,7 +1,10 @@
-ALPHA v37
+Kyria v37
 
 v37 swaps E and space across hands, but doesn't adjust the other layers. The operation of the shift key is
 improved to handle both caps-word and caps-lock better.
+
+
+ALPHA
 
  ,-----------------------------------------.                        ,-----------------------------------------.
  |  Esc |   B  |   C  |   W  |   M  |   K  |                        |Search|   F  |   U  | .  ! | -  _ |   Q  |
