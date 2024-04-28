@@ -1,9 +1,10 @@
-# Kyria RSTHD/Prime v38
+# Kyria RSTHD/Prime v39
 
 This is the keymap for my Kyria keyboard from [splitkb.com](https://splitkb.com). The alpha layout was based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/) but is now heavily modified. The layout is optimized for minimum usage of the inner index column. Features in the code include runtime switching between Mac/Windows/Linux shortcuts and a custom implementation of "comborolls".
 
 <!--ts-->
    * [Overview](#overview)
+      * [Latest changes](#latest-changes)
       * [Goals](#goals)
       * [Keyboard configuration](#keyboard-configuration)
       * [Features](#features)
@@ -29,15 +30,25 @@ This is the keymap for my Kyria keyboard from [splitkb.com](https://splitkb.com)
 
 ## Overview
 
-The alphabetic layout in this keymap was originally based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/). I tried it, liked it, tweaked it, and tweaked some more...
+The alphabetic layout in this keymap was *originally* based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/). I tried it, liked it, tweaked it, and tweaked some more...
 
-When I originally started making changes to RSTHD, I called it RSTHD'. The `'`, pronounced "prime", is [used in maths](https://en.wikipedia.org/wiki/Prime_(symbol)#Use_in_mathematics,_statistics,_and_science) to indicate a derivative of the named thing. I think the layout still retains its RSTHD DNA despite all the changes. I figure calling it *RSTHD/Prime* acknowledges its origin while still indicating that it's different.
+When I originally started making changes to RSTHD, I called it RSTHD'. The `'`, pronounced "prime", is [used in maths](https://en.wikipedia.org/wiki/Prime_(symbol)#Use_in_mathematics,_statistics,_and_science) to indicate a derivative of the named thing. While the layout is hardly  recognizable as RSTHD any more, I still call it *RSTHD/Prime* to acknowledge its origin.
 
 The code is known to compile for and work on a rev1 Kyria with a 32kB Pro Micro controller and a rev3 Kyria with a Liatris controller. There are some lines at the top of rules.mk that will need to be un/commented accordingly.
 
 See also [Kyria Build Notes](docs/kyria-build-notes.md).
 
-**As of late 2023, I'm not maintaining this documentation very often. It's too much work to be frank. It serves as a general guide, but for actual info please refer to the source. See also the [common](../common/) folder.**
+### Latest changes
+
+April 2024/v39: I think this layout is finally "it." Here are the changes that have put the icing on my little keyboard cake:
+
+- R and D swap positions
+- `-` and `'` swap positions
+- M and F swap hands
+- E and space swap hands
+- SYMS layer uses a numrow (instead of numpad)
+
+**As of late 2023, I don't keep the documentation rigorously updated. It's too much work to be frank. For current status please refer to the source. See also the [common](../common/) folder.**
 
 ### Goals
 
@@ -51,7 +62,9 @@ Typing speed and reducing the number of keys on the keyboard are not important g
 
 ### Keyboard configuration
 
-My Kyria uses all 6 columns on each hand. However, the lower inner column keys are absent. There are three thumb keys on each side. The left side has an OLED. Either side can take an encoder, but the right side is slightly more functional. (The encoder seems like a great idea but in practice I find that I mostly use it for adjusting the lighting, as for other functions it's usually quicker to just use keys; I could certainly live without it.)
+My Kyria uses all 6 columns on each hand. However, the lower inner column keys are absent. There are three thumb keys on each side. The left side has an OLED.
+
+Either side can take an encoder. The screenshots and description below mostly assume it is on the left, but a right-side encoder works, and would usually be used with the "opposite" layer (EDIT instead of SYMS, SNAP instead of FUNC). In practice, I find that I mostly use the encoder for adjusting keyboard lighting, as for most functions it's quicker to just use keys; I could certainly live without it.
 
 ### Features
 
@@ -81,13 +94,15 @@ Layer switching is done with custom code, so that a. shifted and custom keys can
 
 ![kyria-rsthd-prime-alpha](docs/images/kyria-rsthd-prime-alpha.png)
 
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/a3c533814afd6550258f456b85d1d678)
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/35bf08ea0f5aec96e33b1234b7dc3d5a)
 
-The alpha layout aims to reduce lateral finger movement on the index finger. In fact, the lower keys of the inner columns have been removed entirely.
+The alpha layout aims to reduce lateral finger movement on the index finger. In fact, the lower keys of the inner columns have now been removed entirely.
 
-An older version of the layout performed very well in an [analyzer](docs/prime-on-the-analyzer.md), with low SFU (same finger utilization) stats and low travel distance. Since then, changes have been made to the layout that nominally give it worse performance, because of the use of [comborolls](docs/comborolls.md). (See [``common/combo_defs.h``](combo_defs.h) for current comborolls). 
+An older version of the layout performed very well in an [analyzer](docs/prime-on-the-analyzer.md), with low SFU (same finger utilization) stats and low travel distance. Since then, changes have been made to the layout that nominally give it worse performance, because of the use of [comborolls](docs/comborolls.md).
 
-Some characters can only be accessed with combos or comborolls: Z, J and backslash.
+*Effective use of this layout **requires** comborolls.* For a layout that doesn't (so much), see [Kyria v38](https://github.com/frogm0uth/keyboard-firmware/tree/kyria-v38/kyria-rsthd-prime). 
+
+These characters can only be accessed with comborolls: J, K and backslash.
 
 The shift keys are "auto-off":
 - If a shift key is held and another key is pressed, you get the shifted version of the key then shift is turned off. This completely eliminates typos like "THe".
@@ -97,6 +112,10 @@ The shift keys are "auto-off":
 Except for Shift, there are no modifiers on the alpha layer. To access them, hold the SYMS or EDIT layer key, hold the modifier(s) down, then release the layer key. This is a bit like Callum mods except it doesn't use one-shots. This is less inconvenient than it sounds: you can usually roll the layer key with the modifier, and common shortcuts have dedicated keys on other layers anyway.
 
 Since v37, E and Space have swapped hands relative to their RSTHD positions. This seems to be common amongst adopters - see [RSTHD variants and similar layouts](#rsthd-variants-and-similar-layouts). F and M also swapped hands to reduce pinballing off the right index column; while partially effective, I still find it helpful to have F as a comboroll on the left hand to break up words like LIFE.
+
+Since v39, R and D have swapped locations compared to RSTHD. Having R on the index finger gives a lot of inward rolls, but also creates a lot of SFBs on that finger. I've addressed this with comborolls; even so, there are about the same number as the previous version.
+
+The encoder is used to adjust volume and screen brightness.
 
 ## Other layers
 
@@ -108,15 +127,15 @@ Activated by the right thumb.
 
 ![kyria-rsthd-prime-syms](docs/images/kyria-rsthd-prime-syms.png)
 
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/1320c291327964f5a62b71087b0907d4)
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/28a80ba78a02f052b21f8f9e520dcbb2)
 
-Numbers and punctuation are combined on one layer. Numbers are along the home row and punctuation is mostly arranged on the left hand. If only one character shown, it is output regardless of Shift.
+Numbers and punctuation are combined on one layer. Numbers are along the home row and punctuation is mostly arranged on the left hand. (If only one character shown, it is output regardless of Shift.)
 
-The punctuation is arranged so that common (for me) two-letter sequences are an inward roll: `{% %} </ /> => -> ()`. Outward rolls include `/= !=`. The characters `-` and `!` are duplicated from the base layer for this reason. Additional sequences such as `/* */ ); ~/` are accessed with comborolls that activate if shift is held.
+The punctuation is arranged so that common (for me) symbol bigrams are an inward roll: `{% %} </ /> ~/ -> ()`. The `=` symbol is on the right hand because it combines with so many other symbols. Additional bigrams such as `/* */ => );` are on comborolls that activate if shift is held. Overall, this layer works much better for me than pre-v38 versions that used a numpad layout.
 
 Cut, copy and paste shortcuts are along the right hand top row.
 
-This layer works much better than pre-v38 versions that used a numpad layout in "Programmer Dvorak" style (numbers accessed with shift).
+The encoder is used for history scrubbing.
 
 ### EDIT
 
@@ -139,6 +158,8 @@ All actions have auto-repeat. You can change the special modifiers while holding
 
 Cut, copy and paste shortcuts are along the left hand top row. Shortcuts for window and desktop navigation are scattered around the edges.
 
+If there is an encoder on the right side, holding one of the custom modifiers and rotating the encoder does "fast editing". (In practice though, I never use this.)
+
 ### META
 Activated by either pinky.
 
@@ -150,17 +171,19 @@ This layer contains common shortcuts, mostly arranged according to the letter us
 
 This layer also contains media control keys and the keys to access the FUNC and SNAP layers.
 
+The encoder is used for forward and backward search.
+
 ### FUNC
 
 Activated by the right thumb from the META layer.
 
 ![kyria-rsthd-prime-func](docs/images/kyria-rsthd-prime-func.png)
 
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/73bd011d1e75479761ce9c6aa4777ea4)
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/d92e0106ea3488121c06071fa5cf543a)
 
-This layer contains function keys arranged roughly the same as the numbers on the SYMS layer. It also contains the keys that switch between macOS, Windows and Linux shortcuts.
+This layer contains function keys on the left hand and mouse buttons on the left thumb. It also contains the keys that switch between macOS, Windows and Linux shortcuts.
 
-The encoder is used to adjust the OLED brightness and the backlight/per-key LEDs, depending on which modifier is held.
+The encoder is used to adjust the OLED brightness and the backlight/per-key LEDs, depending on which modifier is held. There are also two keys on the left hand for this, in case there is no encoder.
 
 ### SNAP
 
@@ -168,11 +191,11 @@ Activated by the left thumb from the META layer.
 
 ![kyria-rsthd-prime-snap](docs/images/kyria-rsthd-prime-snap.png)
 
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/815a6d29c23fbe01ef7c1ce0e7f0e00b)
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/9384b760732a7f55a02fbe9f45dd58e4)
 
 So called because of the keys for window snapping, which snap the active window to various locations on the screen. This works on macOS if [Rectangle Pro](https://rectangleapp.com) is running; it is not working at all on Windows and Linux yet.
 
-It also contains shortcuts for screenshots and for window zooming.
+It also contains shortcuts for screenshots and for window zooming, as well as mouse buttons.
 
 ## Backmatter
 
