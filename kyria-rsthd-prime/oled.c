@@ -100,7 +100,7 @@ static const char PROGMEM str_encoder_blank[]   = "                    ";
 #endif
 
 static const char PROGMEM str_oled_header[]     = "     RSTHD/Prime    ";
-static const char PROGMEM str_oled_version[]    = "         v37        ";
+static const char PROGMEM str_oled_version[]    = "         v38        ";
 static const char PROGMEM str_oled_caps[]       = "        CAPS        ";
 static const char PROGMEM str_oled_newline[]    = "\n";
 
@@ -199,6 +199,7 @@ static void render_status(void) {
             break;
 
         case EDIT:
+        case SYMS:
 #    ifdef CUSTOM_EDIT
             if (custom_edit_encoder_ready()) {
                 custom_edit_encoder_status();
@@ -215,6 +216,7 @@ static void render_status(void) {
             break;
 
         case SNAP:
+        case FUNC:
             if (mods & MOD_MASK_CAG) {
 #    if defined(RGBLIGHT_ENABLE) || defined(RGB_MATRIX_ENABLE)
                 rgblight_oled_encoder_status();

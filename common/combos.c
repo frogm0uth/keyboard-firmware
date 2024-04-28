@@ -61,7 +61,7 @@
 #define Q_CMBO_TRM(name, ms)
 #define Q_RtoL_TRM(name, ms)
 #define Q_LtoR_TRM(name, ms)
-#define ___NOSFT(name)
+#define _ONSHIFT(name)
 
 // Enum for combo codes
 #define Q_CMBO_KEY(name, out, ...)  COMBO_ID_##name,

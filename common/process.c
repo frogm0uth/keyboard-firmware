@@ -145,11 +145,11 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
 #ifdef LAYER_TAP_TOGGLE
             // layer switching using layer-tap-toggle custom code
         case CL_SYMS:
-            return layer_tap_toggle(KC_ENTER, SYMS, record);
+            return layer_tap_toggle(KC_TAB, SYMS, record);
             break;
 
         case CL_EDIT:
-            return layer_tap_toggle(KC_TAB, EDIT, record);
+            return layer_tap_toggle(KC_ENTER, EDIT, record);
             break;
 
         case CL_META:
@@ -177,6 +177,17 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
         //    break;
 #endif
 
+            /*  Emit custom keycodes.
+             */
+        case CU_DIRUP:
+            if (record->event.pressed) {
+                tap_code(KC_DOT);
+                tap_code(KC_DOT);
+                tap_code(KC_SLSH);
+            }
+            return false;
+            break;
+
             /* Switch between applications (like Alt-Tab on Windows or Cmd-Tab on macOS) This must be triggered from
              * a layer so the release event is called from layer_state_set_user() when the layer is released.
              */
@@ -190,13 +201,13 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
 
             /* Modify keyboard parameters.
              */
-        case CU_KBUP:
+        case CU_LGHTUP:
             if (record->event.pressed) {
                 kb_lighting_adjust(true, mods);
             }
             return false;
             break;
-        case CU_KBDN:
+        case CU_LGHTDN:
             if (record->event.pressed) {
                 kb_lighting_adjust(false, mods);
             }
@@ -270,9 +281,9 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
             /* Select the OS used for shortcuts and write to EEPROM.
              */
 #if defined(OS_SHORTCUTS) && !defined(OS_SHORTCUTS_STATIC)
-        case CU_SELECT_MACOS:
-        case CU_SELECT_WINDOWS:
-        case CU_SELECT_LINUX:
+        case CU_MACOS:
+        case CU_WINDOWS:
+        case CU_LINUX:
             if (record->event.pressed) {
                 process_os_change(keycode);
             }
