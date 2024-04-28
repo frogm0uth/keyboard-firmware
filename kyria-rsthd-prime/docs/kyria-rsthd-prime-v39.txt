@@ -1,7 +1,6 @@
 Kyria v39
 
-v39 swaps R and D, and updates comborolls accordingly. It also removes K from the base layer (accessible
-only by comboroll).
+v39 swaps R and D, and updates comborolls accordingly. It also swaps digits across hands on the SYMS layer for easier use (1-4 and 9 are now on the left hand) and removes K from the base layer (accessible only by comboroll).
 
 
 ALPHA

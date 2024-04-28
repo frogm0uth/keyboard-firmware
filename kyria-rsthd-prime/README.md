@@ -4,6 +4,7 @@ This is the keymap for my Kyria keyboard from [splitkb.com](https://splitkb.com)
 
 <!--ts-->
    * [Overview](#overview)
+      * [Latest changes](#latest-changes)
       * [Goals](#goals)
       * [Keyboard configuration](#keyboard-configuration)
       * [Features](#features)
@@ -37,7 +38,17 @@ The code is known to compile for and work on a rev1 Kyria with a 32kB Pro Micro 
 
 See also [Kyria Build Notes](docs/kyria-build-notes.md).
 
-**As of late 2023, I'm not maintaining this documentation regularly. It's too much work to be frank. It serves as a general guide, but for actual info please refer to the source. See also the [common](../common/) folder.**
+### Latest changes
+
+April 2024/v39: I think this layout is finally "it." Here are the changes that have put the icing on my little keyboard cake:
+
+- R and D swap positions
+- `-` and `'` swap positions
+- M and F swap hands
+- E and space swap hands
+- SYMS layer uses a numrow (instead of numpad)
+
+**As of late 2023, I don't keep the documentation rigorously updated. It's too much work to be frank. For current status please refer to the source. See also the [common](../common/) folder.**
 
 ### Goals
 
