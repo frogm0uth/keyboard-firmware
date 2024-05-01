@@ -24,6 +24,7 @@
 #include "../common/layer_tap_toggle.h"
 #include "../common/os_shortcuts.h"
 #include "../common/process.h"
+#include "../common/repeat.h"
 #include "../common/util.h"
 
 // Define the layers

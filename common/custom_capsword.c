@@ -45,6 +45,10 @@ bool process_auto_unshift(uint16_t keycode, keyrecord_t *record) {
     if (record->event.pressed && check_auto_unshift()) {
         switch (keycode) {
             case KC_A ... KC_Z:
+                while (repeat_that_output()) {
+                    tap_code16(keycode);
+                    del_mods(MOD_MASK_SHIFT);
+                }
                 register_code16(keycode);
                 del_mods(MOD_MASK_SHIFT);
                 return false;

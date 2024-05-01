@@ -35,7 +35,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  `----------------------------------'                                      `----------------------------------'
 
  .                 ,------.      ,--------------------.  ,--------------------.
- .                 | Mute |      | Enter| Space|      |  | -  _ |   E  |  Tab |
+ .                 | Mute |      | Enter| Space|Repeat|  | -  _ |   E  |  Tab |
  .                 |      |      | EDIT |      |      |  |      |      | SYMS |
  .                 `------'      `--------------------'  `--------------------'
 */
@@ -51,7 +51,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              KC_L,  KC_Y,  CU_COMM, KC_RSFT, CL_META_R,
 
         /* Thumbs */
-        CL_EDIT, KC_SPC, ___X___,   KC_MINS, KC_E, CL_SYMS,
+        CL_EDIT, KC_SPC, CU_REPT,   KC_MINS, KC_E, CL_SYMS,
 
         /* Encoder button */
         KC_MUTE

@@ -26,6 +26,21 @@
 void register_custom_key(uint16_t keycode, keyrecord_t *record) {
     record->event.pressed = true; // force it on
     // Process the keycode so that custom codes work
+    while (repeat_that_output()) {
+        // if we are repeating a key, do extra events - register
+        if (process_record_user_emit(keycode, record)) {
+            if (keycode < QK_USER) { // in case of lax return values from previous call
+                register_code16(keycode);
+            }
+        }
+        record->event.pressed = false; // unregister
+        if (process_record_user_emit(keycode, record)) {
+            if (keycode < QK_USER) { // in case of lax return values from previous call
+                unregister_code16(keycode);
+            }
+        }
+        record->event.pressed = true; // force it on
+    }
     if (process_record_user_emit(keycode, record)) {
         if (keycode < QK_USER) { // in case of lax return values from previous call
             register_code16(keycode);
@@ -292,11 +307,14 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
             break;
 #endif
     }
+
 #ifdef CUSTOM_CAPSWORD
-    return process_auto_unshift(keycode, record);
-#else
-    return true;
+    if (!process_auto_unshift(keycode, record)) {
+        return false;
+    }
 #endif
+
+    return true;
 }
 
 /**
@@ -307,6 +325,11 @@ bool process_record_user_common(uint16_t keycode, keyrecord_t *record) {
     // Check for interrupt to layer-tap-toggle
     ltt_interrupt(keycode, record);
 #endif
+
+    // Check for repeat key
+    if (!process_record_repeatkey(keycode, record)) {
+        return false;
+    }
 
 #ifdef COMBOROLL_ENABLE
     // Check for and process comboroll keys
@@ -324,7 +347,19 @@ bool process_record_user_common(uint16_t keycode, keyrecord_t *record) {
     }
     */
     // Process custom keycodes that output characters
-    return process_record_user_emit(keycode, record);
+    if (!process_record_user_emit(keycode, record)) {
+        return false;
+    }
+
+    // Add extra tap events if the repeat key has been pressed
+    if (record->event.pressed && keycode < QK_USER && keycode != KC_LSFT && keycode != KC_RSFT) {
+        while (repeat_that_output()) {
+            tap_code16(keycode);
+        }
+        return true;
+    }
+
+    return true;
 }
 
 /**

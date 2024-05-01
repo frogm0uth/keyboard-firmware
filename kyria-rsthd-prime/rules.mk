@@ -46,7 +46,7 @@ APP_SWITCHER = yes           # Enable timed app-switcher, such as triggered by a
 
 # Don't edit from here down
 
-SRC += ../common/process.c ../common/util.c
+SRC += ../common/process.c ../common/repeat.c ../common/util.c
 
 ifeq ($(strip $(OLED_ENABLE)), yes)
         SRC += oled.c

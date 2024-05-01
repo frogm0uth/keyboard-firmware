@@ -383,10 +383,19 @@ bool process_record_comboroll(uint16_t keycode, keyrecord_t *record) {
 // Handle timing and output first key if too long for second. Must call from matrix_scan_user()
 //
 void comboroll_tick() {
-    if (is_in_comboroll) {
-        if (timer_elapsed(comboroll_timer) > comboroll_longest_term) {
-            is_in_comboroll = false;
-            register_custom_key(firstkey_matched, &firstkey_record); // register the first key
-        }
+    if (timer_elapsed(comboroll_timer) > comboroll_longest_term) {
+        cancel_comboroll();
     }
 }
+
+
+// Cancel a pending comboroll (if there is one)
+//
+void cancel_comboroll() {
+    if (is_in_comboroll) {
+        is_in_comboroll = false;
+        register_custom_key(firstkey_matched, &firstkey_record); // register the first key
+    }
+}
+
+
