@@ -80,8 +80,8 @@ RtoL_STR( you, KC_U, CU_DOT )
 
 // Inner column minimization and comfort generally
 LtoR_STR( k,   KC_W, KC_M )
-LtoR_STR( v,   KC_D, KC_W )
-LtoR_STR( rk,  KC_D, KC_M )
+LtoR_STR( v,   KC_D, KC_T )
+LtoR_STR( rk,  KC_D, KC_W )
 LtoR_STR( b,   KC_P, KC_G )
 LtoR_STR( j,   KC_S, KC_R )
 
@@ -122,16 +122,15 @@ RtoL_LIT( espace, "e ", KC_E, CU_COMM )
 // Utilities
 CMBO_KEY( screenlock, CU_SLCK,   KC_ESC, KC_Q )
 
-// Syntax layer
-LtoR_LIT( l_c_comment, "/*", CU_LPRN, KC_ASTR )
-LtoR_LIT( r_c_comment, "*/", KC_ASTR, CU_RPRN )
-_ONSHIFT( l_c_comment )  // only trigger if shift is down
-_ONSHIFT( r_c_comment )
+// Syntax layer most only trigger if shift is down
+LtoR_LIT( l_c_comment, "/*", CU_LPRN, KC_ASTR ) _ONSHIFT( l_c_comment )
+LtoR_LIT( r_c_comment, "*/", KC_ASTR, CU_RPRN ) _ONSHIFT( r_c_comment )
 
-LtoR_LIT( l_php, "<?php", CU_LT, CU_SLSH_SLSH)
-LtoR_LIT( r_php, "?>",    CU_SLSH_SLSH, CU_GT)
-_ONSHIFT( l_php )  // only trigger if shift is down
-_ONSHIFT( r_php )
+LtoR_LIT( l_j_comment, "{#", CU_3, KC_ASTR ) _ONSHIFT( l_j_comment )
+LtoR_LIT( r_j_comment, "#}", KC_ASTR, CU_3 ) _ONSHIFT( r_j_comment )
+
+LtoR_LIT( l_php, "<?php", CU_LT, CU_SLSH_SLSH) _ONSHIFT( l_php )
+LtoR_LIT( r_php, "?>",    CU_SLSH_SLSH, CU_GT) _ONSHIFT( r_php )
 
 LtoR_LIT( parensemi, ");", CU_LT,        CU_GT )   _ONSHIFT( parensemi )
 LtoR_LIT( eql_gt,    "=>", CU_MINS_MINS, CU_GT)    _ONSHIFT( eql_gt )
