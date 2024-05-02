@@ -23,7 +23,7 @@
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-/* ALPHA v38
+/* ALPHA v39
  
  ,-----------------------------------------.                        ,-----------------------------------------.
  |  Esc |   B  |   C  |   W  |   M  |   Z  |                        |Search|   F  |   U  | .  ! | '  " |   Q  |
