@@ -33,8 +33,19 @@ static bool     is_auto_unshift  = false; // next character cancels shift
 static bool     capsword_waiting = false; // waiting to see if shift will be released
 static uint16_t capsword_timer   = 0;
 
+/*
+ * Test if capsword is active.
+ */
 bool is_capsword_active() {
     return is_capsword && host_keyboard_led_state().caps_lock;
+}
+
+/*
+ * Cancel any pending tap to activate caps-word. This is be called by other code
+ * that processes shift key releases, to avoid accidentally toggling caps-word.
+ */
+void cancel_capsword_tap_timer() {
+    capsword_waiting = false;
 }
 
 /**
