@@ -376,6 +376,9 @@ void matrix_scan_user(void) {
     ltt_tick();
 #endif
 
+    // Repeat key timeout
+    repeatkey_tick();
+
     // Caps word toggle timeout
 #ifdef CUSTOM_CAPSWORD
     capsword_tick();

@@ -19,9 +19,14 @@
 
 /**
  * Support for the (pre) repeat key.
+ * The repeat is active for REPEATKEY_TIMEOUT (default 500ms) after the initial press,
+ * or until the key is released, whichever comes last.
  */
 
 static uint16_t repeat_count=0;
+static bool     repeatkey_waiting = false;
+static bool     repeatkey_down = false;
+static uint16_t repeatkey_timer = 0;
 
 /*
  * Capture the current counter. This is used for higher-level repeats e.g. a sequence
@@ -41,6 +46,13 @@ void set_repeat_count(uint16_t count) {
     if (count > 0) {
         repeat_count = count;
     }
+}
+
+/*
+ * Test if repeat is active
+ */
+bool is_repeat_active() {
+    return (repeat_count > 0);
 }
 
 /*
@@ -77,12 +89,35 @@ bool process_record_repeatkey(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 cancel_comboroll();   // cancel any existing comboroll so first letter is output
                 set_repeat_count(1);  // THEN enable the repeat for the next letter
+                repeatkey_timer = timer_read(); // Start the timer to turn off the repeat
+                repeatkey_waiting = true;
+                repeatkey_down = true;
+            } else {
+                repeatkey_down = false;
+                if (!repeatkey_waiting) {
+                    repeat_count = 0;
+                }
             }
             return false;
             break;
         default:
             return true;
             break;
+    }
+}
+
+
+/*
+ * Time out the repeat key
+ */
+void repeatkey_tick() {
+    if (repeatkey_waiting) {
+        if (timer_elapsed(repeatkey_timer) > REPEATKEY_TIMEOUT) {
+            repeatkey_waiting = false;
+            if (!repeatkey_down) {
+                repeat_count = 0;
+            }
+        }
     }
 }
 

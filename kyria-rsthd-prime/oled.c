@@ -108,6 +108,7 @@ static const char PROGMEM str_mod_shift[] = "Shift ";
 static const char PROGMEM str_mod_ctrl[]  = "Ctrl ";
 static const char PROGMEM str_mod_alt[]   = "Alt ";
 static const char PROGMEM str_mod_gui[]   = "Gui ";
+static const char PROGMEM str_mod_rpt[]   = "RPT ";
 
 //static const char PROGMEM str_mod_alt_macos[]   = "Opt ";
 
@@ -160,6 +161,9 @@ static void render_status(void) {
         oled_write_P(PSTR("One-shot "), false);
     }
 #endif
+    if (is_repeat_active()) {
+        oled_write_P(PSTR(str_mod_rpt), true);
+    }
     if ((mods | ossmods) & MOD_MASK_SHIFT) {
         oled_write_P(str_mod_shift, false);
     } else {

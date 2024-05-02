@@ -20,7 +20,7 @@
 /**
  * Support for the (pre) repeat key.
  *
- * usage pattern:
+ * Typical usage pattern:
 
 do {
     tap_code16(keycode);
@@ -28,7 +28,13 @@ do {
 
  */
 
+#ifndef REPEATKEY_TIMEOUT
+#define REPEATKEY_TIMEOUT 500
+#endif
+
 bool process_record_repeatkey(uint16_t keycode, keyrecord_t *record);
 void set_repeat_count(uint16_t);
 bool repeat_that_output(void);
 uint16_t capture_repeat_count(void);
+void repeatkey_tick(void);
+bool is_repeat_active(void);
