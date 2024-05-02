@@ -149,7 +149,7 @@ void emit_progmem_array_record(const uint16_t *keyptr, keyrecord_t *record) {
     }
 }
 
-// Emit a PROGMEM string. Check auto-unshift after first character.
+// Emit a PROGMEM string.
 void emit_progmem_string(const char *str) {
     char ch = pgm_read_byte(str++);
     while (ch) {
@@ -157,6 +157,7 @@ void emit_progmem_string(const char *str) {
         ch = pgm_read_byte(str++);
     }
 }
+
 // Emit a PROGMEM string and check auto-unshift after first character.
 void emit_progmem_string_autounshift(const char *str) {
     char ch = pgm_read_byte(str++);

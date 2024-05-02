@@ -29,9 +29,6 @@ do {
  */
 
 bool process_record_repeatkey(uint16_t keycode, keyrecord_t *record);
-
-bool repeat_that_output(void);
-
-bool is_repeat_active(void);
 void set_repeat_count(uint16_t);
-
+bool repeat_that_output(void);
+uint16_t capture_repeat_count(void);

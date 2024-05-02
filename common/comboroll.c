@@ -248,32 +248,42 @@ static uint16_t    comboroll_longest_term = 0;
 void process_comboroll(comboroll_t *cr) {
     uint8_t mods = get_mods();
 
-    // All types except string ignore shift
+    // All types of comboroll except string ignore shift
     if (cr->type != comboroll_t_string) {
         del_mods(MOD_MASK_SHIFT);
     }
-    // Process by type
+    // Process by comboroll type.
+    // We have to do a tap for output keys. We can't register them, because we don't have a
+    // way to remember it to unregister later. This is why we can't have hold type keys as
+    // combo output.
     switch (cr->type) {
-            // We have to do a tap for an output key. We can't register it, because we don't have a
-            // way to remember it to unregister later. This is why we can't have hold type keys as
-            // combo output. To be able to remember a held key, we would need a stack or list of
-            // active combos (or something along those lines).
+        uint16_t rc;
         case comboroll_t_keycode:
+            // Repeat is done in tap_custom_key()
             tap_custom_key(cr->output_keycode, &firstkey_record);
             break;
 
-        case comboroll_t_array:
-            emit_progmem_array_record(cr->output_array, &firstkey_record);
-            break;
+        default:
+            // Repeat the output if the repeat key has been pressed
+            rc = capture_repeat_count();
+            do {
+                switch (cr->type) {
+                    case comboroll_t_array:
+                        emit_progmem_array_record(cr->output_array, &firstkey_record);
+                        break;
 
-        case comboroll_t_literal:
-            emit_progmem_string(cr->output_string);
-            break;
+                    case comboroll_t_literal:
+                        emit_progmem_string(cr->output_string);
+                        break;
 
-        case comboroll_t_string:
-            emit_progmem_string_autounshift(cr->output_string); // string type uses auto-unshift
+                    case comboroll_t_string:
+                        emit_progmem_string_autounshift(cr->output_string); // string type uses auto-unshift
+                        break;
+                }
+            } while (rc--);
             break;
     }
+    // Restore mods for every comboroll type except strings
     if (cr->type != comboroll_t_string) {
         set_mods(mods);
     }

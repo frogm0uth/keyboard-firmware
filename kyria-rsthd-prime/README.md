@@ -111,7 +111,7 @@ The shift keys are "auto-off":
 
 Except for Shift, there are no modifiers on the alpha layer. To access them, hold the SYMS or EDIT layer key, hold the modifier(s) down, then release the layer key. This is a bit like Callum mods except it doesn't use one-shots. This is less inconvenient than it sounds: you can usually roll the layer key with the modifier, and common shortcuts have dedicated keys on other layers anyway.
 
-The "repeat" thumb key is different to other implementations, in that you press it *before* the key that is to be repeated. This makes it more effective if placed on the same thumb as space, as double letters often occur at the end of words, like OFF and ALL. It also made it easier (for me) to implement and opens up possibilities like repeating sequences of characters (as triggered by a macro) and allowing it to be used like a modifier or like a one-shot, or even like a mod-tap. Currently, it acts like a modifier with auto-off and a one-shot.
+The "repeat" thumb key is different to other implementations, in that you press it *before* the key that is to be repeated. This makes it more effective if placed on the same thumb as space, as double letters often occur at the end of words, like OFF and ALL. It also made it easier (for me) to implement and opens up possibilities like being able to repeat sequences of characters (e.g. in a comboroll).
 
 The encoder is used to adjust volume and screen brightness.
 ### More notes on the alpha layer

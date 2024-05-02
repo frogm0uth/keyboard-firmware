@@ -19,23 +19,45 @@
 
 /**
  * Support for the (pre) repeat key.
- *
- * usage pattern:
-
-do {
-    tap_code16(keycode);
-} while (repeat_that_output());
-
  */
 
 static uint16_t repeat_count=0;
 
+/*
+ * Capture the current counter. This is used for higher-level repeats e.g. a sequence
+ * of keycodes. The repeat count is set to zero so it doesn't caused repeats at
+ * lower levels.
+ */
+uint16_t capture_repeat_count() {
+    uint16_t rc = repeat_count;
+    repeat_count = 0;
+    return rc;
+}
+
+/*
+ * Set the repeat count.
+ */
 void set_repeat_count(uint16_t count) {
     if (count > 0) {
         repeat_count = count;
     }
 }
 
+/*
+ * Check if the output should be repeated. There are two usage patterns. For pure tapping:
+ *
+    do {
+        tap_code16(keycode);
+    } while (repeat_that_output());
+ *
+ * and if wanting the keycode to remain registered:
+ *
+    while (repeat_that_output() {
+        tap_code16(keycode);
+    }
+    register_code16(keycode);
+ *
+ */
 bool repeat_that_output() {
     if (repeat_count > 0) {
         repeat_count--;
@@ -44,12 +66,9 @@ bool repeat_that_output() {
         return false;
     }
 }
-bool is_repeat_active() {
-    return repeat_count > 0;
-}
 
 /**
- * Enable the repeat.
+ * Process the repeat key.
  */
 bool process_record_repeatkey(uint16_t keycode, keyrecord_t *record) {
 
