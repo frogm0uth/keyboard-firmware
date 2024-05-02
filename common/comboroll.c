@@ -239,6 +239,7 @@ void comboroll_post_init() {
 // local vars
 static bool        is_in_comboroll  = false;
 static uint16_t    firstkey_matched = KC_NO;
+static uint8_t     firstkey_shiftmask = 0;
 static keyrecord_t firstkey_record;
 static uint16_t    comboroll_timer        = 0;
 static uint16_t    comboroll_longest_term = 0;
@@ -339,10 +340,15 @@ bool process_record_comboroll(uint16_t keycode, keyrecord_t *record) {
             // Look for match on second key
             comboroll_t *second = comboroll_scan_secondkey(firstkey_matched, keycode);
             if (second) {
-                process_comboroll(second);                                 // matched second key, so emit the combo
-                return false;                                              // no further processing
+                add_mods(firstkey_shiftmask);       // Set shift how it was when the first key was pressed
+                process_comboroll(second);          // matched second key, so emit the combo
+                cancel_capsword_tap_timer();        // Cancel the caps-word timer in case shift is down, so
+                                                    // it can't activate if subsequently released quickly enough
+
+                return false;                       // no further processing
 
             } else {                                                       // no match
+                add_mods(firstkey_shiftmask);                              // Set shift how it was when the first key was pressed
                 tap_custom_key(firstkey_matched, &firstkey_record);        // tap the first key
                                                                            // fall through to check for start of comboroll again
             }
@@ -352,6 +358,7 @@ bool process_record_comboroll(uint16_t keycode, keyrecord_t *record) {
             is_in_comboroll  = true;
             firstkey_record  = *record;      // Make a copy of the record for later use
             firstkey_matched = keycode;      // QMK doesn't use record->keycode - ?
+            firstkey_shiftmask = get_mods() & MOD_MASK_SHIFT; // Record if shifted when the first key is pressed
             comboroll_timer  = timer_read(); // Restart the timer
             return false;                    // no further processing as we've held the key
         } else {
@@ -363,17 +370,19 @@ bool process_record_comboroll(uint16_t keycode, keyrecord_t *record) {
             // If we're here, check to see if it was the first key that was just released. If so,
             // send it and cancel the wait for combo
             if (keycode == firstkey_matched) {
+                add_mods(firstkey_shiftmask);  // Set shift how it was when the first key was pressed
                 tap_custom_key(firstkey_matched, &firstkey_record);
                 is_in_comboroll = false;
 	            return false;
             } else if (keycode == KC_LSFT || keycode == KC_RSFT) {
-                // If shift was just released, then this is a rolling shift, so send the
-                // first key and cancel the wait for combo
-                // FIXME: this means that shift must be held until the second key is pressed.
-                // otherwise the comboroll will not activate
-                tap_custom_key(firstkey_matched, &firstkey_record);
-                is_in_comboroll = false;
-                // let QMK handle shift release
+
+                // If shift was just released, cancel the caps-word tap timer so it can't
+                // activate
+                cancel_capsword_tap_timer();
+
+                // For good measure, deregister the shift here and don't let it propagate
+                unregister_code16(keycode);
+                return false;
             }
         }
     }
@@ -386,6 +395,7 @@ void comboroll_tick() {
     if (is_in_comboroll) {
         if (timer_elapsed(comboroll_timer) > comboroll_longest_term) {
             is_in_comboroll = false;
+            add_mods(firstkey_shiftmask);  // Set shift how it was when the first key was pressed
             register_custom_key(firstkey_matched, &firstkey_record); // register the first key
         }
     }
