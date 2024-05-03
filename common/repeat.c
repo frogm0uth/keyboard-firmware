@@ -17,47 +17,12 @@
 #include "keymap.h"
 
 
-/**
- * Support for the (pre) repeat key.
+/* Support for the (pre) repeat key.
+ *
  * The repeat is active for REPEATKEY_TIMEOUT (default 500ms) after the initial press,
  * or until the key is released, whichever comes last.
- */
+ * There are two usage patterns. For pure tapping:
 
-static uint16_t repeat_count=0;
-static bool     repeatkey_waiting = false;
-static bool     repeatkey_down = false;
-static uint16_t repeatkey_timer = 0;
-
-/*
- * Capture the current counter. This is used for higher-level repeats e.g. a sequence
- * of keycodes. The repeat count is set to zero so it doesn't caused repeats at
- * lower levels.
- */
-uint16_t capture_repeat_count() {
-    uint16_t rc = repeat_count;
-    repeat_count = 0;
-    return rc;
-}
-
-/*
- * Set the repeat count.
- */
-void set_repeat_count(uint16_t count) {
-    if (count > 0) {
-        repeat_count = count;
-    }
-}
-
-/*
- * Test if repeat is active
- */
-bool is_repeat_active() {
-    return (repeat_count > 0);
-}
-
-/*
- * Check if the output should be repeated. There are two usage patterns. For pure tapping:
- *
     do {
         tap_code16(keycode);
     } while (repeat_that_output());
@@ -68,8 +33,41 @@ bool is_repeat_active() {
         tap_code16(keycode);
     }
     register_code16(keycode);
- *
  */
+
+
+static uint16_t repeat_count=0;
+static bool     repeatkey_waiting = false;
+static bool     repeatkey_down = false;
+static uint16_t repeatkey_timer = 0;
+
+
+// Capture the current counter. This is used for higher-level repeats e.g. a sequence
+// of keycodes. The repeat count is set to zero so it doesn't cause repeats at
+// lower levels.
+//
+uint16_t capture_repeat_count() {
+    uint16_t rc = repeat_count;
+    repeat_count = 0;
+    return rc;
+}
+
+// Set the repeat count.
+//
+void set_repeat_count(uint16_t count) {
+    if (count > 0) {
+        repeat_count = count;
+    }
+}
+
+// Test if repeat is active
+//
+bool is_repeat_active() {
+    return (repeat_count > 0);
+}
+
+// Check if the output should be repeated. See the examples at the top of the file.
+//
 bool repeat_that_output() {
     if (repeat_count > 0) {
         repeat_count--;
@@ -79,9 +77,8 @@ bool repeat_that_output() {
     }
 }
 
-/**
- * Process the repeat key.
- */
+// Process the repeat key.
+//
 bool process_record_repeatkey(uint16_t keycode, keyrecord_t *record) {
 
     switch (keycode) {
@@ -106,10 +103,8 @@ bool process_record_repeatkey(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
-
-/*
- * Time out the repeat key
- */
+// Time out the repeat key
+//
 void repeatkey_tick() {
     if (repeatkey_waiting) {
         if (timer_elapsed(repeatkey_timer) > REPEATKEY_TIMEOUT) {
