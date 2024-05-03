@@ -8,11 +8,6 @@ This is the keymap for my Kyria keyboard from [splitkb.com](https://splitkb.com)
       * [Goals](#goals)
       * [Keyboard configuration](#keyboard-configuration)
       * [Features](#features)
-         * [Platform-independent shortcuts](#platform-independent-shortcuts)
-         * [Comborolls](#comborolls)
-         * [Custom shift keys](#custom-shift-keys)
-         * [Custom edit modifiers](#custom-edit-modifiers)
-         * [Custom layer switching](#custom-layer-switching)
    * [Alpha layer](#alpha-layer)
    * [Other layers](#other-layers)
       * [SYMS](#syms)
@@ -48,7 +43,7 @@ April 2024/v39: I think this layout is finally "it." Here are the changes that h
 - E and space swap hands
 - SYMS layer uses a numrow (instead of numpad)
 
-**As of late 2023, I don't keep the documentation rigorously updated. It's too much work to be frank. For current status please refer to the source. See also the [common](../common/) folder.**
+**As of late 2023, I don't keep the documentation rigorously updated. For current status please refer to the source. See also the [common](../common/) folder.**
 
 ### Goals
 
@@ -64,31 +59,11 @@ Typing speed and reducing the number of keys on the keyboard are not important g
 
 My Kyria uses all 6 columns on each hand. However, the lower inner column keys are absent. There are three thumb keys on each side. The left side has an OLED.
 
-Either side can take an encoder. The screenshots and description below mostly assume it is on the left, but a right-side encoder works, and would usually be used with the "opposite" layer (EDIT instead of SYMS, SNAP instead of FUNC). In practice, I find that I mostly use the encoder for adjusting keyboard lighting, as for most functions it's quicker to just use keys; I could certainly live without it.
+Either side can take an encoder. The screenshots and description below mostly assume it is on the left, but a right-side encoder works, and would usually be used with the "opposite" layer (EDIT instead of SYMS, SNAP instead of FUNC). In practice, I find that I mostly use the encoder for adjusting keyboard lighting, as for most functions it's quicker to just use keys.
 
 ### Features
 
 See [common code](../common/README.md).
-
-#### Platform-independent shortcuts
-
-A set of shortcuts which can be switched at run-time for macOS, Windows, or Linux. macOS shortcuts are pretty stable, Windows and Linux still need work. For more info, see `os_shortcuts.h/c` and `os_shortcut_defs.h`.
-
-#### Comborolls
-
-I have a userspace implementation of combos called "[comboroll](docs/comborolls.md)" to avoid timing issues with QMK's overlapping combos. The doc is out of date for the current key layout, but see `combo_defs.h` for combo definitions and `comboroll.h/c` for the implementation.
-
-#### Custom shift keys
-
-I generalized the notion of having a non-standard character output on shift so that any unshifted/shifted pair can be defined with a macro. See `shift_defs.h` for definitions and `process.c` for the implementation.
-
-#### Custom edit modifiers
-
-This is platform independent shortcuts taken to the max. I can never reliably remember which modifiers do what to the arrow keys on which platform so I've defined a set of custom modifiers. See the EDIT layer below and `custom_edit.h/c` for the implementation.
-
-#### Custom layer switching
-
-Layer switching is done with custom code, so that a. shifted and custom keys can be emitted on the tap and b. so that the layer activates immediately for faster access to the keys in the layer. See `layer_tap_toggle.c/h`.
 
 ## Alpha layer
 
@@ -100,7 +75,7 @@ The alpha layout aims to reduce lateral finger movement on the index finger. In 
 
 An older version of the layout performed very well in an [analyzer](docs/prime-on-the-analyzer.md), with low SFU (same finger utilization) stats and low travel distance. Since then, changes have been made to the layout that nominally give it worse performance, because of the use of [comborolls](docs/comborolls.md).
 
-*Effective use of this layout **requires** comborolls.* For a layout that doesn't (so much), see [Kyria v38](https://github.com/frogm0uth/keyboard-firmware/tree/kyria-v38/kyria-rsthd-prime). 
+*Effective use of this layout **requires** comborolls.* For a layout that doesn't (so much), see [Kyria v38](https://github.com/frogm0uth/keyboard-firmware/tree/kyria-v38-final/kyria-rsthd-prime). 
 
 These characters can only be accessed with comborolls: J, K and backslash.
 
@@ -111,15 +86,14 @@ The shift keys are "auto-off":
 
 Except for Shift, there are no modifiers on the alpha layer. To access them, hold the SYMS or EDIT layer key, hold the modifier(s) down, then release the layer key. This is a bit like Callum mods except it doesn't use one-shots. This is less inconvenient than it sounds: you can usually roll the layer key with the modifier, and common shortcuts have dedicated keys on other layers anyway.
 
-The "repeat" thumb key is different to other implementations, in that you press it *before* the key that is to be repeated. This makes it more effective if placed on the same thumb as space, as double letters often occur at the end of words, like OFF and ALL. It also made it easier (for me) to implement and opens up possibilities like being able to repeat sequences of characters (e.g. in a comboroll).
+The "repeat" thumb key is different to other implementations, in that you press it *before* the key that is to be repeated. This makes it possible to place it on the same thumb as space, as double letters often occur at the end of words. It also made it easier (for me) to implement and opens up possibilities like being able to repeat sequences of characters e.g. in a comboroll.
 
 The encoder is used to adjust volume and screen brightness.
 ### More notes on the alpha layer
 
 Since v37, E and Space have swapped hands relative to their RSTHD positions. This seems to be common amongst adopters - see [RSTHD variants and similar layouts](#rsthd-variants-and-similar-layouts). F and M also swapped hands to reduce pinballing off the right index column; while partially effective, I still find it helpful to have F as a comboroll on the left hand to break up words like LIFE.
 
-Since v39, R and D have swapped locations compared to RSTHD. Having R on the index finger gives a lot of inward rolls, but also creates a lot of SFBs on that finger. I've addressed this with comborolls; even so, there are about the same number as the previous version.
-
+Since v39, R and D have swapped locations compared to RSTHD. Having R on the index finger gives a lot of inward rolls, but also creates a lot of SFBs on that finger. I've addressed this with comborolls.
 
 ## Other layers
 
