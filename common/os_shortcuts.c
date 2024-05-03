@@ -96,31 +96,67 @@ void os_set_from_keycode(uint16_t keycode) {
 #endif
 
 /**
- * Display the selected OS on the OLED.
+ * Functions for displaying shortcut status on the OLED
  */
 // clang-format off
 #ifdef OLED_ENABLE
+static const char PROGMEM str_mod_gui[]   = "Gui  ";
+static const char PROGMEM str_mod_cmd[]   = "Cmd  ";
+static const char PROGMEM str_mod_super[] = "Super"; // hopefully this comes at the end of the line
+
+static const char PROGMEM str_os_macos[]   = "   MACOS";
+static const char PROGMEM str_os_windows[] = " WINDOWS";
+static const char PROGMEM str_os_linux[]   = "   LINUX";
+
+// Display the selected OS on the OLED.
 void os_shortcut_status (bool invert) {
 #ifdef OS_SHORTCUTS_STATIC
 #ifdef OS_MACOS
-    oled_write_P(PSTR("   MACOS"), invert);
+    oled_write_P(str_os_macos, invert);
 #else
     #ifdef OS_WINDOWS
-        oled_write_P(PSTR(" WINDOWS"), invert);
+        oled_write_P(str_os_windows, invert);
     #else
-        oled_write_P(PSTR("   LINUX"), invert);
+        oled_write_P(str_os_linux, invert);
     #endif
 #endif
 #else
     switch (os_index) {
         case os_platform_macos:
-            oled_write_P(PSTR("   MACOS"), invert);
+            oled_write_P(str_os_macos, invert);
             break;
         case os_platform_windows:
-            oled_write_P(PSTR(" WINDOWS"), invert);
+            oled_write_P(str_os_windows, invert);
             break;
         case os_platform_linux:
-            oled_write_P(PSTR("   LINUX"), invert);
+            oled_write_P(str_os_linux, invert);
+            break;
+    }
+#endif
+}
+
+// Display the Gui/Cmd/Super string on the OLED.
+void os_shortcut_cmd_status (bool invert) {
+#ifdef OS_SHORTCUTS_STATIC
+#ifdef OS_MACOS
+    oled_write_P(str_mod_cmd, invert);
+#else
+    #ifdef OS_WINDOWS
+        oled_write_P(str_mod_gui, invert);
+    #else
+        oled_write_P(str_mod_super, invert);
+    #endif
+#endif
+#else
+    switch (os_index) {
+        case os_platform_macos:
+            oled_write_P(str_mod_cmd, invert);
+            break;
+        case os_platform_windows:
+            oled_write_P(str_mod_gui, invert);
+            break;
+        case os_platform_linux:
+            oled_write_P(str_mod_super, invert);
             break;
     }
 #endif
