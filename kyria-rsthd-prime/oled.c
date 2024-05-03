@@ -100,26 +100,22 @@ static const char PROGMEM str_encoder_blank[]   = "                    ";
 #endif
 
 static const char PROGMEM str_oled_header[]     = "     RSTHD/Prime    ";
-static const char PROGMEM str_oled_version[]    = "         v40        ";
-static const char PROGMEM str_oled_caps[]       = "        CAPS        ";
+static const char PROGMEM str_oled_version[]    = "        v 40        ";
+static const char PROGMEM str_oled_caps[]       = "    CAPS  ";
+static const char PROGMEM str_oled_repeat[]     = "  REPEAT  ";
 static const char PROGMEM str_oled_newline[]    = "\n";
 
 static const char PROGMEM str_mod_shift[] = "Shift ";
 static const char PROGMEM str_mod_ctrl[]  = "Ctrl ";
 static const char PROGMEM str_mod_alt[]   = "Alt ";
-static const char PROGMEM str_mod_gui[]   = "Gui ";
-static const char PROGMEM str_mod_rpt[]   = "RPT ";
-
-//static const char PROGMEM str_mod_alt_macos[]   = "Opt ";
-
-//static const char PROGMEM str_mod_gui_macos[]   = "Cmd";
-//static const char PROGMEM str_mod_gui_linux[]   = "Super";
 
 static const char PROGMEM str_blank4[]   = "    ";
 static const char PROGMEM str_blank5[]   = "     ";
 static const char PROGMEM str_blank6[]   = "      ";
+static const char PROGMEM str_blank10[]  = "          ";
 
-
+// Display keyboard status on the OLED
+//
 static void render_status(void) {
     bool capslock = host_keyboard_led_state().caps_lock;
     bool invert = capslock;
@@ -131,6 +127,13 @@ static void render_status(void) {
     invert = false;
     if (host_keyboard_led_state().caps_lock) {
         oled_write_P(str_oled_caps, false);
+    } else {
+        oled_write_P(str_blank10, false);
+    }
+    if (is_repeat_active()) {
+        oled_write_P(str_oled_repeat, false);
+    } else {
+        oled_write_P(str_blank10, false);
     }
     oled_write_P(str_oled_newline, false);
 
@@ -146,7 +149,7 @@ static void render_status(void) {
     oled_write_P(PSTR(" :: "), invert);
 #endif
     oled_write_P(layer_names[layer], invert);
-    oled_write_P(PSTR("\n"), invert);
+    oled_write_P(str_oled_newline, invert);
 
     // Display modifiers
     uint8_t mods = get_mods();
@@ -161,14 +164,11 @@ static void render_status(void) {
         oled_write_P(PSTR("One-shot "), false);
     }
 #endif
-    if (is_repeat_active()) {
-        oled_write_P(PSTR(str_mod_rpt), true);
-    }
     if ((mods | ossmods) & MOD_MASK_SHIFT) {
         oled_write_P(str_mod_shift, false);
     } else {
         if (layer != EDIT) {
-            oled_write_P(str_blank6, false);                        
+            oled_write_P(str_blank6, false);
         }
     }
     if ((mods | ossmods) & MOD_MASK_CAG) {
@@ -183,7 +183,7 @@ static void render_status(void) {
             oled_write_P(str_blank4, false);            
         }
         if ((mods | ossmods) & MOD_MASK_GUI) {
-            oled_write_P(str_mod_gui, false);
+            os_shortcut_cmd_status(invert);
         }
     }
 #ifdef CUSTOM_EDIT

@@ -443,18 +443,18 @@ void custom_edit_status(bool shift) {
         }
     }
     oled_write_P(str_blank1, false);
-    if (IS_EDIT_FAST) {
-        oled_write_P(PSTR("FAST "), false);
+    if (IS_EDIT_MORE) {
+        oled_write_P(PSTR("MORE "), false);
     } else {
         oled_write_P(str_blank5, false);
     }
-     if (IS_EDIT_X4) {
+    if (IS_EDIT_X4) {
         oled_write_P(PSTR("X4 "), false);
     } else {
         oled_write_P(str_blank3, false);
     }
-    if (IS_EDIT_MORE) {
-        oled_write_P(PSTR("MORE "), false);
+    if (IS_EDIT_FAST) {
+        oled_write_P(PSTR("FAST "), false);
     }
 }
 
