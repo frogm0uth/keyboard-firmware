@@ -38,3 +38,5 @@ bool repeat_that_output(void);
 uint16_t capture_repeat_count(void);
 void repeatkey_tick(void);
 bool is_repeat_active(void);
+bool do_extra_space(void);
+void did_extra_space(void);

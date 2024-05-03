@@ -39,6 +39,7 @@
 static uint16_t repeat_count=0;
 static bool     repeatkey_waiting = false;
 static bool     repeatkey_down = false;
+static bool     repeatkey_tapped = false;
 static uint16_t repeatkey_timer = 0;
 
 
@@ -66,6 +67,15 @@ bool is_repeat_active() {
     return (repeat_count > 0);
 }
 
+// Test if an extra space should be output
+//
+bool do_extra_space() {
+    return repeatkey_tapped;
+}
+void did_extra_space() {
+    repeatkey_tapped = false;
+}
+
 // Check if the output should be repeated. See the examples at the top of the file.
 //
 bool repeat_that_output() {
@@ -89,10 +99,14 @@ bool process_record_repeatkey(uint16_t keycode, keyrecord_t *record) {
                 repeatkey_timer = timer_read(); // Start the timer to turn off the repeat
                 repeatkey_waiting = true;
                 repeatkey_down = true;
+                repeatkey_tapped = false;
             } else {
                 repeatkey_down = false;
                 if (!repeatkey_waiting) {
                     repeat_count = 0;
+                    repeatkey_tapped = false;
+                } else {
+                    repeatkey_tapped = true;
                 }
             }
             return false;
@@ -111,6 +125,7 @@ void repeatkey_tick() {
             repeatkey_waiting = false;
             if (!repeatkey_down) {
                 repeat_count = 0;
+                repeatkey_tapped = false;
             }
         }
     }

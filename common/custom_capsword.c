@@ -62,6 +62,11 @@ bool process_auto_unshift(uint16_t keycode, keyrecord_t *record) {
                 }
                 register_code16(keycode);
                 del_mods(MOD_MASK_SHIFT);
+                if (do_extra_space()) {
+                    unregister_code16(keycode);
+                    tap_code16(KC_SPC);
+                    did_extra_space();
+                }
                 return false;
                 break;
         }

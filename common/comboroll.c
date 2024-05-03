@@ -281,6 +281,11 @@ void process_comboroll(comboroll_t *cr) {
                         break;
                 }
             } while (rc--);
+
+            if (do_extra_space()) {
+                tap_code16(KC_SPC);
+                did_extra_space();
+            }
             break;
     }
     // Restore mods for every comboroll type except strings

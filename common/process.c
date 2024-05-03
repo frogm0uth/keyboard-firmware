@@ -46,6 +46,16 @@ void register_custom_key(uint16_t keycode, keyrecord_t *record) {
             register_code16(keycode);
         }
     }
+    if (do_extra_space()) {
+        record->event.pressed = false; // unregister
+        if (process_record_user_emit(keycode, record)) {
+            if (keycode < QK_USER) { // in case of lax return values from previous call
+                unregister_code16(keycode);
+            }
+        }
+        tap_code16(KC_SPC);
+        did_extra_space();
+    }
 }
 
 // Unregister a single key. Handles custom keycodes.
@@ -355,6 +365,12 @@ bool process_record_user_common(uint16_t keycode, keyrecord_t *record) {
     if (record->event.pressed && keycode < QK_USER && keycode != KC_LSFT && keycode != KC_RSFT) {
         while (repeat_that_output()) {
             tap_code16(keycode);
+        }
+        if (do_extra_space()) {
+            tap_code16(keycode);
+            tap_code16(KC_SPC);
+            did_extra_space();
+            return false;
         }
         return true;
     }
