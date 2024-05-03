@@ -126,4 +126,36 @@ void os_shortcut_status (bool invert) {
 #endif
 }
 #endif
+
+/**
+ * Display the Gui/Cmd/Super string on the OLED.
+ */
+// clang-format off
+#ifdef OLED_ENABLE
+void os_shortcut_cmd_status (bool invert) {
+#ifdef OS_SHORTCUTS_STATIC
+#ifdef OS_MACOS
+    oled_write_P(PSTR("Cmd "), invert);
+#else
+    #ifdef OS_WINDOWS
+        oled_write_P(PSTR("Gui "), invert);
+    #else
+        oled_write_P(PSTR("Super "), invert);
+    #endif
+#endif
+#else
+    switch (os_index) {
+        case os_platform_macos:
+            oled_write_P(PSTR("Cmd "), invert);
+            break;
+        case os_platform_windows:
+            oled_write_P(PSTR("Gui "), invert);
+            break;
+        case os_platform_linux:
+            oled_write_P(PSTR("Super"), invert); // hopefully this comes at the end of the line
+            break;
+    }
+#endif
+}
+#endif
 // clang-format on
