@@ -84,6 +84,7 @@ LtoR_STR( v,   KC_D, KC_T )
 LtoR_STR( rk,  KC_D, KC_M )
 LtoR_STR( b,   KC_P, KC_G )
 LtoR_STR( j,   KC_S, KC_R )
+LtoR_STR( rc,  KC_D, KC_C )
 
 // Common word endings, right hand
 RtoL_STR( ally, KC_F, CU_DOT )
@@ -100,8 +101,8 @@ RtoL_LIT( backslash, "\\", KC_U, KC_QUOT )
 
 // Comborolls across both hands
 RtoL_STR( cd,   KC_C, CU_COMM )
-RtoL_LIT( apos_ve, "\'ve",  KC_W, CU_COMM )
-RtoL_STR( ght,  KC_M, CU_COMM )
+RtoL_STR( ght,  KC_W, CU_COMM )
+RtoL_LIT( apos_ve, "\'ve",  KC_M, CU_COMM )
  
 RtoL_LIT( comma_dquo, ",\"", KC_X, CU_COMM )
 RtoL_STR( diff, KC_D, CU_COMM )
