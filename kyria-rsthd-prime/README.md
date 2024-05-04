@@ -1,4 +1,4 @@
-# Kyria RSTHD/Prime v40
+# Kyria RSTHD/Prime v41
 
 This is the keymap for my Kyria keyboard from [splitkb.com](https://splitkb.com). The alpha layout was based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/) but is now heavily modified. The layout is optimized for minimum usage of the inner index column. Features in the code include runtime switching between Mac/Windows/Linux shortcuts and a custom implementation of "comborolls".
 
@@ -27,7 +27,7 @@ This is the keymap for my Kyria keyboard from [splitkb.com](https://splitkb.com)
 
 The alphabetic layout in this keymap was *originally* based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/). I tried it, liked it, tweaked it, and tweaked some more...
 
-When I originally started making changes to RSTHD, I called it RSTHD'. The `'`, pronounced "prime", is [used in maths](https://en.wikipedia.org/wiki/Prime_(symbol)#Use_in_mathematics,_statistics,_and_science) to indicate a derivative of the named thing. While the layout is hardly  recognizable as RSTHD any more, I still call it *RSTHD/Prime* to acknowledge its origin.
+When I originally started making changes to RSTHD, I called it RSTHD'. The `'`, pronounced "prime", is [used in maths](https://en.wikipedia.org/wiki/Prime_(symbol)#Use_in_mathematics,_statistics,_and_science) to indicate a derivative of the named thing. While the layout has now diverged a lot from RSTHD, I think it still retains the RSTHD DNA, so I still call it *RSTHD/Prime* to acknowledge its origin while making it clear that it's not the same.
 
 The code is known to compile for and work on a rev1 Kyria with a 32kB Pro Micro controller and a rev3 Kyria with a Liatris controller. There are some lines at the top of rules.mk that will need to be un/commented accordingly.
 
@@ -35,13 +35,12 @@ See also [Kyria Build Notes](docs/kyria-build-notes.md).
 
 ### Latest changes
 
-April 2024/v39: I think this layout is finally "it." Here are the changes that have put the icing on my little keyboard cake:
+April 2024/v41: I think this layout is finally "it." Here are the changes that have put the icing on my little keyboard cake:
 
-- R and D swap positions
-- `-` and `'` swap positions
-- M and F swap hands
 - E and space swap hands
 - SYMS layer uses a numrow (instead of numpad)
+- M and F swap hands
+- `-` and `'` swap positions
 
 **As of late 2023, I don't keep the documentation rigorously updated. For current status please refer to the source. See also the [common](../common/) folder.**
 
@@ -69,31 +68,28 @@ See [common code](../common/README.md).
 
 ![kyria-rsthd-prime-alpha](docs/images/kyria-rsthd-prime-alpha.png)
 
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/35bf08ea0f5aec96e33b1234b7dc3d5a)
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/06f63ae2174923cb64fc7dbdb55b841b)
 
-The alpha layout aims to reduce lateral finger movement on the index finger. In fact, the lower keys of the inner columns have now been removed entirely.
+The alpha layout aims to reduce lateral finger movement on the index finger. In fact, the lower keys of the inner columns have been removed entirely.
 
-An older version of the layout performed very well in an [analyzer](docs/prime-on-the-analyzer.md), with low SFU (same finger utilization) stats and low travel distance. Since then, changes have been made to the layout that nominally give it worse performance, because of the use of [comborolls](docs/comborolls.md).
+An older version of the layout performed very well in an [analyzer](docs/prime-on-the-analyzer.md), with low SFU (same finger utilization) stats and low travel distance. Since then, some changes have been made to the layout that nominally give it worse performance, because of the use of [comborolls](docs/comborolls.md).
 
-*Effective use of this layout **requires** comborolls.* For a layout that doesn't (so much), see [Kyria v38](https://github.com/frogm0uth/keyboard-firmware/tree/kyria-v38-final/kyria-rsthd-prime). 
+*Effective use of this layout **requires** comborolls.*
 
-These characters can only be accessed with comborolls: J, K and backslash.
+These letters can only be accessed with comborolls: J, K and backslash. These letters are usually accessed with comborolls even though they have a key: B and V.
 
 The shift keys are "auto-off":
 - If a shift key is held and another key is pressed, you get the shifted version of the key then shift is turned off. This completely eliminates typos like "THe".
 - If a shift key is tapped, it toggles caps-word.
 - If both shift keys are tapped at the same, they toggle caps-lock.
 
-Except for Shift, there are no modifiers on the alpha layer. To access them, hold the SYMS or EDIT layer key, hold the modifier(s) down, then release the layer key. This is a bit like Callum mods except it doesn't use one-shots. This is less inconvenient than it sounds: you can usually roll the layer key with the modifier, and common shortcuts have dedicated keys on other layers anyway.
+Except for Shift, there are no modifiers on the alpha layer. To access them, hold the SYMS or EDIT layer key, hold the modifier(s) down, then release the layer key. This is a bit like Callum mods except it doesn't use one-shots. This is less inconvenient than it sounds: I roll the layer key with the modifier, and common shortcuts have dedicated keys on other layers anyway.
 
 The "repeat" thumb key is different to other implementations, in that you press it *before* the key that is to be repeated. This makes it possible to place it on the same thumb as space, as double letters often occur at the end of words. It also made it easier (for me) to implement and opens up possibilities like being able to repeat sequences of characters e.g. in a comboroll.
 
-The encoder is used to adjust volume and screen brightness.
-### More notes on the alpha layer
-
 Since v37, E and Space have swapped hands relative to their RSTHD positions. This seems to be common amongst adopters - see [RSTHD variants and similar layouts](#rsthd-variants-and-similar-layouts). F and M also swapped hands to reduce pinballing off the right index column; while partially effective, I still find it helpful to have F as a comboroll on the left hand to break up words like LIFE.
 
-Since v39, R and D have swapped locations compared to RSTHD. Having R on the index finger gives a lot of inward rolls, but also creates a lot of SFBs on that finger. I've addressed this with comborolls.
+The encoder is used to adjust volume and screen brightness.
 
 ## Other layers
 
