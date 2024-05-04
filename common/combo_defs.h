@@ -55,7 +55,7 @@
 
 // Anti-SFU and anti-pinballing
 LtoR_STR( sc, KC_C, KC_M )
-LtoR_STR( f,  KC_R, KC_H )
+LtoR_STR( f,  KC_S, KC_D )
 
 RtoL_STR( fl, KC_F, KC_QUOT )
 RtoL_STR( er, KC_O, KC_A )
@@ -73,14 +73,14 @@ CMBO_STR( ui, KC_I, KC_U )
 // Awkward bigrams/trigrams
 LtoR_STR( qu,  KC_B, KC_M )
 LtoR_STR( cr,  KC_T, KC_D )
-LtoR_STR( br,  KC_R, KC_W )
+LtoR_STR( br,  KC_B, KC_W )
 LtoR_STR( pr,  KC_G, KC_D )
 RtoL_STR( you, KC_U, CU_DOT )
 
 // Inner column minimization and comfort generally
 LtoR_STR( k,   KC_W, KC_M )
-LtoR_STR( b,   KC_P, KC_G )
-LtoR_STR( j,   KC_S, KC_D )
+LtoR_STR( b,   KC_R, KC_H )
+LtoR_STR( j,   KC_P, KC_G )
 LtoR_STR( v,   KC_P, KC_D )
 
 // Common word endings, right hand
@@ -93,8 +93,8 @@ RtoL_STR( ough, KC_N, CU_COMM )
 RtoL_LIT( backslash, "\\", KC_U, KC_QUOT )
 
 // Right-to-left rolls on left hand
-//RtoL_KEY( comma,  KC_COMM, KC_P, KC_G )  RtoL_TRM( comma,  300 )
-//RtoL_KEY( period, KC_DOT,  KC_C, KC_W )  RtoL_TRM( period, 300 )
+RtoL_KEY( comma,  KC_COMM, KC_P, KC_G )  RtoL_TRM( comma,  300 )
+RtoL_KEY( period, KC_DOT,  KC_C, KC_W )  RtoL_TRM( period, 300 )
 
 // Comborolls across both hands
 RtoL_STR( cd,   KC_C, CU_COMM )
