@@ -1,4 +1,4 @@
-Kyria v40
+Kyria v41
 
 v41 puts R and D back in their original RSTHD locations and adjusts comborolls accordingly, effectively reverting
 to an improved v38.
@@ -60,7 +60,7 @@ META
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
  | eXit |Reload| Save |newTab|      | BriD |                        | VolD |  New |      | Open |saveAs| Quit |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
- |      |      | Print| Prev | Next |                                      | Back |  Fwd |ComboR|      |      |
+ |      |      | Print| Prev | Next |                                      | Back |  Fwd |      |      |      |
  | (**) | Shift|      |      |      |                                      |      |      |      | Shift| (**) |
  `----------------------------------'                                      `----------------------------------'
 
