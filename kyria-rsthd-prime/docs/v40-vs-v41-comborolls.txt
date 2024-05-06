@@ -90,7 +90,7 @@ B-
 F-
 V-
 
-olls:
+Rolls v1:
 
 BC BW=BR BM=QU CW- CM=SC WM=K
 RH=B
@@ -102,3 +102,24 @@ BH SG- SD=F TD=CR
 
 ,S=SP
 
+Or v2:
+
+BC BW BM=QU CW- CM=SC WM=K
+RH=BR
+PG=F GD=PR PD=V
+
+RW
+
+BH SG=J SD=B TD=CR
+
+,S=SP
+
+OR v3:
+
+BC BW BM=QU CW=SC CM=F WM=CR
+RH=BR
+PG=SP GD=PR PD=J
+
+RW=V
+
+BH SG SD=B TD=K
