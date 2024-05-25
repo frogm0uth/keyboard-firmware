@@ -95,6 +95,7 @@ enum custom_keycodes {
  */
 #define CU_COMM CU_COMMA_QUES
 #define CU_DOT  CU_DOT_EXLM
+#define CU_BSLS CU_BSLS_AT
 
 // Make it easier to read null key (instead of XXXXXXX)
 #define ___X___ KC_NO
