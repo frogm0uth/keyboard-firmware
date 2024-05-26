@@ -35,7 +35,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  `----------------------------------'                                      `----------------------------------'
 
  .                 ,------.      ,--------------------.  ,--------------------.
- .                 | Mute |      | Enter| Space| -  _ |  | '  " |   E  |  Tab |
+ .                 | Mute |      | Enter| Space| '  " |  | -  _ |   E  |  Tab |
  .                 |      |      | EDIT |      |      |  |      |      | SYMS |
  .                 `------'      `--------------------'  `--------------------'
 */
@@ -51,7 +51,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              KC_L,  KC_Y,  CU_COMM, KC_RSFT, CL_META_R,
 
         /* Thumbs */
-        CL_EDIT, KC_SPC, KC_MINS,   KC_QUOT, KC_E, CL_SYMS,
+        CL_EDIT, KC_SPC, KC_QUOT,   KC_MINS, KC_E, CL_SYMS,
 
         /* Encoder button */
         KC_MUTE
@@ -73,7 +73,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  .                 |      |      | Enter| Space|   .  |  |      |      |      |
  .                 |      |      |      |      |      |  |      |      | (**) |
  .                 `------'      `--------------------'  `--------------------'
-
 */
 
     [SYMS] = KEY_LAYOUT_stack(
@@ -208,9 +207,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* SNAP
 
  ,-----------------------------------------.                        ,-----------------------------------------.
- |      |      |      |      |      |      |                        |      | SL23 | SnapT| SR23 | ZmIn |      |
+ |      |      |      |      |      |      |                        |LghtUp| SL23 | SnapT| SR23 | ZmIn |      |
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
- |!WRITE| SSApp| SSScr| SSWin| SSRgn|      |                        |      | SnapL| SnapC| SnapR| ZmOut|      |
+ |!WRITE| SSApp| SSScr| SSWin| SSRgn|      |                        |LghtDn| SnapL| SnapC| SnapR| ZmOut|      |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
  |      |      |      |      |      |                                      | SL14 | SnapB| SR14 |  Zm0 |      |
  | (**) | Shift| Ctrl |  Alt |  Cmd |                                      |      |      |      |      | (**) |
@@ -229,9 +228,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,  CU_SHIFT,          KC_LCTL,              KC_LALT,        KC_LGUI,
 
          /* Right hand */
-                 ___X___,  SC_SNAP_LEFTTWOTHIRDS, SC_SNAP_TOP,          SC_SNAP_RIGHTTWOTHIRDS, SC_APP_ZOOM_IN,    ___X___,
-                 ___X___,  SC_SNAP_LEFT,          SC_SNAP_MIDTWOTHIRDS, SC_SNAP_RIGHT,          SC_APP_ZOOM_OUT,   ___X___,
-                           SC_SNAP_LEFTQUARTER,   SC_SNAP_BOTTOM,       SC_SNAP_RIGHTQUARTER,   SC_APP_ZOOM_RESET, _______,
+                 CU_LGHTUP,  SC_SNAP_LEFTTWOTHIRDS, SC_SNAP_TOP,          SC_SNAP_RIGHTTWOTHIRDS, SC_APP_ZOOM_IN,    ___X___,
+                 CU_LGHTDN,  SC_SNAP_LEFT,          SC_SNAP_MIDTWOTHIRDS, SC_SNAP_RIGHT,          SC_APP_ZOOM_OUT,   ___X___,
+                             SC_SNAP_LEFTQUARTER,   SC_SNAP_BOTTOM,       SC_SNAP_RIGHTQUARTER,   SC_APP_ZOOM_RESET, _______,
 
         /* Thumbs */
         _______, ___X___, CU_WIPE,   ___X___, CM_BTN1, CM_BTN2,
