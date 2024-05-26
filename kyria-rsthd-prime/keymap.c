@@ -23,10 +23,10 @@
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-/* ALPHA v39
- 
+/* ALPHA v41
+
  ,-----------------------------------------.                        ,-----------------------------------------.
- |  Esc |   B  |   C  |   W  |   M  |   Z  |                        |Search|   F  |   U  | .  ! | '  " |   Q  |
+ |  Esc |   B  |   C  |   W  |   F  |   Z  |                        |Search|   M  |   U  | .  ! | \  @ |   Q  |
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
  |   X  |   R  |   S  |   T  |   H  |   V  |                        | ;  : |   N  |   I  |   O  |   A  | Enter|
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
@@ -35,23 +35,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  `----------------------------------'                                      `----------------------------------'
 
  .                 ,------.      ,--------------------.  ,--------------------.
- .                 | Mute |      | Enter| Space|Repeat|  | -  _ |   E  |  Tab |
+ .                 | Mute |      | Enter| Space| -  _ |  | '  " |   E  |  Tab |
  .                 |      |      | EDIT |      |      |  |      |      | SYMS |
  .                 `------'      `--------------------'  `--------------------'
 */
     [ALPHA] = KEY_LAYOUT_stack(
         /* Left hand */
-        KC_ESC,   KC_B,     KC_C,  KC_W,  KC_M,  KC_Z,
+        KC_ESC,   KC_B,     KC_C,  KC_W,  KC_F,  KC_Z,
         KC_X,     KC_R,     KC_S,  KC_T,  KC_H,  KC_V,
         CL_META,  KC_LSFT,  KC_P,  KC_G,  KC_D,
 
         /* Right hand */
-                  SC_SEARCH, KC_F,  KC_U,  CU_DOT,  KC_QUOT, KC_Q,
+                  SC_SEARCH, KC_M,  KC_U,  CU_DOT,  CU_BSLS, KC_Q,
                   KC_SCLN,   KC_N,  KC_I,  KC_O,    KC_A,    KC_ENT,
                              KC_L,  KC_Y,  CU_COMM, KC_RSFT, CL_META_R,
 
         /* Thumbs */
-        CL_EDIT, KC_SPC, CU_REPT,   KC_MINS, KC_E, CL_SYMS,
+        CL_EDIT, KC_SPC, KC_MINS,   KC_QUOT, KC_E, CL_SYMS,
 
         /* Encoder button */
         KC_MUTE

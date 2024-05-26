@@ -220,13 +220,10 @@ const uint16_t PROGMEM comboroll_keys[][2] = {
 void comboroll_post_init() {
 #undef  RtoL_TRM
 #undef  LtoR_TRM
+#undef  CMBO_TRM
 #define RtoL_TRM(name, targ) comboroll_data[COMBOROLL_ID_##name].term = targ;
 #define LtoR_TRM RtoL_TRM
-
-#ifndef COMBO_ENABLE
-    #undef  CMBO_TRM
-    #define CMBO_TRM RtoL_TRM
-#endif
+#define CMBO_TRM RtoL_TRM
 
 #undef  _ONSHIFT
 #define _ONSHIFT(name) comboroll_data[COMBOROLL_ID_##name].onshift = 1;
