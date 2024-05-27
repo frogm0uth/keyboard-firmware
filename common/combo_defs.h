@@ -120,9 +120,23 @@ RtoL_LIT( ifdef,  "#ifdef",  KC_F, KC_Q )
 RtoL_LIT( endif,  "#endif",  KC_H, KC_Q )
 RtoL_LIT( define, "#define", KC_D, KC_Q )
 
+// Rolls to make apostrophes easier
+LtoR_LIT(quotspc, "' ",  KC_QUOT, CU_COMM)
+LtoR_LIT(dquospc, "\" ", KC_MINS, CU_COMM)
+
+RtoL_LIT(spcquot, " '",  KC_QUOT, CU_COMM)
+RtoL_LIT(spcdquo, " \"", KC_MINS, CU_COMM)
+
+LtoR_LIT(quotspc2, "' ",  KC_QUOT, CU_DOT)
+LtoR_LIT(dquospc2, "\" ", KC_MINS, CU_DOT)
+
+RtoL_LIT(spcquot2, " '",  KC_QUOT, CU_DOT)
+RtoL_LIT(spcdquo2, " \"", KC_MINS, CU_DOT)
+
+//CMBO_LIT( eapos,  "e\'", KC_MINS, KC_QUOT ) CMBO_TRM( eapos, 600 )
+
 // Extras and oddballs
 RtoL_LIT( espace, "e ",  KC_E,    CU_COMM )
-CMBO_LIT( eapos,  "e\'", KC_MINS, KC_QUOT ) CMBO_TRM( eapos, 600 )
 
 // Utilities
 CMBO_KEY( screenlock, CU_SLCK,   KC_ESC, KC_Q )
