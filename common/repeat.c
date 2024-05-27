@@ -84,8 +84,8 @@ bool process_record_repeatkey(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case CU_REPT:
             if (record->event.pressed) {
-                cancel_comboroll();   // cancel any existing comboroll so first letter is output
-                set_repeat_count(1);  // THEN enable the repeat for the next letter
+                cancel_comboroll(false);   // if waiting for a comboroll, cancel it and register the held letter
+                set_repeat_count(1);       // THEN enable the repeat for the next letter
                 repeatkey_timer = timer_read(); // Start the timer to turn off the repeat
                 repeatkey_waiting = true;
                 repeatkey_down = true;
