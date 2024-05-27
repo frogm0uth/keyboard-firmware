@@ -33,15 +33,6 @@ The code is known to compile for and work on a rev1 Kyria with a 32kB Pro Micro 
 
 See also [Kyria Build Notes](docs/kyria-build-notes.md).
 
-### Latest changes
-
-April 2024/v41: I think this layout is finally "it." Here are the changes that have put the icing on my little keyboard cake:
-
-- E and space swap hands
-- SYMS layer uses a numrow (instead of numpad)
-- M and F swap hands
-- `-` and `'` swap positions
-
 **As of late 2023, I don't keep the documentation rigorously updated. For current status please refer to the source. See also the [common](../common/) folder.**
 
 ### Goals
@@ -85,9 +76,9 @@ The shift keys are "auto-off":
 
 Except for Shift, there are no modifiers on the alpha layer. To access them, hold the SYMS or EDIT layer key, hold the modifier(s) down, then release the layer key. This is a bit like Callum mods except it doesn't use one-shots. This is less inconvenient than it sounds: I roll the layer key with the modifier, and common shortcuts have dedicated keys on other layers anyway.
 
-The "repeat" thumb key is different to other implementations, in that you press it *before* the key that is to be repeated. This makes it possible to place it on the same thumb as space, as double letters often occur at the end of words. It also made it easier (for me) to implement and opens up possibilities like being able to repeat sequences of characters e.g. in a comboroll.
+Instead of a "repeat" key, there are some comborolls for some common double letters (S, T, L, E, R).
 
-Since v37, E and Space have swapped hands relative to their RSTHD positions. This seems to be common amongst adopters - see [RSTHD variants and similar layouts](#rsthd-variants-and-similar-layouts). F and M also swapped hands to reduce pinballing off the right index column; while partially effective, I still find it helpful to have F as a comboroll on the left hand to break up words like LIFE.
+Since v37, E and Space have swapped hands relative to their RSTHD positions. This seems to be common amongst adopters - see [RSTHD variants and similar layouts](#rsthd-variants-and-similar-layouts).
 
 The encoder is used to adjust volume and screen brightness.
 
@@ -182,14 +173,22 @@ git clone https://github.com/frogm0uth/keyboard-firmware.git
 ```
 Assuming you already have QMK set up using the documented method:
 ```
-cd ~qmk_firmware/keyboards/splitkb/kyria/keymaps
+cd ~/qmk_firmware/keyboards/splitkb/kyria/keymaps
 ln -s /path/to/workingdir/keyboard-firmware/kyria-rsthd-prime .
 ```
 To compile for a rev1 board with a Pro Micro controller:
 ```
 qmk compile -kb splitkb/kyria/rev1 -km kyria-rsthd-prime
 ```
-To compile for a rev3 board with a Liatris controller:
+To compile for a rev3 board with a Liatris controller, you will also need to symlink the customized info.json file which turns off the unused LEDs:
+```
+cd ~/qmk_firmware/keyboards/splitkb/kyria
+mv rev3 x-rev3
+ln -s /path/to/workingdir/keyboard-firmware/kyria-rsthd-prime/kyria/rev3 .
+```
+(There must be a better way to do this than modifying the keyboard/hardware definition, but I couldn't figure it out.)
+
+Then:
 ```
 qmk compile -e CONVERT_TO=liatris -kb splitkb/kyria/rev3 -km kyria-rsthd-prime
 ```
