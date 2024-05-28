@@ -26,7 +26,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* ALPHA v41
 
  ,-----------------------------------------.                        ,-----------------------------------------.
- |  Esc |   B  |   C  |   W  |   F  |   Z  |                        |Search|   M  |   U  | .  ! | \  @ |   Q  |
+ |  Esc |   B  |   C  |   W  |   F  |   Z  |                        |Search|   M  |   U  | .  ! | -  _ |   Q  |
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
  |   X  |   R  |   S  |   T  |   H  |   V  |                        | ;  : |   N  |   I  |   O  |   A  | Enter|
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
@@ -35,7 +35,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  `----------------------------------'                                      `----------------------------------'
 
  .                 ,------.      ,--------------------.  ,--------------------.
- .                 | Mute |      | Enter| Space| '  " |  | -  _ |   E  |  Tab |
+ .                 | Mute |      | Enter| Space|Repeat|  | '  " |   E  |  Tab |
  .                 |      |      | EDIT |      |      |  |      |      | SYMS |
  .                 `------'      `--------------------'  `--------------------'
 */
@@ -46,12 +46,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         CL_META,  KC_LSFT,  KC_P,  KC_G,  KC_D,
 
         /* Right hand */
-                  SC_SEARCH, KC_M,  KC_U,  CU_DOT,  CU_BSLS, KC_Q,
+                  SC_SEARCH, KC_M,  KC_U,  CU_DOT,  KC_MINS, KC_Q,
                   KC_SCLN,   KC_N,  KC_I,  KC_O,    KC_A,    KC_ENT,
                              KC_L,  KC_Y,  CU_COMM, KC_RSFT, CL_META_R,
 
         /* Thumbs */
-        CL_EDIT, KC_SPC, KC_QUOT,   KC_MINS, KC_E, CL_SYMS,
+        CL_EDIT, KC_SPC, CU_REPT,   KC_QUOT, KC_E, CL_SYMS,
 
         /* Encoder button */
         KC_MUTE

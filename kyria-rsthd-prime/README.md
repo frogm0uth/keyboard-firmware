@@ -65,7 +65,7 @@ An older version of the layout performed very well in an [analyzer](docs/prime-o
 
 *Use of this layout **requires** comborolls.*
 
-These letters can only be accessed with comborolls: J and K. These letters are usually accessed with comborolls even though they have a key: B and V. The letter M has a comboroll on the left hand to counter pin-balling off the MNL column.
+These letters can only be accessed with comborolls: J, K and `\`. These letters are usually accessed with comborolls even though they have a key: B and V. The letter M has a comboroll on the left hand to counter pin-balling off the MNL column.
 
 The shift keys are "auto-off":
 - If a shift key is held and another key is pressed, you get the shifted version of the key then shift is turned off. This completely eliminates typos like "THe".
@@ -74,7 +74,7 @@ The shift keys are "auto-off":
 
 Except for Shift, there are no modifiers on the alpha layer. To access them, hold the SYMS or EDIT layer key, hold the modifier(s) down, then release the layer key. This is a bit like Callum mods except it doesn't use one-shots. This is less inconvenient than it sounds: I roll the layer key with the modifier, and common shortcuts have dedicated keys on other layers anyway.
 
-Instead of a "repeat" key, there are comborolls for some common double letters (S, T, L, E, R).
+The "repeat" thumb key is different to other implementations, in that you press it *before* the key that is to be repeated. This makes it possible to place it on the same thumb as space, as double letters often occur at the end of words. It also made it easier (for me) to implement and opens up possibilities like being able to repeat sequences of characters e.g. in a comboroll.
 
 Since v37, E and Space have swapped hands relative to their RSTHD positions. This seems to be common amongst adopters - see [RSTHD variants and similar layouts](#rsthd-variants-and-similar-layouts).
 
