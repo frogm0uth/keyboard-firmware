@@ -53,72 +53,90 @@
  */
 // clang-format off
 
+// Letters not in alpha and related rolls
+LtoR_STR( j,  KC_R, KC_W )
+LtoR_STR( k,  KC_T, KC_F )
+LtoR_STR( ck, KC_C, KC_F )
+
 // Anti-SFU and anti-pinballing
-LtoR_STR( rm,  KC_C, KC_M )
+LtoR_STR( m,  KC_T, KC_D )
+LtoR_STR( sc, KC_C, KC_W )
+LtoR_STR( sp, KC_P, KC_G )
 
-LtoR_STR( sc, KC_S, KC_G )
-LtoR_STR( f,  KC_D, KC_H )
-
-RtoL_STR( hr, KC_D, KC_H )
-
-RtoL_STR( fl, KC_F, KC_QUOT )
+//CMBO_STR( et, CU_DOT, KC_MINS ) CMBO_TRM( et,  300 )
 RtoL_STR( er, KC_O, KC_A )
+RtoL_STR( es, KC_U, CU_BSLS )
+RtoL_STR( ll, KC_L, CU_COMM )
 RtoL_STR( ve, KC_I, CU_COMM )
 RtoL_STR( ee, KC_Y, CU_COMM )
-RtoL_STR( es, KC_L, CU_COMM )
 
 // Verticals
 CMBO_STR( tw, KC_T, KC_W )
-CMBO_STR( ps, KC_S, KC_C )
-CMBO_STR( rh, KC_H, KC_M )
-CMBO_STR( lf, KC_N, KC_F )
+CMBO_STR( cs, KC_S, KC_C )
+CMBO_STR( ps, KC_H, KC_F )
+CMBO_STR( lm, KC_N, KC_M )
 CMBO_STR( ui, KC_I, KC_U )
 
 // Awkward bigrams/trigrams
-LtoR_STR( qu,  KC_B, KC_M )
+LtoR_STR( cr,  KC_W, KC_F )
+LtoR_STR( fr,  KC_S, KC_F )
+LtoR_STR( qu,  KC_B, KC_F )
+LtoR_STR( pr,  KC_G, KC_D )
+LtoR_STR( ght, KC_X, KC_H )
+
 RtoL_STR( you, KC_U, CU_DOT )
 
-// Inner column minimization and comfort generally
-LtoR_STR( k,   KC_W, KC_M )
-LtoR_STR( v,   KC_D, KC_T )
-LtoR_STR( rk,  KC_D, KC_M )
-LtoR_STR( b,   KC_P, KC_G )
-LtoR_STR( j,   KC_S, KC_R )
-LtoR_STR( rc,  KC_D, KC_C )
+// Inner column minimization and comfort
+LtoR_STR( v,   KC_P, KC_D )
+LtoR_STR( br,  KC_R, KC_H )
+LtoR_STR( b,   KC_S, KC_D )
 
 // Common word endings, right hand
-RtoL_STR( ally, KC_F, CU_DOT )
+RtoL_STR( ally, KC_M, CU_DOT )
 RtoL_STR( ould, KC_I, CU_DOT )
 RtoL_STR( all,  KC_N, CU_DOT )
 RtoL_STR( ough, KC_N, CU_COMM )
 
-// More punctuation on alpha layer
-RtoL_LIT( backslash, "\\", KC_U, KC_QUOT )
-
 // Right-to-left rolls on left hand
-//RtoL_KEY( comma,  KC_COMM, KC_P, KC_G )  RtoL_TRM( comma,  300 )
-//RtoL_KEY( period, KC_DOT,  KC_C, KC_W )  RtoL_TRM( period, 300 )
+RtoL_KEY( comma,  KC_COMM, KC_P, KC_G )  RtoL_TRM( comma,  300 )
+RtoL_KEY( period, KC_DOT,  KC_C, KC_W )  RtoL_TRM( period, 300 )
 
 // Comborolls across both hands
 RtoL_STR( cd,   KC_C, CU_COMM )
-RtoL_STR( ght,  KC_W, CU_COMM )
-RtoL_LIT( apos_ve, "\'ve",  KC_M, CU_COMM )
+RtoL_STR( was,  KC_W, CU_COMM )
+RtoL_STR( for,  KC_F, CU_COMM )
  
-RtoL_LIT( comma_dquo, ",\"", KC_X, CU_COMM )
-RtoL_STR( diff, KC_D, CU_COMM )
-RtoL_STR( sp,   KC_S, CU_COMM )
-RtoL_STR( but,  KC_T, CU_COMM )
-RtoL_LIT( apos_ll, "\'ll", KC_H, CU_COMM )
+RtoL_STR( rr,   KC_R, CU_COMM )
+RtoL_STR( ss,   KC_S, CU_COMM )
+RtoL_STR( tt,   KC_T, CU_COMM )
+RtoL_STR( his,  KC_H, CU_COMM )
 RtoL_STR( vs,   KC_V, CU_COMM )
 
 RtoL_STR( pwd,  KC_P, CU_COMM )
 RtoL_STR( grep, KC_G, CU_COMM )
-RtoL_LIT( apos_re, "\'re", KC_R, CU_COMM )
+RtoL_STR( diff, KC_D, CU_COMM )
 
-RtoL_STR( from, KC_M, KC_F )
+RtoL_LIT( ifdef,  "#ifdef",  KC_F, KC_Q )
+RtoL_LIT( endif,  "#endif",  KC_H, KC_Q )
+RtoL_LIT( define, "#define", KC_D, KC_Q )
+
+// Rolls to make apostrophes easier
+LtoR_LIT(quotspc, "' ",  KC_QUOT, CU_COMM)
+LtoR_LIT(dquospc, "\" ", KC_MINS, CU_COMM)
+
+RtoL_LIT(spcquot, " '",  KC_QUOT, CU_COMM)
+RtoL_LIT(spcdquo, " \"", KC_MINS, CU_COMM)
+
+LtoR_LIT(quotspc2, "' ",  KC_QUOT, CU_DOT)
+LtoR_LIT(dquospc2, "\" ", KC_MINS, CU_DOT)
+
+RtoL_LIT(spcquot2, " '",  KC_QUOT, CU_DOT)
+RtoL_LIT(spcdquo2, " \"", KC_MINS, CU_DOT)
+
+//CMBO_LIT( eapos,  "e\'", KC_MINS, KC_QUOT ) CMBO_TRM( eapos, 600 )
 
 // Extras and oddballs
-RtoL_LIT( espace, "e ", KC_E, CU_COMM )
+RtoL_LIT( espace, "e ",  KC_E,    CU_COMM )
 
 // Utilities
 CMBO_KEY( screenlock, CU_SLCK,   KC_ESC, KC_Q )

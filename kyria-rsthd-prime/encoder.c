@@ -54,7 +54,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             // On Alpha layer, control volume
         case ALPHA:
             if (mods & MOD_MASK_SHIFT) {
-                keycode = clockwise ? KC_BRIU : KC_BRID;
+                keycode = clockwise ? SC(SC_BRIGHTNESS_UP) : SC(SC_BRIGHTNESS_DOWN);
             } else {
                 keycode = clockwise ? KC_VOLU : KC_VOLD;
             }

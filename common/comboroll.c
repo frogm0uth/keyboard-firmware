@@ -220,13 +220,10 @@ const uint16_t PROGMEM comboroll_keys[][2] = {
 void comboroll_post_init() {
 #undef  RtoL_TRM
 #undef  LtoR_TRM
+#undef  CMBO_TRM
 #define RtoL_TRM(name, targ) comboroll_data[COMBOROLL_ID_##name].term = targ;
 #define LtoR_TRM RtoL_TRM
-
-#ifndef COMBO_ENABLE
-    #undef  CMBO_TRM
-    #define CMBO_TRM RtoL_TRM
-#endif
+#define CMBO_TRM RtoL_TRM
 
 #undef  _ONSHIFT
 #define _ONSHIFT(name) comboroll_data[COMBOROLL_ID_##name].onshift = 1;
@@ -239,7 +236,7 @@ void comboroll_post_init() {
 // local vars
 static bool        is_in_comboroll  = false;
 static uint16_t    firstkey_matched = KC_NO;
-static uint8_t     firstkey_shiftmask = 0;
+static uint8_t     firstkey_mods = 0;
 static keyrecord_t firstkey_record;
 static uint16_t    comboroll_timer        = 0;
 static uint16_t    comboroll_longest_term = 0;
@@ -346,21 +343,27 @@ bool process_record_comboroll(uint16_t keycode, keyrecord_t *record) {
     if (record->event.pressed) {
         // Key press
         if (is_in_comboroll) {
-            is_in_comboroll = false;
             // Look for match on second key
             comboroll_t *second = comboroll_scan_secondkey(firstkey_matched, keycode);
             if (second) {
-                add_mods(firstkey_shiftmask);       // Set shift how it was when the first key was pressed
+                uint8_t mods = get_mods();          // Save mods as they are now
+                set_mods(firstkey_mods);            // Set mods how they were when the first key was pressed
                 process_comboroll(second);          // matched second key, so emit the combo
+
+                // If processing the comboroll changed the mods, leave them. If they didn't change, set them
+                // back to how they were as of the start of this function.
+                if (get_mods() == firstkey_mods) {
+                    set_mods(mods);
+                }
+
                 cancel_capsword_tap_timer();        // Cancel the caps-word timer in case shift is down, so
                                                     // it can't activate if subsequently released quickly enough
-
+                is_in_comboroll = false;
                 return false;                       // no further processing
 
-            } else {                                                       // no match
-                add_mods(firstkey_shiftmask);                              // Set shift how it was when the first key was pressed
-                tap_custom_key(firstkey_matched, &firstkey_record);        // tap the first key
-                                                                           // fall through to check for start of comboroll again
+            } else {                       // no match
+                cancel_comboroll(true);    // tap the first key and cancel wait for comboroll
+                                           // fall through to check for start of comboroll again
             }
         }
         // If still here, check for a match as first key
@@ -368,7 +371,7 @@ bool process_record_comboroll(uint16_t keycode, keyrecord_t *record) {
             is_in_comboroll  = true;
             firstkey_record  = *record;      // Make a copy of the record for later use
             firstkey_matched = keycode;      // QMK doesn't use record->keycode - ?
-            firstkey_shiftmask = get_mods() & MOD_MASK_SHIFT; // Record if shifted when the first key is pressed
+            firstkey_mods = get_mods();      // Record mod state when the first key is pressed
             comboroll_timer  = timer_read(); // Restart the timer
             return false;                    // no further processing as we've held the key
         } else {
@@ -378,11 +381,9 @@ bool process_record_comboroll(uint16_t keycode, keyrecord_t *record) {
         // Key release
         if (is_in_comboroll) {
             // If we're here, check to see if it was the first key that was just released. If so,
-            // send it and cancel the wait for combo
+            // tap it and cancel the wait for combo
             if (keycode == firstkey_matched) {
-                add_mods(firstkey_shiftmask);  // Set shift how it was when the first key was pressed
-                tap_custom_key(firstkey_matched, &firstkey_record);
-                is_in_comboroll = false;
+                cancel_comboroll(true);
 	            return false;
             } else if (keycode == KC_LSFT || keycode == KC_RSFT) {
 
@@ -399,23 +400,34 @@ bool process_record_comboroll(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
-// Handle timing and output first key if too long for second. Must call from matrix_scan_user()
+// Handle timing and register first key if too long for second. Must call from matrix_scan_user()
 //
 void comboroll_tick() {
     if (timer_elapsed(comboroll_timer) > comboroll_longest_term) {
-        cancel_comboroll();
+        cancel_comboroll(false);
     }
 }
 
 
-// Cancel a pending comboroll (if there is one)
+// Cancel a pending comboroll (if there is one). If there is one, the currently held first
+// key is registered. If. the unregister argument is true, it is also unregistered i.e. it's
+// tapped.
 //
-void cancel_comboroll() {
+void cancel_comboroll(bool unregister) {
     if (is_in_comboroll) {
         is_in_comboroll = false;
-        add_mods(firstkey_shiftmask);  // Set shift how it was when the first key was pressed
+        uint8_t mods = get_mods();     // Save mods as they are now
+
+        set_mods(firstkey_mods);       // Set mods how they were when the first key was pressed
         register_custom_key(firstkey_matched, &firstkey_record); // register the first key
+        if (unregister) {
+            unregister_custom_key(firstkey_matched, &firstkey_record); // unregister the first key
+        }
+
+        // If the register/unregister changed the mods, leave it. If it didn't change any, set them
+        // back to how they were as of the start of this function.
+        if (get_mods() == firstkey_mods) {
+            set_mods(mods);
+        }
     }
 }
-
-

@@ -58,6 +58,6 @@ typedef struct comboroll_node {
 void comboroll_post_init(void);
 bool process_record_comboroll(uint16_t keycode, keyrecord_t* record);
 void comboroll_tick(void);
-void cancel_comboroll(void);
+void cancel_comboroll(bool unregister);
 
 #endif // COMBOROLL_ENABLE
