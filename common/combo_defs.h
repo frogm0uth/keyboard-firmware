@@ -65,8 +65,7 @@ LtoR_STR( sp, KC_P, KC_G )
 
 //CMBO_STR( et, CU_DOT, KC_MINS ) CMBO_TRM( et,  300 )
 RtoL_STR( er, KC_O, KC_A )
-RtoL_STR( es, KC_U, CU_BSLS )
-RtoL_STR( ll, KC_L, CU_COMM )
+RtoL_STR( es, KC_L, CU_COMM )
 RtoL_STR( ve, KC_I, CU_COMM )
 RtoL_STR( ee, KC_Y, CU_COMM )
 
@@ -120,23 +119,13 @@ RtoL_LIT( ifdef,  "#ifdef",  KC_F, KC_Q )
 RtoL_LIT( endif,  "#endif",  KC_H, KC_Q )
 RtoL_LIT( define, "#define", KC_D, KC_Q )
 
-// Rolls to make apostrophes easier
-LtoR_LIT(quotspc, "' ",  KC_QUOT, CU_COMM)
-LtoR_LIT(dquospc, "\" ", KC_MINS, CU_COMM)
-
-RtoL_LIT(spcquot, " '",  KC_QUOT, CU_COMM)
-RtoL_LIT(spcdquo, " \"", KC_MINS, CU_COMM)
-
-LtoR_LIT(quotspc2, "' ",  KC_QUOT, CU_DOT)
-LtoR_LIT(dquospc2, "\" ", KC_MINS, CU_DOT)
-
-RtoL_LIT(spcquot2, " '",  KC_QUOT, CU_DOT)
-RtoL_LIT(spcdquo2, " \"", KC_MINS, CU_DOT)
-
-//CMBO_LIT( eapos,  "e\'", KC_MINS, KC_QUOT ) CMBO_TRM( eapos, 600 )
+// Rolls for apostrophes
+RtoL_LIT(aposll, "'ll",  KC_QUOT, KC_L)
+RtoL_LIT(aposre, "'re",  KC_QUOT, KC_N)
 
 // Extras and oddballs
-RtoL_LIT( espace, "e ",  KC_E,    CU_COMM )
+RtoL_LIT( espace, "e ",  KC_E, CU_COMM )
+RtoL_LIT( backslash, "\\",  KC_U, KC_MINS )
 
 // Utilities
 CMBO_KEY( screenlock, CU_SLCK,   KC_ESC, KC_Q )
