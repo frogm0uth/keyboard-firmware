@@ -27,13 +27,11 @@ This is the keymap for my Kyria keyboard from [splitkb.com](https://splitkb.com)
 
 The alphabetic layout in this keymap was *originally* based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/). I tried it, liked it, tweaked it, and tweaked some more...
 
-When I originally started making changes to RSTHD, I called it RSTHD'. The `'`, pronounced "prime", is [used in maths](https://en.wikipedia.org/wiki/Prime_(symbol)#Use_in_mathematics,_statistics,_and_science) to indicate a derivative of the named thing. While the layout has now diverged a lot from RSTHD, I think it still retains the RSTHD DNA, so I still call it *RSTHD/Prime* to acknowledge its origin while making it clear that it's not the same.
+When I originally started making changes to RSTHD, I called it RSTHD'. The `'`, pronounced "prime", is [used in maths](https://en.wikipedia.org/wiki/Prime_(symbol)#Use_in_mathematics,_statistics,_and_science) to indicate a derivative of the named thing. While the layout has now diverged a lot from RSTHD, I still call it *RSTHD/Prime* to acknowledge its origin while making it clear that it's not the same.
 
 The code is known to compile for and work on a rev1 Kyria with a 32kB Pro Micro controller and a rev3 Kyria with a Liatris controller. There are some lines at the top of rules.mk that will need to be un/commented accordingly.
 
 See also [Kyria Build Notes](docs/kyria-build-notes.md).
-
-**As of late 2023, I don't keep the documentation rigorously updated. For current status please refer to the source. See also the [common](../common/) folder.**
 
 ### Goals
 
@@ -65,9 +63,9 @@ The alpha layout aims to reduce lateral finger movement on the index finger. In 
 
 An older version of the layout performed very well in an [analyzer](docs/prime-on-the-analyzer.md), with low SFU (same finger utilization) stats and low travel distance. Since then, some changes have been made to the layout that nominally give it worse performance, because of the use of [comborolls](docs/comborolls.md).
 
-*Effective use of this layout **requires** comborolls.*
+*Use of this layout **requires** comborolls.*
 
-These letters can only be accessed with comborolls: J, K and backslash. These letters are usually accessed with comborolls even though they have a key: B and V.
+These letters can only be accessed with comborolls: J and K. These letters are usually accessed with comborolls even though they have a key: B and V. The letter M has a comboroll on the left hand to counter pin-balling off the MNL column.
 
 The shift keys are "auto-off":
 - If a shift key is held and another key is pressed, you get the shifted version of the key then shift is turned off. This completely eliminates typos like "THe".
@@ -76,7 +74,7 @@ The shift keys are "auto-off":
 
 Except for Shift, there are no modifiers on the alpha layer. To access them, hold the SYMS or EDIT layer key, hold the modifier(s) down, then release the layer key. This is a bit like Callum mods except it doesn't use one-shots. This is less inconvenient than it sounds: I roll the layer key with the modifier, and common shortcuts have dedicated keys on other layers anyway.
 
-Instead of a "repeat" key, there are some comborolls for some common double letters (S, T, L, E, R).
+Instead of a "repeat" key, there are comborolls for some common double letters (S, T, L, E, R).
 
 Since v37, E and Space have swapped hands relative to their RSTHD positions. This seems to be common amongst adopters - see [RSTHD variants and similar layouts](#rsthd-variants-and-similar-layouts).
 
