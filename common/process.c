@@ -82,26 +82,10 @@ const uint16_t PROGMEM shift_keycodes[][2] = {
 // Process a single custom shift key based on passed values
 void process_shift_key(uint16_t key, uint16_t shiftedkey, keyrecord_t *record) {
     if (record->event.pressed) {
-#ifndef NO_ACTION_ONESHOT
-        uint8_t mods    = get_mods();
-        uint8_t ossmods = get_oneshot_mods();
-
-        del_mods(MOD_MASK_SHIFT);
-        del_oneshot_mods(MOD_MASK_SHIFT);
-
-        register_custom_key((mods | ossmods) & MOD_MASK_SHIFT ? shiftedkey : key, record);
-
-        set_mods(mods);
-        set_oneshot_mods(ossmods);
-        if (ossmods & MOD_MASK_SHIFT) {
-            del_oneshot_mods(MOD_MASK_SHIFT);
-        }
-#else
         uint8_t mods = get_mods();
         del_mods(MOD_MASK_SHIFT);
         register_custom_key(mods & MOD_MASK_SHIFT ? shiftedkey : key, record);
         set_mods(mods);
-#endif
     } else {
         unregister_custom_key(key, record);
         unregister_custom_key(shiftedkey, record);
