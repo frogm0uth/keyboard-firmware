@@ -17,6 +17,18 @@
 
 #include QMK_KEYBOARD_H
 
+#ifndef KEY_WAIT_TERM
+#    define KEY_WAIT_TERM 300
+#endif
+
+#ifndef KEY_REPEAT_TERM
+#    define KEY_REPEAT_TERM 100
+#endif
+
+void start_key_repeat(uint16_t keycode, keyrecord_t *record);
+void stop_key_repeat(void);
+void key_repeat_tick(void);
+
 void kb_lighting_adjust(bool up, uint8_t mods);
 void emit_progmem_array(const uint16_t *keyptr);
 void emit_progmem_array_record(const uint16_t *keyptr, keyrecord_t *record);
