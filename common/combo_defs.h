@@ -130,7 +130,7 @@ RtoL_LIT( backslash, "\\",  KC_U, KC_MINS )
 // Utilities
 CMBO_KEY( screenlock, CU_SLCK,   KC_ESC, KC_Q )
 
-// Syntax layer most only trigger if shift is down
+// Syntax layer - most only trigger if shift is down
 LtoR_LIT( l_c_comment, "/*", CU_LPRN, KC_ASTR ) _ONSHIFT( l_c_comment )
 LtoR_LIT( r_c_comment, "*/", KC_ASTR, CU_RPRN ) _ONSHIFT( r_c_comment )
 
@@ -142,3 +142,5 @@ LtoR_LIT( r_php, "?>",    CU_SLSH_SLSH, CU_GT) _ONSHIFT( r_php )
 
 LtoR_LIT( parensemi, ");", CU_LT,        CU_GT )   _ONSHIFT( parensemi )
 LtoR_LIT( eql_gt,    "=>", CU_MINS_MINS, CU_GT)    _ONSHIFT( eql_gt )
+
+//LtoR_LIT( htmlcomment, "<!--", CU_MINS_MINS, CU_LT)
