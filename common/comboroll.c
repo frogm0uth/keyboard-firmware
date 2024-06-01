@@ -349,7 +349,7 @@ comboroll_t *comboroll_scan_secondkey(uint16_t firstkey, uint16_t secondkey) {
                 || (!(firstkey_mods & MOD_MASK_SHIFT) && comboroll_data[i].noshift)
             )
         ) {
-	        if (timer_elapsed(comboroll_timer) <= comboroll_data[i].term) { // don't match combo if it took too long
+            if (timer_elapsed(comboroll_timer) <= comboroll_data[i].term) { // don't match combo if it took too long
                 result = &comboroll_data[i];
             }
             break;
