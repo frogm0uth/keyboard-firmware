@@ -143,4 +143,4 @@ LtoR_LIT( r_php, "?>",    CU_SLSH_SLSH, CU_GT) _ONSHIFT( r_php )
 LtoR_LIT( parensemi, ");", CU_LT,        CU_GT )   _ONSHIFT( parensemi )
 LtoR_LIT( eql_gt,    "=>", CU_MINS_MINS, CU_GT)    _ONSHIFT( eql_gt )
 
-//LtoR_LIT( htmlcomment, "<!--", CU_MINS_MINS, CU_LT)
+LtoR_LIT( htmlcomment, "<!--", CU_MINS_MINS, CU_LT)
