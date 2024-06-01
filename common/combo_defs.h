@@ -33,6 +33,7 @@
  * 
  * ...._TRM: arguments are name, term. This changes the timeout, and must follow the combo definition.
  * _ONSHIFT: argument is the name. Makes the combo trigger only on shift, and must follow the combo definition.
+ * _NOSHIFT: argument is the name. Makes the combo trigger only if no shift, and must follow the combo definition.
  *
  * This is an example of the ARR macro:
  *

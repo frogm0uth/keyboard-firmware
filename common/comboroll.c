@@ -55,6 +55,7 @@
 #define RtoL_TRM(name, ms)
 #define LtoR_TRM(name, ms)
 #define _ONSHIFT(name)
+#define _NOSHIFT(name)
 
 
 // Define an enum of identifiers.
@@ -129,20 +130,20 @@ enum comboroll_ids {
 #undef  CMBO_LIT
 #undef  CMBO_STR
 
-#define LtoR_KEY(name, out, k1, k2) {comboroll_t_keycode, CMB_MATCH_LEFT, 0, COMBOROLL_TERM, {.output_keycode=out}},
-#define LtoR_ARR(name, out, k1, k2) {comboroll_t_array,   CMB_MATCH_LEFT, 0, COMBOROLL_TERM, {.output_array=comboroll_array_##name}},
-#define LtoR_LIT(name, out, k1, k2) {comboroll_t_literal, CMB_MATCH_LEFT, 0, COMBOROLL_TERM, {.output_string=comboroll_string_##name}},
-#define LtoR_STR(name,      k1, k2) {comboroll_t_string,  CMB_MATCH_LEFT, 0, COMBOROLL_TERM, {.output_string=comboroll_string_##name}},
+#define LtoR_KEY(name, out, k1, k2) {comboroll_t_keycode, CMB_MATCH_LEFT, 0, 0, COMBOROLL_TERM, {.output_keycode=out}},
+#define LtoR_ARR(name, out, k1, k2) {comboroll_t_array,   CMB_MATCH_LEFT, 0, 0, COMBOROLL_TERM, {.output_array=comboroll_array_##name}},
+#define LtoR_LIT(name, out, k1, k2) {comboroll_t_literal, CMB_MATCH_LEFT, 0, 0, COMBOROLL_TERM, {.output_string=comboroll_string_##name}},
+#define LtoR_STR(name,      k1, k2) {comboroll_t_string,  CMB_MATCH_LEFT, 0, 0, COMBOROLL_TERM, {.output_string=comboroll_string_##name}},
 
-#define RtoL_KEY(name, out, k1, k2) {comboroll_t_keycode, CMB_MATCH_RIGHT, 0, COMBOROLL_TERM, {.output_keycode=out}},
-#define RtoL_ARR(name, out, k1, k2) {comboroll_t_array,   CMB_MATCH_RIGHT, 0, COMBOROLL_TERM, {.output_array=comboroll_array_##name}},
-#define RtoL_LIT(name, out, k1, k2) {comboroll_t_literal, CMB_MATCH_RIGHT, 0, COMBOROLL_TERM, {.output_string=comboroll_string_##name}},
-#define RtoL_STR(name,      k1, k2) {comboroll_t_string,  CMB_MATCH_RIGHT, 0, COMBOROLL_TERM, {.output_string=comboroll_string_##name}},
+#define RtoL_KEY(name, out, k1, k2) {comboroll_t_keycode, CMB_MATCH_RIGHT, 0, 0, COMBOROLL_TERM, {.output_keycode=out}},
+#define RtoL_ARR(name, out, k1, k2) {comboroll_t_array,   CMB_MATCH_RIGHT, 0, 0, COMBOROLL_TERM, {.output_array=comboroll_array_##name}},
+#define RtoL_LIT(name, out, k1, k2) {comboroll_t_literal, CMB_MATCH_RIGHT, 0, 0, COMBOROLL_TERM, {.output_string=comboroll_string_##name}},
+#define RtoL_STR(name,      k1, k2) {comboroll_t_string,  CMB_MATCH_RIGHT, 0, 0, COMBOROLL_TERM, {.output_string=comboroll_string_##name}},
 
-#define CMBO_KEY(name, out, k1, k2) {comboroll_t_keycode, CMB_MATCH_BOTH, 0, COMBO_TERM, {.output_keycode=out}},
-#define CMBO_ARR(name, out, k1, k2) {comboroll_t_array,   CMB_MATCH_BOTH, 0, COMBO_TERM, {.output_array=comboroll_array_##name}},
-#define CMBO_LIT(name, out, k1, k2) {comboroll_t_literal, CMB_MATCH_BOTH, 0, COMBO_TERM, {.output_string=comboroll_string_##name}},
-#define CMBO_STR(name,      k1, k2) {comboroll_t_string,  CMB_MATCH_BOTH, 0, COMBO_TERM, {.output_string=comboroll_string_##name}},
+#define CMBO_KEY(name, out, k1, k2) {comboroll_t_keycode, CMB_MATCH_BOTH, 0, 0, COMBO_TERM, {.output_keycode=out}},
+#define CMBO_ARR(name, out, k1, k2) {comboroll_t_array,   CMB_MATCH_BOTH, 0, 0, COMBO_TERM, {.output_array=comboroll_array_##name}},
+#define CMBO_LIT(name, out, k1, k2) {comboroll_t_literal, CMB_MATCH_BOTH, 0, 0, COMBO_TERM, {.output_string=comboroll_string_##name}},
+#define CMBO_STR(name,      k1, k2) {comboroll_t_string,  CMB_MATCH_BOTH, 0, 0, COMBO_TERM, {.output_string=comboroll_string_##name}},
 
 comboroll_t comboroll_data[] = {
 #   include "combo_defs.h"
@@ -227,6 +228,8 @@ void comboroll_post_init() {
 
 #undef  _ONSHIFT
 #define _ONSHIFT(name) comboroll_data[COMBOROLL_ID_##name].onshift = 1;
+#undef  _NOSHIFT
+#define _NOSHIFT(name) comboroll_data[COMBOROLL_ID_##name].noshift = 1;
 
 #include "combo_defs.h"
 }
@@ -297,15 +300,19 @@ bool comboroll_scan_firstkey(uint16_t keycode) {
     }
     comboroll_longest_term = 0;
     for (int i = 0; i < COMBOROLL_COUNT; i++) {
-        if  (
-                (
-                    (CMB_IS_MATCHES_LEFT(comboroll_data[i].direction) && keycode == CMB_KEY_1(i))
-                    || (CMB_IS_MATCHES_RIGHT(comboroll_data[i].direction) && keycode == CMB_KEY_2(i))
-                )
-                && (
-                    !comboroll_data[i].onshift
-                    || ((get_mods() & MOD_MASK_SHIFT) && comboroll_data[i].onshift)
-                )
+        if (
+            (
+                (CMB_IS_MATCHES_LEFT(comboroll_data[i].direction) && keycode == CMB_KEY_1(i))
+                || (CMB_IS_MATCHES_RIGHT(comboroll_data[i].direction) && keycode == CMB_KEY_2(i))
+            )
+            && (
+                !comboroll_data[i].onshift
+                || ((get_mods() & MOD_MASK_SHIFT) && comboroll_data[i].onshift)
+            )
+            && (
+                !comboroll_data[i].noshift
+                || (!(get_mods() & MOD_MASK_SHIFT) && comboroll_data[i].noshift)
+            )
         ) {
             found = true;
             if (comboroll_data[i].term > comboroll_longest_term) {
@@ -328,15 +335,19 @@ comboroll_t *comboroll_scan_secondkey(uint16_t firstkey, uint16_t secondkey) {
         return NULL;
     }
     for (int i = 0; i < COMBOROLL_COUNT; i++) {
-        if  (
-                (
-                    (CMB_IS_MATCHES_LEFT(comboroll_data[i].direction) && firstkey == CMB_KEY_1(i) && secondkey == CMB_KEY_2(i))
-                    || (CMB_IS_MATCHES_RIGHT(comboroll_data[i].direction) && firstkey == CMB_KEY_2(i) && secondkey == CMB_KEY_1(i))
-                )
-                && (
-                    !comboroll_data[i].onshift
-                    || ((firstkey_mods & MOD_MASK_SHIFT) && comboroll_data[i].onshift)
-                )
+        if (
+            (
+                (CMB_IS_MATCHES_LEFT(comboroll_data[i].direction) && firstkey == CMB_KEY_1(i) && secondkey == CMB_KEY_2(i))
+                || (CMB_IS_MATCHES_RIGHT(comboroll_data[i].direction) && firstkey == CMB_KEY_2(i) && secondkey == CMB_KEY_1(i))
+            )
+            && (
+                !comboroll_data[i].onshift
+                || ((firstkey_mods & MOD_MASK_SHIFT) && comboroll_data[i].onshift)
+            )
+            && (
+                !comboroll_data[i].noshift
+                || (!(firstkey_mods & MOD_MASK_SHIFT) && comboroll_data[i].noshift)
+            )
         ) {
 	        if (timer_elapsed(comboroll_timer) <= comboroll_data[i].term) { // don't match combo if it took too long
                 result = &comboroll_data[i];
