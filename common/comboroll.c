@@ -297,12 +297,16 @@ bool comboroll_scan_firstkey(uint16_t keycode) {
     }
     comboroll_longest_term = 0;
     for (int i = 0; i < COMBOROLL_COUNT; i++) {
-        if (
-            ((CMB_IS_MATCHES_LEFT(comboroll_data[i].direction) && keycode == CMB_KEY_1(i))
-            || (CMB_IS_MATCHES_RIGHT(comboroll_data[i].direction) && keycode == CMB_KEY_2(i)))
-            && !(!(get_mods() & MOD_MASK_SHIFT) && comboroll_data[i].onshift)
-            ) {
-
+        if  (
+                (
+                    (CMB_IS_MATCHES_LEFT(comboroll_data[i].direction) && keycode == CMB_KEY_1(i))
+                    || (CMB_IS_MATCHES_RIGHT(comboroll_data[i].direction) && keycode == CMB_KEY_2(i))
+                )
+                && (
+                    !comboroll_data[i].onshift
+                    || ((get_mods() & MOD_MASK_SHIFT) && comboroll_data[i].onshift)
+                )
+        ) {
             found = true;
             if (comboroll_data[i].term > comboroll_longest_term) {
                 comboroll_longest_term = comboroll_data[i].term;
@@ -324,10 +328,16 @@ comboroll_t *comboroll_scan_secondkey(uint16_t firstkey, uint16_t secondkey) {
         return NULL;
     }
     for (int i = 0; i < COMBOROLL_COUNT; i++) {
-        if (
-            (CMB_IS_MATCHES_LEFT(comboroll_data[i].direction) && firstkey == CMB_KEY_1(i) && secondkey == CMB_KEY_2(i))
-            || (CMB_IS_MATCHES_RIGHT(comboroll_data[i].direction) && firstkey == CMB_KEY_2(i) && secondkey == CMB_KEY_1(i))) {
-
+        if  (
+                (
+                    (CMB_IS_MATCHES_LEFT(comboroll_data[i].direction) && firstkey == CMB_KEY_1(i) && secondkey == CMB_KEY_2(i))
+                    || (CMB_IS_MATCHES_RIGHT(comboroll_data[i].direction) && firstkey == CMB_KEY_2(i) && secondkey == CMB_KEY_1(i))
+                )
+                && (
+                    !comboroll_data[i].onshift
+                    || ((firstkey_mods & MOD_MASK_SHIFT) && comboroll_data[i].onshift)
+                )
+        ) {
 	        if (timer_elapsed(comboroll_timer) <= comboroll_data[i].term) { // don't match combo if it took too long
                 result = &comboroll_data[i];
             }
