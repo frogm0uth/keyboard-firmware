@@ -59,7 +59,7 @@ LtoR_STR( k,  KC_T, KC_F )
 LtoR_STR( ck, KC_C, KC_F )
 
 // Anti-SFU and anti-pinballing
-LtoR_STR( m,  KC_T, KC_D )
+LtoR_STR( m,  KC_S, KC_D )
 LtoR_STR( sc, KC_C, KC_W )
 LtoR_STR( sp, KC_P, KC_G )
 
@@ -88,7 +88,7 @@ RtoL_STR( you, KC_U, CU_DOT )
 // Inner column minimization and comfort
 LtoR_STR( v,   KC_P, KC_D )
 LtoR_STR( br,  KC_R, KC_H )
-LtoR_STR( b,   KC_S, KC_D )
+LtoR_STR( b,   KC_T, KC_D )
 
 // Common word endings, right hand
 RtoL_STR( ally, KC_M, CU_DOT )
