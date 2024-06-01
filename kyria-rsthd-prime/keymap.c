@@ -61,9 +61,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* SYMS
 
  ,-----------------------------------------.                        ,-----------------------------------------.
- |   ^  |   +  | (  [ |   *  | )  ] |  ../ |                        |      | Paste| Copy |  Cut |  All |   #  |
+ |   ^  |   +  | (  [ |   *  | )  ] |  ../ |                        | AppR | Paste| Copy |  Cut |  All |   #  |
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
- |  Tab | 4  @ | 3  { | 2  % | 1  } |   9  |                        |   8  | 0  = | 5  ` | 6 Tab|   7  |   =  |
+ |   9  | 4  @ | 3  { | 2  % | 1  } |  Tab |                        |   =  | 0  ` | 5 Tab|   6  |   7  |   8  |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
  |   ~  |   -  | <  & |   /  | >  | |                                      |      |      |      |      |   $  |
  |      |      |      |      |      |                                      |  Cmd |  Alt | Ctrl | Shift|      |
@@ -78,13 +78,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [SYMS] = KEY_LAYOUT_stack(
         /* Left hand */
         KC_CIRC,  KC_PLUS,       CU_LPRN,  KC_ASTR,       CU_RPRN,  CU_DIRUP,
-        KC_TAB,   CU_4,          CU_3,     CU_2,          CU_1,     CU_9,
+        CU_9,     CU_4,          CU_3,     CU_2,          CU_1,     KC_TAB,
         KC_TILD,  CU_MINS_MINS,  CU_LT,    CU_SLSH_SLSH,  CU_GT,
 
         /* Right hand */
-                  ___X___,  SC_PASTE,  SC_COPY,  SC_CUT,   SC_SELECT_ALL,  KC_HASH,
-                  CU_8,     CU_0,      CU_5,     CU_6,     CU_7,           CU_EQL_EQL,
-                            KC_RGUI,   KC_RALT,  KC_RCTL,  CU_SHIFT,       KC_DLR,
+                  CU_APPSWITCH_RIGHT,  SC_PASTE,  SC_COPY,  SC_CUT,   SC_SELECT_ALL,  KC_HASH,
+                  CU_EQL_EQL,          CU_0,      CU_5,     CU_6,     CU_7,           CU_8,
+                                       KC_RGUI,   KC_RALT,  KC_RCTL,  CU_SHIFT,       KC_DLR,
 
         /* Thumbs */
         CU_ENT_ENT, CU_SPC_SPC, CU_DOT_DOT,   ___X___, ___X___, _______,
@@ -95,14 +95,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 /* EDIT
- 
+
  ,-----------------------------------------.                        ,-----------------------------------------.
- |  Esc |  All |  Cut | Copy | Paste|Dsktop|                        |Expose| Home |  Up  |  End | PgUp | WinR |
+ |  Esc |  All |  Cut | Copy | Paste|AppWin|                        |Expose| Home |  Up  |  End | PgUp | ScrR |
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
- |FulScr|      |      |      |      | ScrL |                        | ScrR | Left | Down | Right| PgDn | TabR |
+ |FulScr|      |      |      |      | TabL |                        | TabR | Left | Down | Right| PgDn | WinR |
  |      |Delete| More |  x4  | Fast |      |                        |      |      |      |      |      |      |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
- |AppWin|      |      |      |      |                                      | Undo | Space| Redo |  Tab | AppR |
+ | SNAP |      |      |      |      |                                      | Undo | Space| Redo |  Tab | AppR |
  |      | Shift| Ctrl |  Alt |  Cmd |                                      |      |      |      |      |      |
  `----------------------------------'                                      `----------------------------------'
 
@@ -114,14 +114,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [EDIT] = KEY_LAYOUT_stack(
         /* Left hand */
-        _______,            SC_SELECT_ALL,  SC_CUT,   SC_COPY,  SC_PASTE,  SC_REVEAL_DESKTOP,
-        SC_FULLSCREEN,      CE_DELETE,      CE_MORE,  CE_X4,    CE_FAST,   SC_PREV_SCREEN,
-        SC_EXPOSE_WINDOWS,  CU_SHIFT,       KC_LCTL,  KC_LALT,  KC_LGUI,
-
+        _______,        SC_SELECT_ALL,  SC_CUT,   SC_COPY,  SC_PASTE,  SC_EXPOSE_APP,
+        SC_FULLSCREEN,  CE_DELETE,      CE_MORE,  CE_X4,    CE_FAST,   SC_TAB_LEFT,
+        CL_SNAP,        CU_SHIFT,       KC_LCTL,  KC_LALT,  KC_LGUI,
 
         /* Right hand */
-                     SC_EXPOSE_ALL,   CE_HOME,  CE_UP,    CE_END,    CE_PAGE_UP,    CU_NEXT_WINDOW,
-                     SC_NEXT_SCREEN,  CE_LEFT,  CE_DOWN,  CE_RIGHT,  CE_PAGE_DOWN,  CU_TAB_RIGHT,
+                     SC_EXPOSE_ALL,   CE_HOME,  CE_UP,    CE_END,    CE_PAGE_UP,    CU_SCREEN_RL,
+                     CU_TAB_RIGHT,    CE_LEFT,  CE_DOWN,  CE_RIGHT,  CE_PAGE_DOWN,  CU_NEXT_WINDOW,
                                       SC_UNDO,  KC_SPC,   SC_REDO,   KC_TAB,        CU_APPSWITCH_RIGHT,
 
         /* Thumbs */
@@ -135,33 +134,33 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* META
 
  ,-----------------------------------------.                        ,-----------------------------------------.
- |      |  Bin | Close|      | Find | BriU |                        | VolU |PrvTrk| Play |NxtTrk| Mute |      |
+ |      |  Bin | Close|Dsktop| Find | BriU |                        | VolU |PrvTrk| Play |NxtTrk| Mute |      |
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
  | eXit |Reload| Save |newTab|      | BriD |                        | VolD |  New |      | Open |saveAs| Quit |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
- |      |      | Print| Prev | Next |                                      | Back |  Fwd |      |      |      |
+ |      |      | Print| Prev | Next |                                      | Back |  Fwd |AppSet|      |      |
  | (**) | Shift|      |      |      |                                      |      |      |      | Shift| (**) |
  `----------------------------------'                                      `----------------------------------'
 
  .                 ,------.      ,--------------------.  ,--------------------.
- .                 |      |      |      | AppR | WinR |  | WinR | AppR |      |
+ .                 |      |      |      |      |      |  |SysSet|      |      |
  .                 |      |      | SNAP |      |      |  |      |      | FUNC |
  .                 `------'      `--------------------'  `--------------------'
  */
 
     [META] = KEY_LAYOUT_stack(
         /* Left hand */
-        ___X___, SC_BIN,      SC_CLOSE_TAB, ___X___,        SC_FIND,        SC_BRIGHTNESS_UP,
+        ___X___, SC_BIN,      SC_CLOSE_TAB, SC_REVEAL_DESKTOP, SC_FIND,     SC_BRIGHTNESS_UP,
         SC_QUIT, SC_RELOAD,   SC_SAVE,      SC_NEW_TAB,     ___X___,        SC_BRIGHTNESS_DOWN,
         _______, CU_SHIFT,    SC_PRINT,     SC_PREV_SEARCH, SC_NEXT_SEARCH,
 
         /* Right hand */
-                 KC_VOLU,  KC_MPRV,         KC_MPLY,        KC_MNXT,  KC_MUTE,     ___X___,
-                 KC_VOLD,  SC_NEW,          ___X___,        SC_OPEN,  SC_SAVE_AS,  SC_QUIT,
-                           SC_BROWSER_BACK, SC_BROWSER_FWD, ___X___,  CU_SHIFT,    _______,
+                 KC_VOLU,  KC_MPRV,         KC_MPLY,        KC_MNXT,         KC_MUTE,     ___X___,
+                 KC_VOLD,  SC_NEW,          ___X___,        SC_OPEN,         SC_SAVE_AS,  SC_QUIT,
+                           SC_BROWSER_BACK, SC_BROWSER_FWD, SC_APP_SETTINGS, CU_SHIFT,    _______,
 
         /* Thumbs */
-        CL_SNAP, CU_APPSWITCH_RIGHT, CU_NEXT_WINDOW,   CU_NEXT_WINDOW, CU_APPSWITCH_RIGHT, CL_FUNC,
+        CL_SNAP, ___X___, ___X___, SC_SYS_SETTINGS, ___X___, CL_FUNC,
 
         /* Encoder button */
         ___X___
@@ -171,9 +170,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* FUNC
 
  ,-----------------------------------------.                        ,-----------------------------------------.
- |      |  F8  |  F7  |  F6  |  F5  |LghtUp|                        |      |      |      |      |      |      |
+ |      |  F8  |  F7  |  F6  |  F5  |LghtUp|                        |      | !Mac | !Win |!Linux|      |      |
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
- |      |  F4  |  F3  |  F2  |  F1  |LghtDn|                        |      | !Mac | !Win |!Linux|      |!WRITE|
+ |      |  F4  |  F3  |  F2  |  F1  |LghtDn|                        |      | SSRgn| SSWin| SSScr| SSApp|!WRITE|
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
  |      |  F12 |  F11 |  F10 |  F9  |                                      |      |      |      |      |      |
  | (**) |      |      |      |      |                                      |  Cmd |  Alt | Ctrl | Shift| (**) |
@@ -192,9 +191,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,  KC_F12,    KC_F11,   KC_F10,   KC_F9,
 
         /* Right hand */
-                 ___X___,   ___X___,    ___X___,    ___X___,   ___X___,   ___X___,
-                 ___X___,   CU_MACOS,  CU_WINDOWS,  CU_LINUX,  ___X___,   CU_WRITE,
-                            KC_RGUI,   KC_RALT,     KC_RCTL,   CU_SHIFT,  _______,
+                 ___X___,   CU_MACOS,        CU_WINDOWS,      CU_LINUX,          ___X___,        ___X___,
+                 ___X___,   CU_SCRSHOT_RGN,  CU_SCRSHOT_WIN,  SC_SCRSHOT_SCREEN, SC_SCRSHOT_APP, CU_WRITE,
+                            KC_RGUI,         KC_RALT,         KC_RCTL,           CU_SHIFT,       _______,
 
         /* Thumbs */
         _______, CM_BTN1, CM_BTN2,   CU_WIPE, ___X___, _______,
@@ -207,11 +206,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* SNAP
 
  ,-----------------------------------------.                        ,-----------------------------------------.
- |      |      |      |      |      |      |                        |LghtUp| SL23 | SnapT| SR23 | ZmIn |      |
+ |      |      |      |      |      |      |                        | SPrev| SL23 | SMax | SR23 | ZmIn | SnapT|
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
- |!WRITE| SSApp| SSScr| SSWin| SSRgn|      |                        |LghtDn| SnapL| SnapC| SnapR| ZmOut|      |
+ |!WRITE| SSApp| SSScr| SSWin| SSRgn|      |                        | SVert| SL12 | SM23 | SR12 | ZmOut| SnapB|
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
- |      |      |      |      |      |                                      | SL14 | SnapB| SR14 |  Zm0 |      |
+ |      |      |      |      |      |                                      | SL14 | SM12 | SR14 |  Zm0 |      |
  | (**) | Shift| Ctrl |  Alt |  Cmd |                                      |      |      |      |      | (**) |
  `----------------------------------'                                      `----------------------------------'
 
@@ -224,13 +223,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [SNAP] = KEY_LAYOUT_stack(
         /* Left hand */
         ___X___,  ___X___,           ___X___,              ___X___,        ___X___,        ___X___,
-        CU_WRITE, SC_SCREENSHOT_APP, SC_SCREENSHOT_SCREEN, CU_SCRSHOT_WIN, CU_SCRSHOT_RGN, ___X___,
+        CU_WRITE, SC_SCRSHOT_APP,    SC_SCRSHOT_SCREEN,    CU_SCRSHOT_WIN, CU_SCRSHOT_RGN, ___X___,
         _______,  CU_SHIFT,          KC_LCTL,              KC_LALT,        KC_LGUI,
 
          /* Right hand */
-                 CU_LGHTUP,  SC_SNAP_LEFTTWOTHIRDS, SC_SNAP_TOP,          SC_SNAP_RIGHTTWOTHIRDS, SC_APP_ZOOM_IN,    ___X___,
-                 CU_LGHTDN,  SC_SNAP_LEFT,          SC_SNAP_MIDTWOTHIRDS, SC_SNAP_RIGHT,          SC_APP_ZOOM_OUT,   ___X___,
-                             SC_SNAP_LEFTQUARTER,   SC_SNAP_BOTTOM,       SC_SNAP_RIGHTQUARTER,   SC_APP_ZOOM_RESET, _______,
+                 SC_SNAP_PREVIOUS,  SC_SNAP_LEFTTWOTHIRDS, SC_SNAP_MAXIMIZE,     SC_SNAP_RIGHTTWOTHIRDS, SC_APP_ZOOM_IN,    SC_SNAP_TOP,
+                 SC_SNAP_VERTICAL,  SC_SNAP_LEFT,          SC_SNAP_MIDTWOTHIRDS, SC_SNAP_RIGHT,          SC_APP_ZOOM_OUT,   SC_SNAP_BOTTOM,
+                                    SC_SNAP_LEFTQUARTER,   SC_SNAP_MIDDLE,       SC_SNAP_RIGHTQUARTER,   SC_APP_ZOOM_RESET, _______,
 
         /* Thumbs */
         _______, ___X___, CU_WIPE,   ___X___, CM_BTN1, CM_BTN2,

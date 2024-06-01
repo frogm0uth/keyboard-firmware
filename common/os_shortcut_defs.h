@@ -66,36 +66,41 @@ DEFINE_SHORTCUT( NEXT_SCREEN,     C(KC_RGHT),  G(C(KC_RGHT)),   G(C(KC_RGHT)) ) 
 DEFINE_SHORTCUT( PREV_SCREEN,     C(KC_LEFT),  G(C(KC_LEFT)),   G(C(KC_LEFT)) )   // Move to previous screen
 DEFINE_SHORTCUT( FULLSCREEN,      G(C(KC_F)),  KC_F11,          KC_F11 )          // Toggle window to/from full-screen
 
-DEFINE_SHORTCUT( EXPOSE_WINDOWS,  C(KC_DOWN),  G(A(KC_TAB)),    G(A(KC_TAB))  )   // Expose windows of current app
+DEFINE_SHORTCUT( EXPOSE_APP,      C(KC_DOWN),  G(A(KC_TAB)),    G(A(KC_TAB))  )   // Expose windows of current app
 DEFINE_SHORTCUT( NEXT_APP,        KC_TAB,      KC_NO,           KC_NO  )          // Next application while in Mission Control FIXME not working in Win/Linux
 DEFINE_SHORTCUT( PREV_APP,        S(KC_TAB),   KC_NO,           KC_NO  )          // Previous application
 DEFINE_SHORTCUT( REVEAL_DESKTOP,  KC_F11,      G(KC_D),         G(KC_D)  )        // Reveal desktop
 
 
 /**
- * Window snapping. On macOS this needs Rectangle Pro installed
+ * Window snapping. On macOS this needs Rectangle Pro installed. Marked with an asterix if the shortcut
+ * must be set up.
+ * 
  * FIXME for Linux (KDE)
  */
 DEFINE_SHORTCUT( SNAP_LEFT,       C(A(KC_LEFT)),   G(KC_LEFT),      KC_NO )       // Snap to left half of screen
 DEFINE_SHORTCUT( SNAP_RIGHT,      C(A(KC_RIGHT)),  G(KC_RIGHT),     KC_NO )       // Snap to right half of screen
+DEFINE_SHORTCUT( SNAP_MIDDLE,     G(C(A(KC_M))),   KC_NO,           KC_NO )       // * Snap to middle half of screen
 DEFINE_SHORTCUT( SNAP_TOP,        C(A(KC_UP)),     A(G(KC_UP)),     KC_NO )       // Snap to top half of screen
 DEFINE_SHORTCUT( SNAP_BOTTOM,     C(A(KC_DOWN)),   A(G(KC_DOWN)),   KC_NO )       // Snap to bottom half of screen
+
+DEFINE_SHORTCUT( SNAP_MAXIMIZE,    C(A(KC_ENT)),     KC_NO,        KC_NO )        // Maximize
+DEFINE_SHORTCUT( SNAP_VERTICAL,    G(C(A(KC_UP))),   S(G(KC_UP)),  KC_NO )        // * Snap vertical i.e. maximize height
+DEFINE_SHORTCUT( SNAP_PREVIOUS,    G(C(A(KC_DOWN))), KC_NO,        KC_NO )        // * Snap to previous
 
 DEFINE_SHORTCUT( SNAP_TOPLEFT,     C(A(KC_U)),      KC_NO,        KC_NO )       // Snap to top left quadrant of screen
 DEFINE_SHORTCUT( SNAP_TOPRIGHT,    C(A(KC_I)),      G(KC_Z),      KC_NO )       // Snap to top right quadrant of screen (macOS), open snap options (Windows)
 DEFINE_SHORTCUT( SNAP_BOTTOMLEFT,  C(A(KC_J)),      KC_NO,        KC_NO )       // Snap to bottom left quadrant of screen
 DEFINE_SHORTCUT( SNAP_BOTTOMRIGHT, C(A(KC_K)),      KC_NO,        KC_NO )       // Snap to bottom right quadrant of screen
 
-DEFINE_SHORTCUT( SNAP_VERTICAL,    S(C(A(KC_UP))),  S(G(KC_UP)),  KC_NO )       // Snap vertical i.e. maximize height
-
 DEFINE_SHORTCUT( SNAP_LEFTTHIRD,   C(A(KC_D)),  KC_NO,     KC_NO )       // Snap to left third of screen
 DEFINE_SHORTCUT( SNAP_RIGHTTHIRD,  C(A(KC_G)),  KC_NO,     KC_NO )       // Snap to right third of screen
 
-DEFINE_SHORTCUT( SNAP_LEFTQUARTER,   C(A(KC_Q)),    KC_NO,     KC_NO )       // Snap to left quarter of screen
-DEFINE_SHORTCUT( SNAP_RIGHTQUARTER,  S(C(A(KC_Q))), KC_NO,     KC_NO )       // Snap to right quarter of screen
+DEFINE_SHORTCUT( SNAP_LEFTQUARTER,   C(A(KC_Q)),    KC_NO,     KC_NO )       // * Snap to left quarter of screen
+DEFINE_SHORTCUT( SNAP_RIGHTQUARTER,  S(C(A(KC_Q))), KC_NO,     KC_NO )       // * Snap to right quarter of screen
 
 DEFINE_SHORTCUT( SNAP_LEFTTWOTHIRDS,   C(A(KC_E)),  KC_NO,     KC_NO )       // Snap to left two-thirds of screen
-DEFINE_SHORTCUT( SNAP_MIDTWOTHIRDS,    C(A(KC_X)),  KC_NO,     KC_NO )       // Snap to middle two-thirds of screen
+DEFINE_SHORTCUT( SNAP_MIDTWOTHIRDS,    C(A(KC_X)),  KC_NO,     KC_NO )       // * Snap to middle two-thirds of screen
 DEFINE_SHORTCUT( SNAP_RIGHTTWOTHIRDS,  C(A(KC_T)),  KC_NO,     KC_NO )       // Snap to right two-thirds of screen
 
 /**
@@ -142,9 +147,9 @@ DEFINE_SHORTCUT( SCR_ZOOM_RESET,    A(G(KC_8)),      KC_NO,        G(KC_0) )    
 /**
  * Screenshots - may need additional OS-specific code
  */
-DEFINE_SHORTCUT( SCREENSHOT_SCREEN,   S(G(KC_3)),   G(KC_PSCR),   G(KC_PSCR) )  // Take whole screen
-DEFINE_SHORTCUT( SCREENSHOT_REGION,   S(G(KC_4)),   G(S(KC_S)),   KC_NO )       // Start screenshot of region
-DEFINE_SHORTCUT( SCREENSHOT_APP,      S(G(KC_5)),   G(S(KC_S)),   KC_NO )       // Start screen shot app
+DEFINE_SHORTCUT( SCRSHOT_SCREEN,   S(G(KC_3)),   G(KC_PSCR),   G(KC_PSCR) )  // Take whole screen
+DEFINE_SHORTCUT( SCRSHOT_REGION,   S(G(KC_4)),   G(S(KC_S)),   KC_NO )       // Start screenshot of region
+DEFINE_SHORTCUT( SCRSHOT_APP,      S(G(KC_5)),   G(S(KC_S)),   KC_NO )       // Start screen shot app
 
 
 /**
@@ -173,3 +178,9 @@ DEFINE_SHORTCUT( SYSTEM_SLEEP,  A(G(KC_EJCT)),  KC_SLEP,    KC_SLEP   )  // Syst
 
 DEFINE_SHORTCUT( BRIGHTNESS_UP,   KC_BRMU, KC_BRIU, KC_BRIU )    // Brightness
 DEFINE_SHORTCUT( BRIGHTNESS_DOWN, KC_BRMD, KC_BRID, KC_BRID )
+
+DEFINE_SHORTCUT( APP_SETTINGS,   G(KC_COMM), KC_NO, KC_NO )
+DEFINE_SHORTCUT( SYS_SETTINGS,   G(KC_LT),   KC_NO, KC_NO )
+
+
+

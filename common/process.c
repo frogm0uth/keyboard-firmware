@@ -216,7 +216,7 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
              */
         case CU_SCRSHOT_WIN:
             if (record->event.pressed) {
-                tap_code16(SC(SC_SCREENSHOT_REGION));
+                tap_code16(SC(SC_SCRSHOT_REGION));
                 wait_ms(100);
                 tap_code(KC_SPC);
 #ifdef MOUSEKEY_ENABLE
@@ -232,7 +232,7 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
              */
         case CU_SCRSHOT_RGN:
             if (record->event.pressed) {
-                tap_code16(SC(SC_SCREENSHOT_REGION));
+                tap_code16(SC(SC_SCRSHOT_REGION));
 #ifdef MOUSEKEY_ENABLE
                 wait_ms(100);
                 register_code16(CM_BTN1);
