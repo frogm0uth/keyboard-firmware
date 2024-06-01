@@ -202,14 +202,12 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
             /* Modify keyboard parameters.
              */
         case CU_LGHTUP:
-            if (record->event.pressed) {
-                kb_lighting_adjust(true, mods);
-            }
-            return false;
-            break;
         case CU_LGHTDN:
             if (record->event.pressed) {
-                kb_lighting_adjust(false, mods);
+                kb_lighting_adjust(keycode == CU_LGHTUP, mods);
+                start_key_repeat(keycode, record);
+            } else {
+                stop_key_repeat();
             }
             return false;
             break;
@@ -362,6 +360,9 @@ void matrix_scan_user(void) {
 
     // Repeat key timeout
     repeatkey_tick();
+
+    // Key repeat timeout
+    key_repeat_tick();
 
     // Caps word toggle timeout
 #ifdef CUSTOM_CAPSWORD

@@ -21,6 +21,61 @@
  * QMK-related utilities
  */
 
+// Variables for timer
+enum { repeat_inactive, repeat_waiting, repeat_repeating };
+
+static uint16_t    repeat_timer   = 0;
+static uint16_t    repeat_term    = KEY_WAIT_TERM;
+static uint16_t    repeat_key     = KC_NO;
+static keyrecord_t repeat_record;
+static uint8_t     repeat_state   = repeat_inactive;
+
+// Start repeating a key. Call from process_record_user().
+//
+void start_key_repeat(uint16_t keycode, keyrecord_t *record) {
+    switch (repeat_state) {
+        case repeat_inactive:
+            repeat_key = keycode;
+            repeat_record = *record; // make a copy
+            repeat_term  = KEY_WAIT_TERM;
+            repeat_state = repeat_waiting;
+            repeat_timer = timer_read();
+            break;
+    }
+}
+
+// Stop repeating a key. Call from process_record_user().
+//
+void stop_key_repeat() {
+    repeat_state = repeat_inactive;
+}
+
+// Process a key repeat tick. Call from matrix_scan_user()
+//
+void key_repeat_tick() {
+    switch (repeat_state) {
+        case repeat_inactive:
+            break;
+
+        case repeat_waiting:
+            if (timer_elapsed(repeat_timer) > repeat_term) {
+                tap_custom_key(repeat_key, &repeat_record);
+                repeat_state = repeat_repeating;
+                repeat_term  = KEY_REPEAT_TERM;
+                repeat_timer = timer_read();
+            }
+            break;
+
+        case repeat_repeating:
+            if (timer_elapsed(repeat_timer) > repeat_term) {
+                tap_custom_key(repeat_key, &repeat_record);
+                repeat_state = repeat_repeating; // WHY is this necessary??!
+                repeat_timer = timer_read();
+            }
+            break;
+    }
+}
+
 
 /**
  * User space in EEPROM. Variable and function to read at initialization.
