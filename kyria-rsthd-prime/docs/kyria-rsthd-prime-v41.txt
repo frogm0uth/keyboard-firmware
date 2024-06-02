@@ -39,9 +39,9 @@ SYMS
 EDIT
 
  ,-----------------------------------------.                        ,-----------------------------------------.
- |  Esc |  All |  Cut | Copy | Paste|AppWin|                        |Expose| Home |  Up  |  End | PgUp | ScrR |
+ |  Esc |  All |  Cut | Copy | Paste| AppR |                        |Expose| Home |  Up  |  End | PgUp | ScrR |
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
- |FulScr|      |      |      |      | TabL |                        | TabR | Left | Down | Right| PgDn | WinR |
+ |FulScr|      |      |      |      |AppWin|                        | TabR | Left | Down | Right| PgDn | WinR |
  |      |Delete| More |  x4  | Fast |      |                        |      |      |      |      |      |      |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
  | SNAP |      |      |      |      |                                      | Undo | Space| Redo |  Tab | AppR |

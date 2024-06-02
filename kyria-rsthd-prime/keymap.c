@@ -97,9 +97,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* EDIT
 
  ,-----------------------------------------.                        ,-----------------------------------------.
- |  Esc |  All |  Cut | Copy | Paste|AppWin|                        |Expose| Home |  Up  |  End | PgUp | ScrR |
+ |  Esc |  All |  Cut | Copy | Paste| AppR |                        |Expose| Home |  Up  |  End | PgUp | ScrR |
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
- |FulScr|      |      |      |      | TabL |                        | TabR | Left | Down | Right| PgDn | WinR |
+ |FulScr|      |      |      |      |AppWin|                        | TabR | Left | Down | Right| PgDn | WinR |
  |      |Delete| More |  x4  | Fast |      |                        |      |      |      |      |      |      |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
  | SNAP |      |      |      |      |                                      | Undo | Space| Redo |  Tab | AppR |
@@ -114,12 +114,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [EDIT] = KEY_LAYOUT_stack(
         /* Left hand */
-        _______,        SC_SELECT_ALL,  SC_CUT,   SC_COPY,  SC_PASTE,  SC_EXPOSE_APP,
-        SC_FULLSCREEN,  CE_DELETE,      CE_MORE,  CE_X4,    CE_FAST,   SC_TAB_LEFT,
+        _______,        SC_SELECT_ALL,  SC_CUT,   SC_COPY,  SC_PASTE,  CU_APPSWITCH_RIGHT,
+        SC_FULLSCREEN,  CE_DELETE,      CE_MORE,  CE_X4,    CE_FAST,   SC_EXPOSE_APP,
         CL_SNAP,        CU_SHIFT,       KC_LCTL,  KC_LALT,  KC_LGUI,
 
         /* Right hand */
-                     SC_EXPOSE_ALL,   CE_HOME,  CE_UP,    CE_END,    CE_PAGE_UP,    CU_SCREEN_RL,
+                     CU_EXPOSE_ALL,   CE_HOME,  CE_UP,    CE_END,    CE_PAGE_UP,    CU_SCREEN_RL,
                      CU_TAB_RIGHT,    CE_LEFT,  CE_DOWN,  CE_RIGHT,  CE_PAGE_DOWN,  CU_NEXT_WINDOW,
                                       SC_UNDO,  KC_SPC,   SC_REDO,   KC_TAB,        CU_APPSWITCH_RIGHT,
 
