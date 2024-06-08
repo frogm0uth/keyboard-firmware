@@ -15,6 +15,10 @@ This is the keymap for my Kyria keyboard from [splitkb.com](https://splitkb.com)
       * [META](#meta)
       * [FUNC](#func)
       * [SNAP](#snap)
+   * [Layout notes](#layout-notes)
+      * [Why put E on the thumb?](#why-put-e-on-the-thumb)
+      * [E on which thumb?](#e-on-which-thumb)
+      * [Comboroll what?](#comboroll-what)
    * [Backmatter](#backmatter)
       * [How to build](#how-to-build)
       * [RSTHD variants and similar layouts](#rsthd-variants-and-similar-layouts)
@@ -59,7 +63,7 @@ See [common code](../common/README.md).
 
 The alpha layout aims to reduce lateral finger movement on the index finger. In fact, the lower keys of the inner columns have been removed entirely.
 
-An older version of the layout performed very well in an [analyzer](docs/prime-on-the-analyzer.md), with low SFU (same finger utilization) stats and low travel distance. Since then, some changes have been made to the layout that nominally give it worse performance, because of the use of [comborolls](docs/comborolls.md).
+An older version of the layout performed very well in an [analyzer](docs/prime-on-the-analyzer.md), with low SFU (same finger utilization) stats and low travel distance. Since then, some changes have been made to the layout that nominally give it worse performance, because of the use of [comborolls](#comboroll-what).
 
 *Use of this layout **requires** comborolls.*
 
@@ -72,7 +76,7 @@ The shift keys are "auto-off":
 
 Except for Shift, there are no modifiers on the alpha layer. To access them, hold the SYMS or EDIT layer key, hold the modifier(s) down, then release the layer key. This is a bit like Callum mods except it doesn't use one-shots. This is less inconvenient than it sounds: I roll the layer key with the modifier, and common shortcuts have dedicated keys on other layers anyway.
 
-The "repeat" thumb key is different to other implementations, in that you press it *before* the key that is to be repeated. This makes it possible to place it on the same thumb as space, as double letters often occur at the end of words. It also made it easier (for me) to implement and opens up possibilities like being able to repeat sequences of characters e.g. in a comboroll.
+The "repeat" thumb key is different to other implementations, in that you press it *before* the key that is to be repeated. This makes it possible to place it on the same thumb as space, as double letters often occur at the end of words.
 
 Since v37, E and Space have swapped hands relative to their RSTHD positions. This seems to be common amongst adopters - see [RSTHD variants and similar layouts](#rsthd-variants-and-similar-layouts).
 
@@ -158,6 +162,42 @@ Activated by the left thumb from the META layer.
 So called because of the keys for window snapping, which snap the active window to various locations on the screen. This works on macOS if [Rectangle Pro](https://rectangleapp.com) is running; it is not working at all on Windows and Linux yet.
 
 It also contains shortcuts for screenshots and for window zooming, as well as mouse buttons.
+
+
+## Layout notes
+
+### Why put E on the thumb?
+
+Opinions differ about whether E is a good letter to put on a thumb key, or whether putting a letter on the thumb is a good idea at all.
+
+To be frank, some of the arguments put forth about this seem a little bizarre to me. Ultimately, of course, everyone should use what they find comfortable, but the *reason* to use E is simply that (in English) it's the most common letter by far, so putting it on a thumb provides greater freedom to redistribute the load on the fingers.
+
+In my case, it has meant I can remove most of the load on the inner index column. Other people might have an issue with pinkies. Thing is, every layout choice has compromises and you need to pick the set that is most comfortable to you. If I had spider fingers and could use every column fully, for example, perhaps I would use a layout with E in the alpha block instead. (Then again, perhaps I wouldn't need an ergonomic keyboard at all.)
+
+### E on which thumb?
+
+RSTHD has E on the left thumb, but many adopters swap the E and space, as indicated in [RSTHD variants and similar layouts](#rsthd-variants-and-similar-layouts) below. I have tried both, starting with E on the left thumb a la RSTHD (now the [kyria-v42](https://github.com/frogm0uth/keyboard-firmware/blob/kyria-v42/kyria-rsthd-prime/README.md) branch) and, later on, E on the right thumb (the [kyria-v41](https://github.com/frogm0uth/keyboard-firmware/blob/kyria-v41/kyria-rsthd-prime/README.md) branch).
+
+The swapped-E version seems appealing at first, and rollers such as myself will enjoy rolling off the consonants onto the space. However, I found that, as I gained fluency, I would just stumble sometimes. Eventually, I realized why: "pinballing" between the space and the consonants. Consider a phrase such as "with this ring that" - between every pair of words there is a redirect/pinball on the thumb i.e.  `t t`, `s r`, `g t`.
+
+This was an interesting realization, and led me to try the left-thumb E again. Well, every layout has compromises and in the end I decided to stay with the swapped-E version. I have counteracted the pinballing mentioned somewhat by adding a comboroll for space on the right hand. I've also got a comboroll for E-space on the right hand to reduce alternation (when E occurs at the end of a word, which is often).
+
+### Comboroll what?
+
+I wrote a long explanation of these a while back, but my thinking has evolved since then, so here's a short version. Basically, a comboroll is a combo that you trigger by rolling two letters - that is, press the second key before releasing the first. Usually, the trigger keys are an inward roll. The number of output letters ranges from one to four - I haven't found longer to be useful.
+
+That's it. Not complicated. While I have a custom implementation, you can do a version of it in QMK with the `COMBO_MUST_PRESS_IN_ORDER` or `COMBO_MUST_PRESS_IN_ORDER_PER_COMBO` flags ([docs](https://docs.qmk.fm/features/combo#advanced-configuration)). The QMK implementation has some limitations (\*), but it's certainly good enough to get a feel for the concept.
+
+Essentially, a comboroll changes something "bad" into something "good" (a roll). The "bad" thing could be an SFB, a redirect, a too-long sequence of alternations, or some other awkward key sequence.
+
+Because the combo is "directional", you can use trigger keys that you might not want to use for a normal combo. For example, OA is somewhat common but AO is uncommon, so you can use AO as a comboroll trigger. For this reason, you can also have a longer timeout. When you get it right, and assuming you roll keys when you type anyway, the comboroll fits into the normal flow of typing but changes the key patterns into something more comfortable.
+
+Comborolls are related to Hands Down "adaptive keys" except that a. there is no assumption that the output letters are related to the input letters; b. the rolling requirement means that *not* triggering the combo doesn't have a timing dependency (just release the first key before pressing the second); c. the implementation is just a declaration of combos instead of being hardwired into code.
+
+The old long version of the essay is [here](docs/comborolls.md).
+
+(\*) The QMK implementation may give unexpected results with overlapping combos. For example, if AB produces X and AC produces Y, then rolling ABC will produce BY. In addition, if shift is pressed, all output letters are shifted (there is no way to have just the first letter capitalized).
+
 
 ## Backmatter
 
