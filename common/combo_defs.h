@@ -122,10 +122,12 @@ RtoL_LIT( define, "#define", KC_D, KC_Q )
 
 // Rolls for apostrophes
 RtoL_LIT(aposll, "'ll",  KC_QUOT, KC_L)
-RtoL_LIT(aposre, "'re",  KC_QUOT, KC_N)
+RtoL_LIT(aposre, "'re",  KC_QUOT, KC_Y)
 
 // Extras and oddballs
-RtoL_LIT( espace, "e ",  KC_E, CU_COMM )
+RtoL_LIT( espace, "e ",     KC_E,   CU_COMM )
+RtoL_LIT( ospace, "o ",     KC_E,   CU_DOT )
+RtoL_LIT( space,  " ",      KC_L,   CU_COMM )
 RtoL_LIT( backslash, "\\",  KC_U, KC_MINS )
 
 // Utilities
