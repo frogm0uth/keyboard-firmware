@@ -41,15 +41,15 @@ See also [Kyria Build Notes](docs/kyria-build-notes.md).
 
 Coming from a "slab" QWERTY keyboard to a programmable ergo split, I wanted to optimize:
 
-- Comfort. For me, that largely means de-emphasizing the inner index column. I've gone as far as to remove the lower key on that column (qwerty B/N). It also means balancing hand usage better.
-- Cross-platform portability. I need to switch between macOS and Windows frequently. The differences in shortcuts and location of Ctrl/Cmd keys was frustrating and programmable keyboards seemed to be the answer.
-- Better support for ambidextrous use of the trackpad or mouses (I use two). For example, it should be possible to do things like cut-copy-paste from either hand alone.
+- Comfort. For me, that largely means de-emphasizing the inner index columns. I've gone as far as to remove the lower key on those columns.
+- Cross-platform portability. The differences in shortcuts and location of Ctrl/Cmd keys on macOS and Windows are frustrating and programmable keyboards seemed to be the answer.
+- Better support for ambidextrous use of the trackpad. For example, it should be possible to do things like cut-copy-paste from either hand alone.
 
 Typing speed and reducing the number of keys on the keyboard are not important goals to me. With that said, my layout has now shrunk to 40 keys.
 
 ### Keyboard configuration
 
-My Kyria uses all 6 columns on each hand. However, the lower inner column keys are absent. There are three thumb keys on each side. The left side has an OLED and an encoder. In practice, I find that I mostly use the encoder for adjusting keyboard lighting, as for most functions it's quicker to just use keys.
+My Kyria uses all 6 columns on each hand. However, the lower inner column keys are absent. There are three thumb keys on each side. The left side has an OLED and an encoder. In practice, I find that I mostly use the encoder for adjusting keyboard lighting, as for other functions it's quicker to just use keys.
 
 ### Features
 
@@ -61,20 +61,20 @@ See [common code](../common/README.md).
 
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/06f63ae2174923cb64fc7dbdb55b841b)
 
-The alpha layout aims to reduce lateral finger movement on the index finger. In fact, the lower keys of the inner columns have been removed entirely.
+The alpha layout aims to reduce lateral finger movement on the index finger.
 
 An older version of the layout performed very well in an [analyzer](docs/prime-on-the-analyzer.md), with low SFU (same finger utilization) stats and low travel distance. Since then, some changes have been made to the layout that nominally give it worse performance, because of the use of [comborolls](#comboroll-what).
 
 *Use of this layout **requires** comborolls.*
 
-These letters can only be accessed with comborolls: J, K and `\`. These letters are usually accessed with comborolls even though they have a key: B and V. The letter M has a comboroll on the left hand to counter pin-balling off the MNL column.
+Some letters can only be accessed with comborolls: J, K and `\`. Some are usually accessed with comborolls even though they have a key: B and V. The letter M has a comboroll on the left hand to counter pin-balling off the MNL column.
 
 The shift keys are "auto-off":
 - If a shift key is held and another key is pressed, you get the shifted version of the key then shift is turned off. This completely eliminates typos like "THe".
 - If a shift key is tapped, it toggles caps-word.
 - If both shift keys are tapped at the same, they toggle caps-lock.
 
-Except for Shift, there are no modifiers on the alpha layer. To access them, hold the SYMS or EDIT layer key, hold the modifier(s) down, then release the layer key. This is a bit like Callum mods except it doesn't use one-shots. This is less inconvenient than it sounds: I roll the layer key with the modifier, and common shortcuts have dedicated keys on other layers anyway.
+Except for Shift, there are no modifiers on the alpha layer. To access them, hold the SYMS or EDIT layer key, hold the modifier(s) down, then release the layer key. This is a bit like Callum mods except it doesn't use one-shots.
 
 The "repeat" thumb key is different to other implementations, in that you press it *before* the key that is to be repeated. This makes it possible to place it on the same thumb as space, as double letters often occur at the end of words.
 
@@ -96,7 +96,7 @@ Activated by the right thumb.
 
 Numbers and punctuation are combined on one layer. Numbers are along the home row and punctuation is mostly arranged on the left hand. (If only one character shown, it is output regardless of Shift.)
 
-The punctuation is arranged so that common (for me) symbol bigrams are an inward roll: `{% %} </ /> ~/ -> ()`. The `=` symbol is on the right hand because it combines with so many other symbols. Additional bigrams such as `/* */ => );` are on comborolls that activate if shift is held. Overall, this layer works much better for me than pre-v38 versions that used a numpad layout.
+The punctuation is arranged so that common (for me) symbol bigrams are an inward roll: `{% %} </ /> ~/ -> ()`. The `=` symbol is on the right hand because it combines with so many other symbols. Additional bigrams such as `/* */ => );` are on comborolls that activate if shift is held. Overall, this layer works much better for me than earlier versions that used a numpad layout.
 
 Cut, copy and paste shortcuts are along the right hand top row.
 
@@ -122,8 +122,6 @@ Modifiers are on the left hand. If one of the standard modifiers (Shift, Ctrl, A
 All actions have auto-repeat. You can change the special modifiers while holding down a navigation key and the action changes accordingly.
 
 Cut, copy and paste shortcuts are along the left hand top row. Shortcuts for window and desktop navigation are scattered around the edges.
-
-If there is an encoder on the right side, holding one of the custom modifiers and rotating the encoder does "fast editing". (In practice though, I never use this.)
 
 ### META
 Activated by either pinky.
@@ -191,8 +189,6 @@ That's it. Not complicated. While I have a custom implementation, you can do a v
 Essentially, a comboroll changes something "bad" into something "good" (a roll). The "bad" thing could be an SFB, a redirect, a too-long sequence of alternations, or some other awkward key sequence.
 
 Because the combo is "directional", you can use trigger keys that you might not want to use for a normal combo. For example, OA is somewhat common but AO is uncommon, so you can use AO as a comboroll trigger. For this reason, you can also have a longer timeout. When you get it right, and assuming you roll keys when you type anyway, the comboroll fits into the normal flow of typing but changes the key patterns into something more comfortable.
-
-Comborolls are related to Hands Down "adaptive keys" except that a. there is no assumption that the output letters are related to the input letters; b. the rolling requirement means that *not* triggering the combo doesn't have a timing dependency (just release the first key before pressing the second); c. the implementation is just a declaration of combos instead of being hardwired into code.
 
 The old long version of the essay is [here](docs/comborolls.md).
 
