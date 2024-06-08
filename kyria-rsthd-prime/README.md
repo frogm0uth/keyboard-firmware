@@ -188,7 +188,7 @@ That's it. Not complicated. While I have a custom implementation, you can do a v
 
 Essentially, a comboroll changes something "bad" into something "good" (a roll). The "bad" thing could be an SFB, a redirect, a too-long sequence of alternations, or some other awkward key sequence.
 
-Because the combo is "directional", you can use trigger keys that you might not want to use for a normal combo. For example, OA is somewhat common but AO is uncommon, so you can use AO as a comboroll trigger. For this reason, you can also have a longer timeout. When you get it right, and assuming you roll keys when you type anyway, the comboroll fits into the normal flow of typing but changes the key patterns into something more comfortable.
+Because the combo is "directional", you can use trigger keys that you might not want to use for a normal combo. For example, AO is very uncommon so makes a good comboroll trigger, but OA is a bit too common to be used. For this reason, you can also have a longer timeout. When you get it right, and assuming you roll keys when you type anyway, comborolls fit into the normal flow of typing but change the key patterns into something more comfortable.
 
 The old long version of the essay is [here](docs/comborolls.md).
 
