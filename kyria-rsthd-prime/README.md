@@ -174,11 +174,15 @@ In my case, it has meant I can remove most of the load on the inner index column
 
 ### E on which thumb?
 
-RSTHD has E on the left thumb, but many adopters swap the E and space, as indicated in [RSTHD variants and similar layouts](#rsthd-variants-and-similar-layouts) below. I have tried both, starting with E on the left thumb a la RSTHD (now the [kyria-v42](https://github.com/frogm0uth/keyboard-firmware/blob/kyria-v42/kyria-rsthd-prime/README.md) branch) and, later on, E on the right thumb (the [kyria-v41](https://github.com/frogm0uth/keyboard-firmware/blob/kyria-v41/kyria-rsthd-prime/README.md) branch).
+RSTHD has E on the left thumb, but many adopters swap the E and space, as indicated in [RSTHD variants and similar layouts](#rsthd-variants-and-similar-layouts) below. I have tried both, starting with E on the left thumb a la RSTHD and now, as documented on this page, E on the right thumb. That means, of course, that space moves over to the left thumb.
 
-The swapped-E version seems appealing at first, and rollers such as myself will enjoy rolling off the consonants onto the space. However, I found that, as I gained fluency, I would just stumble sometimes. Eventually, I realized why: "pinballing" between the space and the consonants. Consider a phrase such as "with this ring that" - between every pair of words there is a redirect/pinball on the thumb i.e.  `t t`, `s r`, `g t`.
+The location of the space key has a ripple effect that causes the "handedness" of most of the upper layers to be swapped, because you don't want the layer key for symbols on the same thumb as space. It is documented in [Space on Right Thumb](docs/space-on-right-thumb.md).
 
-This was an interesting realization, and led me to try the left-thumb E again. Well, every layout has compromises and in the end I decided to stay with the swapped-E version. I have counteracted the pinballing mentioned somewhat by adding a comboroll for space on the right hand. I've also got a comboroll for E-space on the right hand to reduce alternation (when E occurs at the end of a word, which is often).
+The swapped-E version seems very appealing at first, and rollers such as myself will enjoy rolling off the consonants onto the space. However, I found that, as I gained fluency, I would just stumble sometimes. Eventually, I realized why: "pinballing" between the space and the consonants. Consider a phrase such as "with this ring that" - between every pair of words there is a redirect/pinball on the thumb i.e.  `t t`, `s r`, `g t`.
+
+This was an interesting realization, and led me to try the left-thumb E again. Well, every layout has compromises and it's not just the location of space and E that a decision. As of now, I'm leaning towards keeping space on the left hand, but I'm also hedging my bets by including the compile option `SPACE_ON_RIGHT_THUMB` to put it back the original way.
+
+With space on the left hand, I've counteracted the pinballing mentioned somewhat by adding a comboroll for space on the right hand. It may be that the best solution would be to have space on both thumbs... to be investigated...
 
 ### Comboroll what?
 

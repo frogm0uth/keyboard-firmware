@@ -66,9 +66,12 @@ LtoR_STR( sp, KC_P, KC_G )
 
 //CMBO_STR( et, CU_DOT, KC_MINS ) CMBO_TRM( et,  300 )
 RtoL_STR( er, KC_O, KC_A )
-RtoL_STR( es, KC_L, CU_COMM )
 RtoL_STR( ve, KC_I, CU_COMM )
 RtoL_STR( ee, KC_Y, CU_COMM )
+#ifdef SPACE_ON_RIGHT_THUMB
+RtoL_STR( es, KC_L, CU_COMM )
+RtoL_STR( ed, KC_L, KC_Y )
+#endif
 
 // Verticals
 CMBO_STR( tw, KC_T, KC_W )
@@ -105,12 +108,18 @@ RtoL_KEY( period, KC_DOT,  KC_C, KC_W )  RtoL_TRM( period, 300 )
 RtoL_STR( cd,   KC_C, CU_COMM )
 RtoL_STR( was,  KC_W, CU_COMM )
 RtoL_STR( for,  KC_F, CU_COMM )
- 
-RtoL_STR( rr,   KC_R, CU_COMM )
-RtoL_STR( ss,   KC_S, CU_COMM )
-RtoL_STR( tt,   KC_T, CU_COMM )
-RtoL_STR( his,  KC_H, CU_COMM )
+
+#ifdef SPACE_ON_RIGHT_THUMB
+RtoL_STR( be,   KC_R, CU_COMM )
+RtoL_STR( his,  KC_S, CU_COMM )
+RtoL_STR( but,  KC_T, CU_COMM )
+RtoL_STR( had,  KC_H, CU_COMM )
 RtoL_STR( vs,   KC_V, CU_COMM )
+#else
+RtoL_LIT( of_the, "of the ", KC_S, CU_COMM )
+RtoL_LIT( to_the, "to the ", KC_T, CU_COMM )
+RtoL_LIT( in_the, "in the ", KC_H, CU_COMM )
+#endif
 
 RtoL_STR( pwd,  KC_P, CU_COMM )
 RtoL_STR( grep, KC_G, CU_COMM )
@@ -125,9 +134,13 @@ RtoL_LIT(aposll, "'ll",  KC_QUOT, KC_L)
 RtoL_LIT(aposre, "'re",  KC_QUOT, KC_Y)
 
 // Extras and oddballs
+#ifdef SPACE_ON_RIGHT_THUMB
+RtoL_LIT( espace, "e ",     KC_SPC, KC_U )
+#else
 RtoL_LIT( espace, "e ",     KC_E,   CU_COMM )
 RtoL_LIT( ospace, "o ",     KC_E,   CU_DOT )
 RtoL_LIT( space,  " ",      KC_L,   CU_COMM )
+#endif
 RtoL_LIT( backslash, "\\",  KC_U, KC_MINS )
 
 // Utilities

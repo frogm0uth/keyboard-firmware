@@ -100,7 +100,11 @@ static const char PROGMEM str_encoder_blank[]   = "                    ";
 #endif
 
 static const char PROGMEM str_oled_header[]     = "     RSTHD/Prime    ";
+#ifdef SPACE_ON_RIGHT_THUMB
+static const char PROGMEM str_oled_version[]    = "        v41_R       ";
+#else
 static const char PROGMEM str_oled_version[]    = "        v 41        ";
+#endif
 static const char PROGMEM str_oled_caps[]       = "    CAPS  ";
 static const char PROGMEM str_oled_repeat[]     = "  REPEAT  ";
 static const char PROGMEM str_oled_newline[]    = "\n";
