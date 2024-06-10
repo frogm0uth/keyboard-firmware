@@ -19,7 +19,7 @@ This is the keymap with the space on the right thumb and E on the left, as in th
 
 ## Alpha layer
 
-![kyria-rsthd-prime-alpha](docs/images/space-on-right-thumb/kyria-rsthd-prime-alpha.png)
+![kyria-rsthd-prime-alpha](images/space-on-right-thumb/kyria-rsthd-prime-alpha.png)
 
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/4b3cb8fc77dca45f1f23864446b5cde8)
 
