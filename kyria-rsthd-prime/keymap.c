@@ -51,7 +51,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              KC_L,  KC_Y,  CU_COMM, KC_RSFT, CL_META_R,
 
         /* Thumbs */
-        CL_EDIT, KC_SPC, CU_REPT,   KC_QUOT, KC_E, CL_SYMS,
+        KC_QUOT, CL_EDIT, KC_SPC, CU_REPT,   KC_SPC, KC_E, CL_SYMS, KC_QUOT,
 
         /* Encoder button */
         KC_MUTE
@@ -87,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                        KC_RGUI,   KC_RALT,  KC_RCTL,  CU_SHIFT,       KC_DLR,
 
         /* Thumbs */
-        CU_ENT_ENT, CU_SPC_SPC, CU_DOT_DOT,   ___X___, ___X___, _______,
+        ___X___, CU_ENT_ENT, CU_SPC_SPC, CU_DOT_DOT,   ___X___, ___X___, _______, ___X___,
 
         /* Encoder button */
         ___X___
@@ -124,7 +124,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                       SC_UNDO,  KC_SPC,   SC_REDO,   KC_TAB,        CU_APPSWITCH_RIGHT,
 
         /* Thumbs */
-        _______, ___X___, ___X___,   CU_ENT_ENT, KC_BSPC, KC_DEL,
+        ___X___, _______, ___X___, ___X___,   CU_ENT_ENT, KC_BSPC, KC_DEL, ___X___,
 
         /* Encoder button */
         ___X___
@@ -160,7 +160,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                            SC_BROWSER_BACK, SC_BROWSER_FWD, SC_APP_SETTINGS, CU_SHIFT,    _______,
 
         /* Thumbs */
-        CL_SNAP, ___X___, ___X___, SC_SYS_SETTINGS, ___X___, CL_FUNC,
+        ___X___, CL_SNAP, ___X___, ___X___, SC_SYS_SETTINGS, ___X___, CL_FUNC, ___X___,
 
         /* Encoder button */
         ___X___
@@ -196,7 +196,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                             KC_RGUI,         KC_RALT,         KC_RCTL,           CU_SHIFT,       _______,
 
         /* Thumbs */
-        _______, CM_BTN1, CM_BTN2,   CU_WIPE, ___X___, _______,
+        ___X___, _______, CM_BTN1, CM_BTN2,   CU_WIPE, ___X___, _______, ___X___,
 
         /* Encoder button */
         SC_APP_ZOOM_RESET
@@ -232,7 +232,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                     SC_SNAP_LEFTQUARTER,   SC_SNAP_MIDDLE,       SC_SNAP_RIGHTQUARTER,   SC_APP_ZOOM_RESET, _______,
 
         /* Thumbs */
-        _______, ___X___, CU_WIPE,   ___X___, CM_BTN1, CM_BTN2,
+        ___X___, _______, ___X___, CU_WIPE,   ___X___, CM_BTN1, CM_BTN2, ___X___,
 
         /* Encoder button */
         ___X___

@@ -103,18 +103,18 @@ enum layers {
                         k5B, k5C, k5D, k5E, k5F, k5G,   \
                              k6C, k6D, k6E, k6F, k6G,   \
                                                         \
-        k3B, k3F, k3A, k7A, k7F, k7B,                   \
+        k3C, k3B, k3F, k3A, k7A, k7F, k7B, k7C,         \
                                                         \
         k3E                                             \
     ) {                                                 \
          {KC_NO, k0B,   k0C,   k0D,   k0E,   k0F, k0G},   \
          {KC_NO, k1B,   k1C,   k1D,   k1E,   k1F, k1G},   \
          {KC_NO, KC_NO, k2C,   k2D,   k2E,   k2F, k2G},   \
-         {k3A,   k3B,   KC_NO, KC_NO, k3E,   k3F, KC_NO}, \
+         {k3A,   k3B,   k3C,   KC_NO, k3E,   k3F, KC_NO}, \
          {KC_NO, k4B,   k4C,   k4D,   k4E,   k4F, k4G},   \
          {KC_NO, k5B,   k5C,   k5D,   k5E,   k5F, k5G},   \
          {KC_NO, KC_NO, k6C,   k6D,   k6E,   k6F, k6G},   \
-         {k7A,   k7B,   KC_NO, KC_NO, KC_NO, k7F, KC_NO}  \
+         {k7A,   k7B,   k7C,   KC_NO, KC_NO, k7F, KC_NO}  \
     }
 #endif
 

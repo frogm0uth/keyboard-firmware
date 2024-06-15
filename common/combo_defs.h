@@ -121,8 +121,8 @@ RtoL_LIT( endif,  "#endif",  KC_H, KC_Q )
 RtoL_LIT( define, "#define", KC_D, KC_Q )
 
 // Rolls for apostrophes
-RtoL_LIT(aposll, "'ll",  KC_QUOT, KC_L)
-RtoL_LIT(aposre, "'re",  KC_QUOT, KC_N)
+//RtoL_LIT(aposll, "'ll",  KC_QUOT, KC_L)
+//RtoL_LIT(aposre, "'re",  KC_QUOT, KC_N)
 
 // Extras and oddballs
 RtoL_LIT( espace, "e ",  KC_E, CU_COMM )
