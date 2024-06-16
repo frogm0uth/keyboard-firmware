@@ -57,6 +57,8 @@ See [common code](../common/README.md).
 
 ## Alpha layer
 
+*This version has E and Space swapped relative to their RSTHD positions. For the other version, see [Space on Right Thumb](docs/space-on-right-thumb.md).*
+
 ![kyria-rsthd-prime-alpha](docs/images/kyria-rsthd-prime-alpha.png)
 
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/06f63ae2174923cb64fc7dbdb55b841b)
@@ -67,7 +69,7 @@ An older version of the layout performed very well in an [analyzer](docs/prime-o
 
 *Use of this layout **requires** comborolls.*
 
-Some letters can only be accessed with comborolls: J, K and `\`. Some are usually accessed with comborolls even though they have a key: B and V. The letter M has a comboroll on the left hand to counter pin-balling off the MNL column.
+These letters can only be accessed with comborolls: J, K and \\. These letters are usually accessed with comborolls even though they have a key: B and V. The letter M has a comboroll on the left hand to counter pin-balling off the MNL column.
 
 The shift keys are "auto-off":
 - If a shift key is held and another key is pressed, you get the shifted version of the key then shift is turned off. This completely eliminates typos like "THe".
@@ -78,13 +80,13 @@ Except for Shift, there are no modifiers on the alpha layer. To access them, hol
 
 The "repeat" thumb key is different to other implementations, in that you press it *before* the key that is to be repeated. This makes it possible to place it on the same thumb as space, as double letters often occur at the end of words.
 
-Since v37, E and Space have swapped hands relative to their RSTHD positions. This seems to be common amongst adopters - see [RSTHD variants and similar layouts](#rsthd-variants-and-similar-layouts).
-
 The encoder is used to adjust volume and screen brightness.
 
 ## Other layers
 
 There are five more layers, for a total of 6. All are hold-to-activate. The shift keys in these layers are *not* auto-off.
+
+*These layers have their "handedness" swapped relative to the version with E on the left thumb of the alpha layer. For the other version, see [Space on Right Thumb](docs/space-on-right-thumb.md#other-layers).*
 
 ### SYMS
 
@@ -174,15 +176,13 @@ In my case, it has meant I can remove most of the load on the inner index column
 
 ### E on which thumb?
 
-RSTHD has E on the left thumb, but many adopters swap the E and space, as indicated in [RSTHD variants and similar layouts](#rsthd-variants-and-similar-layouts) below. I have tried both, starting with E on the left thumb a la RSTHD and now, as documented on this page, E on the right thumb. That means, of course, that space moves over to the left thumb.
+RSTHD has E on the left thumb, but many adopters swap the E and space, as indicated in [RSTHD variants and similar layouts](#rsthd-variants-and-similar-layouts) below. I have tried both, starting with E on the left thumb and space on the right a la RSTHD, documented in [Space on Right Thumb](docs/space-on-right-thumb.md), and now, as documented on this page, E on the right thumb and space on the left.
 
-The location of the space key has a ripple effect that causes the "handedness" of most of the upper layers to be swapped, because you don't want the layer key for symbols on the same thumb as space. It is documented in [Space on Right Thumb](docs/space-on-right-thumb.md).
+The location of the space key has a ripple effect that causes the "handedness" of most of the upper layers to be swapped, because you don't want the layer key for symbols on the same thumb as space.
 
 The swapped-E version seems very appealing at first, and rollers such as myself will enjoy rolling off the consonants onto the space. However, I found that, as I gained fluency, I would just stumble sometimes. Eventually, I realized why: "pinballing" between the space and the consonants. Consider a phrase such as "with this ring that" - between every pair of words there is a redirect/pinball on the thumb i.e.  `t t`, `s r`, `g t`.
 
-This was an interesting realization, and led me to try the left-thumb E again. Well, every layout has compromises and it's not just the location of space and E that a decision. As of now, I'm leaning towards keeping space on the left hand, but I'm also hedging my bets by including the compile option `SPACE_ON_RIGHT_THUMB` to put it back the original way.
-
-With space on the left hand, I've counteracted the pinballing mentioned somewhat by adding a comboroll for space on the right hand. It may be that the best solution would be to have space on both thumbs... to be investigated...
+This was an interesting realization, and led me to try the left-thumb E again. Well, every layout has compromises... As of now, I'm hedging my bets by including the compile option `SPACE_ON_RIGHT_THUMB` so that either version can be used.
 
 ### Comboroll what?
 

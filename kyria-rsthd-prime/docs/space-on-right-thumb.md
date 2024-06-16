@@ -1,7 +1,7 @@
 # Kyria RSTHD/Prime v41_R - Space on Right Thumb
 
 This is the keymap with the space on the right thumb and E on the left, as in the original
-[RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/).
+[RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/). For the swapped version, see the [main doc](../README.md#alpha-layer).
 
 <!--ts-->
    * [Alpha layer](#alpha-layer)
@@ -29,7 +29,7 @@ An older version of the layout performed very well in an [analyzer](docs/prime-o
 
 *Use of this layout **requires** comborolls.*
 
-These letters can only be accessed with comborolls: J, K and `\`. These letters are usually accessed with comborolls even though they have a key: B and V. The letter M has a comboroll on the left hand to counter pin-balling off the MNL column.
+These letters can only be accessed with comborolls: J, K and \\. These letters are usually accessed with comborolls even though they have a key: B and V. The letter M has a comboroll on the left hand to counter pin-balling off the MNL column.
 
 The shift keys are "auto-off":
 - If a shift key is held and another key is pressed, you get the shifted version of the key then shift is turned off. This completely eliminates typos like "THe".
