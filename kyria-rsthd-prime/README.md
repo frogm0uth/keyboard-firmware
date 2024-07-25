@@ -15,6 +15,10 @@ This is the keymap for my Kyria keyboard from [splitkb.com](https://splitkb.com)
       * [META](#meta)
       * [FUNC](#func)
       * [SNAP](#snap)
+   * [Layout notes](#layout-notes)
+      * [Why put E on the thumb?](#why-put-e-on-the-thumb)
+      * [E on which thumb?](#e-on-which-thumb)
+      * [Comboroll what?](#comboroll-what)
    * [Backmatter](#backmatter)
       * [How to build](#how-to-build)
       * [RSTHD variants and similar layouts](#rsthd-variants-and-similar-layouts)
@@ -37,15 +41,15 @@ See also [Kyria Build Notes](docs/kyria-build-notes.md).
 
 Coming from a "slab" QWERTY keyboard to a programmable ergo split, I wanted to optimize:
 
-- Comfort. For me, that largely means de-emphasizing the inner index column. I've gone as far as to remove the lower key on that column (qwerty B/N). It also means balancing hand usage better.
-- Cross-platform portability. I need to switch between macOS and Windows frequently. The differences in shortcuts and location of Ctrl/Cmd keys was frustrating and programmable keyboards seemed to be the answer.
-- Better support for ambidextrous use of the trackpad or mouses (I use two). For example, it should be possible to do things like cut-copy-paste from either hand alone.
+- Comfort. For me, that largely means de-emphasizing the inner index columns. I've gone as far as to remove the lower key on those columns.
+- Cross-platform portability. The differences in shortcuts and location of Ctrl/Cmd keys on macOS and Windows are frustrating and programmable keyboards seemed to be the answer.
+- Better support for ambidextrous use of the trackpad. For example, it should be possible to do things like cut-copy-paste from either hand alone.
 
 Typing speed and reducing the number of keys on the keyboard are not important goals to me. With that said, my layout has now shrunk to 40 keys.
 
 ### Keyboard configuration
 
-My Kyria uses all 6 columns on each hand. However, the lower inner column keys are absent. There are three thumb keys on each side. The left side has an OLED and an encoder. In practice, I find that I mostly use the encoder for adjusting keyboard lighting, as for most functions it's quicker to just use keys.
+My Kyria uses all 6 columns on each hand. However, the lower inner column keys are absent. There are three thumb keys on each side. The left side has an OLED and an encoder. In practice, I find that I mostly use the encoder for adjusting keyboard lighting, as for other functions it's quicker to just use keys.
 
 ### Features
 
@@ -53,34 +57,36 @@ See [common code](../common/README.md).
 
 ## Alpha layer
 
+*This version has E and Space swapped relative to their RSTHD positions. For the other version, see [Space on Right Thumb](docs/space-on-right-thumb.md).*
+
 ![kyria-rsthd-prime-alpha](docs/images/kyria-rsthd-prime-alpha.png)
 
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/06f63ae2174923cb64fc7dbdb55b841b)
 
-The alpha layout aims to reduce lateral finger movement on the index finger. In fact, the lower keys of the inner columns have been removed entirely.
+The alpha layout aims to reduce lateral finger movement on the index finger.
 
-An older version of the layout performed very well in an [analyzer](docs/prime-on-the-analyzer.md), with low SFU (same finger utilization) stats and low travel distance. Since then, some changes have been made to the layout that nominally give it worse performance, because of the use of [comborolls](docs/comborolls.md).
+An older version of the layout performed very well in an [analyzer](docs/prime-on-the-analyzer.md), with low SFU (same finger utilization) stats and low travel distance. Since then, some changes have been made to the layout that nominally give it worse performance, because of the use of [comborolls](#comboroll-what).
 
 *Use of this layout **requires** comborolls.*
 
-These letters can only be accessed with comborolls: J, K and `\`. These letters are usually accessed with comborolls even though they have a key: B and V. The letter M has a comboroll on the left hand to counter pin-balling off the MNL column.
+These letters can only be accessed with comborolls: J, K and \\. These letters are usually accessed with comborolls even though they have a key: B and V. The letter M has a comboroll on the left hand to counter pin-balling off the MNL column.
 
 The shift keys are "auto-off":
 - If a shift key is held and another key is pressed, you get the shifted version of the key then shift is turned off. This completely eliminates typos like "THe".
 - If a shift key is tapped, it toggles caps-word.
 - If both shift keys are tapped at the same, they toggle caps-lock.
 
-Except for Shift, there are no modifiers on the alpha layer. To access them, hold the SYMS or EDIT layer key, hold the modifier(s) down, then release the layer key. This is a bit like Callum mods except it doesn't use one-shots. This is less inconvenient than it sounds: I roll the layer key with the modifier, and common shortcuts have dedicated keys on other layers anyway.
+Except for Shift, there are no modifiers on the alpha layer. To access them, hold the SYMS or EDIT layer key, hold the modifier(s) down, then release the layer key. This is a bit like Callum mods except it doesn't use one-shots.
 
-The "repeat" thumb key is different to other implementations, in that you press it *before* the key that is to be repeated. This makes it possible to place it on the same thumb as space, as double letters often occur at the end of words. It also made it easier (for me) to implement and opens up possibilities like being able to repeat sequences of characters e.g. in a comboroll.
-
-Since v37, E and Space have swapped hands relative to their RSTHD positions. This seems to be common amongst adopters - see [RSTHD variants and similar layouts](#rsthd-variants-and-similar-layouts).
+The "repeat" thumb key is different to other implementations, in that you press it *before* the key that is to be repeated. This makes it possible to place it on the same thumb as space, as double letters often occur at the end of words.
 
 The encoder is used to adjust volume and screen brightness.
 
 ## Other layers
 
-There are five more layers, for a total of 6. All are hold-to-activate. The shift keys in these layers are *not* auto-off.
+There are five more layers, for a total of 6. All are hold-to-activate. The shift keys in these layers are *not* auto-off and don't toggle caps-lock and caps-word.
+
+*These layers have their "handedness" swapped relative to the version with E on the left thumb of the alpha layer. For the other version, see [E on Left Thumb](docs/e-on-left-thumb.md).
 
 ### SYMS
 
@@ -92,7 +98,7 @@ Activated by the right thumb.
 
 Numbers and punctuation are combined on one layer. Numbers are along the home row and punctuation is mostly arranged on the left hand. (If only one character shown, it is output regardless of Shift.)
 
-The punctuation is arranged so that common (for me) symbol bigrams are an inward roll: `{% %} </ /> ~/ -> ()`. The `=` symbol is on the right hand because it combines with so many other symbols. Additional bigrams such as `/* */ => );` are on comborolls that activate if shift is held. Overall, this layer works much better for me than pre-v38 versions that used a numpad layout.
+The punctuation is arranged so that common (for me) symbol bigrams are an inward roll: `{% %} </ /> ~/ -> ()`. The `=` symbol is on the right hand because it combines with so many other symbols. Additional bigrams such as `/* */ => );` are on comborolls that activate if shift is held. Overall, this layer works much better for me than earlier versions that used a numpad layout.
 
 Cut, copy and paste shortcuts are along the right hand top row.
 
@@ -118,8 +124,6 @@ Modifiers are on the left hand. If one of the standard modifiers (Shift, Ctrl, A
 All actions have auto-repeat. You can change the special modifiers while holding down a navigation key and the action changes accordingly.
 
 Cut, copy and paste shortcuts are along the left hand top row. Shortcuts for window and desktop navigation are scattered around the edges.
-
-If there is an encoder on the right side, holding one of the custom modifiers and rotating the encoder does "fast editing". (In practice though, I never use this.)
 
 ### META
 Activated by either pinky.
@@ -158,6 +162,42 @@ Activated by the left thumb from the META layer.
 So called because of the keys for window snapping, which snap the active window to various locations on the screen. This works on macOS if [Rectangle Pro](https://rectangleapp.com) is running; it is not working at all on Windows and Linux yet.
 
 It also contains shortcuts for screenshots and for window zooming, as well as mouse buttons.
+
+
+## Layout notes
+
+### Why put E on the thumb?
+
+Opinions differ about whether E is a good letter to put on a thumb key, or whether putting a letter on the thumb is a good idea at all.
+
+To be frank, some of the arguments put forth about this seem a little bizarre to me. Ultimately, of course, everyone should use what they find comfortable, but the *reason* to use E is simply that (in English) it's the most common letter, so putting it on a thumb provides greater freedom to redistribute the load on the fingers.
+
+In my case, it has meant I can remove most of the load on the inner index column. Other people might have an issue with pinkies. Thing is, every layout choice has compromises and you need to pick the set that is most comfortable to you.
+
+### E on which thumb?
+
+RSTHD has E on the left thumb, but many adopters swap the E and space, as indicated in [RSTHD variants and similar layouts](#rsthd-variants-and-similar-layouts) below. I have tried both, starting with E on the left thumb and space on the right a la RSTHD, documented in [E on Left Thumb](docs/e-on-left-thumb.md), and now, as documented on this page, E on the right thumb and space on the left.
+
+The location of the space key has a ripple effect that causes the "handedness" of most of the upper layers to be swapped, because you don't want the layer key for symbols on the same thumb as space.
+
+The swapped-E version seems very appealing at first, and rollers such as myself will enjoy rolling off the consonants onto the space. However, I found that, as I gained fluency, I would just stumble sometimes. Eventually, I realized why: "pinballing" between the space and the consonants. Consider a phrase such as "with this ring that" - between every pair of words there is a redirect/pinball on the thumb i.e.  `t t`, `s r`, `g t`.
+
+The solution, in the end, was to add a space key on the right thumb also. This one is used less often than the "main" one on the left thumb. It adds significantly to the learning curve, but so far is proving to make for a smoother ride. Even so, I'm hedging my bets by including the compile option `E_ON_LEFT_THUMB` so that either version can be used.
+
+### Comboroll what?
+
+I wrote a long explanation of these a while back, but my thinking has evolved since then, so here's a short version. Basically, a comboroll is a combo that you trigger by rolling two letters - that is, press the second key before releasing the first. Usually, the trigger keys are an inward roll. The number of output letters ranges from one to four.
+
+That's it. Not complicated. While I have a custom implementation, you can do a version of it in QMK with the `COMBO_MUST_PRESS_IN_ORDER` or `COMBO_MUST_PRESS_IN_ORDER_PER_COMBO` flags ([docs](https://docs.qmk.fm/features/combo#advanced-configuration)). The QMK implementation has some limitations (\*), but it's certainly good enough to get a feel for the concept.
+
+Essentially, a comboroll changes something "bad" into something "good" (a roll). The "bad" thing could be an SFB, a redirect, a too-long sequence of alternations, or some other awkward key sequence.
+
+Because the combo is "directional", you can use trigger keys that you might not want to use for a normal combo. For example, AO is very uncommon so makes a good comboroll trigger, but OA is a bit too common to be used. For this reason, you can also have a longer timeout. When you get it right, and assuming you roll keys when you type anyway, comborolls fit into the normal flow of typing but change the key patterns into something more comfortable.
+
+The old long version of the essay is [here](docs/comborolls.md).
+
+(\*) The QMK implementation may give unexpected results with overlapping combos. For example, if AB produces X and AC produces Y, then rolling ABC will produce BY. In addition, if shift is pressed, all output letters are shifted (there is no way to have just the first letter capitalized).
+
 
 ## Backmatter
 
