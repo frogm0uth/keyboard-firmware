@@ -55,23 +55,24 @@
 // clang-format off
 
 // Letters not in alpha and related rolls
-LtoR_STR( j,  KC_R, KC_W )
-LtoR_STR( k,  KC_T, KC_F )
-LtoR_STR( ck, KC_C, KC_F )
+LtoR_STR( j,  KC_S, KC_G )
+LtoR_STR( k,  KC_W, KC_F )
 
 // Anti-SFU and anti-pinballing
 LtoR_STR( m,  KC_S, KC_D )
-LtoR_STR( sc, KC_C, KC_W )
+LtoR_STR( sc, KC_C, KC_F )
 LtoR_STR( sp, KC_P, KC_G )
 
-//CMBO_STR( et, CU_DOT, KC_MINS ) CMBO_TRM( et,  300 )
+RtoL_STR( ll, KC_N, CU_DOT )
 RtoL_STR( er, KC_O, KC_A )
-RtoL_STR( ve, KC_I, CU_COMM )
-RtoL_STR( ee, KC_Y, CU_COMM )
-#ifdef SPACE_ON_RIGHT_THUMB
-RtoL_STR( es, KC_L, CU_COMM )
+#ifdef E_ON_LEFT_THUMB
+CMBO_STR( et, CU_DOT, KC_MINS ) CMBO_TRM( et,  300 )
+RtoL_STR( e,  KC_L, CU_COMM )
 RtoL_STR( ed, KC_L, KC_Y )
+#else
+
 #endif
+RtoL_STR( ee, KC_Y, CU_COMM )
 
 // Verticals
 CMBO_STR( tw, KC_T, KC_W )
@@ -81,23 +82,23 @@ CMBO_STR( lm, KC_N, KC_M )
 CMBO_STR( ui, KC_I, KC_U )
 
 // Awkward bigrams/trigrams
-LtoR_STR( cr,  KC_W, KC_F )
+LtoR_STR( cr,  KC_T, KC_F )
 LtoR_STR( fr,  KC_S, KC_F )
 LtoR_STR( qu,  KC_B, KC_F )
 LtoR_STR( pr,  KC_G, KC_D )
-LtoR_STR( ght, KC_X, KC_H )
 
 RtoL_STR( you, KC_U, CU_DOT )
 
 // Inner column minimization and comfort
-LtoR_STR( v,   KC_P, KC_D )
 LtoR_STR( br,  KC_R, KC_H )
 LtoR_STR( b,   KC_T, KC_D )
+LtoR_STR( v,   KC_P, KC_D )
+
+RtoL_STR( ve, KC_I, CU_COMM )
 
 // Common word endings, right hand
 RtoL_STR( ally, KC_M, CU_DOT )
 RtoL_STR( ould, KC_I, CU_DOT )
-RtoL_STR( all,  KC_N, CU_DOT )
 RtoL_STR( ough, KC_N, CU_COMM )
 
 // Right-to-left rolls on left hand
@@ -109,16 +110,13 @@ RtoL_STR( cd,   KC_C, CU_COMM )
 RtoL_STR( was,  KC_W, CU_COMM )
 RtoL_STR( for,  KC_F, CU_COMM )
 
-#ifdef SPACE_ON_RIGHT_THUMB
-RtoL_STR( be,   KC_R, CU_COMM )
+RtoL_STR( ght,  KC_R, CU_COMM )
+#ifdef E_ON_LEFT_THUMB
 RtoL_STR( his,  KC_S, CU_COMM )
 RtoL_STR( but,  KC_T, CU_COMM )
 RtoL_STR( had,  KC_H, CU_COMM )
 RtoL_STR( vs,   KC_V, CU_COMM )
 #else
-RtoL_LIT( of_the, "of the ", KC_S, CU_COMM )
-RtoL_LIT( to_the, "to the ", KC_T, CU_COMM )
-RtoL_LIT( in_the, "in the ", KC_H, CU_COMM )
 #endif
 
 RtoL_STR( pwd,  KC_P, CU_COMM )
@@ -129,17 +127,14 @@ RtoL_LIT( ifdef,  "#ifdef",  KC_F, KC_Q )
 RtoL_LIT( endif,  "#endif",  KC_H, KC_Q )
 RtoL_LIT( define, "#define", KC_D, KC_Q )
 
-// Rolls for apostrophes
-RtoL_LIT(aposll, "'ll",  KC_QUOT, KC_L)
-RtoL_LIT(aposre, "'re",  KC_QUOT, KC_Y)
-
 // Extras and oddballs
-#ifdef SPACE_ON_RIGHT_THUMB
+LtoR_STR( from, KC_F, KC_M )
+
+#ifdef E_ON_LEFT_THUMB
 RtoL_LIT( espace, "e ",     KC_SPC, KC_U )
 #else
 RtoL_LIT( espace, "e ",     KC_E,   CU_COMM )
 RtoL_LIT( ospace, "o ",     KC_E,   CU_DOT )
-RtoL_LIT( space,  " ",      KC_L,   CU_COMM )
 #endif
 RtoL_LIT( backslash, "\\",  KC_U, KC_MINS )
 
@@ -160,3 +155,4 @@ LtoR_LIT( parensemi, ");", CU_LT,        CU_GT )   _ONSHIFT( parensemi )
 LtoR_LIT( eql_gt,    "=>", CU_MINS_MINS, CU_GT)    _ONSHIFT( eql_gt )
 
 LtoR_LIT( htmlcomment, "<!--", CU_MINS_MINS, CU_LT)
+LtoR_LIT( tildeslash,  "~/",   CU_MINS_MINS, CU_SLSH_SLSH)

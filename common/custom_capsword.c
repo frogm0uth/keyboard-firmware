@@ -202,16 +202,16 @@ bool process_record_capslock(uint16_t keycode, keyrecord_t *record) {
                 is_auto_unshift = false;
 
                 // Wait to see if this will toggle caps word
-                capsword_waiting = true;
-                capsword_timer = timer_read();
+                //capsword_waiting = true;
+                //capsword_timer = timer_read();
 
             } else {
                 unregister_code16(KC_LSFT);
 
                 // toggle caps-word if key is released quickly
-                if (capsword_waiting) {
-                    toggle_capsword();
-                }
+                //if (capsword_waiting) {
+                //    toggle_capsword();
+                ///}
             }
             return false;
             break;

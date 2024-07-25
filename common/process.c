@@ -143,7 +143,7 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
 #ifdef LAYER_TAP_TOGGLE
             // layer switching using layer-tap-toggle custom code
-#ifdef SPACE_ON_RIGHT_THUMB
+#ifdef E_ON_LEFT_THUMB
         case CL_SYMS:
             return layer_tap_toggle(KC_ENTER, SYMS, record);
             break;
@@ -165,7 +165,7 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
             break;
 
         case CL_META_R:
-            return layer_tap_toggle(CU_BSPC_DEL, META, record);
+            return layer_tap_toggle(KC_ENTER, META, record);
             break;
 
         case CL_FUNC:
@@ -193,6 +193,15 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
                 tap_code(KC_DOT);
                 tap_code(KC_DOT);
                 tap_code(KC_SLSH);
+            }
+            return false;
+            break;
+
+        case CU_SPCR:
+            if (record->event.pressed) {
+                register_code(KC_SPC);
+            } else {
+                unregister_code(KC_SPC);
             }
             return false;
             break;

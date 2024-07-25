@@ -1,6 +1,6 @@
-# Kyria RSTHD/Prime v41_R - Space on Right Thumb
+# Kyria RSTHD/Prime v41_R - E on Left Thumb
 
-This is the keymap with the space on the right thumb and E on the left, as in the original
+This is the keymap with the space on the E on the left thumb, as in the original
 [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/). For the swapped version, see the [main doc](../README.md#alpha-layer).
 
 <!--ts-->
@@ -19,7 +19,7 @@ This is the keymap with the space on the right thumb and E on the left, as in th
 
 ## Alpha layer
 
-![kyria-rsthd-prime-alpha](images/space-on-right-thumb/kyria-rsthd-prime-alpha.png)
+![kyria-rsthd-prime-alpha](images/e-on-left-thumb/kyria-rsthd-prime-alpha.png)
 
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/4b3cb8fc77dca45f1f23864446b5cde8)
 

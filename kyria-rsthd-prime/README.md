@@ -84,9 +84,9 @@ The encoder is used to adjust volume and screen brightness.
 
 ## Other layers
 
-There are five more layers, for a total of 6. All are hold-to-activate. The shift keys in these layers are *not* auto-off.
+There are five more layers, for a total of 6. All are hold-to-activate. The shift keys in these layers are *not* auto-off and don't toggle caps-lock and caps-word.
 
-*These layers have their "handedness" swapped relative to the version with E on the left thumb of the alpha layer. For the other version, see [Space on Right Thumb](docs/space-on-right-thumb.md#other-layers).*
+*These layers have their "handedness" swapped relative to the version with E on the left thumb of the alpha layer. For the other version, see [E on Left Thumb](docs/e-on-left-thumb.md).
 
 ### SYMS
 
@@ -170,23 +170,23 @@ It also contains shortcuts for screenshots and for window zooming, as well as mo
 
 Opinions differ about whether E is a good letter to put on a thumb key, or whether putting a letter on the thumb is a good idea at all.
 
-To be frank, some of the arguments put forth about this seem a little bizarre to me. Ultimately, of course, everyone should use what they find comfortable, but the *reason* to use E is simply that (in English) it's the most common letter by far, so putting it on a thumb provides greater freedom to redistribute the load on the fingers.
+To be frank, some of the arguments put forth about this seem a little bizarre to me. Ultimately, of course, everyone should use what they find comfortable, but the *reason* to use E is simply that (in English) it's the most common letter, so putting it on a thumb provides greater freedom to redistribute the load on the fingers.
 
-In my case, it has meant I can remove most of the load on the inner index column. Other people might have an issue with pinkies. Thing is, every layout choice has compromises and you need to pick the set that is most comfortable to you. If I had spider fingers and could use every column fully, for example, perhaps I would use a layout with E in the alpha block instead. (Then again, perhaps I wouldn't need an ergonomic keyboard at all.)
+In my case, it has meant I can remove most of the load on the inner index column. Other people might have an issue with pinkies. Thing is, every layout choice has compromises and you need to pick the set that is most comfortable to you.
 
 ### E on which thumb?
 
-RSTHD has E on the left thumb, but many adopters swap the E and space, as indicated in [RSTHD variants and similar layouts](#rsthd-variants-and-similar-layouts) below. I have tried both, starting with E on the left thumb and space on the right a la RSTHD, documented in [Space on Right Thumb](docs/space-on-right-thumb.md), and now, as documented on this page, E on the right thumb and space on the left.
+RSTHD has E on the left thumb, but many adopters swap the E and space, as indicated in [RSTHD variants and similar layouts](#rsthd-variants-and-similar-layouts) below. I have tried both, starting with E on the left thumb and space on the right a la RSTHD, documented in [E on Left Thumb](docs/e-on-left-thumb.md), and now, as documented on this page, E on the right thumb and space on the left.
 
 The location of the space key has a ripple effect that causes the "handedness" of most of the upper layers to be swapped, because you don't want the layer key for symbols on the same thumb as space.
 
 The swapped-E version seems very appealing at first, and rollers such as myself will enjoy rolling off the consonants onto the space. However, I found that, as I gained fluency, I would just stumble sometimes. Eventually, I realized why: "pinballing" between the space and the consonants. Consider a phrase such as "with this ring that" - between every pair of words there is a redirect/pinball on the thumb i.e.  `t t`, `s r`, `g t`.
 
-This was an interesting realization, and led me to try the left-thumb E again. Well, every layout has compromises... As of now, I'm hedging my bets by including the compile option `SPACE_ON_RIGHT_THUMB` so that either version can be used.
+The solution, in the end, was to add a space key on the right thumb also. This one is used less often than the "main" one on the left thumb. It adds significantly to the learning curve, but so far is proving to make for a smoother ride. Even so, I'm hedging my bets by including the compile option `E_ON_LEFT_THUMB` so that either version can be used.
 
 ### Comboroll what?
 
-I wrote a long explanation of these a while back, but my thinking has evolved since then, so here's a short version. Basically, a comboroll is a combo that you trigger by rolling two letters - that is, press the second key before releasing the first. Usually, the trigger keys are an inward roll. The number of output letters ranges from one to four - I haven't found longer to be useful.
+I wrote a long explanation of these a while back, but my thinking has evolved since then, so here's a short version. Basically, a comboroll is a combo that you trigger by rolling two letters - that is, press the second key before releasing the first. Usually, the trigger keys are an inward roll. The number of output letters ranges from one to four.
 
 That's it. Not complicated. While I have a custom implementation, you can do a version of it in QMK with the `COMBO_MUST_PRESS_IN_ORDER` or `COMBO_MUST_PRESS_IN_ORDER_PER_COMBO` flags ([docs](https://docs.qmk.fm/features/combo#advanced-configuration)). The QMK implementation has some limitations (\*), but it's certainly good enough to get a feel for the concept.
 
