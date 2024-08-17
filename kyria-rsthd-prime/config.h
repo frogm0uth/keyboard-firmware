@@ -39,9 +39,6 @@
 
 #endif
 
-// Put space on right thumb (and E on left) if uncommented
-//#define E_ON_LEFT_THUMB
-
 // Tapping control
 #define TAPPING_TERM 500
 //#define TAPPING_TOGGLE 2

@@ -1,4 +1,4 @@
-# Kyria RSTHD/Prime v41
+# Kyria RSTHD/Prime v42
 
 This is the keymap for my Kyria keyboard from [splitkb.com](https://splitkb.com). The alpha layout was based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/) but is now heavily modified. The layout is optimized for minimum usage of the inner index column. Features in the code include runtime switching between Mac/Windows/Linux shortcuts and a custom implementation of *comborolls*.
 
@@ -45,11 +45,11 @@ Coming from a "slab" QWERTY keyboard to a programmable ergo split, I wanted to o
 - Cross-platform portability. The differences in shortcuts and location of Ctrl/Cmd keys on macOS and Windows are frustrating and programmable keyboards seemed to be the answer.
 - Better support for ambidextrous use of the trackpad. For example, it should be possible to do things like cut-copy-paste from either hand alone.
 
-Typing speed and reducing the number of keys on the keyboard are not important goals to me. With that said, my layout has now shrunk to 40 keys.
+Typing speed and reducing the number of keys on the keyboard are not important goals to me. With that said, my layout has now shrunk to 41 keys.
 
 ### Keyboard configuration
 
-My Kyria uses all 6 columns on each hand. However, the lower inner column keys are absent. There are three thumb keys on each side. The left side has an OLED and an encoder. In practice, I find that I mostly use the encoder for adjusting keyboard lighting, as for other functions it's quicker to just use keys.
+My Kyria uses all 6 columns on each hand. However, the lower inner column keys are absent. There are three thumb keys on the left and four on the right. The left side has an OLED and an encoder. In practice, I find that I mostly use the encoder for adjusting keyboard lighting, as for other functions it's quicker to just use keys.
 
 ### Features
 
@@ -57,11 +57,9 @@ See [common code](../common/README.md).
 
 ## Alpha layer
 
-*This version has E and Space swapped relative to their RSTHD positions. For the other version, see [Space on Right Thumb](docs/space-on-right-thumb.md).*
+![kyria-rsthd-prime-alpha](images/kyria-rsthd-prime-alpha.png)
 
-![kyria-rsthd-prime-alpha](docs/images/kyria-rsthd-prime-alpha.png)
-
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/06f63ae2174923cb64fc7dbdb55b841b)
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/4a1c453527f24cdc558bc684974edbf9)
 
 The alpha layout aims to reduce lateral finger movement on the index finger.
 
@@ -86,35 +84,28 @@ The encoder is used to adjust volume and screen brightness.
 
 There are five more layers, for a total of 6. All are hold-to-activate. The shift keys in these layers are *not* auto-off and don't toggle caps-lock and caps-word.
 
-*These layers have their "handedness" swapped relative to the version with E on the left thumb of the alpha layer. For the other version, see [E on Left Thumb](docs/e-on-left-thumb.md).
 
 ### SYMS
 
-Activated by the right thumb.
+Activated by the left thumb.
+![kyria-rsthd-prime-syms](images/kyria-rsthd-prime-syms.png)
+[KLE layout](http://www.keyboard-layout-editor.com/#/gists/5a7d6afc1ee1a321449fc2c645c5a2c0)
 
-![kyria-rsthd-prime-syms](docs/images/kyria-rsthd-prime-syms.png)
+Numbers and punctuation are combined on one layer. Numbers are along the home row and punctuation is mostly arranged on the right hand. (If only one character shown, it is output regardless of Shift.)
 
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/098aba74e9c04713110edcf25372559d)
+The punctuation is arranged so that common (for me) symbol bigrams are an inward roll: `{% %} </ /> ~/ -> ()`. The `=` symbol is on the left hand because it combines with so many other symbols. Additional bigrams such as `/* */ => );` are on comborolls that activate if shift is held. Overall, this layer works better for me than pre-v38 versions that used a numpad layout.
 
-Numbers and punctuation are combined on one layer. Numbers are along the home row and punctuation is mostly arranged on the left hand. (If only one character shown, it is output regardless of Shift.)
-
-The punctuation is arranged so that common (for me) symbol bigrams are an inward roll: `{% %} </ /> ~/ -> ()`. The `=` symbol is on the right hand because it combines with so many other symbols. Additional bigrams such as `/* */ => );` are on comborolls that activate if shift is held. Overall, this layer works much better for me than earlier versions that used a numpad layout.
-
-Cut, copy and paste shortcuts are along the right hand top row.
-
-The encoder is used for history scrubbing.
+Cut, copy and paste shortcuts are along the left hand top row.
 
 ### EDIT
 
-Activated by the left thumb.
+Activated by the right thumb.
+![kyria-rsthd-prime-edit](images/kyria-rsthd-prime-edit.png)
+[KLE layout](http://www.keyboard-layout-editor.com/#/gists/3a6218306588db4240bcf25c74741580)
 
-![kyria-rsthd-prime-edit](docs/images/kyria-rsthd-prime-edit.png)
+This layer extends the idea of platform-independent shortcuts to a complete layer. The left hand has the standard cursor keys, home/end and page up/down.
 
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/cf3687727512c49fd8baccf7459a6ddb)
-
-This layer extends the idea of platform-independent shortcuts to a complete layer. The right hand has the standard cursor keys, home/end and page up/down.
-
-Modifiers are on the left hand. If one of the standard modifiers (Shift, Ctrl, Alt, Gui) is held, the emitted code is that modifier + keycode. The special modifiers on the home row act as follows:
+Modifiers are on the right hand. If one of the standard modifiers (Shift, Ctrl, Alt, Gui) is held, the emitted code is that modifier + keycode. The special modifiers on the home row act as follows:
 
 - **Delete** makes the action delete instead of moving.
 - **More** makes the key do "more" : left and right move a word left or right; home and end move to the start and end of a paragraph; page up/down move to the start and end of the document. Up and down are an exception: these activate mouse wheel scrolling.
@@ -123,14 +114,14 @@ Modifiers are on the left hand. If one of the standard modifiers (Shift, Ctrl, A
 
 All actions have auto-repeat. You can change the special modifiers while holding down a navigation key and the action changes accordingly.
 
-Cut, copy and paste shortcuts are along the left hand top row. Shortcuts for window and desktop navigation are scattered around the edges.
+Cut, copy and paste shortcuts are along the right hand top row. Shortcuts for window and desktop navigation are scattered around the edges.
+
+Holding one of the custom modifiers and rotating the encoder does "fast editing". (In practice though, I never use this.)
 
 ### META
 Activated by either pinky.
-
-![kyria-rsthd-prime-meta](docs/images/kyria-rsthd-prime-meta.png)
-
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/6629f8673758273154b55ee8da43293c)
+![kyria-rsthd-prime-meta](images/kyria-rsthd-prime-meta.png)
+[KLE layout](http://www.keyboard-layout-editor.com/#/gists/96ff5eadac73281833f15d58e1535305)
 
 This layer contains common shortcuts, mostly arranged according to the letter used in the Mac/Windows shortcut. For example, the S key invokes Save (Cmd-S on Mac, Ctrl-S on Windows). However, the mapping is not always that straightforward (e.g. Cmd-Q on Mac and Alt-F4 on Windows), hence the use of a dedicated layer.
 
@@ -140,28 +131,23 @@ The encoder is used for forward and backward search.
 
 ### FUNC
 
+Activated by the left thumb from the META layer.
+![kyria-rsthd-prime-func](images/kyria-rsthd-prime-func.png)
+[KLE layout](http://www.keyboard-layout-editor.com/#/gists/d5f816259b3660f371f074a6a06e1c61)
 
-Activated by the right thumb from the META layer.
-
-![kyria-rsthd-prime-func](docs/images/kyria-rsthd-prime-func.png)
-
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/910a80c762c4e1a844969cdb8b0ff876)
-
-This layer contains function keys on the left hand and mouse buttons on the left thumb. It also contains the keys that switch between macOS, Windows and Linux shortcuts. Keys for screenshots are duplicated from the SNAP layer.
-
-The encoder zooms the current application. If a modifier is held, it adjusts the OLED brightness and the backlight/per-key LEDs, depending on the modifier. There are also two keys on the left hand for this, in case there is no encoder.
+This layer contains function keys on the right hand. It also contains the keys that switch between macOS, Windows and Linux shortcuts, as well as mouse buttons.
 
 ### SNAP
 
-Activated by the left thumb from the META layer.
-
-![kyria-rsthd-prime-snap](docs/images/kyria-rsthd-prime-snap.png)
-
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/e63007b231cb9a8d2fb4366b60a1ec57)
+Activated by the right thumb from the META layer.
+![kyria-rsthd-prime-snap](images/kyria-rsthd-prime-snap.png)
+[KLE layout](http://www.keyboard-layout-editor.com/#/gists/04e568d50406671e17d73c3438e7b6f8)
 
 So called because of the keys for window snapping, which snap the active window to various locations on the screen. This works on macOS if [Rectangle Pro](https://rectangleapp.com) is running; it is not working at all on Windows and Linux yet.
 
 It also contains shortcuts for screenshots and for window zooming, as well as mouse buttons.
+
+The encoder zooms the current application. If a modifier is held, it adjusts the OLED brightness and the backlight/per-key LEDs, depending on the modifier. There are also two keys on the left hand for this, in case there is no encoder.
 
 
 ## Layout notes
@@ -176,13 +162,13 @@ In my case, it has meant I can remove most of the load on the inner index column
 
 ### E on which thumb?
 
-RSTHD has E on the left thumb, but many adopters swap the E and space, as indicated in [RSTHD variants and similar layouts](#rsthd-variants-and-similar-layouts) below. I have tried both, starting with E on the left thumb and space on the right a la RSTHD, documented in [E on Left Thumb](docs/e-on-left-thumb.md), and now, as documented on this page, E on the right thumb and space on the left.
+RSTHD has E on the left thumb, but many adopters swap the E and space, as indicated in [RSTHD variants and similar layouts](#rsthd-variants-and-similar-layouts) below. I have tried both, starting with E on the left thumb and primary space on the right a la RSTHD and now E on the right thumb and primary space on the left.
 
 The location of the space key has a ripple effect that causes the "handedness" of most of the upper layers to be swapped, because you don't want the layer key for symbols on the same thumb as space.
 
 The swapped-E version seems very appealing at first, and rollers such as myself will enjoy rolling off the consonants onto the space. However, I found that, as I gained fluency, I would just stumble sometimes. Eventually, I realized why: "pinballing" between the space and the consonants. Consider a phrase such as "with this ring that" - between every pair of words there is a redirect/pinball on the thumb i.e.  `t t`, `s r`, `g t`.
 
-The solution, in the end, was to add a space key on the right thumb also. This one is used less often than the "main" one on the left thumb. It adds significantly to the learning curve, but so far is proving to make for a smoother ride. Even so, I'm hedging my bets by including the compile option `E_ON_LEFT_THUMB` so that either version can be used.
+The solution, in the end, was to add a space key on the right thumb also. This one is used less often than the primary space key on the left thumb. It adds significantly to the learning curve, but so far is proving to make for a smoother ride.
 
 ### Comboroll what?
 
@@ -193,6 +179,8 @@ That's it. Not complicated. While I have a custom implementation, you can do a v
 Essentially, a comboroll changes something "bad" into something "good" (a roll). The "bad" thing could be an SFB, a redirect, a too-long sequence of alternations, or some other awkward key sequence.
 
 Because the combo is "directional", you can use trigger keys that you might not want to use for a normal combo. For example, AO is very uncommon so makes a good comboroll trigger, but OA is a bit too common to be used. For this reason, you can also have a longer timeout. When you get it right, and assuming you roll keys when you type anyway, comborolls fit into the normal flow of typing but change the key patterns into something more comfortable.
+
+It's worth noting that comborolls are only somewhat timing-dependant. For example, if you type say AORTA a lot and trigger the AO combo by mistake, you can learn to release the A before pressing the O – you don't have to slow your typing to wait out the timeout.
 
 The old long version of the essay is [here](docs/comborolls.md).
 
