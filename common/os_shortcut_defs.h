@@ -103,6 +103,9 @@ DEFINE_SHORTCUT( SNAP_LEFTTWOTHIRDS,   C(A(KC_E)),  KC_NO,     KC_NO )       // 
 DEFINE_SHORTCUT( SNAP_MIDTWOTHIRDS,    C(A(KC_X)),  KC_NO,     KC_NO )       // * Snap to middle two-thirds of screen
 DEFINE_SHORTCUT( SNAP_RIGHTTWOTHIRDS,  C(A(KC_T)),  KC_NO,     KC_NO )       // Snap to right two-thirds of screen
 
+DEFINE_SHORTCUT( MOVETO_NEXT_SCREEN,     G(A(C(KC_RGHT))),  KC_NO,     KC_NO )   // Move window to next screen
+DEFINE_SHORTCUT( MOVETO_PREV_SCREEN,     G(A(C(KC_LEFT))),  KC_NO,     KC_NO )   // Move window to previous screen
+
 /**
  * Window/tab navigation
  */

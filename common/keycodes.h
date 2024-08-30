@@ -36,7 +36,6 @@ enum custom_keycodes {
     CU_WRITE, // Save current state to EEPROM
 
     CU_DIRUP, // Move up a directory
-    CU_SPCR,  // Custom space for right thumb
 
     CU_REPT,  // Repeat the next character (or comboroll)
 
