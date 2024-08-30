@@ -135,7 +135,7 @@ Activated by the left thumb from the META layer.
 ![kyria-rsthd-prime-func](docs/images/kyria-rsthd-prime-func.png)
 [KLE layout](http://www.keyboard-layout-editor.com/#/gists/d5f816259b3660f371f074a6a06e1c61)
 
-This layer contains function keys on the right hand. It also contains the keys that switch between macOS, Windows and Linux shortcuts, as well as mouse buttons.
+This layer contains function keys on the right hand. It also contains the keys that switch between macOS, Windows and Linux shortcuts.
 
 ### SNAP
 
