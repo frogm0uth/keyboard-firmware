@@ -188,15 +188,6 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
             return false;
             break;
 
-        case CU_SPCR:
-            if (record->event.pressed) {
-                register_code(KC_SPC);
-            } else {
-                unregister_code(KC_SPC);
-            }
-            return false;
-            break;
-
             /* Switch between applications (like Alt-Tab on Windows or Cmd-Tab on macOS) This must be triggered from
              * a layer so the release event is called from layer_state_set_user() when the layer is released.
              */

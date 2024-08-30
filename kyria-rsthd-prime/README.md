@@ -125,7 +125,7 @@ Activated by either pinky.
 
 This layer contains common shortcuts, mostly arranged according to the letter used in the Mac/Windows shortcut. For example, the S key invokes Save (Cmd-S on Mac, Ctrl-S on Windows). However, the mapping is not always that straightforward (e.g. Cmd-Q on Mac and Alt-F4 on Windows), hence the use of a dedicated layer.
 
-This layer also contains media control keys and the keys to access the FUNC and SNAP layers.
+This layer also contains media control keys and the keys to access the FUNC and SNAP layers, as well as mouse buttons.
 
 The encoder is used for forward and backward search.
 
@@ -135,7 +135,7 @@ Activated by the left thumb from the META layer.
 ![kyria-rsthd-prime-func](docs/images/kyria-rsthd-prime-func.png)
 [KLE layout](http://www.keyboard-layout-editor.com/#/gists/d5f816259b3660f371f074a6a06e1c61)
 
-This layer contains function keys on the right hand. It also contains the keys that switch between macOS, Windows and Linux shortcuts, as well as mouse buttons.
+This layer contains function keys on the right hand. It also contains the keys that switch between macOS, Windows and Linux shortcuts.
 
 ### SNAP
 
@@ -145,7 +145,7 @@ Activated by the right thumb from the META layer.
 
 So called because of the keys for window snapping, which snap the active window to various locations on the screen. This works on macOS if [Rectangle Pro](https://rectangleapp.com) is running; it is not working at all on Windows and Linux yet.
 
-It also contains shortcuts for screenshots and for window zooming, as well as mouse buttons.
+It also contains shortcuts for screenshots and for window zooming.
 
 The encoder zooms the current application. If a modifier is held, it adjusts the OLED brightness and the backlight/per-key LEDs, depending on the modifier. There are also two keys on the left hand for this, in case there is no encoder.
 
