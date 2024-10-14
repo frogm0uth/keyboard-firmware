@@ -60,7 +60,7 @@ LtoR_STR( k,  KC_W, KC_F )
 
 // Anti-SFU and anti-pinballing
 LtoR_STR( m,  KC_S, KC_D )
-LtoR_STR( sc, KC_C, KC_F )
+LtoR_STR( sc, KC_B, KC_W )
 LtoR_STR( sp, KC_P, KC_G )
 
 RtoL_STR( ll, KC_N, CU_DOT )
@@ -77,6 +77,7 @@ CMBO_STR( ui, KC_I, KC_U )
 // Awkward bigrams/trigrams
 LtoR_STR( cr,  KC_T, KC_F )
 LtoR_STR( fr,  KC_S, KC_F )
+LtoR_STR( ft,  KC_C, KC_F )
 LtoR_STR( qu,  KC_B, KC_F )
 LtoR_STR( pr,  KC_G, KC_D )
 
@@ -103,11 +104,11 @@ RtoL_STR( cd,   KC_C, CU_COMM )
 RtoL_STR( was,  KC_W, CU_COMM )
 RtoL_STR( for,  KC_F, CU_COMM )
 
-RtoL_STR( ght,  KC_R, CU_COMM )
-//RtoL_STR( his,  KC_S, CU_COMM )
-//RtoL_STR( but,  KC_T, CU_COMM )
-//RtoL_STR( had,  KC_H, CU_COMM )
-//RtoL_STR( vs,   KC_V, CU_COMM )
+RtoL_STR( but,  KC_R, CU_COMM )
+RtoL_STR( his,  KC_S, CU_COMM )
+RtoL_STR( ght,  KC_T, CU_COMM )
+RtoL_STR( had,  KC_H, CU_COMM )
+RtoL_STR( vs,   KC_V, CU_COMM )
 
 RtoL_STR( pwd,  KC_P, CU_COMM )
 RtoL_STR( grep, KC_G, CU_COMM )
