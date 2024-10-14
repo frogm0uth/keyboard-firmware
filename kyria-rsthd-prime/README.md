@@ -89,7 +89,8 @@ There are five more layers, for a total of 6. All are hold-to-activate. The shif
 
 Activated by the left thumb.
 ![kyria-rsthd-prime-syms](docs/images/kyria-rsthd-prime-syms.png)
-[KLE layout](http://www.keyboard-layout-editor.com/#/gists/5a7d6afc1ee1a321449fc2c645c5a2c0)
+
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/5a7d6afc1ee1a321449fc2c645c5a2c0)
 
 Numbers and punctuation are combined on one layer. Numbers are along the home row and punctuation is mostly arranged on the right hand. (If only one character shown, it is output regardless of Shift.)
 
@@ -101,7 +102,8 @@ Cut, copy and paste shortcuts are along the left hand top row.
 
 Activated by the right thumb.
 ![kyria-rsthd-prime-edit](docs/images/kyria-rsthd-prime-edit.png)
-[KLE layout](http://www.keyboard-layout-editor.com/#/gists/3a6218306588db4240bcf25c74741580)
+
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/3a6218306588db4240bcf25c74741580)
 
 This layer extends the idea of platform-independent shortcuts to a complete layer. The left hand has the standard cursor keys, home/end and page up/down.
 
@@ -121,7 +123,8 @@ Holding one of the custom modifiers and rotating the encoder does "fast editing"
 ### META
 Activated by either pinky.
 ![kyria-rsthd-prime-meta](docs/images/kyria-rsthd-prime-meta.png)
-[KLE layout](http://www.keyboard-layout-editor.com/#/gists/96ff5eadac73281833f15d58e1535305)
+
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/96ff5eadac73281833f15d58e1535305)
 
 This layer contains common shortcuts, mostly arranged according to the letter used in the Mac/Windows shortcut. For example, the S key invokes Save (Cmd-S on Mac, Ctrl-S on Windows). However, the mapping is not always that straightforward (e.g. Cmd-Q on Mac and Alt-F4 on Windows), hence the use of a dedicated layer.
 
@@ -133,7 +136,8 @@ The encoder is used for forward and backward search.
 
 Activated by the left thumb from the META layer.
 ![kyria-rsthd-prime-func](docs/images/kyria-rsthd-prime-func.png)
-[KLE layout](http://www.keyboard-layout-editor.com/#/gists/d5f816259b3660f371f074a6a06e1c61)
+
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/d5f816259b3660f371f074a6a06e1c61)
 
 This layer contains function keys on the right hand. It also contains the keys that switch between macOS, Windows and Linux shortcuts.
 
@@ -141,7 +145,8 @@ This layer contains function keys on the right hand. It also contains the keys t
 
 Activated by the right thumb from the META layer.
 ![kyria-rsthd-prime-snap](docs/images/kyria-rsthd-prime-snap.png)
-[KLE layout](http://www.keyboard-layout-editor.com/#/gists/04e568d50406671e17d73c3438e7b6f8)
+
+[KLE link](http://www.keyboard-layout-editor.com/#/gists/04e568d50406671e17d73c3438e7b6f8)
 
 So called because of the keys for window snapping, which snap the active window to various locations on the screen. This works on macOS if [Rectangle Pro](https://rectangleapp.com) is running; it is not working at all on Windows and Linux yet.
 
