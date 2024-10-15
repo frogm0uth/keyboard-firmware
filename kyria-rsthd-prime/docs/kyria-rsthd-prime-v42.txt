@@ -56,9 +56,9 @@ EDIT
 META
 
  ,-----------------------------------------.                        ,-----------------------------------------.
- |      |  Bin | Close|      | Find | BriU |                        | VolU |PrvTrk| Play |NxtTrk| Mute |SysSet|
+ |DskTop|  Bin | Close|      | Find | BriU |                        | VolU |PrvTrk| Play |NxtTrk| Mute |SysSet|
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
- | eXit |Reload| Save |newTab|DskTop| BriD |                        | VolD |  New |      | Open |saveAs| Quit |
+ | eXit |Reload| Save |newTab|      | BriD |                        | VolD |  New |      | Open |saveAs| Quit |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
  |      |      | Print| Prev | Next |                                      | Back |  Fwd |AppSet|      |      |
  | (**) | Shift|      |      |      |                                      |      |      |      | Shift| (**) |

@@ -134,9 +134,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* META
 
  ,-----------------------------------------.                        ,-----------------------------------------.
- |      |  Bin | Close|      | Find | BriU |                        | VolU |PrvTrk| Play |NxtTrk| Mute |SysSet|
+ |DskTop|  Bin | Close|      | Find | BriU |                        | VolU |PrvTrk| Play |NxtTrk| Mute |SysSet|
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
- | eXit |Reload| Save |newTab|DskTop| BriD |                        | VolD |  New |      | Open |saveAs| Quit |
+ | eXit |Reload| Save |newTab|      | BriD |                        | VolD |  New |      | Open |saveAs| Quit |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
  |      |      | Print| Prev | Next |                                      | Back |  Fwd |AppSet|      |      |
  | (**) | Shift|      |      |      |                                      |      |      |      | Shift| (**) |
@@ -150,9 +150,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [META] = KEY_LAYOUT_stack(
         /* Left hand */
-        ___X___, SC_BIN,      SC_CLOSE_TAB, ___X___,        SC_FIND,           SC_BRIGHTNESS_UP,
-        SC_QUIT, SC_RELOAD,   SC_SAVE,      SC_NEW_TAB,     SC_REVEAL_DESKTOP, SC_BRIGHTNESS_DOWN,
-        _______, CU_SHIFT,    SC_PRINT,     SC_PREV_SEARCH, SC_NEXT_SEARCH,
+        SC_REVEAL_DESKTOP, SC_BIN,      SC_CLOSE_TAB, ___X___,        SC_FIND,        SC_BRIGHTNESS_UP,
+        SC_QUIT,           SC_RELOAD,   SC_SAVE,      SC_NEW_TAB,     ___X___,        SC_BRIGHTNESS_DOWN,
+        _______,           CU_SHIFT,    SC_PRINT,     SC_PREV_SEARCH, SC_NEXT_SEARCH,
 
         /* Right hand */
                  KC_VOLU,  KC_MPRV,         KC_MPLY,        KC_MNXT,          KC_MUTE,     SC_SYS_SETTINGS,
