@@ -1,7 +1,7 @@
 Kyria v42
 
-v42 has E on the right thumb, but the other layers have the same handedness as when E was on the left thumb.
-We can do this now because there are space keys on both hands. It also has a fourth thumb key on the right hand.
+v42 has E on the right thumb, but the FUNC and SNAP layer have the same handedness as when E was on the left thumb.
+It also has a fourth thumb key on the right hand.
 
 
 ALPHA
@@ -17,40 +17,40 @@ ALPHA
 
  .                 ,------.      ,--------------------.  ,---------------------------.
  .                 | Mute |      | Enter| Space|Repeat|  | Space|   E  |  Tab |BkSp/D|
- .                 |      |      | SYMS |      |      |  |      |      | EDIT |      |
+ .                 |      |      | EDIT |      |      |  |      |      | SYMS |      |
  .                 `------'      `--------------------'  `---------------------------'
 
 SYMS
 
  ,-----------------------------------------.                        ,-----------------------------------------.
- |      |  All |  Cut | Copy | Paste| AppR |                        |  ../ | )  ] |   *  | (  [ |   +  |   #  |
+ | ^  ~ |   +  | (  [ |   *  | )  ] |  ../ |                        | AppR | Paste| Copy |  Cut |  All |   #  |
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
- |   =  |   7  |   6  | 5 Tab|   0  |   8  |                        |   9  | 1  } | 2  % | 3  { | 4  @ | $  ^ |
+ |   $  | 7  @ | 6  { | 5  % | 0  } |   9  |                        |   8  | 1  ` | 2 Tab|   3  |   4  |   =  |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
- |      |      |      |      |      |                                      | >  | |   /  | <  & |   -  | ~  ` |
- | FUNC | Shift| Ctrl |  Alt |  Cmd |                                      |      |      |      |      |      |
+ |  Tab |   -  | <  & |   /  | >  | |                                      |      |      |      |      |      |
+ |      |      |      |      |      |                                      |  Cmd |  Alt | Ctrl | Shift| SNAP |
  `----------------------------------'                                      `----------------------------------'
 
  .                 ,------.      ,--------------------.  ,---------------------------.
- .                 |      |      |      |      |      |  | Space|   .  | Enter|BkSp/D|
- .                 |      |      | (**) |      |      |  |      |      |      |      |
+ .                 |      |      | Enter| Space|   .  |  |      |      |      |      |
+ .                 |      |      |      |      |      |  |      |      | (**) |      |
  .                 `------'      `--------------------'  `---------------------------'
 
 EDIT
 
  ,-----------------------------------------.                        ,-----------------------------------------.
- | ScrL | PgUp | Home |  Up  |  End | ScrR |                        | AppR | Paste| Copy |  Cut |  All |DskTop|
+ |DskTop|  All |  Cut | Copy | Paste| AppR |                        | ScrL | Home |  Up  |  End | PgUp |ScrR/L|
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
- | WinR | PgDn | Left | Down | Right| TabR |                        |AppWin|      |      |      |      |Expose|
- |      |      |      |      |      |      |                        |      | Fast |  x4  | More |Delete|      |
+ |Expose|      |      |      |      |AppWin|                        |TabR/L| Left | Down | Right| PgDn |WinR/L|
+ |      |Delete| More |  x4  | Fast |      |                        |      |      |      |      |      |      |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
- | AppR |      | Undo | Space| Redo |                                      |      |      |      |      |      |
- |      | Shift|      |      |      |                                      |  Cmd |  Alt | Ctrl | Shift| SNAP |
+ |      |      |      |      |      |                                      | Undo | Space| Redo |      |AppR/L|
+ | FUNC | Shift| Ctrl |  Alt |  Cmd |                                      |      |      |      | Shift|      |
  `----------------------------------'                                      `----------------------------------'
- .
+
  .                 ,------.      ,--------------------.  ,---------------------------.
- .                 |      |      | Enter| BkSp |  Del |  |      |      |      |      |
- .                 |      |      |      |      |      |  |      |      | (**) |      |
+ .                 |      |      |      |      |      |  | Enter|BkSp/D|  Tab |      |
+ .                 |      |      | (**) |      |      |  |      |      |      |      |
  .                 `------'      `--------------------'  `---------------------------'
 
 META
@@ -88,9 +88,9 @@ FUNC
 SNAP - on macOS needs Rectangle Pro installed
 
  ,-----------------------------------------.                        ,-----------------------------------------.
- |LghtUp| ZmIn | SL23 | SMax | SR23 | SPrev|                        |      |      |      |      |      |      |
+ | SnapT| ZmIn | SL23 | SMax | SR23 |LghtUp|                        |      | SPrev| SVert|      |      |      |
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
- |LghtDn| ZmOut| SL12 | SM23 | SR12 | SVert|                        |      | SSRgn| SSWin| SSScr| SSApp|!WRITE|
+ | SnapB| ZmOut| SL12 | SM23 | SR12 |LghtDn|                        |      | SSRgn| SSWin| SSScr| SSApp|!WRITE|
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
  |      |  Zm0 | SL14 | SM12 | SR14 |                                      |      |      |      |      |      |
  | (**) |      |      |      |      |                                      |  Cmd |  Alt | Ctrl | Shift| (**) |
