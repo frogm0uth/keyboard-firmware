@@ -97,9 +97,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* EDIT
  
  ,-----------------------------------------.                        ,-----------------------------------------.
- |DskTop|  All |  Cut | Copy | Paste| AppR |                        | ScrL | Home |  Up  |  End | PgUp |ScrR/L|
+ |AppWin|  All |  Cut | Copy | Paste| AppR |                        | ScrL | Home |  Up  |  End | PgUp |ScrR/L|
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
- |Expose|      |      |      |      |AppWin|                        |TabR/L| Left | Down | Right| PgDn |WinR/L|
+ |Expose|      |      |      |      |FulScr|                        |TabR/L| Left | Down | Right| PgDn |WinR/L|
  |      |Delete| More |  x4  | Fast |      |                        |      |      |      |      |      |      |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
  |      |      |      |      |      |                                      | Undo | Space| Redo |      |AppR/L|
@@ -114,9 +114,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [EDIT] = KEY_LAYOUT_stack(
         /* Left hand */
-        SC_REVEAL_DESKTOP,  SC_SELECT_ALL,  SC_CUT,   SC_COPY,  SC_PASTE,  CU_APPSWITCH_RIGHT,
-        CU_EXPOSE_ALL,      CE_DELETE,      CE_MORE,  CE_X4,    CE_FAST,   SC_EXPOSE_APP,
-        CL_FUNC,            CU_SHIFT,       KC_LCTL,  KC_LALT,  KC_LGUI,
+        SC_EXPOSE_APP,  SC_SELECT_ALL,  SC_CUT,   SC_COPY,  SC_PASTE,  CU_APPSWITCH_RIGHT,
+        CU_EXPOSE_ALL,  CE_DELETE,      CE_MORE,  CE_X4,    CE_FAST,   SC_FULLSCREEN,
+        CL_FUNC,        CU_SHIFT,       KC_LCTL,  KC_LALT,  KC_LGUI,
 
         /* Right hand */
                      SC_PREV_SCREEN,  CE_HOME,  CE_UP,    CE_END,    CE_PAGE_UP,    CU_SCREEN_RL,
@@ -136,7 +136,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  ,-----------------------------------------.                        ,-----------------------------------------.
  |      |  Bin | Close|      | Find | BriU |                        | VolU |PrvTrk| Play |NxtTrk| Mute |SysSet|
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
- | eXit |Reload| Save |newTab|      | BriD |                        | VolD |  New |      | Open |saveAs| Quit |
+ | eXit |Reload| Save |newTab|DskTop| BriD |                        | VolD |  New |      | Open |saveAs| Quit |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
  |      |      | Print| Prev | Next |                                      | Back |  Fwd |AppSet|      |      |
  | (**) | Shift|      |      |      |                                      |      |      |      | Shift| (**) |
@@ -150,8 +150,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [META] = KEY_LAYOUT_stack(
         /* Left hand */
-        ___X___, SC_BIN,      SC_CLOSE_TAB, ___X___,        SC_FIND,        SC_BRIGHTNESS_UP,
-        SC_QUIT, SC_RELOAD,   SC_SAVE,      SC_NEW_TAB,     ___X___,        SC_BRIGHTNESS_DOWN,
+        ___X___, SC_BIN,      SC_CLOSE_TAB, ___X___,        SC_FIND,           SC_BRIGHTNESS_UP,
+        SC_QUIT, SC_RELOAD,   SC_SAVE,      SC_NEW_TAB,     SC_REVEAL_DESKTOP, SC_BRIGHTNESS_DOWN,
         _______, CU_SHIFT,    SC_PRINT,     SC_PREV_SEARCH, SC_NEXT_SEARCH,
 
         /* Right hand */

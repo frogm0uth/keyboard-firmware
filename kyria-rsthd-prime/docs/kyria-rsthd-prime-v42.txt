@@ -39,9 +39,9 @@ SYMS
 EDIT
 
  ,-----------------------------------------.                        ,-----------------------------------------.
- |DskTop|  All |  Cut | Copy | Paste| AppR |                        | ScrL | Home |  Up  |  End | PgUp |ScrR/L|
+ |AppWin|  All |  Cut | Copy | Paste| AppR |                        | ScrL | Home |  Up  |  End | PgUp |ScrR/L|
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
- |Expose|      |      |      |      |AppWin|                        |TabR/L| Left | Down | Right| PgDn |WinR/L|
+ |Expose|      |      |      |      |FulScr|                        |TabR/L| Left | Down | Right| PgDn |WinR/L|
  |      |Delete| More |  x4  | Fast |      |                        |      |      |      |      |      |      |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
  |      |      |      |      |      |                                      | Undo | Space| Redo |      |AppR/L|
@@ -58,7 +58,7 @@ META
  ,-----------------------------------------.                        ,-----------------------------------------.
  |      |  Bin | Close|      | Find | BriU |                        | VolU |PrvTrk| Play |NxtTrk| Mute |SysSet|
  |------+------+------+------+------+------|                        |------+------+------+------+------+------|
- | eXit |Reload| Save |newTab|      | BriD |                        | VolD |  New |      | Open |saveAs| Quit |
+ | eXit |Reload| Save |newTab|DskTop| BriD |                        | VolD |  New |      | Open |saveAs| Quit |
  |------+------+------+------+------+------'                        `------+------+------+------+------+------|
  |      |      | Print| Prev | Next |                                      | Back |  Fwd |AppSet|      |      |
  | (**) | Shift|      |      |      |                                      |      |      |      | Shift| (**) |
