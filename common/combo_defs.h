@@ -52,7 +52,23 @@
  * My "best practice" is to use comborolls for everything, and QMK combos only for things
  * that use modifiers and are not typed overlapping with any comborolls.
  */
+
+/* Note: the "K_VERSION" flag turns on the use of WF for K, instead of TF. This makes K, CK, SK, RK more comfortable
+ * but removes the nice positioning of SC and CR.
+ */
+
 // clang-format off
+
+
+// Verticals
+CMBO_STR( tw, KC_T, KC_W )
+CMBO_STR( cs, KC_S, KC_C )
+CMBO_STR( ps, KC_H, KC_F )
+CMBO_STR( lm, KC_N, KC_M )
+CMBO_STR( ui, KC_I, KC_U )
+
+
+#ifdef K_VERSION // New version with nice K comboroll
 
 // Letters not in alpha and related rolls
 LtoR_STR( j,  KC_S, KC_G )
@@ -65,14 +81,8 @@ LtoR_STR( sp, KC_P, KC_G )
 
 RtoL_STR( ll, KC_N, CU_DOT )
 RtoL_STR( er, KC_O, KC_A )
+RtoL_STR( es, KC_L, CU_COMM )
 RtoL_STR( ee, KC_Y, CU_COMM )
-
-// Verticals
-CMBO_STR( tw, KC_T, KC_W )
-CMBO_STR( cs, KC_S, KC_C )
-CMBO_STR( ps, KC_H, KC_F )
-CMBO_STR( lm, KC_N, KC_M )
-CMBO_STR( ui, KC_I, KC_U )
 
 // Awkward bigrams/trigrams
 LtoR_STR( cr,  KC_T, KC_F )
@@ -80,15 +90,53 @@ LtoR_STR( fr,  KC_S, KC_F )
 LtoR_STR( ft,  KC_C, KC_F )
 LtoR_STR( qu,  KC_B, KC_F )
 LtoR_STR( pr,  KC_G, KC_D )
+LtoR_STR( ght, KC_X, KC_H )
 
 RtoL_STR( you, KC_U, CU_DOT )
 
 // Inner column minimization and comfort
 LtoR_STR( br,  KC_R, KC_H )
 LtoR_STR( b,   KC_T, KC_D )
-LtoR_STR( v,   KC_P, KC_D )
 
-RtoL_STR( ve, KC_I, CU_COMM )
+LtoR_STR( v,   KC_P, KC_D )
+RtoL_STR( ve,  KC_I, CU_COMM )
+
+#else // old version with nice SC and CR comborolls
+
+// Letters not in alpha and related rolls
+LtoR_STR( j,  KC_S, KC_G )
+LtoR_STR( k,  KC_T, KC_F )
+
+// Anti-SFU and anti-pinballing
+LtoR_STR( m,  KC_S, KC_D )
+LtoR_STR( sc, KC_C, KC_W )
+LtoR_STR( sp, KC_P, KC_G )
+
+RtoL_STR( ll, KC_N, CU_DOT )
+RtoL_STR( er, KC_O, KC_A )
+RtoL_STR( es, KC_L, CU_COMM )
+RtoL_STR( ee, KC_Y, CU_COMM )
+
+// Awkward bigrams/trigrams
+LtoR_STR( cr,  KC_W, KC_F )
+LtoR_STR( fr,  KC_S, KC_F )
+LtoR_STR( qu,  KC_B, KC_F )
+LtoR_STR( pr,  KC_G, KC_D )
+LtoR_STR( ght, KC_X, KC_H )
+
+RtoL_STR( you, KC_U, CU_DOT )
+
+// Inner column minimization
+LtoR_STR( ck,  KC_C, KC_F )
+LtoR_STR( rk,  KC_R, KC_W )
+
+LtoR_STR( br,  KC_R, KC_H )
+LtoR_STR( b,   KC_T, KC_D )
+
+LtoR_STR( v,   KC_P, KC_D )
+RtoL_STR( ve,  KC_I, CU_COMM )
+
+#endif
 
 // Common word endings, right hand
 RtoL_STR( ally, KC_M, CU_DOT )
@@ -106,7 +154,7 @@ RtoL_STR( for,  KC_F, CU_COMM )
 
 RtoL_STR( but,  KC_R, CU_COMM )
 RtoL_STR( his,  KC_S, CU_COMM )
-RtoL_STR( ght,  KC_T, CU_COMM )
+RtoL_STR( ove,  KC_T, CU_COMM )
 RtoL_STR( had,  KC_H, CU_COMM )
 RtoL_STR( vs,   KC_V, CU_COMM )
 
@@ -122,7 +170,7 @@ RtoL_LIT( define, "#define", KC_D, KC_Q )
 LtoR_STR( from, KC_F, KC_M )
 
 RtoL_LIT( espace, "e ",     KC_E,   CU_COMM )
-RtoL_LIT( ospace, "o ",     KC_E,   CU_DOT )
+//RtoL_LIT( ospace, "o ",     KC_E,   CU_DOT )
 RtoL_LIT( backslash, "\\",  KC_U, KC_MINS )
 
 // Utilities
@@ -132,8 +180,8 @@ CMBO_KEY( screenlock, CU_SLCK,   KC_ESC, KC_Q )
 LtoR_LIT( l_c_comment, "/*", CU_LPRN, KC_ASTR ) _ONSHIFT( l_c_comment )
 LtoR_LIT( r_c_comment, "*/", KC_ASTR, CU_RPRN ) _ONSHIFT( r_c_comment )
 
-LtoR_LIT( l_j_comment, "{#", CU_3, KC_ASTR ) _ONSHIFT( l_j_comment )
-LtoR_LIT( r_j_comment, "#}", KC_ASTR, CU_1 ) _ONSHIFT( r_j_comment )
+LtoR_LIT( l_j_comment, "{#", CU_6, KC_ASTR ) _ONSHIFT( l_j_comment )
+LtoR_LIT( r_j_comment, "#}", KC_ASTR, CU_0 ) _ONSHIFT( r_j_comment )
 
 LtoR_LIT( l_php, "<?php", CU_LT, CU_SLSH_SLSH) _ONSHIFT( l_php )
 LtoR_LIT( r_php, "?>",    CU_SLSH_SLSH, CU_GT) _ONSHIFT( r_php )
@@ -142,6 +190,4 @@ LtoR_LIT( parensemi, ");", CU_LT,        CU_GT )   _ONSHIFT( parensemi )
 LtoR_LIT( eql_gt,    "=>", CU_MINS_MINS, CU_GT)    _ONSHIFT( eql_gt )
 
 LtoR_LIT( htmlcomment, "<!--", CU_MINS_MINS, CU_LT)
-LtoR_LIT( code, "```", CU_MINS_MINS, CU_SLSH_SLSH)
-
-//LtoR_LIT( tildeslash,  "~/",   CU_MINS_MINS, CU_SLSH_SLSH)
+LtoR_LIT( tildeslash,  "~/",   CU_MINS_MINS, CU_SLSH_SLSH)

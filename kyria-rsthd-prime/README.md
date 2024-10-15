@@ -59,7 +59,7 @@ See [common code](../common/README.md).
 
 ![kyria-rsthd-prime-alpha](docs/images/kyria-rsthd-prime-alpha.png)
 
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/4a1c453527f24cdc558bc684974edbf9)
+[KLE link](https://www.keyboard-layout-editor.com/#/gists/966c5646db209f5ab2c8691d66f876da)
 
 The alpha layout aims to reduce lateral finger movement on the index finger.
 
@@ -150,7 +150,7 @@ Activated by the right thumb from the META layer.
 
 So called because of the keys for window snapping, which snap the active window to various locations on the screen. This works on macOS if [Rectangle Pro](https://rectangleapp.com) is running; it is not working at all on Windows and Linux yet.
 
-It also contains shortcuts for screenshots and for window zooming.
+It also contains shortcuts for screenshots, to make a window full-screen and to move a window to a different screen.
 
 The encoder zooms the current application. If a modifier is held, it adjusts the OLED brightness and the backlight/per-key LEDs, depending on the modifier. There are also two keys on the left hand for this, in case there is no encoder.
 
