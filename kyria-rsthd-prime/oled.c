@@ -92,7 +92,9 @@ const static char* layer_names[] = {
 //clang-format on
 
 #ifdef ENCODER_ENABLE
-static const char PROGMEM str_encoder_volume[]  = "<-     Volume     +>";
+static const char PROGMEM str_encoder_alpha[]   = "<-    App|Page    +>";
+static const char PROGMEM str_encoder_brtvol[]  = "<- Bright|Volume  +>";
+static const char PROGMEM str_encoder_tabrl[]   = "<Prev   Tab    Next>";
 static const char PROGMEM str_encoder_zoom[]    = "<-      Zoom      +>";
 static const char PROGMEM str_encoder_search[]  = "<Prev  Search  Next>";
 static const char PROGMEM str_encoder_history[] = "<Undo          Redo>";
@@ -200,11 +202,10 @@ static void render_status(void) {
     // encoder help
     switch (layer) {
         case ALPHA:
-            oled_write_P(str_encoder_volume, false);
+            oled_write_P(str_encoder_alpha, false);
             break;
 
         case EDIT:
-        case SYMS:
 #    ifdef CUSTOM_EDIT
             if (custom_edit_encoder_ready()) {
                 custom_edit_encoder_status();
@@ -216,11 +217,14 @@ static void render_status(void) {
 #    endif
             break;
 
-        case META:
+        case SYMS:
             oled_write_P(str_encoder_search, false);
             break;
 
-        case SNAP:
+        case META:
+            oled_write_P(str_encoder_brtvol, false);
+            break;
+
         case FUNC:
             if (mods & MOD_MASK_CAG) {
 #    if defined(RGBLIGHT_ENABLE) || defined(RGB_MATRIX_ENABLE)
@@ -229,8 +233,12 @@ static void render_status(void) {
             } else if (mods & MOD_MASK_SHIFT) {
                 oled_brightness_encoder_status();
             } else {
-                oled_write_P(str_encoder_zoom, false);
+                oled_write_P(str_encoder_tabrl, false);
             }
+            break;
+
+        case SNAP:
+            oled_write_P(str_encoder_zoom, false);
             break;
 
         default:
