@@ -59,6 +59,7 @@
 
 // clang-format off
 
+#define K_VERSION
 
 // Verticals
 CMBO_STR( tw, KC_T, KC_W )
@@ -136,7 +137,7 @@ LtoR_STR( b,   KC_T, KC_D )
 LtoR_STR( v,   KC_P, KC_D )
 RtoL_STR( ve,  KC_I, CU_COMM )
 
-#endif
+#endif // not K_VERSION
 
 // Common word endings, right hand
 RtoL_STR( ally, KC_M, CU_DOT )
@@ -166,15 +167,17 @@ RtoL_LIT( ifdef,  "#ifdef",  KC_F, KC_Q )
 RtoL_LIT( endif,  "#endif",  KC_H, KC_Q )
 RtoL_LIT( define, "#define", KC_D, KC_Q )
 
+
 // Extras and oddballs
 LtoR_STR( from, KC_F, KC_M )
 
-RtoL_LIT( espace, "e ",     KC_E,   CU_COMM )
-//RtoL_LIT( ospace, "o ",     KC_E,   CU_DOT )
+RtoL_LIT( espace, "e ",     KC_E,   KC_A )
 RtoL_LIT( backslash, "\\",  KC_U, KC_MINS )
 
 // Utilities
 CMBO_KEY( screenlock, CU_SLCK,   KC_ESC, KC_Q )
+CMBO_KEY( search,     SC_SEARCH, KC_W,   KC_U )
+CMBO_KEY( search2,    SC_SEARCH, KC_TAB, KC_E )
 
 // Syntax layer - most only trigger if shift is down
 LtoR_LIT( l_c_comment, "/*", CU_LPRN, KC_ASTR ) _ONSHIFT( l_c_comment )
