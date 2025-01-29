@@ -3,8 +3,8 @@
 This is the keymap for my Kyria keyboard from [splitkb.com](https://splitkb.com). The alpha layout was based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/) but is now heavily modified. The layout is optimized for minimum usage of the inner index column. Features in the code include runtime switching between Mac/Windows/Linux shortcuts and a custom implementation of *comborolls*.
 
 <!--ts-->
+* [Kyria RSTHD/Prime v42](#kyria-rsthdprime-v42)
    * [Overview](#overview)
-      * [Latest changes](#latest-changes)
       * [Goals](#goals)
       * [Keyboard configuration](#keyboard-configuration)
       * [Features](#features)
@@ -19,11 +19,15 @@ This is the keymap for my Kyria keyboard from [splitkb.com](https://splitkb.com)
       * [Why put E on the thumb?](#why-put-e-on-the-thumb)
       * [E on which thumb?](#e-on-which-thumb)
       * [Comboroll what?](#comboroll-what)
+      * [Thoughts on symbol layers](#thoughts-on-symbol-layers)
    * [Backmatter](#backmatter)
       * [How to build](#how-to-build)
       * [RSTHD variants and similar layouts](#rsthd-variants-and-similar-layouts)
       * [Relevant articles and resources](#relevant-articles-and-resources)
       * [Acknowledgments](#acknowledgments)
+
+<!-- Created by https://github.com/ekalinin/github-markdown-toc -->
+<!-- Added by: username, at: Fri 20 Dec 2024 13:17:37 AEDT -->
 
 <!--te-->
 
@@ -78,7 +82,7 @@ Except for Shift, there are no modifiers on the alpha layer. To access them, hol
 
 The "repeat" thumb key is different to other implementations, in that you press it *before* the key that is to be repeated. This makes it possible to place it on the same thumb as space, as double letters often occur at the end of words.
 
-The encoder is used to adjust volume and screen brightness.
+The left encoder is used for application switching, while the right encoder scrolls up and down a page.
 
 ## Other layers
 
@@ -87,27 +91,29 @@ There are five more layers, for a total of 6. All are hold-to-activate. The shif
 
 ### SYMS
 
-Activated by the left thumb.
+Activated by the right thumb.
 ![kyria-rsthd-prime-syms](docs/images/kyria-rsthd-prime-syms.png)
 
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/5a7d6afc1ee1a321449fc2c645c5a2c0)
 
-Numbers and punctuation are combined on one layer. Numbers are along the home row and punctuation is mostly arranged on the right hand. (If only one character shown, it is output regardless of Shift.)
+Numbers and punctuation are combined on one layer. Numbers are along the home row and punctuation is mostly arranged on the left hand. (If only one character is shown, it is output regardless of Shift.)
 
-The punctuation is arranged so that common (for me) symbol bigrams are an inward roll: `{% %} </ /> ~/ -> ()`. The `=` symbol is on the left hand because it combines with so many other symbols. Additional bigrams such as `/* */ => );` are on comborolls that activate if shift is held. Overall, this layer works better for me than pre-v38 versions that used a numpad layout.
+The punctuation is arranged so that common (for me) symbol bigrams are an inward roll: `{% %} </ /> ~/ -> ()`. The `=` symbol is on the right hand because it combines with so many other symbols. Additional bigrams such as `/* */ => );` are on comborolls that activate if shift is held. Overall, this layer works better for me than pre-v38 versions that used a numpad layout.
 
-Cut, copy and paste shortcuts are along the left hand top row.
+Cut, copy and paste shortcuts are along the right hand top row.
+
+The encoder (left) is used to move through search results.
 
 ### EDIT
 
-Activated by the right thumb.
+Activated by the left thumb.
 ![kyria-rsthd-prime-edit](docs/images/kyria-rsthd-prime-edit.png)
 
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/3a6218306588db4240bcf25c74741580)
+[KLE link](https://www.keyboard-layout-editor.com/#/gists/3a6218306588db4240bcf25c74741580)
 
-This layer extends the idea of platform-independent shortcuts to a complete layer. The left hand has the standard cursor keys, home/end and page up/down.
+This layer extends the idea of platform-independent shortcuts to a complete layer. The right hand has the standard cursor keys, home/end and page up/down.
 
-Modifiers are on the right hand. If one of the standard modifiers (Shift, Ctrl, Alt, Gui) is held, the emitted code is that modifier + keycode. The special modifiers on the home row act as follows:
+Modifiers are on the left hand. If one of the standard modifiers (Shift, Ctrl, Alt, Gui) is held, the emitted code is that modifier + keycode. The special modifiers on the home row act as follows:
 
 - **Delete** makes the action delete instead of moving.
 - **More** makes the key do "more" : left and right move a word left or right; home and end move to the start and end of a paragraph; page up/down move to the start and end of the document. Up and down are an exception: these activate mouse wheel scrolling.
@@ -116,43 +122,47 @@ Modifiers are on the right hand. If one of the standard modifiers (Shift, Ctrl, 
 
 All actions have auto-repeat. You can change the special modifiers while holding down a navigation key and the action changes accordingly.
 
-Cut, copy and paste shortcuts are along the right hand top row. Shortcuts for window and desktop navigation are scattered around the edges.
+Cut, copy and paste shortcuts are along the left hand top row. Shortcuts for window and desktop navigation are scattered around the edges.
 
-Holding one of the custom modifiers and rotating the encoder does "fast editing". (In practice though, I never use this.)
+The encoder (right) is used for history scrubbing, unless one of the edit modifier keys are held, in which case it does "fast editing." 
 
 ### META
 Activated by either pinky.
 ![kyria-rsthd-prime-meta](docs/images/kyria-rsthd-prime-meta.png)
 
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/96ff5eadac73281833f15d58e1535305)
+[KLE link](https://www.keyboard-layout-editor.com/#/gists/96ff5eadac73281833f15d58e1535305)
 
 This layer contains common shortcuts, mostly arranged according to the letter used in the Mac/Windows shortcut. For example, the S key invokes Save (Cmd-S on Mac, Ctrl-S on Windows). However, the mapping is not always that straightforward (e.g. Cmd-Q on Mac and Alt-F4 on Windows), hence the use of a dedicated layer.
 
 This layer also contains media control keys and the keys to access the FUNC and SNAP layers, as well as mouse buttons.
 
-The encoder is used for forward and backward search.
+The encoders are used for volume and screen brightness control.
 
 ### FUNC
 
-Activated by the left thumb from the META layer.
+Activated by the right thumb from the META layer.
+
 ![kyria-rsthd-prime-func](docs/images/kyria-rsthd-prime-func.png)
 
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/d5f816259b3660f371f074a6a06e1c61)
+[KLE link](https://www.keyboard-layout-editor.com/#/gists/c12a52db15ac6b000953d836f6b825bb)
 
-This layer contains function keys on the right hand. It also contains the keys that switch between macOS, Windows and Linux shortcuts.
+This layer contains function keys on the left hand. It also contains the keys that switch between macOS, Windows and Linux shortcuts.
+
+ The encoder (left) moves between tabs of an application. If a modifier is held, it adjusts the OLED brightness and the backlight/per-key LEDs, depending on the modifier. There are also two keys on the left hand for this, in case there is no encoder.
 
 ### SNAP
 
-Activated by the right thumb from the META layer.
+Activated by the left thumb from the META layer.
+
 ![kyria-rsthd-prime-snap](docs/images/kyria-rsthd-prime-snap.png)
 
-[KLE link](http://www.keyboard-layout-editor.com/#/gists/04e568d50406671e17d73c3438e7b6f8)
+[KLE link](https://www.keyboard-layout-editor.com/#/gists/ada5a465922dddfe360e713aed6b158e)
 
 So called because of the keys for window snapping, which snap the active window to various locations on the screen. This works on macOS if [Rectangle Pro](https://rectangleapp.com) is running; it is not working at all on Windows and Linux yet.
 
 It also contains shortcuts for screenshots, to make a window full-screen and to move a window to a different screen.
 
-The encoder zooms the current application. If a modifier is held, it adjusts the OLED brightness and the backlight/per-key LEDs, depending on the modifier. There are also two keys on the left hand for this, in case there is no encoder.
+The encoder (right) zooms the current application window.
 
 
 ## Layout notes
@@ -171,9 +181,9 @@ RSTHD has E on the left thumb, but many adopters swap the E and space, as indica
 
 The location of the space key has a ripple effect that causes the "handedness" of most of the upper layers to be swapped, because you don't want the layer key for symbols on the same thumb as space.
 
-The swapped-E version seems very appealing at first, and rollers such as myself will enjoy rolling off the consonants onto the space. However, I found that, as I gained fluency, I would just stumble sometimes. Eventually, I realized why: "pinballing" between the space and the consonants. Consider a phrase such as "with this ring that" - between every pair of words there is a redirect/pinball on the thumb i.e.  `t t`, `s r`, `g t`.
+The swapped-E version seems very appealing at first, and rollers such as myself will enjoy rolling off the consonants onto the space. However, I found that, as I gained fluency, I would just stumble sometimes. Eventually, I realized why: "pinballing" between the space and the consonants. Consider a phrase such as "with this ring that" - between every pair of words there is a pinball aka redirect on the thumb i.e.  `t t`, `s r`, `g t`.
 
-The solution, in the end, was to add a space key on the right thumb also. This one is used less often than the primary space key on the left thumb. It adds significantly to the learning curve, but so far is proving to make for a smoother ride.
+ A partial solution was to add a second space key on the right thumb.
 
 ### Comboroll what?
 
@@ -181,7 +191,7 @@ I wrote a long explanation of these a while back, but my thinking has evolved si
 
 That's it. Not complicated. While I have a custom implementation, you can do a version of it in QMK with the `COMBO_MUST_PRESS_IN_ORDER` or `COMBO_MUST_PRESS_IN_ORDER_PER_COMBO` flags ([docs](https://docs.qmk.fm/features/combo#advanced-configuration)). The QMK implementation has some limitations (\*), but it's certainly good enough to get a feel for the concept.
 
-Essentially, a comboroll changes something "bad" into something "good" (a roll). The "bad" thing could be an SFB, a redirect, a too-long sequence of alternations, or some other awkward key sequence.
+Essentially, a comboroll changes something "bad" into something "good." The "bad" thing could be an SFB, a redirect, a too-long sequence of alternations, or some other awkward key sequence. The "good" thing is typically an inward roll.
 
 Because the combo is "directional", you can use trigger keys that you might not want to use for a normal combo. For example, AO is very uncommon so makes a good comboroll trigger, but OA is a bit too common to be used. For this reason, you can also have a longer timeout. When you get it right, and assuming you roll keys when you type anyway, comborolls fit into the normal flow of typing but change the key patterns into something more comfortable.
 
@@ -189,7 +199,7 @@ It's worth noting that comborolls are only somewhat timing-dependant. For exampl
 
 The old long version of the essay is [here](docs/comborolls.md).
 
-(\*) The QMK implementation may give unexpected results with overlapping combos. For example, if AB produces X and AC produces Y, then rolling ABC will produce BY. In addition, if shift is pressed, all output letters are shifted (there is no way to have just the first letter capitalized).
+(\*) The QMK implementation may give unexpected results with overlapping combos. For example, if AB produces X and AC produces Y, then rolling ABC will produce BY. In addition, if shift is pressed, all output letters are shifted (there is no way to have just the first letter capitalized), whereas my implementation turns shift off after the first output letter.
 
 
 ## Backmatter
