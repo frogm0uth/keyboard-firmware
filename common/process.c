@@ -144,7 +144,7 @@ bool process_record_user_emit(uint16_t keycode, keyrecord_t *record) {
 #ifdef LAYER_TAP_TOGGLE
             // layer switching using layer-tap-toggle custom code
         case CL_SYMS:
-            return layer_tap_toggle(KC_TAB, SYMS, record);
+            return layer_tap_toggle(KC_SPC, SYMS, record);
             break;
 
         case CL_EDIT:
