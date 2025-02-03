@@ -17,6 +17,13 @@
 
 #include QMK_KEYBOARD_H
 
+
+// Define this to use E on the left thumb. Otherwise E is on the right.
+//
+#define v42e
+
+
+// Include everything...
 #include "../common/appswitcher.h"
 #include "../common/comboroll.h"
 #include "../common/custom_capsword.h"

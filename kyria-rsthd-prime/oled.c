@@ -205,6 +205,10 @@ static void render_status(void) {
             oled_write_P(str_encoder_alpha, false);
             break;
 
+        case SYMS:
+            oled_write_P(str_encoder_search, false);
+            break;
+
         case EDIT:
 #    ifdef CUSTOM_EDIT
             if (custom_edit_encoder_ready()) {
@@ -215,10 +219,6 @@ static void render_status(void) {
 #    else
             oled_write_P(str_encoder_history, false);
 #    endif
-            break;
-
-        case SYMS:
-            oled_write_P(str_encoder_search, false);
             break;
 
         case META:

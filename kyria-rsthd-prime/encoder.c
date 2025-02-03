@@ -48,16 +48,33 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
      */
     clear_mods();
     switch (layer) {
-            // On Alpha layer, mouse wheel
+            // On Alpha layer, page up/down
         case ALPHA:
             if (right) {
                 keycode = clockwise ? KC_PGDN : KC_PGUP;
             }
             break;
 
+            // On Syms layer, search forward and back
+        case SYMS:
+#ifndef v42e
+            if (left)
+#else
+            if (right)
+#endif
+            {
+                keycode = clockwise ? SC(SC_NEXT_SEARCH) : SC(SC_PREV_SEARCH);
+            }
+            break;
+
             // On the Edit layer, scrub history, unless an edit modifier is held.
         case EDIT:
-            if (right) {
+#ifndef v42e
+            if (right)
+#else
+            if (left)
+#endif
+            {
 #ifdef CUSTOM_EDIT
                 if (custom_edit_encoder_ready()) {
                     custom_edit_encoder(clockwise);
@@ -67,13 +84,6 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 #else
                 keycode = clockwise ? SC(SC_REDO) : SC(SC_UNDO);
 #endif
-            }
-            break;
-
-            // On Syms layer, search forward and back
-        case SYMS:
-            if (left) {
-                keycode = clockwise ? SC(SC_NEXT_SEARCH) : SC(SC_PREV_SEARCH);
             }
             break;
 
@@ -88,7 +98,12 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 
             // On the FUNC layer, change backlight color or OLED brightness
         case FUNC:
-            if (left) {
+#ifndef v42e
+            if (left)
+#else
+            if (right)
+#endif
+            {
                 if (mods & MOD_MASK_CSAG) {
                     kb_lighting_adjust(clockwise, mods);
                 } else {
@@ -99,7 +114,12 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 
             // On the SNAP layer, change application zoom
         case SNAP:
-            if (right) {
+#ifndef v42e
+            if (right)
+#else
+            if (left)
+#endif
+            {
                 keycode = clockwise ? SC(SC_APP_ZOOM_IN) : SC(SC_APP_ZOOM_OUT);
             }
             break;

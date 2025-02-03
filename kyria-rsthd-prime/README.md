@@ -65,7 +65,7 @@ See [common code](../common/README.md).
 
 [KLE link](https://www.keyboard-layout-editor.com/#/gists/966c5646db209f5ab2c8691d66f876da)
 
-The alpha layout aims to reduce lateral finger movement on the index finger.
+The alpha layout aims to reduce lateral finger movement on the index finger. This page documents the version with E on the right thumb. For the original version with E on the left thumb (like RSTHD), see [v42e](docs/v42e.md). 
 
 An older version of the layout performed very well in an [analyzer](docs/prime-on-the-analyzer.md), with low SFU (same finger utilization) stats and low travel distance. Since then, some changes have been made to the layout that nominally give it worse performance, because of the use of [comborolls](#comboroll-what).
 
@@ -92,6 +92,7 @@ There are five more layers, for a total of 6. All are hold-to-activate. The shif
 ### SYMS
 
 Activated by the right thumb.
+
 ![kyria-rsthd-prime-syms](docs/images/kyria-rsthd-prime-syms.png)
 
 [KLE link](http://www.keyboard-layout-editor.com/#/gists/5a7d6afc1ee1a321449fc2c645c5a2c0)
@@ -107,9 +108,10 @@ The encoder (left) is used to move through search results.
 ### EDIT
 
 Activated by the left thumb.
+
 ![kyria-rsthd-prime-edit](docs/images/kyria-rsthd-prime-edit.png)
 
-[KLE link](https://www.keyboard-layout-editor.com/#/gists/3a6218306588db4240bcf25c74741580)
+[KLE link](https://www.keyboard-layout-editor.com/#/gists/49ddfbdb6321d28ff68672c4d3e53381)
 
 This layer extends the idea of platform-independent shortcuts to a complete layer. The right hand has the standard cursor keys, home/end and page up/down.
 
@@ -127,7 +129,9 @@ Cut, copy and paste shortcuts are along the left hand top row. Shortcuts for win
 The encoder (right) is used for history scrubbing, unless one of the edit modifier keys are held, in which case it does "fast editing." 
 
 ### META
+
 Activated by either pinky.
+
 ![kyria-rsthd-prime-meta](docs/images/kyria-rsthd-prime-meta.png)
 
 [KLE link](https://www.keyboard-layout-editor.com/#/gists/96ff5eadac73281833f15d58e1535305)
@@ -136,7 +140,7 @@ This layer contains common shortcuts, mostly arranged according to the letter us
 
 This layer also contains media control keys and the keys to access the FUNC and SNAP layers, as well as mouse buttons.
 
-The encoders are used for volume and screen brightness control.
+The encoders are used for volume (right) and screen brightness (left) control.
 
 ### FUNC
 
@@ -148,7 +152,7 @@ Activated by the right thumb from the META layer.
 
 This layer contains function keys on the left hand. It also contains the keys that switch between macOS, Windows and Linux shortcuts.
 
- The encoder (left) moves between tabs of an application. If a modifier is held, it adjusts the OLED brightness and the backlight/per-key LEDs, depending on the modifier. There are also two keys on the left hand for this, in case there is no encoder.
+The encoder (left) moves between tabs of an application. If a modifier is held, it adjusts the OLED brightness and the backlight/per-key LEDs, depending on the modifier. There are also two keys on the left hand for this, in case there is no encoder.
 
 ### SNAP
 
