@@ -111,7 +111,7 @@ Activated by the left thumb.
 
 ![kyria-rsthd-prime-edit](docs/images/kyria-rsthd-prime-edit.png)
 
-[KLE link](https://www.keyboard-layout-editor.com/#/gists/49ddfbdb6321d28ff68672c4d3e53381)
+[KLE link](https://www.keyboard-layout-editor.com/#/gists/3a6218306588db4240bcf25c74741580)
 
 This layer extends the idea of platform-independent shortcuts to a complete layer. The right hand has the standard cursor keys, home/end and page up/down.
 
