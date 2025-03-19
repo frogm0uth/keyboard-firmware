@@ -33,6 +33,8 @@ This is the keymap for my Kyria keyboard from [splitkb.com](https://splitkb.com)
 
 ## Overview
 
+To see just the keymap: [v42 keymap](docs/v42-keymap.md)
+
 The alphabetic layout in this keymap was *originally* based on [RSTHD](https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/). I tried it, liked it, tweaked it, and tweaked some more...
 
 When I originally started making changes to RSTHD, I called it RSTHD'. The `'`, pronounced "prime", is [used in maths](https://en.wikipedia.org/wiki/Prime_(symbol)#Use_in_mathematics,_statistics,_and_science) to indicate a derivative of the named thing. While the layout has now diverged a lot from RSTHD, I still call it *RSTHD/Prime* to acknowledge its origin while making it clear that it's not the same.
@@ -65,7 +67,7 @@ See [common code](../common/README.md).
 
 [KLE link](https://www.keyboard-layout-editor.com/#/gists/966c5646db209f5ab2c8691d66f876da)
 
-The alpha layout aims to reduce lateral finger movement on the index finger. This page documents the version with E on the right thumb. For the original version with E on the left thumb (like RSTHD), see [v42e](docs/v42e.md). 
+The alpha layout aims to reduce lateral finger movement on the index finger. This page documents the version with E on the right thumb. For the original version with E on the left thumb (like RSTHD), see [v42e keymap](docs/v42e-keymap.md).
 
 An older version of the layout performed very well in an [analyzer](docs/prime-on-the-analyzer.md), with low SFU (same finger utilization) stats and low travel distance. Since then, some changes have been made to the layout that nominally give it worse performance, because of the use of [comborolls](#comboroll-what).
 
@@ -188,6 +190,10 @@ The location of the space key has a ripple effect that causes the "handedness" o
 The swapped-E version seems very appealing at first, and rollers such as myself will enjoy rolling off the consonants onto the space. However, I found that, as I gained fluency, I would just stumble sometimes. Eventually, I realized why: "pinballing" between the space and the consonants. Consider a phrase such as "with this ring that" - between every pair of words there is a pinball aka redirect on the thumb i.e.  `t t`, `s r`, `g t`.
 
  A partial solution was to add a second space key on the right thumb.
+
+To compare the two keymaps:
+-  [v42 keymap](docs/v42-keymap.md) (E on right)
+-  [v42e keymap](docs/v42e-keymap.md) (E on left)
 
 ### Comboroll what?
 
