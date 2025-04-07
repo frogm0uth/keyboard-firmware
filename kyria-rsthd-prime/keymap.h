@@ -20,7 +20,7 @@
 
 // Define this to use E on the left thumb. Otherwise E is on the right.
 //
-#define v42e
+//#define v42e
 
 
 // Include everything...

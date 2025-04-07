@@ -167,12 +167,15 @@ RtoL_LIT( ifdef,  "#ifdef",  KC_F, KC_Q )
 RtoL_LIT( endif,  "#endif",  KC_H, KC_Q )
 RtoL_LIT( define, "#define", KC_D, KC_Q )
 
-
 // Extras and oddballs
 LtoR_STR( from, KC_F, KC_M )
-
-RtoL_LIT( espace, "e ",     KC_E,   KC_A )
 RtoL_LIT( backslash, "\\",  KC_U, KC_MINS )
+#ifdef v42e
+RtoL_STR( ed,   KC_L, KC_Y )
+RtoL_LIT( espace, "e ",     KC_SPC, KC_U )
+#else
+RtoL_LIT( espace, "e ",     KC_E,   KC_A )
+#endif
 
 // Utilities
 CMBO_KEY( screenlock, CU_SLCK,   KC_ESC, KC_Q )

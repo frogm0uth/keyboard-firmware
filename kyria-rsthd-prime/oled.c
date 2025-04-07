@@ -102,8 +102,11 @@ static const char PROGMEM str_encoder_blank[]   = "                    ";
 #endif
 
 static const char PROGMEM str_oled_header[]     = "     RSTHD/Prime    ";
+#ifdef v42e
+static const char PROGMEM str_oled_version[]    = "        v42e        ";
+#else
 static const char PROGMEM str_oled_version[]    = "        v 42        ";
-
+#endif
 static const char PROGMEM str_oled_caps[]       = "    CAPS  ";
 static const char PROGMEM str_oled_repeat[]     = "  REPEAT  ";
 static const char PROGMEM str_oled_newline[]    = "\n";
@@ -205,10 +208,6 @@ static void render_status(void) {
             oled_write_P(str_encoder_alpha, false);
             break;
 
-        case SYMS:
-            oled_write_P(str_encoder_search, false);
-            break;
-
         case EDIT:
 #    ifdef CUSTOM_EDIT
             if (custom_edit_encoder_ready()) {
@@ -219,6 +218,10 @@ static void render_status(void) {
 #    else
             oled_write_P(str_encoder_history, false);
 #    endif
+            break;
+
+        case SYMS:
+            oled_write_P(str_encoder_search, false);
             break;
 
         case META:
