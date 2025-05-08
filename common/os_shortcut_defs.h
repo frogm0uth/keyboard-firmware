@@ -73,20 +73,20 @@ DEFINE_SHORTCUT( REVEAL_DESKTOP,  KC_F11,      G(KC_D),         G(KC_D)  )      
 
 
 /**
- * Window snapping. On macOS this needs Rectangle Pro installed. Marked with an asterix if the shortcut
+ * Window snapping. On macOS this needs Rectangle Pro i31nstalled. Marked with an asterix if the shortcut
  * must be set up.
  * 
  * FIXME for Linux (KDE)
  */
 DEFINE_SHORTCUT( SNAP_LEFT,       C(A(KC_LEFT)),   G(KC_LEFT),      KC_NO )       // Snap to left half of screen
 DEFINE_SHORTCUT( SNAP_RIGHT,      C(A(KC_RIGHT)),  G(KC_RIGHT),     KC_NO )       // Snap to right half of screen
-DEFINE_SHORTCUT( SNAP_MIDDLE,     G(C(A(KC_M))),   KC_NO,           KC_NO )       // * Snap to middle half of screen
+DEFINE_SHORTCUT( SNAP_MIDDLE,     S(C(A(KC_UP))),  KC_NO,           KC_NO )       // Snap to middle half of screen
 DEFINE_SHORTCUT( SNAP_TOP,        C(A(KC_UP)),     A(G(KC_UP)),     KC_NO )       // Snap to top half of screen
 DEFINE_SHORTCUT( SNAP_BOTTOM,     C(A(KC_DOWN)),   A(G(KC_DOWN)),   KC_NO )       // Snap to bottom half of screen
 
 DEFINE_SHORTCUT( SNAP_MAXIMIZE,    C(A(KC_ENT)),     KC_NO,        KC_NO )        // Maximize
 DEFINE_SHORTCUT( SNAP_VERTICAL,    G(C(A(KC_UP))),   S(G(KC_UP)),  KC_NO )        // * Snap vertical i.e. maximize height
-DEFINE_SHORTCUT( SNAP_PREVIOUS,    G(C(A(KC_DOWN))), KC_NO,        KC_NO )        // * Snap to previous
+DEFINE_SHORTCUT( SNAP_PREVIOUS,    C(A(KC_DEL)),     KC_NO,        KC_NO )        // * Snap to previous
 
 DEFINE_SHORTCUT( SNAP_TOPLEFT,     C(A(KC_U)),      KC_NO,        KC_NO )       // Snap to top left quadrant of screen
 DEFINE_SHORTCUT( SNAP_TOPRIGHT,    C(A(KC_I)),      G(KC_Z),      KC_NO )       // Snap to top right quadrant of screen (macOS), open snap options (Windows)
