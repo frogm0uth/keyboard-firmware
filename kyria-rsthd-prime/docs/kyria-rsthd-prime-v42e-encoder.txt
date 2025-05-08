@@ -1,0 +1,63 @@
+
+Kyria v42 dual encoder
+
+Left:
+
+(None)	App-switcher
+Press
+
+Right:
+
+(None)	Page down/up
+Press	(none)
+
+
+SYMS:
+
+Right:
+
+(None)	Search next/prev
+Press
+
+
+EDIT
+
+Left:
+
+(None)	Redo/Undo
+Press	(none)
+EditMod	FastEdit
+
+
+META
+
+Left:
+(None)	Brightness up/down
+Press	
+
+
+Right:
+
+(None)	Volume up/down
+Press	Mute
+
+
+FUNC
+
+Right:
+
+(None)	Tab R/L
+Press	Write
+Shift	OLED
+Ctrl	Hue
+Alt		Saturation
+Cmd		Value
+
+
+SNAP
+
+Left:
+
+(None)	App zoom in/out
+Press	App zoom reset
+

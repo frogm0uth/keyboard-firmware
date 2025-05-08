@@ -17,6 +17,13 @@
 
 #include QMK_KEYBOARD_H
 
+
+// Define this to use E on the left thumb. Otherwise E is on the right.
+//
+//#define v42e
+
+
+// Include everything...
 #include "../common/appswitcher.h"
 #include "../common/comboroll.h"
 #include "../common/custom_capsword.h"
@@ -103,9 +110,9 @@ enum layers {
                         k5B, k5C, k5D, k5E, k5F, k5G,   \
                              k6C, k6D, k6E, k6F, k6G,   \
                                                         \
-        k3B, k3F, k3A, k7A, k7F, k7B, k7C,              \
+        k3B, k3F, k3A, k7A, k7F, k7B,                   \
                                                         \
-        k3E                                             \
+        k3E, k7E                                        \
     ) {                                                 \
          {KC_NO, k0B,   k0C,   k0D,   k0E,   k0F, k0G},   \
          {KC_NO, k1B,   k1C,   k1D,   k1E,   k1F, k1G},   \
@@ -114,7 +121,7 @@ enum layers {
          {KC_NO, k4B,   k4C,   k4D,   k4E,   k4F, k4G},   \
          {KC_NO, k5B,   k5C,   k5D,   k5E,   k5F, k5G},   \
          {KC_NO, KC_NO, k6C,   k6D,   k6E,   k6F, k6G},   \
-         {k7A,   k7B,   k7C,   KC_NO, KC_NO, k7F, KC_NO}  \
+         {k7A,   k7B,   KC_NO, KC_NO, k7E,   k7F, KC_NO}  \
     }
 #endif
 

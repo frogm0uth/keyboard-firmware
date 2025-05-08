@@ -15,6 +15,7 @@
  */
 #include QMK_KEYBOARD_H
 #include "keymap.h"
+#include "quantum/color.h"
 
 
 /**
@@ -163,12 +164,16 @@ void kb_lighting_adjust(bool up, uint8_t mods) {
     }
 #endif
 #if defined(RGB_MATRIX_ENABLE)
+    HSV hsv = rgb_matrix_get_hsv();
     if (mods & MOD_MASK_CTRL) {
+        uint8_t hue;
         if (up) {
-            rgb_matrix_increase_hue_noeeprom();
+            hue = (hsv.h + 4) % 256;
         } else {
-            rgb_matrix_decrease_hue_noeeprom();
+            hue = (hsv.h - 4) % 256;
         }
+        rgb_matrix_sethsv_noeeprom(hue, hsv.s, hsv.v);
+
     } else if (mods & MOD_MASK_ALT) {
         if (up) {
             rgb_matrix_increase_sat_noeeprom();
@@ -176,11 +181,13 @@ void kb_lighting_adjust(bool up, uint8_t mods) {
             rgb_matrix_decrease_sat_noeeprom();
         }
     } else if (mods & MOD_MASK_GUI) {
+        uint8_t val;
         if (up) {
-            rgb_matrix_increase_val_noeeprom();
+            val = hsv.v < (255 - 8) ? hsv.v + 8 : 255;
         } else {
-            rgb_matrix_decrease_val_noeeprom();
+            val = hsv.v > 8 ? (hsv.v - 8) : 0;
         }
+        rgb_matrix_sethsv_noeeprom(hsv.h, hsv.s, val);
     }
 #endif
 }
